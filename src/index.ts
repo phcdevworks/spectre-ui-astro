@@ -3,10 +3,6 @@
  *
  * Astro integration layer for the Spectre design system.
  *
- * This package provides ergonomic Astro components that wrap
- * @phcdevworks/spectre-ui's design system without reimplementing
- * any design logic.
- *
  * @example
  * ```astro
  * ---
@@ -19,7 +15,7 @@
  * ```
  */
 
-// Export Astro components
+// Export Astro components (for Astro projects to import directly)
 export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";
 export { default as SpInput } from "./components/SpInput.astro";
@@ -47,18 +43,6 @@ export type {
 
 /**
  * CSS Import Path Constants
- *
- * Import these CSS files from @phcdevworks/spectre-ui in your Astro project:
- *
- * @example
- * ```astro
- * ---
- * // In your layout or page:
- * import "@phcdevworks/spectre-ui/dist/base.css";
- * import "@phcdevworks/spectre-ui/dist/components.css";
- * import "@phcdevworks/spectre-ui/dist/utilities.css";
- * ---
- * ```
  */
 export const SPECTRE_CSS_PATHS = {
   base: "@phcdevworks/spectre-ui/dist/base.css",
