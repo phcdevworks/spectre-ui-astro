@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"github.copilot",
+		"github.copilot-chat",
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"GitHub.github-vscode-theme",
+		"openai.chatgpt",
+		"streetsidesoftware.code-spell-checker",
+	]
+}
