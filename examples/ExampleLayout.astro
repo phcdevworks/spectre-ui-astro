@@ -1,0 +1,28 @@
+---
+/**
+ * Example Layout Component
+ *
+ * This demonstrates how to import Spectre UI CSS in your Astro layout.
+ */
+import "@phcdevworks/spectre-ui/dist/base.css";
+import "@phcdevworks/spectre-ui/dist/components.css";
+import "@phcdevworks/spectre-ui/dist/utilities.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Spectre UI Astro Example" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

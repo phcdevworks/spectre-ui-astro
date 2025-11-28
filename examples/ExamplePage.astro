@@ -1,0 +1,201 @@
+---
+/**
+ * Example Page Component
+ *
+ * This demonstrates usage of all Spectre UI Astro components.
+ */
+import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
+import Layout from "./ExampleLayout.astro";
+---
+
+<Layout title="Spectre UI Components Example">
+  <main class="sp-container sp-stack">
+    <h1>Spectre UI Astro Components</h1>
+
+    <!-- Button Examples -->
+    <section class="sp-stack">
+      <h2>Buttons</h2>
+
+      <div class="sp-flex sp-gap-4">
+        <SpButton variant="primary">
+          Primary Button
+        </SpButton>
+
+        <SpButton variant="secondary">
+          Secondary Button
+        </SpButton>
+
+        <SpButton variant="ghost">
+          Ghost Button
+        </SpButton>
+
+        <SpButton variant="success">
+          Success Button
+        </SpButton>
+
+        <SpButton variant="danger">
+          Danger Button
+        </SpButton>
+      </div>
+
+      <div class="sp-flex sp-gap-4">
+        <SpButton size="sm">Small</SpButton>
+        <SpButton size="md">Medium</SpButton>
+        <SpButton size="lg">Large</SpButton>
+      </div>
+
+      <div class="sp-flex sp-gap-4">
+        <SpButton disabled>Disabled</SpButton>
+        <SpButton loading>Loading</SpButton>
+        <SpButton as="a" href="#" variant="primary">Link Button</SpButton>
+      </div>
+    </section>
+
+    <!-- Card Examples -->
+    <section class="sp-stack">
+      <h2>Cards</h2>
+
+      <div class="sp-grid sp-gap-4" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <SpCard variant="default">
+          <h3>Default Card</h3>
+          <p>This is a default card with standard styling.</p>
+        </SpCard>
+
+        <SpCard variant="elevated">
+          <h3>Elevated Card</h3>
+          <p>This card has elevation with a shadow effect.</p>
+        </SpCard>
+
+        <SpCard variant="outlined">
+          <h3>Outlined Card</h3>
+          <p>This card has a border outline.</p>
+        </SpCard>
+      </div>
+
+      <SpCard as="article" variant="elevated">
+        <header>
+          <h3>Card as Article</h3>
+        </header>
+        <p>This card is rendered as an HTML article element for semantic markup.</p>
+      </SpCard>
+    </section>
+
+    <!-- Input Examples -->
+    <section class="sp-stack">
+      <h2>Inputs</h2>
+
+      <div class="sp-stack sp-gap-4" style="max-width: 400px;">
+        <SpInput
+          label="Username"
+          name="username"
+          placeholder="Enter your username"
+          required
+        />
+
+        <SpInput
+          label="Email"
+          type="email"
+          name="email"
+          placeholder="you@example.com"
+          helperText="We'll never share your email with anyone."
+        />
+
+        <SpInput
+          label="Password"
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          required
+        />
+
+        <SpInput
+          label="Invalid Input"
+          name="invalid"
+          state="error"
+          errorMessage="This field contains an error."
+        />
+
+        <SpInput
+          label="Valid Input"
+          name="valid"
+          value="john_doe"
+          state="success"
+        />
+
+        <SpInput
+          label="Disabled Input"
+          name="disabled"
+          disabled
+          value="Cannot edit this"
+        />
+
+        <SpInput
+          label="Readonly Input"
+          name="readonly"
+          readonly
+          value="Read-only value"
+        />
+      </div>
+    </section>
+
+    <!-- Form Example -->
+    <section class="sp-stack">
+      <h2>Complete Form Example</h2>
+
+      <SpCard variant="elevated">
+        <form class="sp-stack sp-gap-4" style="max-width: 500px;">
+          <h3>Sign Up</h3>
+
+          <SpInput
+            label="Full Name"
+            name="fullName"
+            placeholder="John Doe"
+            required
+          />
+
+          <SpInput
+            label="Email Address"
+            type="email"
+            name="email"
+            placeholder="john@example.com"
+            required
+            helperText="We'll send a confirmation email."
+          />
+
+          <SpInput
+            label="Password"
+            type="password"
+            name="password"
+            placeholder="Min. 8 characters"
+            required
+          />
+
+          <SpInput
+            label="Confirm Password"
+            type="password"
+            name="confirmPassword"
+            placeholder="Re-enter password"
+            required
+          />
+
+          <div class="sp-flex sp-gap-4">
+            <SpButton type="submit" variant="primary">
+              Create Account
+            </SpButton>
+            <SpButton type="reset" variant="ghost">
+              Reset
+            </SpButton>
+          </div>
+        </form>
+      </SpCard>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+</style>

@@ -1,0 +1,57 @@
+{
+  "name": "@phcdevworks/spectre-ui-astro",
+  "version": "0.0.1",
+  "description": "Astro integration layer for the Spectre design system",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "astro",
+    "astro-component",
+    "spectre",
+    "design-system",
+    "ui-components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phcdevworks/spectre-ui-astro.git"
+  },
+  "author": "PHCDevworks",
+  "license": "MIT",
+  "peerDependencies": {
+    "astro": "^4.0.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "@phcdevworks/spectre-ui": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "astro": "^5.0.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}

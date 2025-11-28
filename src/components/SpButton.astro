@@ -1,0 +1,95 @@
+---
+import type { SpButtonProps } from "../types/button.ts";
+import { getButtonClasses } from "@phcdevworks/spectre-ui";
+
+type Props = SpButtonProps;
+
+const {
+  variant = "primary",
+  size = "md",
+  as = "button",
+  href,
+  target,
+  rel,
+  type = "button",
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  class: className,
+  style,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  id,
+  name,
+  value,
+  tabindex,
+  onclick,
+} = Astro.props;
+
+// Determine the state based on disabled and loading props
+const state = disabled ? "disabled" : loading ? "loading" : "default";
+
+// Get base classes from Spectre UI
+const baseClasses = getButtonClasses({
+  variant,
+  size,
+  state,
+  fullWidth,
+});
+
+// Merge with custom classes
+const classes = [baseClasses, className].filter(Boolean).join(" ");
+
+// Common props for both button and anchor
+const commonProps = {
+  class: classes,
+  style,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  "aria-busy": loading ? "true" : undefined,
+  tabindex,
+  onclick,
+};
+
+// Render as anchor if as="a"
+if (as === "a") {
+  const anchorProps = {
+    ...commonProps,
+    href,
+    target,
+    rel: rel || (target === "_blank" ? "noopener noreferrer" : undefined),
+    "aria-disabled": disabled ? "true" : undefined,
+  };
+---
+  <a {...anchorProps}>
+    <slot />
+  </a>
+---
+} else if (as === "span") {
+  const spanProps = {
+    ...commonProps,
+    role: "button",
+    "aria-disabled": disabled ? "true" : undefined,
+  };
+---
+  <span {...spanProps}>
+    <slot />
+  </span>
+---
+} else {
+  // Render as button (default)
+  const buttonProps = {
+    ...commonProps,
+    type,
+    disabled: disabled || loading,
+    name,
+    value,
+  };
+---
+  <button {...buttonProps}>
+    <slot />
+  </button>
+---
+}
+---
