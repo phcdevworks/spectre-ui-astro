@@ -4,9 +4,18 @@
   "description": "Astro integration layer for the Spectre design system.",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
     "./components/*": "./src/components/*.astro",
     "./types/*": "./dist/types/*.js"
+  },
+  "typesVersions": {
+    "*": {
+      "*": ["./src/index.ts"],
+      "types/*": ["./dist/types/*"]
+    }
   },
   "files": [
     "src",
