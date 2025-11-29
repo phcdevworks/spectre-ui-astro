@@ -52,44 +52,42 @@ const commonProps = {
   onclick,
 };
 
-// Render as anchor if as="a"
-if (as === "a") {
-  const anchorProps = {
-    ...commonProps,
-    href,
-    target,
-    rel: rel || (target === "_blank" ? "noopener noreferrer" : undefined),
-    "aria-disabled": disabled ? "true" : undefined,
-  };
+// Props for each element type
+const anchorProps = {
+  ...commonProps,
+  href,
+  target,
+  rel: rel || (target === "_blank" ? "noopener noreferrer" : undefined),
+  "aria-disabled": disabled ? "true" : undefined,
+};
+
+const spanProps = {
+  ...commonProps,
+  role: "button",
+  "aria-disabled": disabled ? "true" : undefined,
+};
+
+const buttonProps = {
+  ...commonProps,
+  type,
+  disabled: disabled || loading,
+  name,
+  value,
+};
 ---
-  <a {...anchorProps}>
-    <slot />
-  </a>
----
-} else if (as === "span") {
-  const spanProps = {
-    ...commonProps,
-    role: "button",
-    "aria-disabled": disabled ? "true" : undefined,
-  };
----
-  <span {...spanProps}>
-    <slot />
-  </span>
----
-} else {
-  // Render as button (default)
-  const buttonProps = {
-    ...commonProps,
-    type,
-    disabled: disabled || loading,
-    name,
-    value,
-  };
----
-  <button {...buttonProps}>
-    <slot />
-  </button>
----
+
+{
+  as === "a" ? (
+    <a {...anchorProps}>
+      <slot />
+    </a>
+  ) : as === "span" ? (
+    <span {...spanProps}>
+      <slot />
+    </span>
+  ) : (
+    <button {...buttonProps}>
+      <slot />
+    </button>
+  )
 }
----
