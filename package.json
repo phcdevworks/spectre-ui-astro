@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Astro integration layer for the Spectre design system.",
   "type": "module",
   "exports": {
@@ -13,8 +13,12 @@
   },
   "typesVersions": {
     "*": {
-      "*": ["./src/index.ts"],
-      "types/*": ["./dist/types/*"]
+      "*": [
+        "./src/index.ts"
+      ],
+      "types/*": [
+        "./dist/types/*"
+      ]
     }
   },
   "files": [
