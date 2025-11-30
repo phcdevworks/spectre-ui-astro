@@ -1,5 +1,5 @@
 ---
-import type { SpInputProps } from "../types/input.ts";
+import type { SpInputProps, SpInputState } from "../types/input.ts";
 import { getInputClasses } from "@phcdevworks/spectre-ui";
 
 type Props = SpInputProps;
@@ -37,12 +37,18 @@ const {
   onblur,
 } = Astro.props;
 
+// Normalize Spectre UI state to stay in sync with disabled attribute
+const computedState: SpInputState = disabled ? "disabled" : state;
+
+const showError = Boolean(errorMessage && computedState === "invalid");
+const showHelperText = Boolean(helperText && !showError);
+
 // Auto-generate ID if not provided and label exists
 const inputId = providedId || (label ? `sp-input-${Math.random().toString(36).substr(2, 9)}` : undefined);
 
 // Generate IDs for helper/error text if needed
-const helperTextId = (helperText && !errorMessage) ? `${inputId}-helper` : undefined;
-const errorTextId = errorMessage ? `${inputId}-error` : undefined;
+const helperTextId = showHelperText ? `${inputId}-helper` : undefined;
+const errorTextId = showError ? `${inputId}-error` : undefined;
 
 // Combine aria-describedby with helper/error text IDs
 const describedBy = [
@@ -53,7 +59,7 @@ const describedBy = [
 
 // Get base classes from Spectre UI
 const baseClasses = getInputClasses({
-  state,
+  state: computedState,
 });
 
 // Merge with custom classes
@@ -81,7 +87,7 @@ const inputProps = {
   style,
   "aria-label": ariaLabel,
   "aria-describedby": describedBy,
-  "aria-invalid": ariaInvalid !== undefined ? ariaInvalid : (state === "error" ? true : undefined),
+  "aria-invalid": ariaInvalid !== undefined ? ariaInvalid : (computedState === "invalid" ? true : undefined),
   tabindex,
   oninput,
   onchange,
@@ -100,13 +106,13 @@ const inputProps = {
 
   <input {...inputProps} />
 
-  {errorMessage && state === "error" && (
+  {showError && (
     <div id={errorTextId} class="sp-error-message" role="alert">
       {errorMessage}
     </div>
   )}
 
-  {helperText && !errorMessage && (
+  {showHelperText && (
     <div id={helperTextId} class="sp-helper-text">
       {helperText}
     </div>

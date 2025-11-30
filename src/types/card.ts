@@ -1,7 +1,9 @@
+import type { CardVariant } from "@phcdevworks/spectre-ui";
+
 /**
  * Card variant types matching Spectre UI design system
  */
-export type SpCardVariant = "default" | "elevated" | "outlined";
+export type SpCardVariant = CardVariant;
 
 /**
  * Valid HTML elements for card rendering
@@ -14,7 +16,7 @@ export type SpCardElement = "div" | "section" | "article";
 export interface SpCardProps {
   /**
    * Visual variant of the card
-   * @default "default"
+   * @default "base"
    */
   variant?: SpCardVariant;
 

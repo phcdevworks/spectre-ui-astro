@@ -56,9 +56,9 @@ import Layout from "./ExampleLayout.astro";
       <h2>Cards</h2>
 
       <div class="sp-grid sp-gap-4" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-        <SpCard variant="default">
-          <h3>Default Card</h3>
-          <p>This is a default card with standard styling.</p>
+        <SpCard variant="base">
+          <h3>Base Card</h3>
+          <p>This is a base card with standard styling.</p>
         </SpCard>
 
         <SpCard variant="elevated">
@@ -66,8 +66,8 @@ import Layout from "./ExampleLayout.astro";
           <p>This card has elevation with a shadow effect.</p>
         </SpCard>
 
-        <SpCard variant="outlined">
-          <h3>Outlined Card</h3>
+        <SpCard variant="flat">
+          <h3>Flat Card</h3>
           <p>This card has a border outline.</p>
         </SpCard>
       </div>
@@ -111,7 +111,7 @@ import Layout from "./ExampleLayout.astro";
         <SpInput
           label="Invalid Input"
           name="invalid"
-          state="error"
+          state="invalid"
           errorMessage="This field contains an error."
         />
 
@@ -119,7 +119,7 @@ import Layout from "./ExampleLayout.astro";
           label="Valid Input"
           name="valid"
           value="john_doe"
-          state="success"
+          state="valid"
         />
 
         <SpInput

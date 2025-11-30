@@ -1,5 +1,5 @@
 ---
-import type { SpButtonProps } from "../types/button.ts";
+import type { SpButtonProps, SpButtonState } from "../types/button.ts";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
 
 type Props = SpButtonProps;
@@ -26,24 +26,29 @@ const {
   onclick,
 } = Astro.props;
 
-// Determine the state based on disabled and loading props
-const state = disabled ? "disabled" : loading ? "loading" : "default";
+// Determine the state based on disabled prop (loading is handled separately)
+const state: SpButtonState = disabled ? "disabled" : "default";
 
 // Get base classes from Spectre UI
 const baseClasses = getButtonClasses({
   variant,
   size,
   state,
-  fullWidth,
 });
 
 // Merge with custom classes
 const classes = [baseClasses, className].filter(Boolean).join(" ");
 
+// Merge inline styles with optional full width rule
+const mergedStyle = [
+  style,
+  fullWidth ? "width: 100%;" : undefined,
+].filter(Boolean).join(" ") || undefined;
+
 // Common props for both button and anchor
 const commonProps = {
   class: classes,
-  style,
+  style: mergedStyle,
   id,
   "aria-label": ariaLabel,
   "aria-describedby": ariaDescribedby,

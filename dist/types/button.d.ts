@@ -1,15 +1,17 @@
+import { ButtonVariant, ButtonSize, ButtonState } from '@phcdevworks/spectre-ui';
+
 /**
  * Button variant types matching Spectre UI design system
  */
-type SpButtonVariant = "primary" | "secondary" | "ghost" | "success" | "danger";
+type SpButtonVariant = ButtonVariant;
 /**
  * Button size types
  */
-type SpButtonSize = "sm" | "md" | "lg";
+type SpButtonSize = ButtonSize;
 /**
  * Button state types
  */
-type SpButtonState = "default" | "disabled" | "loading";
+type SpButtonState = ButtonState;
 /**
  * Valid HTML elements for button rendering
  */

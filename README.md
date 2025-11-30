@@ -74,7 +74,7 @@ A flexible button component that supports multiple variants, sizes, and element 
 - `target`: `"_blank"` | `"_self"` | `"_parent"` | `"_top"` (only for `as="a"`)
 - `disabled`: boolean (default: `false`)
 - `loading`: boolean (default: `false`)
-- `fullWidth`: boolean (default: `false`)
+- `fullWidth`: boolean (default: `false`, forces width: 100%)
 - `class`: string (additional CSS classes)
 - Standard HTML attributes: `id`, `name`, `value`, `aria-label`, etc.
 
@@ -108,7 +108,7 @@ A simple structural wrapper that applies card classes.
 
 **Props:**
 
-- `variant`: `"default"` | `"elevated"` | `"outlined"` (default: `"default"`)
+- `variant`: `"base"` | `"elevated"` | `"flat"` (default: `"base"`)
 - `as`: `"div"` | `"section"` | `"article"` (default: `"div"`)
 - `class`: string (additional CSS classes)
 - Standard HTML attributes: `id`, `role`, `aria-label`, etc.
@@ -137,10 +137,10 @@ A comprehensive input component with label, error, and helper text support.
 
 **Props:**
 
-- `state`: `"default"` | `"error"` | `"success"` (default: `"default"`)
+- `state`: `"default"` | `"focus"` | `"invalid"` | `"valid"` | `"disabled"` (default: `"default"`)
 - `type`: `"text"` | `"email"` | `"password"` | `"number"` | `"tel"` | `"url"` | `"search"` | `"date"` | `"time"` | `"datetime-local"` (default: `"text"`)
 - `label`: string (input label)
-- `errorMessage`: string (error message to display when `state="error"`)
+- `errorMessage`: string (error message to display when `state="invalid"`)
 - `helperText`: string (helper text below input)
 - `id`: string (auto-generated if not provided)
 - `name`: string
@@ -171,21 +171,21 @@ A comprehensive input component with label, error, and helper text support.
   helperText="We'll never share your email."
 />
 
-<!-- Input with error state -->
+<!-- Input with invalid state -->
 <SpInput
   label="Password"
   type="password"
   name="password"
-  state="error"
+  state="invalid"
   errorMessage="Password must be at least 8 characters."
 />
 
-<!-- Input with success state -->
+<!-- Input with valid state -->
 <SpInput
   label="Username"
   name="username"
   value="john_doe"
-  state="success"
+  state="valid"
 />
 ```
 

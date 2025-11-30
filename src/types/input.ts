@@ -1,7 +1,9 @@
+import type { InputState } from "@phcdevworks/spectre-ui";
+
 /**
  * Input state types matching Spectre UI design system
  */
-export type SpInputState = "default" | "error" | "success";
+export type SpInputState = InputState;
 
 /**
  * Input types
@@ -30,7 +32,7 @@ export interface SpInputProps {
   label?: string;
 
   /**
-   * Error message to display when state is "error"
+   * Error message to display when state is "invalid"
    */
   errorMessage?: string;
 
