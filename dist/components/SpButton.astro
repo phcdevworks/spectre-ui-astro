@@ -1,16 +1,14 @@
+---
 import type { SpButtonProps } from "../types/button";
-import type { ButtonVariant } from "@phcdevworks/spectre-ui";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
 
 type Props = SpButtonProps;
-
-const props = Astro.props as Props;
 
 const {
   variant = "primary",
   size = "md",
   as = "button",
-  type: buttonType = "button",
+  type = "button",
   href,
   target,
   rel,
@@ -19,78 +17,61 @@ const {
   fullWidth = false,
   class: className,
   ...rest
-} = props;
+} = Astro.props;
 
-const normalizedVariant: ButtonVariant =
-  variant === "success" ? "primary" : variant;
 const isInteractiveDisabled = disabled || loading;
+
+// Handle success variant (map to primary in spectre-ui, then add success class)
+const normalizedVariant = variant === "success" ? "primary" : variant;
 
 const generatedClasses = getButtonClasses({
   variant: normalizedVariant,
   size,
   fullWidth,
-  loading,
-  disabled: isInteractiveDisabled,
 });
 
-const classTokens = generatedClasses.split(" ").filter(Boolean);
-const spectreClasses =
-  variant === "success"
-    ? classTokens.filter((token) => token !== "sp-btn--primary").concat("sp-btn--success")
-    : classTokens;
-const classes = [...spectreClasses, className].filter(Boolean).join(" ");
+// Build final class list
+const classes = [
+  generatedClasses,
+  variant === "success" ? "sp-btn--success" : "",
+  isInteractiveDisabled ? "sp-btn--disabled" : "",
+  loading ? "sp-btn--loading" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
 
-const relValue =
-  target === "_blank" ? rel ?? "noopener noreferrer" : rel ?? undefined;
+const relValue = target === "_blank" ? rel || "noopener noreferrer" : rel;
 
-const sharedProps = {
+const commonProps = {
   ...rest,
   class: classes,
-  "aria-busy": loading ? "true" : undefined,
-  "data-loading": loading ? "true" : undefined,
+  "aria-busy": loading || undefined,
+  "data-loading": loading || undefined,
 };
-
-const anchorProps =
-  as === "a"
-    ? {
-        ...sharedProps,
-        href: isInteractiveDisabled ? undefined : href,
-        target: isInteractiveDisabled ? undefined : target,
-        rel: isInteractiveDisabled ? undefined : relValue,
-        "aria-disabled": isInteractiveDisabled ? "true" : sharedProps["aria-disabled"],
-      }
-    : null;
-
-const spanProps =
-  as === "span"
-    ? {
-        ...sharedProps,
-        role: sharedProps.role ?? "button",
-        "aria-disabled": isInteractiveDisabled ? "true" : sharedProps["aria-disabled"],
-      }
-    : null;
-
-const buttonProps =
-  as === "button" || !["a", "span"].includes(as)
-    ? {
-        ...sharedProps,
-        type: buttonType,
-        disabled: isInteractiveDisabled,
-      }
-    : null;
 ---
 
 {
   as === "a" ? (
-    <a {...anchorProps}>
+    <a
+      {...commonProps}
+      href={isInteractiveDisabled ? undefined : href}
+      target={isInteractiveDisabled ? undefined : target}
+      rel={isInteractiveDisabled ? undefined : relValue}
+      aria-disabled={isInteractiveDisabled || undefined}
+    >
       <slot />
     </a>
   ) : as === "span" ? (
-    <span {...spanProps}>
+    <span
+      {...commonProps}
+      role="button"
+      aria-disabled={isInteractiveDisabled || undefined}
+    >
       <slot />
     </span>
   ) : (
-    <button {...buttonProps}>
+    <button {...commonProps} type={type} disabled={isInteractiveDisabled}>
       <slot />
     </button>
   )
