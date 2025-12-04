@@ -1,8 +1,4 @@
-import type {
-  ButtonSize,
-  ButtonState,
-  ButtonVariant,
-} from "@phcdevworks/spectre-ui";
+import type { ButtonSize, ButtonVariant } from "@phcdevworks/spectre-ui";
 
 /**
  * Button variant types matching Spectre UI design system
@@ -15,9 +11,9 @@ export type SpButtonVariant = ButtonVariant;
 export type SpButtonSize = ButtonSize;
 
 /**
- * Button state types
+ * Button state types used internally for component state management
  */
-export type SpButtonState = ButtonState;
+export type SpButtonState = "default" | "disabled";
 
 /**
  * Valid HTML elements for button rendering

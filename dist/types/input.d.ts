@@ -1,17 +1,16 @@
-import { InputState } from '@phcdevworks/spectre-ui';
-
+import type { SpectreInputState } from "@phcdevworks/spectre-ui";
 /**
  * Input state types matching Spectre UI design system
  */
-type SpInputState = InputState;
+export type SpInputState = SpectreInputState;
 /**
  * Input types
  */
-type SpInputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search" | "date" | "time" | "datetime-local";
+export type SpInputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search" | "date" | "time" | "datetime-local";
 /**
  * Props for SpInput component
  */
-interface SpInputProps {
+export interface SpInputProps {
     /**
      * Visual state of the input
      * @default "default"
@@ -138,5 +137,4 @@ interface SpInputProps {
      */
     onblur?: string;
 }
-
-export type { SpInputProps, SpInputState, SpInputType };
+//# sourceMappingURL=input.d.ts.map

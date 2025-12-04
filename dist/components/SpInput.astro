@@ -1,0 +1,120 @@
+---
+import type { SpInputProps, SpInputState } from "../types/input.ts";
+import { getInputClasses } from "@phcdevworks/spectre-ui";
+
+type Props = SpInputProps;
+
+const {
+  state = "default",
+  type = "text",
+  label,
+  errorMessage,
+  helperText,
+  id: providedId,
+  name,
+  value,
+  defaultValue,
+  placeholder,
+  required = false,
+  disabled = false,
+  readonly = false,
+  autocomplete,
+  min,
+  max,
+  step,
+  pattern,
+  maxlength,
+  minlength,
+  class: className,
+  style,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  "aria-invalid": ariaInvalid,
+  tabindex,
+  oninput,
+  onchange,
+  onfocus,
+  onblur,
+} = Astro.props;
+
+// Normalize Spectre UI state to stay in sync with disabled attribute
+const computedState: SpInputState = disabled ? "disabled" : state;
+
+const showError = Boolean(errorMessage && computedState === "invalid");
+const showHelperText = Boolean(helperText && !showError);
+
+// Auto-generate ID if not provided and label exists
+const inputId = providedId || (label ? `sp-input-${Math.random().toString(36).substr(2, 9)}` : undefined);
+
+// Generate IDs for helper/error text if needed
+const helperTextId = showHelperText ? `${inputId}-helper` : undefined;
+const errorTextId = showError ? `${inputId}-error` : undefined;
+
+// Combine aria-describedby with helper/error text IDs
+const describedBy = [
+  ariaDescribedby,
+  helperTextId,
+  errorTextId,
+].filter(Boolean).join(" ") || undefined;
+
+// Get base classes from Spectre UI
+const baseClasses = getInputClasses({
+  state: computedState,
+});
+
+// Merge with custom classes
+const classes = [baseClasses, className].filter(Boolean).join(" ");
+
+// Input props
+const inputProps = {
+  type,
+  id: inputId,
+  name,
+  value,
+  defaultValue,
+  placeholder,
+  required,
+  disabled,
+  readonly,
+  autocomplete,
+  min,
+  max,
+  step,
+  pattern,
+  maxlength,
+  minlength,
+  class: classes,
+  style,
+  "aria-label": ariaLabel,
+  "aria-describedby": describedBy,
+  "aria-invalid": ariaInvalid !== undefined ? ariaInvalid : (computedState === "invalid" ? true : undefined),
+  tabindex,
+  oninput,
+  onchange,
+  onfocus,
+  onblur,
+};
+---
+
+<div class="sp-input-wrapper">
+  {label && (
+    <label for={inputId} class="sp-label">
+      {label}
+      {required && <span class="sp-required" aria-label="required">*</span>}
+    </label>
+  )}
+
+  <input {...inputProps} />
+
+  {showError && (
+    <div id={errorTextId} class="sp-error-message" role="alert">
+      {errorMessage}
+    </div>
+  )}
+
+  {showHelperText && (
+    <div id={helperTextId} class="sp-helper-text">
+      {helperText}
+    </div>
+  )}
+</div>

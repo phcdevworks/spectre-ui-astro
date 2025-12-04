@@ -1,17 +1,16 @@
-import { CardVariant } from '@phcdevworks/spectre-ui';
-
+import type { SpectreCardVariant } from "@phcdevworks/spectre-ui";
 /**
  * Card variant types matching Spectre UI design system
  */
-type SpCardVariant = CardVariant;
+export type SpCardVariant = SpectreCardVariant;
 /**
  * Valid HTML elements for card rendering
  */
-type SpCardElement = "div" | "section" | "article";
+export type SpCardElement = "div" | "section" | "article";
 /**
  * Props for SpCard component
  */
-interface SpCardProps {
+export interface SpCardProps {
     /**
      * Visual variant of the card
      * @default "base"
@@ -47,5 +46,4 @@ interface SpCardProps {
      */
     "aria-labelledby"?: string;
 }
-
-export type { SpCardElement, SpCardProps, SpCardVariant };
+//# sourceMappingURL=card.d.ts.map

@@ -14,22 +14,18 @@
  * </SpButton>
  * ```
  */
-
-// Export Astro components (for Astro projects to import directly)
 export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";
 export { default as SpInput } from "./components/SpInput.astro";
-
-// Export types aligned with the README
 export type { SpButtonProps, SpButtonVariant } from "./types/button";
 export type { SpCardProps } from "./types/card";
 export type { SpInputProps, SpInputState } from "./types/input";
-
 /**
  * CSS Import Path Constants
  */
-export const SPECTRE_CSS_PATHS = {
-  base: "@phcdevworks/spectre-ui/dist/base.css",
-  components: "@phcdevworks/spectre-ui/dist/components.css",
-  utilities: "@phcdevworks/spectre-ui/dist/utilities.css",
-} as const;
+export declare const SPECTRE_CSS_PATHS: {
+    readonly base: "@phcdevworks/spectre-ui/dist/base.css";
+    readonly components: "@phcdevworks/spectre-ui/dist/components.css";
+    readonly utilities: "@phcdevworks/spectre-ui/dist/utilities.css";
+};
+//# sourceMappingURL=index.d.ts.map

@@ -1,25 +1,24 @@
-import { ButtonVariant, ButtonSize, ButtonState } from '@phcdevworks/spectre-ui';
-
+import type { ButtonSize, ButtonVariant } from "@phcdevworks/spectre-ui";
 /**
  * Button variant types matching Spectre UI design system
  */
-type SpButtonVariant = ButtonVariant;
+export type SpButtonVariant = ButtonVariant;
 /**
  * Button size types
  */
-type SpButtonSize = ButtonSize;
+export type SpButtonSize = ButtonSize;
 /**
- * Button state types
+ * Button state types used internally for component state management
  */
-type SpButtonState = ButtonState;
+export type SpButtonState = "default" | "disabled";
 /**
  * Valid HTML elements for button rendering
  */
-type SpButtonElement = "button" | "a" | "span";
+export type SpButtonElement = "button" | "a" | "span";
 /**
  * Props for SpButton component
  */
-interface SpButtonProps {
+export interface SpButtonProps {
     /**
      * Visual variant of the button
      * @default "primary"
@@ -104,5 +103,4 @@ interface SpButtonProps {
      */
     onclick?: string;
 }
-
-export type { SpButtonElement, SpButtonProps, SpButtonSize, SpButtonState, SpButtonVariant };
+//# sourceMappingURL=button.d.ts.map

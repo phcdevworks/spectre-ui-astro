@@ -1,9 +1,9 @@
-import type { CardVariant } from "@phcdevworks/spectre-ui";
+import type { SpectreCardVariant } from "@phcdevworks/spectre-ui";
 
 /**
  * Card variant types matching Spectre UI design system
  */
-export type SpCardVariant = CardVariant;
+export type SpCardVariant = SpectreCardVariant;
 
 /**
  * Valid HTML elements for card rendering

@@ -1,11 +1,14 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/types/button.ts", "src/types/card.ts", "src/types/input.ts"],
+  entry: ["src/index.ts"],
   format: ["esm"],
-  dts: true,
+  dts: false,
   sourcemap: true,
   clean: true,
-  outDir: "dist/types",
+  target: "esnext",
+  bundle: false,
+  splitting: false,
+  outDir: "dist",
   external: ["astro", "@phcdevworks/spectre-ui"],
 });

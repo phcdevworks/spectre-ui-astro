@@ -1,0 +1,42 @@
+---
+import type { SpCardProps } from "../types/card.ts";
+import { getCardClasses } from "@phcdevworks/spectre-ui";
+
+type Props = SpCardProps;
+
+const {
+  variant = "base",
+  as = "div",
+  class: className,
+  style,
+  id,
+  role,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+} = Astro.props;
+
+// Get base classes from Spectre UI
+const baseClasses = getCardClasses({
+  variant,
+});
+
+// Merge with custom classes
+const classes = [baseClasses, className].filter(Boolean).join(" ");
+
+// Common props for all element types
+const commonProps = {
+  class: classes,
+  style,
+  id,
+  role,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+};
+
+// Determine which element to render
+const Element = as;
+---
+
+<Element {...commonProps}>
+  <slot />
+</Element>

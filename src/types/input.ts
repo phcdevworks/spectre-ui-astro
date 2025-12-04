@@ -1,9 +1,9 @@
-import type { InputState } from "@phcdevworks/spectre-ui";
+import type { SpectreInputState } from "@phcdevworks/spectre-ui";
 
 /**
  * Input state types matching Spectre UI design system
  */
-export type SpInputState = InputState;
+export type SpInputState = SpectreInputState;
 
 /**
  * Input types

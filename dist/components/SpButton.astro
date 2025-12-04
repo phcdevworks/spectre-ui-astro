@@ -1,0 +1,98 @@
+---
+import type { SpButtonProps, SpButtonState } from "../types/button.ts";
+import { getButtonClasses } from "@phcdevworks/spectre-ui";
+
+type Props = SpButtonProps;
+
+const {
+  variant = "primary",
+  size = "md",
+  as = "button",
+  href,
+  target,
+  rel,
+  type = "button",
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  class: className,
+  style,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  id,
+  name,
+  value,
+  tabindex,
+  onclick,
+} = Astro.props;
+
+// Determine the state based on disabled prop (loading is handled separately)
+const state: SpButtonState = disabled ? "disabled" : "default";
+
+// Get base classes from Spectre UI
+const baseClasses = getButtonClasses({
+  variant,
+  size,
+  state,
+});
+
+// Merge with custom classes
+const classes = [baseClasses, className].filter(Boolean).join(" ");
+
+// Merge inline styles with optional full width rule
+const mergedStyle = [
+  style,
+  fullWidth ? "width: 100%;" : undefined,
+].filter(Boolean).join(" ") || undefined;
+
+// Common props for both button and anchor
+const commonProps = {
+  class: classes,
+  style: mergedStyle,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  "aria-busy": loading ? "true" : undefined,
+  tabindex,
+  onclick,
+};
+
+// Props for each element type
+const anchorProps = {
+  ...commonProps,
+  href,
+  target,
+  rel: rel || (target === "_blank" ? "noopener noreferrer" : undefined),
+  "aria-disabled": disabled ? "true" : undefined,
+};
+
+const spanProps = {
+  ...commonProps,
+  role: "button",
+  "aria-disabled": disabled ? "true" : undefined,
+};
+
+const buttonProps = {
+  ...commonProps,
+  type,
+  disabled: disabled || loading,
+  name,
+  value,
+};
+---
+
+{
+  as === "a" ? (
+    <a {...anchorProps}>
+      <slot />
+    </a>
+  ) : as === "span" ? (
+    <span {...spanProps}>
+      <slot />
+    </span>
+  ) : (
+    <button {...buttonProps}>
+      <slot />
+    </button>
+  )
+}

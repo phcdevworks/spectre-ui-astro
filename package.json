@@ -3,22 +3,17 @@
   "version": "0.0.2",
   "description": "Astro integration layer for the Spectre design system.",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
-    "./components/*": "./src/components/*.astro",
-    "./types/*": "./dist/types/*.js"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./src/index.ts"
-      ],
-      "types/*": [
-        "./dist/types/*"
-      ]
+    "./components/*": {
+      "default": "./dist/components/*.astro"
     }
   },
   "files": [
@@ -29,7 +24,9 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && npm run build:types",
+    "postbuild": "node scripts/copy-components.mjs",
+    "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist",
