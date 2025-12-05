@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
+---
+
+<BaseLayout>
+  <SpCard variant="elevated" class="demo-card">
+    <h1>Spectre UI Astro</h1>
+    <p>Example showing Spectre CSS wiring via SPECTRE_CSS_PATHS.</p>
+
+    <div class="demo-actions">
+      <SpButton variant="primary">Get Started</SpButton>
+      <SpButton variant="secondary" as="a" href="https://astro.build/">
+        Learn Astro
+      </SpButton>
+    </div>
+
+    <div class="demo-inputs">
+      <SpInput label="Email" type="email" placeholder="you@example.com" />
+      <SpInput
+        label="Password"
+        type="password"
+        state="invalid"
+        errorMessage="Pick something stronger"
+      />
+    </div>
+  </SpCard>
+</BaseLayout>
+
+<style>
+  .demo-card {
+    width: min(100%, 32rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .demo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .demo-inputs {
+    display: grid;
+    gap: 1rem;
+  }
+</style>
