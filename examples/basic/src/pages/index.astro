@@ -1,64 +1,114 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SpButton, SpCard, SpInput } from "../../../../src/index.js";
+import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
 ---
 
 <BaseLayout>
   <div class="page">
     <header class="page__header">
       <div>
-        <p class="eyebrow">Spectre UI Astro</p>
-        <h1>Welcome back</h1>
+        <p class="eyebrow">Spectre UI for Astro</p>
+        <h1>Build better websites faster</h1>
+        <p class="subtitle">
+          A design system integration that brings Spectre UI components to your
+          Astro projects.
+        </p>
       </div>
-      <SpButton variant="primary" as="a" href="https://astro.build/">
-        Get Started
-      </SpButton>
+      <SpButton variant="primary" size="lg"> Get Started </SpButton>
     </header>
 
-    <SpCard variant="base" class="auth-card">
-      <h2>Sign in to your dashboard</h2>
-      <form class="auth-form" aria-label="Sign in form">
-        <SpInput
-          label="Email address"
-          type="email"
-          placeholder="you@example.com"
-          helperText="Use the email associated with your Spectre account."
-          required
-        />
+    <section class="demo-section">
+      <h2>Components</h2>
+      <div class="component-grid">
+        <SpCard variant="elevated">
+          <h3>Buttons</h3>
+          <p>
+            Flexible button components with multiple variants, sizes, and
+            states.
+          </p>
+          <div class="button-demo">
+            <SpButton variant="primary" size="sm">Primary</SpButton>
+            <SpButton variant="secondary" size="sm">Secondary</SpButton>
+            <SpButton variant="ghost" size="sm">Ghost</SpButton>
+          </div>
+        </SpCard>
 
-        <SpInput
-          label="Password"
-          type="password"
-          state="error"
-          errorMessage="Password must be at least 8 characters."
-          placeholder="••••••••"
-          required
-        />
+        <SpCard variant="elevated">
+          <h3>Cards</h3>
+          <p>
+            Structural wrappers with elevation, borders, and semantic HTML
+            support.
+          </p>
+        </SpCard>
 
-        <SpButton variant="primary" type="submit" class="sp-btn--full">
-          Sign In
-        </SpButton>
-      </form>
-    </SpCard>
+        <SpCard variant="elevated">
+          <h3>Inputs</h3>
+          <p>Form controls with labels, validation states, and helper text.</p>
+          <div class="input-demo">
+            <SpInput
+              label="Email"
+              type="email"
+              placeholder="you@example.com"
+              helperText="We'll never share your email."
+            />
+          </div>
+        </SpCard>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Try it out</h2>
+      <SpCard variant="base" class="contact-card">
+        <h3>Contact Form</h3>
+        <form class="contact-form">
+          <SpInput label="Name" type="text" placeholder="Your name" required />
+
+          <SpInput
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            required
+          />
+
+          <SpInput
+            label="Message"
+            type="text"
+            placeholder="Tell us what you think"
+          />
+
+          <div class="form-actions">
+            <SpButton variant="primary" type="submit"> Send Message </SpButton>
+            <SpButton variant="ghost" type="button">Cancel</SpButton>
+          </div>
+        </form>
+      </SpCard>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
   .page {
-    width: min(100%, 48rem);
+    width: min(100%, 72rem);
     display: grid;
-    gap: 2.5rem;
+    gap: 3rem;
   }
 
   .page__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 2rem 0;
   }
 
   .page__header h1 {
-    margin: 0.25rem 0 0;
+    margin: 0.5rem 0 0;
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    color: #cbd5f5;
+    margin: 0.5rem 0 1rem;
   }
 
   .eyebrow {
@@ -69,14 +119,56 @@ import { SpButton, SpCard, SpInput } from "../../../../src/index.js";
     color: #cbd5f5;
   }
 
-  .auth-card {
+  .demo-section {
     display: grid;
     gap: 1.5rem;
-    width: min(100%, 32rem);
   }
 
-  .auth-form {
+  .demo-section h2 {
+    margin: 0;
+  }
+
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .component-grid h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .component-grid p {
+    margin: 0 0 1rem;
+    color: #cbd5f5;
+  }
+
+  .button-demo {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .input-demo {
+    margin-top: 1rem;
+  }
+
+  .contact-card {
+    max-width: 42rem;
+  }
+
+  .contact-card h3 {
+    margin: 0 0 1rem;
+  }
+
+  .contact-form {
     display: grid;
     gap: 1.25rem;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
   }
 </style>

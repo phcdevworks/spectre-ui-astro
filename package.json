@@ -2,6 +2,48 @@
   "name": "@phcdevworks/spectre-ui-astro",
   "version": "0.0.2",
   "description": "Astro integration layer for the Spectre design system.",
+  "keywords": [
+    "phcdevworks",
+    "spectre",
+    "spectre-ui",
+    "spectre-design-system",
+    "design-system",
+    "ui-library",
+    "ui-components",
+    "component-library",
+    "astro",
+    "astro-integration",
+    "astro-component",
+    "astro-component-library",
+    "typescript",
+    "ssr",
+    "tailwindcss",
+    "design-tokens"
+  ],
+
+  "author": "PHCDevworks",
+  "license": "MIT",
+
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/phcdevworks"
+    },
+    {
+      "type": "buymeacoffee",
+      "url": "https://buymeacoffee.com/phcdevworks"
+    }
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phcdevworks/spectre-ui-astro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phcdevworks/spectre-ui-astro/issues"
+  },
+  "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
+
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,6 +58,7 @@
       "default": "./dist/components/*.astro"
     }
   },
+
   "files": [
     "src",
     "dist",
@@ -23,6 +66,7 @@
     "LICENSE",
     "CHANGELOG.md"
   ],
+
   "scripts": {
     "build": "tsup && npm run build:types",
     "postbuild": "node scripts/copy-components.mjs",
@@ -33,28 +77,11 @@
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build"
   },
-  "keywords": [
-    "astro",
-    "astro-component",
-    "spectre",
-    "design-system",
-    "ui-components",
-    "typescript",
-    "ssr"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/phcdevworks/spectre-ui-astro.git"
-  },
-  "bugs": {
-    "url": "https://github.com/phcdevworks/spectre-ui-astro/issues"
-  },
-  "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
-  "author": "PHCDevworks",
-  "license": "MIT",
+
   "publishConfig": {
     "access": "public"
   },
+
   "peerDependencies": {
     "astro": "^4.0.0 || ^5.0.0"
   },
