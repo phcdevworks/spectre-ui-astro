@@ -6,8 +6,7 @@ type Props = SpInputProps;
 
 const generateInputId = () =>
   `sp-input-${
-    globalThis.crypto?.randomUUID?.() ??
-    Math.random().toString(36).slice(2, 10)
+    globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2, 10)
   }`;
 
 const props = Astro.props as Props;
@@ -24,18 +23,14 @@ const {
   disabled: disabledProp = false,
   "aria-describedby": ariaDescribedby,
   "aria-invalid": ariaInvalid,
-  "aria-disabled": ariaDisabled,
   ...rest
 } = props;
 
-const computedState: SpInputState =
-  disabledProp || providedState === "disabled"
-    ? "disabled"
-    : providedState;
+const computedState: SpInputState = providedState;
 
 const inputId = providedId ?? generateInputId();
 
-const showError = Boolean(errorMessage && computedState === "invalid");
+const showError = Boolean(errorMessage && computedState === "error");
 const showHelperText = Boolean(helperText && !showError);
 
 const helperTextId = showHelperText ? `${inputId}-helper` : undefined;
@@ -45,17 +40,7 @@ const describedBy =
   [ariaDescribedby, helperTextId, errorTextId].filter(Boolean).join(" ") ||
   undefined;
 
-const recipeState =
-  computedState === "invalid"
-    ? "error"
-    : computedState === "valid"
-      ? "success"
-      : "default";
-
-const additionalStateClasses: Partial<Record<SpInputState, string>> = {
-  focus: "sp-input--focus",
-  disabled: "sp-input--disabled",
-};
+const recipeState = computedState;
 
 const baseClasses = getInputClasses({
   state: recipeState,
@@ -63,7 +48,7 @@ const baseClasses = getInputClasses({
 
 const classes = [
   baseClasses,
-  additionalStateClasses[computedState],
+  disabledProp ? "sp-input--disabled" : "",
   className,
 ]
   .filter(Boolean)
@@ -75,33 +60,42 @@ const inputProps = {
   id: inputId,
   required,
   class: classes,
-  disabled: computedState === "disabled" ? true : disabledProp,
+  disabled: disabledProp,
   "aria-describedby": describedBy,
   "aria-invalid": ariaInvalid ?? (showError ? true : undefined),
-  "aria-disabled":
-    ariaDisabled ?? (computedState === "disabled" ? true : undefined),
+  "aria-disabled": disabledProp ? true : undefined,
 };
 ---
 
 <div class="sp-input-wrapper">
-  {label && (
-    <label for={inputId} class="sp-label">
-      {label}
-      {required && <span class="sp-required" aria-label="required">*</span>}
-    </label>
-  )}
+  {
+    label && (
+      <label for={inputId} class="sp-label">
+        {label}
+        {required && (
+          <span class="sp-required" aria-label="required">
+            *
+          </span>
+        )}
+      </label>
+    )
+  }
 
   <input {...inputProps} />
 
-  {showError && (
-    <div id={errorTextId} class="sp-error-message" role="alert">
-      {errorMessage}
-    </div>
-  )}
+  {
+    showError && (
+      <div id={errorTextId} class="sp-error-message" role="alert">
+        {errorMessage}
+      </div>
+    )
+  }
 
-  {showHelperText && (
-    <div id={helperTextId} class="sp-helper-text">
-      {helperText}
-    </div>
-  )}
+  {
+    showHelperText && (
+      <div id={helperTextId} class="sp-helper-text">
+        {helperText}
+      </div>
+    )
+  }
 </div>
