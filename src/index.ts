@@ -21,9 +21,13 @@ export { default as SpCard } from "./components/SpCard.astro";
 export { default as SpInput } from "./components/SpInput.astro";
 
 // Export types aligned with the README
-export type { SpButtonProps, SpButtonVariant } from "./types/button";
-export type { SpCardProps } from "./types/card";
-export type { SpInputProps, SpInputState } from "./types/input";
+export type {
+  SpButtonProps,
+  SpButtonVariant,
+  SpCardProps,
+  SpInputProps,
+  SpInputState,
+} from "./types";
 
 /**
  * CSS Import Path Constants

@@ -1,49 +1,33 @@
-import type { SpectreCardVariant } from "@phcdevworks/spectre-ui";
+import type { HTMLAttributes } from "astro/types";
 /**
- * Card variant types matching Spectre UI design system
+ * Card variant types exposed in the README.
  */
-export type SpCardVariant = SpectreCardVariant;
+export type SpCardVariant = "base" | "elevated" | "flat";
 /**
- * Valid HTML elements for card rendering
+ * Valid HTML elements for card rendering.
  */
 export type SpCardElement = "div" | "section" | "article";
+type CardElementAttributes<T extends SpCardElement> = Omit<HTMLAttributes<T>, "class">;
+type SpCardElementProps = ({
+    as?: "div";
+} & CardElementAttributes<"div">) | ({
+    as: "section";
+} & CardElementAttributes<"section">) | ({
+    as: "article";
+} & CardElementAttributes<"article">);
 /**
- * Props for SpCard component
+ * Props for SpCard component.
  */
-export interface SpCardProps {
+export type SpCardProps = SpCardElementProps & {
     /**
-     * Visual variant of the card
+     * Visual variant of the card.
      * @default "base"
      */
     variant?: SpCardVariant;
     /**
-     * HTML element to render as
-     * @default "div"
-     */
-    as?: SpCardElement;
-    /**
-     * Additional CSS classes
+     * Additional CSS classes.
      */
     class?: string;
-    /**
-     * Additional inline styles
-     */
-    style?: string;
-    /**
-     * ID attribute
-     */
-    id?: string;
-    /**
-     * Role attribute for accessibility
-     */
-    role?: string;
-    /**
-     * Aria label for accessibility
-     */
-    "aria-label"?: string;
-    /**
-     * Aria labelledby for accessibility
-     */
-    "aria-labelledby"?: string;
-}
+};
+export {};
 //# sourceMappingURL=card.d.ts.map

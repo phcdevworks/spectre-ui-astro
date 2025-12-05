@@ -4,95 +4,82 @@ import { getInputClasses } from "@phcdevworks/spectre-ui";
 
 type Props = SpInputProps;
 
+const generateInputId = () =>
+  `sp-input-${
+    globalThis.crypto?.randomUUID?.() ??
+    Math.random().toString(36).slice(2, 10)
+  }`;
+
+const props = Astro.props as Props;
+
 const {
-  state = "default",
+  state: providedState = "default",
   type = "text",
   label,
   errorMessage,
   helperText,
   id: providedId,
-  name,
-  value,
-  defaultValue,
-  placeholder,
-  required = false,
-  disabled = false,
-  readonly = false,
-  autocomplete,
-  min,
-  max,
-  step,
-  pattern,
-  maxlength,
-  minlength,
   class: className,
-  style,
-  "aria-label": ariaLabel,
+  required = false,
+  disabled: disabledProp = false,
   "aria-describedby": ariaDescribedby,
   "aria-invalid": ariaInvalid,
-  tabindex,
-  oninput,
-  onchange,
-  onfocus,
-  onblur,
-} = Astro.props;
+  "aria-disabled": ariaDisabled,
+  ...rest
+} = props;
 
-// Normalize Spectre UI state to stay in sync with disabled attribute
-const computedState: SpInputState = disabled ? "disabled" : state;
+const computedState: SpInputState =
+  disabledProp || providedState === "disabled"
+    ? "disabled"
+    : providedState;
+
+const inputId = providedId ?? generateInputId();
 
 const showError = Boolean(errorMessage && computedState === "invalid");
 const showHelperText = Boolean(helperText && !showError);
 
-// Auto-generate ID if not provided and label exists
-const inputId = providedId || (label ? `sp-input-${Math.random().toString(36).substr(2, 9)}` : undefined);
-
-// Generate IDs for helper/error text if needed
 const helperTextId = showHelperText ? `${inputId}-helper` : undefined;
 const errorTextId = showError ? `${inputId}-error` : undefined;
 
-// Combine aria-describedby with helper/error text IDs
-const describedBy = [
-  ariaDescribedby,
-  helperTextId,
-  errorTextId,
-].filter(Boolean).join(" ") || undefined;
+const describedBy =
+  [ariaDescribedby, helperTextId, errorTextId].filter(Boolean).join(" ") ||
+  undefined;
 
-// Get base classes from Spectre UI
+const recipeState =
+  computedState === "invalid"
+    ? "error"
+    : computedState === "valid"
+      ? "success"
+      : "default";
+
+const additionalStateClasses: Partial<Record<SpInputState, string>> = {
+  focus: "sp-input--focus",
+  disabled: "sp-input--disabled",
+};
+
 const baseClasses = getInputClasses({
-  state: computedState,
+  state: recipeState,
 });
 
-// Merge with custom classes
-const classes = [baseClasses, className].filter(Boolean).join(" ");
+const classes = [
+  baseClasses,
+  additionalStateClasses[computedState],
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
 
-// Input props
 const inputProps = {
+  ...rest,
   type,
   id: inputId,
-  name,
-  value,
-  defaultValue,
-  placeholder,
   required,
-  disabled,
-  readonly,
-  autocomplete,
-  min,
-  max,
-  step,
-  pattern,
-  maxlength,
-  minlength,
   class: classes,
-  style,
-  "aria-label": ariaLabel,
+  disabled: computedState === "disabled" ? true : disabledProp,
   "aria-describedby": describedBy,
-  "aria-invalid": ariaInvalid !== undefined ? ariaInvalid : (computedState === "invalid" ? true : undefined),
-  tabindex,
-  oninput,
-  onchange,
-  onfocus,
-  onblur,
+  "aria-invalid": ariaInvalid ?? (showError ? true : undefined),
+  "aria-disabled":
+    ariaDisabled ?? (computedState === "disabled" ? true : undefined),
 };
 ---
 
