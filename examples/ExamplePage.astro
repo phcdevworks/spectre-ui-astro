@@ -2,182 +2,229 @@
 /**
  * Example Page Component
  *
- * This demonstrates usage of all Spectre UI Astro components.
+ * Demonstrates SpButton, SpCard, and SpInput using the core Spectre UI styles.
  */
 import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
 import Layout from "./ExampleLayout.astro";
 ---
 
 <Layout title="Spectre UI Components Example">
-  <main class="sp-container sp-stack">
-    <h1>Spectre UI Astro Components</h1>
+  <main class="example-page">
+    <header>
+      <h1>Spectre UI Astro Components</h1>
+      <p>Thin Astro wrappers powered directly by @phcdevworks/spectre-ui.</p>
+    </header>
 
-    <!-- Button Examples -->
-    <section class="sp-stack">
+    <section class="section">
       <h2>Buttons</h2>
 
-      <div class="sp-flex sp-gap-4">
-        <SpButton variant="primary"> Primary Button </SpButton>
-
-        <SpButton variant="secondary"> Secondary Button </SpButton>
-
-        <SpButton variant="ghost"> Ghost Button </SpButton>
-
-        <SpButton variant="success"> Success Button </SpButton>
-
-        <SpButton variant="danger"> Danger Button </SpButton>
+      <div class="button-row">
+        <SpButton variant="primary">Primary</SpButton>
+        <SpButton variant="secondary">Secondary</SpButton>
+        <SpButton variant="ghost">Ghost</SpButton>
+        <SpButton variant="danger">Danger</SpButton>
       </div>
 
-      <div class="sp-flex sp-gap-4">
+      <div class="button-row">
         <SpButton size="sm">Small</SpButton>
         <SpButton size="md">Medium</SpButton>
         <SpButton size="lg">Large</SpButton>
       </div>
 
-      <div class="sp-flex sp-gap-4">
+      <div class="button-row">
         <SpButton disabled>Disabled</SpButton>
         <SpButton loading>Loading</SpButton>
-        <SpButton as="a" href="#" variant="primary">Link Button</SpButton>
+        <SpButton as="a" href="#" variant="primary">
+          Link Button
+        </SpButton>
       </div>
     </section>
 
-    <!-- Card Examples -->
-    <section class="sp-stack">
+    <section class="section">
       <h2>Cards</h2>
-
-      <div
-        class="sp-grid sp-gap-4"
-        style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
-      >
-        <SpCard variant="base">
-          <h3>Base Card</h3>
-          <p>This is a base card with standard styling.</p>
-        </SpCard>
-
-        <SpCard variant="elevated">
+      <div class="card-grid">
+        <SpCard variant="elevated" padded>
           <h3>Elevated Card</h3>
-          <p>This card has elevation with a shadow effect.</p>
+          <p>This is a padded card with elevation styling.</p>
         </SpCard>
 
-        <SpCard variant="flat">
-          <h3>Flat Card</h3>
-          <p>This card has a border outline.</p>
+        <SpCard variant="outline" padded>
+          <h3>Outline Card</h3>
+          <p>Outline variant is perfect for subtle grouping.</p>
+        </SpCard>
+
+        <SpCard variant="ghost" padded>
+          <h3>Ghost Card</h3>
+          <p>Ghost variant keeps backgrounds transparent.</p>
         </SpCard>
       </div>
 
-      <SpCard as="article" variant="elevated">
+      <SpCard as="article" variant="elevated" padded interactive>
         <header>
           <h3>Card as Article</h3>
+          <p>Cards can use semantic HTML when needed.</p>
         </header>
-        <p>
-          This card is rendered as an HTML article element for semantic markup.
-        </p>
       </SpCard>
     </section>
 
-    <!-- Input Examples -->
-    <section class="sp-stack">
+    <section class="section">
       <h2>Inputs</h2>
 
-      <div class="sp-stack sp-gap-4" style="max-width: 400px;">
-        <SpInput
-          label="Username"
-          name="username"
-          placeholder="Enter your username"
-          required
-        />
+      <div class="input-list">
+        <div class="field">
+          <label class="field-label" for="input-username">Username</label>
+          <SpInput
+            id="input-username"
+            name="username"
+            placeholder="Enter your username"
+            required
+            fullWidth
+          />
+        </div>
 
-        <SpInput
-          label="Email"
-          type="email"
-          name="email"
-          placeholder="you@example.com"
-          helperText="We'll never share your email with anyone."
-        />
+        <div class="field">
+          <label class="field-label" for="input-email">Email</label>
+          <SpInput
+            id="input-email"
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            aria-describedby="input-email-helper"
+            fullWidth
+          />
+          <p id="input-email-helper" class="field-helper">
+            We'll never share your email with anyone.
+          </p>
+        </div>
 
-        <SpInput
-          label="Password"
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          required
-        />
+        <div class="field">
+          <label class="field-label" for="input-password">Password</label>
+          <SpInput
+            id="input-password"
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            required
+            fullWidth
+          />
+        </div>
 
-        <SpInput
-          label="Invalid Input"
-          name="invalid"
-          state="error"
-          errorMessage="This field contains an error."
-        />
+        <div class="field">
+          <label class="field-label" for="input-error">Invalid Input</label>
+          <SpInput
+            id="input-error"
+            name="invalid"
+            state="error"
+            aria-describedby="input-error-text"
+            fullWidth
+          />
+          <p id="input-error-text" class="field-error" role="alert">
+            This field contains an error.
+          </p>
+        </div>
 
-        <SpInput
-          label="Valid Input"
-          name="valid"
-          value="john_doe"
-          state="success"
-        />
+        <div class="field">
+          <label class="field-label" for="input-success">Valid Input</label>
+          <SpInput
+            id="input-success"
+            name="valid"
+            value="john_doe"
+            state="success"
+            fullWidth
+          />
+        </div>
 
-        <SpInput
-          label="Disabled Input"
-          name="disabled"
-          disabled
-          value="Cannot edit this"
-        />
+        <div class="field">
+          <label class="field-label" for="input-disabled">Disabled Input</label>
+          <SpInput
+            id="input-disabled"
+            name="disabled"
+            value="Cannot edit this"
+            disabled
+            fullWidth
+          />
+        </div>
 
-        <SpInput
-          label="Readonly Input"
-          name="readonly"
-          readonly
-          value="Read-only value"
-        />
+        <div class="field">
+          <label class="field-label" for="input-readonly">Readonly Input</label>
+          <SpInput
+            id="input-readonly"
+            name="readonly"
+            value="Read-only value"
+            readonly
+            fullWidth
+          />
+        </div>
       </div>
     </section>
 
-    <!-- Form Example -->
-    <section class="sp-stack">
+    <section class="section">
       <h2>Complete Form Example</h2>
 
-      <SpCard variant="elevated">
-        <form class="sp-stack sp-gap-4" style="max-width: 500px;">
-          <h3>Sign Up</h3>
+      <SpCard variant="outline" padded>
+        <form class="form" aria-labelledby="signup-heading">
+          <h3 id="signup-heading">Sign Up</h3>
 
-          <SpInput
-            label="Full Name"
-            name="fullName"
-            placeholder="John Doe"
-            required
-          />
+          <div class="field">
+            <label class="field-label" for="form-name">Full Name</label>
+            <SpInput
+              id="form-name"
+              name="fullName"
+              placeholder="John Doe"
+              required
+              fullWidth
+            />
+          </div>
 
-          <SpInput
-            label="Email Address"
-            type="email"
-            name="email"
-            placeholder="john@example.com"
-            required
-            helperText="We'll send a confirmation email."
-          />
+          <div class="field">
+            <label class="field-label" for="form-email">Email Address</label>
+            <SpInput
+              id="form-email"
+              type="email"
+              name="email"
+              placeholder="john@example.com"
+              aria-describedby="form-email-helper"
+              required
+              fullWidth
+            />
+            <p id="form-email-helper" class="field-helper">
+              We'll send a confirmation email.
+            </p>
+          </div>
 
-          <SpInput
-            label="Password"
-            type="password"
-            name="password"
-            placeholder="Min. 8 characters"
-            required
-          />
+          <div class="field">
+            <label class="field-label" for="form-password">Password</label>
+            <SpInput
+              id="form-password"
+              type="password"
+              name="password"
+              placeholder="Min. 8 characters"
+              required
+              fullWidth
+            />
+          </div>
 
-          <SpInput
-            label="Confirm Password"
-            type="password"
-            name="confirmPassword"
-            placeholder="Re-enter password"
-            required
-          />
+          <div class="field">
+            <label class="field-label" for="form-password-confirm">
+              Confirm Password
+            </label>
+            <SpInput
+              id="form-password-confirm"
+              type="password"
+              name="confirmPassword"
+              placeholder="Re-enter password"
+              required
+              fullWidth
+            />
+          </div>
 
-          <div class="sp-flex sp-gap-4">
-            <SpButton type="submit" variant="primary">
+          <div class="form-actions">
+            <SpButton type="submit" variant="primary" fullWidth>
               Create Account
             </SpButton>
-            <SpButton type="reset" variant="ghost"> Reset </SpButton>
+            <SpButton type="reset" variant="ghost" fullWidth>
+              Reset
+            </SpButton>
           </div>
         </form>
       </SpCard>
@@ -186,9 +233,86 @@ import Layout from "./ExampleLayout.astro";
 </Layout>
 
 <style>
-  main {
+  .example-page {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .example-page header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .button-row,
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .card-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .input-list,
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .input-list {
+    max-width: 420px;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .field-helper {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .field-error {
+    font-size: 0.85rem;
+    color: #fca5a5;
+    margin: 0;
+  }
+
+  .card-grid h3,
+  .form h3 {
+    margin: 0 0 0.35rem;
+  }
+
+  .form-actions {
+    padding-top: 0.5rem;
   }
 </style>

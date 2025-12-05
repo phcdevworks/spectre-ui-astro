@@ -1,6 +1,3 @@
----
-import { SPECTRE_CSS_PATHS } from "@phcdevworks/spectre-ui-astro";
-
 interface Props {
   title?: string;
 }
@@ -13,11 +10,12 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="stylesheet" href={SPECTRE_CSS_PATHS.base} />
-    <link rel="stylesheet" href={SPECTRE_CSS_PATHS.components} />
-    <link rel="stylesheet" href={SPECTRE_CSS_PATHS.utilities} />
-    <style>
-      :global(body) {
+    <style is:global>
+      @import "@phcdevworks/spectre-ui/dist/base.css";
+      @import "@phcdevworks/spectre-ui/dist/components.css";
+      @import "@phcdevworks/spectre-ui/dist/utilities.css";
+
+      body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
         background-color: #0f172a;

@@ -1,78 +1,74 @@
----
-import type { SpButtonProps } from "../types/button";
-import { getButtonClasses } from "@phcdevworks/spectre-ui";
+import {
+  getButtonClasses,
+  type ButtonVariant,
+  type ButtonSize,
+} from "@phcdevworks/spectre-ui";
 
-type Props = SpButtonProps;
+export interface SpButtonProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  iconOnly?: boolean;
+  as?: "button" | "a" | "span";
+  href?: string;
+  target?: "_self" | "_blank" | "_parent" | "_top";
+  rel?: string;
+  type?: "button" | "submit" | "reset";
+  class?: string;
+  [key: string]: any;
+}
 
 const {
   variant = "primary",
   size = "md",
-  as = "button",
-  type = "button",
-  href,
-  target,
-  rel,
-  disabled = false,
-  loading = false,
   fullWidth = false,
-  class: className,
+  loading = false,
+  disabled = false,
+  iconOnly = false,
+  as = "button",
+  class: extraClass = "",
+  href,
+  type = "button",
   ...rest
-} = Astro.props;
+} = Astro.props as SpButtonProps;
 
-const isInteractiveDisabled = disabled || loading;
-
-// Handle success variant (map to primary in spectre-ui, then add success class)
-const normalizedVariant = variant === "success" ? "primary" : variant;
-
-const generatedClasses = getButtonClasses({
-  variant: normalizedVariant,
+const baseClasses = getButtonClasses({
+  variant,
   size,
   fullWidth,
+  disabled,
+  loading,
+  iconOnly,
 });
 
-// Build final class list
-const classes = [
-  generatedClasses,
-  variant === "success" ? "sp-btn--success" : "",
-  isInteractiveDisabled ? "sp-btn--disabled" : "",
-  loading ? "sp-btn--loading" : "",
-  className,
-]
-  .filter(Boolean)
-  .join(" ");
-
-const relValue = target === "_blank" ? rel || "noopener noreferrer" : rel;
-
-const commonProps = {
-  ...rest,
-  class: classes,
-  "aria-busy": loading || undefined,
-  "data-loading": loading || undefined,
-};
+const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 ---
 
-{
-  as === "a" ? (
-    <a
-      {...commonProps}
-      href={isInteractiveDisabled ? undefined : href}
-      target={isInteractiveDisabled ? undefined : target}
-      rel={isInteractiveDisabled ? undefined : relValue}
-      aria-disabled={isInteractiveDisabled || undefined}
-    >
-      <slot />
-    </a>
-  ) : as === "span" ? (
-    <span
-      {...commonProps}
-      role="button"
-      aria-disabled={isInteractiveDisabled || undefined}
-    >
-      <slot />
-    </span>
-  ) : (
-    <button {...commonProps} type={type} disabled={isInteractiveDisabled}>
-      <slot />
-    </button>
-  )
-}
+{as === "a" && (
+  <a
+    class={classes}
+    href={href}
+    aria-disabled={disabled ? "true" : undefined}
+    {...rest}
+  >
+    <slot />
+  </a>
+)}
+
+{as === "button" && (
+  <button class={classes} type={type} disabled={disabled} {...rest}>
+    <slot />
+  </button>
+)}
+
+{as === "span" && (
+  <span
+    class={classes}
+    aria-disabled={disabled ? "true" : undefined}
+    {...rest}
+  >
+    <slot />
+  </span>
+)}

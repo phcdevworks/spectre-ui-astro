@@ -1,38 +1,36 @@
----
 import { SpButton } from "@phcdevworks/spectre-ui-astro";
 import Layout from "./ExampleLayout.astro";
 ---
 
 <Layout title="SpButton Examples">
-  <main class="sp-container sp-stack sp-gap-6">
-    <header class="sp-stack">
+  <main class="button-page">
+    <header class="stack">
       <h1>SpButton Examples</h1>
       <p>Quick reference for Spectre UI button variants, sizes, and states.</p>
     </header>
 
-    <section class="sp-stack">
+    <section class="stack">
       <h2>Variants</h2>
-      <div class="sp-flex sp-flex-wrap sp-gap-3">
+      <div class="row">
         <SpButton variant="primary">Primary</SpButton>
         <SpButton variant="secondary">Secondary</SpButton>
         <SpButton variant="ghost">Ghost</SpButton>
-        <SpButton variant="success">Success</SpButton>
         <SpButton variant="danger">Danger</SpButton>
       </div>
     </section>
 
-    <section class="sp-stack">
+    <section class="stack">
       <h2>Sizes</h2>
-      <div class="sp-flex sp-flex-wrap sp-gap-3">
+      <div class="row">
         <SpButton size="sm">Small</SpButton>
         <SpButton size="md">Medium</SpButton>
         <SpButton size="lg">Large</SpButton>
       </div>
     </section>
 
-    <section class="sp-stack">
+    <section class="stack">
       <h2>Links</h2>
-      <div class="sp-flex sp-flex-wrap sp-gap-3">
+      <div class="row">
         <SpButton as="a" href="/docs" variant="secondary">
           Internal Link
         </SpButton>
@@ -47,9 +45,9 @@ import Layout from "./ExampleLayout.astro";
       </div>
     </section>
 
-    <section class="sp-stack">
+    <section class="stack">
       <h2>Full Width</h2>
-      <div class="sp-stack" style="max-width: 320px;">
+      <div class="full-width-demo">
         <SpButton fullWidth> Full Width Button </SpButton>
         <SpButton as="a" href="/get-started" fullWidth>
           Full Width Link
@@ -57,9 +55,9 @@ import Layout from "./ExampleLayout.astro";
       </div>
     </section>
 
-    <section class="sp-stack">
+    <section class="stack">
       <h2>States</h2>
-      <div class="sp-flex sp-flex-wrap sp-gap-3">
+      <div class="row">
         <SpButton loading> Loading Button </SpButton>
         <SpButton as="a" href="/status" loading> Loading Link </SpButton>
         <SpButton disabled> Disabled Button </SpButton>
@@ -70,9 +68,31 @@ import Layout from "./ExampleLayout.astro";
 </Layout>
 
 <style>
-  main {
+  .button-page {
     max-width: 960px;
     margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .full-width-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 320px;
   }
 </style>

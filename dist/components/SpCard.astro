@@ -1,28 +1,50 @@
 ---
-import type { SpCardProps, SpCardVariant } from "../types/card.ts";
+import {
+  getCardClasses,
+  type CardVariant,
+  type CardRecipeOptions,
+} from "@phcdevworks/spectre-ui";
 
-type Props = SpCardProps;
+export interface SpCardProps extends CardRecipeOptions {
+  class?: string;
+  as?: "div" | "section" | "article";
+  [key: string]: any;
+}
 
 const {
-  variant = "base",
+  variant = "elevated",
+  interactive = false,
+  padded = false,
+  fullHeight = false,
+  class: extraClass = "",
   as = "div",
-  class: className,
   ...rest
-} = Astro.props;
+} = Astro.props as SpCardProps;
 
-const VARIANT_CLASS_MAP: Record<SpCardVariant, string | undefined> = {
-  base: undefined,
-  elevated: "sp-card--elevated",
-  flat: "sp-card--outline",
-};
+const baseClasses = getCardClasses({
+  variant,
+  interactive,
+  padded,
+  fullHeight,
+});
 
-const classes = ["sp-card", VARIANT_CLASS_MAP[variant], className]
-  .filter(Boolean)
-  .join(" ");
-
-const Element = as;
+const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 ---
 
-<Element class={classes} {...rest}>
-  <slot />
-</Element>
+{as === "section" && (
+  <section class={classes} {...rest}>
+    <slot />
+  </section>
+)}
+
+{as === "article" && (
+  <article class={classes} {...rest}>
+    <slot />
+  </article>
+)}
+
+{as === "div" && (
+  <div class={classes} {...rest}>
+    <slot />
+  </div>
+)}

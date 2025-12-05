@@ -1,101 +1,34 @@
 ---
-import type { SpInputProps, SpInputState } from "../types/input.ts";
-import { getInputClasses } from "@phcdevworks/spectre-ui";
+import {
+  getInputClasses,
+  type InputState,
+  type InputSize,
+} from "@phcdevworks/spectre-ui";
 
-type Props = SpInputProps;
-
-const generateInputId = () =>
-  `sp-input-${
-    globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2, 10)
-  }`;
-
-const props = Astro.props as Props;
+export interface SpInputProps {
+  state?: InputState;
+  size?: InputSize;
+  fullWidth?: boolean;
+  class?: string;
+  id?: string;
+  name?: string;
+  type?: string;
+  value?: string;
+  placeholder?: string;
+  [key: string]: any;
+}
 
 const {
-  state: providedState = "default",
+  state = "default",
+  size = "md",
+  fullWidth = false,
+  class: extraClass = "",
   type = "text",
-  label,
-  errorMessage,
-  helperText,
-  id: providedId,
-  class: className,
-  required = false,
-  disabled: disabledProp = false,
-  "aria-describedby": ariaDescribedby,
-  "aria-invalid": ariaInvalid,
   ...rest
-} = props;
+} = Astro.props as SpInputProps;
 
-const computedState: SpInputState = providedState;
-
-const inputId = providedId ?? generateInputId();
-
-const showError = Boolean(errorMessage && computedState === "error");
-const showHelperText = Boolean(helperText && !showError);
-
-const helperTextId = showHelperText ? `${inputId}-helper` : undefined;
-const errorTextId = showError ? `${inputId}-error` : undefined;
-
-const describedBy =
-  [ariaDescribedby, helperTextId, errorTextId].filter(Boolean).join(" ") ||
-  undefined;
-
-const recipeState = computedState;
-
-const baseClasses = getInputClasses({
-  state: recipeState,
-});
-
-const classes = [
-  baseClasses,
-  disabledProp ? "sp-input--disabled" : "",
-  className,
-]
-  .filter(Boolean)
-  .join(" ");
-
-const inputProps = {
-  ...rest,
-  type,
-  id: inputId,
-  required,
-  class: classes,
-  disabled: disabledProp,
-  "aria-describedby": describedBy,
-  "aria-invalid": ariaInvalid ?? (showError ? true : undefined),
-  "aria-disabled": disabledProp ? true : undefined,
-};
+const baseClasses = getInputClasses({ state, size, fullWidth });
+const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 ---
 
-<div class="sp-input-wrapper">
-  {
-    label && (
-      <label for={inputId} class="sp-label">
-        {label}
-        {required && (
-          <span class="sp-required" aria-label="required">
-            *
-          </span>
-        )}
-      </label>
-    )
-  }
-
-  <input {...inputProps} />
-
-  {
-    showError && (
-      <div id={errorTextId} class="sp-error-message" role="alert">
-        {errorMessage}
-      </div>
-    )
-  }
-
-  {
-    showHelperText && (
-      <div id={helperTextId} class="sp-helper-text">
-        {helperText}
-      </div>
-    )
-  }
-</div>
+<input class={classes} type={type} {...rest} />
