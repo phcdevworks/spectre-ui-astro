@@ -4,7 +4,7 @@
  *
  * This demonstrates usage of all Spectre UI Astro components.
  */
-import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
+import { SpButton, SpCard, SpInput } from "../src/index.js";
 import Layout from "./ExampleLayout.astro";
 ---
 
@@ -17,25 +17,15 @@ import Layout from "./ExampleLayout.astro";
       <h2>Buttons</h2>
 
       <div class="sp-flex sp-gap-4">
-        <SpButton variant="primary">
-          Primary Button
-        </SpButton>
+        <SpButton variant="primary"> Primary Button </SpButton>
 
-        <SpButton variant="secondary">
-          Secondary Button
-        </SpButton>
+        <SpButton variant="secondary"> Secondary Button </SpButton>
 
-        <SpButton variant="ghost">
-          Ghost Button
-        </SpButton>
+        <SpButton variant="ghost"> Ghost Button </SpButton>
 
-        <SpButton variant="success">
-          Success Button
-        </SpButton>
+        <SpButton variant="success"> Success Button </SpButton>
 
-        <SpButton variant="danger">
-          Danger Button
-        </SpButton>
+        <SpButton variant="danger"> Danger Button </SpButton>
       </div>
 
       <div class="sp-flex sp-gap-4">
@@ -55,7 +45,10 @@ import Layout from "./ExampleLayout.astro";
     <section class="sp-stack">
       <h2>Cards</h2>
 
-      <div class="sp-grid sp-gap-4" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+      <div
+        class="sp-grid sp-gap-4"
+        style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+      >
         <SpCard variant="base">
           <h3>Base Card</h3>
           <p>This is a base card with standard styling.</p>
@@ -76,7 +69,9 @@ import Layout from "./ExampleLayout.astro";
         <header>
           <h3>Card as Article</h3>
         </header>
-        <p>This card is rendered as an HTML article element for semantic markup.</p>
+        <p>
+          This card is rendered as an HTML article element for semantic markup.
+        </p>
       </SpCard>
     </section>
 
@@ -111,7 +106,7 @@ import Layout from "./ExampleLayout.astro";
         <SpInput
           label="Invalid Input"
           name="invalid"
-          state="invalid"
+          state="error"
           errorMessage="This field contains an error."
         />
 
@@ -119,7 +114,7 @@ import Layout from "./ExampleLayout.astro";
           label="Valid Input"
           name="valid"
           value="john_doe"
-          state="valid"
+          state="success"
         />
 
         <SpInput
@@ -182,9 +177,7 @@ import Layout from "./ExampleLayout.astro";
             <SpButton type="submit" variant="primary">
               Create Account
             </SpButton>
-            <SpButton type="reset" variant="ghost">
-              Reset
-            </SpButton>
+            <SpButton type="reset" variant="ghost"> Reset </SpButton>
           </div>
         </form>
       </SpCard>

@@ -1,5 +1,5 @@
 ---
-import { SpButton } from "@phcdevworks/spectre-ui-astro";
+import { SpButton } from "../src/index.js";
 import Layout from "./ExampleLayout.astro";
 ---
 
@@ -36,7 +36,12 @@ import Layout from "./ExampleLayout.astro";
         <SpButton as="a" href="/docs" variant="secondary">
           Internal Link
         </SpButton>
-        <SpButton as="a" href="https://example.com" target="_blank" rel="noreferrer">
+        <SpButton
+          as="a"
+          href="https://example.com"
+          target="_blank"
+          rel="noreferrer"
+        >
           External Link
         </SpButton>
       </div>
@@ -45,9 +50,7 @@ import Layout from "./ExampleLayout.astro";
     <section class="sp-stack">
       <h2>Full Width</h2>
       <div class="sp-stack" style="max-width: 320px;">
-        <SpButton fullWidth>
-          Full Width Button
-        </SpButton>
+        <SpButton fullWidth> Full Width Button </SpButton>
         <SpButton as="a" href="/get-started" fullWidth>
           Full Width Link
         </SpButton>
@@ -57,18 +60,10 @@ import Layout from "./ExampleLayout.astro";
     <section class="sp-stack">
       <h2>States</h2>
       <div class="sp-flex sp-flex-wrap sp-gap-3">
-        <SpButton loading>
-          Loading Button
-        </SpButton>
-        <SpButton as="a" href="/status" loading>
-          Loading Link
-        </SpButton>
-        <SpButton disabled>
-          Disabled Button
-        </SpButton>
-        <SpButton as="a" href="/status" disabled>
-          Disabled Link
-        </SpButton>
+        <SpButton loading> Loading Button </SpButton>
+        <SpButton as="a" href="/status" loading> Loading Link </SpButton>
+        <SpButton disabled> Disabled Button </SpButton>
+        <SpButton as="a" href="/status" disabled> Disabled Link </SpButton>
       </div>
     </section>
   </main>

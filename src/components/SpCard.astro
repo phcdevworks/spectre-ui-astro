@@ -1,17 +1,14 @@
+---
 import type { SpCardProps, SpCardVariant } from "../types/card.ts";
 
 type Props = SpCardProps;
 
-const props = Astro.props as Props;
-
 const {
-  variant: providedVariant = "base",
+  variant = "base",
   as = "div",
   class: className,
   ...rest
-} = props;
-
-const variant = providedVariant as SpCardVariant;
+} = Astro.props;
 
 const VARIANT_CLASS_MAP: Record<SpCardVariant, string | undefined> = {
   base: undefined,

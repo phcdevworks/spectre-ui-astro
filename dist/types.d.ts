@@ -1,4 +1,4 @@
-export type { SpButtonProps, SpButtonVariant } from "./types/button";
-export type { SpCardProps } from "./types/card";
+export type { SpButtonProps, SpButtonVariant, SpButtonSize } from "./types/button";
+export type { SpCardProps, SpCardVariant } from "./types/card";
 export type { SpInputProps, SpInputState } from "./types/input";
 //# sourceMappingURL=types.d.ts.map
