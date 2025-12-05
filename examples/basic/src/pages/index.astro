@@ -4,44 +4,79 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
 ---
 
 <BaseLayout>
-  <SpCard variant="elevated" class="demo-card">
-    <h1>Spectre UI Astro</h1>
-    <p>Example showing Spectre CSS wiring via SPECTRE_CSS_PATHS.</p>
-
-    <div class="demo-actions">
-      <SpButton variant="primary">Get Started</SpButton>
-      <SpButton variant="secondary" as="a" href="https://astro.build/">
-        Learn Astro
+  <div class="page">
+    <header class="page__header">
+      <div>
+        <p class="eyebrow">Spectre UI Astro</p>
+        <h1>Welcome back</h1>
+      </div>
+      <SpButton variant="primary" as="a" href="https://astro.build/">
+        Get Started
       </SpButton>
-    </div>
+    </header>
 
-    <div class="demo-inputs">
-      <SpInput label="Email" type="email" placeholder="you@example.com" />
-      <SpInput
-        label="Password"
-        type="password"
-        state="invalid"
-        errorMessage="Pick something stronger"
-      />
-    </div>
-  </SpCard>
+    <SpCard variant="base" class="auth-card">
+      <h2>Sign in to your dashboard</h2>
+      <form class="auth-form" aria-label="Sign in form">
+        <SpInput
+          label="Email address"
+          type="email"
+          placeholder="you@example.com"
+          helperText="Use the email associated with your Spectre account."
+          required
+        />
+
+        <SpInput
+          label="Password"
+          type="password"
+          state="invalid"
+          errorMessage="Password must be at least 8 characters."
+          placeholder="••••••••"
+          required
+        />
+
+        <SpButton variant="primary" type="submit" class="sp-btn--full">
+          Sign In
+        </SpButton>
+      </form>
+    </SpCard>
+  </div>
 </BaseLayout>
 
 <style>
-  .demo-card {
-    width: min(100%, 32rem);
+  .page {
+    width: min(100%, 48rem);
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .page__header h1 {
+    margin: 0.25rem 0 0;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    font-size: 0.85rem;
+    color: #cbd5f5;
+  }
+
+  .auth-card {
     display: grid;
     gap: 1.5rem;
+    width: min(100%, 32rem);
   }
 
-  .demo-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .demo-inputs {
+  .auth-form {
     display: grid;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 </style>
