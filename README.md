@@ -137,10 +137,10 @@ A comprehensive input component with label, error, and helper text support.
 
 **Props:**
 
-- `state`: `"default"` | `"focus"` | `"invalid"` | `"valid"` | `"disabled"` (default: `"default"`)
+- `state`: `"default"` | `"error"` | `"success"` (default: `"default"`)
 - `type`: `"text"` | `"email"` | `"password"` | `"number"` | `"tel"` | `"url"` | `"search"` | `"date"` | `"time"` | `"datetime-local"` (default: `"text"`)
 - `label`: string (input label)
-- `errorMessage`: string (error message to display when `state="invalid"`)
+- `errorMessage`: string (error message to display when `state="error"`)
 - `helperText`: string (helper text below input)
 - `id`: string (auto-generated if not provided)
 - `name`: string
@@ -171,21 +171,21 @@ A comprehensive input component with label, error, and helper text support.
   helperText="We'll never share your email."
 />
 
-<!-- Input with invalid state -->
+<!-- Input with error state -->
 <SpInput
   label="Password"
   type="password"
   name="password"
-  state="invalid"
+  state="error"
   errorMessage="Password must be at least 8 characters."
 />
 
-<!-- Input with valid state -->
+<!-- Input with success state -->
 <SpInput
   label="Username"
   name="username"
   value="john_doe"
-  state="valid"
+  state="success"
 />
 ```
 
@@ -197,7 +197,9 @@ All components are fully typed. Import types as needed:
 import type {
   SpButtonProps,
   SpButtonVariant,
+  SpButtonSize,
   SpCardProps,
+  SpCardVariant,
   SpInputProps,
   SpInputState,
 } from "@phcdevworks/spectre-ui-astro";
@@ -233,8 +235,6 @@ This package follows strict design principles:
 ## Contributing
 
 Contributions are welcome! Please see the [contributing guidelines](CONTRIBUTING.md).
-
-For detailed architecture information, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## License
 
