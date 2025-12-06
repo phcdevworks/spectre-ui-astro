@@ -1,78 +1,39 @@
-# Example Usage
+# Example App
 
-This directory contains example files demonstrating how to use `@phcdevworks/spectre-ui-astro` in an Astro project.
+A complete Astro application demonstrating `@phcdevworks/spectre-ui-astro` components.
 
-> **Note for Development**: These examples use the package import `@phcdevworks/spectre-ui-astro` to show the public API. During local development, you may see TypeScript errors since the package isn't published yet. For testing locally, you can temporarily change imports to `../src/index.js`.
-
-## Running the Example App
-
-The `basic/` directory contains a complete Astro application:
+## Running the Example
 
 ```bash
-cd examples/basic
+cd examples
 npm install
 npm run dev
 ```
 
 Open http://localhost:4321 to see the example app showcasing SpButton, SpCard, and SpInput components.
 
-## Example Files
+## What's Included
 
-The root `examples/` directory contains standalone example files for reference:
+This example demonstrates:
 
-- `ExampleLayout.astro` - Shows how to import Spectre CSS directly
-- `ExampleLayoutWithPaths.astro` - Shows how to use `SPECTRE_CSS_PATHS` constants
-- `ExamplePage.astro` - Comprehensive demo of all components
-- `buttons.astro` - Focused button playground with all variants and states
-
-These are code examples for documentation, not runnable pages.
-
-## Setup
-
-1. Install the package:
-
-```bash
-npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
-```
-
-2. Import CSS in your layout (see `ExampleLayout.astro` or `ExampleLayoutWithPaths.astro`)
-
-3. Use components in your pages (see `ExamplePage.astro` or `buttons.astro`)
+- **Component usage**: SpButton, SpCard, SpInput with various props and states
+- **CSS integration**: Using `SPECTRE_CSS_PATHS` to import Spectre UI styles
+- **Real layouts**: Hero section, component showcase grid, and contact form
+- **Best practices**: Proper semantic HTML, accessibility attributes, and responsive design
 
 ## Files
 
-- `ExampleLayout.astro` - Shows how to import Spectre CSS directly
-- `ExampleLayoutWithPaths.astro` - Shows how to use `SPECTRE_CSS_PATHS` constants
-- `ExamplePage.astro` - Comprehensive demo of all components
-- `buttons.astro` - Focused button playground with all variants and states
+- `src/pages/index.astro` - Homepage with component demos
+- `src/layouts/BaseLayout.astro` - Base layout with CSS imports
+- `astro.config.mjs` - Astro configuration
+- `package.json` - Dependencies (links to parent package with `file:..`)
 
-## Quick Example
+## Quick Start
 
-```astro
----
-// Import components
-import { SpButton, SpCard, SpInput, SPECTRE_CSS_PATHS } from "@phcdevworks/spectre-ui-astro";
+After running the dev server, you'll see:
 
-// Import CSS (in your layout)
-import "@phcdevworks/spectre-ui/dist/base.css";
-import "@phcdevworks/spectre-ui/dist/components.css";
-import "@phcdevworks/spectre-ui/dist/utilities.css";
----
+1. A hero section showcasing the design system
+2. Component cards demonstrating buttons, cards, and inputs
+3. A working contact form with validation states
 
-<SpButton variant="primary" size="lg">
-  Get Started
-</SpButton>
-
-<SpCard variant="elevated">
-  <h2>Card Title</h2>
-  <p>Card content goes here.</p>
-</SpCard>
-
-<SpInput
-  label="Email"
-  type="email"
-  name="email"
-  placeholder="Enter your email"
-  required
-/>
-```
+Edit `src/pages/index.astro` to experiment with different component props and variants.
