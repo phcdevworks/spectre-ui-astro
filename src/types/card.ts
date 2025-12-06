@@ -1,37 +1,50 @@
-import type { HTMLAttributes } from "astro/types";
+export type CardVariant = 'elevated' | 'outline' | 'ghost';
+
+export interface CardRecipeOptions {
+  variant?: CardVariant;
+  interactive?: boolean; // hover/focus styles
+  padded?: boolean;      // apply default padding
+  fullHeight?: boolean;
+}
 
 /**
- * Card variant types exposed in the README.
+ * Generate Spectre card classes.
+ *
+ * Rules:
+ * - Base: "sp-card"
+ * - Variant:
+ *   - "elevated" => "sp-card--elevated" (default)
+ *   - "outline"  => "sp-card--outline"
+ *   - "ghost"    => "sp-card--ghost"
+ * - interactive => "sp-card--interactive"
+ * - padded      => "sp-card--padded"
+ * - fullHeight  => "sp-card--full"
  */
-export type SpCardVariant = "base" | "elevated" | "flat";
+export function getCardClasses(opts: CardRecipeOptions = {}): string {
+  const {
+    variant = 'elevated',
+    interactive = false,
+    padded = false,
+    fullHeight = false,
+  } = opts;
 
-/**
- * Valid HTML elements for card rendering.
- */
-export type SpCardElement = "div" | "section" | "article";
+  const classes: string[] = [];
 
-type CardElementAttributes<T extends SpCardElement> = Omit<
-  HTMLAttributes<T>,
-  "class"
->;
+  // Base
+  classes.push('sp-card');
 
-type SpCardElementProps =
-  | ({ as?: "div" } & CardElementAttributes<"div">)
-  | ({ as: "section" } & CardElementAttributes<"section">)
-  | ({ as: "article" } & CardElementAttributes<"article">);
+  // Variant
+  const variantMap: Record<CardVariant, string> = {
+    elevated: 'sp-card--elevated',
+    outline: 'sp-card--outline',
+    ghost: 'sp-card--ghost',
+  };
+  classes.push(variantMap[variant]);
 
-/**
- * Props for SpCard component.
- */
-export type SpCardProps = SpCardElementProps & {
-  /**
-   * Visual variant of the card.
-   * @default "base"
-   */
-  variant?: SpCardVariant;
+  // Flags
+  if (interactive) classes.push('sp-card--interactive');
+  if (padded) classes.push('sp-card--padded');
+  if (fullHeight) classes.push('sp-card--full');
 
-  /**
-   * Additional CSS classes.
-   */
-  class?: string;
-};
+  return classes.filter(Boolean).join(' ').trim();
+}

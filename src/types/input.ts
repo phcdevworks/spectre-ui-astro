@@ -1,171 +1,58 @@
-import type { InputState } from "@phcdevworks/spectre-ui";
+export type InputState = 'default' | 'error' | 'success';
+export type InputSize = 'sm' | 'md' | 'lg';
+
+export interface InputRecipeOptions {
+  state?: InputState;
+  size?: InputSize;
+  fullWidth?: boolean;
+}
 
 /**
- * Input state types matching Spectre UI design system
+ * Generate Spectre input classes.
+ *
+ * Rules:
+ * - Base: "sp-input"
+ * - State:
+ *   - "default" => no state modifier
+ *   - "error"   => "sp-input--error"
+ *   - "success" => "sp-input--success"
+ * - Size:
+ *   - "sm" => "sp-input--sm"
+ *   - "md" => "sp-input--md" (default)
+ *   - "lg" => "sp-input--lg"
+ * - fullWidth => "sp-input--full"
  */
-export type SpInputState = InputState;
+export function getInputClasses(opts: InputRecipeOptions = {}): string {
+  const {
+    state = 'default',
+    size = 'md',
+    fullWidth = false,
+  } = opts;
 
-/**
- * Input types
- */
-export type SpInputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search" | "date" | "time" | "datetime-local";
+  const classes: string[] = [];
 
-/**
- * Props for SpInput component
- */
-export interface SpInputProps {
-  /**
-   * Visual state of the input ("default" | "error" | "success")
-   * @default "default"
-   */
-  state?: SpInputState;
+  // Base
+  classes.push('sp-input');
 
-  /**
-   * Input type attribute
-   * @default "text"
-   */
-  type?: SpInputType;
+  // State
+  if (state === 'error') {
+    classes.push('sp-input--error');
+  } else if (state === 'success') {
+    classes.push('sp-input--success');
+  }
 
-  /**
-   * Label text
-   */
-  label?: string;
+  // Size
+  const sizeMap: Record<InputSize, string> = {
+    sm: 'sp-input--sm',
+    md: 'sp-input--md',
+    lg: 'sp-input--lg',
+  };
+  classes.push(sizeMap[size]);
 
-  /**
-   * Error message to display when state is "invalid"
-   */
-  errorMessage?: string;
+  // Flags
+  if (fullWidth) {
+    classes.push('sp-input--full');
+  }
 
-  /**
-   * Helper text to display below input
-   */
-  helperText?: string;
-
-  /**
-   * ID attribute (auto-generated if not provided)
-   */
-  id?: string;
-
-  /**
-   * Name attribute
-   */
-  name?: string;
-
-  /**
-   * Value attribute
-   */
-  value?: string;
-
-  /**
-   * Default value attribute
-   */
-  defaultValue?: string;
-
-  /**
-   * Placeholder text
-   */
-  placeholder?: string;
-
-  /**
-   * Whether the input is required
-   * @default false
-   */
-  required?: boolean;
-
-  /**
-   * Whether the input is disabled
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
-   * Whether the input is readonly
-   * @default false
-   */
-  readonly?: boolean;
-
-  /**
-   * Autocomplete attribute
-   */
-  autocomplete?: string;
-
-  /**
-   * Min value (for number inputs)
-   */
-  min?: number | string;
-
-  /**
-   * Max value (for number inputs)
-   */
-  max?: number | string;
-
-  /**
-   * Step value (for number inputs)
-   */
-  step?: number | string;
-
-  /**
-   * Pattern for validation (regex)
-   */
-  pattern?: string;
-
-  /**
-   * Max length
-   */
-  maxlength?: number;
-
-  /**
-   * Min length
-   */
-  minlength?: number;
-
-  /**
-   * Additional CSS classes
-   */
-  class?: string;
-
-  /**
-   * Additional inline styles
-   */
-  style?: string;
-
-  /**
-   * Aria label for accessibility
-   */
-  "aria-label"?: string;
-
-  /**
-   * Aria describedby for accessibility
-   */
-  "aria-describedby"?: string;
-
-  /**
-   * Aria invalid for accessibility
-   */
-  "aria-invalid"?: boolean;
-
-  /**
-   * Tab index
-   */
-  tabindex?: number;
-
-  /**
-   * Input event handler
-   */
-  oninput?: string;
-
-  /**
-   * Change event handler
-   */
-  onchange?: string;
-
-  /**
-   * Focus event handler
-   */
-  onfocus?: string;
-
-  /**
-   * Blur event handler
-   */
-  onblur?: string;
+  return classes.filter(Boolean).join(' ').trim();
 }
