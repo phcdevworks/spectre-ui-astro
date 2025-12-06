@@ -5,6 +5,12 @@ import {
   type InputSize,
 } from "@phcdevworks/spectre-ui";
 
+let inputIdCounter = 0;
+const createInputId = () => {
+  inputIdCounter += 1;
+  return `sp-input-${inputIdCounter}`;
+};
+
 export interface SpInputProps {
   state?: InputState;
   size?: InputSize;
@@ -14,6 +20,7 @@ export interface SpInputProps {
   helperText?: string;
   class?: string;
   id?: string;
+  name?: string;
   type?: string;
   [key: string]: any;
 }
@@ -28,13 +35,13 @@ const {
   class: extraClass = "",
   id,
   type = "text",
-  ...inputProps
+  ...rest
 } = Astro.props as SpInputProps;
 
-const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2, 10)}`;
-const helperId = helperText ? `${inputId}-helper` : undefined;
+const baseId = id ?? createInputId();
+const helperId = helperText ? `${baseId}-helper` : undefined;
 const showError = state === "error" && Boolean(errorMessage);
-const errorId = showError ? `${inputId}-error` : undefined;
+const errorId = showError ? `${baseId}-error` : undefined;
 const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
 
 const baseClasses = getInputClasses({ state, size, fullWidth });
@@ -43,18 +50,18 @@ const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 
 <div class="sp-input-wrapper">
   {label && (
-    <label class="sp-label" for={inputId}>
+    <label class="sp-label" for={baseId}>
       {label}
     </label>
   )}
 
   <input
-    id={inputId}
+    id={baseId}
     class={classes}
     type={type}
     aria-invalid={showError ? "true" : undefined}
     aria-describedby={describedBy}
-    {...inputProps}
+    {...rest}
   />
 
   {showError && (

@@ -22,24 +22,20 @@ export interface SpButtonProps {
 }
 
 const {
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  loading = false,
+  disabled = false,
+  iconOnly = false,
   as = "button",
-  class: extraClass = "",
   href,
   target,
   rel,
   type = "button",
-  ...buttonProps
+  class: extraClass = "",
+  ...rest
 } = Astro.props as SpButtonProps;
-
-const {
-  variant,
-  size,
-  fullWidth,
-  loading,
-  disabled,
-  iconOnly,
-  ...domProps
-} = buttonProps;
 
 const baseClasses = getButtonClasses({
   variant,
@@ -51,19 +47,29 @@ const baseClasses = getButtonClasses({
 });
 
 const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
-const ariaDisabled = disabled ? "true" : undefined;
 const ariaBusy = loading ? "true" : undefined;
 ---
 
-{as === "a" && (
+{as === "a" && !disabled && (
   <a
     class={classes}
     href={href}
     target={target}
     rel={rel}
-    aria-disabled={ariaDisabled}
     aria-busy={ariaBusy}
-    {...domProps}
+    {...rest}
+  >
+    <slot />
+  </a>
+)}
+
+{as === "a" && disabled && (
+  <a
+    class={classes}
+    aria-disabled="true"
+    aria-busy={ariaBusy}
+    tabindex="-1"
+    {...rest}
   >
     <slot />
   </a>
@@ -75,7 +81,7 @@ const ariaBusy = loading ? "true" : undefined;
     type={type}
     disabled={disabled}
     aria-busy={ariaBusy}
-    {...domProps}
+    {...rest}
   >
     <slot />
   </button>
@@ -84,9 +90,9 @@ const ariaBusy = loading ? "true" : undefined;
 {as === "span" && (
   <span
     class={classes}
-    aria-disabled={ariaDisabled}
+    aria-disabled={disabled ? "true" : undefined}
     aria-busy={ariaBusy}
-    {...domProps}
+    {...rest}
   >
     <slot />
   </span>
