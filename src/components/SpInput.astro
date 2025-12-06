@@ -19,16 +19,15 @@ export interface SpInputProps {
 }
 
 const {
-  state = "default",
-  size = "md",
-  fullWidth = false,
   class: extraClass = "",
   type = "text",
-  ...rest
+  ...inputProps
 } = Astro.props as SpInputProps;
+
+const { state, size, fullWidth, ...domProps } = inputProps;
 
 const baseClasses = getInputClasses({ state, size, fullWidth });
 const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 ---
 
-<input class={classes} type={type} {...rest} />
+<input class={classes} type={type} {...domProps} />

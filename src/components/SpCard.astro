@@ -11,15 +11,10 @@ export interface SpCardProps extends CardRecipeOptions {
   [key: string]: any;
 }
 
-const {
-  variant = "elevated",
-  interactive = false,
-  padded = false,
-  fullHeight = false,
-  class: extraClass = "",
-  as = "div",
-  ...rest
-} = Astro.props as SpCardProps;
+const { as = "div", class: extraClass = "", ...cardProps } =
+  Astro.props as SpCardProps;
+
+const { variant, interactive, padded, fullHeight, ...domProps } = cardProps;
 
 const baseClasses = getCardClasses({
   variant,
@@ -32,19 +27,19 @@ const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 ---
 
 {as === "section" && (
-  <section class={classes} {...rest}>
+  <section class={classes} {...domProps}>
     <slot />
   </section>
 )}
 
 {as === "article" && (
-  <article class={classes} {...rest}>
+  <article class={classes} {...domProps}>
     <slot />
   </article>
 )}
 
 {as === "div" && (
-  <div class={classes} {...rest}>
+  <div class={classes} {...domProps}>
     <slot />
   </div>
 )}
