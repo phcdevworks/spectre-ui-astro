@@ -9,25 +9,63 @@ export interface SpInputProps {
   state?: InputState;
   size?: InputSize;
   fullWidth?: boolean;
+  label?: string;
+  errorMessage?: string;
+  helperText?: string;
   class?: string;
   id?: string;
-  name?: string;
   type?: string;
-  value?: string;
-  placeholder?: string;
   [key: string]: any;
 }
 
 const {
+  state = "default",
+  size = "md",
+  fullWidth = false,
+  label,
+  errorMessage,
+  helperText,
   class: extraClass = "",
+  id,
   type = "text",
   ...inputProps
 } = Astro.props as SpInputProps;
 
-const { state, size, fullWidth, ...domProps } = inputProps;
+const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2, 10)}`;
+const helperId = helperText ? `${inputId}-helper` : undefined;
+const showError = state === "error" && Boolean(errorMessage);
+const errorId = showError ? `${inputId}-error` : undefined;
+const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
 
 const baseClasses = getInputClasses({ state, size, fullWidth });
 const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
 ---
 
-<input class={classes} type={type} {...domProps} />
+<div class="sp-input-wrapper">
+  {label && (
+    <label class="sp-label" for={inputId}>
+      {label}
+    </label>
+  )}
+
+  <input
+    id={inputId}
+    class={classes}
+    type={type}
+    aria-invalid={showError ? "true" : undefined}
+    aria-describedby={describedBy}
+    {...inputProps}
+  />
+
+  {showError && (
+    <p class="sp-error-message" id={errorId}>
+      {errorMessage}
+    </p>
+  )}
+
+  {helperText && (
+    <p class="sp-helper-text" id={helperId}>
+      {helperText}
+    </p>
+  )}
+</div>

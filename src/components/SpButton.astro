@@ -25,6 +25,8 @@ const {
   as = "button",
   class: extraClass = "",
   href,
+  target,
+  rel,
   type = "button",
   ...buttonProps
 } = Astro.props as SpButtonProps;
@@ -57,6 +59,8 @@ const ariaBusy = loading ? "true" : undefined;
   <a
     class={classes}
     href={href}
+    target={target}
+    rel={rel}
     aria-disabled={ariaDisabled}
     aria-busy={ariaBusy}
     {...domProps}
