@@ -45,18 +45,18 @@
   "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
 
   "type": "module",
-  "main": "./dist/index.js",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs"
     },
-    "./components/*": {
-      "default": "./dist/components/*.astro"
-    }
+    "./SpButton.astro": "./dist/SpButton.astro",
+    "./SpCard.astro": "./dist/SpCard.astro",
+    "./SpInput.astro": "./dist/SpInput.astro"
   },
 
   "files": [
@@ -68,8 +68,7 @@
   ],
 
   "scripts": {
-    "build": "tsup && npm run build:types",
-    "postbuild": "node scripts/copy-components.mjs",
+    "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
@@ -83,15 +82,14 @@
   },
 
   "peerDependencies": {
-    "astro": "^5.0.0",
-    "@phcdevworks/spectre-ui": "^0.0.3"
+    "astro": "^4.0.0"
   },
   "dependencies": {
-    "@phcdevworks/spectre-ui": "^0.0.3"
+    "@phcdevworks/spectre-ui": "^0.0.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
-    "astro": "^5.0.0",
+    "astro": "^4.0.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   }
