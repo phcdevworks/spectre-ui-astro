@@ -17,9 +17,12 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
       <SpButton variant="primary" size="lg"> Get Started </SpButton>
     </header>
 
+    <!-- COMPONENT DEMOS -->
     <section class="demo-section">
       <h2>Components</h2>
+
       <div class="component-grid">
+        <!-- BUTTON CARD -->
         <SpCard variant="elevated">
           <h3>Buttons</h3>
           <p>
@@ -33,8 +36,19 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
           </div>
         </SpCard>
 
-        <SpCard variant="elevated" />
+        <!-- CARDS -->
+        <SpCard variant="elevated">
+          <h3>Cards</h3>
+          <p>
+            Use cards to group related UI content. Cards automatically adapt to
+            Spectre’s surface and text tokens for proper contrast.
+          </p>
+          <div class="button-demo">
+            <SpButton variant="primary" size="sm">Example CTA</SpButton>
+          </div>
+        </SpCard>
 
+        <!-- INPUTS -->
         <SpCard variant="elevated">
           <h3>Inputs</h3>
           <p>Form controls with labels, validation states, and helper text.</p>
@@ -50,9 +64,10 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
       </div>
     </section>
 
+    <!-- CONTACT FORM DEMO -->
     <section class="demo-section">
       <h2>Try it out</h2>
-      <SpCard variant="base" class="contact-card">
+      <SpCard variant="elevated" class="contact-card">
         <h3>Contact Form</h3>
         <form class="contact-form">
           <SpInput label="Name" type="text" placeholder="Your name" required />
@@ -79,90 +94,3 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
     </section>
   </div>
 </BaseLayout>
-
-<style>
-  .page {
-    width: min(100%, 72rem);
-    display: grid;
-    gap: 3rem;
-  }
-
-  .page__header {
-    display: grid;
-    gap: 1.5rem;
-    text-align: center;
-    padding: 2rem 0;
-  }
-
-  .page__header h1 {
-    margin: 0.5rem 0 0;
-    font-size: 2.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.125rem;
-    color: #cbd5f5;
-    margin: 0.5rem 0 1rem;
-  }
-
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0;
-    font-size: 0.85rem;
-    color: #cbd5f5;
-  }
-
-  .demo-section {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .demo-section h2 {
-    margin: 0;
-  }
-
-  .component-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .component-grid h3 {
-    margin: 0 0 0.5rem;
-  }
-
-  .component-grid p {
-    margin: 0 0 1rem;
-    color: #cbd5f5;
-  }
-
-  .button-demo {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .input-demo {
-    margin-top: 1rem;
-  }
-
-  .contact-card {
-    max-width: 42rem;
-  }
-
-  .contact-card h3 {
-    margin: 0 0 1rem;
-  }
-
-  .contact-form {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .form-actions {
-    display: flex;
-    gap: 0.75rem;
-    padding-top: 0.5rem;
-  }
-</style>
