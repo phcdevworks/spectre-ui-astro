@@ -13,9 +13,12 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <!-- Spectre UI CSS layers -->
     <link rel="stylesheet" href={SPECTRE_CSS_PATHS.base} />
     <link rel="stylesheet" href={SPECTRE_CSS_PATHS.components} />
     <link rel="stylesheet" href={SPECTRE_CSS_PATHS.utilities} />
+
     <style is:global>
       body {
         font-family:
@@ -24,8 +27,6 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
           BlinkMacSystemFont,
           "Segoe UI",
           sans-serif;
-        background-color: #0f172a;
-        color: #f1f5f9;
         margin: 0;
       }
 
