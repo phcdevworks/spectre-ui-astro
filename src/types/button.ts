@@ -1,6 +1,25 @@
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonTone = 'default' | 'success' | 'warning' | 'danger';
+export type SpButtonVariant = ButtonVariant;
+export type SpButtonSize = ButtonSize;
+
+export interface SpButtonProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  tone?: ButtonTone;
+  fullWidth?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  iconOnly?: boolean;
+  as?: 'button' | 'a' | 'span';
+  href?: string;
+  target?: '_self' | '_blank' | '_parent' | '_top';
+  rel?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  [key: string]: any;
+}
 
 export interface ButtonRecipeOptions {
   variant?: ButtonVariant;

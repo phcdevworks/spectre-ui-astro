@@ -1,99 +1,48 @@
 ---
-import {
-  getButtonClasses,
-  type ButtonVariant,
-  type ButtonSize,
-} from "@phcdevworks/spectre-ui";
-
-export interface SpButtonProps {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  fullWidth?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  iconOnly?: boolean;
-  as?: "button" | "a" | "span";
-  href?: string;
-  target?: "_self" | "_blank" | "_parent" | "_top";
-  rel?: string;
-  type?: "button" | "submit" | "reset";
-  class?: string;
-  [key: string]: any;
-}
+import type { SpButtonProps } from "../types";
+import { getButtonClasses } from "@phcdevworks/spectre-ui";
 
 const {
+  as = "button",
   variant = "primary",
   size = "md",
+  tone = "default",
   fullWidth = false,
   loading = false,
   disabled = false,
   iconOnly = false,
-  as = "button",
-  href,
-  target,
-  rel,
-  type = "button",
-  class: extraClass = "",
+  class: className,
   ...rest
 } = Astro.props as SpButtonProps;
 
-const baseClasses = getButtonClasses({
+const classes = getButtonClasses({
   variant,
   size,
+  tone,
   fullWidth,
-  disabled,
   loading,
+  disabled,
   iconOnly,
 });
 
-const classes = [baseClasses, extraClass].filter(Boolean).join(" ");
-const ariaBusy = loading ? "true" : undefined;
+const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
-{as === "a" && !disabled && (
-  <a
-    class={classes}
-    href={href}
-    target={target}
-    rel={rel}
-    aria-busy={ariaBusy}
-    {...rest}
-  >
+{as === "a" ? (
+  <a class={finalClass} aria-disabled={disabled || undefined} {...rest}>
     <slot />
   </a>
-)}
-
-{as === "a" && disabled && (
-  <a
-    class={classes}
-    aria-disabled="true"
-    aria-busy={ariaBusy}
-    tabindex="-1"
-    {...rest}
-  >
+) : as === "span" ? (
+  <span class={finalClass} aria-disabled={disabled || undefined} {...rest}>
     <slot />
-  </a>
-)}
-
-{as === "button" && (
+  </span>
+) : (
   <button
-    class={classes}
-    type={type}
+    class={finalClass}
     disabled={disabled}
-    aria-busy={ariaBusy}
+    type={(rest as any).type ?? "button"}
     {...rest}
   >
     <slot />
   </button>
-)}
-
-{as === "span" && (
-  <span
-    class={classes}
-    aria-disabled={disabled ? "true" : undefined}
-    aria-busy={ariaBusy}
-    {...rest}
-  >
-    <slot />
-  </span>
 )}
