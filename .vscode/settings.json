@@ -74,5 +74,8 @@
 	"git.autofetch": true,
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
-	"scm.defaultViewMode": "tree"
+	"scm.defaultViewMode": "tree",
+	"cSpell.words": [
+		"phcdevworks"
+	]
 }
