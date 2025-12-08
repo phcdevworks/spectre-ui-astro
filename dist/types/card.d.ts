@@ -1,33 +1,22 @@
-import type { HTMLAttributes } from "astro/types";
+export type CardVariant = 'elevated' | 'outline' | 'ghost';
+export interface CardRecipeOptions {
+    variant?: CardVariant;
+    interactive?: boolean;
+    padded?: boolean;
+    fullHeight?: boolean;
+}
 /**
- * Card variant types exposed in the README.
+ * Generate Spectre card classes.
+ *
+ * Rules:
+ * - Base: "sp-card"
+ * - Variant:
+ *   - "elevated" => "sp-card--elevated" (default)
+ *   - "outline"  => "sp-card--outline"
+ *   - "ghost"    => "sp-card--ghost"
+ * - interactive => "sp-card--interactive"
+ * - padded      => "sp-card--padded"
+ * - fullHeight  => "sp-card--full"
  */
-export type SpCardVariant = "base" | "elevated" | "flat";
-/**
- * Valid HTML elements for card rendering.
- */
-export type SpCardElement = "div" | "section" | "article";
-type CardElementAttributes<T extends SpCardElement> = Omit<HTMLAttributes<T>, "class">;
-type SpCardElementProps = ({
-    as?: "div";
-} & CardElementAttributes<"div">) | ({
-    as: "section";
-} & CardElementAttributes<"section">) | ({
-    as: "article";
-} & CardElementAttributes<"article">);
-/**
- * Props for SpCard component.
- */
-export type SpCardProps = SpCardElementProps & {
-    /**
-     * Visual variant of the card.
-     * @default "base"
-     */
-    variant?: SpCardVariant;
-    /**
-     * Additional CSS classes.
-     */
-    class?: string;
-};
-export {};
+export declare function getCardClasses(opts?: CardRecipeOptions): string;
 //# sourceMappingURL=card.d.ts.map
