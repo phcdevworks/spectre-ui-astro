@@ -1,6 +1,18 @@
 export type InputState = 'default' | 'error' | 'success';
 export type InputSize = 'sm' | 'md' | 'lg';
 
+export interface InputProps {
+  label?: string;
+  state?: InputState;
+  size?: InputSize;
+  fullWidth?: boolean;
+  helperText?: string;
+  errorMessage?: string;
+  id?: string;
+  class?: string;
+  [key: string]: any;
+}
+
 export interface InputRecipeOptions {
   state?: InputState;
   size?: InputSize;

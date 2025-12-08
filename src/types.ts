@@ -1,3 +1,3 @@
 export type { SpButtonProps, SpButtonVariant, SpButtonSize } from "./types/button";
-export type { SpCardProps, SpCardVariant } from "./types/card";
-export type { SpInputProps, SpInputState } from "./types/input";
+export type { CardProps, CardVariant } from "./types/card";
+export type { InputProps, InputState } from "./types/input";
