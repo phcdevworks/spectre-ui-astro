@@ -1,16 +1,31 @@
 ---
-import type { SpButtonProps } from "../types";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
+import type { ButtonVariant, ButtonSize } from "@phcdevworks/spectre-ui";
+
+type SpButtonElement = "button" | "a" | "span";
+
+interface SpButtonProps {
+  as?: SpButtonElement;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  class?: string;
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+  type?: "button" | "submit" | "reset";
+  [key: string]: any;
+}
 
 const {
   as = "button",
   variant = "primary",
   size = "md",
-  tone = "default",
   fullWidth = false,
   loading = false,
   disabled = false,
-  iconOnly = false,
   class: className,
   ...rest
 } = Astro.props as SpButtonProps;
@@ -18,31 +33,34 @@ const {
 const classes = getButtonClasses({
   variant,
   size,
-  tone,
   fullWidth,
   loading,
   disabled,
-  iconOnly,
 });
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+// make sure rest no longer has class
+delete (rest as any).class;
 ---
 
-{as === "a" ? (
-  <a class={finalClass} aria-disabled={disabled || undefined} {...rest}>
-    <slot />
-  </a>
-) : as === "span" ? (
-  <span class={finalClass} aria-disabled={disabled || undefined} {...rest}>
-    <slot />
-  </span>
-) : (
-  <button
-    class={finalClass}
-    disabled={disabled}
-    type={(rest as any).type ?? "button"}
-    {...rest}
-  >
-    <slot />
-  </button>
-)}
+{
+  as === "a" ? (
+    <a class={finalClass} aria-disabled={disabled || undefined} {...rest}>
+      <slot />
+    </a>
+  ) : as === "span" ? (
+    <span class={finalClass} aria-disabled={disabled || undefined} {...rest}>
+      <slot />
+    </span>
+  ) : (
+    <button
+      class={finalClass}
+      disabled={disabled}
+      type={(rest as any).type ?? "button"}
+      {...rest}
+    >
+      <slot />
+    </button>
+  )
+}

@@ -20,10 +20,8 @@
     "tailwindcss",
     "design-tokens"
   ],
-
   "author": "PHCDevworks",
   "license": "MIT",
-
   "funding": [
     {
       "type": "github",
@@ -34,7 +32,6 @@
       "url": "https://buymeacoffee.com/phcdevworks"
     }
   ],
-
   "repository": {
     "type": "git",
     "url": "https://github.com/phcdevworks/spectre-ui-astro.git"
@@ -43,7 +40,6 @@
     "url": "https://github.com/phcdevworks/spectre-ui-astro/issues"
   },
   "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
-
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
@@ -58,7 +54,6 @@
     "./SpCard.astro": "./dist/SpCard.astro",
     "./SpInput.astro": "./dist/SpInput.astro"
   },
-
   "files": [
     "src",
     "dist",
@@ -66,7 +61,6 @@
     "LICENSE",
     "CHANGELOG.md"
   ],
-
   "scripts": {
     "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
@@ -76,15 +70,14 @@
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build"
   },
-
   "publishConfig": {
     "access": "public"
   },
-
   "peerDependencies": {
     "astro": "^4.0.0"
   },
   "dependencies": {
+    "@phcdevworks/spectre-tokens": "^0.0.4",
     "@phcdevworks/spectre-ui": "^0.0.4"
   },
   "devDependencies": {

@@ -30,22 +30,22 @@ const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2)}`;
 
 const classes = getInputClasses({ state, size, fullWidth });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (rest as any).class;
 ---
 
 <div class="sp-input-wrapper">
-  {label && (
-    <label class="sp-label" for={inputId}>
-      {label}
-    </label>
-  )}
+  {
+    label && (
+      <label class="sp-label" for={inputId}>
+        {label}
+      </label>
+    )
+  }
 
   <input id={inputId} class={finalClass} {...rest} />
 
-  {helperText && !errorMessage && (
-    <p class="sp-helper-text">{helperText}</p>
-  )}
+  {helperText && !errorMessage && <p class="sp-helper-text">{helperText}</p>}
 
-  {errorMessage && (
-    <p class="sp-error-message">{errorMessage}</p>
-  )}
+  {errorMessage && <p class="sp-error-message">{errorMessage}</p>}
 </div>

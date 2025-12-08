@@ -1,6 +1,6 @@
 ---
-import type { CardVariant } from "@phcdevworks/spectre-ui";
 import { getCardClasses } from "@phcdevworks/spectre-ui";
+import type { CardVariant } from "@phcdevworks/spectre-ui";
 
 interface SpCardProps {
   variant?: CardVariant;
@@ -24,18 +24,22 @@ const {
 
 const classes = getCardClasses({ variant, interactive, padded, fullHeight });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (rest as any).class;
 ---
 
-{as === "section" ? (
-  <section class={finalClass} {...rest}>
-    <slot />
-  </section>
-) : as === "article" ? (
-  <article class={finalClass} {...rest}>
-    <slot />
-  </article>
-) : (
-  <div class={finalClass} {...rest}>
-    <slot />
-  </div>
-)}
+{
+  as === "section" ? (
+    <section class={finalClass} {...rest}>
+      <slot />
+    </section>
+  ) : as === "article" ? (
+    <article class={finalClass} {...rest}>
+      <slot />
+    </article>
+  ) : (
+    <div class={finalClass} {...rest}>
+      <slot />
+    </div>
+  )
+}
