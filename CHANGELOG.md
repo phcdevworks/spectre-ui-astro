@@ -4,6 +4,8 @@ All notable changes to this project will be documented here. The format follows 
 
 ## [Unreleased]
 
+## [0.0.3] - 2025-12-08
+
 ### Added
 
 - Enhanced example app with homepage design showcasing components, features grid, and contact form ([6ff4b80], [fdd8c9c]).
@@ -13,6 +15,8 @@ All notable changes to this project will be documented here. The format follows 
 ### Changed
 
 - Updated README with improved structure, component documentation, and Spectre Suite alignment ([1445f26]).
+- Simplified CSS imports to use single `index.css` bundle from Spectre UI ([8afff37]).
+- Refactored CHANGELOG formatting and link references ([8a61ab3]).
 - Refactored components to simplify props and improve type clarity ([2bcdad4], [f4385fa]).
 - Updated SpButton, SpCard, and SpInput to use cleaner prop handling and Astro best practices ([b3801e7], [bd5a03b], [8deed6a]).
 - Simplified CSS imports to use direct Spectre UI paths instead of SPECTRE_CSS_PATHS ([fb0b94c], [ff03805]).
