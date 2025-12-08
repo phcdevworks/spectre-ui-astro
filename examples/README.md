@@ -17,7 +17,7 @@ Open http://localhost:4321 to see the example app showcasing SpButton, SpCard, a
 This example demonstrates:
 
 - **Component usage**: SpButton, SpCard, SpInput with various props and states
-- **CSS integration**: Using `SPECTRE_CSS_PATHS` to import Spectre UI styles
+- **CSS integration**: Single `index.css` import from Spectre UI
 - **Real layouts**: Hero section, component showcase grid, and contact form
 - **Best practices**: Proper semantic HTML, accessibility attributes, and responsive design
 

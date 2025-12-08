@@ -24,14 +24,12 @@ npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 
 ### 1. Import CSS
 
-Import Spectre UI's CSS files in your Astro layout or page:
+Import Spectre UI's CSS in your Astro layout:
 
 ```astro
 ---
 // src/layouts/Layout.astro
-import "@phcdevworks/spectre-ui/dist/base.css";
-import "@phcdevworks/spectre-ui/dist/components.css";
-import "@phcdevworks/spectre-ui/dist/utilities.css";
+import "@phcdevworks/spectre-ui/index.css";
 ---
 ```
 
@@ -39,6 +37,7 @@ import "@phcdevworks/spectre-ui/dist/utilities.css";
 
 ```astro
 ---
+import "@phcdevworks/spectre-ui/index.css";
 import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
 ---
 
@@ -154,17 +153,17 @@ import type {
 } from "@phcdevworks/spectre-ui-astro";
 ```
 
-## CSS Path Constants
+## CSS Import
 
-Utilities for referencing Spectre UI CSS files programmatically:
+Spectre UI provides a single bundled CSS file that includes all necessary styles:
 
-```typescript
-import { SPECTRE_CSS_PATHS } from "@phcdevworks/spectre-ui-astro";
-
-// SPECTRE_CSS_PATHS.base → "@phcdevworks/spectre-ui/dist/base.css"
-// SPECTRE_CSS_PATHS.components → "@phcdevworks/spectre-ui/dist/components.css"
-// SPECTRE_CSS_PATHS.utilities → "@phcdevworks/spectre-ui/dist/utilities.css"
+```astro
+---
+import "@phcdevworks/spectre-ui/index.css";
+---
 ```
+
+This single import includes tokens, base styles, components, and utilities - everything needed for Spectre UI Astro components to work correctly.
 
 ## Design Principles
 
