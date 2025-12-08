@@ -1,0 +1,45 @@
+---
+import { getCardClasses } from "@phcdevworks/spectre-ui";
+import type { CardVariant } from "@phcdevworks/spectre-ui";
+
+interface SpCardProps {
+  variant?: CardVariant;
+  interactive?: boolean;
+  padded?: boolean;
+  fullHeight?: boolean;
+  as?: "div" | "section" | "article";
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  variant = "elevated",
+  interactive = false,
+  padded = true,
+  fullHeight = false,
+  as = "div",
+  class: className,
+  ...rest
+} = Astro.props as SpCardProps;
+
+const classes = getCardClasses({ variant, interactive, padded, fullHeight });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (rest as any).class;
+---
+
+{
+  as === "section" ? (
+    <section class={finalClass} {...rest}>
+      <slot />
+    </section>
+  ) : as === "article" ? (
+    <article class={finalClass} {...rest}>
+      <slot />
+    </article>
+  ) : (
+    <div class={finalClass} {...rest}>
+      <slot />
+    </div>
+  )
+}

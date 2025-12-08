@@ -1,0 +1,51 @@
+---
+import { getInputClasses } from "@phcdevworks/spectre-ui";
+import type { InputState, InputSize } from "@phcdevworks/spectre-ui";
+
+interface SpInputProps {
+  label?: string;
+  state?: InputState;
+  size?: InputSize;
+  fullWidth?: boolean;
+  helperText?: string;
+  errorMessage?: string;
+  id?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  label,
+  state = "default",
+  size = "md",
+  fullWidth = false,
+  helperText,
+  errorMessage,
+  id,
+  class: className,
+  ...rest
+} = Astro.props as SpInputProps;
+
+const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2)}`;
+
+const classes = getInputClasses({ state, size, fullWidth });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (rest as any).class;
+---
+
+<div class="sp-input-wrapper">
+  {
+    label && (
+      <label class="sp-label" for={inputId}>
+        {label}
+      </label>
+    )
+  }
+
+  <input id={inputId} class={finalClass} {...rest} />
+
+  {helperText && !errorMessage && <p class="sp-helper-text">{helperText}</p>}
+
+  {errorMessage && <p class="sp-error-message">{errorMessage}</p>}
+</div>
