@@ -14,15 +14,13 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
           Astro projects.
         </p>
       </div>
-      <SpButton variant="primary" size="lg"> Get Started </SpButton>
+      <SpButton variant="primary" size="lg">Get Started</SpButton>
     </header>
 
-    <!-- COMPONENT DEMOS -->
     <section class="demo-section">
       <h2>Components</h2>
 
       <div class="component-grid">
-        <!-- BUTTON CARD -->
         <SpCard variant="elevated">
           <h3>Buttons</h3>
           <p>
@@ -36,19 +34,17 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
           </div>
         </SpCard>
 
-        <!-- CARDS -->
         <SpCard variant="elevated">
           <h3>Cards</h3>
           <p>
             Use cards to group related UI content. Cards automatically adapt to
-            Spectre’s surface and text tokens for proper contrast.
+            Spectre's surface and text tokens for proper contrast.
           </p>
           <div class="button-demo">
             <SpButton variant="primary" size="sm">Example CTA</SpButton>
           </div>
         </SpCard>
 
-        <!-- INPUTS -->
         <SpCard variant="elevated">
           <h3>Inputs</h3>
           <p>Form controls with labels, validation states, and helper text.</p>
@@ -64,7 +60,6 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
       </div>
     </section>
 
-    <!-- CONTACT FORM DEMO -->
     <section class="demo-section">
       <h2>Try it out</h2>
       <SpCard variant="elevated" class="contact-card">
@@ -86,7 +81,7 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
           />
 
           <div class="form-actions">
-            <SpButton variant="primary" type="submit"> Send Message </SpButton>
+            <SpButton variant="primary" type="submit">Send Message</SpButton>
             <SpButton variant="ghost" type="button">Cancel</SpButton>
           </div>
         </form>
@@ -94,3 +89,86 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 1100px;
+  }
+
+  .page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0 0 0.35rem;
+  }
+
+  .subtitle {
+    margin: 0.25rem 0 0;
+    color: #475569;
+    max-width: 46ch;
+    line-height: 1.6;
+  }
+
+  .demo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .button-demo,
+  .input-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .input-demo {
+    max-width: 340px;
+  }
+
+  .contact-card {
+    max-width: 640px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 720px) {
+    .page__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .form-actions {
+      flex-wrap: wrap;
+    }
+  }
+</style>
