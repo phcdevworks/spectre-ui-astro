@@ -2,14 +2,16 @@
 
 Astro integration layer for the Spectre design system.
 
+> 📋 **[View Roadmap](https://github.com/phcdevworks/spectre-ui-astro/blob/main/ROADMAP.md)** | 🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)**
+
 ## Overview
 
-`@phcdevworks/spectre-ui-astro` provides ergonomic Astro components (`<SpButton>`, `<SpCard>`, `<SpInput>`, etc.) that wrap [@phcdevworks/spectre-ui](https://github.com/phcdevworks/spectre-ui)'s design system. This package is a thin integration layer that:
+`@phcdevworks/spectre-ui-astro` provides ergonomic Astro components (`<SpButton>`, `<SpCard>`, `<SpInput>`) that wrap [@phcdevworks/spectre-ui](https://github.com/phcdevworks/spectre-ui)'s design system. This package is a thin integration layer that consumes Spectre UI recipes and classes without duplicating styling logic.
 
 - ✅ Uses Spectre UI's `.sp-*` classes and recipes internally
 - ✅ Does not reimplement design logic
-- ✅ Provides fully typed components
-- ✅ Is SSR-safe and framework-agnostic (pure Astro components)
+- ✅ Provides fully typed components with discriminated unions
+- ✅ SSR-safe and framework-agnostic (pure Astro components)
 - ✅ Consumes all styling from `@phcdevworks/spectre-ui`
 
 ## Installation
@@ -22,7 +24,7 @@ npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 
 ### 1. Import CSS
 
-You **must** import Spectre UI's CSS files in your Astro project. Add these imports to your layout or page:
+Import Spectre UI's CSS files in your Astro layout or page:
 
 ```astro
 ---
@@ -33,7 +35,7 @@ import "@phcdevworks/spectre-ui/dist/utilities.css";
 ---
 ```
 
-### 2. Use Components
+### 2. Use components
 
 ```astro
 ---
@@ -60,138 +62,85 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
 
 ## Components
 
-### SpButton
+### Button variants
 
-A flexible button component that supports multiple variants, sizes, and element types.
+```astro
+<SpButton variant="primary">Primary CTA</SpButton>
+<SpButton variant="secondary">Secondary</SpButton>
+<SpButton variant="ghost">Low-emphasis</SpButton>
+<SpButton variant="danger">Destructive</SpButton>
+```
 
-**Props:**
+All variants support full state coverage: `disabled`, `loading`, and sizes (`sm`, `md`, `lg`).
+
+**Polymorphic rendering:**
+
+```astro
+<!-- Button element -->
+<SpButton type="submit">Submit Form</SpButton>
+
+<!-- Anchor element -->
+<SpButton as="a" href="/about">Learn More</SpButton>
+
+<!-- Span element -->
+<SpButton as="span">Non-interactive</SpButton>
+```
+
+**Full props:**
 
 - `variant`: `"primary"` | `"secondary"` | `"ghost"` | `"success"` | `"danger"` (default: `"primary"`)
 - `size`: `"sm"` | `"md"` | `"lg"` (default: `"md"`)
 - `as`: `"button"` | `"a"` | `"span"` (default: `"button"`)
-- `type`: `"button"` | `"submit"` | `"reset"` (default: `"button"`, only for `as="button"`)
-- `href`: string (only for `as="a"`)
-- `target`: `"_blank"` | `"_self"` | `"_parent"` | `"_top"` (only for `as="a"`)
-- `disabled`: boolean (default: `false`)
-- `loading`: boolean (default: `false`)
-- `fullWidth`: boolean (default: `false`, forces width: 100%)
+- `type`: `"button"` | `"submit"` | `"reset"` (when `as="button"`)
+- `href`, `target`: string (when `as="a"`)
+- `disabled`, `loading`, `fullWidth`: boolean
 - `class`: string (additional CSS classes)
-- Standard HTML attributes: `id`, `name`, `value`, `aria-label`, etc.
 
-**Examples:**
+### Input states
 
 ```astro
-<!-- Primary button -->
-<SpButton variant="primary" size="lg">
-  Submit
-</SpButton>
-
-<!-- Button as link -->
-<SpButton as="a" href="/about" variant="secondary">
-  Learn More
-</SpButton>
-
-<!-- Loading state -->
-<SpButton loading>
-  Processing...
-</SpButton>
-
-<!-- Disabled button -->
-<SpButton disabled>
-  Unavailable
-</SpButton>
+<SpInput label="Email" type="email" state="default" />
+<SpInput label="Password" type="password" state="error" errorMessage="Required" />
+<SpInput label="Username" value="john_doe" state="success" />
 ```
 
-### SpCard
+**Full props:**
 
-A simple structural wrapper that applies card classes.
-
-**Props:**
-
-- `variant`: `"base"` | `"elevated"` | `"flat"` (default: `"base"`)
-- `as`: `"div"` | `"section"` | `"article"` (default: `"div"`)
+- `state`: `"default"` | `"error"` | `"success"` (default: `"default"`)
+- `type`: `"text"` | `"email"` | `"password"` | `"number"` | `"tel"` | `"url"` | `"search"` | `"date"` | `"time"` | `"datetime-local"` (default: `"text"`)
+- `label`, `errorMessage`, `helperText`: string
+- `id`: string (auto-generated if not provided)
+- `name`, `value`, `placeholder`: string
+- `required`, `disabled`, `readonly`: boolean
 - `class`: string (additional CSS classes)
-- Standard HTML attributes: `id`, `role`, `aria-label`, etc.
+- Standard input attributes: `min`, `max`, `step`, `pattern`, `maxlength`, `minlength`
 
-**Examples:**
+### Card variants
 
 ```astro
-<!-- Basic card -->
-<SpCard>
-  <h3>Card Title</h3>
-  <p>Card content.</p>
-</SpCard>
+<SpCard variant="elevated">Default shadow</SpCard>
+<SpCard variant="outline">Bordered</SpCard>
+<SpCard variant="ghost">Transparent</SpCard>
+```
 
-<!-- Elevated card as article -->
-<SpCard variant="elevated" as="article">
-  <header>
-    <h2>Article Title</h2>
-  </header>
+**Semantic HTML:**
+
+```astro
+<SpCard as="article" variant="elevated">
+  <h2>Article Title</h2>
   <p>Article content.</p>
 </SpCard>
 ```
 
-### SpInput
+**Full props:**
 
-A comprehensive input component with label, error, and helper text support.
-
-**Props:**
-
-- `state`: `"default"` | `"error"` | `"success"` (default: `"default"`)
-- `type`: `"text"` | `"email"` | `"password"` | `"number"` | `"tel"` | `"url"` | `"search"` | `"date"` | `"time"` | `"datetime-local"` (default: `"text"`)
-- `label`: string (input label)
-- `errorMessage`: string (error message to display when `state="error"`)
-- `helperText`: string (helper text below input)
-- `id`: string (auto-generated if not provided)
-- `name`: string
-- `value`: string
-- `placeholder`: string
-- `required`: boolean (default: `false`)
-- `disabled`: boolean (default: `false`)
-- `readonly`: boolean (default: `false`)
+- `variant`: `"base"` | `"elevated"` | `"flat"` (default: `"base"`)
+- `as`: `"div"` | `"section"` | `"article"` (default: `"div"`)
 - `class`: string (additional CSS classes)
-- Standard input attributes: `min`, `max`, `step`, `pattern`, `maxlength`, `minlength`, etc.
-
-**Examples:**
-
-```astro
-<!-- Basic input -->
-<SpInput
-  label="Username"
-  name="username"
-  placeholder="Enter username"
-  required
-/>
-
-<!-- Email input with helper text -->
-<SpInput
-  label="Email"
-  type="email"
-  name="email"
-  helperText="We'll never share your email."
-/>
-
-<!-- Input with error state -->
-<SpInput
-  label="Password"
-  type="password"
-  name="password"
-  state="error"
-  errorMessage="Password must be at least 8 characters."
-/>
-
-<!-- Input with success state -->
-<SpInput
-  label="Username"
-  name="username"
-  value="john_doe"
-  state="success"
-/>
-```
 
 ## TypeScript Support
 
-All components are fully typed. Import types as needed:
+Type definitions are bundled automatically:
 
 ```typescript
 import type {
@@ -207,7 +156,7 @@ import type {
 
 ## CSS Path Constants
 
-The package exports constants for Spectre UI CSS paths:
+Utilities for referencing Spectre UI CSS files programmatically:
 
 ```typescript
 import { SPECTRE_CSS_PATHS } from "@phcdevworks/spectre-ui-astro";
@@ -219,23 +168,35 @@ import { SPECTRE_CSS_PATHS } from "@phcdevworks/spectre-ui-astro";
 
 ## Design Principles
 
-This package follows strict design principles:
+1. **Single source of truth** – All Spectre Astro components consume Spectre UI styles and recipes.
+2. **No style duplication** – This package never re-encodes Spectre UI logic.
+3. **Framework agnostic** – Pure Astro components that work with any bundler or runtime.
+4. **Type-safe ergonomics** – Every component exports strict TypeScript types for confident usage.
+5. **SSR-safe** – All components work with Astro's server-side rendering.
 
-1. **No style reimplementation**: All styling comes from `@phcdevworks/spectre-ui`
-2. **Thin wrappers**: Components are minimal wrappers around Spectre CSS classes and recipes
-3. **Framework-agnostic**: Pure Astro components, no React/Vue/Svelte dependencies
-4. **Type-safe**: Comprehensive TypeScript types for all props
-5. **SSR-safe**: All components work with Astro's SSR
+## Part of the Spectre Suite
 
-## Requirements
-
-- **Astro**: ^4.0.0 || ^5.0.0
-- **@phcdevworks/spectre-ui**: ^0.0.1
+- **Spectre Tokens** – Design-token foundation
+- **Spectre UI** – Core styling layer
+- **Spectre Blocks** – WordPress block library
+- **Spectre Astro** – Astro integration (this package)
+- **Spectre 11ty** – Eleventy integration
 
 ## Contributing
 
-Contributions are welcome! Please see the [contributing guidelines](CONTRIBUTING.md).
+Issues and pull requests are welcome. If you are proposing component or type changes, update `src/` and include regenerated builds.
+
+For detailed contribution guidelines, see **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 
 ## License
 
-MIT © PHCDevworks
+MIT © PHCDevworks — See **[LICENSE](LICENSE)** for details.
+
+---
+
+## ❤️ Support Spectre
+
+If Spectre UI Astro helps your workflow, consider sponsoring:
+
+- [GitHub Sponsors](https://github.com/sponsors/phcdevworks)
+- [Buy Me a Coffee](https://buymeacoffee.com/phcdevworks)
