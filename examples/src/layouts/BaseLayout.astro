@@ -1,11 +1,10 @@
----
-import "@phcdevworks/spectre-ui/index.css";
+import { SPECTRE_UI_CSS } from "@phcdevworks/spectre-ui-astro";
+import SPECTRE_STYLES from "@phcdevworks/spectre-ui/index.css";
 interface Props {
   title?: string;
 }
 
 const { title = "Spectre UI Astro Example" } = Astro.props as Props;
----
 
 <html lang="en">
   <head>
