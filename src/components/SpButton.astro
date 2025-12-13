@@ -39,6 +39,7 @@ const classes = getButtonClasses({
 });
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
+const isDisabled = disabled || loading;
 
 // make sure rest no longer has class
 delete (rest as any).class;
@@ -46,17 +47,25 @@ delete (rest as any).class;
 
 {
   as === "a" ? (
-    <a class={finalClass} aria-disabled={disabled || undefined} {...rest}>
+    <a
+      class={finalClass}
+      aria-disabled={isDisabled ? "true" : undefined}
+      {...rest}
+    >
       <slot />
     </a>
   ) : as === "span" ? (
-    <span class={finalClass} aria-disabled={disabled || undefined} {...rest}>
+    <span
+      class={finalClass}
+      aria-disabled={isDisabled ? "true" : undefined}
+      {...rest}
+    >
       <slot />
     </span>
   ) : (
     <button
       class={finalClass}
-      disabled={disabled}
+      disabled={isDisabled}
       type={(rest as any).type ?? "button"}
       {...rest}
     >
