@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Astro integration layer for the Spectre design system.",
   "keywords": [
     "phcdevworks",
@@ -47,6 +47,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
@@ -74,10 +75,10 @@
     "access": "public"
   },
   "peerDependencies": {
-    "astro": "^5.16.4"
+    "astro": "^5.0.0"
   },
   "dependencies": {
-    "@phcdevworks/spectre-ui": "^0.0.5"
+    "@phcdevworks/spectre-ui": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
