@@ -28,6 +28,11 @@ const {
 
 const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2)}`;
 
+const helperId = `${inputId}-helper`;
+const errorId = `${inputId}-error`;
+
+const describedBy = errorMessage ? errorId : helperText ? helperId : undefined;
+
 const classes = getInputClasses({ state, size, fullWidth });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
@@ -43,9 +48,27 @@ delete (rest as any).class;
     )
   }
 
-  <input id={inputId} class={finalClass} {...rest} />
+  <input
+    id={inputId}
+    class={finalClass}
+    aria-invalid={state === "error" ? "true" : undefined}
+    aria-describedby={describedBy}
+    {...rest}
+  />
 
-  {helperText && !errorMessage && <p class="sp-helper-text">{helperText}</p>}
+  {
+    helperText && !errorMessage && (
+      <p class="sp-helper-text" id={helperId}>
+        {helperText}
+      </p>
+    )
+  }
 
-  {errorMessage && <p class="sp-error-message">{errorMessage}</p>}
+  {
+    errorMessage && (
+      <p class="sp-error-message" id={errorId}>
+        {errorMessage}
+      </p>
+    )
+  }
 </div>
