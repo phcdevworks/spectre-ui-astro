@@ -11,11 +11,15 @@ interface SpButtonProps {
   fullWidth?: boolean;
   loading?: boolean;
   disabled?: boolean;
+  iconOnly?: boolean;
   class?: string;
+
   href?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
   rel?: string;
+
   type?: "button" | "submit" | "reset";
+
   [key: string]: any;
 }
 
@@ -26,30 +30,40 @@ const {
   fullWidth = false,
   loading = false,
   disabled = false,
+  iconOnly = false,
   class: className,
+  href,
   ...rest
 } = Astro.props as SpButtonProps;
+
+const isDisabled = disabled || loading;
 
 const classes = getButtonClasses({
   variant,
   size,
   fullWidth,
   loading,
-  disabled,
+  disabled: isDisabled,
+  iconOnly,
 });
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
-const isDisabled = disabled || loading;
 
 // make sure rest no longer has class
 delete (rest as any).class;
+
+// If anchor is "disabled", prevent navigation and remove focus
+const finalHref = as === "a" && isDisabled ? undefined : href;
+const finalTabIndex = as === "a" && isDisabled ? -1 : (rest as any).tabindex;
 ---
 
 {
   as === "a" ? (
     <a
       class={finalClass}
+      href={finalHref}
       aria-disabled={isDisabled ? "true" : undefined}
+      tabindex={finalTabIndex}
       {...rest}
     >
       <slot />
