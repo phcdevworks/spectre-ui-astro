@@ -19,7 +19,6 @@ interface SpButtonProps {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
-
   [key: string]: any;
 }
 
@@ -32,7 +31,6 @@ const {
   disabled = false,
   iconOnly = false,
   class: className,
-  href,
   ...rest
 } = Astro.props as SpButtonProps;
 
@@ -49,21 +47,21 @@ const classes = getButtonClasses({
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-// make sure rest no longer has class
+// remove class so it doesn’t duplicate
 delete (rest as any).class;
 
-// If anchor is "disabled", prevent navigation and remove focus
-const finalHref = as === "a" && isDisabled ? undefined : href;
-const finalTabIndex = as === "a" && isDisabled ? -1 : (rest as any).tabindex;
+// if link is disabled/loading, prevent navigation + focus
+if (as === "a" && isDisabled) {
+  delete (rest as any).href;
+  (rest as any).tabindex = -1;
+}
 ---
 
 {
   as === "a" ? (
     <a
       class={finalClass}
-      href={finalHref}
       aria-disabled={isDisabled ? "true" : undefined}
-      tabindex={finalTabIndex}
       {...rest}
     >
       <slot />

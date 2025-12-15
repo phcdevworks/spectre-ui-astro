@@ -1,39 +1,16 @@
-export {
-  spectreBaseStylesPath,
-  spectreComponentsStylesPath,
-  spectreUtilitiesStylesPath,
-  spectreStyles,
-} from "./css-constants";
+export { default as SpButton } from "./components/SpButton.astro";
+export { default as SpCard } from "./components/SpCard.astro";
+export { default as SpInput } from "./components/SpInput.astro";
 
-export {
-  createSpectreTailwindTheme,
-  type SpectreTailwindTheme,
-  type CreateSpectreTailwindThemeOptions,
-} from "./tailwind/theme";
+export { PHCDEVWORKS_SPECTRE_UI_CSS, SPECTRE_UI_CSS } from "./styles";
 
-export { spectrePreset } from "./tailwind/preset";
-
-export {
-  spectreTokens,
-  type SpectreTokens,
-} from "./tokens";
-
-export {
-  getButtonClasses,
-  type ButtonRecipeOptions,
-  type ButtonVariant,
-  type ButtonSize,
-} from "./recipes/button";
-
-export {
-  getCardClasses,
-  type CardRecipeOptions,
-  type CardVariant,
-} from "./recipes/card";
-
-export {
-  getInputClasses,
-  type InputRecipeOptions,
-  type InputState,
-  type InputSize,
-} from "./recipes/input";
+export type {
+  ButtonVariant,
+  ButtonSize,
+  ButtonRecipeOptions,
+  CardVariant,
+  CardRecipeOptions,
+  InputState,
+  InputSize,
+  InputRecipeOptions,
+} from "@phcdevworks/spectre-ui";
