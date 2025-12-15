@@ -11,7 +11,7 @@ export function getCardClasses(opts: CardRecipeOptions = {}): string {
   const {
     variant = "elevated",
     interactive = false,
-    padded = true,
+    padded = false,
     fullHeight = false,
   } = opts;
 

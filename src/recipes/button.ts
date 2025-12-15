@@ -22,7 +22,6 @@ export function getButtonClasses(opts: ButtonRecipeOptions = {}): string {
 
   const classes: string[] = ["sp-btn"];
 
-  // Variant
   const variantMap: Record<ButtonVariant, string> = {
     primary: "sp-btn--primary",
     secondary: "sp-btn--secondary",
@@ -32,7 +31,6 @@ export function getButtonClasses(opts: ButtonRecipeOptions = {}): string {
   };
   classes.push(variantMap[variant]);
 
-  // Size
   const sizeMap: Record<ButtonSize, string> = {
     sm: "sp-btn--sm",
     md: "sp-btn--md",
@@ -40,7 +38,6 @@ export function getButtonClasses(opts: ButtonRecipeOptions = {}): string {
   };
   classes.push(sizeMap[size]);
 
-  // Flags
   if (fullWidth) classes.push("sp-btn--full");
   if (loading) classes.push("sp-btn--loading");
   if (disabled) classes.push("sp-btn--disabled");
