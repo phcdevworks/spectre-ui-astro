@@ -1,5 +1,5 @@
-// Recipes (primary API)
+// Recipes (class generators)
 export * from "./recipes";
 
-// CSS entrypoint constant
-export * from "./styles";
+// CSS entry (single source of truth)
+export { SPECTRE_UI_CSS } from "./styles";
