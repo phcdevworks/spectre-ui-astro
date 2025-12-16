@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Astro integration layer for the Spectre design system.",
   "keywords": [
     "phcdevworks",
