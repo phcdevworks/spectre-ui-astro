@@ -1,0 +1,41 @@
+---
+import { getIconBoxClasses } from "../recipes/iconbox";
+import type { IconBoxVariant, IconBoxSize } from "../recipes/iconbox";
+
+interface SpIconBoxProps {
+  variant?: IconBoxVariant;
+  size?: IconBoxSize;
+  rounded?: boolean;
+  circle?: boolean;
+  as?: "div" | "span";
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  rounded = false,
+  circle = false,
+  as = "div",
+  class: className,
+  ...rest
+} = Astro.props as SpIconBoxProps;
+
+const classes = getIconBoxClasses({ variant, size, rounded, circle });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (rest as any).class;
+---
+
+{
+  as === "div" ? (
+    <div class={finalClass} {...rest}>
+      <slot />
+    </div>
+  ) : (
+    <span class={finalClass} {...rest}>
+      <slot />
+    </span>
+  )
+}

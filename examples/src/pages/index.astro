@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
+import {
+  SpBadge,
+  SpButton,
+  SpCard,
+  SpIconBox,
+  SpInput,
+} from "@phcdevworks/spectre-ui-astro";
 ---
 
 <BaseLayout>
@@ -35,7 +41,29 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
         </SpCard>
 
         <SpCard variant="elevated">
-          <h3>Cards</h3>
+          <div class="card-header">
+            <SpIconBox variant="primary" size="md" rounded>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+                <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+                <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+                <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+              </svg>
+            </SpIconBox>
+            <div>
+              <h3>Cards <SpBadge variant="primary" size="sm">New</SpBadge></h3>
+            </div>
+          </div>
           <p>
             Use cards to group related UI content. Cards automatically adapt to
             Spectre's surface and text tokens for proper contrast.
@@ -46,7 +74,30 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
         </SpCard>
 
         <SpCard variant="elevated">
-          <h3>Inputs</h3>
+          <div class="card-header">
+            <SpIconBox variant="success" size="md" circle>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m3 17 2 2 4-4"></path>
+                <path d="m3 7 2 2 4-4"></path>
+                <path d="M13 6h8"></path>
+                <path d="M13 12h8"></path>
+                <path d="M13 18h8"></path>
+              </svg>
+            </SpIconBox>
+            <div>
+              <h3>Inputs</h3>
+            </div>
+          </div>
           <p>Form controls with labels, validation states, and helper text.</p>
           <div class="input-demo">
             <SpInput
@@ -55,6 +106,84 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
               placeholder="you@example.com"
               helperText="We'll never share your email."
             />
+          </div>
+        </SpCard>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Badges & Icons</h2>
+      <div class="component-grid">
+        <SpCard variant="elevated">
+          <h3>Badges</h3>
+          <p>Display status, labels, or counts with different variants.</p>
+          <div class="badge-demo">
+            <SpBadge variant="primary">Primary</SpBadge>
+            <SpBadge variant="success">Success</SpBadge>
+            <SpBadge variant="danger">Danger</SpBadge>
+            <SpBadge variant="warning">Warning</SpBadge>
+            <SpBadge variant="info" pill>Info Pill</SpBadge>
+            <SpBadge variant="secondary" outlined>Outlined</SpBadge>
+          </div>
+        </SpCard>
+
+        <SpCard variant="elevated">
+          <h3>Icon Boxes</h3>
+          <p>Decorative containers for icons with multiple styles.</p>
+          <div class="iconbox-demo">
+            <SpIconBox variant="primary" size="md" rounded>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 2v20M2 12h20"></path>
+              </svg>
+            </SpIconBox>
+            <SpIconBox variant="success" size="md" circle>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M20 6 9 17l-5-5"></path>
+              </svg>
+            </SpIconBox>
+            <SpIconBox variant="danger" size="md" rounded>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 6 6 18M6 6l12 12"></path>
+              </svg>
+            </SpIconBox>
+            <SpIconBox variant="info" size="md" circle>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4M12 8h.01"></path>
+              </svg>
+            </SpIconBox>
           </div>
         </SpCard>
       </div>
@@ -134,11 +263,35 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
   }
 
   .button-demo,
-  .input-demo {
+  .input-demo,
+  .badge-demo,
+  .iconbox-demo {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1rem;
+  }
+
+  .badge-demo {
+    align-items: center;
+  }
+
+  .iconbox-demo {
+    gap: 1rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .input-demo {

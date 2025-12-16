@@ -1,0 +1,41 @@
+---
+import { getBadgeClasses } from "../recipes/badge";
+import type { BadgeVariant, BadgeSize } from "../recipes/badge";
+
+interface SpBadgeProps {
+  variant?: BadgeVariant;
+  size?: BadgeSize;
+  outlined?: boolean;
+  pill?: boolean;
+  as?: "span" | "div";
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  variant = "default",
+  size = "md",
+  outlined = false,
+  pill = false,
+  as = "span",
+  class: className,
+  ...rest
+} = Astro.props as SpBadgeProps;
+
+const classes = getBadgeClasses({ variant, size, outlined, pill });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (rest as any).class;
+---
+
+{
+  as === "div" ? (
+    <div class={finalClass} {...rest}>
+      <slot />
+    </div>
+  ) : (
+    <span class={finalClass} {...rest}>
+      <slot />
+    </span>
+  )
+}

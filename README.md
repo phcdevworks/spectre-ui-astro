@@ -38,7 +38,13 @@ import "@phcdevworks/spectre-ui/index.css";
 ```astro
 ---
 import "@phcdevworks/spectre-ui/index.css";
-import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
+import {
+  SpBadge,
+  SpButton,
+  SpCard,
+  SpIconBox,
+  SpInput,
+} from "@phcdevworks/spectre-ui-astro";
 ---
 
 <SpButton variant="primary" size="lg">
@@ -46,8 +52,15 @@ import { SpButton, SpCard, SpInput } from "@phcdevworks/spectre-ui-astro";
 </SpButton>
 
 <SpCard variant="elevated">
-  <h2>Card Title</h2>
-  <p>Card content goes here.</p>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <SpIconBox variant="primary" rounded>
+      <!-- Your icon SVG here -->
+    </SpIconBox>
+    <div>
+      <h2>Card Title <SpBadge variant="success">New</SpBadge></h2>
+      <p>Card content goes here.</p>
+    </div>
+  </div>
 </SpCard>
 
 <SpInput
@@ -137,19 +150,60 @@ All variants support full state coverage: `disabled`, `loading`, and sizes (`sm`
 - `as`: `"div"` | `"section"` | `"article"` (default: `"div"`)
 - `class`: string (additional CSS classes)
 
+### Badge variants
+
+```astro
+<SpBadge variant="primary">Primary</SpBadge>
+<SpBadge variant="success">Success</SpBadge>
+<SpBadge variant="danger">Danger</SpBadge>
+<SpBadge variant="warning">Warning</SpBadge>
+<SpBadge variant="info" pill>Info</SpBadge>
+<SpBadge variant="secondary" outlined>Outlined</SpBadge>
+```
+
+**Full props:**
+
+- `variant`: `"default"` | `"primary"` | `"secondary"` | `"success"` | `"danger"` | `"warning"` | `"info"` (default: `"default"`)
+- `size`: `"sm"` | `"md"` | `"lg"` (default: `"md"`)
+- `outlined`, `pill`: boolean
+- `as`: `"span"` | `"div"` (default: `"span"`)
+- `class`: string (additional CSS classes)
+
+### Icon Box
+
+```astro
+<SpIconBox variant="primary" size="md" rounded>
+  <svg><!-- Your icon --></svg>
+</SpIconBox>
+
+<SpIconBox variant="success" size="lg" circle>
+  <svg><!-- Your icon --></svg>
+</SpIconBox>
+```
+
+**Full props:**
+
+- `variant`: `"primary"` | `"secondary"` | `"success"` | `"danger"` | `"warning"` | `"info"` (default: `"primary"`)
+- `size`: `"sm"` | `"md"` | `"lg"` (default: `"md"`)
+- `rounded`, `circle`: boolean
+- `as`: `"div"` | `"span"` (default: `"div"`)
+- `class`: string (additional CSS classes)
+
 ## TypeScript Support
 
 Type definitions are bundled automatically:
 
 ```typescript
 import type {
-  SpButtonProps,
-  SpButtonVariant,
-  SpButtonSize,
-  SpCardProps,
-  SpCardVariant,
-  SpInputProps,
-  SpInputState,
+  BadgeVariant,
+  BadgeSize,
+  ButtonVariant,
+  ButtonSize,
+  CardVariant,
+  IconBoxVariant,
+  IconBoxSize,
+  InputState,
+  InputSize,
 } from "@phcdevworks/spectre-ui-astro";
 ```
 
