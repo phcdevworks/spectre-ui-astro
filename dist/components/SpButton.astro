@@ -11,10 +11,13 @@ interface SpButtonProps {
   fullWidth?: boolean;
   loading?: boolean;
   disabled?: boolean;
+  iconOnly?: boolean;
   class?: string;
+
   href?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
   rel?: string;
+
   type?: "button" | "submit" | "reset";
   [key: string]: any;
 }
@@ -26,37 +29,55 @@ const {
   fullWidth = false,
   loading = false,
   disabled = false,
+  iconOnly = false,
   class: className,
   ...rest
 } = Astro.props as SpButtonProps;
+
+const isDisabled = disabled || loading;
 
 const classes = getButtonClasses({
   variant,
   size,
   fullWidth,
   loading,
-  disabled,
+  disabled: isDisabled,
+  iconOnly,
 });
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-// make sure rest no longer has class
+// remove class so it doesn’t duplicate
 delete (rest as any).class;
+
+// if link is disabled/loading, prevent navigation + focus
+if (as === "a" && isDisabled) {
+  delete (rest as any).href;
+  (rest as any).tabindex = -1;
+}
 ---
 
 {
   as === "a" ? (
-    <a class={finalClass} aria-disabled={disabled || undefined} {...rest}>
+    <a
+      class={finalClass}
+      aria-disabled={isDisabled ? "true" : undefined}
+      {...rest}
+    >
       <slot />
     </a>
   ) : as === "span" ? (
-    <span class={finalClass} aria-disabled={disabled || undefined} {...rest}>
+    <span
+      class={finalClass}
+      aria-disabled={isDisabled ? "true" : undefined}
+      {...rest}
+    >
       <slot />
     </span>
   ) : (
     <button
       class={finalClass}
-      disabled={disabled}
+      disabled={isDisabled}
       type={(rest as any).type ?? "button"}
       {...rest}
     >

@@ -1,5 +1,5 @@
 ---
-import { SPECTRE_UI_CSS } from "@phcdevworks/spectre-ui-astro";
+import "@phcdevworks/spectre-ui/index.css";
 
 interface Props {
   title?: string;
@@ -13,8 +13,6 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-
-    <link rel="stylesheet" href={SPECTRE_UI_CSS} />
 
     <style is:global>
       body {
@@ -36,6 +34,7 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
       }
     </style>
   </head>
+
   <body>
     <main class="app-shell">
       <slot />

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src/recipes/index.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,gBAAgB,EAChB,KAAK,mBAAmB,EACxB,KAAK,aAAa,EAClB,KAAK,UAAU,GAChB,MAAM,UAAU,CAAC;AAElB,OAAO,EACL,cAAc,EACd,KAAK,iBAAiB,EACtB,KAAK,WAAW,GACjB,MAAM,QAAQ,CAAC;AAEhB,OAAO,EACL,eAAe,EACf,KAAK,kBAAkB,EACvB,KAAK,UAAU,EACf,KAAK,SAAS,GACf,MAAM,SAAS,CAAC"}

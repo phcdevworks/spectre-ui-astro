@@ -51,12 +51,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./SpButton.astro": "./dist/SpButton.astro",
-    "./SpCard.astro": "./dist/SpCard.astro",
-    "./SpInput.astro": "./dist/SpInput.astro"
+    "./components/SpButton.astro": "./dist/components/SpButton.astro",
+    "./components/SpCard.astro": "./dist/components/SpCard.astro",
+    "./components/SpInput.astro": "./dist/components/SpInput.astro"
   },
   "files": [
-    "src",
     "dist",
     "README.md",
     "LICENSE",
