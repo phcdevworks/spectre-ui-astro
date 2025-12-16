@@ -92,7 +92,7 @@ All variants support full state coverage: `disabled`, `loading`, and sizes (`sm`
 - `as`: `"button"` | `"a"` | `"span"` (default: `"button"`)
 - `type`: `"button"` | `"submit"` | `"reset"` (when `as="button"`)
 - `href`, `target`: string (when `as="a"`)
-- `disabled`, `loading`, `fullWidth`: boolean
+- `disabled`, `loading`, `fullWidth`, `iconOnly`: boolean
 - `class`: string (additional CSS classes)
 
 ### Input states
@@ -161,6 +161,15 @@ Spectre UI provides a single bundled CSS file that includes all necessary styles
 ---
 import "@phcdevworks/spectre-ui/index.css";
 ---
+```
+
+Alternatively, you can use the exported constant:
+
+```astro
+---
+import { SPECTRE_UI_CSS } from "@phcdevworks/spectre-ui-astro";
+---
+<link rel="stylesheet" href={SPECTRE_UI_CSS} />
 ```
 
 This single import includes tokens, base styles, components, and utilities - everything needed for Spectre UI Astro components to work correctly.
