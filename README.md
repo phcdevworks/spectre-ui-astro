@@ -53,7 +53,7 @@ import {
 
 <SpCard variant="elevated">
   <div style="display: flex; align-items: center; gap: 0.75rem;">
-    <SpIconBox variant="primary" rounded>
+    <SpIconBox variant="primary" size="md">
       <!-- Your icon SVG here -->
     </SpIconBox>
     <div>
@@ -118,7 +118,7 @@ All variants support full state coverage: `disabled`, `loading`, and sizes (`sm`
 
 **Full props:**
 
-- `state`: `"default"` | `"error"` | `"success"` (default: `"default"`)
+- `state`: `"default"` | `"error"` | `"success"` | `"disabled"` (default: `"default"`)
 - `type`: `"text"` | `"email"` | `"password"` | `"number"` | `"tel"` | `"url"` | `"search"` | `"date"` | `"time"` | `"datetime-local"` (default: `"text"`)
 - `label`, `errorMessage`, `helperText`: string
 - `id`: string (auto-generated if not provided)
@@ -146,7 +146,7 @@ All variants support full state coverage: `disabled`, `loading`, and sizes (`sm`
 
 **Full props:**
 
-- `variant`: `"base"` | `"elevated"` | `"flat"` (default: `"base"`)
+- `variant`: `"elevated"` | `"flat"` | `"outline"` | `"ghost"` (default: `"elevated"`)
 - `as`: `"div"` | `"section"` | `"article"` (default: `"div"`)
 - `class`: string (additional CSS classes)
 
@@ -155,38 +155,33 @@ All variants support full state coverage: `disabled`, `loading`, and sizes (`sm`
 ```astro
 <SpBadge variant="primary">Primary</SpBadge>
 <SpBadge variant="success">Success</SpBadge>
-<SpBadge variant="danger">Danger</SpBadge>
 <SpBadge variant="warning">Warning</SpBadge>
-<SpBadge variant="info" pill>Info</SpBadge>
-<SpBadge variant="secondary" outlined>Outlined</SpBadge>
+<SpBadge variant="danger">Danger</SpBadge>
 ```
 
 **Full props:**
 
-- `variant`: `"default"` | `"primary"` | `"secondary"` | `"success"` | `"danger"` | `"warning"` | `"info"` (default: `"default"`)
+- `variant`: `"primary"` | `"success"` | `"warning"` | `"danger"` (default: `"primary"`)
 - `size`: `"sm"` | `"md"` | `"lg"` (default: `"md"`)
-- `outlined`, `pill`: boolean
-- `as`: `"span"` | `"div"` (default: `"span"`)
 - `class`: string (additional CSS classes)
 
 ### Icon Box
 
 ```astro
-<SpIconBox variant="primary" size="md" rounded>
+<SpIconBox variant="primary" size="md">
   <svg><!-- Your icon --></svg>
 </SpIconBox>
 
-<SpIconBox variant="success" size="lg" circle>
+<SpIconBox variant="success" size="lg">
   <svg><!-- Your icon --></svg>
 </SpIconBox>
 ```
 
 **Full props:**
 
-- `variant`: `"primary"` | `"secondary"` | `"success"` | `"danger"` | `"warning"` | `"info"` (default: `"primary"`)
+- `variant`: `"primary"` | `"success"` | `"warning"` | `"danger"` | `"info"` (default: `"primary"`)
 - `size`: `"sm"` | `"md"` | `"lg"` (default: `"md"`)
-- `rounded`, `circle`: boolean
-- `as`: `"div"` | `"span"` (default: `"div"`)
+- `as`: `"div"` | `"span"` (default: `"span"`)
 - `class`: string (additional CSS classes)
 
 ## TypeScript Support

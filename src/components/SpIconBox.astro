@@ -1,40 +1,34 @@
 ---
-import { getIconBoxClasses } from "../recipes/iconbox";
-import type { IconBoxVariant, IconBoxSize } from "../recipes/iconbox";
+import { getIconBoxClasses } from "@phcdevworks/spectre-ui";
+import type { IconBoxVariant, IconBoxSize } from "@phcdevworks/spectre-ui";
 
 interface SpIconBoxProps {
   variant?: IconBoxVariant;
   size?: IconBoxSize;
-  rounded?: boolean;
-  circle?: boolean;
   as?: "div" | "span";
   class?: string;
   [key: string]: any;
 }
 
 const {
-  variant = "primary",
-  size = "md",
-  rounded = false,
-  circle = false,
-  as = "div",
+  variant,
+  size,
+  as = "span",
   class: className,
-  ...rest
+  ...attrs
 } = Astro.props as SpIconBoxProps;
 
-const classes = getIconBoxClasses({ variant, size, rounded, circle });
-const finalClass = [classes, className].filter(Boolean).join(" ");
-
-delete (rest as any).class;
+const classes = getIconBoxClasses({ variant, size, className } as any);
+const finalClass = className ? [classes, className].filter(Boolean).join(" ") : classes;
 ---
 
 {
   as === "div" ? (
-    <div class={finalClass} {...rest}>
+    <div class={finalClass} {...attrs}>
       <slot />
     </div>
   ) : (
-    <span class={finalClass} {...rest}>
+    <span class={finalClass} {...attrs}>
       <slot />
     </span>
   )

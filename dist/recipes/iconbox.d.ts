@@ -1,10 +1,2 @@
-export type IconBoxVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info";
-export type IconBoxSize = "sm" | "md" | "lg";
-export interface IconBoxRecipeOptions {
-    variant?: IconBoxVariant;
-    size?: IconBoxSize;
-    rounded?: boolean;
-    circle?: boolean;
-}
-export declare function getIconBoxClasses(opts?: IconBoxRecipeOptions): string;
+export { getIconBoxClasses, type IconBoxRecipeOptions, type IconBoxVariant, type IconBoxSize, } from "@phcdevworks/spectre-ui";
 //# sourceMappingURL=iconbox.d.ts.map

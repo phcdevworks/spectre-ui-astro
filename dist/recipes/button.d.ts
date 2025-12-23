@@ -1,12 +1,2 @@
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "success";
-export type ButtonSize = "sm" | "md" | "lg";
-export interface ButtonRecipeOptions {
-    variant?: ButtonVariant;
-    size?: ButtonSize;
-    fullWidth?: boolean;
-    loading?: boolean;
-    disabled?: boolean;
-    iconOnly?: boolean;
-}
-export declare function getButtonClasses(opts?: ButtonRecipeOptions): string;
+export { getButtonClasses, type ButtonRecipeOptions, type ButtonVariant, type ButtonSize, } from "@phcdevworks/spectre-ui";
 //# sourceMappingURL=button.d.ts.map

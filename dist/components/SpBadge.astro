@@ -1,41 +1,25 @@
 ---
-import { getBadgeClasses } from "../recipes/badge";
-import type { BadgeVariant, BadgeSize } from "../recipes/badge";
+import { getBadgeClasses } from "@phcdevworks/spectre-ui";
+import type { BadgeVariant, BadgeSize } from "@phcdevworks/spectre-ui";
 
 interface SpBadgeProps {
   variant?: BadgeVariant;
   size?: BadgeSize;
-  outlined?: boolean;
-  pill?: boolean;
-  as?: "span" | "div";
   class?: string;
   [key: string]: any;
 }
 
 const {
-  variant = "default",
-  size = "md",
-  outlined = false,
-  pill = false,
-  as = "span",
+  variant,
+  size,
   class: className,
-  ...rest
+  ...attrs
 } = Astro.props as SpBadgeProps;
 
-const classes = getBadgeClasses({ variant, size, outlined, pill });
-const finalClass = [classes, className].filter(Boolean).join(" ");
-
-delete (rest as any).class;
+const classes = getBadgeClasses({ variant, size, className } as any);
+const finalClass = className ? [classes, className].filter(Boolean).join(" ") : classes;
 ---
 
-{
-  as === "div" ? (
-    <div class={finalClass} {...rest}>
-      <slot />
-    </div>
-  ) : (
-    <span class={finalClass} {...rest}>
-      <slot />
-    </span>
-  )
-}
+<span class={finalClass} {...attrs}>
+  <slot />
+</span>
