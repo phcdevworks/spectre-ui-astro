@@ -18,8 +18,10 @@ const {
   ...attrs
 } = Astro.props as SpIconBoxProps;
 
-const classes = getIconBoxClasses({ variant, size, className } as any);
-const finalClass = className ? [classes, className].filter(Boolean).join(" ") : classes;
+const classes = getIconBoxClasses({ variant, size });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (attrs as any).class;
 ---
 
 {
