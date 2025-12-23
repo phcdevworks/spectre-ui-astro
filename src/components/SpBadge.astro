@@ -9,6 +9,15 @@ interface SpBadgeProps {
   [key: string]: any;
 }
 
+const badgeVariants: BadgeVariant[] = ["primary", "success", "warning", "danger"];
+const badgeSizes: BadgeSize[] = ["sm", "md", "lg"];
+
+const isBadgeVariant = (value: unknown): value is BadgeVariant =>
+  typeof value === "string" && badgeVariants.includes(value as BadgeVariant);
+
+const isBadgeSize = (value: unknown): value is BadgeSize =>
+  typeof value === "string" && badgeSizes.includes(value as BadgeSize);
+
 const {
   variant,
   size,
@@ -16,7 +25,10 @@ const {
   ...attrs
 } = Astro.props as SpBadgeProps;
 
-const classes = getBadgeClasses({ variant, size });
+const resolvedVariant: BadgeVariant = isBadgeVariant(variant) ? variant : "primary";
+const resolvedSize: BadgeSize | undefined = isBadgeSize(size) ? size : undefined;
+
+const classes = getBadgeClasses({ variant: resolvedVariant, size: resolvedSize });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 delete (attrs as any).class;
