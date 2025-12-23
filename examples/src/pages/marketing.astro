@@ -1,0 +1,220 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  SpBadge,
+  SpButton,
+  SpCard,
+  SpIconBox,
+} from "@phcdevworks/spectre-ui-astro";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/buttons", label: "Buttons" },
+  { href: "/forms", label: "Forms" },
+  { href: "/marketing", label: "Marketing" },
+  { href: "/primitives", label: "Primitives" },
+];
+---
+
+<BaseLayout title="Marketing — Spectre UI Astro">
+  <div class="page">
+    <nav class="nav">
+      {navLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <header class="header">
+      <div>
+        <p class="eyebrow">Spectre Examples</p>
+        <h1>Marketing</h1>
+        <p class="subtitle">Hero and feature layouts with cards, badges, and icon boxes.</p>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="feature">
+        <SpBadge variant="warning">New release</SpBadge>
+        <h2 class="hero-title">Launch faster with Spectre</h2>
+        <p class="hero-copy">
+          Prebuilt tokens, UI recipes, and Astro adapters so you can ship consistent experiences quickly.
+        </p>
+        <div class="actions">
+          <SpButton variant="primary" size="lg">Start free</SpButton>
+          <SpButton variant="ghost" size="lg">View docs</SpButton>
+        </div>
+      </div>
+
+      <SpCard variant="elevated">
+        <div class="feature">
+          <h3 class="card-title">
+            <SpIconBox variant="primary" size="sm" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M5 3h14l-1.5 13h-11zM9 21h6v-2H9z" />
+              </svg>
+            </SpIconBox>
+            Reliability
+          </h3>
+          <p>Backed by type-safe recipes and a single CSS entry point.</p>
+          <div class="badge-row">
+            <SpBadge variant="primary">Tokens</SpBadge>
+            <SpBadge variant="success">Recipes</SpBadge>
+            <SpBadge variant="danger">Adapters</SpBadge>
+          </div>
+        </div>
+      </SpCard>
+    </section>
+
+    <section class="grid three">
+      <SpCard variant="elevated">
+        <div class="feature">
+          <SpIconBox variant="primary" size="sm" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2 2 7l10 5 10-5zm-7.5 9.5L12 17l7.5-5.5V17L12 22 4.5 17z" />
+            </svg>
+          </SpIconBox>
+          <h3 class="card-title">Composable</h3>
+          <p>Build cards, CTAs, and forms from the same primitives.</p>
+          <SpButton variant="primary" size="sm">Learn more</SpButton>
+        </div>
+      </SpCard>
+
+      <SpCard variant="outline">
+        <div class="feature">
+          <SpIconBox variant="success" size="sm" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+            </svg>
+          </SpIconBox>
+          <h3 class="card-title">Accessible</h3>
+          <p>Semantic markup with labeled inputs and aria-aware controls.</p>
+          <SpButton variant="ghost" size="sm">Accessibility</SpButton>
+        </div>
+      </SpCard>
+
+      <SpCard variant="ghost">
+        <div class="feature">
+          <SpIconBox variant="warning" size="sm" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 15h2v2h-2zm0-8h2v6h-2z" />
+            </svg>
+          </SpIconBox>
+          <h3 class="card-title">Transparent</h3>
+          <p>Clear separation of tokens, UI recipes, and Astro wrappers.</p>
+          <SpButton variant="secondary" size="sm">View roadmap</SpButton>
+        </div>
+      </SpCard>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: min(1150px, 100%);
+  }
+
+  .nav {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    color: #0f172a;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+  }
+
+  .nav a:hover {
+    background: #cbd5e1;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: #475569;
+    max-width: 60ch;
+  }
+
+  .hero {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+  }
+
+  .feature {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hero-title {
+    margin: 0;
+  }
+
+  .hero-copy {
+    margin: 0 0 0.5rem;
+    color: #475569;
+    max-width: 60ch;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .grid.three {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .card-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .icon {
+    width: 1.2em;
+    height: 1.2em;
+  }
+</style>

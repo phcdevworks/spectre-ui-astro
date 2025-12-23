@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  SpBadge,
+  SpIconBox,
+} from "@phcdevworks/spectre-ui-astro";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/buttons", label: "Buttons" },
+  { href: "/forms", label: "Forms" },
+  { href: "/marketing", label: "Marketing" },
+  { href: "/primitives", label: "Primitives" },
+];
+---
+
+<BaseLayout title="Primitives — Spectre UI Astro">
+  <div class="page">
+    <nav class="nav">
+      {navLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <header class="header">
+      <div>
+        <p class="eyebrow">Spectre Examples</p>
+        <h1>Primitives</h1>
+        <p class="subtitle">Badge and IconBox variants and sizes.</p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="panel stack">
+        <h2>Badge Variants</h2>
+        <div class="inline">
+          <SpBadge variant="primary">Primary</SpBadge>
+          <SpBadge variant="success">Success</SpBadge>
+          <SpBadge variant="warning">Warning</SpBadge>
+          <SpBadge variant="danger">Danger</SpBadge>
+        </div>
+      </div>
+
+      <div class="panel stack">
+        <h2>Badge Sizes</h2>
+        <div class="inline">
+          <SpBadge variant="primary" size="sm">Small</SpBadge>
+          <SpBadge variant="primary" size="md">Medium</SpBadge>
+          <SpBadge variant="primary" size="lg">Large</SpBadge>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel stack">
+        <h2>IconBox Variants</h2>
+        <div class="inline">
+          <SpIconBox variant="primary" size="md" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M5 3h14l-1.5 13h-11z" />
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="success" size="md" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="warning" size="md" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 15h2v2h-2zm0-8h2v6h-2z" />
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="danger" size="md" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2 2 22h20z" />
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="info" size="md" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 9h2v10h-2zm0-4h2v2h-2z" />
+            </svg>
+          </SpIconBox>
+        </div>
+      </div>
+
+      <div class="panel stack">
+        <h2>IconBox Sizes</h2>
+        <div class="inline">
+          <SpIconBox variant="primary" size="sm" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="6" fill="currentColor" />
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="primary" size="md" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="6" fill="currentColor" />
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="primary" size="lg" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="6" fill="currentColor" />
+            </svg>
+          </SpIconBox>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: min(960px, 100%);
+  }
+
+  .nav {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    color: #0f172a;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+  }
+
+  .nav a:hover {
+    background: #cbd5e1;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: #475569;
+    max-width: 60ch;
+  }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .panel {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .inline {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .icon {
+    width: 1em;
+    height: 1em;
+  }
+</style>

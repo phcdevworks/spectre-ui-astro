@@ -16,8 +16,10 @@ const {
   ...attrs
 } = Astro.props as SpBadgeProps;
 
-const classes = getBadgeClasses({ variant, size, className } as any);
-const finalClass = className ? [classes, className].filter(Boolean).join(" ") : classes;
+const classes = getBadgeClasses({ variant, size });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+delete (attrs as any).class;
 ---
 
 <span class={finalClass} {...attrs}>

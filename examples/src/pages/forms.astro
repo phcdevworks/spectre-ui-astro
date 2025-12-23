@@ -1,0 +1,172 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  SpButton,
+  SpCard,
+  SpInput,
+} from "@phcdevworks/spectre-ui-astro";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/buttons", label: "Buttons" },
+  { href: "/forms", label: "Forms" },
+  { href: "/marketing", label: "Marketing" },
+  { href: "/primitives", label: "Primitives" },
+];
+---
+
+<BaseLayout title="Forms — Spectre UI Astro">
+  <div class="page">
+    <nav class="nav">
+      {navLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <header class="header">
+      <div>
+        <p class="eyebrow">Spectre Examples</p>
+        <h1>Forms</h1>
+        <p class="subtitle">
+          Input states, sizes, and a composed form built with Spectre primitives.
+        </p>
+      </div>
+    </header>
+
+    <section class="grid two">
+      <div class="panel stack">
+        <h2>Input States</h2>
+        <SpInput
+          label="Email"
+          type="email"
+          placeholder="you@example.com"
+          helperText="We'll never share your email."
+        />
+        <SpInput
+          label="Display Name"
+          value="Spectre User"
+          state="success"
+          helperText="Looks good!"
+        />
+        <SpInput
+          label="Password"
+          type="password"
+          state="error"
+          errorMessage="Password must be at least 8 characters."
+        />
+        <SpInput
+          label="API Key"
+          type="text"
+          value="••••••••••••••••"
+          state="disabled"
+          disabled
+        />
+      </div>
+
+      <div class="panel stack">
+        <h2>Sizes</h2>
+        <SpInput label="Small" size="sm" placeholder="sm input" />
+        <SpInput label="Medium" size="md" placeholder="md input" />
+        <SpInput label="Large" size="lg" placeholder="lg input" />
+      </div>
+    </section>
+
+    <section class="panel stack">
+      <h2>Card Form</h2>
+      <SpCard variant="elevated">
+        <form class="stack" style="margin: 0;">
+          <SpInput label="Full Name" name="fullName" placeholder="Jane Doe" required />
+          <SpInput label="Work Email" type="email" name="email" placeholder="you@company.com" required />
+          <SpInput
+            label="Phone"
+            type="tel"
+            name="phone"
+            placeholder="+1 (555) 123-4567"
+            helperText="Optional"
+          />
+          <div class="inline">
+            <SpButton variant="primary" type="submit">Submit</SpButton>
+            <SpButton variant="ghost" type="reset">Reset</SpButton>
+          </div>
+        </form>
+      </SpCard>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: min(1000px, 100%);
+  }
+
+  .nav {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    color: #0f172a;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+  }
+
+  .nav a:hover {
+    background: #cbd5e1;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: #475569;
+    max-width: 60ch;
+  }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .grid.two {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .panel {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .inline {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+</style>
