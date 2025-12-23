@@ -79,7 +79,7 @@
     "astro": "^5.0.0"
   },
   "dependencies": {
-    "@phcdevworks/spectre-ui": "^0.2.1"
+    "@phcdevworks/spectre-ui": "github:phcdevworks/spectre-ui"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
