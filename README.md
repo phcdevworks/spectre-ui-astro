@@ -6,13 +6,33 @@ Astro integration layer for the Spectre design system.
 
 ## Overview
 
-`@phcdevworks/spectre-ui-astro` provides ergonomic Astro components (`<SpButton>`, `<SpCard>`, `<SpInput>`) that wrap [@phcdevworks/spectre-ui](https://github.com/phcdevworks/spectre-ui)'s design system. This package is a thin integration layer that consumes Spectre UI recipes and classes without duplicating styling logic.
+`@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre design system.
+
+This package provides ergonomic Astro components (`<SpButton>`, `<SpCard>`, `<SpInput>`, `<SpBadge>`, `<SpIconBox>`) that wrap [@phcdevworks/spectre-ui](https://github.com/phcdevworks/spectre-ui)'s design system. This package is a thin integration layer that consumes Spectre UI recipes and classes without duplicating styling logic.
 
 - ✅ Uses Spectre UI's `.sp-*` classes and recipes internally
 - ✅ Does not reimplement design logic
 - ✅ Provides fully typed components with discriminated unions
 - ✅ SSR-safe and framework-agnostic (pure Astro components)
 - ✅ Consumes all styling from `@phcdevworks/spectre-ui`
+
+### What This Package Does
+
+- ✅ Provides Astro component wrappers for Spectre UI
+- ✅ Uses canonical recipes from `@phcdevworks/spectre-ui`
+- ✅ Follows Astro SSR constraints (no client-side JavaScript unless specified)
+- ✅ Exports type-safe component interfaces
+- ✅ Provides a stable foundation for Spectre-powered Astro applications
+
+### What This Package Does NOT Do
+
+- ❌ Does not define or override design values
+- ❌ Does not reimplement CSS or styling logic
+- ❌ Does not run token generation at runtime
+- ❌ Does not provide client-side JavaScript frameworks
+- ❌ Does not manage CSS bundling (consumers import from `@phcdevworks/spectre-ui`)
+
+**This separation is intentional and enforced.**
 
 ## Installation
 
@@ -225,11 +245,11 @@ This single import includes tokens, base styles, components, and utilities - eve
 
 ## Design Principles
 
-1. **Single source of truth** – All Spectre Astro components consume Spectre UI styles and recipes.
-2. **No style duplication** – This package never re-encodes Spectre UI logic.
-3. **Framework agnostic** – Pure Astro components that work with any bundler or runtime.
-4. **Type-safe ergonomics** – Every component exports strict TypeScript types for confident usage.
-5. **SSR-safe** – All components work with Astro's server-side rendering.
+1. **Single source of truth** – All design lives in `@phcdevworks/spectre-ui`
+2. **No CSS duplication** – This package never defines `.sp-*` styles
+3. **Adapter, not framework** – Thin by design
+4. **Type-safe ergonomics** – Every component exports strict TypeScript types for confident usage
+5. **SSR-safe** – All components work with Astro's server-side rendering
 
 ## Part of the Spectre Suite
 
@@ -238,6 +258,8 @@ This single import includes tokens, base styles, components, and utilities - eve
 - **Spectre Blocks** – WordPress block library
 - **Spectre Astro** – Astro integration (this package)
 - **Spectre 11ty** – Eleventy integration
+
+For the project's future direction, see the **[Roadmap](https://github.com/phcdevworks/spectre-ui-astro/blob/main/ROADMAP.md)**.
 
 ## Contributing
 
