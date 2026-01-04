@@ -4,6 +4,29 @@ All notable changes to this project will be documented here. The format follows 
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-01-04
+
+### Added
+
+- Added server configuration to Astro config for Docker container compatibility ([7de58bc], [7e81149]).
+- Added validation for SpBadge variant and size props ([e056fe3]).
+- Added SpBadge and SpIconBox components ([b552cde], [ea49860]).
+- Added example pages for buttons, forms, marketing, and primitives ([61c0b03]).
+
+### Changed
+
+- Updated `@phcdevworks/spectre-ui` to v0.4.0 ([66ebbc3]).
+- Updated `@phcdevworks/spectre-ui` to v0.2.2 ([5dbe513]).
+- Updated `@phcdevworks/spectre-ui` to v0.2.1 ([532ac4c]).
+- Updated `@emnapi/runtime` dependency ([0db0618]).
+- Refactored components to use spectre-ui package exports ([b6625cf]).
+- Refactored class handling in SpBadge and SpIconBox ([e159f0e]).
+- Refactored to use Spectre UI CSS from spectreStyles ([f8a0654]).
+- Updated BaseLayout to use improved Spectre UI CSS import ([602c3fb]).
+- Updated Astro example build and dependencies ([139ee20]).
+- Updated Astro config and types references ([712fd72]).
+- Revised documentation and guidelines for clarity ([da3b67a]).
+
 ## [0.1.0] - 2025-12-16
 
 ### Added
@@ -91,11 +114,29 @@ All notable changes to this project will be documented here. The format follows 
 - SSR-safe, framework-agnostic pure Astro components.
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.0.3...v0.1.0
 [0.0.3]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/phcdevworks/spectre-ui-astro/tree/v0.0.1
+[0db0618]: https://github.com/phcdevworks/spectre-ui-astro/commit/0db0618
+[602c3fb]: https://github.com/phcdevworks/spectre-ui-astro/commit/602c3fb
+[f8a0654]: https://github.com/phcdevworks/spectre-ui-astro/commit/f8a0654
+[7e81149]: https://github.com/phcdevworks/spectre-ui-astro/commit/7e81149
+[7de58bc]: https://github.com/phcdevworks/spectre-ui-astro/commit/7de58bc
+[66ebbc3]: https://github.com/phcdevworks/spectre-ui-astro/commit/66ebbc3
+[da3b67a]: https://github.com/phcdevworks/spectre-ui-astro/commit/da3b67a
+[5dbe513]: https://github.com/phcdevworks/spectre-ui-astro/commit/5dbe513
+[e056fe3]: https://github.com/phcdevworks/spectre-ui-astro/commit/e056fe3
+[e159f0e]: https://github.com/phcdevworks/spectre-ui-astro/commit/e159f0e
+[139ee20]: https://github.com/phcdevworks/spectre-ui-astro/commit/139ee20
+[532ac4c]: https://github.com/phcdevworks/spectre-ui-astro/commit/532ac4c
+[712fd72]: https://github.com/phcdevworks/spectre-ui-astro/commit/712fd72
+[61c0b03]: https://github.com/phcdevworks/spectre-ui-astro/commit/61c0b03
+[b6625cf]: https://github.com/phcdevworks/spectre-ui-astro/commit/b6625cf
+[ea49860]: https://github.com/phcdevworks/spectre-ui-astro/commit/ea49860
+[b552cde]: https://github.com/phcdevworks/spectre-ui-astro/commit/b552cde
 [85ab557]: https://github.com/phcdevworks/spectre-ui-astro/commit/85ab557
 [3149605]: https://github.com/phcdevworks/spectre-ui-astro/commit/3149605
 [5bfc952]: https://github.com/phcdevworks/spectre-ui-astro/commit/5bfc952
