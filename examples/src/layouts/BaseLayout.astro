@@ -1,5 +1,5 @@
 ---
-import "@phcdevworks/spectre-ui/index.css";
+import { SPECTRE_UI_CSS } from "@phcdevworks/spectre-ui-astro";
 
 interface Props {
   title?: string;
@@ -13,30 +13,12 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <link rel="stylesheet" href={SPECTRE_UI_CSS} />
 
-    <style is:global>
-      body {
-        margin: 0;
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
-      }
-
-      .app-shell {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-      }
-    </style>
   </head>
 
   <body>
-    <main class="app-shell">
+    <main class="sp-container sp-section">
       <slot />
     </main>
   </body>

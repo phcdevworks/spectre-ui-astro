@@ -5,6 +5,7 @@ import {
   SpButton,
   SpCard,
   SpIconBox,
+  getButtonClasses,
 } from "@phcdevworks/spectre-ui-astro";
 
 const navLinks = [
@@ -14,18 +15,20 @@ const navLinks = [
   { href: "/marketing", label: "Marketing" },
   { href: "/primitives", label: "Primitives" },
 ];
+
+const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
 ---
 
 <BaseLayout title="Buttons — Spectre UI Astro">
-  <div class="page">
-    <nav class="nav">
+  <div class="sp-stack page">
+    <nav class="sp-hstack nav">
       {navLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
+        <a class={navLinkClasses} href={link.href}>{link.label}</a>
       ))}
     </nav>
 
-    <header class="header">
-      <div>
+    <header class="sp-stack header">
+      <div class="sp-stack">
         <p class="eyebrow">Spectre Examples</p>
         <h1>Buttons</h1>
         <p class="subtitle">
@@ -34,41 +37,41 @@ const navLinks = [
       </div>
     </header>
 
-    <section class="section grid two">
-      <div class="stack">
+    <section class="sp-stack grid two">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Variants</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpButton variant="primary">Primary</SpButton>
           <SpButton variant="secondary">Secondary</SpButton>
           <SpButton variant="ghost">Ghost</SpButton>
           <SpButton variant="success">Success</SpButton>
           <SpButton variant="danger">Danger</SpButton>
         </div>
-      </div>
+      </SpCard>
 
-      <div class="stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Sizes</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpButton variant="primary" size="sm">Small</SpButton>
           <SpButton variant="primary" size="md">Medium</SpButton>
           <SpButton variant="primary" size="lg">Large</SpButton>
         </div>
-      </div>
+      </SpCard>
     </section>
 
-    <section class="section grid two">
-      <div class="stack">
+    <section class="sp-stack grid two">
+      <SpCard variant="flat" class="sp-stack">
         <h2>States</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpButton variant="primary" loading>Loading</SpButton>
           <SpButton variant="secondary" disabled>Disabled</SpButton>
           <SpButton variant="danger" loading disabled>Loading Disabled</SpButton>
         </div>
-      </div>
+      </SpCard>
 
-      <div class="stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Icon Buttons</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpButton variant="ghost" iconOnly aria-label="Play">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M8 5v14l11-7z" />
@@ -91,10 +94,10 @@ const navLinks = [
             </svg>
           </SpButton>
         </div>
-      </div>
+      </SpCard>
     </section>
 
-    <section class="section">
+    <section class="sp-stack">
       <h2>Cards with Buttons</h2>
       <div class="card-row">
         <SpCard variant="elevated">
@@ -126,9 +129,9 @@ const navLinks = [
       </div>
     </section>
 
-    <section class="section">
+    <section class="sp-stack">
       <h2>Buttons + Primitives</h2>
-      <div class="inline align-center">
+      <div class="sp-hstack inline align-center">
         <SpButton variant="primary">Notify</SpButton>
         <SpBadge variant="warning">Beta</SpBadge>
         <SpIconBox variant="primary" size="sm" aria-hidden="true">
@@ -146,80 +149,49 @@ const navLinks = [
 
 <style>
   .page {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--sp-layout-section-gap-lg);
     width: min(1100px, 100%);
   }
 
   .nav {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--sp-layout-stack-gap-sm);
     flex-wrap: wrap;
-  }
-
-  .nav a {
-    color: #0f172a;
-    text-decoration: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    background: #e2e8f0;
-    border: 1px solid #cbd5e1;
-  }
-
-  .nav a:hover {
-    background: #cbd5e1;
   }
 
   .header {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: var(--sp-layout-stack-gap-sm);
   }
 
   .eyebrow {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.85rem;
-    color: #64748b;
+    font-size: var(--sp-font-xs-size);
+    color: var(--sp-text-on-page-muted);
     margin: 0;
   }
 
   .subtitle {
     margin: 0;
-    color: #475569;
+    color: var(--sp-text-on-page-muted);
     max-width: 60ch;
-  }
-
-  .section {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
   }
 
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
   }
 
   .grid.two {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
   .inline {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--sp-layout-stack-gap-sm);
     flex-wrap: wrap;
     align-items: center;
   }
@@ -230,7 +202,7 @@ const navLinks = [
 
   .card-row {
     display: grid;
-    gap: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 

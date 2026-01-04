@@ -1,4 +1,4 @@
-export declare const SPECTRE_UI_CSS = "@phcdevworks/spectre-ui/index.css";
+export declare const SPECTRE_UI_CSS: string;
 export { default as SpBadge } from "./components/SpBadge.astro";
 export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";

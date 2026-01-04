@@ -1,4 +1,5 @@
-const SPECTRE_UI_CSS = "@phcdevworks/spectre-ui/index.css";
+import { spectreStyles } from "@phcdevworks/spectre-ui";
+const SPECTRE_UI_CSS = spectreStyles.index;
 import { default as default2 } from "./components/SpBadge.astro";
 import { default as default3 } from "./components/SpButton.astro";
 import { default as default4 } from "./components/SpCard.astro";

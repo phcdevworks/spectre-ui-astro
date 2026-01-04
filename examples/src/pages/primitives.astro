@@ -2,7 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   SpBadge,
+  SpCard,
   SpIconBox,
+  getButtonClasses,
 } from "@phcdevworks/spectre-ui-astro";
 
 const navLinks = [
@@ -12,18 +14,20 @@ const navLinks = [
   { href: "/marketing", label: "Marketing" },
   { href: "/primitives", label: "Primitives" },
 ];
+
+const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
 ---
 
 <BaseLayout title="Primitives — Spectre UI Astro">
-  <div class="page">
-    <nav class="nav">
+  <div class="sp-stack page">
+    <nav class="sp-hstack nav">
       {navLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
+        <a class={navLinkClasses} href={link.href}>{link.label}</a>
       ))}
     </nav>
 
-    <header class="header">
-      <div>
+    <header class="sp-stack header">
+      <div class="sp-stack">
         <p class="eyebrow">Spectre Examples</p>
         <h1>Primitives</h1>
         <p class="subtitle">Badge and IconBox variants and sizes.</p>
@@ -31,30 +35,30 @@ const navLinks = [
     </header>
 
     <section class="grid">
-      <div class="panel stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Badge Variants</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpBadge variant="primary">Primary</SpBadge>
           <SpBadge variant="success">Success</SpBadge>
           <SpBadge variant="warning">Warning</SpBadge>
           <SpBadge variant="danger">Danger</SpBadge>
         </div>
-      </div>
+      </SpCard>
 
-      <div class="panel stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Badge Sizes</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpBadge variant="primary" size="sm">Small</SpBadge>
           <SpBadge variant="primary" size="md">Medium</SpBadge>
           <SpBadge variant="primary" size="lg">Large</SpBadge>
         </div>
-      </div>
+      </SpCard>
     </section>
 
     <section class="grid">
-      <div class="panel stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>IconBox Variants</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpIconBox variant="primary" size="md" aria-hidden="true">
             <svg class="icon" viewBox="0 0 24 24">
               <path fill="currentColor" d="M5 3h14l-1.5 13h-11z" />
@@ -81,11 +85,11 @@ const navLinks = [
             </svg>
           </SpIconBox>
         </div>
-      </div>
+      </SpCard>
 
-      <div class="panel stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>IconBox Sizes</h2>
-        <div class="inline">
+        <div class="sp-hstack inline">
           <SpIconBox variant="primary" size="sm" aria-hidden="true">
             <svg class="icon" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="6" fill="currentColor" />
@@ -102,81 +106,53 @@ const navLinks = [
             </svg>
           </SpIconBox>
         </div>
-      </div>
+      </SpCard>
     </section>
   </div>
 </BaseLayout>
 
 <style>
   .page {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--sp-layout-section-gap-lg);
     width: min(960px, 100%);
   }
 
   .nav {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--sp-layout-stack-gap-sm);
     flex-wrap: wrap;
-  }
-
-  .nav a {
-    color: #0f172a;
-    text-decoration: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    background: #e2e8f0;
-    border: 1px solid #cbd5e1;
-  }
-
-  .nav a:hover {
-    background: #cbd5e1;
   }
 
   .header {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: var(--sp-layout-stack-gap-sm);
   }
 
   .eyebrow {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.85rem;
-    color: #64748b;
+    font-size: var(--sp-font-xs-size);
+    color: var(--sp-text-on-page-muted);
     margin: 0;
   }
 
   .subtitle {
     margin: 0;
-    color: #475569;
+    color: var(--sp-text-on-page-muted);
     max-width: 60ch;
   }
 
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-
-  .panel {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 1rem;
-    padding: 1.25rem;
-  }
-
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
   }
 
   .inline {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--sp-layout-stack-gap-sm);
     flex-wrap: wrap;
     align-items: center;
   }

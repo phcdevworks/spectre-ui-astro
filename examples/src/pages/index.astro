@@ -10,9 +10,9 @@ import {
 ---
 
 <BaseLayout>
-  <div class="page">
-    <header class="page__header">
-      <div>
+  <div class="sp-stack page">
+    <header class="hero">
+      <div class="sp-stack hero-text">
         <p class="eyebrow">Spectre UI for Astro</p>
         <h1>Build better websites faster</h1>
         <p class="subtitle">
@@ -33,7 +33,7 @@ import {
             Flexible button components with multiple variants, sizes, and
             states.
           </p>
-          <div class="button-demo">
+          <div class="sp-hstack demo-row">
             <SpButton variant="primary" size="sm">Primary</SpButton>
             <SpButton variant="secondary" size="sm">Secondary</SpButton>
             <SpButton variant="ghost" size="sm">Ghost</SpButton>
@@ -41,8 +41,8 @@ import {
         </SpCard>
 
         <SpCard variant="elevated">
-          <div class="card-header">
-            <SpIconBox variant="primary" size="md" rounded>
+          <div class="sp-hstack card-header">
+            <SpIconBox variant="primary" size="md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -68,14 +68,14 @@ import {
             Use cards to group related UI content. Cards automatically adapt to
             Spectre's surface and text tokens for proper contrast.
           </p>
-          <div class="button-demo">
+          <div class="sp-hstack demo-row">
             <SpButton variant="primary" size="sm">Example CTA</SpButton>
           </div>
         </SpCard>
 
         <SpCard variant="elevated">
-          <div class="card-header">
-            <SpIconBox variant="success" size="md" circle>
+          <div class="sp-hstack card-header">
+            <SpIconBox variant="success" size="md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -117,21 +117,21 @@ import {
         <SpCard variant="elevated">
           <h3>Badges</h3>
           <p>Display status, labels, or counts with different variants.</p>
-          <div class="badge-demo">
+          <div class="sp-hstack demo-row">
             <SpBadge variant="primary">Primary</SpBadge>
             <SpBadge variant="success">Success</SpBadge>
-            <SpBadge variant="danger">Danger</SpBadge>
             <SpBadge variant="warning">Warning</SpBadge>
-            <SpBadge variant="info" pill>Info Pill</SpBadge>
-            <SpBadge variant="secondary" outlined>Outlined</SpBadge>
+            <SpBadge variant="danger">Danger</SpBadge>
+            <SpBadge variant="primary" size="sm">Small</SpBadge>
+            <SpBadge variant="primary" size="lg">Large</SpBadge>
           </div>
         </SpCard>
 
         <SpCard variant="elevated">
           <h3>Icon Boxes</h3>
           <p>Decorative containers for icons with multiple styles.</p>
-          <div class="iconbox-demo">
-            <SpIconBox variant="primary" size="md" rounded>
+          <div class="sp-hstack demo-row iconbox-row">
+            <SpIconBox variant="primary" size="md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -144,7 +144,7 @@ import {
                 <path d="M12 2v20M2 12h20"></path>
               </svg>
             </SpIconBox>
-            <SpIconBox variant="success" size="md" circle>
+            <SpIconBox variant="success" size="md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -157,7 +157,7 @@ import {
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
             </SpIconBox>
-            <SpIconBox variant="danger" size="md" rounded>
+            <SpIconBox variant="danger" size="md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -170,7 +170,7 @@ import {
                 <path d="M18 6 6 18M6 6l12 12"></path>
               </svg>
             </SpIconBox>
-            <SpIconBox variant="info" size="md" circle>
+            <SpIconBox variant="info" size="md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -209,7 +209,7 @@ import {
             placeholder="Tell us what you think"
           />
 
-          <div class="form-actions">
+          <div class="sp-hstack form-actions">
             <SpButton variant="primary" type="submit">Send Message</SpButton>
             <SpButton variant="ghost" type="button">Cancel</SpButton>
           </div>
@@ -221,77 +221,73 @@ import {
 
 <style>
   .page {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    gap: var(--sp-layout-section-gap-lg);
     max-width: 1100px;
   }
 
-  .page__header {
+  .hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--sp-layout-section-gap-md);
+    flex-wrap: wrap;
+  }
+
+  .hero-text {
+    max-width: 56ch;
   }
 
   .eyebrow {
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.85rem;
-    color: #64748b;
-    margin: 0 0 0.35rem;
+    font-size: var(--sp-font-xs-size);
+    color: var(--sp-text-on-page-muted);
+    margin: 0;
   }
 
   .subtitle {
-    margin: 0.25rem 0 0;
-    color: #475569;
-    max-width: 46ch;
-    line-height: 1.6;
+    margin: 0.35rem 0 0;
+    color: var(--sp-text-on-page-muted);
+    max-width: 60ch;
+    line-height: var(--sp-font-md-line-height);
   }
 
   .demo-section {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: var(--sp-layout-stack-gap-md);
   }
 
   .component-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
   }
 
-  .button-demo,
-  .input-demo,
-  .badge-demo,
-  .iconbox-demo {
+  .demo-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    gap: var(--sp-layout-stack-gap-sm);
+    margin-top: var(--sp-layout-stack-gap-sm);
   }
 
-  .badge-demo {
-    align-items: center;
-  }
-
-  .iconbox-demo {
-    gap: 1rem;
+  .iconbox-row {
+    gap: var(--sp-layout-stack-gap-md);
   }
 
   .card-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    gap: var(--sp-layout-stack-gap-sm);
+    margin-bottom: var(--sp-layout-stack-gap-sm);
   }
 
   .card-header h3 {
     margin: 0;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--sp-layout-stack-gap-sm);
   }
 
   .input-demo {
@@ -305,23 +301,11 @@ import {
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
+    margin-top: var(--sp-layout-stack-gap-md);
   }
 
   .form-actions {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  @media (max-width: 720px) {
-    .page__header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .form-actions {
-      flex-wrap: wrap;
-    }
+    gap: var(--sp-layout-stack-gap-sm);
   }
 </style>

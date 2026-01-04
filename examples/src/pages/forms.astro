@@ -4,6 +4,7 @@ import {
   SpButton,
   SpCard,
   SpInput,
+  getButtonClasses,
 } from "@phcdevworks/spectre-ui-astro";
 
 const navLinks = [
@@ -13,18 +14,20 @@ const navLinks = [
   { href: "/marketing", label: "Marketing" },
   { href: "/primitives", label: "Primitives" },
 ];
+
+const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
 ---
 
 <BaseLayout title="Forms — Spectre UI Astro">
-  <div class="page">
-    <nav class="nav">
+  <div class="sp-stack page">
+    <nav class="sp-hstack nav">
       {navLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
+        <a class={navLinkClasses} href={link.href}>{link.label}</a>
       ))}
     </nav>
 
-    <header class="header">
-      <div>
+    <header class="sp-stack header">
+      <div class="sp-stack">
         <p class="eyebrow">Spectre Examples</p>
         <h1>Forms</h1>
         <p class="subtitle">
@@ -34,7 +37,7 @@ const navLinks = [
     </header>
 
     <section class="grid two">
-      <div class="panel stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Input States</h2>
         <SpInput
           label="Email"
@@ -61,19 +64,19 @@ const navLinks = [
           state="disabled"
           disabled
         />
-      </div>
+      </SpCard>
 
-      <div class="panel stack">
+      <SpCard variant="flat" class="sp-stack">
         <h2>Sizes</h2>
         <SpInput label="Small" size="sm" placeholder="sm input" />
         <SpInput label="Medium" size="md" placeholder="md input" />
         <SpInput label="Large" size="lg" placeholder="lg input" />
-      </div>
+      </SpCard>
     </section>
 
-    <section class="panel stack">
+    <section class="sp-stack">
       <h2>Card Form</h2>
-      <SpCard variant="elevated">
+      <SpCard variant="elevated" class="sp-stack">
         <form class="stack" style="margin: 0;">
           <SpInput label="Full Name" name="fullName" placeholder="Jane Doe" required />
           <SpInput label="Work Email" type="email" name="email" placeholder="you@company.com" required />
@@ -96,77 +99,55 @@ const navLinks = [
 
 <style>
   .page {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--sp-layout-section-gap-lg);
     width: min(1000px, 100%);
   }
 
   .nav {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--sp-layout-stack-gap-sm);
     flex-wrap: wrap;
-  }
-
-  .nav a {
-    color: #0f172a;
-    text-decoration: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    background: #e2e8f0;
-    border: 1px solid #cbd5e1;
-  }
-
-  .nav a:hover {
-    background: #cbd5e1;
   }
 
   .header {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: var(--sp-layout-stack-gap-sm);
   }
 
   .eyebrow {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.85rem;
-    color: #64748b;
+    font-size: var(--sp-font-xs-size);
+    color: var(--sp-text-on-page-muted);
     margin: 0;
   }
 
   .subtitle {
     margin: 0;
-    color: #475569;
+    color: var(--sp-text-on-page-muted);
     max-width: 60ch;
   }
 
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
   }
 
   .grid.two {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
-  .panel {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 1rem;
-    padding: 1.25rem;
-  }
-
   .stack {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--sp-layout-stack-gap-md);
   }
 
   .inline {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--sp-layout-stack-gap-sm);
     flex-wrap: wrap;
   }
 </style>
