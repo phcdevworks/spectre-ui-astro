@@ -1,11 +1,11 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   SpButton,
   SpCard,
   SpInput,
   getButtonClasses,
 } from "@phcdevworks/spectre-ui-astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -21,9 +21,13 @@ const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
 <BaseLayout title="Forms — Spectre UI Astro">
   <div class="sp-stack page">
     <nav class="sp-hstack nav">
-      {navLinks.map((link) => (
-        <a class={navLinkClasses} href={link.href}>{link.label}</a>
-      ))}
+      {
+        navLinks.map((link) => (
+          <a class={navLinkClasses} href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <header class="sp-stack header">
@@ -31,7 +35,8 @@ const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
         <p class="eyebrow">Spectre Examples</p>
         <h1>Forms</h1>
         <p class="subtitle">
-          Input states, sizes, and a composed form built with Spectre primitives.
+          Input states, sizes, and a composed form built with Spectre
+          primitives.
         </p>
       </div>
     </header>
@@ -78,8 +83,19 @@ const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
       <h2>Card Form</h2>
       <SpCard variant="elevated" class="sp-stack">
         <form class="stack" style="margin: 0;">
-          <SpInput label="Full Name" name="fullName" placeholder="Jane Doe" required />
-          <SpInput label="Work Email" type="email" name="email" placeholder="you@company.com" required />
+          <SpInput
+            label="Full Name"
+            name="fullName"
+            placeholder="Jane Doe"
+            required
+          />
+          <SpInput
+            label="Work Email"
+            type="email"
+            name="email"
+            placeholder="you@company.com"
+            required
+          />
           <SpInput
             label="Phone"
             type="tel"

@@ -1,2 +1,2 @@
-export { getButtonClasses, type ButtonRecipeOptions, type ButtonVariant, type ButtonSize, } from "@phcdevworks/spectre-ui";
+export { getButtonClasses, type ButtonRecipeOptions, type ButtonSize, type ButtonVariant } from "@phcdevworks/spectre-ui";
 //# sourceMappingURL=button.d.ts.map

@@ -1,6 +1,4 @@
 export {
   getInputClasses,
-  type InputRecipeOptions,
-  type InputState,
-  type InputSize,
+  type InputRecipeOptions, type InputSize, type InputState
 } from "@phcdevworks/spectre-ui";

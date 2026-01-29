@@ -1,2 +1,2 @@
-export { getBadgeClasses, type BadgeRecipeOptions, type BadgeVariant, type BadgeSize, } from "@phcdevworks/spectre-ui";
+export { getBadgeClasses, type BadgeRecipeOptions, type BadgeSize, type BadgeVariant } from "@phcdevworks/spectre-ui";
 //# sourceMappingURL=badge.d.ts.map

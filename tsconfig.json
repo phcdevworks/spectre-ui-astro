@@ -9,7 +9,9 @@
     "strict": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": false,
@@ -19,8 +21,16 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["astro/client"]
+    "types": [
+      "astro/client"
+    ]
   },
-  "include": ["src", "env.d.ts"],
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    "src",
+    "env.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }

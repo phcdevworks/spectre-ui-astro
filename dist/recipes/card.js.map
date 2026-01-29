@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/recipes/card.ts"],"sourcesContent":["export {\n  getCardClasses,\n  type CardRecipeOptions,\n  type CardVariant,\n} from \"@phcdevworks/spectre-ui\";\n"],"mappings":"AAAA;AAAA,EACE;AAAA,OAGK;","names":[]}
+{"version":3,"sources":["../../src/recipes/card.ts"],"sourcesContent":["export {\n  getCardClasses,\n  type CardRecipeOptions,\n  type CardVariant\n} from \"@phcdevworks/spectre-ui\";\n"],"mappings":"AAAA;AAAA,EACE;AAAA,OAGK;","names":[]}

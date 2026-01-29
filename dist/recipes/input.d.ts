@@ -1,2 +1,2 @@
-export { getInputClasses, type InputRecipeOptions, type InputState, type InputSize, } from "@phcdevworks/spectre-ui";
+export { getInputClasses, type InputRecipeOptions, type InputSize, type InputState } from "@phcdevworks/spectre-ui";
 //# sourceMappingURL=input.d.ts.map

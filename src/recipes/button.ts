@@ -1,6 +1,4 @@
 export {
   getButtonClasses,
-  type ButtonRecipeOptions,
-  type ButtonVariant,
-  type ButtonSize,
+  type ButtonRecipeOptions, type ButtonSize, type ButtonVariant
 } from "@phcdevworks/spectre-ui";

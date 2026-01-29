@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/recipes/badge.ts"],"sourcesContent":["export {\n  getBadgeClasses,\n  type BadgeRecipeOptions,\n  type BadgeVariant,\n  type BadgeSize,\n} from \"@phcdevworks/spectre-ui\";\n"],"mappings":"AAAA;AAAA,EACE;AAAA,OAIK;","names":[]}
+{"version":3,"sources":["../../src/recipes/badge.ts"],"sourcesContent":["export {\n  getBadgeClasses,\n  type BadgeRecipeOptions, type BadgeSize, type BadgeVariant\n} from \"@phcdevworks/spectre-ui\";\n"],"mappings":"AAAA;AAAA,EACE;AAAA,OAEK;","names":[]}

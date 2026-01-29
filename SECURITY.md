@@ -10,6 +10,7 @@ We aim to support the latest published version of Spectre UI Astro. Security upd
 | < 0.1   | :x:                |
 
 **Please ensure you are using the most recent version** of both:
+
 - The Spectre UI Astro package
 - `@phcdevworks/spectre-ui` (updated in `package.json`)
 
@@ -24,6 +25,7 @@ If you discover a security vulnerability, please **DO NOT** open a public issue.
 **Preferred method**: Use [GitHub Security Advisories](https://github.com/phcdevworks/spectre-ui-astro/security/advisories/new) to privately report vulnerabilities
 
 **Alternative methods**:
+
 - Email the maintainers at [security contact - see repository]
 - Direct message maintainers through GitHub
 
@@ -48,6 +50,7 @@ Please provide as much detail as possible to help us reproduce and assess impact
 ## Responsible Disclosure
 
 We appreciate responsible disclosure and will work with you to:
+
 - Understand the scope and severity of the issue
 - Develop and test a fix
 - Coordinate public disclosure timing
@@ -68,12 +71,14 @@ When using Spectre UI Astro:
 ## Scope
 
 This security policy covers:
+
 - The Spectre UI Astro package code
 - Astro component implementations
 - Build pipeline security
 - Astro-specific integrations
 
 This policy does **NOT** cover:
+
 - Vulnerabilities in Astro core (report to Astro.build)
 - Vulnerabilities in third-party Astro integrations
 - Issues in `@phcdevworks/spectre-ui` (report to that repository)
@@ -82,6 +87,7 @@ This policy does **NOT** cover:
 ## Contact
 
 For security-related questions that aren't vulnerabilities:
+
 - Open a [GitHub Discussion](https://github.com/phcdevworks/spectre-ui-astro/discussions)
 - Tag maintainers in relevant issues
 

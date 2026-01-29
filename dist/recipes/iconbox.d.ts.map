@@ -1,1 +1,1 @@
-{"version":3,"file":"iconbox.d.ts","sourceRoot":"","sources":["../../src/recipes/iconbox.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,iBAAiB,EACjB,KAAK,oBAAoB,EACzB,KAAK,cAAc,EACnB,KAAK,WAAW,GACjB,MAAM,yBAAyB,CAAC"}
+{"version":3,"file":"iconbox.d.ts","sourceRoot":"","sources":["../../src/recipes/iconbox.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,iBAAiB,EACjB,KAAK,oBAAoB,EAAE,KAAK,WAAW,EAAE,KAAK,cAAc,EACjE,MAAM,yBAAyB,CAAC"}

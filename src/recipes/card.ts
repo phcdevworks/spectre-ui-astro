@@ -1,5 +1,5 @@
 export {
   getCardClasses,
   type CardRecipeOptions,
-  type CardVariant,
+  type CardVariant
 } from "@phcdevworks/spectre-ui";

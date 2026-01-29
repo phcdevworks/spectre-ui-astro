@@ -13,6 +13,7 @@ Spectre is a **specification-driven design system** built on three strict layers
 **Exports**: CSS variables (`--sp-*`), TypeScript token object, Tailwind-compatible theme mappings
 
 **Rules**:
+
 - Tokens define semantic meaning, not UI behavior
 - UI must never invent new colors or values
 - Designers own `tokens/*.json`; engineers maintain `src/` transforms
@@ -25,6 +26,7 @@ Spectre is a **specification-driven design system** built on three strict layers
 **Purpose**: Converts tokens into real CSS and class recipes
 
 **Ships**:
+
 - `index.css` (canonical CSS bundle: tokens + base + components + utilities)
 - `base.css` (resets + globals)
 - `components.css` (`.sp-btn`, `.sp-card`, `.sp-input`, etc.)
@@ -32,6 +34,7 @@ Spectre is a **specification-driven design system** built on three strict layers
 - Type-safe recipes: `getButtonClasses`, `getCardClasses`, `getInputClasses`
 
 **Rules**:
+
 - UI must consume tokens, not redefine design values
 - Literal values in CSS are fallbacks only
 - Every CSS selector has a matching recipe where applicable
@@ -44,11 +47,13 @@ Spectre is a **specification-driven design system** built on three strict layers
 **Purpose**: Thin Astro wrapper around spectre-ui; automatically wraps recipes and outputs correct HTML + classes
 
 **Key mechanism**:
+
 - Imports class recipes from `@phcdevworks/spectre-ui`
 - Exports Astro components that render semantic HTML with Spectre classes
 - Provides `SPECTRE_UI_CSS` constant for CSS imports
 
 **Rules**:
+
 - Astro never defines styles, never duplicates CSS, never loads tokens directly
 - Package only wraps recipes and provides components
 - All design values come from tokens, all CSS comes from spectre-ui
@@ -125,6 +130,7 @@ spectre-ui-astro/
 ```
 
 **Responsibilities**:
+
 - **Component developers**: Edit `src/components/` to add or update Astro components
 - **Type developers**: Own `src/recipes/` for recipe re-exports and type definitions
 - **Build engineers**: Update `tsup.config.ts` when export patterns change
@@ -199,6 +205,7 @@ const classes = getButtonClasses({ variant, size });
 ## Questions or Issues?
 
 Please open an issue or discussion on GitHub if you're unsure about the best approach for a change. Coordinating early avoids conflicts with:
+
 - Spectre UI updates
 - Component API design
 - Diverging patterns across the Spectre Suite

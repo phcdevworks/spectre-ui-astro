@@ -1,6 +1,4 @@
 export {
   getBadgeClasses,
-  type BadgeRecipeOptions,
-  type BadgeVariant,
-  type BadgeSize,
+  type BadgeRecipeOptions, type BadgeSize, type BadgeVariant
 } from "@phcdevworks/spectre-ui";

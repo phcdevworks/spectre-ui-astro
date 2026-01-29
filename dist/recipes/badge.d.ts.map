@@ -1,1 +1,1 @@
-{"version":3,"file":"badge.d.ts","sourceRoot":"","sources":["../../src/recipes/badge.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,eAAe,EACf,KAAK,kBAAkB,EACvB,KAAK,YAAY,EACjB,KAAK,SAAS,GACf,MAAM,yBAAyB,CAAC"}
+{"version":3,"file":"badge.d.ts","sourceRoot":"","sources":["../../src/recipes/badge.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,eAAe,EACf,KAAK,kBAAkB,EAAE,KAAK,SAAS,EAAE,KAAK,YAAY,EAC3D,MAAM,yBAAyB,CAAC"}
