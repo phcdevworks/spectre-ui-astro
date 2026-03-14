@@ -1,17 +1,11 @@
 ---
-import type { ButtonSize, ButtonVariant } from "@phcdevworks/spectre-ui";
+import type { ButtonRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
 
 type SpButtonElement = "button" | "a" | "span";
 
-interface SpButtonProps {
+interface SpButtonProps extends ButtonRecipeOptions {
   as?: SpButtonElement;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  fullWidth?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  iconOnly?: boolean;
   class?: string;
 
   href?: string;
@@ -24,12 +18,12 @@ interface SpButtonProps {
 
 const {
   as = "button",
-  variant = "primary",
-  size = "md",
-  fullWidth = false,
-  loading = false,
-  disabled = false,
-  iconOnly = false,
+  variant,
+  size,
+  fullWidth,
+  loading,
+  disabled,
+  iconOnly,
   class: className,
   ...rest
 } = Astro.props as SpButtonProps;
