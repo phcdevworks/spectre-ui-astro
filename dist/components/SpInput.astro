@@ -1,12 +1,9 @@
 ---
-import type { InputSize, InputState } from "@phcdevworks/spectre-ui";
+import type { InputRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getInputClasses } from "@phcdevworks/spectre-ui";
 
-interface SpInputProps {
+interface SpInputProps extends InputRecipeOptions {
   label?: string;
-  state?: InputState;
-  size?: InputSize;
-  fullWidth?: boolean;
   helperText?: string;
   errorMessage?: string;
   id?: string;
@@ -16,9 +13,9 @@ interface SpInputProps {
 
 const {
   label,
-  state = "default",
-  size = "md",
-  fullWidth = false,
+  state,
+  size,
+  fullWidth,
   helperText,
   errorMessage,
   id,
