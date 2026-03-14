@@ -1,27 +1,11 @@
 ---
-import type { BadgeSize, BadgeVariant } from "@phcdevworks/spectre-ui";
+import type { BadgeRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 
-interface SpBadgeProps {
-  variant?: BadgeVariant;
-  size?: BadgeSize;
+interface SpBadgeProps extends BadgeRecipeOptions {
   class?: string;
   [key: string]: any;
 }
-
-const badgeVariants: BadgeVariant[] = [
-  "primary",
-  "success",
-  "warning",
-  "danger",
-];
-const badgeSizes: BadgeSize[] = ["sm", "md", "lg"];
-
-const isBadgeVariant = (value: unknown): value is BadgeVariant =>
-  typeof value === "string" && badgeVariants.includes(value as BadgeVariant);
-
-const isBadgeSize = (value: unknown): value is BadgeSize =>
-  typeof value === "string" && badgeSizes.includes(value as BadgeSize);
 
 const {
   variant,
@@ -30,16 +14,9 @@ const {
   ...attrs
 } = Astro.props as SpBadgeProps;
 
-const resolvedVariant: BadgeVariant = isBadgeVariant(variant)
-  ? variant
-  : "primary";
-const resolvedSize: BadgeSize | undefined = isBadgeSize(size)
-  ? size
-  : undefined;
-
 const classes = getBadgeClasses({
-  variant: resolvedVariant,
-  size: resolvedSize,
+  variant,
+  size,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
