@@ -2,7 +2,10 @@
 import type { BadgeRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 
+type SpBadgeElement = "span" | "div";
+
 interface SpBadgeProps extends BadgeRecipeOptions {
+  as?: SpBadgeElement;
   class?: string;
   [key: string]: any;
 }
@@ -10,6 +13,7 @@ interface SpBadgeProps extends BadgeRecipeOptions {
 const {
   variant,
   size,
+  as: Tag = "span",
   class: className,
   ...attrs
 } = Astro.props as SpBadgeProps;
@@ -19,10 +23,8 @@ const classes = getBadgeClasses({
   size,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
-
-delete (attrs as any).class;
 ---
 
-<span class={finalClass} {...attrs}>
+<Tag class={finalClass} {...attrs}>
   <slot />
-</span>
+</Tag>
