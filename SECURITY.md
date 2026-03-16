@@ -2,19 +2,9 @@
 
 ## Supported Versions
 
-We aim to support the latest published version of Spectre UI Astro. Security updates are applied to the current major version only.
+We aim to support the latest published version of the project. Security updates are applied to the current major version only.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.1.x   | :white_check_mark: |
-| < 0.1   | :x:                |
-
-**Please ensure you are using the most recent version** of both:
-
-- The Spectre UI Astro package
-- `@phcdevworks/spectre-ui` (updated in `package.json`)
-
-Older releases may not receive security fixes.
+**Please ensure you are using the most recent versions** of the Spectre Arsenal packages. Older releases may not receive security fixes.
 
 ## Reporting a Vulnerability
 
@@ -22,12 +12,12 @@ If you discover a security vulnerability, please **DO NOT** open a public issue.
 
 ### How to Report
 
-**Preferred method**: Use [GitHub Security Advisories](https://github.com/phcdevworks/spectre-ui-astro/security/advisories/new) to privately report vulnerabilities
+**Preferred method**: Use GitHub Security Advisories to privately report vulnerabilities on the specific repository.
 
 **Alternative methods**:
 
-- Email the maintainers at [security contact - see repository]
 - Direct message maintainers through GitHub
+- Email the maintainers if provided in the repository
 
 ### What to Include
 
@@ -60,35 +50,19 @@ We appreciate responsible disclosure and will work with you to:
 
 ## Security Best Practices
 
-When using Spectre UI Astro:
+When using the Spectre Arsenal:
 
-1. **Keep dependencies updated** to the latest versions
-2. **Update the package regularly** via `npm install` and rebuild
-3. **Monitor dependencies** for known vulnerabilities (`npm audit`)
-4. **Use HTTPS** for all production sites
-5. **Follow Astro security best practices** for SSR and static site generation
-
-## Scope
-
-This security policy covers:
-
-- The Spectre UI Astro package code
-- Astro component implementations
-- Build pipeline security
-- Astro-specific integrations
-
-This policy does **NOT** cover:
-
-- Vulnerabilities in Astro core (report to Astro.build)
-- Vulnerabilities in third-party Astro integrations
-- Issues in `@phcdevworks/spectre-ui` (report to that repository)
-- Issues in `@phcdevworks/spectre-tokens` (report to that repository)
+1. **Keep dependencies updated** to the latest versions.
+2. **Monitor dependencies** for known vulnerabilities (`npm audit`).
+3. **Use HTTPS** for all production sites.
+4. **Sanitize user input** when using classes or components dynamically.
+5. **Follow framework security best practices** (WordPress, Astro, React, etc.).
 
 ## Contact
 
 For security-related questions that aren't vulnerabilities:
 
-- Open a [GitHub Discussion](https://github.com/phcdevworks/spectre-ui-astro/discussions)
+- Open a GitHub Discussion on the repository
 - Tag maintainers in relevant issues
 
-Thank you for helping keep Spectre UI Astro and our community safe!
+Thank you for helping keep the Spectre community safe!
