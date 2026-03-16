@@ -1,5 +1,7 @@
 # Spectre Agent Instructions: @phcdevworks/spectre-ui-astro
 
+### **The Adapter (Layer 3 of the Spectre 8-Layer Arsenal)**
+
 You are an autonomous agent responsible for Layer 3 of the Spectre 8-Layer Arsenal. This package is the **Adapter**. Your mission is to provide high-performance Astro component wrappers for the logic defined in `@phcdevworks/spectre-ui`.
 
 ## The Golden Rule of Translation
