@@ -55,7 +55,10 @@
     "./components/SpButton.astro": "./dist/components/SpButton.astro",
     "./components/SpCard.astro": "./dist/components/SpCard.astro",
     "./components/SpIconBox.astro": "./dist/components/SpIconBox.astro",
-    "./components/SpInput.astro": "./dist/components/SpInput.astro"
+    "./components/SpInput.astro": "./dist/components/SpInput.astro",
+    "./components/SpPricingCard.astro": "./dist/components/SpPricingCard.astro",
+    "./components/SpRating.astro": "./dist/components/SpRating.astro",
+    "./components/SpTestimonial.astro": "./dist/components/SpTestimonial.astro"
   },
   "files": [
     "dist",
