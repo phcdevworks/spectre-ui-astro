@@ -13,29 +13,15 @@ const {
   interactive,
   padded,
   fullHeight,
-  as = "div",
+  as: Tag = "div",
   class: className,
   ...rest
 } = Astro.props as SpCardProps;
 
 const classes = getCardClasses({ variant, interactive, padded, fullHeight });
 const finalClass = [classes, className].filter(Boolean).join(" ");
-
-delete (rest as any).class;
 ---
 
-{
-  as === "section" ? (
-    <section class={finalClass} {...rest}>
-      <slot />
-    </section>
-  ) : as === "article" ? (
-    <article class={finalClass} {...rest}>
-      <slot />
-    </article>
-  ) : (
-    <div class={finalClass} {...rest}>
-      <slot />
-    </div>
-  )
-}
+<Tag class={finalClass} {...rest}>
+  <slot />
+</Tag>

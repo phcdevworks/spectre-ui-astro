@@ -32,8 +32,6 @@ const describedBy = errorMessage ? errorId : helperText ? helperId : undefined;
 
 const classes = getInputClasses({ state, size, fullWidth });
 const finalClass = [classes, className].filter(Boolean).join(" ");
-
-delete (rest as any).class;
 ---
 
 <div class="sp-input-wrapper">
