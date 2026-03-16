@@ -13,6 +13,7 @@ interface SpBadgeProps extends BadgeRecipeOptions {
 const {
   variant,
   size,
+  interactive,
   as: Tag = "span",
   class: className,
   ...attrs
@@ -21,6 +22,7 @@ const {
 const classes = getBadgeClasses({
   variant,
   size,
+  interactive,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
