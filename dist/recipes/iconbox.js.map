@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/recipes/iconbox.ts"],"sourcesContent":["export {\n  getIconBoxClasses,\n  type IconBoxRecipeOptions, type IconBoxSize, type IconBoxVariant\n} from \"@phcdevworks/spectre-ui\";\n"],"mappings":"AAAA;AAAA,EACE;AAAA,OAEK;","names":[]}
