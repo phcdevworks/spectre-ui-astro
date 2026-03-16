@@ -79,7 +79,7 @@
     "astro": "^5.0.0"
   },
   "dependencies": {
-    "@phcdevworks/spectre-ui": "github:phcdevworks/spectre-ui#main"
+    "@phcdevworks/spectre-ui": "^1.0.0"
   },
   "devDependencies": {
     "@types/chroma-js": "^3.1.2",
