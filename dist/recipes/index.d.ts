@@ -3,4 +3,7 @@ export { getButtonClasses, type ButtonRecipeOptions, type ButtonSize, type Butto
 export { getCardClasses, type CardRecipeOptions, type CardVariant } from "./card";
 export { getIconBoxClasses, type IconBoxRecipeOptions, type IconBoxSize, type IconBoxVariant } from "./iconbox";
 export { getInputClasses, type InputRecipeOptions, type InputSize, type InputState } from "./input";
+export { getTestimonialClasses, getTestimonialQuoteClasses, getTestimonialAuthorClasses, getTestimonialAuthorInfoClasses, getTestimonialAuthorNameClasses, getTestimonialAuthorTitleClasses, type TestimonialRecipeOptions, } from "./testimonial";
+export { getPricingCardClasses, getPricingCardBadgeClasses, getPricingCardPriceContainerClasses, getPricingCardPriceClasses, getPricingCardDescriptionClasses, type PricingCardRecipeOptions, } from "./pricingcard";
+export { getRatingClasses, getRatingStarsClasses, getRatingStarClasses, getRatingTextClasses, type RatingRecipeOptions, } from "./rating";
 //# sourceMappingURL=index.d.ts.map
