@@ -2,11 +2,18 @@
 import type { BadgeRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 
-type SpBadgeElement = "span" | "div";
+type SpBadgeElement = "span" | "div" | "a" | "button";
 
 interface SpBadgeProps extends BadgeRecipeOptions {
   as?: SpBadgeElement;
   class?: string;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+
+  type?: "button" | "submit" | "reset";
+
   [key: string]: any;
 }
 
@@ -16,7 +23,7 @@ const {
   interactive,
   as: Tag = "span",
   class: className,
-  ...attrs
+  ...rest
 } = Astro.props as SpBadgeProps;
 
 const classes = getBadgeClasses({
@@ -27,6 +34,22 @@ const classes = getBadgeClasses({
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
-<Tag class={finalClass} {...attrs}>
-  <slot />
-</Tag>
+{
+  Tag === "a" ? (
+    <a class={finalClass} {...rest}>
+      <slot />
+    </a>
+  ) : Tag === "button" ? (
+    <button class={finalClass} type={rest.type ?? "button"} {...rest}>
+      <slot />
+    </button>
+  ) : Tag === "div" ? (
+    <div class={finalClass} {...rest}>
+      <slot />
+    </div>
+  ) : (
+    <span class={finalClass} {...rest}>
+      <slot />
+    </span>
+  )
+}
