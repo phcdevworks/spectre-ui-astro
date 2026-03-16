@@ -1,12 +1,23 @@
 # @phcdevworks/spectre-ui-astro
 
-Astro integration layer for the Spectre design system.
+### **The Adapter (Layer 3 of the Spectre 8-Layer Arsenal)**
 
-> 📋 **[View Roadmap](https://github.com/phcdevworks/spectre-ui-astro/blob/main/ROADMAP.md)** | 🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)**
+`@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre design system. It provides high-performance Astro component wrappers for the logic and styles defined in `@phcdevworks/spectre-ui`.
 
-## Overview
+> 📋 **[View Roadmap](https://github.com/phcdevworks/spectre-ui-astro/blob/main/ROADMAP.md)** | 🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)** | 🏛️ **[Spectre Arsenal](https://github.com/phcdevworks)**
 
-`@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre design system.
+---
+
+## 🏗️ Core Architecture
+
+This package operates as a pure **Adapter Layer**. It is strictly forbidden from defining CSS or design tokens. It maps Astro component props to the TypeScript recipes and CSS classes provided by Layer 2.
+
+- 🧩 **Thin Wrapper Strategy**: Components are pass-throughs for Layer 2 recipes.
+- 🎭 **Polymorphism by Default**: Support for `as` prop with full type safety.
+- ⚡ **SSR-First**: Optimized for Astro's server-side rendering with zero client-side overhead.
+- 🛠️ **Type Synchronization**: Derived directly from `@phcdevworks/spectre-ui` types.
+
+---
 
 This package provides ergonomic Astro components (`<SpButton>`, `<SpCard>`, `<SpInput>`, `<SpBadge>`, `<SpIconBox>`) that wrap [@phcdevworks/spectre-ui](https://github.com/phcdevworks/spectre-ui)'s design system. This package is a thin integration layer that consumes Spectre UI recipes and classes without duplicating styling logic.
 
@@ -251,21 +262,19 @@ This single import includes tokens, base styles, components, and utilities - eve
 4. **Type-safe ergonomics** – Every component exports strict TypeScript types for confident usage
 5. **SSR-safe** – All components work with Astro's server-side rendering
 
-## Part of the Spectre Suite
+---
 
-- **Spectre Tokens** – Design-token foundation
-- **Spectre UI** – Core styling layer
-- **Spectre Blocks** – WordPress block library
-- **Spectre Astro** – Astro integration (this package)
-- **Spectre 11ty** – Eleventy integration
+## 🏛️ The Spectre Suite Hierarchy
 
-For the project's future direction, see the **[Roadmap](https://github.com/phcdevworks/spectre-ui-astro/blob/main/ROADMAP.md)**.
+Spectre is built on a non-negotiable hierarchy to prevent style leakage and duplication:
 
-## Contributing
+1.  **Layer 1: DNA** ([@phcdevworks/spectre-tokens](https://github.com/phcdevworks/spectre-tokens)) – The source of truth for all design values.
+2.  **Layer 2: Blueprint** ([@phcdevworks/spectre-ui](https://github.com/phcdevworks/spectre-ui)) – Translates tokens into CSS structure and recipes.
+3.  **Layer 3: Adapter (This Package)** – Thin bridges that map Layer 2 to specific frameworks.
 
-Issues and pull requests are welcome. If you are proposing component or type changes, update `src/` and include regenerated builds.
+> **The Golden Rule**: Tokens define *meaning*. UI defines *structure*. Adapters define *delivery*.
 
-For detailed contribution guidelines, see **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+---
 
 ## License
 
