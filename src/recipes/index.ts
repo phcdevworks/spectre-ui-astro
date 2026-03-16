@@ -23,3 +23,30 @@ export {
   getInputClasses,
   type InputRecipeOptions, type InputSize, type InputState
 } from "./input";
+
+export {
+  getTestimonialClasses,
+  getTestimonialQuoteClasses,
+  getTestimonialAuthorClasses,
+  getTestimonialAuthorInfoClasses,
+  getTestimonialAuthorNameClasses,
+  getTestimonialAuthorTitleClasses,
+  type TestimonialRecipeOptions,
+} from "./testimonial";
+
+export {
+  getPricingCardClasses,
+  getPricingCardBadgeClasses,
+  getPricingCardPriceContainerClasses,
+  getPricingCardPriceClasses,
+  getPricingCardDescriptionClasses,
+  type PricingCardRecipeOptions,
+} from "./pricingcard";
+
+export {
+  getRatingClasses,
+  getRatingStarsClasses,
+  getRatingStarClasses,
+  getRatingTextClasses,
+  type RatingRecipeOptions,
+} from "./rating";

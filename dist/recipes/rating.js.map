@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/recipes/rating.ts"],"sourcesContent":["export {\n  getRatingClasses,\n  getRatingStarsClasses,\n  getRatingStarClasses,\n  getRatingTextClasses,\n  type RatingRecipeOptions,\n} from \"@phcdevworks/spectre-ui\";\n"],"mappings":"AAAA;AAAA,EACE;AAAA,EACA;AAAA,EACA;AAAA,EACA;AAAA,OAEK;","names":[]}
