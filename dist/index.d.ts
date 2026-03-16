@@ -4,5 +4,8 @@ export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";
 export { default as SpIconBox } from "./components/SpIconBox.astro";
 export { default as SpInput } from "./components/SpInput.astro";
+export { default as SpTestimonial } from "./components/SpTestimonial.astro";
+export { default as SpPricingCard } from "./components/SpPricingCard.astro";
+export { default as SpRating } from "./components/SpRating.astro";
 export * from "./recipes/index";
 //# sourceMappingURL=index.d.ts.map

@@ -1,0 +1,50 @@
+---
+import {
+  getRatingClasses,
+  getRatingStarsClasses,
+  getRatingStarClasses,
+  getRatingTextClasses,
+  type RatingRecipeOptions,
+} from "../recipes/rating";
+
+interface SpRatingProps extends RatingRecipeOptions {
+  value?: number;
+  max?: number;
+  as?: "div" | "span";
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  value = 0,
+  max = 5,
+  as: Tag = "div",
+  class: className,
+  ...rest
+} = Astro.props as SpRatingProps;
+
+const classes = getRatingClasses(rest);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const starsClasses = getRatingStarsClasses();
+const textClasses = getRatingTextClasses();
+
+const stars = Array.from({ length: max }, (_, i) => i < value);
+---
+
+<Tag class={finalClass} {...rest}>
+  <div class={starsClasses}>
+    {
+      stars.map((isFilled) => (
+        <span class={getRatingStarClasses(isFilled)}>
+          <slot name="star-icon" isFilled={isFilled}>
+            ★
+          </slot>
+        </span>
+      ))
+    }
+  </div>
+  <div class={textClasses}>
+    <slot />
+  </div>
+</Tag>
