@@ -1,0 +1,49 @@
+---
+import {
+  getTestimonialClasses,
+  getTestimonialQuoteClasses,
+  getTestimonialAuthorClasses,
+  getTestimonialAuthorInfoClasses,
+  getTestimonialAuthorNameClasses,
+  getTestimonialAuthorTitleClasses,
+  type TestimonialRecipeOptions,
+} from "../recipes/testimonial";
+
+interface SpTestimonialProps extends TestimonialRecipeOptions {
+  as?: "div" | "section" | "article";
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  as: Tag = "div",
+  class: className,
+  ...rest
+} = Astro.props as SpTestimonialProps;
+
+const classes = getTestimonialClasses(rest);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const quoteClasses = getTestimonialQuoteClasses();
+const authorClasses = getTestimonialAuthorClasses();
+const authorInfoClasses = getTestimonialAuthorInfoClasses();
+const authorNameClasses = getTestimonialAuthorNameClasses();
+const authorTitleClasses = getTestimonialAuthorTitleClasses();
+---
+
+<Tag class={finalClass} {...rest}>
+  <div class={quoteClasses}>
+    <slot name="quote" />
+  </div>
+  <div class={authorClasses}>
+    <slot name="author-image" />
+    <div class={authorInfoClasses}>
+      <div class={authorNameClasses}>
+        <slot name="author-name" />
+      </div>
+      <div class={authorTitleClasses}>
+        <slot name="author-title" />
+      </div>
+    </div>
+  </div>
+</Tag>
