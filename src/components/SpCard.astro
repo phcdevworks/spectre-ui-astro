@@ -1,10 +1,29 @@
 ---
-import type { CardRecipeOptions } from "@phcdevworks/spectre-ui";
-import { getCardClasses } from "@phcdevworks/spectre-ui";
+import { getCardClasses, type CardRecipeOptions } from "@phcdevworks/spectre-ui";
+
+type SpCardElement =
+  | "div"
+  | "section"
+  | "article"
+  | "aside"
+  | "header"
+  | "footer"
+  | "main"
+  | "nav"
+  | "a"
+  | "button"
+  | "li";
 
 interface SpCardProps extends CardRecipeOptions {
-  as?: "div" | "section" | "article";
+  as?: SpCardElement;
   class?: string;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+
+  type?: "button" | "submit" | "reset";
+
   [key: string]: any;
 }
 
@@ -22,6 +41,10 @@ const classes = getCardClasses({ variant, interactive, padded, fullHeight });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
-<Tag class={finalClass} {...rest}>
+<Tag
+  class={finalClass}
+  type={Tag === "button" ? (rest.type ?? "button") : undefined}
+  {...rest}
+>
   <slot />
 </Tag>
