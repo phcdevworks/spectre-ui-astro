@@ -4,193 +4,109 @@ All notable changes to this project will be documented here. The format follows 
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-03-17
+
+### Added
+- Promoted all Spectre UI components for Astro to v1.0.0 stable release.
+- Added `SpPricingCard`, `SpRating`, and `SpTestimonial` components to the marketing example.
+- Centralized example app navigation to `BaseLayout` to follow DRY principles.
+- Cleaned up example documentation code for better readability and structure.
+
 ## [0.1.1] - 2026-01-04
 
 ### Added
-
-- Added server configuration to Astro config for Docker container compatibility ([7de58bc], [7e81149]).
-- Added validation for SpBadge variant and size props ([e056fe3]).
-- Added SpBadge and SpIconBox components ([b552cde], [ea49860]).
-- Added example pages for buttons, forms, marketing, and primitives ([61c0b03]).
+- Added server configuration to Astro config for Docker container compatibility.
+- Added validation for SpBadge variant and size props.
+- Added SpBadge and SpIconBox components.
+- Added example pages for buttons, forms, marketing, and primitives.
 
 ### Changed
-
-- Updated `@phcdevworks/spectre-ui` to v0.4.0 ([66ebbc3]).
-- Updated `@phcdevworks/spectre-ui` to v0.2.2 ([5dbe513]).
-- Updated `@phcdevworks/spectre-ui` to v0.2.1 ([532ac4c]).
-- Updated `@emnapi/runtime` dependency ([0db0618]).
-- Refactored components to use spectre-ui package exports ([b6625cf]).
-- Refactored class handling in SpBadge and SpIconBox ([e159f0e]).
-- Refactored to use Spectre UI CSS from spectreStyles ([f8a0654]).
-- Updated BaseLayout to use improved Spectre UI CSS import ([602c3fb]).
-- Updated Astro example build and dependencies ([139ee20]).
-- Updated Astro config and types references ([712fd72]).
-- Revised documentation and guidelines for clarity ([da3b67a]).
+- Updated `@phcdevworks/spectre-ui` to v0.4.0.
+- Updated `@phcdevworks/spectre-ui` to v0.2.2.
+- Updated `@phcdevworks/spectre-ui` to v0.2.1.
+- Updated `@emnapi/runtime` dependency.
+- Refactored components to use spectre-ui package exports.
+- Refactored class handling in SpBadge and SpIconBox.
+- Refactored to use Spectre UI CSS from spectreStyles.
+- Updated BaseLayout to use improved Spectre UI CSS import.
+- Updated Astro example build and dependencies.
+- Updated Astro config and types references.
+- Revised documentation and guidelines for clarity.
 
 ## [0.1.0] - 2025-12-16
 
 ### Added
-
-- Added CODE_OF_CONDUCT and SECURITY policies ([85ab557]).
-- Added `iconOnly` prop to SpButton for icon-only button support ([ec82b24]).
-- Added Astro example build output and types ([a7fe2d6]).
-- Exported all types from types module ([8f7cbd1]).
+- Added CODE_OF_CONDUCT and SECURITY policies.
+- Added `iconOnly` prop to SpButton for icon-only button support.
+- Added Astro example build output and types.
+- Exported all types from types module.
 
 ### Changed
-
-- Refactored exports for improved clarity and structure ([55d8dbf], [ebbb853], [30e1dc5], [3ab05bf]).
-- Refactored CSS entrypoint export and naming with new `SPECTRE_UI_CSS` constant ([cff87dc], [5718612]).
-- Refactored recipes and types structure for better organization ([f9f37e3]).
-- Refactored Spectre CSS export to new styles module ([3149605], [2f812e2], [5709e2d]).
-- Renamed exported types with `Sp` prefix for consistency ([c29fa0c]).
-- Updated BaseLayout to use `SPECTRE_UI_CSS` import ([2fae136]).
-- Updated Astro module declaration in env.d.ts ([5bfc952]).
-- Updated SpButton to improve link handling and disabled anchor behavior ([ebbb853], [ec82b24], [fc0cfcb]).
-- Updated card padding default ([30e1dc5]).
+- Refactored exports for improved clarity and structure.
+- Refactored CSS entrypoint export and naming with new `SPECTRE_UI_CSS` constant.
+- Refactored recipes and types structure for better organization.
+- Refactored Spectre CSS export to new styles module.
+- Renamed exported types with `Sp` prefix for consistency.
+- Updated BaseLayout to use `SPECTRE_UI_CSS` import.
+- Updated Astro module declaration in env.d.ts.
+- Updated SpButton to improve link handling and disabled anchor behavior.
+- Updated card padding default.
 
 ### Improved
-
-- Improved SpInput accessibility ([b567c25]).
-- Improved accessibility in components ([3ab05bf]).
+- Improved SpInput accessibility.
+- Improved accessibility in components.
 
 ## [0.0.3] - 2025-12-08
 
 ### Added
-
-- Enhanced example app with homepage design showcasing components, features grid, and contact form ([6ff4b80], [fdd8c9c]).
-- Added comprehensive component demos in example app ([7c0bb22]).
-- Integrated Astro v5 type declarations ([1aa5bd6], [35d3d11]).
+- Enhanced example app with homepage design showcasing components, features grid, and contact form.
+- Added comprehensive component demos in example app.
+- Integrated Astro v5 type declarations.
 
 ### Changed
-
-- Updated README with improved structure, component documentation, and Spectre Suite alignment ([1445f26]).
-- Simplified CSS imports to use single `index.css` bundle from Spectre UI ([8afff37]).
-- Refactored CHANGELOG formatting and link references ([8a61ab3]).
-- Refactored components to simplify props and improve type clarity ([2bcdad4], [f4385fa]).
-- Updated SpButton, SpCard, and SpInput to use cleaner prop handling and Astro best practices ([b3801e7], [bd5a03b], [8deed6a]).
-- Simplified CSS imports to use direct Spectre UI paths instead of SPECTRE_CSS_PATHS ([fb0b94c], [ff03805]).
-- Restructured example app: moved from `examples/basic/` to `examples/` root and removed unused documentation files ([9f906b3]).
-- Updated type definitions to extend HTML element interfaces more cleanly ([3c0a1f2], [30243fb]).
-- Refactored component files to remove unnecessary wrappers and improve readability ([08c6454], [637e481], [861eaef]).
-- Updated `@phcdevworks/spectre-ui` to v0.0.5 ([f4385fa]).
-- Updated `@phcdevworks/spectre-ui` to v0.0.3 ([5831b52]).
-- Updated Astro to v5.16.4 ([7a8cc2d]).
-- Updated peer dependencies to support Astro ^4.0.0 || ^5.0.0 ([47a3cd3]).
+- Updated README with improved structure, component documentation, and Spectre Suite alignment.
+- Simplified CSS imports to use single `index.css` bundle from Spectre UI.
+- Refactored CHANGELOG formatting and link references.
+- Refactored components to simplify props and improve type clarity.
+- Updated SpButton, SpCard, and SpInput to use cleaner prop handling and Astro best practices.
+- Simplified CSS imports to use direct Spectre UI paths instead of SPECTRE_CSS_PATHS.
+- Restructured example app: moved from `examples/basic/` to `examples/` root and removed unused documentation files.
+- Updated type definitions to extend HTML element interfaces more cleanly.
+- Refactored component files to remove unnecessary wrappers and improve readability.
+- Updated `@phcdevworks/spectre-ui` to v0.0.5.
+- Updated `@phcdevworks/spectre-ui` to v0.0.3.
+- Updated Astro to v5.16.4.
+- Updated peer dependencies to support Astro ^4.0.0 || ^5.0.0.
 
 ### Fixed
-
-- Fixed CSS imports in BaseLayout to use Astro frontmatter imports instead of link tags ([fb0b94c]).
-- Removed custom body background and text colors for better theme compatibility ([de09085]).
+- Fixed CSS imports in BaseLayout to use Astro frontmatter imports instead of link tags.
+- Removed custom body background and text colors for better theme compatibility.
 
 ## [0.0.2] - 2025-11-30
 
 ### Added
-
-- Added Astro component files (SpButton, SpCard, SpInput) with proper type imports from `@phcdevworks/spectre-ui` ([57d3ed1]).
-- Enhanced type definitions with improved imports and re-exports ([57d3ed1]).
+- Added Astro component files (SpButton, SpCard, SpInput) with proper type imports from `@phcdevworks/spectre-ui`.
+- Enhanced type definitions with improved imports and re-exports.
 
 ### Changed
-
-- Updated dependency from npm package to GitHub source: `@phcdevworks/spectre-ui` now points to `github:phcdevworks/spectre-ui` ([fa030ae]).
-- Refactored SpButton component to use improved type safety with discriminated union props based on `as` prop ([9b1b994], [87327b9]).
-- Improved SpButton class handling with better disabled/loading state management ([87327b9]).
-- Refactored SpButton to use conditional JSX rendering instead of computed props objects ([44587d7]).
-- Updated package.json exports structure and added `typesVersions` for better TypeScript module resolution ([508309e]).
-- Synchronized button, card, and input variants/states with upstream `@phcdevworks/spectre-ui` enums ([6c8507a]).
+- Updated dependency from npm package to GitHub source: `@phcdevworks/spectre-ui` now points to `github:phcdevworks/spectre-ui`.
+- Refactored SpButton component to use improved type safety with discriminated union props based on `as` prop.
+- Improved SpButton class handling with better disabled/loading state management.
+- Refactored SpButton to use conditional JSX rendering instead of computed props objects.
+- Updated package.json exports structure and added `typesVersions` for better TypeScript module resolution.
+- Synchronized button, card, and input variants/states with upstream `@phcdevworks/spectre-ui` enums.
 
 ## [0.0.1] - 2025-11-28
 
 ### Added
-
-- Initial Spectre UI Astro integration package with three core components: SpButton, SpCard, and SpInput ([f391981]).
-- TypeScript type definitions for Button, Card, and Input components with comprehensive prop interfaces ([f78693a]).
-- Build configuration with tsup for bundling and type generation ([a503f46]).
-- Package configuration with proper exports, dependencies, and npm metadata ([a503f46]).
-- Repository infrastructure including LICENSE, README, and configuration files ([82248b0]).
-- Dev container configuration for Node.js and TypeScript development ([da6212f]).
-- VS Code workspace configuration file ([7add65d]).
+- Initial Spectre UI Astro integration package with three core components: SpButton, SpCard, and SpInput.
+- TypeScript type definitions for Button, Card, and Input components with comprehensive prop interfaces.
+- Build configuration with tsup for bundling and type generation.
+- Package configuration with proper exports, dependencies, and npm metadata.
+- Repository infrastructure including LICENSE, README, and configuration files.
+- Dev container configuration for Node.js and TypeScript development.
+- VS Code workspace configuration file.
 - Component features: SpButton (variants, sizes, polymorphic rendering), SpCard (variants, semantic HTML), SpInput (states, auto-IDs, validation).
 - Full TypeScript support with exported types for all component props.
 - SSR-safe, framework-agnostic pure Astro components.
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style duplication).
-
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.1.1...HEAD
-[0.1.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.0.3...v0.1.0
-[0.0.3]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.0.2...v0.0.3
-[0.0.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/v0.0.1...v0.0.2
-[0.0.1]: https://github.com/phcdevworks/spectre-ui-astro/tree/v0.0.1
-[0db0618]: https://github.com/phcdevworks/spectre-ui-astro/commit/0db0618
-[602c3fb]: https://github.com/phcdevworks/spectre-ui-astro/commit/602c3fb
-[f8a0654]: https://github.com/phcdevworks/spectre-ui-astro/commit/f8a0654
-[7e81149]: https://github.com/phcdevworks/spectre-ui-astro/commit/7e81149
-[7de58bc]: https://github.com/phcdevworks/spectre-ui-astro/commit/7de58bc
-[66ebbc3]: https://github.com/phcdevworks/spectre-ui-astro/commit/66ebbc3
-[da3b67a]: https://github.com/phcdevworks/spectre-ui-astro/commit/da3b67a
-[5dbe513]: https://github.com/phcdevworks/spectre-ui-astro/commit/5dbe513
-[e056fe3]: https://github.com/phcdevworks/spectre-ui-astro/commit/e056fe3
-[e159f0e]: https://github.com/phcdevworks/spectre-ui-astro/commit/e159f0e
-[139ee20]: https://github.com/phcdevworks/spectre-ui-astro/commit/139ee20
-[532ac4c]: https://github.com/phcdevworks/spectre-ui-astro/commit/532ac4c
-[712fd72]: https://github.com/phcdevworks/spectre-ui-astro/commit/712fd72
-[61c0b03]: https://github.com/phcdevworks/spectre-ui-astro/commit/61c0b03
-[b6625cf]: https://github.com/phcdevworks/spectre-ui-astro/commit/b6625cf
-[ea49860]: https://github.com/phcdevworks/spectre-ui-astro/commit/ea49860
-[b552cde]: https://github.com/phcdevworks/spectre-ui-astro/commit/b552cde
-[85ab557]: https://github.com/phcdevworks/spectre-ui-astro/commit/85ab557
-[3149605]: https://github.com/phcdevworks/spectre-ui-astro/commit/3149605
-[5bfc952]: https://github.com/phcdevworks/spectre-ui-astro/commit/5bfc952
-[c29fa0c]: https://github.com/phcdevworks/spectre-ui-astro/commit/c29fa0c
-[8f7cbd1]: https://github.com/phcdevworks/spectre-ui-astro/commit/8f7cbd1
-[2fae136]: https://github.com/phcdevworks/spectre-ui-astro/commit/2fae136
-[2f812e2]: https://github.com/phcdevworks/spectre-ui-astro/commit/2f812e2
-[fc0cfcb]: https://github.com/phcdevworks/spectre-ui-astro/commit/fc0cfcb
-[f9f37e3]: https://github.com/phcdevworks/spectre-ui-astro/commit/f9f37e3
-[b567c25]: https://github.com/phcdevworks/spectre-ui-astro/commit/b567c25
-[5709e2d]: https://github.com/phcdevworks/spectre-ui-astro/commit/5709e2d
-[ec82b24]: https://github.com/phcdevworks/spectre-ui-astro/commit/ec82b24
-[55d8dbf]: https://github.com/phcdevworks/spectre-ui-astro/commit/55d8dbf
-[ebbb853]: https://github.com/phcdevworks/spectre-ui-astro/commit/ebbb853
-[30e1dc5]: https://github.com/phcdevworks/spectre-ui-astro/commit/30e1dc5
-[cff87dc]: https://github.com/phcdevworks/spectre-ui-astro/commit/cff87dc
-[5718612]: https://github.com/phcdevworks/spectre-ui-astro/commit/5718612
-[3ab05bf]: https://github.com/phcdevworks/spectre-ui-astro/commit/3ab05bf
-[a7fe2d6]: https://github.com/phcdevworks/spectre-ui-astro/commit/a7fe2d6
-[8a61ab3]: https://github.com/phcdevworks/spectre-ui-astro/commit/8a61ab3
-[8afff37]: https://github.com/phcdevworks/spectre-ui-astro/commit/8afff37
-[1445f26]: https://github.com/phcdevworks/spectre-ui-astro/commit/1445f26
-[7a8cc2d]: https://github.com/phcdevworks/spectre-ui-astro/commit/7a8cc2d
-[2bcdad4]: https://github.com/phcdevworks/spectre-ui-astro/commit/2bcdad4
-[f4385fa]: https://github.com/phcdevworks/spectre-ui-astro/commit/f4385fa
-[6ff4b80]: https://github.com/phcdevworks/spectre-ui-astro/commit/6ff4b80
-[b3801e7]: https://github.com/phcdevworks/spectre-ui-astro/commit/b3801e7
-[bd5a03b]: https://github.com/phcdevworks/spectre-ui-astro/commit/bd5a03b
-[8deed6a]: https://github.com/phcdevworks/spectre-ui-astro/commit/8deed6a
-[fb0b94c]: https://github.com/phcdevworks/spectre-ui-astro/commit/fb0b94c
-[ff03805]: https://github.com/phcdevworks/spectre-ui-astro/commit/ff03805
-[de09085]: https://github.com/phcdevworks/spectre-ui-astro/commit/de09085
-[fdd8c9c]: https://github.com/phcdevworks/spectre-ui-astro/commit/fdd8c9c
-[9f906b3]: https://github.com/phcdevworks/spectre-ui-astro/commit/9f906b3
-[5831b52]: https://github.com/phcdevworks/spectre-ui-astro/commit/5831b52
-[47a3cd3]: https://github.com/phcdevworks/spectre-ui-astro/commit/47a3cd3
-[7c0bb22]: https://github.com/phcdevworks/spectre-ui-astro/commit/7c0bb22
-[3c0a1f2]: https://github.com/phcdevworks/spectre-ui-astro/commit/3c0a1f2
-[30243fb]: https://github.com/phcdevworks/spectre-ui-astro/commit/30243fb
-[08c6454]: https://github.com/phcdevworks/spectre-ui-astro/commit/08c6454
-[637e481]: https://github.com/phcdevworks/spectre-ui-astro/commit/637e481
-[861eaef]: https://github.com/phcdevworks/spectre-ui-astro/commit/861eaef
-[1aa5bd6]: https://github.com/phcdevworks/spectre-ui-astro/commit/1aa5bd6
-[35d3d11]: https://github.com/phcdevworks/spectre-ui-astro/commit/35d3d11
-[fa030ae]: https://github.com/phcdevworks/spectre-ui-astro/commit/fa030ae
-[9b1b994]: https://github.com/phcdevworks/spectre-ui-astro/commit/9b1b994
-[87327b9]: https://github.com/phcdevworks/spectre-ui-astro/commit/87327b9
-[44587d7]: https://github.com/phcdevworks/spectre-ui-astro/commit/44587d7
-[508309e]: https://github.com/phcdevworks/spectre-ui-astro/commit/508309e
-[6c8507a]: https://github.com/phcdevworks/spectre-ui-astro/commit/6c8507a
-[57d3ed1]: https://github.com/phcdevworks/spectre-ui-astro/commit/57d3ed1
-[f391981]: https://github.com/phcdevworks/spectre-ui-astro/commit/f391981
-[f78693a]: https://github.com/phcdevworks/spectre-ui-astro/commit/f78693a
-[a503f46]: https://github.com/phcdevworks/spectre-ui-astro/commit/a503f46
-[82248b0]: https://github.com/phcdevworks/spectre-ui-astro/commit/82248b0
-[da6212f]: https://github.com/phcdevworks/spectre-ui-astro/commit/da6212f
-[7add65d]: https://github.com/phcdevworks/spectre-ui-astro/commit/7add65d

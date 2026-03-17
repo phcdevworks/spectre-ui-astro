@@ -4,32 +4,15 @@ import {
   SpButton,
   SpCard,
   SpIconBox,
-  getButtonClasses,
+  SpTestimonial,
+  SpPricingCard,
+  SpRating,
 } from "@phcdevworks/spectre-ui-astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/buttons", label: "Buttons" },
-  { href: "/forms", label: "Forms" },
-  { href: "/marketing", label: "Marketing" },
-  { href: "/primitives", label: "Primitives" },
-];
-
-const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
 ---
 
 <BaseLayout title="Marketing — Spectre UI Astro">
   <div class="sp-stack page">
-    <nav class="sp-hstack nav">
-      {
-        navLinks.map((link) => (
-          <a class={navLinkClasses} href={link.href}>
-            {link.label}
-          </a>
-        ))
-      }
-    </nav>
 
     <header class="sp-stack header">
       <div class="sp-stack">
@@ -121,6 +104,47 @@ const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
         </div>
       </SpCard>
     </section>
+
+    <section class="sp-stack" style="margin-top: var(--sp-layout-section-gap-md)">
+      <h2 style="margin-bottom: var(--sp-layout-stack-gap-sm)">Pricing & Testimonials</h2>
+      <div class="grid three">
+        <SpPricingCard featured={false}>
+          <h3 slot="header" style="margin:0;">Starter</h3>
+          <span slot="badge">Basic</span>
+          <span slot="price">$9 / mo</span>
+          <span slot="description">Perfect for simple projects.</span>
+          <ul class="sp-stack" style="padding-left:1.5rem; margin:1rem 0; gap:0.5rem">
+            <li>1 Project</li>
+            <li>Basic Analytics</li>
+          </ul>
+          <SpButton slot="footer" variant="secondary" style="width:100%">Choose Starter</SpButton>
+        </SpPricingCard>
+
+        <SpPricingCard featured={true}>
+          <h3 slot="header" style="margin:0;">Pro</h3>
+          <span slot="badge">Popular</span>
+          <span slot="price">$29 / mo</span>
+          <span slot="description">For growing teams and businesses.</span>
+          <ul class="sp-stack" style="padding-left:1.5rem; margin:1rem 0; gap:0.5rem">
+            <li>Unlimited Projects</li>
+            <li>Advanced Analytics</li>
+            <li>Priority Support</li>
+          </ul>
+          <SpButton slot="footer" variant="primary" style="width:100%">Get Pro</SpButton>
+        </SpPricingCard>
+
+        <div class="sp-stack" style="gap: var(--sp-layout-stack-gap-md);">
+          <SpCard variant="elevated">
+            <SpTestimonial>
+              <p slot="quote" style="margin:0;">"Spectre UI has fundamentally changed how quickly we can prototype and ship our Astro projects. It's an absolute game-changer."</p>
+              <div slot="author-name">Jane Doe</div>
+              <div slot="author-title">Frontend Lead at Acme Corp</div>
+            </SpTestimonial>
+            <SpRating value={5} max={5} style="margin-top:1rem" />
+          </SpCard>
+        </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
@@ -128,12 +152,6 @@ const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
   .page {
     gap: var(--sp-layout-section-gap-lg);
     width: min(1150px, 100%);
-  }
-
-  .nav {
-    display: flex;
-    gap: var(--sp-layout-stack-gap-sm);
-    flex-wrap: wrap;
   }
 
   .header {

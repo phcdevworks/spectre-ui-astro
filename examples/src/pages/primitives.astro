@@ -7,28 +7,10 @@ import {
 } from "@phcdevworks/spectre-ui-astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/buttons", label: "Buttons" },
-  { href: "/forms", label: "Forms" },
-  { href: "/marketing", label: "Marketing" },
-  { href: "/primitives", label: "Primitives" },
-];
-
-const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
 ---
 
 <BaseLayout title="Primitives — Spectre UI Astro">
   <div class="sp-stack page">
-    <nav class="sp-hstack nav">
-      {
-        navLinks.map((link) => (
-          <a class={navLinkClasses} href={link.href}>
-            {link.label}
-          </a>
-        ))
-      }
-    </nav>
 
     <header class="sp-stack header">
       <div class="sp-stack">
@@ -121,12 +103,6 @@ const navLinkClasses = getButtonClasses({ variant: "secondary", size: "sm" });
   .page {
     gap: var(--sp-layout-section-gap-lg);
     width: min(960px, 100%);
-  }
-
-  .nav {
-    display: flex;
-    gap: var(--sp-layout-stack-gap-sm);
-    flex-wrap: wrap;
   }
 
   .header {

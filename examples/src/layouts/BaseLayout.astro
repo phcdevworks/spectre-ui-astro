@@ -1,11 +1,22 @@
 ---
 import "@phcdevworks/spectre-ui/index.css";
+import { getButtonClasses } from "@phcdevworks/spectre-ui-astro";
 
 interface Props {
   title?: string;
 }
 
 const { title = "Spectre UI Astro Example" } = Astro.props as Props;
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/buttons", label: "Buttons" },
+  { href: "/forms", label: "Forms" },
+  { href: "/marketing", label: "Marketing" },
+  { href: "/primitives", label: "Primitives" },
+];
+
+const navLinkClasses = getButtonClasses({ variant: "ghost", size: "sm" });
 ---
 
 <html lang="en">
@@ -13,10 +24,27 @@ const { title = "Spectre UI Astro Example" } = Astro.props as Props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <style>
+      .nav-container {
+        padding-bottom: var(--sp-layout-section-gap-sm);
+        display: flex;
+        gap: var(--sp-layout-stack-gap-sm);
+        flex-wrap: wrap;
+      }
+    </style>
   </head>
 
   <body>
     <main class="sp-container sp-section">
+      <nav class="sp-hstack nav-container">
+        {
+          navLinks.map((link) => (
+            <a class={navLinkClasses} href={link.href}>
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
       <slot />
     </main>
   </body>
