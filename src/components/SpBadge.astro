@@ -36,15 +36,10 @@ const classes = getBadgeClasses({
   interactive,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const type = Tag === "button" ? (rest.type ?? "button") : undefined;
 ---
 
-<Tag
-  class={finalClass}
-  href={Tag === "a" ? href : undefined}
-  target={Tag === "a" ? target : undefined}
-  rel={Tag === "a" ? rel : undefined}
-  type={Tag === "button" ? (type ?? "button") : undefined}
-  {...rest}
->
+<Tag class={finalClass} type={type} {...rest}>
   <slot />
 </Tag>
