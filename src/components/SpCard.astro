@@ -39,12 +39,10 @@ const {
 
 const classes = getCardClasses({ variant, interactive, padded, fullHeight });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const type = Tag === "button" ? (rest.type ?? "button") : undefined;
 ---
 
-<Tag
-  class={finalClass}
-  type={Tag === "button" ? (rest.type ?? "button") : undefined}
-  {...rest}
->
+<Tag class={finalClass} type={type} {...rest}>
   <slot />
 </Tag>

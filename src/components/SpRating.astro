@@ -5,7 +5,7 @@ import {
   getRatingStarClasses,
   getRatingTextClasses,
   type RatingRecipeOptions,
-} from "../recipes/rating";
+} from "@phcdevworks/spectre-ui";
 
 interface SpRatingProps extends RatingRecipeOptions {
   value?: number;
@@ -23,7 +23,8 @@ const {
   ...rest
 } = Astro.props as SpRatingProps;
 
-const classes = getRatingClasses(rest);
+// Pass an empty options object to ensure future-proofing if RatingRecipeOptions gains properties
+const classes = getRatingClasses({});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const starsClasses = getRatingStarsClasses();
