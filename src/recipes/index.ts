@@ -1,28 +1,36 @@
 export {
   getBadgeClasses,
-  type BadgeRecipeOptions, type BadgeSize, type BadgeVariant
-} from "./badge";
+  type BadgeRecipeOptions,
+  type BadgeSize,
+  type BadgeVariant,
+} from "@phcdevworks/spectre-ui";
 
 export {
   getButtonClasses,
-  type ButtonRecipeOptions, type ButtonSize, type ButtonVariant
-} from "./button";
+  type ButtonRecipeOptions,
+  type ButtonSize,
+  type ButtonVariant,
+} from "@phcdevworks/spectre-ui";
 
 export {
   getCardClasses,
   type CardRecipeOptions,
-  type CardVariant
-} from "./card";
+  type CardVariant,
+} from "@phcdevworks/spectre-ui";
 
 export {
   getIconBoxClasses,
-  type IconBoxRecipeOptions, type IconBoxSize, type IconBoxVariant
-} from "./iconbox";
+  type IconBoxRecipeOptions,
+  type IconBoxSize,
+  type IconBoxVariant,
+} from "@phcdevworks/spectre-ui";
 
 export {
   getInputClasses,
-  type InputRecipeOptions, type InputSize, type InputState
-} from "./input";
+  type InputRecipeOptions,
+  type InputSize,
+  type InputState,
+} from "@phcdevworks/spectre-ui";
 
 export {
   getTestimonialClasses,
@@ -32,7 +40,7 @@ export {
   getTestimonialAuthorNameClasses,
   getTestimonialAuthorTitleClasses,
   type TestimonialRecipeOptions,
-} from "./testimonial";
+} from "@phcdevworks/spectre-ui";
 
 export {
   getPricingCardClasses,
@@ -41,7 +49,7 @@ export {
   getPricingCardPriceClasses,
   getPricingCardDescriptionClasses,
   type PricingCardRecipeOptions,
-} from "./pricingcard";
+} from "@phcdevworks/spectre-ui";
 
 export {
   getRatingClasses,
@@ -49,4 +57,4 @@ export {
   getRatingStarClasses,
   getRatingTextClasses,
   type RatingRecipeOptions,
-} from "./rating";
+} from "@phcdevworks/spectre-ui";
