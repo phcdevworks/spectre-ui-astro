@@ -17,7 +17,6 @@ interface SpButtonProps extends ButtonRecipeOptions {
 }
 
 const {
-  as: Tag = "button",
   variant,
   size,
   fullWidth,
@@ -25,6 +24,7 @@ const {
   disabled,
   iconOnly,
   pill,
+  as: Tag = "button",
   class: className,
   ...rest
 } = Astro.props as SpButtonProps;
@@ -48,33 +48,16 @@ if (Tag === "a" && isDisabled) {
   delete (rest as any).href;
   (rest as any).tabindex = -1;
 }
+
+const type = Tag === "button" ? (rest.type ?? "button") : undefined;
 ---
 
-{
-  Tag === "a" ? (
-    <a
-      class={finalClass}
-      aria-disabled={isDisabled ? "true" : undefined}
-      {...rest}
-    >
-      <slot />
-    </a>
-  ) : Tag === "span" ? (
-    <span
-      class={finalClass}
-      aria-disabled={isDisabled ? "true" : undefined}
-      {...rest}
-    >
-      <slot />
-    </span>
-  ) : (
-    <button
-      class={finalClass}
-      disabled={isDisabled}
-      type={(rest as any).type ?? "button"}
-      {...rest}
-    >
-      <slot />
-    </button>
-  )
-}
+<Tag
+  class={finalClass}
+  disabled={Tag === "button" ? isDisabled : undefined}
+  aria-disabled={isDisabled ? "true" : undefined}
+  type={type}
+  {...rest}
+>
+  <slot />
+</Tag>
