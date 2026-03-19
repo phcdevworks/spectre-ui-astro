@@ -2,7 +2,7 @@
 import type { BadgeRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 
-type SpBadgeElement = "span" | "div" | "a" | "button";
+type SpBadgeElement = "span" | "div" | "a" | "button" | "li";
 
 interface SpBadgeProps extends BadgeRecipeOptions {
   as?: SpBadgeElement;
@@ -23,6 +23,10 @@ const {
   interactive,
   as: Tag = "span",
   class: className,
+  href,
+  target,
+  rel,
+  type,
   ...rest
 } = Astro.props as SpBadgeProps;
 
