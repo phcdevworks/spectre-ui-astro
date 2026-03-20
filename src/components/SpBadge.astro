@@ -37,9 +37,16 @@ const classes = getBadgeClasses({
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const type = Tag === "button" ? (rest.type ?? "button") : undefined;
+const finalType = Tag === "button" ? (type ?? "button") : undefined;
 ---
 
-<Tag class={finalClass} type={type} {...rest}>
+<Tag
+  class={finalClass}
+  href={Tag === "a" ? href : undefined}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  {...rest}
+>
   <slot />
 </Tag>
