@@ -10,6 +10,7 @@ type SpCardElement =
   | "footer"
   | "main"
   | "nav"
+  | "form"
   | "a"
   | "button"
   | "li";
@@ -34,15 +35,26 @@ const {
   fullHeight,
   as: Tag = "div",
   class: className,
+  href,
+  target,
+  rel,
+  type,
   ...rest
 } = Astro.props as SpCardProps;
 
 const classes = getCardClasses({ variant, interactive, padded, fullHeight });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const type = Tag === "button" ? (rest.type ?? "button") : undefined;
+const finalType = Tag === "button" ? (type ?? "button") : undefined;
 ---
 
-<Tag class={finalClass} type={type} {...rest}>
+<Tag
+  class={finalClass}
+  href={Tag === "a" ? href : undefined}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  {...rest}
+>
   <slot />
 </Tag>
