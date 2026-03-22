@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Astro integration layer for the Spectre design system.",
   "keywords": [
     "phcdevworks",
@@ -71,6 +71,8 @@
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build"
@@ -86,11 +88,19 @@
   },
   "devDependencies": {
     "@types/chroma-js": "^3.1.2",
-    "@types/node": "^20.10.0",
-    "astro": "^5.16.4",
+    "@types/node": "^25.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
+    "@typescript-eslint/parser": "^8.57.1",
     "chroma-js": "^3.2.0",
+    "colord": "^2.9.3",
+    "eslint": "^10.1.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.1",
+    "astro": "^5.16.4"
   }
 }

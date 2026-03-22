@@ -1,33 +1,32 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
     "module": "esnext",
-    "moduleResolution": "bundler",
     "target": "es2020",
-    "jsx": "preserve",
-    "strict": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "lib": [
-      "ES2022"
-    ],
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": false,
+    "moduleResolution": "bundler",
+    "types": [],
+    "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "types": [
-      "astro/client"
-    ]
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": [
     "src",
-    "env.d.ts"
+    "tokens",
+    "scripts",
+    "eslint.config.ts",
+    "tsup.config.ts"
   ],
   "exclude": [
     "dist",
