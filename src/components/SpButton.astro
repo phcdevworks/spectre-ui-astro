@@ -2,7 +2,7 @@
 import type { ButtonRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
 
-type SpButtonElement = "button" | "a" | "span";
+type SpButtonElement = "button" | "a" | "span" | "div" | "li";
 
 interface SpButtonProps extends ButtonRecipeOptions {
   as?: SpButtonElement;
@@ -13,6 +13,7 @@ interface SpButtonProps extends ButtonRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  tabindex?: number;
   [key: string]: any;
 }
 
@@ -26,6 +27,11 @@ const {
   pill,
   as: Tag = "button",
   class: className,
+  href,
+  target,
+  rel,
+  type,
+  tabindex,
   ...rest
 } = Astro.props as SpButtonProps;
 
@@ -43,20 +49,20 @@ const classes = getButtonClasses({
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-// if link is disabled/loading, prevent navigation + focus
-if (Tag === "a" && isDisabled) {
-  delete (rest as any).href;
-  (rest as any).tabindex = -1;
-}
-
-const type = Tag === "button" ? (rest.type ?? "button") : undefined;
+const finalType = Tag === "button" ? (type ?? "button") : undefined;
+const finalHref = Tag === "a" && !isDisabled ? href : undefined;
+const finalTabIndex = Tag === "a" && isDisabled ? -1 : tabindex;
 ---
 
 <Tag
   class={finalClass}
+  href={finalHref}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
   disabled={Tag === "button" ? isDisabled : undefined}
   aria-disabled={isDisabled ? "true" : undefined}
-  type={type}
+  tabindex={finalTabIndex}
   {...rest}
 >
   <slot />
