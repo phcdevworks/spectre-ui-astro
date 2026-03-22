@@ -1,97 +1,43 @@
-# Spectre UI Astro Examples
+# Astro Starter Kit: Minimal
 
-A complete Astro application demonstrating `@phcdevworks/spectre-ui-astro` components in action.
-
-## Running the Example
-
-```bash
-cd examples
-npm install
-npm run dev
+```sh
+npm create astro@latest -- --template minimal
 ```
 
-Open http://localhost:4321 to see the example app showcasing all available Spectre UI Astro components.
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-## What's Included
+## 🚀 Project Structure
 
-This example demonstrates:
+Inside of your Astro project, you'll see the following folders and files:
 
-- **Component usage**: `SpButton`, `SpCard`, `SpInput`, `SpBadge`, `SpIconBox` with various props and states
-- **CSS integration**: Single `index.css` import from Spectre UI
-- **Real layouts**: Hero section, component showcase grid, and contact form
-- **Best practices**: Proper semantic HTML, accessibility attributes, and responsive design
-- **Variant examples**: All component variants (primary, secondary, ghost, success, danger, etc.)
-- **State examples**: Input validation states (default, error, success, disabled)
-
-## Project Structure
-
-```
-examples/
+```text
+/
+├── public/
 ├── src/
-│   ├── pages/
-│   │   ├── index.astro        # Homepage with component demos
-│   │   ├── buttons.astro      # Button variants showcase
-│   │   ├── forms.astro        # Form components and validation
-│   │   ├── marketing.astro    # Marketing layout examples
-│   │   └── primitives.astro   # Primitive components (Badge, IconBox)
-│   └── layouts/
-│       └── BaseLayout.astro   # Base layout with CSS imports
-├── astro.config.mjs           # Astro configuration
-└── package.json               # Dependencies (links to parent package)
+│   └── pages/
+│       └── index.astro
+└── package.json
 ```
 
-## Available Pages
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-After running the dev server, explore these pages:
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-1. **Home** (`/`) - Overview and hero section with mixed component demos
-2. **Buttons** (`/buttons`) - All button variants, sizes, and states
-3. **Forms** (`/forms`) - Input components with validation states
-4. **Marketing** (`/marketing`) - Real-world marketing page layouts
-5. **Primitives** (`/primitives`) - Badge and IconBox components
+Any static assets, like images, can be placed in the `public/` directory.
 
-## Quick Start
+## 🧞 Commands
 
-Edit files in `src/pages/` to experiment with different component props and variants. All components are fully typed, so you'll get IntelliSense and type checking in your editor.
+All commands are run from the root of the project, from a terminal:
 
-### Example: Adding a New Button
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-```astro
----
-import { SpButton } from "@phcdevworks/spectre-ui-astro";
----
+## 👀 Want to learn more?
 
-<SpButton variant="primary" size="lg" fullWidth>
-  Click Me!
-</SpButton>
-```
-
-### Example: Creating a Card Layout
-
-```astro
----
-import { SpCard, SpBadge, SpIconBox } from "@phcdevworks/spectre-ui-astro";
----
-
-<SpCard variant="elevated">
-  <div style="display: flex; align-items: center; gap: 1rem;">
-    <SpIconBox variant="success" size="md">
-      <svg><!-- Your icon --></svg>
-    </SpIconBox>
-    <div>
-      <h3>Feature Title <SpBadge variant="success">New</SpBadge></h3>
-      <p>Feature description goes here.</p>
-    </div>
-  </div>
-</SpCard>
-```
-
-## Design System Resources
-
-- [Spectre UI Astro Documentation](../README.md)
-- [Spectre UI Core](https://github.com/phcdevworks/spectre-ui)
-- [Spectre Tokens](https://github.com/phcdevworks/spectre-tokens)
-
-## Contributing
-
-Found an issue with the examples or want to add more demos? Please open an issue or pull request in the main repository.
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

@@ -1,15 +1,18 @@
 {
-  "name": "spectre-ui-astro-example",
-  "version": "0.0.0",
-  "private": true,
+  "name": "",
   "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
     "@phcdevworks/spectre-ui-astro": "file:..",
-    "astro": "^5.0.0"
+    "astro": "^6.0.8"
   }
 }
