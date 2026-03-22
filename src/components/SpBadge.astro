@@ -21,6 +21,7 @@ const {
   variant,
   size,
   interactive,
+  disabled,
   as: Tag = "span",
   class: className,
   href,
@@ -34,6 +35,7 @@ const classes = getBadgeClasses({
   variant,
   size,
   interactive,
+  disabled,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
@@ -46,6 +48,8 @@ const finalType = Tag === "button" ? (type ?? "button") : undefined;
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-disabled={disabled ? "true" : undefined}
   {...rest}
 >
   <slot />

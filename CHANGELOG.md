@@ -4,6 +4,17 @@ All notable changes to this project will be documented here. The format follows 
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-03-22
+
+### Added
+- **Component States**: Implemented `disabled` props across `SpCard`, `SpBadge`, `SpIconBox`, and `SpPricingCard` components, syncing with Spectre UI v1.1.0 logic.
+- **Pill Variant**: Added `pill` prop support for `SpInput` component.
+- **Polymorphic Refinement**: Improved `disabled` and `aria-disabled` attribute handling for polymorphic components.
+
+### Changed
+- **Dependencies**: Updated `@phcdevworks/spectre-ui` to `^1.1.0`.
+- **Maintenance**: Synchronized project configurations and linting rules with the Spectre suite.
+
 ## [1.0.0] - 2026-03-17
 
 ### Added

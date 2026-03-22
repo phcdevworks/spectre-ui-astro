@@ -33,6 +33,7 @@ const {
   interactive,
   padded,
   fullHeight,
+  disabled,
   as: Tag = "div",
   class: className,
   href,
@@ -42,7 +43,7 @@ const {
   ...rest
 } = Astro.props as SpCardProps;
 
-const classes = getCardClasses({ variant, interactive, padded, fullHeight });
+const classes = getCardClasses({ variant, interactive, padded, fullHeight, disabled });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
@@ -54,6 +55,8 @@ const finalType = Tag === "button" ? (type ?? "button") : undefined;
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-disabled={disabled ? "true" : undefined}
   {...rest}
 >
   <slot />
