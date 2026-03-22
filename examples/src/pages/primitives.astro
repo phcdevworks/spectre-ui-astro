@@ -28,6 +28,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <SpBadge variant="success">Success</SpBadge>
           <SpBadge variant="warning">Warning</SpBadge>
           <SpBadge variant="danger">Danger</SpBadge>
+          <SpBadge variant="primary" disabled>Disabled</SpBadge>
         </div>
       </SpCard>
 
@@ -70,6 +71,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <SpIconBox variant="info" size="md" aria-hidden="true">
             <svg class="icon" viewBox="0 0 24 24">
               <path fill="currentColor" d="M11 9h2v10h-2zm0-4h2v2h-2z"></path>
+            </svg>
+          </SpIconBox>
+          <SpIconBox variant="primary" size="md" disabled aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
             </svg>
           </SpIconBox>
         </div>

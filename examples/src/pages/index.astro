@@ -108,6 +108,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             />
           </div>
         </SpCard>
+
+        <SpCard variant="outline" disabled>
+          <div class="sp-hstack card-header">
+            <SpIconBox variant="warning" size="md">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </SpIconBox>
+            <div>
+              <h3>Disabled Cards</h3>
+            </div>
+          </div>
+          <p>Cards can also be disabled to indicate unavailable actions.</p>
+          <div class="sp-hstack demo-row">
+            <SpButton variant="primary" size="sm" disabled>Disabled Action</SpButton>
+          </div>
+        </SpCard>
       </div>
     </section>
 

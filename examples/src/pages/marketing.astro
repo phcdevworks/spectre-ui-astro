@@ -133,6 +133,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <SpButton slot="footer" variant="primary" style="width:100%">Get Pro</SpButton>
         </SpPricingCard>
 
+        <SpPricingCard featured={false} disabled>
+          <h3 slot="header" style="margin:0;">Enterprise</h3>
+          <span slot="badge">Waitlist</span>
+          <span slot="price">Custom</span>
+          <span slot="description">For large scale applications.</span>
+          <ul class="sp-stack" style="padding-left:1.5rem; margin:1rem 0; gap:0.5rem">
+            <li>Custom Solutions</li>
+            <li>24/7 Support</li>
+          </ul>
+          <SpButton slot="footer" variant="secondary" style="width:100%" disabled>Join Waitlist</SpButton>
+        </SpPricingCard>
+
         <div class="sp-stack" style="gap: var(--sp-layout-stack-gap-md);">
           <SpCard variant="elevated">
             <SpTestimonial>
