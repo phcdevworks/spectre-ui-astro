@@ -16,12 +16,13 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
 
 const {
   featured,
+  disabled,
   as: Tag = "div",
   class: className,
   ...rest
 } = Astro.props as SpPricingCardProps;
 
-const classes = getPricingCardClasses({ featured });
+const classes = getPricingCardClasses({ featured, disabled });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const badgeClasses = getPricingCardBadgeClasses();

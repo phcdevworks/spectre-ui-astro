@@ -15,6 +15,7 @@ const {
   state,
   size,
   fullWidth,
+  pill,
   label,
   helperText,
   errorMessage,
@@ -30,7 +31,7 @@ const errorId = `${inputId}-error`;
 
 const describedBy = errorMessage ? errorId : helperText ? helperId : undefined;
 
-const classes = getInputClasses({ state, size, fullWidth });
+const classes = getInputClasses({ state, size, fullWidth, pill });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

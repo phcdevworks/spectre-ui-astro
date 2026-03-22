@@ -20,6 +20,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
 const {
   variant,
   size,
+  disabled,
   as: Tag = "span",
   class: className,
   href,
@@ -29,7 +30,7 @@ const {
   ...attrs
 } = Astro.props as SpIconBoxProps;
 
-const classes = getIconBoxClasses({ variant, size });
+const classes = getIconBoxClasses({ variant, size, disabled });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
@@ -41,6 +42,8 @@ const finalType = Tag === "button" ? (type ?? "button") : undefined;
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-disabled={disabled ? "true" : undefined}
   {...attrs}
 >
   <slot />
