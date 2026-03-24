@@ -1,26 +1,37 @@
 # Contributing to Spectre UI Astro
 
-Thanks for helping improve Spectre UI Astro! This package is an Astro adapter that wraps the Spectre UI design system into ergonomic Astro components. It ensures Astro users can leverage the Spectre Design System without manually managing CSS classes or imports.
+Thanks for helping improve Spectre UI Astro! This package is an Astro adapter
+that wraps the Spectre UI design system into ergonomic Astro components. It
+ensures Astro users can leverage the Spectre Design System without manually
+managing CSS classes or imports.
 
 ## 🏛️ Spectre Design Philosophy
 
 Spectre is a **specification-driven design system** built on a strict hierarchy:
 
 ### 1. @phcdevworks/spectre-tokens (Layer 1 - DNA)
-- **Purpose**: Single source of truth for design values (colors, spacing, typography, semantic roles).
-- **Rules**: Defines semantic meaning, not UI behavior. Designers own JSON; engineers maintain transforms.
+
+- **Purpose**: Single source of truth for design values (colors, spacing,
+  typography, semantic roles).
+- **Rules**: Defines semantic meaning, not UI behavior. Designers own JSON;
+  engineers maintain transforms.
 
 ### 2. @phcdevworks/spectre-ui (Layer 2 - The Blueprint)
+
 - **Purpose**: Converts tokens into real CSS and class recipes.
-- **Rules**: MUST consume tokens, MUST NOT redefine values. Every CSS selector has a matching recipe.
+- **Rules**: MUST consume tokens, MUST NOT redefine values. Every CSS selector
+  has a matching recipe.
 
 ### 3. Framework Adapters (Layer 3 - Delivery)
+
 - **Purpose**: Map Layer 2 to specific frameworks (WordPress, Astro, etc.).
 - **Rules**: Adapters never define styles or duplicate CSS.
 
-> **The Golden Rule**: Tokens define *meaning*. UI defines *structure*. Adapters define *delivery*.
+> **The Golden Rule**: Tokens define _meaning_. UI defines _structure_. Adapters
+> define _delivery_.
 
 ---
+
 ## Development Setup
 
 1. Clone the repository:
@@ -82,19 +93,24 @@ spectre-ui-astro/
 
 **Responsibilities**:
 
-- **Component developers**: Edit `src/components/` to add or update Astro components
-- **Type developers**: Own `src/recipes/` for recipe re-exports and type definitions
+- **Component developers**: Edit `src/components/` to add or update Astro
+  components
+- **Type developers**: Own `src/recipes/` for recipe re-exports and type
+  definitions
 - **Build engineers**: Update `tsup.config.ts` when export patterns change
 
 ## Contribution Guidelines
 
 ### Component Development
 
-1. **Never edit CSS in components** – Always use recipes from `@phcdevworks/spectre-ui`
-2. **Import recipes, not styles** – Use `getButtonClasses()`, `getCardClasses()`, etc.
+1. **Never edit CSS in components** – Always use recipes from
+   `@phcdevworks/spectre-ui`
+2. **Import recipes, not styles** – Use `getButtonClasses()`,
+   `getCardClasses()`, etc.
 3. **Type safety** – All props must be fully typed with discriminated unions
 4. **Accessibility** – Include proper ARIA attributes and semantic HTML
-5. **SSR compatibility** – Ensure components work server-side (no client JavaScript unless specified)
+5. **SSR compatibility** – Ensure components work server-side (no client
+   JavaScript unless specified)
 
 ### Example (Good Pattern)
 
@@ -155,7 +171,8 @@ const classes = getButtonClasses({ variant, size });
 
 ## Questions or Issues?
 
-Please open an issue or discussion on GitHub if you're unsure about the best approach for a change. Coordinating early avoids conflicts with:
+Please open an issue or discussion on GitHub if you're unsure about the best
+approach for a change. Coordinating early avoids conflicts with:
 
 - Spectre UI updates
 - Component API design
@@ -163,8 +180,11 @@ Please open an issue or discussion on GitHub if you're unsure about the best app
 
 ## Code of Conduct
 
-This project adheres to the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to the project maintainers.
+This project adheres to the [Code of Conduct](CODE_OF_CONDUCT.md). By
+participating, you are expected to uphold this code. Please report unacceptable
+behavior to the project maintainers.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By contributing, you agree that your contributions will be licensed under the
+MIT License.
