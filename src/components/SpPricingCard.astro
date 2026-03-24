@@ -8,9 +8,30 @@ import {
   type PricingCardRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 
+type SpPricingCardElement =
+  | "div"
+  | "section"
+  | "article"
+  | "aside"
+  | "header"
+  | "footer"
+  | "main"
+  | "nav"
+  | "form"
+  | "a"
+  | "button"
+  | "li";
+
 interface SpPricingCardProps extends PricingCardRecipeOptions {
-  as?: "div" | "section" | "article";
+  as?: SpPricingCardElement;
   class?: string;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+
+  type?: "button" | "submit" | "reset";
+
   [key: string]: any;
 }
 
@@ -19,11 +40,17 @@ const {
   disabled,
   as: Tag = "div",
   class: className,
+  href,
+  target,
+  rel,
+  type,
   ...rest
 } = Astro.props as SpPricingCardProps;
 
 const classes = getPricingCardClasses({ featured, disabled });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const finalType = Tag === "button" ? (type ?? "button") : undefined;
 
 const badgeClasses = getPricingCardBadgeClasses();
 const priceContainerClasses = getPricingCardPriceContainerClasses();
@@ -31,7 +58,16 @@ const priceClasses = getPricingCardPriceClasses();
 const descriptionClasses = getPricingCardDescriptionClasses();
 ---
 
-<Tag class={finalClass} {...rest}>
+<Tag
+  class={finalClass}
+  href={Tag === "a" ? href : undefined}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
   <slot name="header" />
 
   <div class={badgeClasses}>
