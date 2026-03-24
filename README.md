@@ -1,14 +1,17 @@
 # @phcdevworks/spectre-ui-astro
 
-### **The Adapter (Layer 3 of the Spectre 8-Layer Arsenal)**
+[![GitHub issues](https://img.shields.io/github/issues/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/issues) [![GitHub pulls](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls) [![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
-`@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre design system. It provides high-performance Astro component wrappers for the logic and styles defined in `@phcdevworks/spectre-ui`.
+The official Astro adapter for the Spectre design system. It provides high-performance Astro component wrappers for the logic and styles defined in `@phcdevworks/spectre-ui`.
 
-> 📋 **[View Roadmap](https://github.com/phcdevworks/spectre-ui-astro/blob/main/ROADMAP.md)** | 🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)** | 🏛️ **[Spectre Arsenal](https://github.com/phcdevworks)**
 
----
 
-## 🏗️ Core Architecture
+🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)** | 🛡️ **[Security Policy](SECURITY.md)**
+
+## Overview
+
+`@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre design system. It providing high-performance Astro component wrappers for the logic and styles defined in `@phcdevworks/spectre-ui`.
+
 
 This package operates as a pure **Adapter Layer**. It is strictly forbidden from defining CSS or design tokens. It maps Astro component props to the TypeScript recipes and CSS classes provided by Layer 2.
 
