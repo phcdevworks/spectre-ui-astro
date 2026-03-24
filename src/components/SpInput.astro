@@ -8,6 +8,7 @@ interface SpInputProps extends InputRecipeOptions {
   errorMessage?: string;
   id?: string;
   class?: string;
+  disabled?: boolean;
   [key: string]: any;
 }
 
@@ -21,8 +22,11 @@ const {
   errorMessage,
   id,
   class: className,
+  disabled,
   ...rest
 } = Astro.props as SpInputProps;
+
+const isInputDisabled = disabled || state === "disabled";
 
 const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2)}`;
 
@@ -31,7 +35,12 @@ const errorId = `${inputId}-error`;
 
 const describedBy = errorMessage ? errorId : helperText ? helperId : undefined;
 
-const classes = getInputClasses({ state, size, fullWidth, pill });
+const classes = getInputClasses({
+  state: isInputDisabled ? "disabled" : state,
+  size,
+  fullWidth,
+  pill,
+});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
@@ -49,6 +58,8 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
     class={finalClass}
     aria-invalid={state === "error" ? "true" : undefined}
     aria-describedby={describedBy}
+    disabled={isInputDisabled}
+    aria-disabled={isInputDisabled ? "true" : undefined}
     {...rest}
   />
 
