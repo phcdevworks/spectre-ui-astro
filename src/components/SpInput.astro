@@ -2,7 +2,19 @@
 import type { InputRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getInputClasses } from "@phcdevworks/spectre-ui";
 
+type SpInputElement =
+  | "div"
+  | "section"
+  | "article"
+  | "aside"
+  | "header"
+  | "footer"
+  | "main"
+  | "form"
+  | "fieldset";
+
 interface SpInputProps extends InputRecipeOptions {
+  as?: SpInputElement;
   label?: string;
   helperText?: string;
   errorMessage?: string;
@@ -17,6 +29,7 @@ const {
   size,
   fullWidth,
   pill,
+  as: Tag = "div",
   label,
   helperText,
   errorMessage,
@@ -44,7 +57,7 @@ const classes = getInputClasses({
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
-<div class="sp-input-wrapper">
+<Tag class="sp-input-wrapper">
   {
     label && (
       <label class="sp-label" for={inputId}>
@@ -78,4 +91,4 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
       </p>
     )
   }
-</div>
+</Tag>
