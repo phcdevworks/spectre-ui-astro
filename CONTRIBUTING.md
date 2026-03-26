@@ -1,188 +1,84 @@
-# Contributing to Spectre UI Astro
+# Contributing to @phcdevworks/spectre-ui-astro
 
-Thanks for helping improve Spectre UI Astro! This package is an Astro adapter
-that wraps the Spectre UI design system into ergonomic Astro components. It
-ensures Astro users can leverage the Spectre Design System without manually
-managing CSS classes or imports.
+Thanks for helping improve Spectre. This package is maintained by PHCDevworks
+as Layer 3 of the Spectre suite. It exposes Spectre UI through Astro-native
+components without duplicating design tokens or CSS logic.
 
-## 🏛️ Spectre Design Philosophy
+## Spectre Suite Model
 
-Spectre is a **specification-driven design system** built on a strict hierarchy:
+Spectre is organized as a strict layered system:
 
-### 1. @phcdevworks/spectre-tokens (Layer 1 - DNA)
+### Layer 1: `@phcdevworks/spectre-tokens`
 
-- **Purpose**: Single source of truth for design values (colors, spacing,
-  typography, semantic roles).
-- **Rules**: Defines semantic meaning, not UI behavior. Designers own JSON;
-  engineers maintain transforms.
+- Purpose: define semantic design values and token contracts
 
-### 2. @phcdevworks/spectre-ui (Layer 2 - The Blueprint)
+### Layer 2: `@phcdevworks/spectre-ui`
 
-- **Purpose**: Converts tokens into real CSS and class recipes.
-- **Rules**: MUST consume tokens, MUST NOT redefine values. Every CSS selector
-  has a matching recipe.
+- Purpose: translate tokens into reusable CSS, utilities, and recipes
 
-### 3. Framework Adapters (Layer 3 - Delivery)
+### Layer 3: `@phcdevworks/spectre-ui-astro`
 
-- **Purpose**: Map Layer 2 to specific frameworks (WordPress, Astro, etc.).
-- **Rules**: Adapters never define styles or duplicate CSS.
+- Purpose: adapt Spectre UI for Astro
+- Scope: Astro components, type-safe props, framework integration patterns
 
-> **The Golden Rule**: Tokens define _meaning_. UI defines _structure_. Adapters
-> define _delivery_.
-
----
+The rule across the suite is simple: tokens define meaning, UI defines
+structure, adapters define delivery.
 
 ## Development Setup
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/phcdevworks/spectre-ui-astro.git
-cd spectre-ui-astro
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Build the package:
-
-```bash
-npm run build
-```
-
-4. Run type checking:
-
-```bash
-npm run typecheck
-```
-
-5. Test in the examples project:
-
-```bash
-cd examples
-npm install
-npm run dev
-```
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Run `npm run build`.
+4. Run `npm run typecheck`.
+5. If needed, validate behavior in the `examples/` app.
 
 ## Project Structure
 
-```
-spectre-ui-astro/
-├── src/
-│   ├── components/        # Astro component implementations
-│   │   ├── SpBadge.astro
-│   │   ├── SpButton.astro
-│   │   ├── SpCard.astro
-│   │   ├── SpIconBox.astro
-│   │   └── SpInput.astro
-│   ├── recipes/          # TypeScript recipe re-exports
-│   │   ├── badge.ts
-│   │   ├── button.ts
-│   │   ├── card.ts
-│   │   ├── iconbox.ts
-│   │   ├── input.ts
-│   │   └── index.ts
-│   └── index.ts          # Main entry point with exports
-├── examples/             # Example Astro application
-├── dist/                 # Built output (generated)
-└── package.json
-```
-
-**Responsibilities**:
-
-- **Component developers**: Edit `src/components/` to add or update Astro
-  components
-- **Type developers**: Own `src/recipes/` for recipe re-exports and type
-  definitions
-- **Build engineers**: Update `tsup.config.ts` when export patterns change
+- `src/components/`: Astro components
+- `src/recipes/`: recipe and type re-exports
+- `examples/`: Astro example app for manual verification
+- `dist/`: generated package output
 
 ## Contribution Guidelines
 
-### Component Development
+### Adapter responsibilities
 
-1. **Never edit CSS in components** – Always use recipes from
-   `@phcdevworks/spectre-ui`
-2. **Import recipes, not styles** – Use `getButtonClasses()`,
-   `getCardClasses()`, etc.
-3. **Type safety** – All props must be fully typed with discriminated unions
-4. **Accessibility** – Include proper ARIA attributes and semantic HTML
-5. **SSR compatibility** – Ensure components work server-side (no client
-   JavaScript unless specified)
+1. Keep components thin and recipe-driven.
+2. Do not introduce token definitions or new CSS in this package.
+3. Prefer deriving prop types from `@phcdevworks/spectre-ui`.
+4. Preserve SSR safety and semantic HTML.
+5. Keep adapter behavior aligned with upstream Spectre UI contracts.
 
-### Example (Good Pattern)
+### Code and tooling
 
-```astro
----
-import { getButtonClasses } from "@phcdevworks/spectre-ui";
-import type { ButtonVariant, ButtonSize } from "@phcdevworks/spectre-ui";
-
-interface Props {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  class?: string;
-}
-
-const { variant = "primary", size = "md", class: className, ...rest } = Astro.props;
-const classes = getButtonClasses({ variant, size });
----
-
-<button class:list={[classes, className]} {...rest}>
-  <slot />
-</button>
-```
-
-### Code Quality
-
-- Follow TypeScript best practices
-- Follow Astro component conventions
-- Add JSDoc comments for public APIs
-- Write clear commit messages
-- Test changes in the examples project
+- Follow Astro and TypeScript best practices.
+- Run `npm run build` for distributable output.
+- Run `npm run typecheck` before opening a pull request.
+- Use the example app when you need to verify rendering behavior manually.
 
 ### Documentation
 
-- Update component props documentation in README.md when adding features
-- Include inline code comments for complex logic
-- Update this CONTRIBUTING.md if development workflows change
+- Update [README.md](README.md) when component APIs or usage guidance change.
+- Keep wording aligned with the rest of the Spectre suite and PHCDevworks
+  ownership.
 
-## Pull Request Process
+## Pull Request Checklist
 
-1. **Branch from `main`**
-2. **Make your changes** and test in the examples project
-3. **Run `npm run build`** to compile components and types
-4. **Run `npm run typecheck`** to verify types
-5. **Commit generated artifacts** in `dist/` when necessary
-6. **Update documentation** or code comments to reflect behavior changes
-7. **Open a PR** describing:
-   - The motivation for the change
-   - What was changed
-   - Astro-specific testing notes (SSR behavior, component props, etc.)
-8. **Respond to feedback** and make requested changes
+1. Keep the change focused.
+2. Run `npm run build`.
+3. Run `npm run typecheck`.
+4. Verify the example app if the change affects rendering or component props.
+5. Update docs if public behavior or guidance changed.
 
-## Known Gaps (Not Done Yet)
+## Questions
 
-- Additional component variants (tabs, modals, dropdowns)
-- Server-side validation helpers
-- Astro integration for automatic CSS imports
-- Additional accessibility features and ARIA patterns
-
-## Questions or Issues?
-
-Please open an issue or discussion on GitHub if you're unsure about the best
-approach for a change. Coordinating early avoids conflicts with:
-
-- Spectre UI updates
-- Component API design
-- Diverging patterns across the Spectre Suite
+Open an issue or discussion in this repository if you want feedback before
+making a larger adapter change.
 
 ## Code of Conduct
 
-This project adheres to the [Code of Conduct](CODE_OF_CONDUCT.md). By
-participating, you are expected to uphold this code. Please report unacceptable
-behavior to the project maintainers.
+By participating in this project, you agree to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
