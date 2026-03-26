@@ -1,7 +1,18 @@
+# Dependencies
 node_modules/
+
+# Build artifacts
 dist/
-.DS_Store
 .astro/
+.output/
+
+# Deployment platforms
 .vercel/
 .netlify/
-.output/
+
+# Logs and caches
+*.log
+.eslintcache
+
+# OS files
+.DS_Store
