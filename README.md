@@ -4,8 +4,8 @@
 [![GitHub pulls](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
 [![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
-The official Astro adapter for the Spectre design system. It provides
-high-performance Astro component wrappers for the logic and styles defined in
+Layer 3 of the Spectre suite, maintained by PHCDevworks. This package provides
+Astro-native components that wrap the logic and styles defined in
 `@phcdevworks/spectre-ui`.
 
 🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)**
@@ -14,12 +14,11 @@ high-performance Astro component wrappers for the logic and styles defined in
 ## Overview
 
 `@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre
-design system. It providing high-performance Astro component wrappers for the
-logic and styles defined in `@phcdevworks/spectre-ui`.
+suite. It provides type-safe, SSR-friendly Astro components that map directly to
+the recipes and CSS classes exported by `@phcdevworks/spectre-ui`.
 
-This package operates as a pure **Adapter Layer**. It is strictly forbidden from
-defining CSS or design tokens. It maps Astro component props to the TypeScript
-recipes and CSS classes provided by Layer 2.
+This package is intentionally thin. It does not define tokens or own styling.
+Its job is to deliver Spectre UI cleanly inside Astro projects.
 
 - 🧩 **Thin Wrapper Strategy**: Components are pass-throughs for Layer 2
   recipes.
@@ -28,6 +27,8 @@ recipes and CSS classes provided by Layer 2.
   client-side overhead.
 - 🛠️ **Type Synchronization**: Derived directly from `@phcdevworks/spectre-ui`
   types.
+
+PHCDevworks maintains this package as the Astro delivery layer for Spectre.
 
 ---
 
