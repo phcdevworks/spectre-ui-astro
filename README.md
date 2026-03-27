@@ -4,8 +4,8 @@
 [![GitHub pulls](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
 [![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
-The official Astro adapter for the Spectre design system. It provides
-high-performance Astro component wrappers for the logic and styles defined in
+Layer 3 of the Spectre suite, maintained by PHCDevworks. This package provides
+Astro-native components that wrap the logic and styles defined in
 `@phcdevworks/spectre-ui`.
 
 🤝 **[Contributing Guide](CONTRIBUTING.md)** | 📝 **[Changelog](CHANGELOG.md)**
@@ -14,12 +14,11 @@ high-performance Astro component wrappers for the logic and styles defined in
 ## Overview
 
 `@phcdevworks/spectre-ui-astro` is the official Astro adapter for the Spectre
-design system. It providing high-performance Astro component wrappers for the
-logic and styles defined in `@phcdevworks/spectre-ui`.
+suite. It provides type-safe, SSR-friendly Astro components that map directly to
+the recipes and CSS classes exported by `@phcdevworks/spectre-ui`.
 
-This package operates as a pure **Adapter Layer**. It is strictly forbidden from
-defining CSS or design tokens. It maps Astro component props to the TypeScript
-recipes and CSS classes provided by Layer 2.
+This package is intentionally thin. It does not define tokens or own styling.
+Its job is to deliver Spectre UI cleanly inside Astro projects.
 
 - 🧩 **Thin Wrapper Strategy**: Components are pass-throughs for Layer 2
   recipes.
@@ -28,6 +27,8 @@ recipes and CSS classes provided by Layer 2.
   client-side overhead.
 - 🛠️ **Type Synchronization**: Derived directly from `@phcdevworks/spectre-ui`
   types.
+
+PHCDevworks maintains this package as the Astro delivery layer for Spectre.
 
 ---
 
@@ -118,6 +119,23 @@ import {
   placeholder="Enter your email"
   required
 />
+
+<SpRating value={4.5} max={5} class="text-indigo-400">
+  4.5/5 Customer Rating
+</SpRating>
+
+<SpTestimonial variant="elevated">
+  <div slot="quote">"The best Astro adapter I have ever used."</div>
+  <div slot="author-name">Alex Smith</div>
+  <div slot="author-title">Senior Developer</div>
+</SpTestimonial>
+
+<SpPricingCard featured>
+  <div slot="header">Pro Plan</div>
+  <div slot="price">$29/mo</div>
+  <div slot="description">Power your growing business.</div>
+  <SpButton variant="primary" fullWidth>Upgrade Now</SpButton>
+</SpPricingCard>
 ```
 
 ## Components
@@ -238,6 +256,55 @@ All variants support full state coverage: `disabled`, `loading`, and sizes
   (default: `"primary"`)
 - `size`: `"sm"` | `"md"` | `"lg"` (default: `"md"`)
 - `as`: `"div"` | `"span"` (default: `"span"`)
+- `class`: string (additional CSS classes)
+
+### Rating
+
+```astro
+<SpRating value={4} max={5} class="text-indigo-400">
+  4 stars
+</SpRating>
+```
+
+**Full props:**
+
+- `value`: number (0 to max)
+- `max`: number (default: 5)
+- `as`: `"div"` | `"span"` (default: `"div"`)
+- `class`: string (additional CSS classes)
+
+### Testimonial
+
+```astro
+<SpTestimonial>
+  <div slot="quote">The design is exceptional and the implementation is flawless.</div>
+  <div slot="author-name">Jane Doe</div>
+  <div slot="author-title">CEO at Example Inc</div>
+</SpTestimonial>
+```
+
+**Full props:**
+
+- `as`: `"div"` | `"section"` | `"article"` (default: `"div"`)
+- `class`: string (additional CSS classes)
+
+### Pricing Card
+
+```astro
+<SpPricingCard featured>
+  <div slot="header">Enterprise</div>
+  <div slot="badge"><SpBadge variant="primary">Popular</SpBadge></div>
+  <div slot="price">$99/mo</div>
+  <div slot="description">Everything you need for large scale projects.</div>
+  <SpButton variant="primary" fullWidth>Get Started</SpButton>
+</SpPricingCard>
+```
+
+**Full props:**
+
+- `featured`: boolean
+- `disabled`: boolean
+- `as`: `"div"` | `"section"` | `"article"` | `"aside"` | etc. (default: `"div"`)
 - `class`: string (additional CSS classes)
 
 ## TypeScript Support
