@@ -9,8 +9,10 @@ import {
   type TestimonialRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 
+type SpTestimonialElement = "div" | "section" | "article" | "aside" | "li";
+
 interface SpTestimonialProps extends TestimonialRecipeOptions {
-  as?: "div" | "section" | "article" | "aside" | "li";
+  as?: SpTestimonialElement;
   class?: string;
   [key: string]: any;
 }
