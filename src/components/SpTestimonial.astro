@@ -9,23 +9,51 @@ import {
   type TestimonialRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 
-type SpTestimonialElement = "div" | "section" | "article" | "aside" | "li";
+type SpTestimonialElement =
+  | "div"
+  | "section"
+  | "article"
+  | "aside"
+  | "header"
+  | "footer"
+  | "main"
+  | "nav"
+  | "form"
+  | "a"
+  | "button"
+  | "li";
 
 interface SpTestimonialProps extends TestimonialRecipeOptions {
   as?: SpTestimonialElement;
   class?: string;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+
+  type?: "button" | "submit" | "reset";
+
+  disabled?: boolean;
+
   [key: string]: any;
 }
 
 const {
   as: Tag = "div",
   class: className,
+  href,
+  target,
+  rel,
+  type,
+  disabled,
   ...rest
 } = Astro.props as SpTestimonialProps;
 
 // Pass an empty options object to ensure future-proofing if TestimonialRecipeOptions gains properties
 const classes = getTestimonialClasses({});
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const finalType = Tag === "button" ? (type ?? "button") : undefined;
 
 const quoteClasses = getTestimonialQuoteClasses();
 const authorClasses = getTestimonialAuthorClasses();
@@ -34,7 +62,16 @@ const authorNameClasses = getTestimonialAuthorNameClasses();
 const authorTitleClasses = getTestimonialAuthorTitleClasses();
 ---
 
-<Tag class={finalClass} {...rest}>
+<Tag
+  class={finalClass}
+  href={Tag === "a" ? href : undefined}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
   <div class={quoteClasses}>
     <slot name="quote" />
   </div>
