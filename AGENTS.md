@@ -1,26 +1,33 @@
 # Spectre UI Astro Agent Guide
 
-This repository is maintained by PHCDevworks and represents Layer 3 of the
-Spectre suite.
+This repository is maintained by PHCDevworks and is the Astro adapter package
+for the Spectre system.
 
 ## Mission
 
-Expose Spectre UI through Astro-native components while keeping the adapter thin
-and aligned with the upstream UI contract.
+Deliver the upstream Spectre UI contract through Astro-native components while
+keeping the adapter thin, SSR-friendly, and strictly downstream of the core
+Spectre layers.
 
 ## Core Rules
 
 1. Use `@phcdevworks/spectre-ui` recipes and styles as the source of truth.
-2. Do not introduce token definitions or package-owned CSS here.
-3. Keep props type-safe, SSR-friendly, and framework-appropriate.
+2. Do not introduce token definitions, package-owned CSS, or package-owned core
+   styling logic here.
+3. Keep Astro components type-safe, SSR-friendly, and framework-appropriate.
 4. Mirror upstream recipe capabilities instead of drifting from them.
-5. Validate examples and types whenever component APIs change.
+5. Treat this package as the reference adapter pattern for future Spectre
+   framework adapters.
+6. Validate examples, exports, and types whenever component APIs change.
 
 ## Working Boundaries
 
 - Token meaning belongs in `@phcdevworks/spectre-tokens`.
-- UI structure belongs in `@phcdevworks/spectre-ui`.
-- Astro delivery belongs here.
+- Core CSS, utilities, Tailwind helpers, and recipe logic belong in
+  `@phcdevworks/spectre-ui`.
+- Astro-native component delivery and framework ergonomics belong here.
+- This package binds upstream contracts for Astro consumption; it does not
+  redefine design ownership.
 
 ## Validation Flow
 
