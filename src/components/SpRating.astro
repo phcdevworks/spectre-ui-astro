@@ -7,11 +7,35 @@ import {
   type RatingRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 
+type SpRatingElement =
+  | "div"
+  | "span"
+  | "section"
+  | "article"
+  | "aside"
+  | "header"
+  | "footer"
+  | "main"
+  | "nav"
+  | "form"
+  | "a"
+  | "button"
+  | "li";
+
 interface SpRatingProps extends RatingRecipeOptions {
   value?: number;
   max?: number;
-  as?: "div" | "span";
+  as?: SpRatingElement;
   class?: string;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+
+  type?: "button" | "submit" | "reset";
+
+  disabled?: boolean;
+
   [key: string]: any;
 }
 
@@ -20,6 +44,11 @@ const {
   max = 5,
   as: Tag = "div",
   class: className,
+  href,
+  target,
+  rel,
+  type,
+  disabled,
   ...rest
 } = Astro.props as SpRatingProps;
 
@@ -27,13 +56,24 @@ const {
 const classes = getRatingClasses({});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
+const finalType = Tag === "button" ? (type ?? "button") : undefined;
+
 const starsClasses = getRatingStarsClasses();
 const textClasses = getRatingTextClasses();
 
 const stars = Array.from({ length: max }, (_, i) => i < value);
 ---
 
-<Tag class={finalClass} {...rest}>
+<Tag
+  class={finalClass}
+  href={Tag === "a" ? href : undefined}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
   <div class={starsClasses}>
     {
       stars.map((isFilled) => (
