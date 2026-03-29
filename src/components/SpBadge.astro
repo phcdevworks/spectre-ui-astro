@@ -2,7 +2,7 @@
 import type { BadgeRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 
-type SpBadgeElement = "span" | "div" | "a" | "button" | "li";
+type SpBadgeElement = "span" | "div" | "a" | "button" | "li" | "time" | "mark";
 
 interface SpBadgeProps extends BadgeRecipeOptions {
   as?: SpBadgeElement;
@@ -13,6 +13,8 @@ interface SpBadgeProps extends BadgeRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  datetime?: string;
+  "aria-label"?: string;
 
   [key: string]: any;
 }
@@ -28,6 +30,8 @@ const {
   target,
   rel,
   type,
+  datetime,
+  "aria-label": ariaLabel,
   ...rest
 } = Astro.props as SpBadgeProps;
 
@@ -40,16 +44,19 @@ const classes = getBadgeClasses({
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
+const finalHref = Tag === "a" && !disabled ? href : undefined;
 ---
 
 <Tag
   class={finalClass}
-  href={Tag === "a" ? href : undefined}
+  href={finalHref}
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && disabled ? true : undefined}
   aria-disabled={disabled ? "true" : undefined}
+  aria-label={ariaLabel}
+  datetime={Tag === "time" ? datetime : undefined}
   {...rest}
 >
   <slot />
