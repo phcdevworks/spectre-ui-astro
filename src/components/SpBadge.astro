@@ -16,6 +16,8 @@ interface SpBadgeProps extends BadgeRecipeOptions {
   datetime?: string;
   "aria-label"?: string;
 
+  loading?: boolean;
+
   [key: string]: any;
 }
 
@@ -24,6 +26,7 @@ const {
   size,
   interactive,
   disabled,
+  loading,
   as: Tag = "span",
   class: className,
   href,
@@ -35,16 +38,19 @@ const {
   ...rest
 } = Astro.props as SpBadgeProps;
 
+const isBadgeDisabled = disabled || loading;
+
 const classes = getBadgeClasses({
   variant,
   size,
   interactive,
-  disabled,
+  disabled: isBadgeDisabled,
+  loading,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !disabled ? href : undefined;
+const finalHref = Tag === "a" && !isBadgeDisabled ? href : undefined;
 ---
 
 <Tag
@@ -53,8 +59,8 @@ const finalHref = Tag === "a" && !disabled ? href : undefined;
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
-  disabled={Tag === "button" && disabled ? true : undefined}
-  aria-disabled={disabled ? "true" : undefined}
+  disabled={Tag === "button" && isBadgeDisabled ? true : undefined}
+  aria-disabled={isBadgeDisabled ? "true" : undefined}
   aria-label={ariaLabel}
   datetime={Tag === "time" ? datetime : undefined}
   {...rest}
