@@ -13,6 +13,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  loading?: boolean;
 
   [key: string]: any;
 }
@@ -21,6 +22,7 @@ const {
   variant,
   size,
   disabled,
+  loading,
   as: Tag = "span",
   class: className,
   href,
@@ -30,20 +32,29 @@ const {
   ...attrs
 } = Astro.props as SpIconBoxProps;
 
-const classes = getIconBoxClasses({ variant, size, disabled });
+const isIconBoxDisabled = disabled || loading;
+
+const classes = getIconBoxClasses({
+  variant,
+  size,
+  disabled: isIconBoxDisabled,
+  loading,
+});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
+const finalHref = Tag === "a" && !isIconBoxDisabled ? href : undefined;
 ---
 
 <Tag
   class={finalClass}
-  href={Tag === "a" ? href : undefined}
+  href={finalHref}
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
-  disabled={Tag === "button" && disabled ? true : undefined}
-  aria-disabled={disabled ? "true" : undefined}
+  disabled={Tag === "button" && isIconBoxDisabled ? true : undefined}
+  aria-disabled={isIconBoxDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
   {...attrs}
 >
   <slot />
