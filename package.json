@@ -82,19 +82,20 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "astro": "^6.0.8"
+    "typescript": "^5.9 || ^6.0"
   },
   "engines": {
     "node": ">=22.0.0"
   },
   "dependencies": {
+    "astro": "^6.0.8",
     "@phcdevworks/spectre-ui": "^1.1.1"
   },
   "devDependencies": {
     "@types/chroma-js": "^3.1.2",
     "@types/node": "^25.5.0",
-    "@typescript-eslint/eslint-plugin": "^8.57.1",
-    "@typescript-eslint/parser": "^8.57.1",
+    "@typescript-eslint/eslint-plugin": "^8.58.0",
+    "@typescript-eslint/parser": "^8.58.0",
     "chroma-js": "^3.2.0",
     "colord": "^2.9.3",
     "eslint": "^10.1.0",
@@ -103,7 +104,7 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1"
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.0"
   }
 }
