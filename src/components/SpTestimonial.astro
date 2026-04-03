@@ -34,6 +34,7 @@ interface SpTestimonialProps extends TestimonialRecipeOptions {
   type?: "button" | "submit" | "reset";
 
   disabled?: boolean;
+  loading?: boolean;
 
   [key: string]: any;
 }
@@ -46,14 +47,20 @@ const {
   rel,
   type,
   disabled,
+  loading,
   ...rest
 } = Astro.props as SpTestimonialProps;
 
-// Pass an empty options object to ensure future-proofing if TestimonialRecipeOptions gains properties
-const classes = getTestimonialClasses({});
+const isTestimonialDisabled = disabled || loading;
+
+const classes = getTestimonialClasses({
+  disabled: isTestimonialDisabled,
+  loading,
+});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
+const finalHref = Tag === "a" && !isTestimonialDisabled ? href : undefined;
 
 const quoteClasses = getTestimonialQuoteClasses();
 const authorClasses = getTestimonialAuthorClasses();
@@ -64,12 +71,13 @@ const authorTitleClasses = getTestimonialAuthorTitleClasses();
 
 <Tag
   class={finalClass}
-  href={Tag === "a" ? href : undefined}
+  href={finalHref}
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
-  disabled={Tag === "button" && disabled ? true : undefined}
-  aria-disabled={disabled ? "true" : undefined}
+  disabled={Tag === "button" && isTestimonialDisabled ? true : undefined}
+  aria-disabled={isTestimonialDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
   {...rest}
 >
   <div class={quoteClasses}>
