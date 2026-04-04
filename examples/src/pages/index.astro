@@ -101,6 +101,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p>Form controls with labels, validation states, and helper text.</p>
           <div class="input-demo">
             <SpInput
+              id="home-demo-email"
               label="Email"
               type="email"
               placeholder="you@example.com"
@@ -223,9 +224,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <SpCard variant="elevated" class="contact-card">
         <h3>Contact Form</h3>
         <form class="contact-form">
-          <SpInput label="Name" type="text" placeholder="Your name" required />
+          <SpInput id="contact-name" label="Name" type="text" placeholder="Your name" required />
 
           <SpInput
+            id="contact-email"
             label="Email"
             type="email"
             placeholder="you@example.com"
@@ -233,6 +235,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           />
 
           <SpInput
+            id="contact-message"
             label="Message"
             type="text"
             placeholder="Tell us what you think"

@@ -98,6 +98,7 @@ import {
   </SpPricingCard>
 
   <SpInput
+    id="email"
     label="Email"
     name="email"
     type="email"
@@ -106,6 +107,10 @@ import {
   />
 </section>
 ```
+
+`SpInput` requires an explicit `id` whenever you pass `label`, `helperText`, or
+`errorMessage`, so Astro can render stable SSR markup and preserve the
+associated accessibility wiring.
 
 ## What this package owns
 
