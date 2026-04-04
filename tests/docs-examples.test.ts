@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const examplesPagesDir = resolve(repoRoot, "examples/src/pages");
+const srcDir = resolve(repoRoot, "src");
 
 function extractSelfClosingSpInputTags(content: string) {
   return content.match(/<SpInput\b[\s\S]*?\/>/g) ?? [];
@@ -15,6 +16,22 @@ async function collectAstroFiles(dir: string): Promise<string[]> {
 
   return entries
     .filter((entry) => entry.isFile() && entry.name.endsWith(".astro"))
+    .map((entry) => resolve(entry.parentPath, entry.name));
+}
+
+async function collectSourceFiles(dir: string): Promise<string[]> {
+  const entries = await readdir(dir, { withFileTypes: true, recursive: true });
+
+  return entries
+    .filter(
+      (entry) =>
+        entry.isFile() &&
+        (entry.name.endsWith(".astro") ||
+          entry.name.endsWith(".ts") ||
+          entry.name.endsWith(".tsx") ||
+          entry.name.endsWith(".js") ||
+          entry.name.endsWith(".mjs")),
+    )
     .map((entry) => resolve(entry.parentPath, entry.name));
 }
 
@@ -48,6 +65,21 @@ describe("docs and examples", () => {
           );
         }
       }
+    }
+  });
+
+  it("keeps adapter source free of package-owned CSS and local style blocks", async () => {
+    const sourceFiles = await collectSourceFiles(srcDir);
+
+    for (const filePath of sourceFiles) {
+      const content = await readFile(filePath, "utf8");
+
+      expect(content, `Expected ${filePath} to avoid local CSS imports`).not.toMatch(
+        /import\s+["'][^"']+\.css["'];?/,
+      );
+      expect(content, `Expected ${filePath} to avoid local <style> blocks`).not.toContain(
+        "<style",
+      );
     }
   });
 });
