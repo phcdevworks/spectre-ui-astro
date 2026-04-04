@@ -23,10 +23,12 @@
   },
   "include": [
     "src",
+    "tests",
     "tokens",
     "scripts",
     "eslint.config.ts",
-    "tsup.config.ts"
+    "tsup.config.ts",
+    "vitest.config.ts"
   ],
   "exclude": [
     "dist",

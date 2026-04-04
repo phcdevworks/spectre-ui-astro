@@ -198,6 +198,7 @@ Install dependencies, then run the package checks:
 ```bash
 npm run build
 npm run typecheck
+npm test
 ```
 
 Key source areas:
@@ -217,6 +218,7 @@ When contributing:
 - keep Astro components aligned with the upstream `@phcdevworks/spectre-ui` contract
 - do not redefine tokens, CSS behavior, or recipe logic in this package
 - keep the adapter SSR-friendly, type-safe, and framework-appropriate
+- run `npm test` to verify adapter exports, SSR rendering, and example/docs guardrails
 - run `npm run build` and `npm run typecheck` before opening a pull request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
