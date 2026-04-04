@@ -69,16 +69,16 @@ import {
 } from '@phcdevworks/spectre-ui-astro'
 ---
 
-<section class="space-y-6">
+<section>
   <SpCard variant="elevated">
-    <div class="flex items-start gap-4">
+    <div>
       <SpIconBox variant="primary" size="md">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 2l7 4v12l-7 4-7-4V6l7-4z" fill="currentColor" />
         </svg>
       </SpIconBox>
 
-      <div class="space-y-2">
+      <div>
         <SpBadge variant="success" size="sm">Stable contract</SpBadge>
         <h2>Build Astro interfaces on the Spectre UI layer</h2>
         <p>
@@ -107,6 +107,10 @@ import {
   />
 </section>
 ```
+
+The README examples intentionally avoid adapter-owned layout or utility styling.
+For page-level composition, import the canonical Spectre UI CSS and add any
+application-specific layout styles in your app rather than this package.
 
 `SpInput` requires an explicit `id` whenever you pass `label`, `helperText`, or
 `errorMessage`, so Astro can render stable SSR markup and preserve the

@@ -45,6 +45,8 @@ the core Spectre layers.
   scoped to framework ergonomics rather than design logic.
 - If an upstream contract is missing or insufficient, fix it upstream or flag it
   explicitly instead of patching around it locally.
+- Do not add package-owned CSS files, `<style>` blocks, token aliases, or local
+  utility/class systems under `src/`.
 - Examples and docs must reflect real exports and supported usage only.
 
 ## Validation Flow
