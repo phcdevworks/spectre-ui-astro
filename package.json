@@ -67,6 +67,7 @@
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
+    "validate:ssr": "tsx scripts/validate-spinput-ssr.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "clean": "rm -rf dist",

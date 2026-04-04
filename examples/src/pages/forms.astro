@@ -27,24 +27,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <SpCard variant="flat" class="sp-stack">
         <h2>Input States</h2>
         <SpInput
+          id="input-state-email"
           label="Email"
           type="email"
           placeholder="you@example.com"
           helperText="We'll never share your email."
         />
         <SpInput
+          id="input-state-display-name"
           label="Display Name"
           value="Spectre User"
           state="success"
           helperText="Looks good!"
         />
         <SpInput
+          id="input-state-password"
           label="Password"
           type="password"
           state="error"
           errorMessage="Password must be at least 8 characters."
         />
         <SpInput
+          id="input-state-api-key"
           label="API Key"
           type="text"
           value="••••••••••••••••"
@@ -55,10 +59,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <SpCard variant="flat" class="sp-stack">
         <h2>Sizes & Shapes</h2>
-        <SpInput label="Small" size="sm" placeholder="sm input" />
-        <SpInput label="Medium" size="md" placeholder="md input" />
-        <SpInput label="Large" size="lg" placeholder="lg input" />
-        <SpInput label="Pill Shape" pill placeholder="Pill shaped input" />
+        <SpInput id="input-size-small" label="Small" size="sm" placeholder="sm input" />
+        <SpInput id="input-size-medium" label="Medium" size="md" placeholder="md input" />
+        <SpInput id="input-size-large" label="Large" size="lg" placeholder="lg input" />
+        <SpInput id="input-size-pill" label="Pill Shape" pill placeholder="Pill shaped input" />
       </SpCard>
     </section>
 
@@ -67,12 +71,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <SpCard variant="elevated" class="sp-stack">
         <form class="stack" style="margin: 0;">
           <SpInput
+            id="card-form-full-name"
             label="Full Name"
             name="fullName"
             placeholder="Jane Doe"
             required
           />
           <SpInput
+            id="card-form-email"
             label="Work Email"
             type="email"
             name="email"
@@ -80,6 +86,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             required
           />
           <SpInput
+            id="card-form-phone"
             label="Phone"
             type="tel"
             name="phone"

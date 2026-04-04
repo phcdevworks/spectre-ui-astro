@@ -1,29 +1,9 @@
 ---
-import type { InputRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getInputClasses } from "@phcdevworks/spectre-ui";
-
-type SpInputElement =
-  | "div"
-  | "section"
-  | "article"
-  | "aside"
-  | "header"
-  | "footer"
-  | "main"
-  | "form"
-  | "fieldset";
-
-interface SpInputProps extends InputRecipeOptions {
-  as?: SpInputElement;
-  label?: string;
-  helperText?: string;
-  errorMessage?: string;
-  id?: string;
-  class?: string;
-  disabled?: boolean;
-  loading?: boolean;
-  [key: string]: any;
-}
+import {
+  resolveSpInputAccessibility,
+  type SpInputProps,
+} from "./sp-input.shared";
 
 const {
   state,
@@ -43,12 +23,13 @@ const {
 
 const isInputDisabled = disabled || state === "disabled" || loading;
 
-const inputId = id ?? `sp-input-${Math.random().toString(36).slice(2)}`;
-
-const helperId = `${inputId}-helper`;
-const errorId = `${inputId}-error`;
-
-const describedBy = errorMessage ? errorId : helperText ? helperId : undefined;
+const { inputId, helperId, errorId, describedBy } =
+  resolveSpInputAccessibility({
+    id,
+    label,
+    helperText,
+    errorMessage,
+  });
 
 const classes = getInputClasses({
   state: loading ? "loading" : isInputDisabled ? "disabled" : state,
