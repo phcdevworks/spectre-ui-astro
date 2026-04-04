@@ -66,8 +66,8 @@
     "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
     "dev": "tsup --watch",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "validate:ssr": "tsx scripts/validate-spinput-ssr.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "clean": "rm -rf dist",
@@ -102,6 +102,7 @@
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.0"
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.2"
   }
 }

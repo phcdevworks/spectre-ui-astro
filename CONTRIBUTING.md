@@ -30,7 +30,8 @@ structure, adapters define delivery.
 2. Install dependencies with `npm install`.
 3. Run `npm run build`.
 4. Run `npm run typecheck`.
-5. If needed, validate behavior in the `examples/` app.
+5. Run `npm test`.
+6. If needed, validate behavior in the `examples/` app.
 
 ## Project Structure
 
@@ -54,6 +55,7 @@ structure, adapters define delivery.
 - Follow Astro and TypeScript best practices.
 - Run `npm run build` for distributable output.
 - Run `npm run typecheck` before opening a pull request.
+- Run `npm test` to catch export drift, SSR regressions, and doc/example mismatch.
 - Use the example app when you need to verify rendering behavior manually.
 
 ### Documentation
@@ -67,8 +69,9 @@ structure, adapters define delivery.
 1. Keep the change focused.
 2. Run `npm run build`.
 3. Run `npm run typecheck`.
-4. Verify the example app if the change affects rendering or component props.
-5. Update docs if public behavior or guidance changed.
+4. Run `npm test`.
+5. Verify the example app if the change affects rendering or component props.
+6. Update docs if public behavior or guidance changed.
 
 ## Questions
 

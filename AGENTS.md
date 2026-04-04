@@ -52,4 +52,5 @@ the core Spectre layers.
 1. Update Astro components, exports, or adapter docs.
 2. Run `npm run build`.
 3. Run `npm run typecheck`.
-4. Verify examples still match the actual public API.
+4. Run `npm test`.
+5. Verify examples still match the actual public API.

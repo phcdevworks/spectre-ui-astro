@@ -1,0 +1,98 @@
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { getButtonClasses, getCardClasses, getInputClasses } from "@phcdevworks/spectre-ui";
+import { beforeAll, describe, expect, it } from "vitest";
+
+import SpButton from "../src/components/SpButton.astro";
+import SpCard from "../src/components/SpCard.astro";
+import SpInput from "../src/components/SpInput.astro";
+import type { SpInputProps } from "../src/components/sp-input.shared";
+
+let container: AstroContainer;
+
+beforeAll(async () => {
+  container = await AstroContainer.create();
+});
+
+describe("SSR rendering", () => {
+  it("renders SpInput associations from explicit ids only", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "email",
+        label: "Email",
+        helperText: "We will never share your email.",
+        size: "lg",
+        fullWidth: true,
+      } satisfies SpInputProps,
+    });
+
+    expect(html).toContain('for="email"');
+    expect(html).toContain('id="email"');
+    expect(html).toContain('id="email-helper"');
+    expect(html).toContain('aria-describedby="email-helper"');
+    expect(html).not.toContain("email-error");
+    expect(html).toContain(getInputClasses({ size: "lg", fullWidth: true }));
+  });
+
+  it("prefers the error association in aria-describedby", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "password",
+        label: "Password",
+        helperText: "Use a strong password.",
+        errorMessage: "Password must be at least 8 characters.",
+        state: "error",
+      } satisfies SpInputProps,
+    });
+
+    expect(html).toContain('for="password"');
+    expect(html).toContain('id="password-error"');
+    expect(html).toContain('aria-describedby="password-error"');
+    expect(html).toContain('aria-invalid="true"');
+    expect(html).not.toContain('aria-describedby="password-helper"');
+    expect(html).toContain(getInputClasses({ state: "error" }));
+  });
+
+  it("rejects associated SpInput usage without a stable id", async () => {
+    // @ts-expect-error SpInput associations require an explicit stable id.
+    const props = { label: "Email" } satisfies SpInputProps;
+
+    await expect(
+      container.renderToString(SpInput, {
+        props,
+      }),
+    ).rejects.toThrow(/requires an explicit `id`/);
+  });
+
+  it("renders SpButton with upstream classes and Astro-safe disabled anchor behavior", async () => {
+    const html = await container.renderToString(SpButton, {
+      props: {
+        as: "a",
+        href: "/docs",
+        loading: true,
+        variant: "primary",
+        size: "lg",
+      },
+    });
+
+    expect(html).toContain(getButtonClasses({ variant: "primary", size: "lg", loading: true, disabled: true }));
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('tabindex="-1"');
+    expect(html).not.toContain('href="/docs"');
+  });
+
+  it("renders SpCard with upstream classes and semantic element behavior", async () => {
+    const html = await container.renderToString(SpCard, {
+      props: {
+        as: "button",
+        variant: "outline",
+        interactive: true,
+        disabled: true,
+      },
+    });
+
+    expect(html).toContain(getCardClasses({ variant: "outline", interactive: true, disabled: true }));
+    expect(html).toContain('type="button"');
+    expect(html).toContain("disabled");
+    expect(html).toContain('aria-disabled="true"');
+  });
+});
