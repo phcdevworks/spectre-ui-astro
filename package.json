@@ -79,16 +79,17 @@
     "tag": "latest"
   },
   "peerDependencies": {
+    "@phcdevworks/spectre-ui": "^1.1.1",
     "typescript": "^5.9 || ^6.0"
   },
   "engines": {
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "astro": "^6.0.8",
-    "@phcdevworks/spectre-ui": "^1.1.1"
+    "astro": "^6.0.8"
   },
   "devDependencies": {
+    "@phcdevworks/spectre-ui": "^1.1.1",
     "@types/chroma-js": "^3.1.2",
     "@types/node": "^25.5.0",
     "@typescript-eslint/eslint-plugin": "^8.58.0",

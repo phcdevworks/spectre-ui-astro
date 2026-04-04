@@ -24,6 +24,10 @@ Maintained by PHCDevworks, it provides Astro-native components that wrap the log
 npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 ```
 
+`@phcdevworks/spectre-ui` is a required peer dependency because this adapter
+binds its upstream recipes, classes, and CSS contract for Astro rather than
+redefining them locally.
+
 If your project consumes Spectre tokens directly, install [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) as well.
 
 ## Quick start
@@ -46,12 +50,6 @@ This package does not ship its own CSS. Import the canonical Spectre UI styleshe
 ---
 import '@phcdevworks/spectre-ui/index.css'
 ---
-```
-
-You can also reference the upstream CSS path constant re-exported by this package:
-
-```ts
-import { SPECTRE_UI_CSS } from '@phcdevworks/spectre-ui-astro'
 ```
 
 ### Astro-native component example
@@ -149,7 +147,6 @@ Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine it
 - `SpPricingCard`
 - `SpRating`
 - `SpTestimonial`
-- `SPECTRE_UI_CSS`
 
 The root package also re-exports shared recipe helpers and related TypeScript option and variant types from `@phcdevworks/spectre-ui`, including:
 

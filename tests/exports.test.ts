@@ -54,7 +54,6 @@ describe("package export surface", () => {
 
   it("keeps the root runtime export surface intentional and stable", () => {
     const expectedRuntimeExports = [
-      "SPECTRE_UI_CSS",
       ...componentExportNames,
       ...recipeRuntimeExports,
     ].sort();
@@ -63,10 +62,13 @@ describe("package export surface", () => {
   });
 
   it("passes upstream recipe helpers through without redefining them", () => {
-    expect(adapter.SPECTRE_UI_CSS).toBe(upstream.spectreStyles.index);
-
     for (const exportName of recipeRuntimeExports) {
       expect(adapter[exportName]).toBe(upstream[exportName]);
     }
+  });
+
+  it("declares @phcdevworks/spectre-ui as the upstream peer contract", () => {
+    expect(packageJson.peerDependencies["@phcdevworks/spectre-ui"]).toBe("^1.1.1");
+    expect(packageJson.dependencies).not.toHaveProperty("@phcdevworks/spectre-ui");
   });
 });

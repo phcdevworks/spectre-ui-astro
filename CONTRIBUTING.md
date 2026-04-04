@@ -33,6 +33,9 @@ structure, adapters define delivery.
 5. Run `npm test`.
 6. If needed, validate behavior in the `examples/` app.
 
+`@phcdevworks/spectre-ui` is a required peer dependency for consumers and
+should remain the source of truth for shared recipes, classes, and CSS.
+
 ## Project Structure
 
 - `src/components/`: Astro components
