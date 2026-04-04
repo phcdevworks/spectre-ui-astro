@@ -36,6 +36,8 @@ the core Spectre layers.
   framework integration belong here.
 - This package binds upstream contracts for Astro consumption; it does not
   redefine design ownership.
+- Treat `@phcdevworks/spectre-ui` as a required upstream peer contract, not a
+  convenience layer to mirror more broadly than Astro delivery requires.
 
 ## Implementation Guardrails
 
