@@ -6,6 +6,8 @@ import { describe, expect, it } from "vitest";
 const repoRoot = resolve(import.meta.dirname, "..");
 const examplesPagesDir = resolve(repoRoot, "examples/src/pages");
 const srcDir = resolve(repoRoot, "src");
+const canonicalRepo = "phcdevworks/spectre-ui-astro";
+const canonicalPackage = "@phcdevworks/spectre-ui-astro";
 
 function extractSelfClosingSpInputTags(content: string) {
   return content.match(/<SpInput\b[\s\S]*?\/>/g) ?? [];
@@ -36,6 +38,32 @@ async function collectSourceFiles(dir: string): Promise<string[]> {
 }
 
 describe("docs and examples", () => {
+  it("keeps repository and package naming on the canonical identity", async () => {
+    const filesToCheck = [
+      resolve(repoRoot, "README.md"),
+      resolve(repoRoot, "AGENTS.md"),
+      resolve(repoRoot, "CONTRIBUTING.md"),
+      resolve(repoRoot, "package.json"),
+      resolve(repoRoot, "examples/package.json"),
+    ];
+
+    for (const filePath of filesToCheck) {
+      const content = await readFile(filePath, "utf8");
+
+      expect(content, `Expected ${filePath} to avoid stale astrojs naming`).not.toContain(
+        "spectre-ui-astrojs",
+      );
+    }
+
+    const readme = await readFile(resolve(repoRoot, "README.md"), "utf8");
+    const packageJson = await readFile(resolve(repoRoot, "package.json"), "utf8");
+
+    expect(readme).toContain(canonicalRepo);
+    expect(readme).toContain(canonicalPackage);
+    expect(packageJson).toContain(canonicalRepo);
+    expect(packageJson).toContain(canonicalPackage);
+  });
+
   it("documents the stable-id requirement for associated SpInput usage", async () => {
     const readme = await readFile(resolve(repoRoot, "README.md"), "utf8");
 
