@@ -24,6 +24,8 @@ interface SpCardProps extends CardRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  "aria-label"?: string;
 
   [key: string]: any;
 }
@@ -40,6 +42,8 @@ const {
   target,
   rel,
   type,
+  tabindex,
+  "aria-label": ariaLabel,
   ...rest
 } = Astro.props as SpCardProps;
 
@@ -47,16 +51,20 @@ const classes = getCardClasses({ variant, interactive, padded, fullHeight, disab
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
+const finalHref = Tag === "a" && !disabled ? href : undefined;
+const finalTabIndex = Tag === "a" && disabled ? -1 : tabindex;
 ---
 
 <Tag
   class={finalClass}
-  href={Tag === "a" ? href : undefined}
+  href={finalHref}
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && disabled ? true : undefined}
   aria-disabled={disabled ? "true" : undefined}
+  aria-label={ariaLabel}
+  tabindex={finalTabIndex}
   {...rest}
 >
   <slot />
