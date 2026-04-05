@@ -37,6 +37,8 @@ function assertPublishedPathsExist(paths, label) {
 const runtimePaths = collectRuntimeExportPaths(packageJson.exports);
 const typePaths = [packageJson.types];
 const mainPaths = [packageJson.main];
+const upstreamContractPackage = "@phcdevworks/spectre-ui";
+const upstreamPeerRange = packageJson.peerDependencies?.[upstreamContractPackage];
 
 if ("module" in packageJson) {
   throw new Error("package.json should not declare a separate module field for this ESM-only package.");
@@ -54,18 +56,16 @@ if (packageJson.types !== "./dist/index.d.ts") {
   throw new Error(`package.json types must point to ./dist/index.d.ts, received ${packageJson.types}`);
 }
 
-if (packageJson.dependencies?.["@phcdevworks/spectre-ui"]) {
-  throw new Error("@phcdevworks/spectre-ui must not be published as a direct runtime dependency.");
+if (packageJson.dependencies?.[upstreamContractPackage]) {
+  throw new Error(`${upstreamContractPackage} must not be published as a direct runtime dependency.`);
 }
 
-if (packageJson.peerDependencies?.["@phcdevworks/spectre-ui"] !== "^1.1.2") {
-  throw new Error(
-    `package.json peerDependencies[@phcdevworks/spectre-ui] must be ^1.1.2, received ${packageJson.peerDependencies?.["@phcdevworks/spectre-ui"]}`,
-  );
+if (typeof upstreamPeerRange !== "string" || upstreamPeerRange.length === 0) {
+  throw new Error(`${upstreamContractPackage} must be declared explicitly in peerDependencies.`);
 }
 
-if (packageJson.devDependencies?.["@phcdevworks/spectre-ui"] !== packageJson.peerDependencies?.["@phcdevworks/spectre-ui"]) {
-  throw new Error("@phcdevworks/spectre-ui devDependency must stay aligned with the published peer dependency range.");
+if (packageJson.devDependencies?.[upstreamContractPackage] !== upstreamPeerRange) {
+  throw new Error(`${upstreamContractPackage} devDependency must stay aligned with the published peer dependency range.`);
 }
 
 assertPublishedPathsExist(runtimePaths, "runtime export");
