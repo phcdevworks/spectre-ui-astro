@@ -38,14 +38,13 @@
   "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     },
     "./components/SpBadge.astro": "./dist/components/SpBadge.astro",
     "./components/SpButton.astro": "./dist/components/SpButton.astro",
@@ -63,8 +62,8 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs",
-    "build:types": "tsc --emitDeclarationOnly --project tsconfig.json",
+    "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs && node scripts/validate-package-contract.mjs",
+    "build:types": "tsc --project tsconfig.build.json",
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

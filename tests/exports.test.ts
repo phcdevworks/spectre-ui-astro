@@ -1,4 +1,4 @@
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { basename, resolve } from "node:path";
 
 import * as upstream from "@phcdevworks/spectre-ui";
@@ -9,6 +9,25 @@ import * as adapter from "../src/index";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const componentsDir = resolve(repoRoot, "src/components");
+
+function collectRuntimeExportPaths(exportsField: typeof packageJson.exports) {
+  const runtimePaths = new Set<string>();
+
+  for (const exportValue of Object.values(exportsField)) {
+    if (typeof exportValue === "string") {
+      runtimePaths.add(exportValue);
+      continue;
+    }
+
+    for (const [condition, targetPath] of Object.entries(exportValue)) {
+      if (condition !== "types") {
+        runtimePaths.add(targetPath);
+      }
+    }
+  }
+
+  return [...runtimePaths].sort();
+}
 
 const recipeRuntimeExports = [
   "getBadgeClasses",
@@ -40,6 +59,26 @@ const componentFiles = readdirSync(componentsDir)
 const componentExportNames = componentFiles.map((fileName) => basename(fileName, ".astro"));
 
 describe("package export surface", () => {
+  it("keeps declared built runtime entry points truthful", () => {
+    const runtimePaths = collectRuntimeExportPaths(packageJson.exports);
+
+    expect(packageJson.main).toBe("./dist/index.js");
+    expect(packageJson.types).toBe("./dist/index.d.ts");
+    expect(packageJson).not.toHaveProperty("module");
+    expect(packageJson.exports["."]).toEqual({
+      types: "./dist/index.d.ts",
+      import: "./dist/index.js",
+      default: "./dist/index.js",
+    });
+
+    for (const targetPath of [packageJson.main, packageJson.types, ...runtimePaths]) {
+      expect(
+        existsSync(resolve(repoRoot, targetPath)),
+        `Expected declared package path to exist after build: ${targetPath}`,
+      ).toBe(true);
+    }
+  });
+
   it("keeps package.json component entry points aligned with actual Astro component files", () => {
     const exportKeys = Object.keys(packageJson.exports)
       .filter((key) => key.startsWith("./components/"))
