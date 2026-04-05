@@ -6,6 +6,60 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-04-05
+
+Release Title: Loading Support and Adapter Guardrails
+
+### Added
+
+- Added `loading` prop support across `SpBadge`, `SpIconBox`, `SpRating`,
+  `SpTestimonial`, and `SpInput`.
+- Added `aria-label` and `tabindex` support to `SpCard` for improved
+  accessibility control.
+- Added Vitest coverage, canonical package/repository name checks, and a GitHub
+  Actions CI workflow.
+
+### Changed
+
+- Declared `@phcdevworks/spectre-ui` as a peer dependency and removed the local
+  CSS export to keep the adapter strictly downstream of upstream styling.
+- Required an explicit `id` for `SpInput` SSR usage to avoid unstable generated
+  identifiers.
+- Clarified Astro adapter guardrails and package rules in repo guidance and test
+  coverage.
+- Updated the expected `@phcdevworks/spectre-ui` peer version to `^1.1.2` for
+  the `2.0.2` release line.
+
+## [2.0.1] - 2026-03-29
+
+Release Title: Polymorphism Expansion Across Astro Components
+
+### Added
+
+- Expanded polymorphic rendering and attribute guarding support for `SpButton`,
+  `SpPricingCard`, `SpInput`, `SpTestimonial`, `SpRating`, and `SpBadge`.
+- Added explicit `disabled` and `aria-disabled` handling for `SpInput`.
+
+### Changed
+
+- Simplified and refreshed the examples scaffold, README, AGENTS guidance, and
+  general repository documentation.
+- Updated editor, formatting, and repository tooling configuration for the Astro
+  adapter workspace.
+- Updated `@phcdevworks/spectre-ui` to `^1.1.1`.
+
+## [2.0.0] - 2026-03-22
+
+Release Title: Astro 6 and Node 22 Alignment
+
+### Changed
+
+- Bumped the package to `2.0.0` and aligned the adapter with Astro `^6.0.8`.
+- Raised the Node.js engine requirement to `>=22.0.0`.
+- Updated `@phcdevworks/spectre-ui` to `^1.1.0`.
+- Refreshed the lockfile and supporting toolchain dependencies for the v2
+  release baseline, including Astro and Shiki-related packages.
+
 ## [1.1.0] - 2026-03-22
 
 Release Title: Component Parity and Polymorphic Refinement
