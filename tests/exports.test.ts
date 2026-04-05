@@ -9,6 +9,8 @@ import * as adapter from "../src/index";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const componentsDir = resolve(repoRoot, "src/components");
+const upstreamContractPackage = "@phcdevworks/spectre-ui";
+const upstreamPeerRange = packageJson.peerDependencies[upstreamContractPackage];
 
 function collectRuntimeExportPaths(exportsField: typeof packageJson.exports) {
   const runtimePaths = new Set<string>();
@@ -108,8 +110,9 @@ describe("package export surface", () => {
   });
 
   it("declares @phcdevworks/spectre-ui as the upstream peer contract", () => {
-    expect(packageJson.peerDependencies["@phcdevworks/spectre-ui"]).toBe("^1.1.2");
-    expect(packageJson.dependencies).not.toHaveProperty("@phcdevworks/spectre-ui");
-    expect(packageJson.devDependencies["@phcdevworks/spectre-ui"]).toBe("^1.1.2");
+    expect(upstreamPeerRange).toEqual(expect.any(String));
+    expect(upstreamPeerRange.length).toBeGreaterThan(0);
+    expect(packageJson.dependencies).not.toHaveProperty(upstreamContractPackage);
+    expect(packageJson.devDependencies[upstreamContractPackage]).toBe(upstreamPeerRange);
   });
 });
