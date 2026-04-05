@@ -63,6 +63,21 @@ describe("SSR rendering", () => {
     ).rejects.toThrow(/requires an explicit `id`/);
   });
 
+  it("allows standalone SpInput usage without an id when no associations are rendered", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        placeholder: "Search",
+        size: "sm",
+      } satisfies SpInputProps,
+    });
+
+    expect(html).toContain('placeholder="Search"');
+    expect(html).not.toContain("<label");
+    expect(html).not.toContain("aria-describedby=");
+    expect(html).not.toContain('id="undefined"');
+    expect(html).toContain(getInputClasses({ size: "sm" }));
+  });
+
   it("renders SpButton with upstream classes and Astro-safe disabled anchor behavior", async () => {
     const html = await container.renderToString(SpButton, {
       props: {
