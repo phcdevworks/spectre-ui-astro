@@ -98,6 +98,7 @@ describe("package export surface", () => {
     ].sort();
 
     expect(Object.keys(adapter).sort()).toEqual(expectedRuntimeExports);
+    expect(adapter).not.toHaveProperty("SPECTRE_UI_CSS");
   });
 
   it("passes upstream recipe helpers through without redefining them", () => {

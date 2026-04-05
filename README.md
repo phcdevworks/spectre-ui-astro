@@ -171,6 +171,10 @@ The root package also re-exports shared recipe helpers and related TypeScript op
 - `getTestimonialAuthorNameClasses`
 - `getTestimonialAuthorTitleClasses`
 
+The adapter does not export a `SPECTRE_UI_CSS` helper. Import the canonical
+stylesheet directly from `@phcdevworks/spectre-ui/index.css` so CSS ownership
+stays with the upstream UI package.
+
 ### Component entry points
 
 - `@phcdevworks/spectre-ui-astro/components/SpBadge.astro`
