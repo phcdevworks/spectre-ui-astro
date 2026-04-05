@@ -31,6 +31,8 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  "aria-label"?: string;
 
   [key: string]: any;
 }
@@ -38,19 +40,30 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
 const {
   featured,
   disabled,
+  loading,
   as: Tag = "div",
   class: className,
   href,
   target,
   rel,
   type,
+  tabindex,
+  "aria-label": ariaLabel,
   ...rest
 } = Astro.props as SpPricingCardProps;
 
-const classes = getPricingCardClasses({ featured, disabled });
+const isPricingCardDisabled = disabled || loading;
+
+const classes = getPricingCardClasses({
+  featured,
+  disabled: isPricingCardDisabled,
+  loading,
+});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
+const finalHref = Tag === "a" && !isPricingCardDisabled ? href : undefined;
+const finalTabIndex = Tag === "a" && isPricingCardDisabled ? -1 : tabindex;
 
 const badgeClasses = getPricingCardBadgeClasses();
 const priceContainerClasses = getPricingCardPriceContainerClasses();
@@ -60,12 +73,15 @@ const descriptionClasses = getPricingCardDescriptionClasses();
 
 <Tag
   class={finalClass}
-  href={Tag === "a" ? href : undefined}
+  href={finalHref}
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
-  disabled={Tag === "button" && disabled ? true : undefined}
-  aria-disabled={disabled ? "true" : undefined}
+  disabled={Tag === "button" && isPricingCardDisabled ? true : undefined}
+  aria-disabled={isPricingCardDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
+  tabindex={finalTabIndex}
   {...rest}
 >
   <slot name="header" />
