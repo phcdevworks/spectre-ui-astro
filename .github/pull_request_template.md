@@ -8,6 +8,7 @@
 
 - [ ] `npm run build`
 - [ ] `npm run typecheck`
+- [ ] `npm test`
 - [ ] Other (describe):
 
 ## Screenshots (if UI)

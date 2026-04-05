@@ -30,15 +30,5 @@ jobs:
       - name: Typecheck package
         run: npm run typecheck
 
-      - name: Detect test script
-        id: detect_test
-        run: |
-          if node -e "const pkg=require('./package.json'); process.exit(pkg.scripts && pkg.scripts.test ? 0 : 1)"; then
-            echo "has_test=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_test=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Run tests
-        if: steps.detect_test.outputs.has_test == 'true'
         run: npm test
