@@ -1,5 +1,5 @@
-import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { existsSync, readdirSync } from "node:fs";
+import { basename, resolve } from "node:path";
 
 import packageJson from "../package.json" with { type: "json" };
 
@@ -30,6 +30,42 @@ function assertPublishedPathsExist(paths, label) {
   if (missingPaths.length > 0) {
     throw new Error(
       `Missing published ${label} path(s): ${missingPaths.join(", ")}`,
+    );
+  }
+}
+
+function assertCopiedAstroComponentsExist() {
+  const srcComponentsDir = resolve(repoRoot, "src/components");
+  const distComponentsDir = resolve(repoRoot, "dist/components");
+
+  const sourceComponentFiles = readdirSync(srcComponentsDir)
+    .filter((fileName) => fileName.endsWith(".astro"))
+    .sort();
+
+  const distComponentFiles = readdirSync(distComponentsDir)
+    .filter((fileName) => fileName.endsWith(".astro"))
+    .sort();
+
+  if (sourceComponentFiles.length !== distComponentFiles.length) {
+    throw new Error(
+      `dist/components Astro file count mismatch. Expected ${sourceComponentFiles.length}, received ${distComponentFiles.length}.`,
+    );
+  }
+
+  for (const fileName of sourceComponentFiles) {
+    const distPath = resolve(distComponentsDir, fileName);
+
+    if (!existsSync(distPath)) {
+      throw new Error(`Missing copied Astro component in dist/components: ${fileName}`);
+    }
+  }
+
+  const srcComponentBasenames = sourceComponentFiles.map((fileName) => basename(fileName));
+  const distComponentBasenames = distComponentFiles.map((fileName) => basename(fileName));
+
+  if (srcComponentBasenames.join("|") !== distComponentBasenames.join("|")) {
+    throw new Error(
+      `dist/components Astro files drifted from src/components. Expected ${srcComponentBasenames.join(", ")}, received ${distComponentBasenames.join(", ")}.`,
     );
   }
 }
@@ -71,3 +107,4 @@ if (packageJson.devDependencies?.[upstreamContractPackage] !== upstreamPeerRange
 assertPublishedPathsExist(runtimePaths, "runtime export");
 assertPublishedPathsExist(typePaths, "types");
 assertPublishedPathsExist(mainPaths, "main");
+assertCopiedAstroComponentsExist();
