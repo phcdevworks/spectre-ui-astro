@@ -54,6 +54,20 @@ if (packageJson.types !== "./dist/index.d.ts") {
   throw new Error(`package.json types must point to ./dist/index.d.ts, received ${packageJson.types}`);
 }
 
+if (packageJson.dependencies?.["@phcdevworks/spectre-ui"]) {
+  throw new Error("@phcdevworks/spectre-ui must not be published as a direct runtime dependency.");
+}
+
+if (packageJson.peerDependencies?.["@phcdevworks/spectre-ui"] !== "^1.1.2") {
+  throw new Error(
+    `package.json peerDependencies[@phcdevworks/spectre-ui] must be ^1.1.2, received ${packageJson.peerDependencies?.["@phcdevworks/spectre-ui"]}`,
+  );
+}
+
+if (packageJson.devDependencies?.["@phcdevworks/spectre-ui"] !== packageJson.peerDependencies?.["@phcdevworks/spectre-ui"]) {
+  throw new Error("@phcdevworks/spectre-ui devDependency must stay aligned with the published peer dependency range.");
+}
+
 assertPublishedPathsExist(runtimePaths, "runtime export");
 assertPublishedPathsExist(typePaths, "types");
 assertPublishedPathsExist(mainPaths, "main");

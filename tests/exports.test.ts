@@ -109,5 +109,6 @@ describe("package export surface", () => {
   it("declares @phcdevworks/spectre-ui as the upstream peer contract", () => {
     expect(packageJson.peerDependencies["@phcdevworks/spectre-ui"]).toBe("^1.1.2");
     expect(packageJson.dependencies).not.toHaveProperty("@phcdevworks/spectre-ui");
+    expect(packageJson.devDependencies["@phcdevworks/spectre-ui"]).toBe("^1.1.2");
   });
 });
