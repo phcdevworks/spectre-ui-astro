@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
@@ -79,7 +79,7 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-ui": "^1.1.1",
+    "@phcdevworks/spectre-ui": "^1.1.2",
     "typescript": "^5.9 || ^6.0"
   },
   "engines": {
