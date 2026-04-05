@@ -8,6 +8,8 @@ reflects package releases published to npm.
 
 ## [1.1.0] - 2026-03-22
 
+Release Title: Component Parity and Polymorphic Refinement
+
 ### Added
 
 - **Component States**: Implemented `disabled` props across `SpCard`, `SpBadge`,
@@ -25,6 +27,8 @@ reflects package releases published to npm.
 
 ## [1.0.0] - 2026-03-17
 
+Release Title: Stable Astro Release
+
 ### Added
 
 - Promoted all Spectre UI components for Astro to v1.0.0 stable release.
@@ -34,6 +38,8 @@ reflects package releases published to npm.
 - Cleaned up example documentation code for better readability and structure.
 
 ## [0.1.1] - 2026-01-04
+
+Release Title: Badge Expansion and Example Coverage
 
 ### Added
 
@@ -57,6 +63,8 @@ reflects package releases published to npm.
 - Revised documentation and guidelines for clarity.
 
 ## [0.1.0] - 2025-12-16
+
+Release Title: Export Cleanup and Accessibility Improvements
 
 ### Added
 
@@ -84,6 +92,8 @@ reflects package releases published to npm.
 - Improved accessibility in components.
 
 ## [0.0.3] - 2025-12-08
+
+Release Title: Example App Refresh
 
 ### Added
 
@@ -121,6 +131,8 @@ reflects package releases published to npm.
 
 ## [0.0.2] - 2025-11-30
 
+Release Title: Typed Astro Foundations
+
 ### Added
 
 - Added Astro component files (SpButton, SpCard, SpInput) with proper type
@@ -143,6 +155,8 @@ reflects package releases published to npm.
   `@phcdevworks/spectre-ui` enums.
 
 ## [0.0.1] - 2025-11-28
+
+Release Title: Initial Astro Adapter Release
 
 ### Added
 
