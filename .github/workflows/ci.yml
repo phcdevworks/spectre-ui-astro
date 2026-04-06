@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: "22"
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            examples/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -32,3 +35,11 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Install example dependencies
+        run: npm ci
+        working-directory: examples
+
+      - name: Build example app
+        run: npm run build
+        working-directory: examples
