@@ -11,6 +11,8 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const componentsDir = resolve(repoRoot, "src/components");
 const upstreamContractPackage = "@phcdevworks/spectre-ui";
 const upstreamPeerRange = packageJson.peerDependencies[upstreamContractPackage];
+const astroHostPackage = "astro";
+const astroPeerRange = packageJson.peerDependencies[astroHostPackage];
 
 function collectRuntimeExportPaths(exportsField: typeof packageJson.exports) {
   const runtimePaths = new Set<string>();
@@ -114,5 +116,12 @@ describe("package export surface", () => {
     expect(upstreamPeerRange.length).toBeGreaterThan(0);
     expect(packageJson.dependencies).not.toHaveProperty(upstreamContractPackage);
     expect(packageJson.devDependencies[upstreamContractPackage]).toBe(upstreamPeerRange);
+  });
+
+  it("declares Astro as the host framework peer contract", () => {
+    expect(astroPeerRange).toEqual(expect.any(String));
+    expect(astroPeerRange.length).toBeGreaterThan(0);
+    expect(packageJson.dependencies).not.toHaveProperty(astroHostPackage);
+    expect(packageJson.devDependencies[astroHostPackage]).toBe(astroPeerRange);
   });
 });
