@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@phcdevworks/spectre-ui": "^1.1.2",
     "@phcdevworks/spectre-ui-astro": "file:..",
     "astro": "^6.0.8"
   }

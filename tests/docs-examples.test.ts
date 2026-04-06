@@ -8,6 +8,7 @@ const examplesPagesDir = resolve(repoRoot, "examples/src/pages");
 const srcDir = resolve(repoRoot, "src");
 const canonicalRepo = "phcdevworks/spectre-ui-astro";
 const canonicalPackage = "@phcdevworks/spectre-ui-astro";
+const upstreamContractPackage = "@phcdevworks/spectre-ui";
 
 function extractSelfClosingSpInputTags(content: string) {
   return content.match(/<SpInput\b[\s\S]*?\/>/g) ?? [];
@@ -62,6 +63,19 @@ describe("docs and examples", () => {
     expect(readme).toContain(canonicalPackage);
     expect(packageJson).toContain(canonicalRepo);
     expect(packageJson).toContain(canonicalPackage);
+  });
+
+  it("keeps the example app aligned with the upstream Spectre UI peer contract", async () => {
+    const rootPackageJson = JSON.parse(
+      await readFile(resolve(repoRoot, "package.json"), "utf8"),
+    ) as typeof import("../package.json");
+    const examplePackageJson = JSON.parse(
+      await readFile(resolve(repoRoot, "examples/package.json"), "utf8"),
+    ) as { dependencies?: Record<string, string> };
+
+    expect(examplePackageJson.dependencies?.[upstreamContractPackage]).toBe(
+      rootPackageJson.peerDependencies[upstreamContractPackage],
+    );
   });
 
   it("documents the stable-id requirement for associated SpInput usage", async () => {
