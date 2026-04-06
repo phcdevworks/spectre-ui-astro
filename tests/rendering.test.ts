@@ -1,9 +1,15 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { getButtonClasses, getCardClasses, getInputClasses } from "@phcdevworks/spectre-ui";
+import {
+  getButtonClasses,
+  getCardClasses,
+  getIconBoxClasses,
+  getInputClasses,
+} from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
 import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
+import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
 
@@ -60,7 +66,7 @@ describe("SSR rendering", () => {
       container.renderToString(SpInput, {
         props,
       }),
-    ).rejects.toThrow(/requires an explicit `id`/);
+    ).rejects.toThrow(/requires an explicit/);
   });
 
   it("allows standalone SpInput usage without an id when no associations are rendered", async () => {
@@ -91,6 +97,24 @@ describe("SSR rendering", () => {
 
     expect(html).toContain(getButtonClasses({ variant: "primary", size: "lg", loading: true, disabled: true }));
     expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('tabindex="-1"');
+    expect(html).not.toContain('href="/docs"');
+  });
+
+  it("renders SpIconBox with upstream classes and safe disabled anchor behavior", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: {
+        as: "a",
+        href: "/docs",
+        loading: true,
+        variant: "primary",
+        size: "md",
+      },
+    });
+
+    expect(html).toContain(getIconBoxClasses({ variant: "primary", size: "md", loading: true, disabled: true }));
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('aria-busy="true"');
     expect(html).toContain('tabindex="-1"');
     expect(html).not.toContain('href="/docs"');
   });

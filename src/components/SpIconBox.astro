@@ -13,6 +13,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  tabindex?: number;
   loading?: boolean;
 
   [key: string]: any;
@@ -29,6 +30,7 @@ const {
   target,
   rel,
   type,
+  tabindex,
   ...attrs
 } = Astro.props as SpIconBoxProps;
 
@@ -44,6 +46,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isIconBoxDisabled ? href : undefined;
+const finalTabIndex = Tag === "a" && isIconBoxDisabled ? -1 : tabindex;
 ---
 
 <Tag
@@ -55,6 +58,7 @@ const finalHref = Tag === "a" && !isIconBoxDisabled ? href : undefined;
   disabled={Tag === "button" && isIconBoxDisabled ? true : undefined}
   aria-disabled={isIconBoxDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
+  tabindex={finalTabIndex}
   {...attrs}
 >
   <slot />
