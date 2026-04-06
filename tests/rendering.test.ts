@@ -5,8 +5,10 @@ import {
   getIconBoxClasses,
   getInputClasses,
 } from "@phcdevworks/spectre-ui";
+import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
+import SpBadge from "../src/components/SpBadge.astro";
 import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
@@ -133,5 +135,23 @@ describe("SSR rendering", () => {
     expect(html).toContain('type="button"');
     expect(html).toContain("disabled");
     expect(html).toContain('aria-disabled="true"');
+  });
+
+  it("renders SpBadge with upstream classes and safe disabled anchor behavior", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: {
+        as: "a",
+        href: "/docs",
+        loading: true,
+        variant: "primary",
+        size: "sm",
+      },
+    });
+
+    expect(html).toContain(getBadgeClasses({ variant: "primary", size: "sm", loading: true, disabled: true }));
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain('tabindex="-1"');
+    expect(html).not.toContain('href="/docs"');
   });
 });
