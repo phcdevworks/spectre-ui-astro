@@ -68,7 +68,7 @@ describe("SSR rendering", () => {
       container.renderToString(SpInput, {
         props,
       }),
-    ).rejects.toThrow(/requires an explicit/);
+    ).rejects.toThrow(/requires an explicit `id`/);
   });
 
   it("allows standalone SpInput usage without an id when no associations are rendered", async () => {
