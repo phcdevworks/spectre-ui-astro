@@ -88,12 +88,11 @@
   "dependencies": {},
   "devDependencies": {
     "@phcdevworks/spectre-ui": "^1.1.2",
-    "astro": "^6.1.4",
+    "astro": "^6.1.3",
     "@types/chroma-js": "^3.1.2",
     "@types/node": "^25.5.2",
     "@typescript-eslint/eslint-plugin": "^8.58.0",
     "@typescript-eslint/parser": "^8.58.0",
-    "astro": "^6.1.3",
     "chroma-js": "^3.2.0",
     "colord": "^2.9.3",
     "eslint": "^10.2.0",
