@@ -29,7 +29,7 @@ function assertPublishedPathsExist(paths, label) {
 
   if (missingPaths.length > 0) {
     throw new Error(
-      "Missing published " + label + " path(s): " + missingPaths.join(", "),
+      `Missing published ${label} path(s): ${missingPaths.join(", ")}`,
     );
   }
 }
@@ -48,11 +48,7 @@ function assertCopiedAstroComponentsExist() {
 
   if (sourceComponentFiles.length !== distComponentFiles.length) {
     throw new Error(
-      "dist/components Astro file count mismatch. Expected "
-        + sourceComponentFiles.length
-        + ", received "
-        + distComponentFiles.length
-        + ".",
+      `dist/components Astro file count mismatch. Expected ${sourceComponentFiles.length}, received ${distComponentFiles.length}.`,
     );
   }
 
@@ -60,7 +56,7 @@ function assertCopiedAstroComponentsExist() {
     const distPath = resolve(distComponentsDir, fileName);
 
     if (!existsSync(distPath)) {
-      throw new Error("Missing copied Astro component in dist/components: " + fileName);
+      throw new Error(`Missing copied Astro component in dist/components: ${fileName}`);
     }
   }
 
@@ -69,11 +65,7 @@ function assertCopiedAstroComponentsExist() {
 
   if (srcComponentBasenames.join("|") !== distComponentBasenames.join("|")) {
     throw new Error(
-      "dist/components Astro files drifted from src/components. Expected "
-        + srcComponentBasenames.join(", ")
-        + ", received "
-        + distComponentBasenames.join(", ")
-        + ".",
+      `dist/components Astro files drifted from src/components. Expected ${srcComponentBasenames.join(", ")}, received ${distComponentBasenames.join(", ")}.`,
     );
   }
 }
@@ -91,39 +83,39 @@ if ("module" in packageJson) {
 }
 
 if ("require" in packageJson.exports["."]) {
-  throw new Error("package.json exports[\".\"] must not advertise a CommonJS require entrypoint.");
+  throw new Error('package.json exports["."] must not advertise a CommonJS require entrypoint.');
 }
 
 if (packageJson.main !== "./dist/index.js") {
-  throw new Error("package.json main must point to ./dist/index.js, received " + packageJson.main);
+  throw new Error(`package.json main must point to ./dist/index.js, received ${packageJson.main}`);
 }
 
 if (packageJson.types !== "./dist/index.d.ts") {
-  throw new Error("package.json types must point to ./dist/index.d.ts, received " + packageJson.types);
+  throw new Error(`package.json types must point to ./dist/index.d.ts, received ${packageJson.types}`);
 }
 
 if (packageJson.dependencies?.[upstreamContractPackage]) {
-  throw new Error(upstreamContractPackage + " must not be published as a direct runtime dependency.");
+  throw new Error(`${upstreamContractPackage} must not be published as a direct runtime dependency.`);
 }
 
 if (packageJson.dependencies?.[astroHostPackage]) {
-  throw new Error(astroHostPackage + " must not be published as a direct runtime dependency for this Astro adapter.");
+  throw new Error(`${astroHostPackage} must not be published as a direct runtime dependency for this Astro adapter.`);
 }
 
 if (typeof upstreamPeerRange !== "string" || upstreamPeerRange.length === 0) {
-  throw new Error(upstreamContractPackage + " must be declared explicitly in peerDependencies.");
+  throw new Error(`${upstreamContractPackage} must be declared explicitly in peerDependencies.`);
 }
 
 if (packageJson.devDependencies?.[upstreamContractPackage] !== upstreamPeerRange) {
-  throw new Error(upstreamContractPackage + " devDependency must stay aligned with the published peer dependency range.");
+  throw new Error(`${upstreamContractPackage} devDependency must stay aligned with the published peer dependency range.`);
 }
 
 if (typeof astroPeerRange !== "string" || astroPeerRange.length === 0) {
-  throw new Error(astroHostPackage + " must be declared explicitly in peerDependencies.");
+  throw new Error(`${astroHostPackage} must be declared explicitly in peerDependencies.`);
 }
 
 if (packageJson.devDependencies?.[astroHostPackage] !== astroPeerRange) {
-  throw new Error(astroHostPackage + " devDependency must stay aligned with the published peer dependency range.");
+  throw new Error(`${astroHostPackage} devDependency must stay aligned with the published peer dependency range.`);
 }
 
 assertPublishedPathsExist(runtimePaths, "runtime export");
