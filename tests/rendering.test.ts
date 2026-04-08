@@ -154,4 +154,21 @@ describe("SSR rendering", () => {
     expect(html).toContain('tabindex="-1"');
     expect(html).not.toContain('href="/docs"');
   });
+
+  it("renders SpButton with role='button' for non-native elements and handles hovered/active props", async () => {
+    const html = await container.renderToString(SpButton, {
+      props: {
+        as: "span",
+        hovered: true,
+        active: true,
+        loading: true,
+      },
+    });
+
+    expect(html).toContain(getButtonClasses({ hovered: true, active: true, loading: true, disabled: true }));
+    expect(html).toContain('role="button"');
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('tabindex="-1"');
+  });
 });
