@@ -27,6 +27,10 @@ interface SpCardProps extends CardRecipeOptions {
   tabindex?: number;
   "aria-label"?: string;
 
+  loading?: boolean;
+  hovered?: boolean;
+  focused?: boolean;
+
   [key: string]: any;
 }
 
@@ -36,6 +40,9 @@ const {
   padded,
   fullHeight,
   disabled,
+  loading,
+  hovered,
+  focused,
   as: Tag = "div",
   class: className,
   href,
@@ -47,12 +54,23 @@ const {
   ...rest
 } = Astro.props as SpCardProps;
 
-const classes = getCardClasses({ variant, interactive, padded, fullHeight, disabled });
+const isCardDisabled = disabled || loading;
+
+const classes = getCardClasses({
+  variant,
+  interactive,
+  padded,
+  fullHeight,
+  disabled: isCardDisabled,
+  loading,
+  hovered,
+  focused,
+});
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !disabled ? href : undefined;
-const finalTabIndex = Tag === "a" && disabled ? -1 : tabindex;
+const finalHref = Tag === "a" && !isCardDisabled ? href : undefined;
+const finalTabIndex = Tag === "a" && isCardDisabled ? -1 : tabindex;
 ---
 
 <Tag
@@ -61,8 +79,9 @@ const finalTabIndex = Tag === "a" && disabled ? -1 : tabindex;
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
-  disabled={Tag === "button" && disabled ? true : undefined}
-  aria-disabled={disabled ? "true" : undefined}
+  disabled={Tag === "button" && isCardDisabled ? true : undefined}
+  aria-disabled={isCardDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
   tabindex={finalTabIndex}
   {...rest}
