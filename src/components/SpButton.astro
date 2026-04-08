@@ -25,6 +25,8 @@ const {
   disabled,
   iconOnly,
   pill,
+  hovered,
+  active,
   as: Tag = "button",
   class: className,
   href,
@@ -45,13 +47,15 @@ const classes = getButtonClasses({
   disabled: isDisabled,
   iconOnly,
   pill,
+  hovered,
+  active,
 });
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isDisabled ? -1 : tabindex;
 ---
 
 <Tag
@@ -61,7 +65,9 @@ const finalTabIndex = Tag === "a" && isDisabled ? -1 : tabindex;
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" ? isDisabled : undefined}
+  role={Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
   tabindex={finalTabIndex}
   {...rest}
 >
