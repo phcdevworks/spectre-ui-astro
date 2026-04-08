@@ -32,6 +32,8 @@ interface SpTestimonialProps extends TestimonialRecipeOptions {
   rel?: string;
 
   type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  "aria-label"?: string;
 
   disabled?: boolean;
   loading?: boolean;
@@ -46,6 +48,8 @@ const {
   target,
   rel,
   type,
+  tabindex,
+  "aria-label": ariaLabel,
   disabled,
   loading,
   ...rest
@@ -61,6 +65,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isTestimonialDisabled ? href : undefined;
+const finalTabIndex = Tag === "a" && isTestimonialDisabled ? -1 : tabindex;
 
 const quoteClasses = getTestimonialQuoteClasses();
 const authorClasses = getTestimonialAuthorClasses();
@@ -78,6 +83,8 @@ const authorTitleClasses = getTestimonialAuthorTitleClasses();
   disabled={Tag === "button" && isTestimonialDisabled ? true : undefined}
   aria-disabled={isTestimonialDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
+  tabindex={finalTabIndex}
   {...rest}
 >
   <div class={quoteClasses}>
