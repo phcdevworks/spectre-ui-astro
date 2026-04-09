@@ -155,6 +155,22 @@ describe("SSR rendering", () => {
     expect(html).not.toContain('href="/docs"');
   });
 
+  it("renders SpBadge with upstream classes and accessibility improvements", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: {
+        as: "span",
+        interactive: true,
+        hovered: true,
+        disabled: true,
+      },
+    });
+
+    expect(html).toContain(getBadgeClasses({ interactive: true, hovered: true, disabled: true }));
+    expect(html).toContain('role="button"');
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('tabindex="-1"');
+  });
+
   it("renders SpButton with role='button' for non-native elements and handles hovered/active props", async () => {
     const html = await container.renderToString(SpButton, {
       props: {
