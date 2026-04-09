@@ -28,6 +28,7 @@ const {
   interactive,
   disabled,
   loading,
+  hovered,
   as: Tag = "span",
   class: className,
   href,
@@ -48,12 +49,13 @@ const classes = getBadgeClasses({
   interactive,
   disabled: isBadgeDisabled,
   loading,
+  hovered,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isBadgeDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isBadgeDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isBadgeDisabled ? -1 : tabindex;
 ---
 
 <Tag
@@ -63,6 +65,7 @@ const finalTabIndex = Tag === "a" && isBadgeDisabled ? -1 : tabindex;
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isBadgeDisabled ? true : undefined}
+  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isBadgeDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
