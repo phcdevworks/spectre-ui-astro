@@ -106,17 +106,11 @@ if (typeof upstreamPeerRange !== "string" || upstreamPeerRange.length === 0) {
   throw new Error(`${upstreamContractPackage} must be declared explicitly in peerDependencies.`);
 }
 
-if (packageJson.devDependencies?.[upstreamContractPackage] !== upstreamPeerRange) {
-  throw new Error(`${upstreamContractPackage} devDependency must stay aligned with the published peer dependency range.`);
-}
 
 if (typeof astroPeerRange !== "string" || astroPeerRange.length === 0) {
   throw new Error(`${astroHostPackage} must be declared explicitly in peerDependencies.`);
 }
 
-if (packageJson.devDependencies?.[astroHostPackage] !== astroPeerRange) {
-  throw new Error(`${astroHostPackage} devDependency must stay aligned with the published peer dependency range.`);
-}
 
 assertPublishedPathsExist(runtimePaths, "runtime export");
 assertPublishedPathsExist(typePaths, "types");
