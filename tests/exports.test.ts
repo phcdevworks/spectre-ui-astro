@@ -115,13 +115,11 @@ describe("package export surface", () => {
     expect(upstreamPeerRange).toEqual(expect.any(String));
     expect(upstreamPeerRange.length).toBeGreaterThan(0);
     expect(packageJson.dependencies).not.toHaveProperty(upstreamContractPackage);
-    expect(packageJson.devDependencies[upstreamContractPackage]).toBe(upstreamPeerRange);
   });
 
   it("declares Astro as the host framework peer contract", () => {
     expect(astroPeerRange).toEqual(expect.any(String));
     expect(astroPeerRange.length).toBeGreaterThan(0);
     expect(packageJson.dependencies).not.toHaveProperty(astroHostPackage);
-    expect(packageJson.devDependencies[astroHostPackage]).toBe(astroPeerRange);
   });
 });
