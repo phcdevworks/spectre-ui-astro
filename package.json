@@ -89,7 +89,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@phcdevworks/spectre-ui": "^1.1.2",
+    "@phcdevworks/spectre-ui": "^1.2.0",
     "astro": "^6.1.5",
     "@types/chroma-js": "^3.1.2",
     "@types/node": "^25.6.0",
