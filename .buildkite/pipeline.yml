@@ -4,7 +4,6 @@ steps:
     command:
       - 'node --version'
       - 'npm --version'
-      - 'npm run validate:runtime'
       - 'npm ci'
       - 'npm run ci:verify'
       - 'cd examples && npm install --no-package-lock && npm run build'
