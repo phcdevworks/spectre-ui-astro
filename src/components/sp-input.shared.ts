@@ -16,7 +16,7 @@ interface SpInputBaseProps extends InputRecipeOptions {
   class?: string;
   disabled?: boolean;
   loading?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 type SpInputAssociatedProps = {

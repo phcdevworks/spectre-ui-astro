@@ -65,12 +65,14 @@
   "scripts": {
     "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs && node scripts/validate-package-contract.mjs",
     "build:types": "tsc --project tsconfig.build.json",
+    "ci:verify": "npm run lint && npm run build && npm run typecheck && npm test",
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "clean": "rm -rf dist",
+    "validate:runtime": "node scripts/validate-runtime.mjs",
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build"
   },

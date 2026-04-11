@@ -1,0 +1,15 @@
+steps:
+  - label: ':node: spectre-ui-astro verify'
+    key: 'verify'
+    command:
+      - 'node --version'
+      - 'npm --version'
+      - 'npm run validate:runtime'
+      - 'npm ci'
+      - 'npm run ci:verify'
+      - 'cd examples && npm install --no-package-lock && npm run build'
+    agents:
+      queue: 'default'
+    artifact_paths:
+      - 'dist/**/*'
+    timeout_in_minutes: 20
