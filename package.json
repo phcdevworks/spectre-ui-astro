@@ -72,7 +72,6 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "clean": "rm -rf dist",
-    "validate:runtime": "node scripts/validate-runtime.mjs",
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build"
   },
