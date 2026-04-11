@@ -10,3 +10,23 @@ updates:
         patterns:
           - '*'
     open-pull-requests-limit: 1
+
+  - package-ecosystem: npm
+    directory: '/examples'
+    schedule:
+      interval: weekly
+    groups:
+      npm-dependencies:
+        patterns:
+          - '*'
+    open-pull-requests-limit: 1
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - '*'
+    open-pull-requests-limit: 1
