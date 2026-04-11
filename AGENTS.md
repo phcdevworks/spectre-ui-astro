@@ -49,6 +49,11 @@ not redefine design ownership.
    upstream package, its `package.json` must declare that dependency honestly.
 10. Treat Astro as a host-framework contract. Dependency classification must
     make consumer requirements explicit.
+11. Do not add or require lockfile-strict example installs for local `file:..`
+    package links. Example apps in this repo are demo/validation surfaces, not
+    independently reproducible packages, so they must not rely on tracked
+    example lockfiles or `npm ci` in CI when consuming the parent package via a
+    local file dependency.
 
 ## What This Repository Owns
 
@@ -142,3 +147,10 @@ npm run build
 npm run typecheck
 npm test
 ```
+
+For `examples/`:
+
+- use `npm install`, not `npm ci`, when the example depends on the parent
+  package through `file:..`
+- do not introduce or require a tracked example `package-lock.json` as a CI
+  contract in that setup
