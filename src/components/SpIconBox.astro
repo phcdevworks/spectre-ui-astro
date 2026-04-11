@@ -14,7 +14,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
-  loading?: boolean;
+  "aria-label"?: string;
 
   [key: string]: any;
 }
@@ -22,8 +22,12 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
 const {
   variant,
   size,
+  interactive,
   disabled,
   loading,
+  hovered,
+  focused,
+  active,
   as: Tag = "span",
   class: className,
   href,
@@ -31,6 +35,7 @@ const {
   rel,
   type,
   tabindex,
+  "aria-label": ariaLabel,
   ...attrs
 } = Astro.props as SpIconBoxProps;
 
@@ -39,14 +44,18 @@ const isIconBoxDisabled = disabled || loading;
 const classes = getIconBoxClasses({
   variant,
   size,
+  interactive,
   disabled: isIconBoxDisabled,
   loading,
+  hovered,
+  focused,
+  active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isIconBoxDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isIconBoxDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isIconBoxDisabled ? -1 : tabindex;
 ---
 
 <Tag
@@ -56,8 +65,10 @@ const finalTabIndex = Tag === "a" && isIconBoxDisabled ? -1 : tabindex;
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isIconBoxDisabled ? true : undefined}
+  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isIconBoxDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
   tabindex={finalTabIndex}
   {...attrs}
 >
