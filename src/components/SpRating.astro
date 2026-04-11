@@ -34,6 +34,7 @@ interface SpRatingProps extends RatingRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  "aria-label"?: string;
 
   [key: string]: any;
 }
@@ -50,6 +51,7 @@ const {
   disabled,
   loading,
   tabindex,
+  "aria-label": ariaLabel,
   ...rest
 } = Astro.props as SpRatingProps;
 
@@ -63,7 +65,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isRatingDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isRatingDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isRatingDisabled ? -1 : tabindex;
 
 const starsClasses = getRatingStarsClasses();
 const textClasses = getRatingTextClasses();
@@ -80,10 +82,11 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
   disabled={Tag === "button" && isRatingDisabled ? true : undefined}
   aria-disabled={isRatingDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
   tabindex={finalTabIndex}
   {...rest}
 >
-  <div class={starsClasses}>
+  <div class={starsClasses} aria-hidden="true">
     {
       stars.map((isFilled) => (
         <span class={getRatingStarClasses(isFilled)}>
