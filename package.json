@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
   "type": "module",
+  "packageManager": "npm@11.12.1",
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
