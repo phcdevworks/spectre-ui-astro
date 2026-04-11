@@ -6,6 +6,23 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.0.3] - 2026-04-11
+
+Release Title: Accessibility Hardening and Release Workflow Cleanup
+
+### Added
+
+- Added loading support and improved accessibility behavior for SpPricingCard, and added loading, hovered, and focused states to SpCard.
+- Added stronger accessibility and prop-forwarding support across SpBadge, SpButton, SpIconBox, SpRating, and SpTestimonial, including tabindex, aria-label, and tighter attribute guarding where appropriate.
+- Added package export validation, copied-component validation, and expanded SSR coverage for SpPricingCard, SpRating, and standalone SpInput rendering.
+
+### Changed
+
+- Declared Astro as a peer dependency and aligned the adapter around the Astro 6.1.x toolchain.
+- Refined CI and release automation with a Buildkite pipeline, updated GitHub Actions workflow configuration, npm-based example installs, and example lockfile handling changes.
+- Updated development tooling and dependencies, including TypeScript 6.0.2, Vitest 4.1.4, Prettier 3.8.2, and current ESLint and Node type packages.
+- Removed Node.js runtime validation and devDependency alignment checks while tightening package contract enforcement and adapter guidance.
+
 ## [2.0.2] - 2026-04-05
 
 Release Title: Loading Support and Adapter Guardrails
