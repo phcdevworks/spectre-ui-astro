@@ -4,6 +4,15 @@ import {
   getCardClasses,
   getIconBoxClasses,
   getInputClasses,
+  getPricingCardBadgeClasses,
+  getPricingCardClasses,
+  getPricingCardDescriptionClasses,
+  getPricingCardPriceClasses,
+  getPricingCardPriceContainerClasses,
+  getRatingClasses,
+  getRatingStarClasses,
+  getRatingStarsClasses,
+  getRatingTextClasses,
 } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
@@ -13,6 +22,8 @@ import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
+import SpPricingCard from "../src/components/SpPricingCard.astro";
+import SpRating from "../src/components/SpRating.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
 
 let container: AstroContainer;
@@ -135,6 +146,66 @@ describe("SSR rendering", () => {
     expect(html).toContain('type="button"');
     expect(html).toContain("disabled");
     expect(html).toContain('aria-disabled="true"');
+  });
+
+
+  it("renders SpPricingCard with upstream slot wrapper classes and safe disabled anchor behavior", async () => {
+    const html = await container.renderToString(SpPricingCard, {
+      props: {
+        as: "a",
+        href: "/pricing",
+        featured: true,
+        loading: true,
+      },
+      slots: {
+        header: "Pro",
+        badge: "Most Popular",
+        price: "9",
+        description: "For growing teams",
+        default: "<button>Choose plan</button>",
+        footer: "Billed monthly",
+      },
+    });
+
+    expect(html).toContain(
+      getPricingCardClasses({ featured: true, loading: true, disabled: true }),
+    );
+    expect(html).toContain(getPricingCardBadgeClasses());
+    expect(html).toContain(getPricingCardPriceContainerClasses());
+    expect(html).toContain(getPricingCardPriceClasses());
+    expect(html).toContain(getPricingCardDescriptionClasses());
+    expect(html).toContain("Most Popular");
+    expect(html).toContain("9");
+    expect(html).toContain("For growing teams");
+    expect(html).toContain("aria-disabled=\"true\"");
+    expect(html).toContain("aria-busy=\"true\"");
+    expect(html).toContain("tabindex=\"-1\"");
+    expect(html).not.toContain("href=\"/pricing\"");
+  });
+
+  it("renders SpRating with upstream classes and loading-safe button behavior", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: {
+        as: "button",
+        value: 3,
+        max: 5,
+        loading: true,
+      },
+      slots: {
+        default: "Rated 3 out of 5",
+      },
+    });
+
+    expect(html).toContain(getRatingClasses({ loading: true, disabled: true }));
+    expect(html).toContain(getRatingStarsClasses());
+    expect(html).toContain(getRatingTextClasses());
+    expect(html).toContain(getRatingStarClasses(true));
+    expect(html).toContain(getRatingStarClasses(false));
+    expect(html).toContain("Rated 3 out of 5");
+    expect(html).toContain("type=\"button\"");
+    expect(html).toContain("disabled");
+    expect(html).toContain("aria-disabled=\"true\"");
+    expect(html).toContain("aria-busy=\"true\"");
   });
 
   it("renders SpBadge with upstream classes and safe disabled anchor behavior", async () => {
