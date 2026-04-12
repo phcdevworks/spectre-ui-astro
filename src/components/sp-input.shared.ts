@@ -16,6 +16,8 @@ interface SpInputBaseProps extends InputRecipeOptions {
   class?: string;
   disabled?: boolean;
   loading?: boolean;
+  focused?: boolean;
+  hovered?: boolean;
   [key: string]: unknown;
 }
 
