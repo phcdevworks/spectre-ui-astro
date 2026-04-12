@@ -18,6 +18,8 @@ const {
   class: className,
   disabled,
   loading,
+  focused,
+  hovered,
   ...rest
 } = Astro.props as SpInputProps;
 
@@ -36,6 +38,8 @@ const classes = getInputClasses({
   size,
   fullWidth,
   pill,
+  focused,
+  hovered,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
