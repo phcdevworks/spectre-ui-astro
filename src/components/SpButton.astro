@@ -14,6 +14,7 @@ interface SpButtonProps extends ButtonRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  "aria-label"?: string;
   [key: string]: any;
 }
 
@@ -26,6 +27,7 @@ const {
   iconOnly,
   pill,
   hovered,
+  focused,
   active,
   as: Tag = "button",
   class: className,
@@ -34,6 +36,7 @@ const {
   rel,
   type,
   tabindex,
+  "aria-label": ariaLabel,
   ...rest
 } = Astro.props as SpButtonProps;
 
@@ -48,6 +51,7 @@ const classes = getButtonClasses({
   iconOnly,
   pill,
   hovered,
+  focused,
   active,
 });
 
@@ -68,6 +72,7 @@ const finalTabIndex = Tag !== "button" && isDisabled ? -1 : tabindex;
   role={Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
   tabindex={finalTabIndex}
   {...rest}
 >
