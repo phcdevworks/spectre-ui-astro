@@ -70,7 +70,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isCardDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isCardDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isCardDisabled ? -1 : tabindex;
 ---
 
 <Tag
@@ -80,6 +80,7 @@ const finalTabIndex = Tag === "a" && isCardDisabled ? -1 : tabindex;
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isCardDisabled ? true : undefined}
+  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isCardDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
