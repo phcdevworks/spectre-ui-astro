@@ -42,6 +42,7 @@ interface SpRatingProps extends RatingRecipeOptions {
 const {
   value = 0,
   max = 5,
+  size,
   as: Tag = "div",
   class: className,
   href,
@@ -58,6 +59,7 @@ const {
 const isRatingDisabled = disabled || loading;
 
 const classes = getRatingClasses({
+  size,
   disabled: isRatingDisabled,
   loading,
 });
