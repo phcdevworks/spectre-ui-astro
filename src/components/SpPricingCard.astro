@@ -63,7 +63,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isPricingCardDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isPricingCardDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isPricingCardDisabled ? -1 : tabindex;
 
 const badgeClasses = getPricingCardBadgeClasses();
 const priceContainerClasses = getPricingCardPriceContainerClasses();
