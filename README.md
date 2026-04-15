@@ -4,19 +4,31 @@
 [![GitHub pulls](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
 [![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
-`@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre system for Astro applications that consume the core Spectre UI contract.
+`@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre
+system for Astro applications that consume the core Spectre UI contract.
 
-Maintained by PHCDevworks, it provides Astro-native components that wrap the logic, styling contracts, and class recipes defined in [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui). It stays strictly downstream of the core Spectre layers, keeps framework delivery separate from design ownership, and serves as the reference adapter pattern for future Spectre framework adapters.
+Maintained by PHCDevworks, it provides Astro-native components that wrap the
+logic, styling contracts, and class recipes defined in
+[`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui). It stays
+strictly downstream of the core Spectre layers, keeps framework delivery
+separate from design ownership, and serves as the reference adapter pattern for
+future Spectre framework adapters.
 
-[Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Security Policy](SECURITY.md)
+[Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) |
+[Security Policy](SECURITY.md)
 
 ## Key capabilities
 
-- Provides Astro-native components built on top of the `@phcdevworks/spectre-ui` recipe and class contract
-- Keeps Astro delivery SSR-friendly and type-safe without redefining tokens or core styling logic
-- Re-exports shared recipe helpers so Astro consumers can compose with the same styling API used downstream
-- Keeps framework ergonomics aligned with the upstream Spectre UI contract instead of introducing adapter drift
-- Establishes the reference adapter pattern for future Spectre framework packages
+- Provides Astro-native components built on top of the `@phcdevworks/spectre-ui`
+  recipe and class contract
+- Keeps Astro delivery SSR-friendly and type-safe without redefining tokens or
+  core styling logic
+- Re-exports shared recipe helpers so Astro consumers can compose with the same
+  styling API used downstream
+- Keeps framework ergonomics aligned with the upstream Spectre UI contract
+  instead of introducing adapter drift
+- Establishes the reference adapter pattern for future Spectre framework
+  packages
 
 ## Installation
 
@@ -28,7 +40,9 @@ npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 binds its upstream recipes, classes, and CSS contract for Astro rather than
 redefining them locally.
 
-If your project consumes Spectre tokens directly, install [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) as well.
+If your project consumes Spectre tokens directly, install
+[`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
+as well.
 
 ## Quick start
 
@@ -44,7 +58,8 @@ import { SpBadge, SpButton, SpCard, SpInput } from '@phcdevworks/spectre-ui-astr
 
 ### CSS import
 
-This package does not ship its own CSS. Import the canonical Spectre UI stylesheet from `@phcdevworks/spectre-ui` in your Astro layout or page:
+This package does not ship its own CSS. Import the canonical Spectre UI
+stylesheet from `@phcdevworks/spectre-ui` in your Astro layout or page:
 
 ```astro
 ---
@@ -119,19 +134,21 @@ associated accessibility wiring.
 - Astro-native component delivery for Spectre UI recipes and classes
 - Astro-friendly, SSR-safe component interfaces and composition patterns
 - Type-safe framework bindings for the upstream Spectre UI contract
-- Adapter-level ergonomics that make `@phcdevworks/spectre-ui` straightforward to consume in Astro projects
+- Adapter-level ergonomics that make `@phcdevworks/spectre-ui` straightforward
+  to consume in Astro projects
 - A reference implementation for future Spectre framework adapters
 
-Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine it.
+Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine
+it.
 
 ## What this package does not own
 
-- Design values or token meaning  
-  That belongs to [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens).
-- Core CSS, utilities, Tailwind helpers, or class recipe logic  
-  That belongs to [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui).
-- Local styling systems that diverge from the shared Spectre contract  
-  This package consumes upstream styling behavior rather than replacing it.
+- Design values or token meaning That belongs to
+  [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens).
+- Core CSS, utilities, Tailwind helpers, or class recipe logic That belongs to
+  [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui).
+- Local styling systems that diverge from the shared Spectre contract This
+  package consumes upstream styling behavior rather than replacing it.
 
 ## Package exports / API surface
 
@@ -148,7 +165,8 @@ Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine it
 - `SpRating`
 - `SpTestimonial`
 
-The root package also re-exports shared recipe helpers and related TypeScript option and variant types from `@phcdevworks/spectre-ui`, including:
+The root package also re-exports shared recipe helpers and related TypeScript
+option and variant types from `@phcdevworks/spectre-ui`, including:
 
 - `getBadgeClasses`
 - `getButtonClasses`
@@ -190,11 +208,16 @@ stays with the upstream UI package.
 
 Spectre keeps responsibilities separate:
 
-- [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) defines design values, semantic meaning, and token contracts
-- [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui) turns those tokens into reusable CSS, utilities, Tailwind helpers, and type-safe class recipes
-- `@phcdevworks/spectre-ui-astro` binds that upstream UI contract into Astro-native components and framework ergonomics
+- [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
+  defines design values, semantic meaning, and token contracts
+- [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui) turns
+  those tokens into reusable CSS, utilities, Tailwind helpers, and type-safe
+  class recipes
+- `@phcdevworks/spectre-ui-astro` binds that upstream UI contract into
+  Astro-native components and framework ergonomics
 
-That separation keeps design ownership centralized, keeps styling logic shared, and lets framework adapters stay thin and consistent.
+That separation keeps design ownership centralized, keeps styling logic shared,
+and lets framework adapters stay thin and consistent.
 
 ## Development
 
@@ -220,10 +243,12 @@ PHCDevworks maintains this package as part of the Spectre suite.
 
 When contributing:
 
-- keep Astro components aligned with the upstream `@phcdevworks/spectre-ui` contract
+- keep Astro components aligned with the upstream `@phcdevworks/spectre-ui`
+  contract
 - do not redefine tokens, CSS behavior, or recipe logic in this package
 - keep the adapter SSR-friendly, type-safe, and framework-appropriate
-- run `npm test` to verify adapter exports, SSR rendering, and example/docs guardrails
+- run `npm test` to verify adapter exports, SSR rendering, and example/docs
+  guardrails
 - run `npm run build` and `npm run typecheck` before opening a pull request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.

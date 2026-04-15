@@ -1,7 +1,7 @@
 # Contributing to @phcdevworks/spectre-ui-astro
 
-Thanks for helping improve Spectre. This package is maintained by PHCDevworks
-as Layer 3 of the Spectre suite. It exposes Spectre UI through Astro-native
+Thanks for helping improve Spectre. This package is maintained by PHCDevworks as
+Layer 3 of the Spectre suite. It exposes Spectre UI through Astro-native
 components without duplicating design tokens or CSS logic.
 
 ## Spectre Suite Model
@@ -33,8 +33,8 @@ structure, adapters define delivery.
 5. Run `npm test`.
 6. If needed, validate behavior in the `examples/` app.
 
-`@phcdevworks/spectre-ui` is a required peer dependency for consumers and
-should remain the source of truth for shared recipes, classes, and CSS.
+`@phcdevworks/spectre-ui` is a required peer dependency for consumers and should
+remain the source of truth for shared recipes, classes, and CSS.
 
 ## Project Structure
 
@@ -58,7 +58,8 @@ should remain the source of truth for shared recipes, classes, and CSS.
 - Follow Astro and TypeScript best practices.
 - Run `npm run build` for distributable output.
 - Run `npm run typecheck` before opening a pull request.
-- Run `npm test` to catch export drift, SSR regressions, and doc/example mismatch.
+- Run `npm test` to catch export drift, SSR regressions, and doc/example
+  mismatch.
 - Use the example app when you need to verify rendering behavior manually.
 
 ### Documentation
