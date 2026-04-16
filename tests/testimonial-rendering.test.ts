@@ -63,4 +63,16 @@ describe("SpTestimonial SSR rendering", () => {
     expect(html).toContain('tabindex="-1"');
     expect(html).not.toContain('href="/testimonials/1"');
   });
+
+  it("applies tabindex='-1' to disabled non-button elements with custom tabindex", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: {
+        as: "div",
+        tabindex: 0,
+        disabled: true,
+      },
+    });
+
+    expect(html).toContain('tabindex="-1"');
+  });
 });
