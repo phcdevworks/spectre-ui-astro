@@ -65,7 +65,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isTestimonialDisabled ? href : undefined;
-const finalTabIndex = Tag === "a" && isTestimonialDisabled ? -1 : tabindex;
+const finalTabIndex = Tag !== "button" && isTestimonialDisabled ? -1 : tabindex;
 
 const quoteClasses = getTestimonialQuoteClasses();
 const authorClasses = getTestimonialAuthorClasses();
