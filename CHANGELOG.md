@@ -6,6 +6,22 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-04-18
+
+Release Title: Accessibility Parity and Upstream Alignment
+
+### Added
+
+- Added `size` prop support for `SpRating`.
+- Added regression coverage for `SpBadge`, `SpButton`, `SpCard`, `SpInput`, `SpPricingCard`, and `SpTestimonial` accessibility and prop-forwarding behavior.
+- Added `ROADMAP.md` and `TODO.md` to track adapter contract parity, packaging validation, and follow-on Astro adapter priorities.
+
+### Changed
+
+- Improved prop forwarding and attribute guarding for `SpBadge`, `SpButton`, and `SpInput` so state props such as `active`, `focused`, and `hovered` reach upstream recipes without leaking invalid DOM attributes.
+- Improved disabled and loading accessibility behavior for `SpCard`, `SpPricingCard`, and `SpTestimonial`, aligning non-native interactive tabindex handling with library standards while preserving native button behavior.
+- Updated the `@phcdevworks/spectre-ui` peer dependency to `^1.2.0` and refreshed local development tooling and lockfile coverage around `@phcdevworks/spectre-ui` `^1.3.0`, Astro `6.1.7`, TypeScript `6.0.3`, Prettier `3.8.3`, TypeScript-ESLint `8.58.2`, and ESLint `10.2.1`.
+
 ## [2.0.3] - 2026-04-11
 
 Release Title: Accessibility Hardening and Release Workflow Cleanup
