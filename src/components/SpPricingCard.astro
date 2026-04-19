@@ -39,8 +39,12 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
 
 const {
   featured,
+  interactive,
   disabled,
   loading,
+  hovered,
+  focused,
+  active,
   as: Tag = "div",
   class: className,
   href,
@@ -56,14 +60,23 @@ const isPricingCardDisabled = disabled || loading;
 
 const classes = getPricingCardClasses({
   featured,
+  interactive,
   disabled: isPricingCardDisabled,
   loading,
+  hovered,
+  focused,
+  active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isPricingCardDisabled ? href : undefined;
-const finalTabIndex = Tag !== "button" && isPricingCardDisabled ? -1 : tabindex;
+const finalTabIndex =
+  Tag !== "button" && isPricingCardDisabled
+    ? -1
+    : interactive && Tag !== "button" && Tag !== "a"
+      ? (tabindex ?? 0)
+      : tabindex;
 
 const badgeClasses = getPricingCardBadgeClasses();
 const priceContainerClasses = getPricingCardPriceContainerClasses();
@@ -78,6 +91,7 @@ const descriptionClasses = getPricingCardDescriptionClasses();
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isPricingCardDisabled ? true : undefined}
+  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isPricingCardDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}

@@ -59,4 +59,36 @@ describe("SpPricingCard improvement verification", () => {
     expect(html).toContain('tabindex="0"');
     expect(html).toContain('disabled');
   });
+
+  it("applies role='button' and default tabindex when interactive", async () => {
+    const html = await container.renderToString(SpPricingCard, {
+      props: {
+        as: "div",
+        interactive: true,
+      },
+    });
+
+    expect(html).toContain('role="button"');
+    expect(html).toContain('tabindex="0"');
+  });
+
+  it("passes state props to recipe and does not leak them to DOM", async () => {
+    const props = {
+      interactive: true,
+      hovered: true,
+      focused: true,
+      active: true,
+    };
+    const html = await container.renderToString(SpPricingCard, {
+      props,
+    });
+
+    const expectedClasses = getPricingCardClasses(props);
+    expect(html).toContain(expectedClasses);
+
+    expect(html).not.toContain('interactive="true"');
+    expect(html).not.toContain('hovered="true"');
+    expect(html).not.toContain('focused="true"');
+    expect(html).not.toContain('active="true"');
+  });
 });
