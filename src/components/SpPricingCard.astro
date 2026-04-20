@@ -39,9 +39,9 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
 
 const {
   featured,
+  interactive,
   disabled,
   loading,
-  interactive,
   hovered,
   focused,
   active,
@@ -60,9 +60,9 @@ const isPricingCardDisabled = disabled || loading;
 
 const classes = getPricingCardClasses({
   featured,
+  interactive,
   disabled: isPricingCardDisabled,
   loading,
-  interactive,
   hovered,
   focused,
   active,
