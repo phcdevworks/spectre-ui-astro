@@ -43,14 +43,18 @@ const {
   value = 0,
   max = 5,
   size,
+  interactive,
+  disabled,
+  loading,
+  hovered,
+  focused,
+  active,
   as: Tag = "div",
   class: className,
   href,
   target,
   rel,
   type,
-  disabled,
-  loading,
   tabindex,
   "aria-label": ariaLabel,
   ...rest
@@ -60,14 +64,23 @@ const isRatingDisabled = disabled || loading;
 
 const classes = getRatingClasses({
   size,
+  interactive,
   disabled: isRatingDisabled,
   loading,
+  hovered,
+  focused,
+  active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isRatingDisabled ? href : undefined;
-const finalTabIndex = Tag !== "button" && isRatingDisabled ? -1 : tabindex;
+const finalTabIndex =
+  Tag !== "button" && isRatingDisabled
+    ? -1
+    : interactive && Tag !== "button" && Tag !== "a"
+      ? (tabindex ?? 0)
+      : tabindex;
 
 const starsClasses = getRatingStarsClasses();
 const textClasses = getRatingTextClasses();
@@ -82,6 +95,7 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isRatingDisabled ? true : undefined}
+  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isRatingDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
