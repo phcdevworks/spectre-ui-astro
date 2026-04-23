@@ -75,3 +75,49 @@ describe("SpRating accessibility improvements", () => {
     expect(htmlDisabledButton).toContain('disabled');
   });
 });
+
+describe("SpRating interactive improvements", () => {
+  it("applies role='button' when interactive is true on a non-native tag", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: {
+        as: "div",
+        interactive: true,
+      },
+    });
+
+    expect(html).toContain('role="button"');
+  });
+
+  it("defaults tabindex to 0 for interactive non-native elements", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: {
+        as: "div",
+        interactive: true,
+      },
+    });
+
+    expect(html).toContain('tabindex="0"');
+  });
+
+  it("applies state-related classes when props are passed", async () => {
+    const htmlNormal = await container.renderToString(SpRating, {
+      props: {
+        interactive: true,
+      },
+    });
+
+    const htmlHovered = await container.renderToString(SpRating, {
+      props: {
+        interactive: true,
+        hovered: true,
+      },
+    });
+
+    // We expect the class lists to be different when hovered is true
+    const classNormal = (htmlNormal.match(/class="([^"]+)"/) || [])[1];
+    const classHovered = (htmlHovered.match(/class="([^"]+)"/) || [])[1];
+
+    expect(classNormal).not.toBe(classHovered);
+    expect(classHovered).toBeDefined();
+  });
+});
