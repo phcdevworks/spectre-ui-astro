@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
   "type": "module",
-  "packageManager": "npm@11.12.1",
+  "packageManager": "npm@11.13.0",
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -90,7 +90,7 @@
   "dependencies": {},
   "devDependencies": {
     "@phcdevworks/spectre-ui": "^1.3.0",
-    "astro": "^6.1.8",
+    "astro": "^6.1.9",
     "@types/chroma-js": "^3.1.2",
     "@types/node": "^25.6.0",
     "@typescript-eslint/eslint-plugin": "^8.59.0",
