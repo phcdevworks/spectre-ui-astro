@@ -30,6 +30,7 @@ interface SpCardProps extends CardRecipeOptions {
   loading?: boolean;
   hovered?: boolean;
   focused?: boolean;
+  active?: boolean;
 
   [key: string]: any;
 }
@@ -43,6 +44,7 @@ const {
   loading,
   hovered,
   focused,
+  active,
   as: Tag = "div",
   class: className,
   href,
@@ -65,12 +67,18 @@ const classes = getCardClasses({
   loading,
   hovered,
   focused,
+  active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isCardDisabled ? href : undefined;
-const finalTabIndex = Tag !== "button" && isCardDisabled ? -1 : tabindex;
+const finalTabIndex =
+  Tag !== "button" && isCardDisabled
+    ? -1
+    : interactive && Tag !== "button" && Tag !== "a"
+      ? (tabindex ?? 0)
+      : tabindex;
 ---
 
 <Tag
