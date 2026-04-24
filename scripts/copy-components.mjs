@@ -6,10 +6,7 @@ const destDir = resolve(process.cwd(), "dist/components");
 
 async function main() {
   await rm(destDir, { recursive: true, force: true });
-  await cp(srcDir, destDir, {
-    recursive: true,
-    filter: (src) => !src.endsWith(".ts"),
-  });
+  await cp(srcDir, destDir, { recursive: true });
 }
 
 main().catch((error) => {
