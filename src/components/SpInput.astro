@@ -20,6 +20,7 @@ const {
   loading,
   focused,
   hovered,
+  active,
   ...rest
 } = Astro.props as SpInputProps;
 
@@ -40,6 +41,7 @@ const classes = getInputClasses({
   pill,
   focused,
   hovered,
+  active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
