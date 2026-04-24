@@ -1,6 +1,7 @@
 ---
 import type { ButtonRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
 type SpButtonElement = "button" | "a" | "span" | "div" | "li";
 
@@ -57,9 +58,13 @@ const classes = getButtonClasses({
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !isDisabled ? href : undefined;
-const finalTabIndex = Tag !== "button" && isDisabled ? -1 : tabindex;
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled,
+  href,
+  type,
+  tabindex,
+});
 ---
 
 <Tag

@@ -8,6 +8,7 @@ import {
   getTestimonialAuthorTitleClasses,
   type TestimonialRecipeOptions,
 } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
 type SpTestimonialElement =
   | "div"
@@ -68,14 +69,14 @@ const classes = getTestimonialClasses({
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !isTestimonialDisabled ? href : undefined;
-const finalTabIndex =
-  Tag !== "button" && isTestimonialDisabled
-    ? -1
-    : interactive && Tag !== "button" && Tag !== "a"
-      ? (tabindex ?? 0)
-      : tabindex;
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isTestimonialDisabled,
+  href,
+  type,
+  tabindex,
+  interactive,
+});
 
 const quoteClasses = getTestimonialQuoteClasses();
 const authorClasses = getTestimonialAuthorClasses();

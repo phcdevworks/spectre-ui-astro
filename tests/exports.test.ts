@@ -114,12 +114,12 @@ describe("package export surface", () => {
   it("declares @phcdevworks/spectre-ui as the upstream peer contract", () => {
     expect(upstreamPeerRange).toEqual(expect.any(String));
     expect(upstreamPeerRange.length).toBeGreaterThan(0);
-    expect(packageJson.dependencies).not.toHaveProperty(upstreamContractPackage);
+    expect(packageJson.dependencies ?? {}).not.toHaveProperty(upstreamContractPackage);
   });
 
   it("declares Astro as the host framework peer contract", () => {
     expect(astroPeerRange).toEqual(expect.any(String));
     expect(astroPeerRange.length).toBeGreaterThan(0);
-    expect(packageJson.dependencies).not.toHaveProperty(astroHostPackage);
+    expect(packageJson.dependencies ?? {}).not.toHaveProperty(astroHostPackage);
   });
 });

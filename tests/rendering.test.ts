@@ -1,5 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import {
+  getBadgeClasses,
   getButtonClasses,
   getCardClasses,
   getIconBoxClasses,
@@ -14,7 +15,6 @@ import {
   getRatingStarsClasses,
   getRatingTextClasses,
 } from "@phcdevworks/spectre-ui";
-import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
 import SpBadge from "../src/components/SpBadge.astro";

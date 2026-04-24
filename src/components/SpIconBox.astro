@@ -1,6 +1,7 @@
 ---
 import type { IconBoxRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getIconBoxClasses } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
 type SpIconBoxElement = "div" | "span" | "i" | "a" | "button" | "li";
 
@@ -53,9 +54,13 @@ const classes = getIconBoxClasses({
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !isIconBoxDisabled ? href : undefined;
-const finalTabIndex = Tag !== "button" && isIconBoxDisabled ? -1 : tabindex;
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isIconBoxDisabled,
+  href,
+  type,
+  tabindex,
+});
 ---
 
 <Tag

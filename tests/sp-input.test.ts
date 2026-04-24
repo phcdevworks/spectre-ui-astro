@@ -10,23 +10,15 @@ beforeAll(async () => {
   container = await AstroContainer.create();
 });
 
-describe("SpInput improvement verification", () => {
-  it("passes hovered and focused states to the recipe and prevents attribute leakage", async () => {
+describe("SpInput state behavior", () => {
+  it("passes hovered and focused states to the recipe without leaking them to DOM", async () => {
     const html = await container.renderToString(SpInput, {
-      props: {
-        hovered: true,
-        focused: true,
-      } as SpInputProps,
+      props: { hovered: true, focused: true } as SpInputProps,
     });
 
-    // Verify classes are applied
     expect(html).toContain(getInputClasses({ hovered: true, focused: true }));
-
-    // Verify attributes do NOT leak to the input element
-    // Note: Astro might render 'focused="true"' or just 'focused'
     expect(html).not.toContain('focused="true"');
     expect(html).not.toContain('hovered="true"');
-    // Also check for the boolean attribute form if applicable, though less likely for these custom prop names
     expect(html).not.toMatch(/<input[^>]*\bfocused\b/);
     expect(html).not.toMatch(/<input[^>]*\bhovered\b/);
   });
