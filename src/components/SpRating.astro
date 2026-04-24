@@ -6,6 +6,7 @@ import {
   getRatingTextClasses,
   type RatingRecipeOptions,
 } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
 type SpRatingElement =
   | "div"
@@ -73,14 +74,14 @@ const classes = getRatingClasses({
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !isRatingDisabled ? href : undefined;
-const finalTabIndex =
-  Tag !== "button" && isRatingDisabled
-    ? -1
-    : interactive && Tag !== "button" && Tag !== "a"
-      ? (tabindex ?? 0)
-      : tabindex;
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isRatingDisabled,
+  href,
+  type,
+  tabindex,
+  interactive,
+});
 
 const starsClasses = getRatingStarsClasses();
 const textClasses = getRatingTextClasses();

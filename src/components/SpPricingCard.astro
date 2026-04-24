@@ -7,6 +7,7 @@ import {
   getPricingCardDescriptionClasses,
   type PricingCardRecipeOptions,
 } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
 type SpPricingCardElement =
   | "div"
@@ -69,14 +70,14 @@ const classes = getPricingCardClasses({
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const finalType = Tag === "button" ? (type ?? "button") : undefined;
-const finalHref = Tag === "a" && !isPricingCardDisabled ? href : undefined;
-const finalTabIndex =
-  Tag !== "button" && isPricingCardDisabled
-    ? -1
-    : interactive && Tag !== "button" && Tag !== "a"
-      ? (tabindex ?? 0)
-      : tabindex;
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isPricingCardDisabled,
+  href,
+  type,
+  tabindex,
+  interactive,
+});
 
 const badgeClasses = getPricingCardBadgeClasses();
 const priceContainerClasses = getPricingCardPriceContainerClasses();
