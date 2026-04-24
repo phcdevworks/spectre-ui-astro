@@ -59,7 +59,12 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const finalType = Tag === "button" ? (type ?? "button") : undefined;
 const finalHref = Tag === "a" && !isBadgeDisabled ? href : undefined;
-const finalTabIndex = Tag !== "button" && isBadgeDisabled ? -1 : tabindex;
+const finalTabIndex =
+  Tag !== "button" && isBadgeDisabled
+    ? -1
+    : interactive && Tag !== "button" && Tag !== "a"
+      ? (tabindex ?? 0)
+      : tabindex;
 ---
 
 <Tag
