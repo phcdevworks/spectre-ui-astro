@@ -11,15 +11,19 @@ beforeAll(async () => {
 });
 
 describe("SpInput state behavior", () => {
-  it("passes hovered and focused states to the recipe without leaking them to DOM", async () => {
+  it("passes hovered, focused, and active states to the recipe without leaking them to DOM", async () => {
     const html = await container.renderToString(SpInput, {
-      props: { hovered: true, focused: true } as SpInputProps,
+      props: { hovered: true, focused: true, active: true } as SpInputProps,
     });
 
-    expect(html).toContain(getInputClasses({ hovered: true, focused: true }));
+    expect(html).toContain(
+      getInputClasses({ hovered: true, focused: true, active: true }),
+    );
     expect(html).not.toContain('focused="true"');
     expect(html).not.toContain('hovered="true"');
-    expect(html).not.toMatch(/<input[^>]*\bfocused\b/);
-    expect(html).not.toMatch(/<input[^>]*\bhovered\b/);
+    expect(html).not.toContain('active="true"');
+    expect(html).not.toMatch(/<input[^>]*\sfocused\b/);
+    expect(html).not.toMatch(/<input[^>]*\shovered\b/);
+    expect(html).not.toMatch(/<input[^>]*\sactive\b/);
   });
 });
