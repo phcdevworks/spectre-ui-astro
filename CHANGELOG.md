@@ -6,6 +6,43 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-04-25
+
+Release Title: Interactive State Parity and Shared Attribute Guarding
+
+### Added
+
+- Added `active` prop support for `SpInput`, forwarding the state to the
+  upstream input recipe without leaking adapter-only props to rendered markup.
+- Added interactive, hovered, focused, and active state forwarding for
+  `SpPricingCard`, `SpRating`, and `SpTestimonial`, keeping Astro output aligned
+  with the upstream `@phcdevworks/spectre-ui` recipe contract.
+- Added shared interactive attribute resolution for component wrappers so
+  disabled links, non-native interactive elements, default button types, and
+  fallback tabindex behavior are handled consistently.
+
+### Changed
+
+- Improved `SpBadge`, `SpButton`, `SpCard`, `SpIconBox`, `SpPricingCard`,
+  `SpRating`, and `SpTestimonial` accessibility behavior by centralizing `href`,
+  `type`, and `tabindex` guarding while preserving native button and anchor
+  semantics.
+- Improved `SpPricingCard`, `SpRating`, and `SpTestimonial` SSR output by
+  applying `role="button"` only when interactive non-native elements need it.
+- Consolidated component regression tests into stable per-component test files
+  covering recipe state forwarding, attribute leakage prevention, disabled
+  behavior, role handling, and tabindex guarding.
+- Updated the package to `2.2.0`, aligned the published peer contract around
+  `@phcdevworks/spectre-ui` `^1.3.0`, refreshed local development against
+  `@phcdevworks/spectre-ui` `^1.4.0`, Astro `6.1.9`, Vitest `4.1.5`, and
+  TypeScript-ESLint `8.59.0`, and kept example dependencies honest for the
+  upstream UI package and Astro host framework.
+- Included `.ts` shared component helper files in the component copy step so
+  published Astro component entrypoints can resolve their adapter helper
+  modules.
+- Declared an explicit empty `dependencies` object to keep runtime dependency
+  classification intentional and adapter boundaries visible.
+
 ## [2.1.0] - 2026-04-18
 
 Release Title: Accessibility Parity and Upstream Alignment
@@ -13,14 +50,24 @@ Release Title: Accessibility Parity and Upstream Alignment
 ### Added
 
 - Added `size` prop support for `SpRating`.
-- Added regression coverage for `SpBadge`, `SpButton`, `SpCard`, `SpInput`, `SpPricingCard`, and `SpTestimonial` accessibility and prop-forwarding behavior.
-- Added `ROADMAP.md` and `TODO.md` to track adapter contract parity, packaging validation, and follow-on Astro adapter priorities.
+- Added regression coverage for `SpBadge`, `SpButton`, `SpCard`, `SpInput`,
+  `SpPricingCard`, and `SpTestimonial` accessibility and prop-forwarding
+  behavior.
+- Added `ROADMAP.md` and `TODO.md` to track adapter contract parity, packaging
+  validation, and follow-on Astro adapter priorities.
 
 ### Changed
 
-- Improved prop forwarding and attribute guarding for `SpBadge`, `SpButton`, and `SpInput` so state props such as `active`, `focused`, and `hovered` reach upstream recipes without leaking invalid DOM attributes.
-- Improved disabled and loading accessibility behavior for `SpCard`, `SpPricingCard`, and `SpTestimonial`, aligning non-native interactive tabindex handling with library standards while preserving native button behavior.
-- Updated the `@phcdevworks/spectre-ui` peer dependency to `^1.2.0` and refreshed local development tooling and lockfile coverage around `@phcdevworks/spectre-ui` `^1.3.0`, Astro `6.1.7`, TypeScript `6.0.3`, Prettier `3.8.3`, TypeScript-ESLint `8.58.2`, and ESLint `10.2.1`.
+- Improved prop forwarding and attribute guarding for `SpBadge`, `SpButton`, and
+  `SpInput` so state props such as `active`, `focused`, and `hovered` reach
+  upstream recipes without leaking invalid DOM attributes.
+- Improved disabled and loading accessibility behavior for `SpCard`,
+  `SpPricingCard`, and `SpTestimonial`, aligning non-native interactive tabindex
+  handling with library standards while preserving native button behavior.
+- Updated the `@phcdevworks/spectre-ui` peer dependency to `^1.2.0` and
+  refreshed local development tooling and lockfile coverage around
+  `@phcdevworks/spectre-ui` `^1.3.0`, Astro `6.1.7`, TypeScript `6.0.3`,
+  Prettier `3.8.3`, TypeScript-ESLint `8.58.2`, and ESLint `10.2.1`.
 
 ## [2.0.3] - 2026-04-11
 
@@ -28,16 +75,25 @@ Release Title: Accessibility Hardening and Release Workflow Cleanup
 
 ### Added
 
-- Added loading support and improved accessibility behavior for SpPricingCard, and added loading, hovered, and focused states to SpCard.
-- Added stronger accessibility and prop-forwarding support across SpBadge, SpButton, SpIconBox, SpRating, and SpTestimonial, including tabindex, aria-label, and tighter attribute guarding where appropriate.
-- Added package export validation, copied-component validation, and expanded SSR coverage for SpPricingCard, SpRating, and standalone SpInput rendering.
+- Added loading support and improved accessibility behavior for SpPricingCard,
+  and added loading, hovered, and focused states to SpCard.
+- Added stronger accessibility and prop-forwarding support across SpBadge,
+  SpButton, SpIconBox, SpRating, and SpTestimonial, including tabindex,
+  aria-label, and tighter attribute guarding where appropriate.
+- Added package export validation, copied-component validation, and expanded SSR
+  coverage for SpPricingCard, SpRating, and standalone SpInput rendering.
 
 ### Changed
 
-- Declared Astro as a peer dependency and aligned the adapter around the Astro 6.1.x toolchain.
-- Refined CI and release automation with a Buildkite pipeline, updated GitHub Actions workflow configuration, npm-based example installs, and example lockfile handling changes.
-- Updated development tooling and dependencies, including TypeScript 6.0.2, Vitest 4.1.4, Prettier 3.8.2, and current ESLint and Node type packages.
-- Removed Node.js runtime validation and devDependency alignment checks while tightening package contract enforcement and adapter guidance.
+- Declared Astro as a peer dependency and aligned the adapter around the Astro
+  6.1.x toolchain.
+- Refined CI and release automation with a Buildkite pipeline, updated GitHub
+  Actions workflow configuration, npm-based example installs, and example
+  lockfile handling changes.
+- Updated development tooling and dependencies, including TypeScript 6.0.2,
+  Vitest 4.1.4, Prettier 3.8.2, and current ESLint and Node type packages.
+- Removed Node.js runtime validation and devDependency alignment checks while
+  tightening package contract enforcement and adapter guidance.
 
 ## [2.0.2] - 2026-04-05
 
