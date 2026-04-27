@@ -44,6 +44,14 @@ describe("SpIconBox behavior", () => {
     expect(html).toContain('tabindex="-1"');
   });
 
+  it("applies default tabindex='0' when interactive and non-native tag", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: { as: "span", interactive: true },
+    });
+
+    expect(html).toContain('tabindex="0"');
+  });
+
   it("does not apply role='button' to native buttons or anchors", async () => {
     const buttonHtml = await container.renderToString(SpIconBox, {
       props: { as: "button", interactive: true },
