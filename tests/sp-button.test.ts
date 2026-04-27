@@ -35,4 +35,20 @@ describe("SpButton behavior", () => {
     expect(html).toContain('href="/dashboard"');
     expect(html).toContain('aria-label="Go to Dashboard"');
   });
+
+  it("guards tabindex=0 for non-native interactive elements", async () => {
+    const html = await container.renderToString(SpButton, {
+      props: { as: "span" },
+    });
+
+    expect(html).toContain('tabindex="0"');
+  });
+
+  it("guards tabindex=-1 for disabled non-native elements", async () => {
+    const html = await container.renderToString(SpButton, {
+      props: { as: "span", disabled: true },
+    });
+
+    expect(html).toContain('tabindex="-1"');
+  });
 });
