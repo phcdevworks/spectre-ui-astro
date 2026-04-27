@@ -44,7 +44,7 @@ describe("SpIconBox behavior", () => {
     expect(html).toContain('tabindex="-1"');
   });
 
-  it("applies tabindex='0' for enabled interactive non-native elements", async () => {
+  it("applies default tabindex='0' when interactive and non-native tag", async () => {
     const html = await container.renderToString(SpIconBox, {
       props: { as: "span", interactive: true },
     });
