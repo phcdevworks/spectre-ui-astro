@@ -1,5 +1,10 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { getPricingCardClasses } from "@phcdevworks/spectre-ui";
+import {
+  getPricingCardClasses,
+  getPricingCardBadgeClasses,
+  getPricingCardPriceContainerClasses,
+  getPricingCardDescriptionClasses,
+} from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 
@@ -54,7 +59,12 @@ describe("SpPricingCard behavior", () => {
   });
 
   it("passes state props to recipe and does not leak them to DOM", async () => {
-    const props = { interactive: true, hovered: true, focused: true, active: true };
+    const props = {
+      interactive: true,
+      hovered: true,
+      focused: true,
+      active: true,
+    };
     const html = await container.renderToString(SpPricingCard, { props });
 
     expect(html).toContain(getPricingCardClasses(props));
@@ -62,5 +72,34 @@ describe("SpPricingCard behavior", () => {
     expect(html).not.toContain('hovered="true"');
     expect(html).not.toContain('focused="true"');
     expect(html).not.toContain('active="true"');
+  });
+
+  describe("slot behavior", () => {
+    it("does not render empty wrapper divs when slots are not provided", async () => {
+      const html = await container.renderToString(SpPricingCard, {
+        props: {},
+      });
+
+      expect(html).not.toContain(getPricingCardBadgeClasses());
+      expect(html).not.toContain(getPricingCardPriceContainerClasses());
+      expect(html).not.toContain(getPricingCardDescriptionClasses());
+    });
+
+    it("renders wrapper divs when slots are provided", async () => {
+      const html = await container.renderToString(SpPricingCard, {
+        slots: {
+          badge: "Hot",
+          price: "$99",
+          description: "Best deal",
+        },
+      });
+
+      expect(html).toContain(getPricingCardBadgeClasses());
+      expect(html).toContain(getPricingCardPriceContainerClasses());
+      expect(html).toContain(getPricingCardDescriptionClasses());
+      expect(html).toContain("Hot");
+      expect(html).toContain("$99");
+      expect(html).toContain("Best deal");
+    });
   });
 });
