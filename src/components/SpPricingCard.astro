@@ -101,19 +101,31 @@ const descriptionClasses = getPricingCardDescriptionClasses();
 >
   <slot name="header" />
 
-  <div class={badgeClasses}>
-    <slot name="badge" />
-  </div>
+  {
+    Astro.slots.has("badge") && (
+      <div class={badgeClasses}>
+        <slot name="badge" />
+      </div>
+    )
+  }
 
-  <div class={priceContainerClasses}>
-    <div class={priceClasses}>
-      <slot name="price" />
-    </div>
-  </div>
+  {
+    Astro.slots.has("price") && (
+      <div class={priceContainerClasses}>
+        <div class={priceClasses}>
+          <slot name="price" />
+        </div>
+      </div>
+    )
+  }
 
-  <div class={descriptionClasses}>
-    <slot name="description" />
-  </div>
+  {
+    Astro.slots.has("description") && (
+      <div class={descriptionClasses}>
+        <slot name="description" />
+      </div>
+    )
+  }
 
   <slot />
 
