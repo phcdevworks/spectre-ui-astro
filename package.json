@@ -91,16 +91,16 @@
   "devDependencies": {
     "@phcdevworks/spectre-ui": "^1.4.0",
     "@types/node": "^25.6.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.0",
-    "@typescript-eslint/parser": "^8.59.0",
-    "astro": "^6.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "astro": "^6.1.10",
     "eslint": "^10.2.1",
     "jiti": "^2.6.1",
     "prettier": "^3.8.3",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.0",
+    "typescript-eslint": "^8.59.1",
     "vitest": "^4.1.5"
   }
 }
