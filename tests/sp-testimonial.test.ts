@@ -1,5 +1,12 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { getTestimonialClasses } from "@phcdevworks/spectre-ui";
+import {
+  getTestimonialClasses,
+  getTestimonialQuoteClasses,
+  getTestimonialAuthorClasses,
+  getTestimonialAuthorInfoClasses,
+  getTestimonialAuthorNameClasses,
+  getTestimonialAuthorTitleClasses,
+} from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpTestimonial from "../src/components/SpTestimonial.astro";
 
@@ -110,5 +117,44 @@ describe("SpTestimonial interactive behavior", () => {
 
     expect(html).not.toContain('target="_blank"');
     expect(html).not.toContain('rel="noopener"');
+  });
+
+  it("passes fullHeight prop to getTestimonialClasses", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: { fullHeight: true },
+    });
+
+    expect(html).toContain(getTestimonialClasses({ fullHeight: true }));
+  });
+});
+
+describe("SpTestimonial slot behavior", () => {
+  it("does not render empty wrapper elements for unpopulated slots", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: {},
+    });
+
+    expect(html).not.toContain(getTestimonialQuoteClasses());
+    expect(html).not.toContain(getTestimonialAuthorClasses());
+    expect(html).not.toContain(getTestimonialAuthorInfoClasses());
+    expect(html).not.toContain(getTestimonialAuthorNameClasses());
+    expect(html).not.toContain(getTestimonialAuthorTitleClasses());
+  });
+
+  it("renders wrapper elements when slots are populated", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      slots: {
+        quote: "Great product!",
+        "author-name": "Jane Doe",
+      },
+    });
+
+    expect(html).toContain(getTestimonialQuoteClasses());
+    expect(html).toContain(getTestimonialAuthorClasses());
+    expect(html).toContain(getTestimonialAuthorInfoClasses());
+    expect(html).toContain(getTestimonialAuthorNameClasses());
+    expect(html).not.toContain(getTestimonialAuthorTitleClasses());
+    expect(html).toContain("Great product!");
+    expect(html).toContain("Jane Doe");
   });
 });
