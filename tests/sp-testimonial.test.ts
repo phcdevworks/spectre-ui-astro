@@ -111,4 +111,16 @@ describe("SpTestimonial interactive behavior", () => {
     expect(html).not.toContain('target="_blank"');
     expect(html).not.toContain('rel="noopener"');
   });
+
+  it("does not render empty slot wrappers when slots are unpopulated", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: {},
+    });
+
+    expect(html).not.toContain("sp-testimonial-quote");
+    expect(html).not.toContain("sp-testimonial-author");
+    expect(html).not.toContain("sp-testimonial-author-info");
+    expect(html).not.toContain("sp-testimonial-author-name");
+    expect(html).not.toContain("sp-testimonial-author-title");
+  });
 });
