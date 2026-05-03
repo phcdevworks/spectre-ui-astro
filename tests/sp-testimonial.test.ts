@@ -57,6 +57,44 @@ describe("SpTestimonial SSR rendering", () => {
 
     expect(html).toContain('tabindex="-1"');
   });
+
+  it("applies fullHeight prop and does not leak it to the DOM", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: { fullHeight: true },
+    });
+
+    expect(html).toContain("sp-testimonial--full");
+    expect(html).not.toMatch(/\sfullHeight=["']/);
+  });
+});
+
+describe("SpTestimonial slot rendering", () => {
+  it("does not render empty slot wrappers", async () => {
+    const html = await container.renderToString(SpTestimonial, {});
+
+    expect(html).not.toContain("sp-testimonial-quote");
+    expect(html).not.toContain("sp-testimonial-author");
+    expect(html).not.toContain("sp-testimonial-author-info");
+    expect(html).not.toContain("sp-testimonial-author-name");
+    expect(html).not.toContain("sp-testimonial-author-title");
+  });
+
+  it("renders only provided slot wrappers", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      slots: {
+        quote: "Great service!",
+        "author-name": "Jane Doe",
+      },
+    });
+
+    expect(html).toContain("sp-testimonial-quote");
+    expect(html).toContain("Great service!");
+    expect(html).toContain("sp-testimonial-author");
+    expect(html).toContain("sp-testimonial-author-info");
+    expect(html).toContain("sp-testimonial-author-name");
+    expect(html).toContain("Jane Doe");
+    expect(html).not.toContain("sp-testimonial-author-title");
+  });
 });
 
 describe("SpTestimonial interactive behavior", () => {
