@@ -46,6 +46,7 @@ const {
   active,
   disabled,
   loading,
+  fullHeight,
   as: Tag = "div",
   class: className,
   href,
@@ -66,6 +67,7 @@ const classes = getTestimonialClasses({
   active,
   disabled: isTestimonialDisabled,
   loading,
+  fullHeight,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
@@ -99,18 +101,38 @@ const authorTitleClasses = getTestimonialAuthorTitleClasses();
   tabindex={finalTabIndex}
   {...rest}
 >
-  <div class={quoteClasses}>
-    <slot name="quote" />
-  </div>
-  <div class={authorClasses}>
-    <slot name="author-image" />
-    <div class={authorInfoClasses}>
-      <div class={authorNameClasses}>
-        <slot name="author-name" />
+  {
+    Astro.slots.has("quote") && (
+      <div class={quoteClasses}>
+        <slot name="quote" />
       </div>
-      <div class={authorTitleClasses}>
-        <slot name="author-title" />
+    )
+  }
+
+  {
+    (Astro.slots.has("author-image") ||
+      Astro.slots.has("author-name") ||
+      Astro.slots.has("author-title")) && (
+      <div class={authorClasses}>
+        <slot name="author-image" />
+        {
+          (Astro.slots.has("author-name") || Astro.slots.has("author-title")) && (
+            <div class={authorInfoClasses}>
+              {Astro.slots.has("author-name") && (
+                <div class={authorNameClasses}>
+                  <slot name="author-name" />
+                </div>
+              )}
+              {Astro.slots.has("author-title") && (
+                <div class={authorTitleClasses}>
+                  <slot name="author-title" />
+                </div>
+              )}
+            </div>
+          )
+        }
       </div>
-    </div>
-  </div>
+    )
+  }
+  <slot />
 </Tag>
