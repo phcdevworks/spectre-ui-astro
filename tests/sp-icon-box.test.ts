@@ -63,4 +63,13 @@ describe("SpIconBox behavior", () => {
     });
     expect(anchorHtml).not.toContain('role="button"');
   });
+
+  it("applies 'pill' class and prevents prop leakage", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: { pill: true },
+    });
+
+    expect(html).toContain(getIconBoxClasses({ pill: true }));
+    expect(html).not.toContain('pill="true"');
+  });
 });
