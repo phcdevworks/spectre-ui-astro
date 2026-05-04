@@ -2,7 +2,7 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/issues)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
-[![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 `@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre
 system for Astro applications that consume the core Spectre UI contract.
