@@ -172,7 +172,6 @@ contracts instead of redefining them locally.
 Why it matters The README already states that CSS ownership stays with
 `@phcdevworks/spectre-ui` and token meaning stays upstream. That rule should be
 enforced as an invariant, not only described in docs.
-:contentReference[oaicite:2]{index=2}
 
 Suggested deliverables
 

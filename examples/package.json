@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "spectre-ui-astro-examples",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,9 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@phcdevworks/spectre-ui": "^1.3.0",
+    "@phcdevworks/spectre-ui": "^1.5.0",
     "@phcdevworks/spectre-ui-astro": "file:..",
-    "astro": "^6.1.8",
+    "astro": "^6.2.2",
     "typescript": "^6.0.3"
   }
 }
