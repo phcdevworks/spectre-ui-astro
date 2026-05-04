@@ -6,6 +6,39 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-05-05
+
+Release Title: Slot Hygiene and Upstream Recipe Alignment
+
+### Added
+
+- Added `fullHeight` prop support for `SpPricingCard` and `SpTestimonial`,
+  forwarding the state to the upstream recipe contract without leaking
+  adapter-only props to rendered markup.
+- Added `pill` prop support for `SpIconBox`, keeping the Astro wrapper aligned
+  with upstream icon box recipe options.
+- Added regression coverage for `SpButton`, `SpIconBox`, `SpPricingCard`, and
+  `SpTestimonial` covering interactive tabindex behavior, recipe prop
+  forwarding, slot wrapper rendering, and DOM prop leakage prevention.
+
+### Changed
+
+- Improved `SpPricingCard` SSR output by rendering badge, price, and
+  description wrapper elements only when their corresponding slots are provided.
+- Improved `SpTestimonial` SSR output by conditionally rendering quote, author,
+  author info, author name, and author title wrappers based on populated slots.
+- Forwarded interactive state into shared attribute resolution for `SpButton`
+  and `SpIconBox` so non-native interactive elements receive consistent
+  tabindex guarding.
+- Consolidated recipe re-exports through a single upstream
+  `@phcdevworks/spectre-ui` export block while preserving the public adapter
+  recipe surface.
+- Updated the package to `2.3.0`, aligned the published peer and local
+  development contract around `@phcdevworks/spectre-ui` `^1.5.0`, refreshed
+  local development against Astro `6.2.2`, ESLint `10.3.0`, and
+  TypeScript-ESLint `8.59.1`, and updated the example app dependencies and
+  Node engine range to match the adapter contract.
+
 ## [2.2.0] - 2026-04-25
 
 Release Title: Interactive State Parity and Shared Attribute Guarding
