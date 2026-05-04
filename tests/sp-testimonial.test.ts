@@ -118,7 +118,9 @@ describe("SpTestimonial interactive behavior", () => {
     expect(html).not.toContain('target="_blank"');
     expect(html).not.toContain('rel="noopener"');
   });
+});
 
+describe("SpTestimonial slot behavior", () => {
   it("passes fullHeight prop to getTestimonialClasses", async () => {
     const html = await container.renderToString(SpTestimonial, {
       props: { fullHeight: true },
@@ -126,9 +128,7 @@ describe("SpTestimonial interactive behavior", () => {
 
     expect(html).toContain(getTestimonialClasses({ fullHeight: true }));
   });
-});
 
-describe("SpTestimonial slot behavior", () => {
   it("does not render empty wrapper elements for unpopulated slots", async () => {
     const html = await container.renderToString(SpTestimonial, {
       props: {},
