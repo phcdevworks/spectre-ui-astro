@@ -115,24 +115,20 @@ const authorTitleClasses = getTestimonialAuthorTitleClasses();
       Astro.slots.has("author-title")) && (
       <div class={authorClasses}>
         <slot name="author-image" />
-
-        {
-          (Astro.slots.has("author-name") || Astro.slots.has("author-title")) && (
-            <div class={authorInfoClasses}>
-              {Astro.slots.has("author-name") && (
-                <div class={authorNameClasses}>
-                  <slot name="author-name" />
-                </div>
-              )}
-
-              {Astro.slots.has("author-title") && (
-                <div class={authorTitleClasses}>
-                  <slot name="author-title" />
-                </div>
-              )}
-            </div>
-          )
-        }
+        {(Astro.slots.has("author-name") || Astro.slots.has("author-title")) && (
+          <div class={authorInfoClasses}>
+            {Astro.slots.has("author-name") && (
+              <div class={authorNameClasses}>
+                <slot name="author-name" />
+              </div>
+            )}
+            {Astro.slots.has("author-title") && (
+              <div class={authorTitleClasses}>
+                <slot name="author-title" />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     )
   }
