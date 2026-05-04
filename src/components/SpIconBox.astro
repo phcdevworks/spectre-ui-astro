@@ -23,6 +23,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
 const {
   variant,
   size,
+  pill,
   interactive,
   disabled,
   loading,
@@ -45,6 +46,7 @@ const isIconBoxDisabled = disabled || loading;
 const classes = getIconBoxClasses({
   variant,
   size,
+  pill,
   interactive,
   disabled: isIconBoxDisabled,
   loading,
