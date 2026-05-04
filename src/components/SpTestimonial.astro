@@ -40,6 +40,7 @@ interface SpTestimonialProps extends TestimonialRecipeOptions {
 }
 
 const {
+  fullHeight,
   interactive,
   hovered,
   focused,
@@ -60,6 +61,7 @@ const {
 const isTestimonialDisabled = disabled || loading;
 
 const classes = getTestimonialClasses({
+  fullHeight,
   interactive,
   hovered,
   focused,
