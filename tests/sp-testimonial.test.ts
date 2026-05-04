@@ -64,6 +64,44 @@ describe("SpTestimonial SSR rendering", () => {
 
     expect(html).toContain('tabindex="-1"');
   });
+
+  it("applies fullHeight prop and does not leak it to the DOM", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: { fullHeight: true },
+    });
+
+    expect(html).toContain("sp-testimonial--full");
+    expect(html).not.toMatch(/\sfullHeight=["']/);
+  });
+});
+
+describe("SpTestimonial slot rendering", () => {
+  it("does not render empty slot wrappers", async () => {
+    const html = await container.renderToString(SpTestimonial, {});
+
+    expect(html).not.toContain("sp-testimonial-quote");
+    expect(html).not.toContain("sp-testimonial-author");
+    expect(html).not.toContain("sp-testimonial-author-info");
+    expect(html).not.toContain("sp-testimonial-author-name");
+    expect(html).not.toContain("sp-testimonial-author-title");
+  });
+
+  it("renders only provided slot wrappers", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      slots: {
+        quote: "Great service!",
+        "author-name": "Jane Doe",
+      },
+    });
+
+    expect(html).toContain("sp-testimonial-quote");
+    expect(html).toContain("Great service!");
+    expect(html).toContain("sp-testimonial-author");
+    expect(html).toContain("sp-testimonial-author-info");
+    expect(html).toContain("sp-testimonial-author-name");
+    expect(html).toContain("Jane Doe");
+    expect(html).not.toContain("sp-testimonial-author-title");
+  });
 });
 
 describe("SpTestimonial interactive behavior", () => {
@@ -127,45 +165,6 @@ describe("SpTestimonial interactive behavior", () => {
     expect(html).not.toContain('class="sp-testimonial__author-info"');
     expect(html).not.toContain('class="sp-testimonial__author-name"');
     expect(html).not.toContain('class="sp-testimonial__author-title"');
-  });
-});
-
-describe("SpTestimonial slot behavior", () => {
-  it("passes fullHeight prop to getTestimonialClasses", async () => {
-    const html = await container.renderToString(SpTestimonial, {
-      props: { fullHeight: true },
-    });
-
-    expect(html).toContain(getTestimonialClasses({ fullHeight: true }));
-  });
-
-  it("does not render empty wrapper elements for unpopulated slots", async () => {
-    const html = await container.renderToString(SpTestimonial, {
-      props: {},
-    });
-
-    expect(html).not.toContain(getTestimonialQuoteClasses());
-    expect(html).not.toContain(getTestimonialAuthorClasses());
-    expect(html).not.toContain(getTestimonialAuthorInfoClasses());
-    expect(html).not.toContain(getTestimonialAuthorNameClasses());
-    expect(html).not.toContain(getTestimonialAuthorTitleClasses());
-  });
-
-  it("renders wrapper elements when slots are populated", async () => {
-    const html = await container.renderToString(SpTestimonial, {
-      slots: {
-        quote: "Great product!",
-        "author-name": "Jane Doe",
-      },
-    });
-
-    expect(html).toContain(getTestimonialQuoteClasses());
-    expect(html).toContain(getTestimonialAuthorClasses());
-    expect(html).toContain(getTestimonialAuthorInfoClasses());
-    expect(html).toContain(getTestimonialAuthorNameClasses());
-    expect(html).not.toContain(getTestimonialAuthorTitleClasses());
-    expect(html).toContain("Great product!");
-    expect(html).toContain("Jane Doe");
   });
 });
 
