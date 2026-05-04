@@ -40,13 +40,13 @@ interface SpTestimonialProps extends TestimonialRecipeOptions {
 }
 
 const {
+  fullHeight,
   interactive,
   hovered,
   focused,
   active,
   disabled,
   loading,
-  fullHeight,
   as: Tag = "div",
   class: className,
   href,
@@ -61,13 +61,13 @@ const {
 const isTestimonialDisabled = disabled || loading;
 
 const classes = getTestimonialClasses({
+  fullHeight,
   interactive,
   hovered,
   focused,
   active,
   disabled: isTestimonialDisabled,
   loading,
-  fullHeight,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
@@ -108,31 +108,27 @@ const authorTitleClasses = getTestimonialAuthorTitleClasses();
       </div>
     )
   }
-
   {
     (Astro.slots.has("author-image") ||
       Astro.slots.has("author-name") ||
       Astro.slots.has("author-title")) && (
       <div class={authorClasses}>
         <slot name="author-image" />
-        {
-          (Astro.slots.has("author-name") || Astro.slots.has("author-title")) && (
-            <div class={authorInfoClasses}>
-              {Astro.slots.has("author-name") && (
-                <div class={authorNameClasses}>
-                  <slot name="author-name" />
-                </div>
-              )}
-              {Astro.slots.has("author-title") && (
-                <div class={authorTitleClasses}>
-                  <slot name="author-title" />
-                </div>
-              )}
-            </div>
-          )
-        }
+        {(Astro.slots.has("author-name") || Astro.slots.has("author-title")) && (
+          <div class={authorInfoClasses}>
+            {Astro.slots.has("author-name") && (
+              <div class={authorNameClasses}>
+                <slot name="author-name" />
+              </div>
+            )}
+            {Astro.slots.has("author-title") && (
+              <div class={authorTitleClasses}>
+                <slot name="author-title" />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     )
   }
-  <slot />
 </Tag>
