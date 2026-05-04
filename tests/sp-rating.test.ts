@@ -85,3 +85,23 @@ describe("SpRating interactive behavior", () => {
     expect(classHovered).toBeDefined();
   });
 });
+
+describe("SpRating SSR optimization", () => {
+  it("does not render the text container when the default slot is empty", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { value: 4 },
+    });
+
+    expect(html).not.toContain('sp-rating-text');
+  });
+
+  it("renders the text container when the default slot has content", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { value: 4 },
+      slots: { default: "4.0 / 5.0" },
+    });
+
+    expect(html).toContain('sp-rating-text');
+    expect(html).toContain("4.0 / 5.0");
+  });
+});
