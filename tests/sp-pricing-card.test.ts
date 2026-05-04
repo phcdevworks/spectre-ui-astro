@@ -74,6 +74,16 @@ describe("SpPricingCard behavior", () => {
     expect(html).not.toContain('active="true"');
   });
 
+  it("passes fullHeight to recipe and does not leak it to DOM", async () => {
+    const props = {
+      fullHeight: true,
+    };
+    const html = await container.renderToString(SpPricingCard, { props });
+
+    expect(html).toContain(getPricingCardClasses(props));
+    expect(html).not.toContain('fullHeight="true"');
+  });
+
   describe("slot behavior", () => {
     it("does not render empty wrapper divs when slots are not provided", async () => {
       const html = await container.renderToString(SpPricingCard, {
