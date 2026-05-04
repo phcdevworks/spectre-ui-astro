@@ -106,11 +106,9 @@ if (typeof upstreamPeerRange !== "string" || upstreamPeerRange.length === 0) {
   throw new Error(`${upstreamContractPackage} must be declared explicitly in peerDependencies.`);
 }
 
-
 if (typeof astroPeerRange !== "string" || astroPeerRange.length === 0) {
   throw new Error(`${astroHostPackage} must be declared explicitly in peerDependencies.`);
 }
-
 
 assertPublishedPathsExist(runtimePaths, "runtime export");
 assertPublishedPathsExist(typePaths, "types");
