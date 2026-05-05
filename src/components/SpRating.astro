@@ -114,7 +114,11 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
       ))
     }
   </div>
-  <div class={textClasses}>
-    <slot />
-  </div>
+  {
+    Astro.slots.has("default") && (
+      <div class={textClasses}>
+        <slot />
+      </div>
+    )
+  }
 </Tag>
