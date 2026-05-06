@@ -84,6 +84,15 @@ describe("SpRating interactive behavior", () => {
     expect(classNormal).not.toBe(classHovered);
     expect(classHovered).toBeDefined();
   });
+
+  it("does not leak pill and fullWidth props to the DOM", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { pill: true, fullWidth: true },
+    });
+
+    expect(html).not.toContain('pill="true"');
+    expect(html).not.toContain('fullWidth="true"');
+  });
 });
 
 describe("SpRating slots", () => {
