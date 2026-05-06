@@ -50,6 +50,8 @@ const {
   hovered,
   focused,
   active,
+  pill,
+  fullWidth,
   as: Tag = "div",
   class: className,
   href,
@@ -71,6 +73,8 @@ const classes = getRatingClasses({
   hovered,
   focused,
   active,
+  pill,
+  fullWidth,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
