@@ -63,7 +63,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsup --config tsup.config.ts && npm run build:types && node scripts/copy-components.mjs && node scripts/validate-package-contract.mjs",
+    "build": "tsup --config tsup.config.ts && npm run build:types && node --experimental-strip-types scripts/copy-components.ts && node --experimental-strip-types scripts/validate-package-contract.ts",
     "build:types": "tsc --project tsconfig.build.json",
     "ci:verify": "npm run lint && npm run build && npm run typecheck && npm test",
     "dev": "tsup --watch",
@@ -85,7 +85,7 @@
     "typescript": "^5.9 || ^6.0"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": "^22.12.0 || >=24.0.0"
   },
   "dependencies": {},
   "devDependencies": {
