@@ -1,8 +1,8 @@
 # @phcdevworks/spectre-ui-astro
 
 [![GitHub issues](https://img.shields.io/github/issues/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/issues)
-[![GitHub pulls](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
+[![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
 `@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre
 system for Astro applications that consume the core Spectre UI contract.
@@ -143,11 +143,11 @@ it.
 
 ## What this package does not own
 
-- Design values or token meaning That belongs to
+- Design values or token meaning. That belongs to
   [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens).
-- Core CSS, utilities, Tailwind helpers, or class recipe logic That belongs to
+- Core CSS, utilities, Tailwind helpers, or class recipe logic. That belongs to
   [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui).
-- Local styling systems that diverge from the shared Spectre contract This
+- Local styling systems that diverge from the shared Spectre contract. This
   package consumes upstream styling behavior rather than replacing it.
 
 ## Package exports / API surface
@@ -224,10 +224,13 @@ and lets framework adapters stay thin and consistent.
 Install dependencies, then run the package checks:
 
 ```bash
+npm install
 npm run build
 npm run typecheck
 npm test
 ```
+
+This project expects Node.js `^22.12.0 || >=24.0.0` and npm `11.13.0`.
 
 Key source areas:
 
