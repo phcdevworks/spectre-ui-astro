@@ -5,39 +5,51 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
-    name: Validate
+    name: Node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 22.12.0
+          - 24.x
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ matrix.node-version }}
           cache: npm
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            examples/package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build package
-        run: npm run build
+      - name: Run validation suite
+        run: npm run ci:verify
 
-      - name: Typecheck package
-        run: npm run typecheck
-
-      - name: Run tests
-        run: npm test
-
-      - name: Install example dependencies
-        run: npm install --no-package-lock
+      - name: Install examples dependencies
+        run: npm ci
         working-directory: examples
 
-      - name: Build example app
+      - name: Build examples
         run: npm run build
         working-directory: examples
