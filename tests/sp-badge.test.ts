@@ -28,6 +28,15 @@ describe("SpBadge class and prop behavior", () => {
     expect(html).not.toContain('active="true"');
     expect(html).not.toContain('active="active"');
   });
+
+  it("applies fullWidth class and does not leak the prop to DOM", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { fullWidth: true },
+    });
+
+    expect(html).toContain("sp-badge--full");
+    expect(html).not.toContain('fullWidth="true"');
+  });
 });
 
 describe("SpBadge tabindex guarding", () => {
