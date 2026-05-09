@@ -26,6 +26,7 @@ interface SpBadgeProps extends BadgeRecipeOptions {
 const {
   variant,
   size,
+  fullWidth,
   interactive,
   disabled,
   loading,
@@ -49,6 +50,7 @@ const isBadgeDisabled = disabled || loading;
 const classes = getBadgeClasses({
   variant,
   size,
+  fullWidth,
   interactive,
   disabled: isBadgeDisabled,
   loading,
