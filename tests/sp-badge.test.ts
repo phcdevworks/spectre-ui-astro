@@ -36,6 +36,7 @@ describe("SpBadge class and prop behavior", () => {
 
     expect(html).toContain("sp-badge--full");
     expect(html).not.toContain('fullWidth="true"');
+    expect(html).not.toContain('fullWidth="fullWidth"');
   });
 });
 
