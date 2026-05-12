@@ -44,14 +44,14 @@ const {
   value = 0,
   max = 5,
   size,
+  pill,
+  fullWidth,
   interactive,
   disabled,
   loading,
   hovered,
   focused,
   active,
-  pill,
-  fullWidth,
   as: Tag = "div",
   class: className,
   href,
@@ -67,14 +67,14 @@ const isRatingDisabled = disabled || loading;
 
 const classes = getRatingClasses({
   size,
+  pill,
+  fullWidth,
   interactive,
   disabled: isRatingDisabled,
   loading,
   hovered,
   focused,
   active,
-  pill,
-  fullWidth,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
