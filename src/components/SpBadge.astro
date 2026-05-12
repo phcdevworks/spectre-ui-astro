@@ -26,10 +26,10 @@ interface SpBadgeProps extends BadgeRecipeOptions {
 const {
   variant,
   size,
-  fullWidth,
   interactive,
   disabled,
   loading,
+  fullWidth,
   hovered,
   focused,
   active,
@@ -50,10 +50,10 @@ const isBadgeDisabled = disabled || loading;
 const classes = getBadgeClasses({
   variant,
   size,
-  fullWidth,
   interactive,
   disabled: isBadgeDisabled,
   loading,
+  fullWidth,
   hovered,
   focused,
   active,

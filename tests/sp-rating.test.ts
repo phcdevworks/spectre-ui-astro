@@ -84,19 +84,6 @@ describe("SpRating interactive behavior", () => {
     expect(classNormal).not.toBe(classHovered);
     expect(classHovered).toBeDefined();
   });
-
-  it("applies pill and fullWidth classes and does not leak the props to DOM", async () => {
-    const html = await container.renderToString(SpRating, {
-      props: { pill: true, fullWidth: true },
-    });
-
-    expect(html).toContain("sp-rating--pill");
-    expect(html).toContain("sp-rating--full");
-    expect(html).not.toContain('pill="true"');
-    expect(html).not.toContain('pill="pill"');
-    expect(html).not.toContain('fullWidth="true"');
-    expect(html).not.toContain('fullWidth="fullWidth"');
-  });
 });
 
 describe("SpRating pill and fullWidth prop forwarding", () => {
@@ -186,7 +173,7 @@ describe("SpRating pill and fullWidth prop forwarding", () => {
 describe("SpRating slots", () => {
   it("does not render the text wrapper div when the default slot is empty", async () => {
     const html = await container.renderToString(SpRating, {
-
+      props: { value: 4 },
     });
 
     expect(html).not.toContain("sp-rating-text");
