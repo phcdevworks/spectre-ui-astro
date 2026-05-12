@@ -84,14 +84,89 @@ describe("SpRating interactive behavior", () => {
     expect(classNormal).not.toBe(classHovered);
     expect(classHovered).toBeDefined();
   });
+});
 
-  it("does not leak pill and fullWidth props to the DOM", async () => {
+describe("SpRating pill and fullWidth prop forwarding", () => {
+  it("applies sp-rating--pill class when only pill prop is set", async () => {
     const html = await container.renderToString(SpRating, {
-      props: { pill: true, fullWidth: true },
+      props: { pill: true },
     });
 
+    expect(html).toContain("sp-rating--pill");
+    expect(html).not.toContain('pill="true"');
+    expect(html).not.toContain('pill="pill"');
+  });
+
+  it("applies sp-rating--full class when only fullWidth prop is set", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { fullWidth: true },
+    });
+
+    expect(html).toContain("sp-rating--full");
+    expect(html).not.toContain('fullWidth="true"');
+    expect(html).not.toContain('fullWidth="fullWidth"');
+  });
+
+  it("does not add pill or fullWidth classes when both are false", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { pill: false, fullWidth: false },
+    });
+
+    expect(html).not.toContain("sp-rating--pill");
+    expect(html).not.toContain("sp-rating--full");
+    expect(html).not.toContain('pill="false"');
+    expect(html).not.toContain('fullWidth="false"');
+  });
+
+  it("applies pill and fullWidth classes alongside interactive state props", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { pill: true, fullWidth: true, interactive: true, hovered: true },
+    });
+
+    expect(html).toContain("sp-rating--pill");
+    expect(html).toContain("sp-rating--full");
     expect(html).not.toContain('pill="true"');
     expect(html).not.toContain('fullWidth="true"');
+  });
+
+  it("applies pill and fullWidth classes when component is in disabled state", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { pill: true, fullWidth: true, disabled: true },
+    });
+
+    expect(html).toContain("sp-rating--pill");
+    expect(html).toContain("sp-rating--full");
+    expect(html).not.toContain('pill="true"');
+    expect(html).not.toContain('fullWidth="true"');
+  });
+
+  it("applies pill and fullWidth classes when component is in loading state", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { pill: true, fullWidth: true, loading: true },
+    });
+
+    expect(html).toContain("sp-rating--pill");
+    expect(html).toContain("sp-rating--full");
+    expect(html).not.toContain('pill="true"');
+    expect(html).not.toContain('fullWidth="true"');
+  });
+
+  it("pill class is absent when prop is omitted entirely", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { value: 3 },
+    });
+
+    expect(html).not.toContain("sp-rating--pill");
+    expect(html).not.toContain('pill="');
+  });
+
+  it("fullWidth class is absent when prop is omitted entirely", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { value: 3 },
+    });
+
+    expect(html).not.toContain("sp-rating--full");
+    expect(html).not.toContain('fullWidth="');
   });
 });
 
