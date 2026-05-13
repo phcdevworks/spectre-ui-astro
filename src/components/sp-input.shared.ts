@@ -46,11 +46,10 @@ export function resolveSpInputAccessibility({
   label,
   helperText,
   errorMessage,
-  "aria-describedby": ariaDescribedby,
-}: Pick<
-  SpInputProps,
-  "id" | "label" | "helperText" | "errorMessage" | "aria-describedby"
->) {
+  userDescribedBy,
+}: Pick<SpInputProps, "id" | "label" | "helperText" | "errorMessage"> & {
+  userDescribedBy?: string;
+}) {
   const requiresStableId = Boolean(label || helperText || errorMessage);
 
   if (requiresStableId && !id) {
@@ -62,9 +61,8 @@ export function resolveSpInputAccessibility({
   const helperId = id && helperText ? `${id}-helper` : undefined;
   const errorId = id && errorMessage ? `${id}-error` : undefined;
 
-  // Follow the rendering logic in SpInput.astro: errorMessage suppresses helperText.
-  const activeGeneratedId = errorId ?? helperId;
-  const mergedDescribedBy = [ariaDescribedby, activeGeneratedId]
+  const internalDescribedBy = errorId ?? helperId;
+  const describedBy = [internalDescribedBy, userDescribedBy]
     .filter(Boolean)
     .join(" ");
 
@@ -72,6 +70,6 @@ export function resolveSpInputAccessibility({
     inputId: id,
     helperId,
     errorId,
-    describedBy: mergedDescribedBy || undefined,
+    describedBy: describedBy || undefined,
   };
 }
