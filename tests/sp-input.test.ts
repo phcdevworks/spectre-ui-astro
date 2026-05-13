@@ -26,63 +26,55 @@ describe("SpInput state behavior", () => {
     expect(html).not.toMatch(/<input[^>]*\shovered\b/);
     expect(html).not.toMatch(/<input[^>]*\sactive\b/);
   });
+});
 
-  it("automatically sets visual error state and aria-invalid when errorMessage is present", async () => {
-    const html = await container.renderToString(SpInput, {
-      props: { id: "test-input", errorMessage: "Invalid input" } as SpInputProps,
-    });
-
-    expect(html).toContain(getInputClasses({ state: "error" }));
-    expect(html).toContain('aria-invalid="true"');
-    expect(html).toContain('id="test-input-error"');
-    expect(html).toContain('aria-describedby="test-input-error"');
-  });
-
-  it("merges user-provided aria-describedby with generated IDs", async () => {
+describe("SpInput accessibility and error state synchronization", () => {
+  it("merges custom aria-describedby with internal helperText ID", async () => {
     const html = await container.renderToString(SpInput, {
       props: {
         id: "test-input",
-        helperText: "Help",
-        "aria-describedby": "external-id",
+        helperText: "Helpful text",
+        "aria-describedby": "custom-desc",
       } as SpInputProps,
     });
 
-    expect(html).toContain('aria-describedby="external-id test-input-helper"');
+    expect(html).toContain('aria-describedby="test-input-helper custom-desc"');
   });
 
-  it("allows overriding aria-invalid even when errorMessage is present", async () => {
+  it("prioritizes user-provided aria-invalid over internal state", async () => {
     const html = await container.renderToString(SpInput, {
       props: {
         id: "test-input",
-        errorMessage: "Error",
         "aria-invalid": "grammar",
+        state: "error",
       } as SpInputProps,
     });
 
     expect(html).toContain('aria-invalid="grammar"');
-    expect(html).not.toContain('aria-invalid="true"');
   });
 
-  it("prioritizes errorId over helperId in aria-describedby when both are present", async () => {
+  it("automatically sets aria-invalid and applies error state when errorMessage is provided", async () => {
     const html = await container.renderToString(SpInput, {
       props: {
         id: "test-input",
-        helperText: "Help",
-        errorMessage: "Error",
+        errorMessage: "Something went wrong",
       } as SpInputProps,
     });
 
-    // When error is present, only errorId should be in aria-describedby
-    // Actually, based on my implementation: mergedDescribedBy = [ariaDescribedby, ...generatedIds].join(" ");
-    // where generatedIds = [errorId, helperId].filter(Boolean)
-    // So it will be "test-input-error test-input-helper"
-    // Wait, let's re-check the previous implementation: describedBy: errorId ?? helperId
-    // My new implementation merges them. Is this desired?
-    // Usually it's better to have both if both are visible.
-    // But in SpInput.astro:
-    // { helperText && !errorMessage && ( ... ) }
-    // It only renders helperText IF NO errorMessage.
-    // So my resolveSpInputAccessibility should probably match that logic or the describedBy should only include what's rendered.
+    expect(html).toContain('aria-invalid="true"');
+    expect(html).toContain(getInputClasses({ state: "error" }));
+    expect(html).toContain('id="test-input-error"');
+    expect(html).toContain('aria-describedby="test-input-error"');
+  });
+
+  it("omits helper text IDs from aria-describedby when an error message is rendered", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "test-input",
+        helperText: "Helpful text",
+        errorMessage: "Something went wrong",
+      } as SpInputProps,
+    });
 
     expect(html).toContain('aria-describedby="test-input-error"');
     expect(html).not.toContain("test-input-helper");
