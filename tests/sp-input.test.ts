@@ -38,7 +38,7 @@ describe("SpInput accessibility and error state synchronization", () => {
       } as SpInputProps,
     });
 
-    expect(html).toContain('aria-describedby="test-input-helper custom-desc"');
+    expect(html).toContain('aria-describedby="custom-desc test-input-helper"');
   });
 
   it("prioritizes user-provided aria-invalid over internal state", async () => {
