@@ -38,10 +38,13 @@ const { inputId, helperId, errorId, describedBy } =
   });
 
 const finalState =
-  loading ? "loading" :
-  isInputDisabled ? "disabled" :
-  (errorMessage || state === "error") ? "error" :
-  state;
+  loading
+    ? "loading"
+    : isInputDisabled
+      ? "disabled"
+      : errorMessage || state === "error"
+        ? "error"
+        : state;
 
 const classes = getInputClasses({
   state: finalState,

@@ -62,7 +62,7 @@ export function resolveSpInputAccessibility({
   const errorId = id && errorMessage ? `${id}-error` : undefined;
 
   const internalDescribedBy = errorId ?? helperId;
-  const describedBy = [internalDescribedBy, userDescribedBy]
+  const describedBy = [userDescribedBy, internalDescribedBy]
     .filter(Boolean)
     .join(" ");
 
