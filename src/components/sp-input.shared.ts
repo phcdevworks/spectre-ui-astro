@@ -19,6 +19,8 @@ interface SpInputBaseProps extends InputRecipeOptions {
   focused?: boolean;
   hovered?: boolean;
   active?: boolean;
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
   [key: string]: unknown;
 }
 
@@ -44,7 +46,11 @@ export function resolveSpInputAccessibility({
   label,
   helperText,
   errorMessage,
-}: Pick<SpInputProps, "id" | "label" | "helperText" | "errorMessage">) {
+  "aria-describedby": ariaDescribedby,
+}: Pick<
+  SpInputProps,
+  "id" | "label" | "helperText" | "errorMessage" | "aria-describedby"
+>) {
   const requiresStableId = Boolean(label || helperText || errorMessage);
 
   if (requiresStableId && !id) {
@@ -56,10 +62,14 @@ export function resolveSpInputAccessibility({
   const helperId = id && helperText ? `${id}-helper` : undefined;
   const errorId = id && errorMessage ? `${id}-error` : undefined;
 
+  const describedBy =
+    [ariaDescribedby, errorId ?? helperId].filter(Boolean).join(" ") ||
+    undefined;
+
   return {
     inputId: id,
     helperId,
     errorId,
-    describedBy: errorId ?? helperId,
+    describedBy,
   };
 }
