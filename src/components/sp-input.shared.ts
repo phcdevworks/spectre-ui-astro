@@ -20,7 +20,7 @@ interface SpInputBaseProps extends InputRecipeOptions {
   hovered?: boolean;
   active?: boolean;
   "aria-describedby"?: string;
-  "aria-invalid"?: "true" | "false" | boolean;
+  "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
   [key: string]: unknown;
 }
 
@@ -46,10 +46,11 @@ export function resolveSpInputAccessibility({
   label,
   helperText,
   errorMessage,
-  userDescribedBy,
-}: Pick<SpInputProps, "id" | "label" | "helperText" | "errorMessage"> & {
-  userDescribedBy?: string;
-}) {
+  "aria-describedby": ariaDescribedby,
+}: Pick<
+  SpInputProps,
+  "id" | "label" | "helperText" | "errorMessage" | "aria-describedby"
+>) {
   const requiresStableId = Boolean(label || helperText || errorMessage);
 
   if (requiresStableId && !id) {
@@ -61,8 +62,9 @@ export function resolveSpInputAccessibility({
   const helperId = id && helperText ? `${id}-helper` : undefined;
   const errorId = id && errorMessage ? `${id}-error` : undefined;
 
-  const internalDescribedBy = errorId ?? helperId;
-  const describedBy = [internalDescribedBy, userDescribedBy]
+  // Follow the rendering logic in SpInput.astro: errorMessage suppresses helperText.
+  const activeGeneratedId = errorId ?? helperId;
+  const mergedDescribedBy = [ariaDescribedby, activeGeneratedId]
     .filter(Boolean)
     .join(" ");
 
@@ -70,6 +72,6 @@ export function resolveSpInputAccessibility({
     inputId: id,
     helperId,
     errorId,
-    describedBy: describedBy || undefined,
+    describedBy: mergedDescribedBy || undefined,
   };
 }
