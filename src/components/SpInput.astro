@@ -21,6 +21,8 @@ const {
   focused,
   hovered,
   active,
+  "aria-describedby": userDescribedBy,
+  "aria-invalid": userAriaInvalid,
   ...rest
 } = Astro.props as SpInputProps;
 
@@ -32,10 +34,17 @@ const { inputId, helperId, errorId, describedBy } =
     label,
     helperText,
     errorMessage,
+    userDescribedBy,
   });
 
+const finalState =
+  loading ? "loading" :
+  isInputDisabled ? "disabled" :
+  (errorMessage || state === "error") ? "error" :
+  state;
+
 const classes = getInputClasses({
-  state: loading ? "loading" : isInputDisabled ? "disabled" : state,
+  state: finalState,
   size,
   fullWidth,
   pill,
@@ -44,6 +53,13 @@ const classes = getInputClasses({
   active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const finalAriaInvalid =
+  userAriaInvalid !== undefined
+    ? String(userAriaInvalid)
+    : finalState === "error"
+      ? "true"
+      : undefined;
 ---
 
 <Tag class="sp-input-wrapper">
@@ -58,7 +74,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
   <input
     id={inputId}
     class={finalClass}
-    aria-invalid={state === "error" ? "true" : undefined}
+    aria-invalid={finalAriaInvalid}
     aria-describedby={describedBy}
     disabled={isInputDisabled}
     aria-disabled={isInputDisabled ? "true" : undefined}
