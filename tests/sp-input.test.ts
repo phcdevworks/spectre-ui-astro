@@ -27,3 +27,41 @@ describe("SpInput state behavior", () => {
     expect(html).not.toMatch(/<input[^>]*\sactive\b/);
   });
 });
+
+describe("SpInput accessibility and error state synchronization", () => {
+  it("merges custom aria-describedby with internal helperText ID", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "test-input",
+        helperText: "Helpful text",
+        "aria-describedby": "custom-desc"
+      } as SpInputProps,
+    });
+
+    expect(html).toContain('aria-describedby="test-input-helper custom-desc"');
+  });
+
+  it("prioritizes user-provided aria-invalid over internal state", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "test-input",
+        "aria-invalid": "false",
+        state: "error"
+      } as SpInputProps,
+    });
+
+    expect(html).toContain('aria-invalid="false"');
+  });
+
+  it("automatically sets aria-invalid and applies error state when errorMessage is provided", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "test-input",
+        errorMessage: "Something went wrong"
+      } as SpInputProps,
+    });
+
+    expect(html).toContain('aria-invalid="true"');
+    expect(html).toContain(getInputClasses({ state: "error" }));
+  });
+});
