@@ -3,12 +3,16 @@
 This repository is maintained by PHCDevworks and contains the Astro adapter for
 the Spectre system.
 
-## Primary Developer Agent
+## Primary AI Developer
 
-**Claude Code** (`claude-sonnet-4-6`) is the designated primary developer agent
-for this repository. All code changes, architectural decisions, and maintenance
-tasks are driven through Claude Code operating from `CLAUDE.md` as the
-authoritative working guide.
+**Claude Code** (`claude-sonnet-4-6`) is the designated primary AI developer for
+this repository, maintained on behalf of Bradley Potts
+(brad.potts@coastdigitalgroup.com) at PHCDevworks. All development is driven
+through Claude Code operating from `CLAUDE.md` as the authoritative working
+guide. Human final review and commit authority rests with Bradley Potts.
+
+Claude Code does not create git commits. Changes are prepared and validated,
+then handed off for human review and commit.
 
 For detailed commands, file structure, component patterns, testing strategy, and
 release workflow, see [`CLAUDE.md`](CLAUDE.md).
