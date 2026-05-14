@@ -27,8 +27,7 @@ const {
 } = Astro.props as SpInputProps;
 
 const isInputDisabled = disabled || state === "disabled" || loading;
-const effectiveState =
-  loading ? "loading" : isInputDisabled ? "disabled" : (errorMessage ? "error" : state);
+const isInputError = Boolean(errorMessage) || state === "error";
 
 const { inputId, helperId, errorId, describedBy } =
   resolveSpInputAccessibility({
@@ -38,6 +37,14 @@ const { inputId, helperId, errorId, describedBy } =
     errorMessage,
     "aria-describedby": ariaDescribedby,
   });
+
+const effectiveState = loading
+  ? "loading"
+  : isInputDisabled
+    ? "disabled"
+    : isInputError
+      ? "error"
+      : state;
 
 const classes = getInputClasses({
   state: effectiveState,
@@ -63,7 +70,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
   <input
     id={inputId}
     class={finalClass}
-    aria-invalid={effectiveState === "error" ? "true" : ariaInvalid}
+    aria-invalid={ariaInvalid ?? (effectiveState === "error" ? "true" : undefined)}
     aria-describedby={describedBy}
     disabled={isInputDisabled}
     aria-disabled={isInputDisabled ? "true" : undefined}

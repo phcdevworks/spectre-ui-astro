@@ -62,14 +62,16 @@ export function resolveSpInputAccessibility({
   const helperId = id && helperText ? `${id}-helper` : undefined;
   const errorId = id && errorMessage ? `${id}-error` : undefined;
 
-  const describedBy =
-    [ariaDescribedby, errorId ?? helperId].filter(Boolean).join(" ") ||
-    undefined;
+  // Follow the rendering logic in SpInput.astro: errorMessage suppresses helperText.
+  const activeGeneratedId = errorId ?? helperId;
+  const mergedDescribedBy = [ariaDescribedby, activeGeneratedId]
+    .filter(Boolean)
+    .join(" ");
 
   return {
     inputId: id,
     helperId,
     errorId,
-    describedBy,
+    describedBy: mergedDescribedBy || undefined,
   };
 }
