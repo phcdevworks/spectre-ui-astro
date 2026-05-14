@@ -1,6 +1,19 @@
 # CLAUDE.md — Spectre UI Astro
 
-Primary developer agent: Claude Code (claude-sonnet-4-6), maintained for PHCDevworks.
+## Project Identity
+
+**Package:** `@phcdevworks/spectre-ui-astro`
+**Layer:** L3 of the Spectre design suite — Astro adapter
+**Human owner:** Bradley Potts (brad.potts@coastdigitalgroup.com)
+**Primary AI developer:** Claude Code (claude-sonnet-4-6)
+
+This file is the authoritative guide for Claude Code. Read it before touching any source file.
+
+## Commit Policy
+
+Claude Code does not create git commits in this repository. Prepare changes,
+run all validation, and leave staging, committing, tagging, and pushing to
+human review.
 
 ## Project identity
 
@@ -150,7 +163,7 @@ Tests use `AstroContainer.create()` in `beforeAll`. All tests must remain green 
 1. Update `CHANGELOG.md` — move `[Unreleased]` items under a new version heading
 2. Bump version in `package.json`
 3. Run `npm run ci:verify`
-4. Tag and publish via `npm publish` (prepublishOnly runs `clean + build` automatically)
+4. Hand off to human for review, commit, tag, and `npm publish`
 
 ## Upstream-first policy
 
