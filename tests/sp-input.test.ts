@@ -10,7 +10,7 @@ beforeAll(async () => {
   container = await AstroContainer.create();
 });
 
-describe("SpInput state behavior", () => {
+describe("SpInput behavior", () => {
   it("passes hovered, focused, and active states to the recipe without leaking them to DOM", async () => {
     const html = await container.renderToString(SpInput, {
       props: { hovered: true, focused: true, active: true } as SpInputProps,
@@ -26,45 +26,65 @@ describe("SpInput state behavior", () => {
     expect(html).not.toMatch(/<input[^>]*\shovered\b/);
     expect(html).not.toMatch(/<input[^>]*\sactive\b/);
   });
-});
 
-describe("SpInput accessibility and state synchronization", () => {
-  it("synchronizes state='error' and aria-invalid when errorMessage is present", async () => {
+  it("automatically sets visual error state and aria-invalid when errorMessage is present", async () => {
     const html = await container.renderToString(SpInput, {
-      props: {
-        id: "test-input",
-        errorMessage: "Something went wrong",
-      } as SpInputProps,
+      props: { id: "test-input", errorMessage: "Invalid input" } as SpInputProps,
     });
 
-    // Check for error class
     expect(html).toContain(getInputClasses({ state: "error" }));
-
-    // Check for aria-invalid
     expect(html).toContain('aria-invalid="true"');
+    expect(html).toContain('id="test-input-error"');
+    expect(html).toContain('aria-describedby="test-input-error"');
   });
 
   it("merges user-provided aria-describedby with generated IDs", async () => {
     const html = await container.renderToString(SpInput, {
       props: {
         id: "test-input",
-        helperText: "Help me",
+        helperText: "Help",
         "aria-describedby": "external-id",
       } as SpInputProps,
     });
 
-    // It should contain both
     expect(html).toContain('aria-describedby="external-id test-input-helper"');
   });
 
-  it("preserves explicit aria-invalid when no error message is present", async () => {
+  it("allows overriding aria-invalid even when errorMessage is present", async () => {
     const html = await container.renderToString(SpInput, {
       props: {
         id: "test-input",
+        errorMessage: "Error",
         "aria-invalid": "grammar",
       } as SpInputProps,
     });
 
     expect(html).toContain('aria-invalid="grammar"');
+    expect(html).not.toContain('aria-invalid="true"');
+  });
+
+  it("prioritizes errorId over helperId in aria-describedby when both are present", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "test-input",
+        helperText: "Help",
+        errorMessage: "Error",
+      } as SpInputProps,
+    });
+
+    expect(html).toContain('aria-describedby="test-input-error"');
+    expect(html).not.toContain("test-input-helper");
+  });
+
+  it("prioritizes user-provided aria-invalid over internal state", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: {
+        id: "test-input",
+        "aria-invalid": "false",
+        state: "error"
+      } as SpInputProps,
+    });
+
+    expect(html).toContain('aria-invalid="false"');
   });
 });
