@@ -87,4 +87,25 @@ describe("SpInput behavior", () => {
 
     expect(html).toContain('aria-invalid="false"');
   });
+
+  it("applies aria-live='polite' to the error message", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: { id: "test-input", errorMessage: "Error occurred" } as SpInputProps,
+    });
+
+    expect(html).toContain('aria-live="polite"');
+    expect(html).toContain('class="sp-error-message"');
+  });
+
+  it("supports 'li' and 'nav' as wrapper tags", async () => {
+    const htmlLi = await container.renderToString(SpInput, {
+      props: { as: "li" } as SpInputProps,
+    });
+    expect(htmlLi).toContain("<li");
+
+    const htmlNav = await container.renderToString(SpInput, {
+      props: { as: "nav" } as SpInputProps,
+    });
+    expect(htmlNav).toContain("<nav");
+  });
 });
