@@ -36,6 +36,8 @@ describe("SpInput behavior", () => {
     expect(html).toContain('aria-invalid="true"');
     expect(html).toContain('id="test-input-error"');
     expect(html).toContain('aria-describedby="test-input-error"');
+    expect(html).toContain('aria-live="polite"');
+    expect(html).toContain('aria-atomic="true"');
   });
 
   it("merges user-provided aria-describedby with generated IDs", async () => {
