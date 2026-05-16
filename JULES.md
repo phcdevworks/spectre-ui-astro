@@ -15,7 +15,7 @@ Jules does not own primary development, architecture decisions, release ownershi
 
 1. Read `AGENTS.md` before taking any action.
 2. Defer to `CLAUDE.md` for development authority.
-3. Treat `@phcdevworks/spectre-components`, `@phcdevworks/spectre-ui`, and `@phcdevworks/spectre-tokens` as primary sources of truth for UI logic.
+3. Treat `@phcdevworks/spectre-ui` and `@phcdevworks/spectre-tokens` as primary sources of truth for UI logic.
 4. No edits to build artifacts by hand.
 5. Commit and push only when validation checks pass clean.
 6. If a gate fails and cannot be safely resolved within scope — revert and report the blocker instead of committing a broken state.
