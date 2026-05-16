@@ -196,11 +196,10 @@ missing:
 Before merging or publishing changes, run:
 
 ```bash
-npm ci
-npm run build
-npm run typecheck
-npm test
+npm run ci:verify
 ```
+
+This runs lint → build → typecheck → test in sequence. For a fresh environment, run `npm ci` first.
 
 For `examples/`:
 
