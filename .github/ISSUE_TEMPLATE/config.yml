@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/phcdevworks/spectre-ui-astro/security/policy
+    about:
+      Report vulnerabilities privately through the repository security policy.
+  - name: Contribution guide
+    url: https://github.com/phcdevworks/spectre-ui-astro/blob/main/CONTRIBUTING.md
+    about:
+      Review repository rules, validation steps, and adapter scope before
+      opening work.
