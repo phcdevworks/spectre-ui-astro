@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai summary"
+  auto_title_placeholder: "@coderabbitai"
+  review_status: true
+  commit_status: true
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: true
+  auto_apply_labels: false
+  suggested_reviewers: false
+  poem: false
+  abort_on_close: true
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+  finishing_touches:
+    docstrings:
+      enabled: true
+  tools:
+    eslint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 90000
+    yamllint:
+      enabled: true
+    languagetool:
+      enabled: true
+      level: default
+    actionlint:
+      enabled: true
+  path_instructions:
+    - path: "**/*.ts"
+      instructions: "Enforce strict TypeScript: flag missing type annotations, any usage, and non-null assertions without justification."
+    - path: "**/*.astro"
+      instructions: "Astro component review: front matter script must be minimal — no business logic, no data fetching. Props must be typed with TypeScript interfaces. Use slots for composition rather than render props. No local <style> blocks — all styling must come from upstream @phcdevworks/spectre-ui. Flag any component that reimplements logic already in spectre-ui or spectre-tokens."
+    - path: "src/**"
+      instructions: "L3 Astro adapter — binds the L2 spectre-ui contract for Astro. Flag any code that reimplements recipe logic from spectre-ui, redefines tokens from spectre-tokens, or introduces package-owned CSS files."
+    - path: "package.json"
+      instructions: "Review dependency additions carefully. Flag unpinned major versions and any new packages that are not Astro-specific. Verify upstream Spectre packages use compatible semver ranges."
+    - path: "CHANGELOG.md"
+      instructions: "Verify entries follow Keep a Changelog format with correct categorization (Added/Changed/Fixed/Removed) and link to a version tag."
+chat:
+  auto_reply: true
+knowledge_base:
+  opt_out: false
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  pull_requests:
+    scope: auto
