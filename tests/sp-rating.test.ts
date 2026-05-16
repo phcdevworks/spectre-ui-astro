@@ -9,12 +9,15 @@ beforeAll(async () => {
 });
 
 describe("SpRating accessibility", () => {
-  it("renders aria-label on the root element", async () => {
+  it("renders aria-label and ARIA value attributes on the root element", async () => {
     const html = await container.renderToString(SpRating, {
-      props: { "aria-label": "User rating: 4 out of 5 stars", value: 4 },
+      props: { "aria-label": "User rating: 4 out of 5 stars", value: 4, max: 5 },
     });
 
     expect(html).toContain('aria-label="User rating: 4 out of 5 stars"');
+    expect(html).toContain('aria-valuenow="4"');
+    expect(html).toContain('aria-valuemin="0"');
+    expect(html).toContain('aria-valuemax="5"');
   });
 
   it("hides the stars container from screen readers", async () => {
@@ -170,8 +173,8 @@ describe("SpRating pill and fullWidth prop forwarding", () => {
   });
 });
 
-describe("SpRating slots", () => {
-  it("does not render the text wrapper div when the default slot is empty", async () => {
+describe("SpRating slots and structure", () => {
+  it("does not render the text wrapper span when the default slot is empty", async () => {
     const html = await container.renderToString(SpRating, {
       props: { value: 4 },
     });
@@ -179,7 +182,7 @@ describe("SpRating slots", () => {
     expect(html).not.toContain("sp-rating-text");
   });
 
-  it("renders the text wrapper div when the default slot has content", async () => {
+  it("renders the text wrapper span when the default slot has content", async () => {
     const html = await container.renderToString(SpRating, {
       props: { value: 4 },
       slots: { default: "Excellent service!" },
@@ -187,5 +190,15 @@ describe("SpRating slots", () => {
 
     expect(html).toContain("sp-rating-text");
     expect(html).toContain("Excellent service!");
+  });
+
+  it("has valid HTML when rendered as a span (no div inside span)", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { as: "span", value: 3 },
+      slots: { default: "Text" },
+    });
+
+    expect(html).toContain("<span");
+    expect(html).not.toContain("<div");
   });
 });

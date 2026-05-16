@@ -104,10 +104,13 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
   aria-disabled={isRatingDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-valuenow={value}
+  aria-valuemin={0}
+  aria-valuemax={max}
   tabindex={finalTabIndex}
   {...rest}
 >
-  <div class={starsClasses} aria-hidden="true">
+  <span class={starsClasses} aria-hidden="true">
     {
       stars.map((isFilled) => (
         <span class={getRatingStarClasses(isFilled)}>
@@ -117,12 +120,12 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
         </span>
       ))
     }
-  </div>
+  </span>
   {
     Astro.slots.has("default") && (
-      <div class={textClasses}>
+      <span class={textClasses}>
         <slot />
-      </div>
+      </span>
     )
   }
 </Tag>
