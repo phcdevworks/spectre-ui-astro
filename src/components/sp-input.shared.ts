@@ -9,7 +9,9 @@ type SpInputElement =
   | "footer"
   | "main"
   | "form"
-  | "fieldset";
+  | "fieldset"
+  | "li"
+  | "nav";
 
 interface SpInputBaseProps extends InputRecipeOptions {
   as?: SpInputElement;
