@@ -39,12 +39,6 @@ Claude Code does not create git commits in this repository. Prepare changes,
 run all validation, and leave staging, committing, tagging, and pushing to
 human review.
 
-## Project identity
-
-Package: `@phcdevworks/spectre-ui-astro`
-Role: Layer 3 of the Spectre design suite — the Astro adapter.
-Repository: `phcdevworks/spectre-ui-astro`
-
 ## Spectre layer hierarchy (read-only upstream)
 
 | Layer | Package | Owns |
