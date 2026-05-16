@@ -20,8 +20,10 @@ When guidance overlaps, follow this order:
 4. `CODEX.md`
 5. Local conventions in source, tests, docs, and package metadata
 
-Claude Code is the primary implementation agent. Codex provides release and
-contract oversight. GitHub Copilot should support both by making narrow,
+Claude Code is the primary implementation agent. Codex provides documentation,
+release, production stabilization, repo hygiene, config standardization, and
+contract oversight. Google Jules, when configured, handles only bounded
+automated maintenance. GitHub Copilot should support the team by making narrow,
 production-safe changes and by keeping documentation and GitHub workflows in
 sync with behavior.
 
@@ -37,6 +39,8 @@ sync with behavior.
 - Keep exports, docs, tests, examples, and package metadata aligned whenever
   public behavior changes.
 - Do not create git commits, tags, or releases.
+- Do not own implementation direction, release decisions, or final handoff
+  authority.
 
 ## Project layout
 

@@ -2,10 +2,10 @@
 
 This directory contains OpenAI Codex support files for this repository.
 
-Claude Code remains the primary AI developer and `CLAUDE.md` remains the
-authoritative implementation guide. Codex uses these files when Bradley loops it
-in for release readiness, production checks, documentation standardization, or
-review of another agent's changes.
+Claude Code remains the lead developer and `CLAUDE.md` remains the
+authoritative implementation guide. Codex uses these files for documentation,
+release readiness, production stabilization, repo hygiene, changelog/release
+note support, config standardization, and review of another agent's changes.
 
 ## Files
 
@@ -14,4 +14,3 @@ review of another agent's changes.
 - `change-watch.md` - lightweight review log for tracking contract, docs,
   examples, dependency, and validation concerns across a branch or release
   candidate.
-

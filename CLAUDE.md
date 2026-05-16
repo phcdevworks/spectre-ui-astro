@@ -11,18 +11,27 @@ This file is the authoritative guide for Claude Code. Read it before touching an
 
 ## Multi-Agent Collaboration
 
-This repository uses a two-AI model:
+This repository follows the Spectre AI factory model:
 
 | Agent | Role | Guide |
 |-------|------|-------|
 | Claude Code (`claude-sonnet-4-6`) | Primary AI developer — implementation lead | This file (`CLAUDE.md`) |
-| OpenAI Codex | Secondary support — release readiness, contract review, docs parity | [`CODEX.md`](CODEX.md) |
+| OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, config standardization, contract review, and docs parity | [`CODEX.md`](CODEX.md), [`.codex/`](.codex/README.md) |
+| GitHub Copilot | General development assistance | [`.github/copilot-instructions.md`](.github/copilot-instructions.md) |
+| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | Future `JULES.md` or task prompt |
 
-**Authority order:** Bradley Potts > [`AGENTS.md`](AGENTS.md) > this file (`CLAUDE.md`) > [`CODEX.md`](CODEX.md) > local conventions.
+**Authority order:** Bradley Potts > [`AGENTS.md`](AGENTS.md) > this file (`CLAUDE.md`) > [`CODEX.md`](CODEX.md) > Copilot/Jules task guidance > local conventions.
 
-[`AGENTS.md`](AGENTS.md) is the shared cross-agent guide — rules there apply to both agents. Read it when rules overlap or conflict. Codex uses [`.codex/`](.codex/README.md) for its release and change-review workflows; Claude Code does not need to edit those files.
+[`AGENTS.md`](AGENTS.md) is the shared cross-agent guide — rules there apply to
+all agents. Read it when rules overlap or conflict. Codex uses
+[`.codex/`](.codex/README.md) for its release and change-review workflows;
+Claude Code does not need to edit those files.
 
-Codex reviews Claude Code's changes for contract drift, dependency classification, SSR safety, documentation parity, and release readiness. Claude Code owns implementation; Codex owns release checks.
+Codex reviews Claude Code's changes for contract drift, dependency
+classification, SSR safety, documentation parity, and release readiness. Claude
+Code owns implementation; Codex owns release checks and repo-hygiene support.
+Copilot assists without ownership. Jules, when configured, stays within bounded
+maintenance prompts.
 
 ## Commit Policy
 
