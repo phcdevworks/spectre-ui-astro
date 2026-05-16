@@ -14,11 +14,11 @@
 
 ## Checklist
 
-- [ ] `npm run build` passes
-- [ ] `npm run typecheck` passes
-- [ ] `npm test` passes
+- [ ] `npm run ci:verify` passes
+- [ ] `examples/` build verified if install, exports, or example wiring changed
 - [ ] No CSS, token, or recipe changes introduced
-- [ ] `CHANGELOG.md` updated
+- [ ] Tests, docs, exports, and examples updated for public behavior changes
+- [ ] `CHANGELOG.md` updated if user-facing behavior changed
 
 ## Screenshots (if applicable)
 

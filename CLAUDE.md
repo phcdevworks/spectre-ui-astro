@@ -9,6 +9,21 @@
 
 This file is the authoritative guide for Claude Code. Read it before touching any source file.
 
+## Multi-Agent Collaboration
+
+This repository uses a two-AI model:
+
+| Agent | Role | Guide |
+|-------|------|-------|
+| Claude Code (`claude-sonnet-4-6`) | Primary AI developer — implementation lead | This file (`CLAUDE.md`) |
+| OpenAI Codex | Secondary support — release readiness, contract review, docs parity | [`CODEX.md`](CODEX.md) |
+
+**Authority order:** Bradley Potts > [`AGENTS.md`](AGENTS.md) > this file (`CLAUDE.md`) > [`CODEX.md`](CODEX.md) > local conventions.
+
+[`AGENTS.md`](AGENTS.md) is the shared cross-agent guide — rules there apply to both agents. Read it when rules overlap or conflict. Codex uses [`.codex/`](.codex/README.md) for its release and change-review workflows; Claude Code does not need to edit those files.
+
+Codex reviews Claude Code's changes for contract drift, dependency classification, SSR safety, documentation parity, and release readiness. Claude Code owns implementation; Codex owns release checks.
+
 ## Commit Policy
 
 Claude Code does not create git commits in this repository. Prepare changes,
