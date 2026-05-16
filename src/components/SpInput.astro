@@ -88,7 +88,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
   {
     errorMessage && (
-      <p class="sp-error-message" id={errorId} aria-live="polite">
+      <p class="sp-error-message" id={errorId} aria-live="polite" aria-atomic="true">
         {errorMessage}
       </p>
     )
