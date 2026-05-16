@@ -62,6 +62,34 @@ This repo is L3. It binds the L2 contract for Astro. It does not redefine anythi
 9. `SpInput` requires an explicit `id` when `label`, `helperText`, or `errorMessage` is used — this is an SSR invariant.
 10. The example app is a validation surface, not a parallel contract. Do not track example lockfiles or use `npm ci` against `file:..` local links.
 
+## Thin adapter decision checklist
+
+Before adding any code to this package, answer these questions:
+
+**Does this belong upstream?**
+- Is it a styling behavior, visual variant, or recipe option? → Fix in `@phcdevworks/spectre-ui`, not here.
+- Is it a design value, color, spacing, or token meaning? → Fix in `@phcdevworks/spectre-tokens`, not here.
+- Is it a CSS utility, Tailwind helper, or class recipe? → Fix in `@phcdevworks/spectre-ui`, not here.
+
+**Does this belong here?**
+- Is it an Astro slot structure or named slot API? → OK here.
+- Is it an SSR constraint or Astro-specific render invariant? → OK here.
+- Is it Astro prop typing, component packaging, or entrypoint wiring? → OK here.
+- Is it an adapter-level ergonomic (like `as` prop or `resolveInteractiveAttrs`)? → OK here.
+
+**Warning signs that code does not belong here:**
+- You are computing CSS class strings from scratch instead of calling an upstream recipe function.
+- You are defining a color, spacing value, or design token.
+- You are writing a `<style>` block or stylesheet.
+- You are re-implementing recipe logic that already exists in `@phcdevworks/spectre-ui`.
+- You are adding a visual variant that does not exist upstream.
+
+**When upstream is missing something you need:**
+1. Check whether the behavior already exists in `@phcdevworks/spectre-ui` under a different name.
+2. If genuinely missing, open an issue or PR in `@phcdevworks/spectre-ui` first.
+3. Add a temporary adapter-level workaround only if waiting for upstream would block critical delivery.
+4. Mark any workaround with a comment referencing the upstream gap and remove it when upstream ships the fix.
+
 ## Essential commands
 
 ```bash

@@ -4,31 +4,16 @@
 [![CI](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml/badge.svg)](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
-`@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre
-system for Astro applications that consume the core Spectre UI contract.
+Astro-native components for the [Spectre UI](https://github.com/phcdevworks/spectre-ui) design system. Drop Spectre components into any Astro project — SSR, SSG, or hybrid — without writing CSS, redefining tokens, or reimplementing recipe logic.
 
-Maintained by PHCDevworks, it provides Astro-native components that wrap the
-logic, styling contracts, and class recipes defined in
-[`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui). It stays
-strictly downstream of the core Spectre layers, keeps framework delivery
-separate from design ownership, and serves as the reference adapter pattern for
-future Spectre framework adapters.
+[Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Security Policy](SECURITY.md)
 
-[Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) |
-[Security Policy](SECURITY.md)
+## What Astro developers get
 
-## Key capabilities
-
-- Provides Astro-native components built on top of the `@phcdevworks/spectre-ui`
-  recipe and class contract
-- Keeps Astro delivery SSR-friendly and type-safe without redefining tokens or
-  core styling logic
-- Re-exports shared recipe helpers so Astro consumers can compose with the same
-  styling API used downstream
-- Keeps framework ergonomics aligned with the upstream Spectre UI contract
-  instead of introducing adapter drift
-- Establishes the reference adapter pattern for future Spectre framework
-  packages
+- **Eight ready-to-use Astro components** — badges, buttons, cards, icon boxes, inputs, pricing cards, ratings, and testimonials
+- **SSR-safe by default** — deterministic markup, no client-side JavaScript, stable accessibility wiring
+- **Thin wrapper pattern** — styling comes entirely from `@phcdevworks/spectre-ui`; this package adds Astro slots, typed props, and framework ergonomics
+- **Re-exported recipe helpers** — use the same class functions the components use, directly from your Astro frontmatter or TypeScript
 
 ## Installation
 
@@ -36,79 +21,69 @@ future Spectre framework adapters.
 npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 ```
 
-`@phcdevworks/spectre-ui` is a required peer dependency because this adapter
-binds its upstream recipes, classes, and CSS contract for Astro rather than
-redefining them locally.
+`@phcdevworks/spectre-ui` is a required peer dependency. It owns the CSS, class recipes, and design system behavior that powers every component in this package.
 
-If your project consumes Spectre tokens directly, install
-[`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
-as well.
+If your project works with Spectre design tokens directly:
+
+```bash
+npm install @phcdevworks/spectre-tokens
+```
+
+## CSS setup
+
+This package ships no CSS. Add the Spectre UI stylesheet once in your Astro layout:
+
+```astro
+---
+// src/layouts/BaseLayout.astro
+import '@phcdevworks/spectre-ui/index.css'
+
+interface Props {
+  title?: string
+}
+const { title = 'My Astro site' } = Astro.props
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+```
+
+All Spectre components pick up the stylesheet through the layout. Do not import it per-component — CSS ownership stays with `@phcdevworks/spectre-ui`.
 
 ## Quick start
 
-### Astro component usage
-
-Import Astro-native components from the package root:
-
 ```astro
 ---
-import { SpBadge, SpButton, SpCard, SpInput } from '@phcdevworks/spectre-ui-astro'
----
-```
-
-### CSS import
-
-This package does not ship its own CSS. Import the canonical Spectre UI
-stylesheet from `@phcdevworks/spectre-ui` in your Astro layout or page:
-
-```astro
----
-import '@phcdevworks/spectre-ui/index.css'
----
-```
-
-### Astro-native component example
-
-```astro
----
-import '@phcdevworks/spectre-ui/index.css'
+import BaseLayout from '../layouts/BaseLayout.astro'
 import {
   SpBadge,
   SpButton,
   SpCard,
   SpIconBox,
   SpInput,
-  SpPricingCard
+  SpPricingCard,
 } from '@phcdevworks/spectre-ui-astro'
 ---
 
-<section>
+<BaseLayout title="My page">
   <SpCard variant="elevated">
-    <div>
-      <SpIconBox variant="primary" size="md">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 2l7 4v12l-7 4-7-4V6l7-4z" fill="currentColor" />
-        </svg>
-      </SpIconBox>
+    <SpIconBox variant="primary" size="md">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2l7 4v12l-7 4-7-4V6l7-4z" fill="currentColor" />
+      </svg>
+    </SpIconBox>
 
-      <div>
-        <SpBadge variant="success" size="sm">Stable contract</SpBadge>
-        <h2>Build Astro interfaces on the Spectre UI layer</h2>
-        <p>
-          Compose Astro-native components while keeping styling behavior aligned
-          with the shared Spectre recipe contract.
-        </p>
-        <SpButton variant="primary" size="lg">Get started</SpButton>
-      </div>
-    </div>
+    <SpBadge variant="success" size="sm">Stable</SpBadge>
+    <h2>Build faster with Spectre</h2>
+    <SpButton variant="primary" size="lg">Get started</SpButton>
   </SpCard>
-
-  <SpPricingCard featured>
-    <div slot="header">Pro</div>
-    <div slot="price">$29/mo</div>
-    <div slot="description">Astro delivery on top of the core Spectre UI layer.</div>
-    <SpButton variant="primary" fullWidth>Choose plan</SpButton>
-  </SpPricingCard>
 
   <SpInput
     id="email"
@@ -116,18 +91,426 @@ import {
     name="email"
     type="email"
     placeholder="you@example.com"
-    helperText="We will use this for product updates."
+    helperText="We will never share your email."
   />
-</section>
+
+  <SpPricingCard featured>
+    <h3 slot="header">Pro</h3>
+    <span slot="price">$29/mo</span>
+    <span slot="description">For growing teams.</span>
+    <SpButton variant="primary" fullWidth>Choose plan</SpButton>
+  </SpPricingCard>
+</BaseLayout>
 ```
 
-The README examples intentionally avoid adapter-owned layout or utility styling.
-For page-level composition, import the canonical Spectre UI CSS and add any
-application-specific layout styles in your app rather than this package.
+## Components
 
-`SpInput` requires an explicit `id` whenever you pass `label`, `helperText`, or
-`errorMessage`, so Astro can render stable SSR markup and preserve the
-associated accessibility wiring.
+All components are SSR-safe and ship no client-side JavaScript. Styling comes from the upstream Spectre UI stylesheet — this package adds no local CSS. Every component accepts a `class` prop for additional classes and spreads unknown props onto the root element.
+
+---
+
+### SpButton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `ButtonVariant` | — | Visual style: `"primary"` `"secondary"` `"ghost"` |
+| `size` | `ButtonSize` | — | Size: `"sm"` `"md"` `"lg"` |
+| `as` | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element |
+| `href` | `string` | — | URL when `as="a"` |
+| `type` | `"button" \| "submit" \| "reset"` | `"button"` | Button type (button elements only) |
+| `disabled` | `boolean` | — | Disables the element; suppresses navigation on anchors |
+| `loading` | `boolean` | — | Loading state; implies `disabled` |
+| `fullWidth` | `boolean` | — | Stretches to fill its container |
+| `iconOnly` | `boolean` | — | Removes text padding for icon-only buttons |
+| `pill` | `boolean` | — | Fully rounded corners |
+| `hovered` | `boolean` | — | Force-applies hover styling |
+| `focused` | `boolean` | — | Force-applies focus styling |
+| `active` | `boolean` | — | Force-applies active styling |
+| `aria-label` | `string` | — | Accessible label |
+| `tabindex` | `number` | — | Tab index override |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpButton variant="primary" size="lg">Get started</SpButton>
+<SpButton variant="ghost" as="a" href="/docs">Read docs</SpButton>
+<SpButton variant="primary" type="submit">Save</SpButton>
+<SpButton variant="primary" loading>Saving…</SpButton>
+<SpButton variant="secondary" as="a" href="/item" disabled>Unavailable</SpButton>
+```
+
+---
+
+### SpCard
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `CardVariant` | — | Visual style: `"elevated"` `"outline"` `"flat"` `"ghost"` |
+| `as` | `"div" \| "section" \| "article" \| "aside" \| "a" \| "button" \| "li" \| …` | `"div"` | Rendered element |
+| `interactive` | `boolean` | — | Adds hover/focus styles; adds `role="button"` for non-native elements |
+| `padded` | `boolean` | — | Applies inner padding |
+| `fullHeight` | `boolean` | — | Stretches to full container height |
+| `disabled` | `boolean` | — | Disables the card; suppresses navigation on anchors |
+| `loading` | `boolean` | — | Loading state |
+| `href` | `string` | — | URL when `as="a"` |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpCard variant="elevated">
+  <h2>Card title</h2>
+  <p>Card content goes here.</p>
+</SpCard>
+
+<!-- Semantic article markup -->
+<SpCard variant="outline" as="article">
+  <h2>Blog post title</h2>
+</SpCard>
+
+<!-- Linked card -->
+<SpCard variant="elevated" as="a" href="/post/1" interactive aria-label="Read post">
+  <h2>Clickable card</h2>
+</SpCard>
+```
+
+The default slot renders any child content.
+
+---
+
+### SpInput
+
+`SpInput` renders a labeled input group: wrapper, optional label, input, optional helper text, and optional error message.
+
+When `label`, `helperText`, or `errorMessage` is present, an explicit `id` is **required**. This is an SSR invariant — without a stable `id`, the `for`/`aria-describedby` associations would be nondeterministic. The component throws at render time if the requirement is violated.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | — | **Required** when using `label`, `helperText`, or `errorMessage` |
+| `label` | `string` | — | Renders a `<label>` associated with the input |
+| `helperText` | `string` | — | Renders helper text below the input |
+| `errorMessage` | `string` | — | Renders an error message; suppresses `helperText` |
+| `state` | `InputState` | — | `"default"` `"success"` `"error"` `"disabled"` `"loading"` |
+| `size` | `InputSize` | — | Size: `"sm"` `"md"` `"lg"` |
+| `fullWidth` | `boolean` | — | Stretches input to fill its container |
+| `pill` | `boolean` | — | Fully rounded corners |
+| `disabled` | `boolean` | — | Disables the input |
+| `loading` | `boolean` | — | Loading state |
+| `as` | `"div" \| "form" \| "fieldset" \| …` | `"div"` | Rendered wrapper element |
+| `class` | `string` | — | Additional CSS classes on the `<input>` element |
+| `…rest` | — | — | Any HTML input attribute (`type`, `name`, `placeholder`, `required`, etc.) |
+
+```astro
+<!-- Standalone — no label, no id required -->
+<SpInput type="search" placeholder="Search…" />
+
+<!-- Labeled with helper text — id required -->
+<SpInput
+  id="email"
+  label="Email"
+  name="email"
+  type="email"
+  placeholder="you@example.com"
+  helperText="We will never share your email."
+/>
+
+<!-- Validation error — errorMessage suppresses helperText -->
+<SpInput
+  id="password"
+  label="Password"
+  type="password"
+  state="error"
+  errorMessage="Password must be at least 8 characters."
+/>
+
+<!-- Disabled field -->
+<SpInput
+  id="api-key"
+  label="API Key"
+  value="••••••••"
+  state="disabled"
+  disabled
+/>
+
+<!-- Pill shape, small size -->
+<SpInput id="search-pill" label="Search" size="sm" pill placeholder="Search…" />
+```
+
+---
+
+### SpBadge
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `BadgeVariant` | — | Visual style: `"primary"` `"success"` `"warning"` `"danger"` `"info"` |
+| `size` | `BadgeSize` | — | Size: `"sm"` `"md"` `"lg"` |
+| `as` | `"span" \| "div" \| "a" \| "button" \| "li" \| "time" \| "mark"` | `"span"` | Rendered element |
+| `interactive` | `boolean` | — | Adds hover/focus styles |
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `disabled` | `boolean` | — | Disables the badge |
+| `loading` | `boolean` | — | Loading state |
+| `href` | `string` | — | URL when `as="a"` |
+| `datetime` | `string` | — | Datetime value when `as="time"` |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpBadge variant="success">Active</SpBadge>
+<SpBadge variant="warning" size="sm">Beta</SpBadge>
+<SpBadge variant="primary" as="a" href="/changelog" interactive>New</SpBadge>
+<SpBadge variant="danger" as="time" datetime="2025-01-01">Jan 2025</SpBadge>
+```
+
+---
+
+### SpIconBox
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `IconBoxVariant` | — | Color: `"primary"` `"success"` `"warning"` `"danger"` `"info"` |
+| `size` | `IconBoxSize` | — | Size: `"sm"` `"md"` `"lg"` |
+| `as` | `"span" \| "div" \| "i" \| "a" \| "button" \| "li"` | `"span"` | Rendered element |
+| `pill` | `boolean` | — | Fully rounded corners |
+| `interactive` | `boolean` | — | Adds hover/focus styles |
+| `disabled` | `boolean` | — | Disables the icon box |
+| `loading` | `boolean` | — | Loading state |
+| `href` | `string` | — | URL when `as="a"` |
+| `aria-label` | `string` | — | Accessible label (use when the icon conveys standalone meaning) |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<!-- Decorative icon — mark the icon aria-hidden -->
+<SpIconBox variant="primary" size="md">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2l7 4v12l-7 4-7-4V6l7-4z" fill="currentColor" />
+  </svg>
+</SpIconBox>
+
+<!-- Standalone meaning — label the component -->
+<SpIconBox variant="success" size="sm" aria-label="Success">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="currentColor" d="M20 6 9 17l-5-5" />
+  </svg>
+</SpIconBox>
+```
+
+Use `aria-hidden="true"` on the icon when surrounding context already describes it. Use `aria-label` on the component when the icon box conveys standalone meaning.
+
+---
+
+### SpPricingCard
+
+Named slots map to the structural sections of the pricing card. Slot wrappers render only when their slot is populated — empty slots produce no markup.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `featured` | `boolean` | — | Highlights the card as the recommended tier |
+| `fullHeight` | `boolean` | — | Stretches to full container height |
+| `interactive` | `boolean` | — | Adds hover/focus styles |
+| `disabled` | `boolean` | — | Disables the card |
+| `loading` | `boolean` | — | Loading state |
+| `as` | `"div" \| "section" \| "article" \| …` | `"div"` | Rendered element |
+| `class` | `string` | — | Additional CSS classes |
+
+| Slot | Description |
+|------|-------------|
+| `header` | Plan name or heading |
+| `badge` | Tag or label (e.g., "Popular") |
+| `price` | Price string or element |
+| `description` | Short plan description |
+| *(default)* | Feature list or body content |
+| `footer` | CTA button or footer action |
+
+```astro
+<SpPricingCard featured>
+  <h3 slot="header">Pro</h3>
+  <span slot="badge">Popular</span>
+  <span slot="price">$29/mo</span>
+  <span slot="description">For growing teams and businesses.</span>
+  <ul>
+    <li>Unlimited projects</li>
+    <li>Advanced analytics</li>
+    <li>Priority support</li>
+  </ul>
+  <SpButton slot="footer" variant="primary" fullWidth>Choose Pro</SpButton>
+</SpPricingCard>
+```
+
+---
+
+### SpRating
+
+Renders a star rating. Stars are built from `value`/`max`. Provide a custom star SVG via the `star-icon` slot. The star container is `aria-hidden="true"` — always pass `aria-label` for screen readers.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Number of filled stars |
+| `max` | `number` | `5` | Total star count |
+| `size` | `RatingSize` | — | Size |
+| `interactive` | `boolean` | — | Adds hover/focus styles |
+| `disabled` | `boolean` | — | Disables the rating |
+| `loading` | `boolean` | — | Loading state |
+| `fullWidth` | `boolean` | — | Stretches to fill container |
+| `pill` | `boolean` | — | Fully rounded corners |
+| `as` | `"div" \| "span" \| "section" \| …` | `"div"` | Rendered element |
+| `aria-label` | `string` | — | Screen-reader description of the rating value |
+| `class` | `string` | — | Additional CSS classes |
+
+| Slot | Description |
+|------|-------------|
+| `star-icon` | Custom star icon. Receives `isFilled` as a slot prop. Defaults to `★`. |
+| *(default)* | Optional text shown after the stars (e.g., "4.8 out of 5") |
+
+```astro
+<!-- Basic rating -->
+<SpRating value={4} max={5} aria-label="4 out of 5 stars" />
+
+<!-- With visible text -->
+<SpRating value={4} max={5} aria-label="4 out of 5 stars">
+  4.0 out of 5
+</SpRating>
+
+<!-- Custom star icon -->
+<SpRating value={3} max={5} aria-label="3 out of 5">
+  <svg slot="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2l3 6.5 7 1-5 4.9 1.2 7L12 18l-6.2 3.4 1.2-7L2 9.5l7-1z" fill="currentColor" />
+  </svg>
+</SpRating>
+```
+
+---
+
+### SpTestimonial
+
+Named slots map to the structural sections of the testimonial. Slot wrappers render only when their slot is populated.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `fullHeight` | `boolean` | — | Stretches to full container height |
+| `interactive` | `boolean` | — | Adds hover/focus styles |
+| `disabled` | `boolean` | — | Disables the testimonial |
+| `loading` | `boolean` | — | Loading state |
+| `as` | `"div" \| "section" \| "article" \| "blockquote" \| …` | `"div"` | Rendered element |
+| `class` | `string` | — | Additional CSS classes |
+
+| Slot | Description |
+|------|-------------|
+| `quote` | Quotation text |
+| `author-image` | Author avatar or image element |
+| `author-name` | Author display name |
+| `author-title` | Author job title or affiliation |
+
+```astro
+<SpTestimonial as="blockquote">
+  <p slot="quote">
+    "Spectre UI cut our Astro prototype time in half."
+  </p>
+  <img
+    slot="author-image"
+    src="/avatars/jane.jpg"
+    alt="Jane Doe"
+    width="40"
+    height="40"
+  />
+  <span slot="author-name">Jane Doe</span>
+  <span slot="author-title">Frontend Lead at Acme Corp</span>
+</SpTestimonial>
+```
+
+---
+
+## Polymorphic rendering (`as` prop)
+
+Most components accept an `as` prop to change the rendered HTML element without changing component behavior or styling.
+
+```astro
+<!-- SpButton: renders <button> by default -->
+<SpButton variant="primary">Submit</SpButton>
+
+<!-- SpButton: renders <a> with all button styling -->
+<SpButton variant="primary" as="a" href="/get-started">Get started</SpButton>
+
+<!-- SpCard: semantic article markup -->
+<SpCard variant="elevated" as="article">
+  <h2>Article title</h2>
+</SpCard>
+
+<!-- SpBadge: inline time element -->
+<SpBadge variant="primary" as="time" datetime="2026-01-01">Jan 2026</SpBadge>
+```
+
+**Disabled navigation:** When `disabled` is set on an anchor (`as="a"`), the `href` is suppressed so the element is not keyboard-navigable. `aria-disabled="true"` is always set alongside `disabled`.
+
+**Button type:** When `as="button"` (the default for `SpButton`), `type` defaults to `"button"` to prevent accidental form submission. Pass `type="submit"` explicitly when needed.
+
+**Non-native interactive elements:** Setting `interactive={true}` on a `div` or `span` adds `role="button"` and `tabindex="0"` automatically. Use this only when a native `button` or `a` is genuinely impractical.
+
+## SSR and static site behavior
+
+`@phcdevworks/spectre-ui-astro` works in all Astro output modes: `"static"`, `"server"`, and `"hybrid"`.
+
+**No client-side JavaScript.** Every component renders entirely at build time or in the server step. No hydration directives are needed or used. Interactive styles (hover, focus, active) are driven by CSS from `@phcdevworks/spectre-ui`.
+
+**Deterministic markup.** All IDs, class names, and attributes are computed from explicit props. Every render of the same props produces identical HTML — safe for SSR streaming and static generation.
+
+**`SpInput` explicit `id` requirement.** When any of `label`, `helperText`, or `errorMessage` are passed, an explicit `id` prop is required. Without it, the component throws during render to prevent nondeterministic `for`/`aria-describedby` wiring in server-rendered and statically generated output.
+
+```astro
+<!-- Throws — id is required when label is set -->
+<SpInput label="Email" name="email" />
+
+<!-- Correct -->
+<SpInput id="email" label="Email" name="email" />
+```
+
+**CSS in SSR.** Import the Spectre UI stylesheet in your Astro layout once. Astro handles CSS bundling and injection in both SSR and static builds — no runtime style injection occurs from this package.
+
+## Recipe helpers
+
+The package re-exports class recipe functions from `@phcdevworks/spectre-ui`. Use these when you need Spectre-aligned class names outside of the Astro components — in layout markup, in headless patterns, or when mapping over dynamic data.
+
+```astro
+---
+// Using getButtonClasses to style plain anchor tags in a nav
+import { getButtonClasses } from '@phcdevworks/spectre-ui-astro'
+
+const navClass = getButtonClasses({ variant: 'ghost', size: 'sm' })
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Blog' },
+]
+---
+
+<nav>
+  {links.map(link => (
+    <a class={navClass} href={link.href}>{link.label}</a>
+  ))}
+</nav>
+```
+
+| Helper | For |
+|--------|-----|
+| `getButtonClasses` | Button class generation |
+| `getCardClasses` | Card class generation |
+| `getBadgeClasses` | Badge class generation |
+| `getIconBoxClasses` | Icon box class generation |
+| `getInputClasses` | Input class generation |
+| `getPricingCardClasses` | Pricing card root classes |
+| `getPricingCardBadgeClasses` | Pricing card badge wrapper |
+| `getPricingCardPriceContainerClasses` | Pricing card price container |
+| `getPricingCardPriceClasses` | Pricing card price element |
+| `getPricingCardDescriptionClasses` | Pricing card description |
+| `getRatingClasses` | Rating root classes |
+| `getRatingStarsClasses` | Rating star container |
+| `getRatingStarClasses` | Individual star element |
+| `getRatingTextClasses` | Rating text element |
+| `getTestimonialClasses` | Testimonial root classes |
+| `getTestimonialQuoteClasses` | Quote wrapper |
+| `getTestimonialAuthorClasses` | Author section wrapper |
+| `getTestimonialAuthorInfoClasses` | Author info wrapper |
+| `getTestimonialAuthorNameClasses` | Author name element |
+| `getTestimonialAuthorTitleClasses` | Author title element |
+
+Recipe option and variant types are also re-exported: `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `TestimonialRecipeOptions`.
 
 ## What this package owns
 
@@ -138,17 +521,13 @@ associated accessibility wiring.
   to consume in Astro projects
 - A reference implementation for future Spectre framework adapters
 
-Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine
-it.
+Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine it.
 
 ## What this package does not own
 
-- Design values or token meaning. That belongs to
-  [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens).
-- Core CSS, utilities, Tailwind helpers, or class recipe logic. That belongs to
-  [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui).
-- Local styling systems that diverge from the shared Spectre contract. This
-  package consumes upstream styling behavior rather than replacing it.
+- Design values or token meaning — [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
+- Core CSS, utilities, Tailwind helpers, or class recipe logic — [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)
+- Local styling systems that diverge from the shared Spectre contract
 
 ## When to use this package
 
@@ -174,74 +553,48 @@ Do not use this package when:
 - you need a framework-agnostic styling contract — consume `@phcdevworks/spectre-ui`
   directly
 
-## Package exports / API surface
+## Package exports
 
-### Root package
+### Root imports
 
-`@phcdevworks/spectre-ui-astro` exports:
+```ts
+import {
+  SpBadge, SpButton, SpCard, SpIconBox, SpInput,
+  SpPricingCard, SpRating, SpTestimonial,
+} from '@phcdevworks/spectre-ui-astro'
 
-- `SpBadge`
-- `SpButton`
-- `SpCard`
-- `SpIconBox`
-- `SpInput`
-- `SpPricingCard`
-- `SpRating`
-- `SpTestimonial`
+import {
+  getButtonClasses,
+  getBadgeClasses,
+  getCardClasses,
+  // …all recipe helpers and types
+} from '@phcdevworks/spectre-ui-astro'
+```
 
-The root package also re-exports shared recipe helpers and related TypeScript
-option and variant types from `@phcdevworks/spectre-ui`, including:
+### Direct component entry points
 
-- `getBadgeClasses`
-- `getButtonClasses`
-- `getCardClasses`
-- `getIconBoxClasses`
-- `getInputClasses`
-- `getPricingCardClasses`
-- `getPricingCardBadgeClasses`
-- `getPricingCardPriceContainerClasses`
-- `getPricingCardPriceClasses`
-- `getPricingCardDescriptionClasses`
-- `getRatingClasses`
-- `getRatingStarsClasses`
-- `getRatingStarClasses`
-- `getRatingTextClasses`
-- `getTestimonialClasses`
-- `getTestimonialQuoteClasses`
-- `getTestimonialAuthorClasses`
-- `getTestimonialAuthorInfoClasses`
-- `getTestimonialAuthorNameClasses`
-- `getTestimonialAuthorTitleClasses`
+```ts
+import SpBadge     from '@phcdevworks/spectre-ui-astro/components/SpBadge.astro'
+import SpButton    from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
+import SpCard      from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
+import SpIconBox   from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
+import SpInput     from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
+import SpPricingCard  from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
+import SpRating    from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
+import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
+```
 
-The adapter does not export a `SPECTRE_UI_CSS` helper. Import the canonical
-stylesheet directly from `@phcdevworks/spectre-ui/index.css` so CSS ownership
-stays with the upstream UI package.
-
-### Component entry points
-
-- `@phcdevworks/spectre-ui-astro/components/SpBadge.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpButton.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpCard.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpIconBox.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpInput.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpRating.astro`
-- `@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro`
+The adapter does not export a CSS helper or path. Import the stylesheet directly from `@phcdevworks/spectre-ui/index.css`.
 
 ## Relationship to the rest of Spectre
 
-Spectre keeps responsibilities separate:
+| Package | Owns |
+|---------|------|
+| [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) | Design values, semantic token meaning, and token contracts |
+| [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui) | CSS, utilities, Tailwind helpers, and type-safe class recipes |
+| `@phcdevworks/spectre-ui-astro` | Astro-native component delivery and framework ergonomics |
 
-- [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
-  defines design values, semantic meaning, and token contracts
-- [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui) turns
-  those tokens into reusable CSS, utilities, Tailwind helpers, and type-safe
-  class recipes
-- `@phcdevworks/spectre-ui-astro` binds that upstream UI contract into
-  Astro-native components and framework ergonomics
-
-That separation keeps design ownership centralized, keeps styling logic shared,
-and lets framework adapters stay thin and consistent.
+Tokens define meaning. UI defines structure. This package defines Astro delivery.
 
 ## Development
 
@@ -264,8 +617,7 @@ npm install
 | `npm run lint` | Run ESLint |
 | `npm run dev` | Watch mode for development |
 
-Run `npm run ci:verify` before opening any pull request. It runs lint, build,
-typecheck, and tests in sequence and is the single gate used by CI.
+Run `npm run ci:verify` before opening any pull request. It is the single gate used by CI.
 
 This project requires Node.js `^22.13.0 || >=24.0.0`.
 
@@ -290,7 +642,7 @@ Run `npm install` to sync installed peer versions, then re-run `npm test`. If
 `exports.test.ts` fails, the public contract has drifted — check `src/index.ts`
 and `package.json` exports against the test expectations.
 
-**`SpInput` SSR renders without accessible label associations**
+**`SpInput` renders without accessible label associations**
 `SpInput` requires an explicit `id` prop whenever `label`, `helperText`, or
 `errorMessage` is passed. Without it, the component throws at render time to
 prevent broken accessibility wiring.
