@@ -4,13 +4,22 @@
 - [ ] Summary of changes
 - [ ] Rationale/context
 
-## Testing
+## Type of Change
 
-- [ ] `npm run build`
-- [ ] `npm run typecheck`
-- [ ] `npm test`
-- [ ] Other (describe):
+- [ ] Bug fix / patch
+- [ ] New adapter component or additive improvement
+- [ ] Breaking change
+- [ ] Documentation / config only
+- [ ] Refactor (no behavior change)
 
-## Screenshots (if UI)
+## Checklist
 
-## Notes for reviewers
+- [ ] `npm run build` passes
+- [ ] `npm run typecheck` passes
+- [ ] `npm test` passes
+- [ ] No CSS, token, or recipe changes introduced
+- [ ] `CHANGELOG.md` updated
+
+## Screenshots (if applicable)
+
+## Notes for Reviewers

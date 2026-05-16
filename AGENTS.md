@@ -17,6 +17,16 @@ then handed off for human review and commit.
 For detailed commands, file structure, component patterns, testing strategy, and
 release workflow, see [`CLAUDE.md`](CLAUDE.md).
 
+## Codex Support Role
+
+OpenAI Codex acts as a secondary engineering and release-readiness agent for
+this repository. Codex keeps Claude Code's lead implementation work in check by
+reviewing contract integrity, dependency classification, SSR safety,
+documentation parity, examples, validation, and release handoff readiness.
+
+Codex-specific operating guidance lives in [`CODEX.md`](CODEX.md). Release
+checks and change-review templates live under [`.codex/`](.codex/README.md).
+
 ## Mission
 
 Deliver the upstream `@phcdevworks/spectre-ui` contract through Astro-native
