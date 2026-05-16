@@ -167,6 +167,25 @@ missing:
 4. Do not patch around upstream gaps with local design logic unless the
    limitation is explicitly documented and temporary.
 
+## Thin adapter decision guide
+
+Use this when deciding whether a change belongs in this package:
+
+| Question | Answer |
+|----------|--------|
+| Is it styling, a visual variant, or recipe logic? | Belongs in `@phcdevworks/spectre-ui` |
+| Is it a design value, token, or color? | Belongs in `@phcdevworks/spectre-tokens` |
+| Is it a CSS utility, Tailwind helper, or class recipe? | Belongs in `@phcdevworks/spectre-ui` |
+| Is it an Astro slot structure, prop type, or SSR constraint? | Belongs here |
+| Is it adapter packaging, entrypoint wiring, or `as`-prop logic? | Belongs here |
+
+**Red flags that code is in the wrong package:**
+- Computing class strings without calling an upstream recipe function
+- Defining a color, spacing, or design token locally
+- Writing a `<style>` block or any local CSS
+- Re-implementing logic that already exists in `@phcdevworks/spectre-ui`
+- Adding a visual variant that does not exist upstream
+
 ## SSR and Accessibility Rules
 
 1. Prefer deterministic markup.
