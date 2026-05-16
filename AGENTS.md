@@ -3,6 +3,26 @@
 This repository is maintained by PHCDevworks and contains the Astro adapter for
 the Spectre system.
 
+## File Ownership at a Glance
+
+| File / Path | Status | Notes |
+|-------------|--------|-------|
+| `src/components/*.astro` | Source — edit freely | Astro component implementations |
+| `src/recipes/index.ts` | Source — edit freely | Re-exports from upstream only |
+| `src/index.ts` | Source — keep in sync | Public package exports |
+| `dist/` | Generated — do not edit by hand | Output of `npm run build` |
+| `package.json` exports | Source — keep in sync with `src/index.ts` | Must match source and docs |
+| `README.md` | Source — keep in sync | Consumer-facing docs |
+| `CHANGELOG.md` | Source — append only | Follow Keep a Changelog format |
+| `CLAUDE.md` | Protected | Lead developer working guide |
+| `AGENTS.md` | Protected | Shared agent authority guide |
+| `CODEX.md` | Protected | Codex release and review guide |
+| `JULES.md` | Protected | Jules maintenance scope |
+| `.github/copilot-instructions.md` | Protected | Copilot support guide |
+| `tests/exports.test.ts` | Source — keep in sync | Guards public contract surface |
+| `scripts/validate-package-contract.ts` | Source — keep in sync | Post-build contract assertions |
+| `examples/` | Validation surface — not a contract | Demo app; not independently published |
+
 ## Primary AI Developer
 
 **Claude Code** (`claude-sonnet-4-6`) is the designated primary AI developer for

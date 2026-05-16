@@ -1,7 +1,7 @@
 # @phcdevworks/spectre-ui-astro
 
-[![GitHub issues](https://img.shields.io/github/issues/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/phcdevworks/spectre-ui-astro)](https://github.com/phcdevworks/spectre-ui-astro/pulls)
+[![npm version](https://img.shields.io/npm/v/@phcdevworks/spectre-ui-astro)](https://www.npmjs.com/package/@phcdevworks/spectre-ui-astro)
+[![CI](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml/badge.svg)](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
 
 `@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre
@@ -150,6 +150,30 @@ it.
 - Local styling systems that diverge from the shared Spectre contract. This
   package consumes upstream styling behavior rather than replacing it.
 
+## When to use this package
+
+Use `@phcdevworks/spectre-ui-astro` when:
+
+- you are building an Astro project and want Spectre UI components as
+  first-class Astro components
+- you need SSR-safe, type-safe component interfaces that bind the upstream
+  `@phcdevworks/spectre-ui` recipe contract without reimplementing it
+- you want to compose with Spectre's shared recipe helpers from TypeScript in an
+  Astro project
+
+## When not to use this package
+
+Do not use this package when:
+
+- you are using a different framework (React, Vue, Svelte, etc.) — this package
+  is Astro-only
+- you want to define custom tokens or override Spectre's design values — that
+  belongs in `@phcdevworks/spectre-tokens`
+- you want to add or change class recipes, CSS utilities, or Tailwind helpers —
+  that belongs in `@phcdevworks/spectre-ui`
+- you need a framework-agnostic styling contract — consume `@phcdevworks/spectre-ui`
+  directly
+
 ## Package exports / API surface
 
 ### Root package
@@ -221,24 +245,60 @@ and lets framework adapters stay thin and consistent.
 
 ## Development
 
-Install dependencies, then run the package checks:
+### Setup
 
 ```bash
+git clone https://github.com/phcdevworks/spectre-ui-astro.git
+cd spectre-ui-astro
 npm install
-npm run build
-npm run typecheck
-npm test
 ```
 
-This project expects Node.js `^22.13.0 || >=24.0.0` and npm `11.14.1`.
+### Common commands
 
-Key source areas:
+| Command | Purpose |
+|---------|---------|
+| `npm run ci:verify` | Full pre-merge check: lint → build → typecheck → test |
+| `npm run build` | Build the distributable package |
+| `npm run typecheck` | Type-check without emitting |
+| `npm test` | Run the Vitest test suite |
+| `npm run lint` | Run ESLint |
+| `npm run dev` | Watch mode for development |
 
-- `src/components/` for Astro component implementations
-- `src/recipes/` for re-exported recipe bindings
-- `src/index.ts` for package exports
-- `examples/` for usage examples
-- `scripts/` for packaging support scripts
+Run `npm run ci:verify` before opening any pull request. It runs lint, build,
+typecheck, and tests in sequence and is the single gate used by CI.
+
+This project requires Node.js `^22.13.0 || >=24.0.0`.
+
+### Key source areas
+
+- `src/components/` — Astro component implementations
+- `src/recipes/` — re-exported recipe bindings from `@phcdevworks/spectre-ui`
+- `src/index.ts` — package exports
+- `tests/` — unit, SSR, and contract tests
+- `examples/` — demo Astro app for manual validation
+- `scripts/` — packaging and contract validation scripts
+
+### Troubleshooting
+
+**`npm run build` fails with a missing recipe or type**
+The upstream `@phcdevworks/spectre-ui` peer dependency must be installed. Run
+`npm install` from the repo root. If a recipe or type is missing from upstream,
+do not add it locally — open an issue in `@phcdevworks/spectre-ui` first.
+
+**Tests fail after pulling upstream changes**
+Run `npm install` to sync installed peer versions, then re-run `npm test`. If
+`exports.test.ts` fails, the public contract has drifted — check `src/index.ts`
+and `package.json` exports against the test expectations.
+
+**`SpInput` SSR renders without accessible label associations**
+`SpInput` requires an explicit `id` prop whenever `label`, `helperText`, or
+`errorMessage` is passed. Without it, the component throws at render time to
+prevent broken accessibility wiring.
+
+**Example app fails to build**
+Run `npm install` from within `examples/` (not `npm ci`) because the example
+depends on the parent package through a local `file:..` link. Do not commit an
+example `package-lock.json` as a CI contract.
 
 ## Contributing
 
@@ -250,9 +310,8 @@ When contributing:
   contract
 - do not redefine tokens, CSS behavior, or recipe logic in this package
 - keep the adapter SSR-friendly, type-safe, and framework-appropriate
-- run `npm test` to verify adapter exports, SSR rendering, and example/docs
-  guardrails
-- run `npm run build` and `npm run typecheck` before opening a pull request
+- run `npm run ci:verify` before opening a pull request — it runs lint, build,
+  typecheck, and tests in one step
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 

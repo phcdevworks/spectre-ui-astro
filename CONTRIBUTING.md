@@ -28,10 +28,10 @@ structure, adapters define delivery.
 
 1. Clone the repository.
 2. Install dependencies with `npm install`.
-3. Run `npm run build`.
-4. Run `npm run typecheck`.
-5. Run `npm test`.
-6. If needed, validate behavior in the `examples/` app.
+3. Run `npm run ci:verify` to confirm everything builds, type-checks, and tests
+   cleanly before making changes.
+4. If needed, validate rendering in the `examples/` app by running
+   `npm install && npm run build` from within `examples/`.
 
 `@phcdevworks/spectre-ui` is a required peer dependency for consumers and should
 remain the source of truth for shared recipes, classes, and CSS.
@@ -56,10 +56,8 @@ remain the source of truth for shared recipes, classes, and CSS.
 ### Code and tooling
 
 - Follow Astro and TypeScript best practices.
-- Run `npm run build` for distributable output.
-- Run `npm run typecheck` before opening a pull request.
-- Run `npm test` to catch export drift, SSR regressions, and doc/example
-  mismatch.
+- Run `npm run ci:verify` before opening a pull request — it runs lint, build,
+  typecheck, and tests in sequence and is the single CI gate.
 - Use the example app when you need to verify rendering behavior manually.
 
 ### Documentation
@@ -71,11 +69,10 @@ remain the source of truth for shared recipes, classes, and CSS.
 ## Pull Request Checklist
 
 1. Keep the change focused.
-2. Run `npm run build`.
-3. Run `npm run typecheck`.
-4. Run `npm test`.
-5. Verify the example app if the change affects rendering or component props.
-6. Update docs if public behavior or guidance changed.
+2. Run `npm run ci:verify` — lint, build, typecheck, and tests must all pass.
+3. Verify the example app if the change affects rendering or component props.
+4. Update `README.md`, `CHANGELOG.md`, and relevant doc files if public behavior
+   or guidance changed.
 
 ## Questions
 
