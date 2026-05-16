@@ -17,15 +17,45 @@ then handed off for human review and commit.
 For detailed commands, file structure, component patterns, testing strategy, and
 release workflow, see [`CLAUDE.md`](CLAUDE.md).
 
+## AI Operating Model
+
+This repository follows the Spectre AI factory model:
+
+| Agent | Role | Authority |
+| ----- | ---- | --------- |
+| Claude Code | Lead developer responsible for primary implementation | `CLAUDE.md` |
+| OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, and config standardization | `CODEX.md` and `.codex/` |
+| GitHub Copilot | General development assistance | `.github/copilot-instructions.md` |
+| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | Future `JULES.md` or task prompt |
+
+Claude Code keeps implementation leadership. Codex keeps release and
+stabilization work clean. Copilot assists without owning decisions. Jules may
+only take bounded automated maintenance when configured for this repository.
+
 ## Codex Support Role
 
-OpenAI Codex acts as a secondary engineering and release-readiness agent for
-this repository. Codex keeps Claude Code's lead implementation work in check by
+OpenAI Codex acts as the documentation, release-readiness, production
+stabilization, repo hygiene, and config standardization agent for this
+repository. Codex keeps Claude Code's lead implementation work in check by
 reviewing contract integrity, dependency classification, SSR safety,
 documentation parity, examples, validation, and release handoff readiness.
 
 Codex-specific operating guidance lives in [`CODEX.md`](CODEX.md). Release
 checks and change-review templates live under [`.codex/`](.codex/README.md).
+
+## GitHub Copilot Support Role
+
+GitHub Copilot provides general development assistance: targeted edits,
+refactors, documentation synchronization, GitHub workflow support, and
+validation awareness. Copilot does not own implementation direction, release
+decisions, or final handoff authority.
+
+## Google Jules Maintenance Role
+
+Google Jules is reserved for automated maintenance: small fixes, dependency
+updates, generated-output synchronization, and micro-updates. Jules must stay
+within the task prompt and must not take on adapter feature ownership or release
+decisions.
 
 ## Mission
 

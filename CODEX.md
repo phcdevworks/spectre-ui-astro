@@ -2,14 +2,19 @@
 
 ## Codex Role
 
-Codex is the secondary AI engineering agent for this repository. Claude Code is
-the designated primary AI developer and `CLAUDE.md` remains the authoritative
-working guide for implementation details, component patterns, validation, and
-release workflow.
+Codex is the documentation, release-readiness, production-stabilization,
+repo-hygiene, changelog/release note support, and config-standardization agent
+for this repository. Claude Code is the designated lead developer and
+`CLAUDE.md` remains the authoritative working guide for implementation details,
+component patterns, validation, and release workflow.
 
-Codex supports Bradley Potts and Claude Code by keeping production readiness,
-release discipline, documentation standardization, and contract integrity in
-check.
+Codex supports Bradley Potts and Claude Code by keeping documentation, releases,
+production stabilization, repo hygiene, config standardization, release
+discipline, and contract integrity in check.
+
+Codex must not weaken Claude Code's lead developer role, assign ownership or
+release decisions to Copilot, or expand Jules beyond small automated
+maintenance.
 
 ## Authority Order
 
@@ -19,7 +24,8 @@ When instructions overlap, follow this order:
 2. Repository rules in `AGENTS.md`
 3. Claude Code working guide in `CLAUDE.md`
 4. Codex operating guidance in this file
-5. Local conventions found in source, tests, examples, and package metadata
+5. Copilot and Jules task guidance
+6. Local conventions found in source, tests, examples, and package metadata
 
 Do not use this file to bypass or weaken the upstream-first adapter rules.
 
@@ -51,6 +57,7 @@ Codex should keep tabs on:
   states, role handling, tabindex guarding, and attribute leakage.
 - Documentation consistency across `README.md`, `CHANGELOG.md`, `CLAUDE.md`,
   `AGENTS.md`, examples, and PR templates.
+- AI-agent and repository configuration consistency when guidance drifts.
 - Release readiness before version bumps, tags, and npm publication.
 
 ## Default Workflow
@@ -100,4 +107,3 @@ When Codex standardizes docs:
 - Keep `README.md` consumer-facing.
 - Keep `.codex/*` focused on Codex release and review workflows.
 - Do not duplicate long component implementation guidance outside `CLAUDE.md`.
-
