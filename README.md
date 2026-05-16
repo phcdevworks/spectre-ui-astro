@@ -454,12 +454,11 @@ Most components accept an `as` prop to change the rendered HTML element without 
 **`SpInput` explicit `id` requirement.** When any of `label`, `helperText`, or `errorMessage` are passed, an explicit `id` prop is required. Without it, the component throws during render to prevent nondeterministic `for`/`aria-describedby` wiring in server-rendered and statically generated output.
 
 ```astro
-<!-- Throws — id is required when label is set -->
-<SpInput label="Email" name="email" />
-
-<!-- Correct -->
+<!-- id is required whenever label, helperText, or errorMessage is set -->
 <SpInput id="email" label="Email" name="email" />
 ```
+
+Omitting `id` when `label` is set throws at render time with a clear error message. This applies in both SSR and static builds.
 
 **CSS in SSR.** Import the Spectre UI stylesheet in your Astro layout once. Astro handles CSS bundling and injection in both SSR and static builds — no runtime style injection occurs from this package.
 
