@@ -21,6 +21,14 @@ const {
   focused,
   hovered,
   active,
+  name,
+  value,
+  placeholder,
+  required,
+  readonly,
+  type,
+  autocomplete,
+  "aria-label": ariaLabel,
   "aria-describedby": ariaDescribedby,
   "aria-invalid": ariaInvalid,
   ...rest
@@ -70,8 +78,17 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
   <input
     id={inputId}
     class={finalClass}
+    name={name}
+    value={value}
+    placeholder={placeholder}
+    required={required}
+    readonly={readonly}
+    type={type}
+    autocomplete={autocomplete}
+    aria-label={ariaLabel}
     aria-invalid={ariaInvalid ?? (effectiveState === "error" ? "true" : undefined)}
     aria-describedby={describedBy}
+    aria-required={required ? "true" : undefined}
     disabled={isInputDisabled}
     aria-disabled={isInputDisabled ? "true" : undefined}
     aria-busy={loading ? "true" : undefined}
