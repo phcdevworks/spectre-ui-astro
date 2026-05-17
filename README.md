@@ -651,6 +651,31 @@ Run `npm install` from within `examples/` (not `npm ci`) because the example
 depends on the parent package through a local `file:..` link. Do not commit an
 example `package-lock.json` as a CI contract.
 
+## Validation
+
+Run the full validation gate before any pull request:
+
+```bash
+npm run check
+```
+
+This runs: lint → build → typecheck → tests. All steps must pass.
+
+## AI and automation boundaries
+
+Claude Code (`claude-sonnet-4-6`) is the primary development agent for this
+repository. Codex handles releases and production stabilization. Jules handles
+small automated fixes and micro-updates. GitHub Copilot provides development
+support.
+
+No agent creates git commits. All changes are prepared and validated, then
+handed off to Bradley Potts for human review and commit.
+
+**Protected from automated change:** SSR rendering invariants, the thin-adapter
+rule (no local CSS, no token redefinition, no recipe reimplementation), and the
+public export surface. See [AGENTS.md](AGENTS.md) for full agent governance and
+boundary rules.
+
 ## Contributing
 
 PHCDevworks maintains this package as part of the Spectre suite.
@@ -661,7 +686,7 @@ When contributing:
   contract
 - do not redefine tokens, CSS behavior, or recipe logic in this package
 - keep the adapter SSR-friendly, type-safe, and framework-appropriate
-- run `npm run ci:verify` before opening a pull request — it runs lint, build,
+- run `npm run check` before opening a pull request — it runs lint, build,
   typecheck, and tests in one step
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
