@@ -21,6 +21,14 @@ interface SpInputBaseProps extends InputRecipeOptions {
   focused?: boolean;
   hovered?: boolean;
   active?: boolean;
+  name?: string;
+  value?: string | number;
+  placeholder?: string;
+  required?: boolean;
+  readonly?: boolean;
+  type?: string;
+  autocomplete?: string;
+  "aria-label"?: string;
   "aria-describedby"?: string;
   "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
   [key: string]: unknown;
