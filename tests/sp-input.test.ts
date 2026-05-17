@@ -110,4 +110,36 @@ describe("SpInput behavior", () => {
     });
     expect(htmlNav).toContain("<nav");
   });
+
+  it("forwards standard HTML input attributes correctly", async () => {
+    const props: SpInputProps = {
+      name: "test-name",
+      value: "test-value",
+      placeholder: "test-placeholder",
+      type: "email",
+      autocomplete: "email",
+      "aria-label": "test-label",
+      required: true,
+      readonly: true,
+    };
+
+    const html = await container.renderToString(SpInput, { props });
+
+    expect(html).toContain('name="test-name"');
+    expect(html).toContain('value="test-value"');
+    expect(html).toContain('placeholder="test-placeholder"');
+    expect(html).toContain('type="email"');
+    expect(html).toContain('autocomplete="email"');
+    expect(html).toContain('aria-label="test-label"');
+    expect(html).toMatch(/<input[^>]*\srequired\b/);
+    expect(html).toMatch(/<input[^>]*\sreadonly\b/);
+    expect(html).toContain('aria-required="true"');
+  });
+
+  it("does not set aria-required when required is false or undefined", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: { required: false } as SpInputProps,
+    });
+    expect(html).not.toContain('aria-required="true"');
+  });
 });
