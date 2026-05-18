@@ -21,7 +21,7 @@ Astro-native components for the [Spectre UI](https://github.com/phcdevworks/spec
 npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 ```
 
-`@phcdevworks/spectre-ui` is a required peer dependency. It owns the CSS, class recipes, and design system behavior that powers every component in this package.
+`@phcdevworks/spectre-ui` is a required peer dependency. It owns the CSS, class recipes, and design system behavior that powers every component in this package. Install this package inside an Astro project; `astro` is also a peer dependency supplied by the consuming app.
 
 If your project works with Spectre design tokens directly:
 
@@ -591,9 +591,12 @@ The adapter does not export a CSS helper or path. Import the stylesheet directly
 |---------|------|
 | [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) | Design values, semantic token meaning, and token contracts |
 | [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui) | CSS, utilities, Tailwind helpers, and type-safe class recipes |
-| `@phcdevworks/spectre-ui-astro` | Astro-native component delivery and framework ergonomics |
+| `@phcdevworks/spectre-components` | Framework-agnostic Lit web component behavior |
+| `@phcdevworks/spectre-ui-astro` | Astro-native adapter delivery and framework ergonomics |
 
-Tokens define meaning. UI defines structure. This package defines Astro delivery.
+Tokens define meaning. UI defines the styling contract. Components define
+framework-agnostic custom element behavior. This package defines Astro delivery
+and consumes the upstream UI contract directly.
 
 ## Development
 
@@ -668,8 +671,10 @@ repository. Codex handles releases and production stabilization. Jules handles
 small automated fixes and micro-updates. GitHub Copilot provides development
 support.
 
-No agent creates git commits. All changes are prepared and validated, then
-handed off to Bradley Potts for human review and commit.
+Claude Code, Codex, and Copilot do not create git commits by default. Jules may
+commit only bounded automated maintenance when the `JULES.md` scope and
+validation gates pass. Release decisions, tags, and publishing remain with
+Bradley Potts.
 
 **Protected from automated change:** SSR rendering invariants, the thin-adapter
 rule (no local CSS, no token redefinition, no recipe reimplementation), and the

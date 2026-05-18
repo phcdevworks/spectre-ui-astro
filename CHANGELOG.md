@@ -6,6 +6,17 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Changed
+
+- Clarified AI guidance and README layer language so this package is documented
+  as the Astro adapter layer downstream of `@phcdevworks/spectre-ui`, while
+  `@phcdevworks/spectre-components` owns framework-agnostic Lit web components.
+- Added root Copilot support guidance to match the Spectre AI instruction
+  structure used by `@phcdevworks/spectre-tokens`.
+- Corrected README automation wording so Jules' bounded maintenance commit
+  authority matches `JULES.md`.
+- Updated shared agent guidance to reference the root Copilot support file.
+
 ## [2.3.0] - 2026-05-05
 
 Release Title: Slot Hygiene and Upstream Recipe Alignment

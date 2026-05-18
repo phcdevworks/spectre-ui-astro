@@ -3,7 +3,7 @@
 ## Project Identity
 
 **Package:** `@phcdevworks/spectre-ui-astro`
-**Layer:** L3 of the Spectre design suite — Astro adapter
+**Layer:** L4 of the Spectre design suite — Astro adapter
 **Human owner:** Bradley Potts (brad.potts@coastdigitalgroup.com)
 **Primary AI developer:** Claude Code (claude-sonnet-4-6)
 
@@ -18,7 +18,7 @@ This repository follows the Spectre AI factory model:
 | Claude Code (`claude-sonnet-4-6`) | Primary AI developer — implementation lead | This file (`CLAUDE.md`) |
 | OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, config standardization, contract review, and docs parity | [`CODEX.md`](CODEX.md), [`.codex/`](.codex/README.md) |
 | GitHub Copilot | General development assistance | [`.github/copilot-instructions.md`](.github/copilot-instructions.md) |
-| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | Future `JULES.md` or task prompt |
+| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | [`JULES.md`](JULES.md) |
 
 **Authority order:** Bradley Potts > [`AGENTS.md`](AGENTS.md) > this file (`CLAUDE.md`) > [`CODEX.md`](CODEX.md) > Copilot/Jules task guidance > local conventions.
 
@@ -45,9 +45,11 @@ human review.
 |-------|---------|------|
 | L1 | `@phcdevworks/spectre-tokens` | Design values and token contracts |
 | L2 | `@phcdevworks/spectre-ui` | CSS, utilities, Tailwind helpers, class recipes |
-| L3 | `@phcdevworks/spectre-ui-astro` | Astro-native component delivery (this repo) |
+| L3 | `@phcdevworks/spectre-components` | Framework-agnostic Lit web component behavior |
+| L4 | `@phcdevworks/spectre-ui-astro` | Astro-native adapter delivery (this repo) |
 
-This repo is L3. It binds the L2 contract for Astro. It does not redefine anything from L1 or L2.
+This repo is L4. It binds the L2 contract for Astro. It does not redefine
+anything from L1 or L2, and it does not own the L3 Lit web component layer.
 
 ## Non-negotiable rules
 
