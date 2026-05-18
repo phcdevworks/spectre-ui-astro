@@ -84,4 +84,22 @@ describe("SpCard accessibility and tabindex guarding", () => {
 
     expect(html).not.toContain('tabindex="-1"');
   });
+
+  it("automatically applies interactive classes when rendered as 'button'", async () => {
+    const html = await container.renderToString(SpCard, {
+      props: { as: "button" },
+    });
+
+    const interactiveClasses = getCardClasses({ interactive: true });
+    expect(html).toContain(interactiveClasses);
+  });
+
+  it("automatically applies interactive classes when rendered as 'a'", async () => {
+    const html = await container.renderToString(SpCard, {
+      props: { as: "a", href: "#" },
+    });
+
+    const interactiveClasses = getCardClasses({ interactive: true });
+    expect(html).toContain(interactiveClasses);
+  });
 });
