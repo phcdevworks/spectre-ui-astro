@@ -17,6 +17,7 @@ the Spectre system.
 | `CLAUDE.md` | Protected | Lead developer working guide |
 | `AGENTS.md` | Protected | Shared agent authority guide |
 | `CODEX.md` | Protected | Codex release and review guide |
+| `COPILOT.md` | Protected | Copilot support guide |
 | `JULES.md` | Protected | Jules maintenance scope |
 | `.github/copilot-instructions.md` | Protected | Copilot support guide |
 | `tests/exports.test.ts` | Source — keep in sync | Guards public contract surface |
@@ -45,8 +46,8 @@ This repository follows the Spectre AI factory model:
 | ----- | ---- | --------- |
 | Claude Code | Lead developer responsible for primary implementation | `CLAUDE.md` |
 | OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, and config standardization | `CODEX.md` and `.codex/` |
-| GitHub Copilot | General development assistance | `.github/copilot-instructions.md` |
-| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | Future `JULES.md` or task prompt |
+| GitHub Copilot | General development assistance | `COPILOT.md` and `.github/copilot-instructions.md` |
+| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | `JULES.md` |
 
 Claude Code keeps implementation leadership. Codex keeps release and
 stabilization work clean. Copilot assists without owning decisions. Jules may
@@ -94,6 +95,9 @@ Within Spectre:
 - `@phcdevworks/spectre-ui`
   - Owns CSS, utilities, Tailwind helpers, class recipes, and shared styling
     behavior.
+- `@phcdevworks/spectre-components`
+  - Owns framework-agnostic Lit web component behavior and the canonical
+    custom-element layer.
 - `@phcdevworks/spectre-ui-astro`
   - Owns Astro-native component delivery, framework ergonomics, slot structure,
     SSR-safe rendering, adapter-level typing, and package publishing for Astro
