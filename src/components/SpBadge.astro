@@ -46,12 +46,13 @@ const {
 } = Astro.props as SpBadgeProps;
 
 const isBadgeDisabled = disabled || loading;
+const isInteractive = interactive || Tag === "a" || Tag === "button";
 
 const classes = getBadgeClasses({
   variant,
   size,
   fullWidth,
-  interactive,
+  interactive: isInteractive,
   disabled: isBadgeDisabled,
   loading,
   hovered,
@@ -66,7 +67,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   href,
   type,
   tabindex,
-  interactive,
+  interactive: isInteractive,
 });
 ---
 
@@ -77,7 +78,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isBadgeDisabled ? true : undefined}
-  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
+  role={isInteractive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isBadgeDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
