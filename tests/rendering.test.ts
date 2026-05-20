@@ -219,7 +219,7 @@ describe("SSR rendering", () => {
       },
     });
 
-    expect(html).toContain(getBadgeClasses({ variant: "primary", size: "sm", loading: true, disabled: true }));
+    expect(html).toContain(getBadgeClasses({ variant: "primary", size: "sm", loading: true, disabled: true, interactive: true }));
     expect(html).toContain('aria-disabled="true"');
     expect(html).toContain('aria-busy="true"');
     expect(html).toContain('tabindex="-1"');

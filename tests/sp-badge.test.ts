@@ -56,4 +56,21 @@ describe("SpBadge tabindex guarding", () => {
 
     expect(html).toContain('tabindex="-1"');
   });
+
+  it("applies interactive classes when rendered as a button even if interactive prop is omitted", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { as: "button" },
+    });
+
+    expect(html).toContain("sp-badge--interactive");
+    expect(html).not.toContain('role="button"');
+  });
+
+  it("applies interactive classes when rendered as an anchor even if interactive prop is omitted", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { as: "a", href: "#" },
+    });
+
+    expect(html).toContain("sp-badge--interactive");
+  });
 });
