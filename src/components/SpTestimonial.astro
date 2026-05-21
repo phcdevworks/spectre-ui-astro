@@ -59,10 +59,11 @@ const {
 } = Astro.props as SpTestimonialProps;
 
 const isTestimonialDisabled = disabled || loading;
+const isInteractive = interactive || Tag === "a" || Tag === "button";
 
 const classes = getTestimonialClasses({
   fullHeight,
-  interactive,
+  interactive: isInteractive,
   hovered,
   focused,
   active,
@@ -77,7 +78,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   href,
   type,
   tabindex,
-  interactive,
+  interactive: isInteractive,
 });
 
 const quoteClasses = getTestimonialQuoteClasses();
@@ -94,7 +95,7 @@ const authorTitleClasses = getTestimonialAuthorTitleClasses();
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isTestimonialDisabled ? true : undefined}
-  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
+  role={isInteractive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isTestimonialDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}

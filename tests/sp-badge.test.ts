@@ -65,6 +65,7 @@ describe("SpBadge interactivity and tabindex guarding", () => {
 
     const interactiveClasses = getBadgeClasses({ interactive: true });
     expect(html).toContain(interactiveClasses);
+    expect(html).not.toContain('role="button"');
   });
 
   it("automatically applies interactive classes when rendered as 'a'", async () => {

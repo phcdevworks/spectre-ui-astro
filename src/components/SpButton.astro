@@ -74,7 +74,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
-  disabled={Tag === "button" ? isDisabled : undefined}
+  disabled={Tag === "button" && isDisabled ? true : undefined}
   role={Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
