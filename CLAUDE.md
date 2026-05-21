@@ -1,263 +1,164 @@
-# CLAUDE.md — Spectre UI Astro
+# CLAUDE.md - Spectre UI Astro
 
 ## Project Identity
 
-**Package:** `@phcdevworks/spectre-ui-astro`
-**Layer:** L4 of the Spectre design suite — Astro adapter
-**Human owner:** Bradley Potts (brad.potts@coastdigitalgroup.com)
-**Primary AI developer:** Claude Code (claude-sonnet-4-6)
+**Package:** `@phcdevworks/spectre-ui-astro` **Layer:** L4 of the Spectre design
+suite - Astro adapter **Human owner:** Bradley Potts
+(brad.potts@coastdigitalgroup.com) **Primary AI developer:** Claude Code
+(claude-sonnet-4-6)
 
-This file is the authoritative guide for Claude Code. Read it before touching any source file.
+This file is the authoritative implementation guide for Claude Code operating in
+this repository. Shared agent roles, package boundaries, validation rules, and
+PR requirements live in `AGENTS.md`.
 
-## Multi-Agent Collaboration
+## Multi-Agent Team
 
-This repository follows the Spectre AI factory model:
-
-| Agent | Role | Guide |
-|-------|------|-------|
-| Claude Code (`claude-sonnet-4-6`) | Primary AI developer — implementation lead | This file (`CLAUDE.md`) |
-| OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, config standardization, contract review, and docs parity | [`CODEX.md`](CODEX.md), [`.codex/`](.codex/README.md) |
-| ChatGPT | Strategy, coordination, prompt design, and external review — support layer only, no implementation ownership | — |
-| GitHub Copilot | General development assistance | [`.github/copilot-instructions.md`](.github/copilot-instructions.md) |
-| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | [`JULES.md`](JULES.md) |
-
-**Authority order:** Bradley Potts > [`AGENTS.md`](AGENTS.md) > this file (`CLAUDE.md`) > [`CODEX.md`](CODEX.md) > Copilot/Jules task guidance > local conventions.
-
-[`AGENTS.md`](AGENTS.md) is the shared cross-agent guide — rules there apply to
-all agents. Read it when rules overlap or conflict. Codex uses
-[`.codex/`](.codex/README.md) for its release and change-review workflows;
-Claude Code does not need to edit those files.
-
-Codex reviews Claude Code's changes for contract drift, dependency
-classification, SSR safety, documentation parity, and release readiness. Claude
-Code owns implementation; Codex owns release checks and repo-hygiene support.
-Copilot assists without ownership. Jules, when configured, stays within bounded
-maintenance prompts.
+`AGENTS.md` is the shared guide for agent roles, edit boundaries, package
+ownership, validation, and PR requirements. Claude Code remains the lead
+implementation authority for Astro adapter source changes and architecture.
+Resolve implementation conflicts by referencing this file together with
+`AGENTS.md`, `src/index.ts`, `package.json`, and
+`scripts/validate-package-contract.ts`.
 
 ## Commit Policy
 
-Claude Code does not create git commits in this repository. Prepare changes,
-run all validation, and leave staging, committing, tagging, and pushing to
-human review.
+Claude Code does not create git commits in this repository. Prepare changes, run
+validation, and leave staging, committing, tagging, and publishing to human
+review.
 
 ## Pull Request Creation
 
-When opening a PR, populate every section of
-`.github/pull_request_template.md`:
+Follow the shared PR requirements in `AGENTS.md`. Claude Code prepares validated
+changes for human review; Bradley Potts handles final commit, merge, tag, and
+release authority.
 
-- **Linked issue** — issue number (`#N`) or `N/A`.
-- **Summary of changes** — one or two bullets describing what changed.
-- **Adapter contract change type** — exactly one of `additive`,
-  `semantic change`, `breaking`, or `N/A`.
-- **Type of Change** — check every box that applies.
-- **Checklist** — check each completed item; leave blocked items unchecked
-  with a brief inline note.
-
-Never submit a PR with an empty body or only the template headings left
-unfilled. CodeRabbit's description check blocks such PRs.
-
-## Spectre layer hierarchy (read-only upstream)
-
-| Layer | Package | Owns |
-|-------|---------|------|
-| L1 | `@phcdevworks/spectre-tokens` | Design values and token contracts |
-| L2 | `@phcdevworks/spectre-ui` | CSS, utilities, Tailwind helpers, class recipes |
-| L3 | `@phcdevworks/spectre-components` | Framework-agnostic Lit web component behavior |
-| L4 | `@phcdevworks/spectre-ui-astro` | Astro-native adapter delivery (this repo) |
-
-This repo is L4. It binds the L2 contract for Astro. It does not redefine
-anything from L1 or L2, and it does not own the L3 Lit web component layer.
-
-## Non-negotiable rules
-
-1. `@phcdevworks/spectre-ui` is the single source of truth for recipe logic, class generation, and styling contracts. Never reimplement upstream recipes locally.
-2. No token definitions in this repo — that belongs to L1.
-3. No package-owned CSS files or local `<style>` blocks — that belongs to L2.
-4. No Tailwind preset or theme generation here.
-5. Keep Astro components thin: they wrap upstream recipes and handle Astro-specific ergonomics only.
-6. Preserve SSR safety — no unstable IDs, no nondeterministic output.
-7. Keep the public export surface intentional, minimal, and in sync with `package.json` exports.
-8. `@phcdevworks/spectre-ui` and `astro` are `peerDependencies`, never `dependencies`.
-9. `SpInput` requires an explicit `id` when `label`, `helperText`, or `errorMessage` is used — this is an SSR invariant.
-10. The example app is a validation surface, not a parallel contract. Do not track example lockfiles or use `npm ci` against `file:..` local links.
-
-## Thin adapter decision checklist
-
-Before adding any code to this package, answer these questions:
-
-**Does this belong upstream?**
-- Is it a styling behavior, visual variant, or recipe option? → Fix in `@phcdevworks/spectre-ui`, not here.
-- Is it a design value, color, spacing, or token meaning? → Fix in `@phcdevworks/spectre-tokens`, not here.
-- Is it a CSS utility, Tailwind helper, or class recipe? → Fix in `@phcdevworks/spectre-ui`, not here.
-
-**Does this belong here?**
-- Is it an Astro slot structure or named slot API? → OK here.
-- Is it an SSR constraint or Astro-specific render invariant? → OK here.
-- Is it Astro prop typing, component packaging, or entrypoint wiring? → OK here.
-- Is it an adapter-level ergonomic (like `as` prop or `resolveInteractiveAttrs`)? → OK here.
-
-**Warning signs that code does not belong here:**
-- You are computing CSS class strings from scratch instead of calling an upstream recipe function.
-- You are defining a color, spacing value, or design token.
-- You are writing a `<style>` block or stylesheet.
-- You are re-implementing recipe logic that already exists in `@phcdevworks/spectre-ui`.
-- You are adding a visual variant that does not exist upstream.
-
-**When upstream is missing something you need:**
-1. Check whether the behavior already exists in `@phcdevworks/spectre-ui` under a different name.
-2. If genuinely missing, open an issue or PR in `@phcdevworks/spectre-ui` first.
-3. Add a temporary adapter-level workaround only if waiting for upstream would block critical delivery.
-4. Mark any workaround with a comment referencing the upstream gap and remove it when upstream ships the fix.
-
-## Essential commands
+## Implementation Workflow
 
 ```bash
-npm install               # install deps
-npm run build             # tsup + copy Astro components + validate package contract
+npm install               # install dependencies
+npm run build             # tsup + types + component copy + package contract validation
 npm run typecheck         # tsc --noEmit
 npm run lint              # eslint .
-npm test                  # vitest run (98 tests across 11 files)
-npm run check             # full pre-merge check (alias for ci:verify)
+npm test                  # vitest run
+npm run check             # full validation gate via ci:verify
 npm run ci:verify         # lint + build + typecheck + test
 ```
 
-Always run `npm run check` before opening a PR or tagging a release.
+Run `npm run check` before every handoff touching `src/`, `tests/`, `scripts/`,
+package exports, examples, or docs.
 
-## File structure
+## File Structure
 
 ```
 src/
   components/
-    SpBadge.astro           # badge component
-    SpButton.astro          # button component
-    SpCard.astro            # card component
-    SpIconBox.astro         # icon box component
-    SpInput.astro           # input component
-    SpPricingCard.astro     # pricing card component (named slots)
-    SpRating.astro          # rating component (star rendering)
-    SpTestimonial.astro     # testimonial component (named slots)
-    sp-input.shared.ts      # SpInput accessibility logic + types
-    sp-interactive.shared.ts  # shared interactive attribute resolution
+    SpBadge.astro
+    SpButton.astro
+    SpCard.astro
+    SpIconBox.astro
+    SpInput.astro
+    SpPricingCard.astro
+    SpRating.astro
+    SpTestimonial.astro
+    sp-input.shared.ts
+    sp-interactive.shared.ts
   recipes/
-    index.ts                # re-exports all upstream recipe helpers and types
-  index.ts                  # public package exports (components + recipes)
+    index.ts
+  index.ts
 
 tests/
-  exports.test.ts           # package contract, export surface, peer dep checks
-  rendering.test.ts         # SSR rendering integration tests
-  docs-examples.test.ts     # README/example alignment checks
-  sp-badge.test.ts          # SpBadge unit tests
-  sp-button.test.ts         # SpButton unit tests
-  sp-card.test.ts           # SpCard unit tests
-  sp-icon-box.test.ts       # SpIconBox unit tests
-  sp-input.test.ts          # SpInput unit tests
-  sp-pricing-card.test.ts   # SpPricingCard unit tests
-  sp-rating.test.ts         # SpRating unit tests
-  sp-testimonial.test.ts    # SpTestimonial unit tests
+  exports.test.ts
+  rendering.test.ts
+  docs-examples.test.ts
+  sp-*.test.ts
 
 scripts/
-  copy-components.ts        # copies .astro files from src/ to dist/
-  validate-package-contract.ts  # post-build contract assertions
+  copy-components.ts
+  validate-package-contract.ts
 
-examples/                   # demo Astro app (not a CI dependency)
-dist/                       # generated build output (gitignored)
+examples/
+dist/
 ```
 
-## Edit Permissions
+Follow the shared edit-permission table in `AGENTS.md`. For Claude Code, the
+important operational rule is that `src/index.ts`, `package.json` exports,
+`src/components/*.astro`, `src/recipes/index.ts`, `tests/`, `examples/`, and
+`scripts/validate-package-contract.ts` are contract-facing surfaces. Keep them
+synchronized whenever adapter behavior changes.
 
-| Path | Status | Notes |
-|---|---|---|
-| `src/components/*.astro` | **May edit** | Astro component implementations |
-| `src/components/*.shared.ts` | **May edit** | Shared adapter helpers; keep framework-specific and narrow |
-| `src/recipes/index.ts` | **May edit carefully** | Re-export upstream only |
-| `src/index.ts` · `package.json` exports | **May edit carefully** | Public package contract |
-| `tests/` · `examples/` | **May edit** | Contract and demo validation surfaces |
-| `scripts/validate-package-contract.ts` | **May edit** | Package contract validation |
-| `dist/` | **Never edit directly** | Generated by `npm run build` |
+## Component Patterns
 
-## Shared utilities
+Every interactive Astro component follows the established adapter pattern:
 
-### `sp-interactive.shared.ts`
+1. Import recipe functions and types from `@phcdevworks/spectre-ui`.
+2. Import shared adapter helpers such as `resolveInteractiveAttrs` when needed.
+3. Declare local element unions and prop interfaces that extend upstream recipe
+   options.
+4. Use `[key: string]: unknown` for pass-through attributes.
+5. Destructure recipe and adapter props explicitly, then capture `...rest`.
+6. Resolve disabled and loading state before rendering.
+7. Call the upstream recipe function to get classes.
+8. Render deterministic Astro markup with ARIA attributes and spread `...rest`
+   last.
 
-`resolveInteractiveAttrs({ Tag, isDisabled, href, type, tabindex, interactive })` — resolves `finalType`, `finalHref`, `finalTabIndex` for any component that supports polymorphic rendering. Used by all interactive components.
+`SpInput` differs because it renders a wrapper, optional label, input, helper
+text, and error text. When `label`, `helperText`, or `errorMessage` is present,
+`SpInput` requires an explicit `id` so SSR output remains deterministic.
 
-Key behaviors:
-- `finalType` is set only when `Tag === "button"` (defaults to `"button"`)
-- `finalHref` is suppressed when `isDisabled` (prevents disabled anchor navigation)
-- `finalTabIndex` is `-1` for non-button disabled/loading elements; `0` for interactive non-native elements
+## Shared Utilities
 
-### `sp-input.shared.ts`
+`sp-interactive.shared.ts` exposes `resolveInteractiveAttrs`, which resolves
+button type, href suppression, and tab index behavior for polymorphic
+interactive components.
 
-`resolveSpInputAccessibility({ id, label, helperText, errorMessage })` — validates the SSR id requirement and returns stable `helperId`, `errorId`, `describedBy`. Throws if `id` is missing when associations are present.
+`sp-input.shared.ts` exposes `resolveSpInputAccessibility`, which enforces the
+explicit `id` requirement and returns stable helper and error associations.
 
-## Component patterns
+## Adding a New Component
 
-Every interactive component follows the same structure:
+1. Add the `.astro` file under `src/components/`.
+2. Export it from `src/index.ts`.
+3. Add the component entrypoint to `package.json` exports.
+4. Re-export upstream recipe helpers and types from `src/recipes/index.ts` when
+   the upstream package exposes them.
+5. Add focused tests under `tests/`.
+6. Add SSR rendering coverage in `tests/rendering.test.ts`.
+7. Update examples if consumer usage changes.
+8. Update `README.md` and `CHANGELOG.md [Unreleased]` for public behavior.
+9. Run `npm run check`.
 
-1. Import recipe function + types from `@phcdevworks/spectre-ui`
-2. Import `resolveInteractiveAttrs` from `./sp-interactive.shared`
-3. Declare a local `SpXxxElement` type union and `SpXxxProps` interface extending the upstream recipe options
-4. Use `[key: string]: unknown` (not `any`) in the props interface for pass-through attributes
-5. Destructure known recipe + adapter props; capture rest with `...rest`
-6. Resolve disabled state: `const isXxxDisabled = disabled || loading`
-7. Call the recipe function to get classes
-8. Call `resolveInteractiveAttrs` for interactive attribute resolution
-9. Render the polymorphic `<Tag>` with ARIA attributes, spreading `{...rest}` last
+## Testing Strategy
 
-`SpInput` differs — it renders a wrapper + label + input + helper/error text rather than a single polymorphic element.
+- `exports.test.ts` guards package surface, export parity, and peer dependency
+  expectations.
+- `rendering.test.ts` verifies SSR rendering through `AstroContainer`.
+- `sp-*.test.ts` files cover component-specific prop, slot, ARIA, disabled, and
+  DOM leakage behavior.
+- `docs-examples.test.ts` keeps README guidance and examples aligned with the
+  adapter contract.
 
-## Adding a new component
+## Code Standards
 
-1. Add the `.astro` file under `src/components/` following the existing pattern
-2. Export from `src/index.ts`
-3. Add the component entrypoint to `package.json` exports
-4. Re-export upstream recipe helpers and types in `src/recipes/index.ts`
-5. Add a test file under `tests/`
-6. Add SSR rendering coverage in `tests/rendering.test.ts`
-7. Verify the example app if needed
-8. Update `README.md` exports and component entry points sections
-9. Add a `CHANGELOG.md` entry under `[Unreleased]`
-10. Run `npm run check`
+- Strict TypeScript and ESM only.
+- `[key: string]: unknown` for pass-through prop index signatures.
+- No comments unless the reason is non-obvious.
+- Adapter-consumed props must not leak to the DOM.
+- Keep framework-specific helper logic narrow and reusable only when the
+  existing component pattern supports it.
 
-## Testing strategy
+## Release Procedure
 
-- `exports.test.ts` — validates the full package surface (no drift between source, package.json, and dist)
-- `rendering.test.ts` — SSR integration tests via `AstroContainer`, checks classes + ARIA + interactive behavior
-- `sp-*.test.ts` — per-component unit tests for prop forwarding, DOM leakage prevention, tabindex guarding, slot behavior
-- `docs-examples.test.ts` — ensures README and examples stay aligned with the contract (no stale naming, SpInput `id` requirement, no local CSS)
+1. Update `CHANGELOG.md` by moving `[Unreleased]` items under a version heading.
+2. Bump `package.json`.
+3. Run `npm run check`.
+4. Hand off to Bradley Potts for review, commit, tag, and `npm publish`.
 
-Tests use `AstroContainer.create()` in `beforeAll`. All tests must remain green before any merge.
+## Roadmap Priorities
 
-## Code standards
+Work P0 items from `ROADMAP.md` and `TODO.md` before expanding component
+surface:
 
-- TypeScript strict, ESM only
-- `[key: string]: unknown` for pass-through prop index signatures (never `any`)
-- No comments unless the why is non-obvious
-- No local CSS, no local tokens, no upstream recipe reimplementation
-- Props consumed by the adapter (recipe options + adapter ergonomics) must not leak to the DOM — destructure them explicitly and spread only `...rest`
-
-## Release workflow
-
-1. Update `CHANGELOG.md` — move `[Unreleased]` items under a new version heading
-2. Bump version in `package.json`
-3. Run `npm run check`
-4. Hand off to human for review, commit, tag, and `npm publish`
-
-## Upstream-first policy
-
-If a styling behavior, recipe option, or shared type is missing, prefer fixing it in `@phcdevworks/spectre-ui` first. Only add local adapter behavior when the need is genuinely Astro-specific. Document any temporary adapter-only workarounds clearly.
-
-## Roadmap priorities (from ROADMAP.md / TODO.md)
-
-**P0 — Contract Integrity:**
-- Add `astro-adapter.contract.json` as a machine-readable contract anchor
-- Harden root export and component entrypoint parity validation from the manifest
-- Add stable upstream UI family parity checks
-- Enforce thin-adapter invariants (no local CSS, no token redefinition)
-
-**P1 — Downstream Safety:**
-- Built-package Astro consumer smoke coverage
-- README contract parity validation
-- Clarify example boundary rules
-
-Work P0 items before expanding the component surface.
+- Add a machine-readable adapter contract anchor.
+- Harden root export and component entrypoint parity validation.
+- Add stable upstream UI family parity checks.
+- Enforce thin-adapter invariants.

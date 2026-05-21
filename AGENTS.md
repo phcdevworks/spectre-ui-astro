@@ -5,24 +5,24 @@ the Spectre system.
 
 ## File Ownership at a Glance
 
-| File / Path | Status | Notes |
-|-------------|--------|-------|
-| `src/components/*.astro` | Source — edit freely | Astro component implementations |
-| `src/recipes/index.ts` | Source — edit freely | Re-exports from upstream only |
-| `src/index.ts` | Source — keep in sync | Public package exports |
-| `dist/` | Generated — do not edit by hand | Output of `npm run build` |
-| `package.json` exports | Source — keep in sync with `src/index.ts` | Must match source and docs |
-| `README.md` | Source — keep in sync | Consumer-facing docs |
-| `CHANGELOG.md` | Source — append only | Follow Keep a Changelog format |
-| `CLAUDE.md` | Protected | Lead developer working guide |
-| `AGENTS.md` | Protected | Shared agent authority guide |
-| `CODEX.md` | Protected | Codex release and review guide |
-| `COPILOT.md` | Protected | Copilot support guide |
-| `JULES.md` | Protected | Jules maintenance scope |
-| `.github/copilot-instructions.md` | Protected | Copilot support guide |
-| `tests/exports.test.ts` | Source — keep in sync | Guards public contract surface |
-| `scripts/validate-package-contract.ts` | Source — keep in sync | Post-build contract assertions |
-| `examples/` | Validation surface — not a contract | Demo app; not independently published |
+| File / Path                            | Status                                    | Notes                                 |
+| -------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| `src/components/*.astro`               | Source — edit freely                      | Astro component implementations       |
+| `src/recipes/index.ts`                 | Source — edit freely                      | Re-exports from upstream only         |
+| `src/index.ts`                         | Source — keep in sync                     | Public package exports                |
+| `dist/`                                | Generated — do not edit by hand           | Output of `npm run build`             |
+| `package.json` exports                 | Source — keep in sync with `src/index.ts` | Must match source and docs            |
+| `README.md`                            | Source — keep in sync                     | Consumer-facing docs                  |
+| `CHANGELOG.md`                         | Source — append only                      | Follow Keep a Changelog format        |
+| `CLAUDE.md`                            | Protected                                 | Lead developer working guide          |
+| `AGENTS.md`                            | Protected                                 | Shared agent authority guide          |
+| `CODEX.md`                             | Protected                                 | Codex release and review guide        |
+| `COPILOT.md`                           | Protected                                 | Copilot support guide                 |
+| `JULES.md`                             | Protected                                 | Jules maintenance scope               |
+| `.github/copilot-instructions.md`      | Protected                                 | Copilot support guide                 |
+| `tests/exports.test.ts`                | Source — keep in sync                     | Guards public contract surface        |
+| `scripts/validate-package-contract.ts` | Source — keep in sync                     | Post-build contract assertions        |
+| `examples/`                            | Validation surface — not a contract       | Demo app; not independently published |
 
 ## Primary AI Developer
 
@@ -42,13 +42,13 @@ release workflow, see [`CLAUDE.md`](CLAUDE.md).
 
 This repository follows the Spectre AI factory model:
 
-| Agent | Role | Authority |
-| ----- | ---- | --------- |
-| Claude Code | Lead developer responsible for primary implementation | `CLAUDE.md` |
-| OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, and config standardization | `CODEX.md` and `.codex/` |
-| ChatGPT | Strategy, coordination, prompt design, and external review — support layer only, no implementation ownership | — |
-| GitHub Copilot | General development assistance | `COPILOT.md` and `.github/copilot-instructions.md` |
-| Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | `JULES.md` |
+| Agent          | Role                                                                                                         | Authority                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| Claude Code    | Lead developer responsible for primary implementation                                                        | `CLAUDE.md`                                        |
+| OpenAI Codex   | Documentation, releases, production stabilization, repo hygiene, and config standardization                  | `CODEX.md` and `.codex/`                           |
+| ChatGPT        | Strategy, coordination, prompt design, and external review — support layer only, no implementation ownership | —                                                  |
+| GitHub Copilot | General development assistance                                                                               | `COPILOT.md` and `.github/copilot-instructions.md` |
+| Google Jules   | Automated maintenance for small fixes, dependency updates, and micro-updates                                 | `JULES.md`                                         |
 
 Claude Code keeps implementation leadership. Codex keeps release and
 stabilization work clean. ChatGPT provides strategy and coordination support
@@ -182,15 +182,16 @@ missing:
 
 Use this when deciding whether a change belongs in this package:
 
-| Question | Answer |
-|----------|--------|
-| Is it styling, a visual variant, or recipe logic? | Belongs in `@phcdevworks/spectre-ui` |
-| Is it a design value, token, or color? | Belongs in `@phcdevworks/spectre-tokens` |
-| Is it a CSS utility, Tailwind helper, or class recipe? | Belongs in `@phcdevworks/spectre-ui` |
-| Is it an Astro slot structure, prop type, or SSR constraint? | Belongs here |
-| Is it adapter packaging, entrypoint wiring, or `as`-prop logic? | Belongs here |
+| Question                                                        | Answer                                   |
+| --------------------------------------------------------------- | ---------------------------------------- |
+| Is it styling, a visual variant, or recipe logic?               | Belongs in `@phcdevworks/spectre-ui`     |
+| Is it a design value, token, or color?                          | Belongs in `@phcdevworks/spectre-tokens` |
+| Is it a CSS utility, Tailwind helper, or class recipe?          | Belongs in `@phcdevworks/spectre-ui`     |
+| Is it an Astro slot structure, prop type, or SSR constraint?    | Belongs here                             |
+| Is it adapter packaging, entrypoint wiring, or `as`-prop logic? | Belongs here                             |
 
 **Red flags that code is in the wrong package:**
+
 - Computing class strings without calling an upstream recipe function
 - Defining a color, spacing, or design token locally
 - Writing a `<style>` block or any local CSS
@@ -249,7 +250,8 @@ Before merging or publishing changes, run:
 npm run check
 ```
 
-This runs lint → build → typecheck → test in sequence. For a fresh environment, run `npm ci` first.
+This runs lint → build → typecheck → test in sequence. For a fresh environment,
+run `npm ci` first.
 
 For `examples/`:
 
@@ -268,18 +270,17 @@ template (`.github/pull_request_template.md`):
 - **Adapter contract change type** — exactly one of `additive`,
   `semantic change`, `breaking`, or `N/A`.
 - **Type of Change** — check every box that applies.
-- **Checklist** — check each completed item; leave blocked items unchecked
-  with a brief inline note.
+- **Checklist** — check each completed item; leave blocked items unchecked with
+  a brief inline note.
 
 Never submit a PR with an empty body or only the template headings left
 unfilled. CodeRabbit's description check blocks such PRs.
 
-## Claude Code Maintenance Notes
+## Agent-Specific Guides
 
-- Run `npm run check` before every handoff touching `src/`, `tests/`,
-  `scripts/`, package exports, examples, or docs.
-- Never hand-edit generated build output in `dist/`.
-- Keep Astro adapter behavior downstream of `@phcdevworks/spectre-ui`; do not
-  add local tokens, CSS systems, Tailwind helpers, or recipe reimplementations.
-- Keep public exports, component entry points, docs, tests, examples, and
-  package metadata synchronized whenever adapter behavior changes.
+- `CLAUDE.md` - primary implementation workflow.
+- `CODEX.md` - documentation, release, stabilization, validation review, and
+  handoff workflow.
+- `JULES.md` - bounded automated maintenance and commit rules.
+- `COPILOT.md` and `.github/copilot-instructions.md` - support-assistant
+  guardrails.
