@@ -54,6 +54,11 @@ const recipeRuntimeExports = [
   "getTestimonialAuthorTitleClasses",
   "getTestimonialClasses",
   "getTestimonialQuoteClasses",
+  "spectreBaseStylesPath",
+  "spectreComponentsStylesPath",
+  "spectreIndexStylesPath",
+  "spectreStyles",
+  "spectreUtilitiesStylesPath",
 ] as const;
 
 const componentFiles = readdirSync(componentsDir)

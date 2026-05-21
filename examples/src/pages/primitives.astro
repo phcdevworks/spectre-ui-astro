@@ -47,6 +47,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <SpBadge variant="primary" fullWidth>Full Width Badge</SpBadge>
         </div>
       </SpCard>
+
+      <SpCard variant="flat" class="sp-stack">
+        <h2>Badge Interactivity Inference</h2>
+        <div class="sp-hstack inline">
+          <SpBadge as="button" variant="primary" id="badge-button">As Button</SpBadge>
+          <SpBadge as="a" href="#" variant="success" id="badge-link">As Link</SpBadge>
+          <SpBadge as="span" variant="warning" id="badge-span">As Span (Non-interactive)</SpBadge>
+        </div>
+      </SpCard>
     </section>
 
     <section class="grid">
