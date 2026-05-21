@@ -6,6 +6,25 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-05-22
+
+Release Title: Interactive State Inference and Adapter Readiness
+
+### Fixed
+
+- `SpBadge`, `SpIconBox`, `SpPricingCard`, `SpRating`, and `SpTestimonial` now
+  automatically infer interactive state when rendered as `a` or `button` tags,
+  so callers no longer need to pass `interactive` explicitly for native
+  interactive elements.
+- Tightened `disabled` attribute handling in `SpButton` so it aligns with the
+  shared polymorphic interactive attribute contract.
+
+### Added
+
+- Added regression tests for interactive state inference across all affected
+  components (`SpBadge`, `SpIconBox`, `SpPricingCard`, `SpRating`,
+  `SpTestimonial`).
+
 ### Changed
 
 - Synchronized components and re-exports with the latest upstream contracts
@@ -17,7 +36,11 @@ reflects package releases published to npm.
   structure used by `@phcdevworks/spectre-tokens`.
 - Corrected README automation wording so Jules' bounded maintenance commit
   authority matches `JULES.md`.
+- Refreshed README project badges and quick links so npm, CI, license, Node,
+  code of conduct, changelog, roadmap, and security references are current.
 - Updated shared agent guidance to reference the root Copilot support file.
+- Updated devDependencies and `packageManager` field to reflect the current
+  local development environment.
 
 ## [2.3.0] - 2026-05-05
 
