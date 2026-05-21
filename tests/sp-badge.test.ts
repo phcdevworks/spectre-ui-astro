@@ -1,4 +1,5 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpBadge from "../src/components/SpBadge.astro";
 
@@ -40,7 +41,7 @@ describe("SpBadge class and prop behavior", () => {
   });
 });
 
-describe("SpBadge tabindex guarding", () => {
+describe("SpBadge interactivity and tabindex guarding", () => {
   it("applies tabindex=0 when interactive on a non-native element", async () => {
     const html = await container.renderToString(SpBadge, {
       props: { interactive: true, as: "div" },
@@ -55,5 +56,23 @@ describe("SpBadge tabindex guarding", () => {
     });
 
     expect(html).toContain('tabindex="-1"');
+  });
+
+  it("automatically applies interactive classes when rendered as 'button'", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { as: "button" },
+    });
+
+    const interactiveClasses = getBadgeClasses({ interactive: true });
+    expect(html).toContain(interactiveClasses);
+  });
+
+  it("automatically applies interactive classes when rendered as 'a'", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { as: "a", href: "#" },
+    });
+
+    const interactiveClasses = getBadgeClasses({ interactive: true });
+    expect(html).toContain(interactiveClasses);
   });
 });
