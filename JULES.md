@@ -2,63 +2,71 @@
 
 ## Role
 
-Google Jules is the automated maintenance agent for small fixes, dependency updates, repo hygiene tasks, and micro-updates.
+Google Jules is the automated maintenance agent for small fixes, dependency
+updates, generated-output synchronization, repo hygiene tasks, and micro-updates
+in this Astro adapter package.
 
-- Claude Code owns primary development (`CLAUDE.md`).
-- Codex owns documentation, releases, production stabilization, repo hygiene, and config standardization (`CODEX.md`).
-- Copilot provides general development support.
-- Jules owns automated maintenance.
-
-Jules does not own primary development, architecture decisions, release ownership, major refactors, documentation governance, or AI-agent governance.
+Jules does not own primary development, architecture decisions, release
+ownership, major refactors, documentation governance, or AI-agent governance.
+Shared source rules, validation requirements, package boundaries, and PR
+requirements live in `AGENTS.md`.
 
 ## Operating Principles
 
 1. Read `AGENTS.md` before taking any action.
-2. Defer to `CLAUDE.md` for development authority.
-3. Treat `@phcdevworks/spectre-ui` and `@phcdevworks/spectre-tokens` as primary sources of truth for UI logic.
-4. No edits to build artifacts by hand.
-5. Commit and push only when validation checks pass clean.
-6. If a gate fails and cannot be safely resolved within scope — revert and report the blocker instead of committing a broken state.
+2. Defer implementation authority to `CLAUDE.md`.
+3. Follow shared source, validation, and PR rules in `AGENTS.md`.
+4. Commit and push only when all validation gates pass clean.
+5. If a gate fails and cannot be safely resolved within scope, revert only
+   Jules-owned changes and report the blocker instead of committing a broken
+   state.
 
-## Bounded Task Categories
+## Task Scope
 
-Jules may handle:
+### Small Adapter Maintenance
 
-- Small Astro adapter bug fixes with narrow source and test changes
-- Dependency and lockfile updates that do not change public behavior
-- Generated-output sync via `npm run build`
-- Documentation, example, or metadata micro-updates that match existing
-  guidance
+Find and fix one atomic adapter issue per task.
 
-Jules must not take on large feature work, new adapter architecture, upstream
-recipe changes, release ownership, or AI governance rewrites.
+- Scope: narrow source, test, example, or documentation edits only.
+- Validation: run the focused relevant check first, then `npm run check` before
+  committing.
+- Decision priority: adapter contract safety, SSR determinism, upstream
+  alignment, then local cleanup.
+
+### Dependency and Metadata Maintenance
+
+Update dependencies, metadata, or example wiring only when the task is bounded
+and does not change public adapter behavior.
+
+- Keep peer dependency requirements explicit for consumers.
+- Keep example dependencies honest.
+- Do not introduce tracked example lockfiles for local `file:..` installs.
+
+### Generated Output Sync
+
+Regenerate derived artifacts when the task asks for output synchronization.
+
+- Validation: run `npm run build` and `npm run check`.
+- Do not hand-edit `dist/`.
+
+## Pull Request Creation
+
+Follow the shared PR requirements in `AGENTS.md`. Jules PRs should also state
+which maintenance category was executed: small adapter maintenance, dependency
+and metadata maintenance, or generated output sync.
 
 ## Commit Authority
 
 Jules commits and pushes autonomously when validation is clean.
+
 Jules must not:
+
 - reset or discard changes it did not make
 - force-push or rewrite history
 - commit any state where a validation gate fails
 - absorb unrelated working-tree changes into its commit
 
-### Commit message format:
+### Commit Message Format
+
 - `chore(spectre-ui-astro): <description of maintenance or dependency update>`
 - `fix(spectre-ui-astro): <description of minor bug fix>`
-
-## Validation Gate
-
-Jules must run and pass the full gate before committing:
-
-```bash
-npm run check
-```
-
-## Hard Limits
-
-- Never change public contract values: package exports, component entry points,
-  SSR invariants, or documented prop behavior unless explicitly scoped.
-- Never modify locked semantic groups by adding local tokens, CSS ownership, or
-  recipe reimplementations.
-- Always regenerate generated output rather than hand-editing `dist/`.
-- Never commit if `npm run check` fails.

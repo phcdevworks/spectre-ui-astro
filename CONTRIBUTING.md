@@ -1,7 +1,7 @@
 # Contributing to @phcdevworks/spectre-ui-astro
 
 Thanks for helping improve Spectre. This package is maintained by PHCDevworks as
-Layer 3 of the Spectre suite. It exposes Spectre UI through Astro-native
+Layer 4 of the Spectre suite. It exposes Spectre UI through Astro-native
 components without duplicating design tokens or CSS logic.
 
 ## Spectre Suite Model
@@ -16,7 +16,11 @@ Spectre is organized as a strict layered system:
 
 - Purpose: translate tokens into reusable CSS, utilities, and recipes
 
-### Layer 3: `@phcdevworks/spectre-ui-astro`
+### Layer 3: `@phcdevworks/spectre-components`
+
+- Purpose: provide framework-agnostic Lit web component behavior
+
+### Layer 4: `@phcdevworks/spectre-ui-astro`
 
 - Purpose: adapt Spectre UI for Astro
 - Scope: Astro components, type-safe props, framework integration patterns
