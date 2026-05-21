@@ -29,6 +29,7 @@ export {
   getRatingStarClasses,
   getRatingTextClasses,
   type RatingRecipeOptions,
+  type RatingSize,
   getTestimonialClasses,
   getTestimonialQuoteClasses,
   getTestimonialAuthorClasses,
@@ -36,4 +37,9 @@ export {
   getTestimonialAuthorNameClasses,
   getTestimonialAuthorTitleClasses,
   type TestimonialRecipeOptions,
+  spectreBaseStylesPath,
+  spectreComponentsStylesPath,
+  spectreIndexStylesPath,
+  spectreStyles,
+  spectreUtilitiesStylesPath,
 } from "@phcdevworks/spectre-ui";
