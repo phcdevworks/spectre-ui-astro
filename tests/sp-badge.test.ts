@@ -1,4 +1,5 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpBadge from "../src/components/SpBadge.astro";
 
@@ -37,6 +38,24 @@ describe("SpBadge class and prop behavior", () => {
     expect(html).toContain("sp-badge--full");
     expect(html).not.toContain('fullWidth="true"');
     expect(html).not.toContain('fullWidth="fullWidth"');
+  });
+});
+
+describe("SpBadge interactive inference", () => {
+  it("infers interactive state when rendered as an anchor", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { as: "a", href: "https://example.com" },
+    });
+
+    expect(html).toContain(getBadgeClasses({ interactive: true }));
+  });
+
+  it("infers interactive state when rendered as a button", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { as: "button" },
+    });
+
+    expect(html).toContain(getBadgeClasses({ interactive: true }));
   });
 });
 
