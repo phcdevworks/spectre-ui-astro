@@ -64,10 +64,11 @@ const {
 } = Astro.props as SpRatingProps;
 
 const isRatingDisabled = disabled || loading;
+const isInteractive = interactive || Tag === "a" || Tag === "button";
 
 const classes = getRatingClasses({
   size,
-  interactive,
+  interactive: isInteractive,
   disabled: isRatingDisabled,
   loading,
   hovered,
@@ -84,7 +85,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   href,
   type,
   tabindex,
-  interactive,
+  interactive: isInteractive,
 });
 
 const starsClasses = getRatingStarsClasses();
@@ -100,7 +101,7 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
   disabled={Tag === "button" && isRatingDisabled ? true : undefined}
-  role={interactive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
+  role={isInteractive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isRatingDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}

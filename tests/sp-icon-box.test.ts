@@ -72,4 +72,20 @@ describe("SpIconBox behavior", () => {
     expect(html).toContain(getIconBoxClasses({ pill: true }));
     expect(html).not.toContain('pill="true"');
   });
+
+  it("applies interactive classes when rendered as an anchor even if interactive prop is omitted", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: { as: "a", href: "#" },
+    });
+
+    expect(html).toContain("sp-iconbox--interactive");
+  });
+
+  it("applies interactive classes when rendered as a button even if interactive prop is omitted", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: { as: "button" },
+    });
+
+    expect(html).toContain("sp-iconbox--interactive");
+  });
 });
