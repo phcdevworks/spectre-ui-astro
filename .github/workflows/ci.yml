@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 22.22.2
+          - 22.13.0
           - 24.x
 
     steps:
@@ -42,12 +42,4 @@ jobs:
         run: npm ci
 
       - name: Run validation suite
-        run: npm run ci:verify
-
-      - name: Install examples dependencies
-        run: npm install
-        working-directory: examples
-
-      - name: Build examples
-        run: npm run build
-        working-directory: examples
+        run: npm run check

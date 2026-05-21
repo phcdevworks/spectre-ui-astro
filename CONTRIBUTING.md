@@ -28,7 +28,7 @@ structure, adapters define delivery.
 
 1. Clone the repository.
 2. Install dependencies with `npm install`.
-3. Run `npm run ci:verify` to confirm everything builds, type-checks, and tests
+3. Run `npm run check` to confirm everything builds, type-checks, and tests
    cleanly before making changes.
 4. If needed, validate rendering in the `examples/` app by running
    `npm install && npm run build` from within `examples/`.
@@ -56,7 +56,7 @@ remain the source of truth for shared recipes, classes, and CSS.
 ### Code and tooling
 
 - Follow Astro and TypeScript best practices.
-- Run `npm run ci:verify` before opening a pull request — it runs lint, build,
+- Run `npm run check` before opening a pull request — it runs lint, build,
   typecheck, and tests in sequence and is the single CI gate.
 - Use the example app when you need to verify rendering behavior manually.
 
@@ -66,10 +66,35 @@ remain the source of truth for shared recipes, classes, and CSS.
 - Keep wording aligned with the rest of the Spectre suite and PHCDevworks
   ownership.
 
+## Contract-Impacting Changes
+
+Any change that touches a public API surface requires explicit classification
+before review. Public surfaces include Astro component exports, prop behavior,
+SSR rendering invariants, `src/index.ts`, `package.json` exports, README
+examples, tests, examples, and generated package output.
+
+Step-by-step checklist:
+
+1. Identify the change classification: `additive`, `semantic change`,
+   `breaking`, or `N/A`.
+2. Update source, tests, README examples, examples, package exports, and
+   `CHANGELOG.md [Unreleased]` together.
+3. Confirm no local tokens, CSS ownership, Tailwind helpers, or recipe
+   reimplementations were added.
+4. Regenerate package output with `npm run build` if exports or output changed.
+5. Run the full validation command:
+
+   ```bash
+   npm run check
+   ```
+
+6. Stop for Bradley Potts approval before weakening SSR safety, changing peer
+   dependency classification, or making a breaking adapter contract change.
+
 ## Pull Request Checklist
 
 1. Keep the change focused.
-2. Run `npm run ci:verify` — lint, build, typecheck, and tests must all pass.
+2. Run `npm run check` — lint, build, typecheck, and tests must all pass.
 3. Verify the example app if the change affects rendering or component props.
 4. Update `README.md`, `CHANGELOG.md`, and relevant doc files if public behavior
    or guidance changed.
