@@ -612,14 +612,15 @@ npm install
 
 | Command | Purpose |
 |---------|---------|
-| `npm run ci:verify` | Full pre-merge check: lint → build → typecheck → test |
+| `npm run check` | Full pre-merge check: lint → build → typecheck → test |
+| `npm run ci:verify` | Underlying verification sequence |
 | `npm run build` | Build the distributable package |
 | `npm run typecheck` | Type-check without emitting |
 | `npm test` | Run the Vitest test suite |
 | `npm run lint` | Run ESLint |
 | `npm run dev` | Watch mode for development |
 
-Run `npm run ci:verify` before opening any pull request. It is the single gate used by CI.
+Run `npm run check` before opening any pull request. It is the single gate used by CI.
 
 This project requires Node.js `^22.13.0 || >=24.0.0`.
 

@@ -46,12 +46,19 @@ This repository follows the Spectre AI factory model:
 | ----- | ---- | --------- |
 | Claude Code | Lead developer responsible for primary implementation | `CLAUDE.md` |
 | OpenAI Codex | Documentation, releases, production stabilization, repo hygiene, and config standardization | `CODEX.md` and `.codex/` |
+| ChatGPT | Strategy, coordination, prompt design, and external review — support layer only, no implementation ownership | — |
 | GitHub Copilot | General development assistance | `COPILOT.md` and `.github/copilot-instructions.md` |
 | Google Jules | Automated maintenance for small fixes, dependency updates, and micro-updates | `JULES.md` |
 
 Claude Code keeps implementation leadership. Codex keeps release and
-stabilization work clean. Copilot assists without owning decisions. Jules may
-only take bounded automated maintenance when configured for this repository.
+stabilization work clean. ChatGPT provides strategy and coordination support
+only. Copilot assists without owning decisions. Jules may only take bounded
+automated maintenance when configured for this repository.
+
+**Bradley Potts** holds final authority for all commits, merges, tags,
+publishing, and releases. No AI agent holds commit authority in this repository
+except Jules, which may commit bounded automated maintenance when all validation
+gates pass.
 
 ## Codex Support Role
 
@@ -239,7 +246,7 @@ Use this when deciding whether a change belongs in this package:
 Before merging or publishing changes, run:
 
 ```bash
-npm run ci:verify
+npm run check
 ```
 
 This runs lint → build → typecheck → test in sequence. For a fresh environment, run `npm ci` first.
@@ -250,3 +257,29 @@ For `examples/`:
   package through `file:..`
 - do not introduce or require a tracked example `package-lock.json` as a CI
   contract in that setup
+
+## Pull Request Creation
+
+Every agent that opens a PR must populate every section of the repo's PR
+template (`.github/pull_request_template.md`):
+
+- **Linked issue** — issue number (`#N`) or `N/A`.
+- **Summary of changes** — one or two bullets describing what changed.
+- **Adapter contract change type** — exactly one of `additive`,
+  `semantic change`, `breaking`, or `N/A`.
+- **Type of Change** — check every box that applies.
+- **Checklist** — check each completed item; leave blocked items unchecked
+  with a brief inline note.
+
+Never submit a PR with an empty body or only the template headings left
+unfilled. CodeRabbit's description check blocks such PRs.
+
+## Claude Code Maintenance Notes
+
+- Run `npm run check` before every handoff touching `src/`, `tests/`,
+  `scripts/`, package exports, examples, or docs.
+- Never hand-edit generated build output in `dist/`.
+- Keep Astro adapter behavior downstream of `@phcdevworks/spectre-ui`; do not
+  add local tokens, CSS systems, Tailwind helpers, or recipe reimplementations.
+- Keep public exports, component entry points, docs, tests, examples, and
+  package metadata synchronized whenever adapter behavior changes.

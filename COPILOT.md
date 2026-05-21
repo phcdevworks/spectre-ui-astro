@@ -27,9 +27,34 @@ maintenance workflows.
   tests, package exports, and dependency classification.
 - Keep framework-agnostic Lit component behavior in
   `@phcdevworks/spectre-components`.
-- Use `npm run ci:verify` as the full validation gate for non-trivial changes.
+- Use `npm run check` as the full validation gate for non-trivial changes.
+
+## Working Style
+
+- Prefer narrow, pattern-aligned changes.
+- Keep tests, docs, exports, examples, and changelog entries synchronized when
+  public behavior changes.
+- Preserve unrelated local changes.
+- Do not create commits, tags, or releases unless explicitly asked.
+
+## Pull Request Creation
+
+When opening a PR, populate every section of
+`.github/pull_request_template.md`:
+
+- **Linked issue** — issue number (`#N`) or `N/A`.
+- **Summary of changes** — one or two bullets describing what changed.
+- **Adapter contract change type** — exactly one of `additive`, `semantic
+  change`, `breaking`, or `N/A`.
+- **Type of Change** — check every box that applies.
+- **Checklist** — check each completed item; leave blocked items unchecked
+  with a brief inline note.
+
+Never submit a PR with an empty body or only the template headings left
+unfilled. CodeRabbit's description check blocks such PRs.
 
 ## Source Of Detailed Guidance
 
 Primary Copilot guidance lives in `.github/copilot-instructions.md`.
-Shared repo boundaries live in `AGENTS.md`.
+Shared repo boundaries live in `AGENTS.md`. Codex release rules live in
+`CODEX.md`.
