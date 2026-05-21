@@ -8,6 +8,8 @@ reflects package releases published to npm.
 
 ### Changed
 
+- Synchronized components and re-exports with the latest upstream contracts
+  from `@phcdevworks/spectre-ui` v1.5.0 and `@phcdevworks/spectre-tokens` v2.5.0.
 - Clarified AI guidance and README layer language so this package is documented
   as the Astro adapter layer downstream of `@phcdevworks/spectre-ui`, while
   `@phcdevworks/spectre-components` owns framework-agnostic Lit web components.
