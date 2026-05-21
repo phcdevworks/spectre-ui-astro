@@ -35,8 +35,24 @@ handoff authority.
 
 - Focused checks first: `npm run lint`, `npm run build`, `npm run typecheck`,
   `npm test`.
-- Use `npm run ci:verify` for release-scoped or broad contract-impact changes.
+- Use `npm run check` for release-scoped or broad contract-impact changes.
 - If examples are affected, validate the example app build in `examples/`.
+
+## Pull Request Creation
+
+When opening a PR, populate every section of
+`.github/pull_request_template.md`:
+
+- **Linked issue** — issue number (`#N`) or `N/A`.
+- **Summary of changes** — one or two bullets describing what changed.
+- **Adapter contract change type** — exactly one of `additive`, `semantic
+  change`, `breaking`, or `N/A`.
+- **Type of Change** — check every box that applies.
+- **Checklist** — check each completed item; leave blocked items unchecked
+  with a brief inline note.
+
+Never submit a PR with an empty body or only the template headings left
+unfilled. CodeRabbit's description check blocks such PRs.
 
 ## References
 

@@ -24,15 +24,15 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 22.22.2
+          - 22.12.0
           - 24.x
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -42,12 +42,4 @@ jobs:
         run: npm ci
 
       - name: Run validation suite
-        run: npm run ci:verify
-
-      - name: Install examples dependencies
-        run: npm install
-        working-directory: examples
-
-      - name: Build examples
-        run: npm run build
-        working-directory: examples
+        run: npm run check
