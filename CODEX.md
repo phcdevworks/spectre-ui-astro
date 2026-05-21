@@ -16,6 +16,28 @@ Codex must not weaken Claude Code's lead developer role, assign ownership or
 release decisions to Copilot, or expand Jules beyond small automated
 maintenance.
 
+## Operating Principles
+
+1. Defer implementation authority to Claude Code and `CLAUDE.md`.
+2. Protect the Astro adapter contract before optimizing implementation details.
+3. Never hand-edit generated output in `dist/`.
+4. Keep this adapter downstream of `@phcdevworks/spectre-ui`.
+5. Do not create commits, tags, releases, or publishes unless Bradley
+   explicitly asks.
+6. Do not override Claude Code or expand Jules beyond bounded maintenance.
+
+## Entry Point
+
+At the start of any Codex session:
+
+1. Read `AGENTS.md` for shared repository boundaries.
+2. Read `CLAUDE.md` for development authority and adapter rules.
+3. Read this file for Codex-specific procedures.
+4. Read `src/index.ts`, `package.json`, and
+   `scripts/validate-package-contract.ts` as the current adapter contract
+   authority.
+5. Check `CHANGELOG.md [Unreleased]` for pending public API classification.
+
 ## Authority Order
 
 When instructions overlap, follow this order:
@@ -76,7 +98,7 @@ For release support:
 
 1. Use `.codex/release-readiness.md`.
 2. Confirm changelog, version, package exports, dependency ranges, and examples.
-3. Run `npm run ci:verify`.
+3. Run `npm run check`.
 4. Report blockers before any release handoff.
 
 ## Validation Tiers
@@ -87,10 +109,41 @@ Use these tiers to avoid slow work too early while still protecting releases:
   script check.
 - Integration: `npm run build`, `npm test`, and docs/example checks affected by
   the change.
-- Release: `npm run ci:verify` after dependencies are installed and lockfile
+- Release: `npm run check` after dependencies are installed and lockfile
   state is understood.
 
 If validation cannot run, document the exact command and reason.
+
+## PR Review Checklist
+
+- [ ] **Contract drift** — `src/index.ts`, package exports, component files,
+      docs, tests, examples, and build output agree.
+- [ ] **Locked values** — no local tokens, CSS ownership, Tailwind helpers, or
+      recipe reimplementations were added.
+- [ ] **Changelog classification** — public adapter changes are classified in
+      `CHANGELOG.md [Unreleased]`.
+- [ ] **Generated output sync** — `dist/` output was regenerated, not
+      hand-edited.
+- [ ] **Validation gate** — `npm run check` passes clean.
+- [ ] **Namespace integrity** — adapter exports and component entry points stay
+      scoped to Spectre Astro delivery.
+
+## Release Procedure
+
+1. Update `package.json` version.
+2. Move `[Unreleased]` notes in `CHANGELOG.md` to a new versioned entry with
+   date and release title.
+3. Update compare links at the bottom of `CHANGELOG.md`.
+4. Run `npm run check`.
+5. Hand off to Bradley Potts for review, commit, tag, and publish.
+
+## Hard Limits
+
+- Never hand-edit generated files or build artifacts.
+- Never commit, tag, publish, or release without Bradley's explicit request.
+- Never override Claude Code's implementation authority.
+- Never add local tokens, CSS systems, Tailwind helpers, or recipe
+  reimplementations.
 
 ## Refactor Rules
 
