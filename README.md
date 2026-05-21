@@ -1,12 +1,15 @@
 # @phcdevworks/spectre-ui-astro
 
 [![npm version](https://img.shields.io/npm/v/@phcdevworks/spectre-ui-astro)](https://www.npmjs.com/package/@phcdevworks/spectre-ui-astro)
-[![CI](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml/badge.svg)](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/phcdevworks/spectre-ui-astro)](LICENSE)
+[![CI](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/phcdevworks/spectre-ui-astro/actions/workflows/ci.yml)
+[![License](https://img.shields.io/npm/l/@phcdevworks/spectre-ui-astro)](LICENSE)
+[![Node](https://img.shields.io/node/v/@phcdevworks/spectre-ui-astro)](https://nodejs.org)
 
 Astro-native components for the [Spectre UI](https://github.com/phcdevworks/spectre-ui) design system. Drop Spectre components into any Astro project — SSR, SSG, or hybrid — without writing CSS, redefining tokens, or reimplementing recipe logic.
 
-[Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Security Policy](SECURITY.md)
+[Contributing](CONTRIBUTING.md) | [Code of Conduct](CODE_OF_CONDUCT.md) |
+[Changelog](CHANGELOG.md) | [Roadmap](ROADMAP.md) |
+[Security Policy](SECURITY.md)
 
 ## What Astro developers get
 
