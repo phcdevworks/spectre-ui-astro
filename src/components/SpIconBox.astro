@@ -16,6 +16,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
   type?: "button" | "submit" | "reset";
   tabindex?: number;
   "aria-label"?: string;
+  fullWidth?: boolean;
 
   [key: string]: unknown;
 }
@@ -24,6 +25,7 @@ const {
   variant,
   size,
   pill,
+  fullWidth,
   interactive,
   disabled,
   loading,
@@ -48,6 +50,7 @@ const classes = getIconBoxClasses({
   variant,
   size,
   pill,
+  fullWidth,
   interactive: isInteractive,
   disabled: isIconBoxDisabled,
   loading,
