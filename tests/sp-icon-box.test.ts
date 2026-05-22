@@ -88,4 +88,13 @@ describe("SpIconBox behavior", () => {
 
     expect(html).toContain("sp-iconbox--interactive");
   });
+
+  it("applies 'fullWidth' class and prevents prop leakage", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: { fullWidth: true },
+    });
+
+    expect(html).toContain("sp-iconbox--full");
+    expect(html).not.toContain('fullWidth="true"');
+  });
 });
