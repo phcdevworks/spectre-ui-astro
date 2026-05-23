@@ -70,6 +70,7 @@
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
+    "release:propose": "node --experimental-strip-types scripts/propose-version.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "clean": "rm -rf dist",

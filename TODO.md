@@ -134,7 +134,7 @@ downstream package safety, and controlled release handoff.
   - Acceptance criteria: stable, provisional, and not-yet-supported families are
     clear before further expansion.
 
-- [ ] Add semver proposal support for release handoff
+- [x] Add semver proposal support for release handoff
   - File targets: release scripts and `CODEX.md`/`CLAUDE.md` release procedure
     references.
   - Acceptance criteria: release handoff can propose a version bump from the
