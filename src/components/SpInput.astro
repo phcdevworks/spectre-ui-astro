@@ -1,5 +1,11 @@
 ---
-import { getInputClasses } from "@phcdevworks/spectre-ui";
+import {
+  getInputClasses,
+  getInputWrapperClasses,
+  getInputLabelClasses,
+  getInputHelperTextClasses,
+  getInputErrorMessageClasses,
+} from "@phcdevworks/spectre-ui";
 import {
   resolveSpInputAccessibility,
   type SpInputProps,
@@ -64,12 +70,17 @@ const classes = getInputClasses({
   active,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const wrapperClasses = getInputWrapperClasses();
+const labelClasses = getInputLabelClasses({ disabled: isInputDisabled });
+const helperTextClasses = getInputHelperTextClasses();
+const errorMessageClasses = getInputErrorMessageClasses();
 ---
 
-<Tag class="sp-input-wrapper">
+<Tag class={wrapperClasses}>
   {
     label && (
-      <label class="sp-label" for={inputId}>
+      <label class={labelClasses} for={inputId}>
         {label}
       </label>
     )
@@ -97,7 +108,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
   {
     helperText && !errorMessage && (
-      <p class="sp-helper-text" id={helperId}>
+      <p class={helperTextClasses} id={helperId}>
         {helperText}
       </p>
     )
@@ -105,7 +116,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 
   {
     errorMessage && (
-      <p class="sp-error-message" id={errorId} aria-live="polite" aria-atomic="true">
+      <p class={errorMessageClasses} id={errorId} aria-live="polite" aria-atomic="true">
         {errorMessage}
       </p>
     )
