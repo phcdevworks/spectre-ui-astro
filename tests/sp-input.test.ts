@@ -1,5 +1,11 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { getInputClasses } from "@phcdevworks/spectre-ui";
+import {
+  getInputClasses,
+  getInputErrorMessageClasses,
+  getInputHelperTextClasses,
+  getInputLabelClasses,
+  getInputWrapperClasses,
+} from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpInput from "../src/components/SpInput.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
@@ -19,6 +25,7 @@ describe("SpInput behavior", () => {
     expect(html).toContain(
       getInputClasses({ hovered: true, focused: true, active: true }),
     );
+    expect(html).toContain(getInputWrapperClasses());
     expect(html).not.toContain('focused="true"');
     expect(html).not.toContain('hovered="true"');
     expect(html).not.toContain('active="true"');
@@ -38,6 +45,7 @@ describe("SpInput behavior", () => {
     expect(html).toContain('aria-describedby="test-input-error"');
     expect(html).toContain('aria-live="polite"');
     expect(html).toContain('aria-atomic="true"');
+    expect(html).toContain(getInputErrorMessageClasses());
   });
 
   it("merges user-provided aria-describedby with generated IDs", async () => {
@@ -50,6 +58,7 @@ describe("SpInput behavior", () => {
     });
 
     expect(html).toContain('aria-describedby="external-id test-input-helper"');
+    expect(html).toContain(getInputHelperTextClasses());
   });
 
   it("allows overriding aria-invalid even when errorMessage is present", async () => {
@@ -71,11 +80,15 @@ describe("SpInput behavior", () => {
         id: "test-input",
         helperText: "Help",
         errorMessage: "Error",
+        label: "Label"
       } as SpInputProps,
     });
 
     expect(html).toContain('aria-describedby="test-input-error"');
     expect(html).not.toContain("test-input-helper");
+    expect(html).toContain(getInputLabelClasses({ disabled: false }));
+    expect(html).toContain(getInputErrorMessageClasses());
+    expect(html).not.toContain(getInputHelperTextClasses());
   });
 
   it("prioritizes user-provided aria-invalid over internal state", async () => {
@@ -96,7 +109,7 @@ describe("SpInput behavior", () => {
     });
 
     expect(html).toContain('aria-live="polite"');
-    expect(html).toContain('class="sp-error-message"');
+    expect(html).toContain(getInputErrorMessageClasses());
   });
 
   it("supports 'li' and 'nav' as wrapper tags", async () => {
