@@ -34,7 +34,18 @@ if (!match) {
   )
 }
 
-const classification = match[1].toLowerCase()
+const rawClassification = match[1]
+
+if (!rawClassification) {
+  throw new Error(
+    [
+      'Unreleased section matched a contract change classification without a captured value.',
+      `Expected: ${CLASSIFICATION_PREFIX} <${ALLOWED.join(' | ')}>`
+    ].join('\n')
+  )
+}
+
+const classification = rawClassification.toLowerCase()
 const pkg = JSON.parse(readFileSync(packagePath, 'utf8')) as { version?: unknown }
 const current = typeof pkg.version === 'string' ? pkg.version : ''
 const [majorStr, minorStr, patchStr] = current.split('.')
