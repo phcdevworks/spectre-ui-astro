@@ -68,12 +68,14 @@ const classes = getInputClasses({
   focused,
   hovered,
   active,
+  disabled: isInputDisabled,
+  loading,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const wrapperClasses = getInputWrapperClasses();
 const labelClasses = getInputLabelClasses({ disabled: isInputDisabled });
-const helperTextClasses = getInputHelperTextClasses();
+const helperTextClasses = getInputHelperTextClasses({ disabled: isInputDisabled });
 const errorMessageClasses = getInputErrorMessageClasses();
 ---
 
