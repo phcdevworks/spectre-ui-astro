@@ -155,4 +155,21 @@ describe("SpInput behavior", () => {
     });
     expect(html).not.toContain('aria-required="true"');
   });
+
+  it("applies disabled styling to helper text and input when disabled", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: { id: "test-input", helperText: "Help", disabled: true } as SpInputProps,
+    });
+
+    expect(html).toContain(getInputHelperTextClasses({ disabled: true }));
+    expect(html).toContain(getInputClasses({ state: "disabled", disabled: true }));
+  });
+
+  it("applies loading state to input recipe", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: { loading: true } as SpInputProps,
+    });
+
+    expect(html).toContain(getInputClasses({ state: "loading", loading: true, disabled: true }));
+  });
 });
