@@ -5,6 +5,10 @@ import {
   getCardClasses,
   getIconBoxClasses,
   getInputClasses,
+  getInputErrorMessageClasses,
+  getInputHelperTextClasses,
+  getInputLabelClasses,
+  getInputWrapperClasses,
   getPricingCardBadgeClasses,
   getPricingCardClasses,
   getPricingCardDescriptionClasses,
@@ -50,6 +54,9 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-describedby="email-helper"');
     expect(html).not.toContain("email-error");
     expect(html).toContain(getInputClasses({ size: "lg", fullWidth: true }));
+    expect(html).toContain(getInputWrapperClasses());
+    expect(html).toContain(getInputLabelClasses({ disabled: false }));
+    expect(html).toContain(getInputHelperTextClasses());
   });
 
   it("prefers the error association in aria-describedby", async () => {
@@ -69,6 +76,8 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-invalid="true"');
     expect(html).not.toContain('aria-describedby="password-helper"');
     expect(html).toContain(getInputClasses({ state: "error" }));
+    expect(html).toContain(getInputLabelClasses({ disabled: false }));
+    expect(html).toContain(getInputErrorMessageClasses());
   });
 
   it("rejects associated SpInput usage without a stable id", async () => {
