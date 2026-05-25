@@ -73,6 +73,15 @@ describe("SpTestimonial SSR rendering", () => {
     expect(html).toContain("sp-testimonial--full");
     expect(html).not.toMatch(/\sfullHeight=["']/);
   });
+
+  it("applies variant prop and does not leak it to the DOM", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: { variant: "ghost" },
+    });
+
+    expect(html).toContain("sp-testimonial--ghost");
+    expect(html).not.toMatch(/\svariant=["']/);
+  });
 });
 
 describe("SpTestimonial slot rendering", () => {
