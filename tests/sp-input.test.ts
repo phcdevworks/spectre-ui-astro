@@ -172,4 +172,30 @@ describe("SpInput behavior", () => {
 
     expect(html).toContain(getInputClasses({ state: "loading", loading: true, disabled: true }));
   });
+
+  it("treats state='loading' as functionally equivalent to loading=true", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: { state: "loading", id: "loading-input", label: "Loading", helperText: "Waiting..." } as SpInputProps,
+    });
+
+    expect(html).toContain(getInputClasses({ state: "loading", loading: true, disabled: true }));
+    expect(html).toContain("disabled");
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain(getInputLabelClasses({ disabled: true }));
+    expect(html).toContain(getInputHelperTextClasses({ disabled: true }));
+  });
+
+  it("treats state='disabled' as functionally equivalent to disabled=true", async () => {
+    const html = await container.renderToString(SpInput, {
+      props: { state: "disabled", id: "disabled-input", label: "Disabled", helperText: "Locked" } as SpInputProps,
+    });
+
+    expect(html).toContain(getInputClasses({ state: "disabled", disabled: true }));
+    expect(html).toContain("disabled");
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).not.toContain('aria-busy="true"');
+    expect(html).toContain(getInputLabelClasses({ disabled: true }));
+    expect(html).toContain(getInputHelperTextClasses({ disabled: true }));
+  });
 });
