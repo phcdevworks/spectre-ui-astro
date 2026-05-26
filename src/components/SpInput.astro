@@ -40,7 +40,8 @@ const {
   ...rest
 } = Astro.props as SpInputProps;
 
-const isInputDisabled = disabled || state === "disabled" || loading;
+const isInputLoading = loading || state === "loading";
+const isInputDisabled = disabled || state === "disabled" || isInputLoading;
 const isInputError = Boolean(errorMessage) || state === "error";
 
 const { inputId, helperId, errorId, describedBy } =
@@ -52,7 +53,7 @@ const { inputId, helperId, errorId, describedBy } =
     "aria-describedby": ariaDescribedby,
   });
 
-const effectiveState = loading
+const effectiveState = isInputLoading
   ? "loading"
   : isInputDisabled
     ? "disabled"
@@ -69,7 +70,7 @@ const classes = getInputClasses({
   hovered,
   active,
   disabled: isInputDisabled,
-  loading,
+  loading: isInputLoading,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
@@ -104,7 +105,7 @@ const errorMessageClasses = getInputErrorMessageClasses();
     aria-required={required ? "true" : undefined}
     disabled={isInputDisabled}
     aria-disabled={isInputDisabled ? "true" : undefined}
-    aria-busy={loading ? "true" : undefined}
+    aria-busy={isInputLoading ? "true" : undefined}
     {...rest}
   />
 
