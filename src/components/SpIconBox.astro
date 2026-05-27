@@ -40,7 +40,7 @@ const {
   type,
   tabindex,
   "aria-label": ariaLabel,
-  ...attrs
+  ...rest
 } = Astro.props as SpIconBoxProps;
 
 const isIconBoxDisabled = disabled || loading;
@@ -82,7 +82,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
   tabindex={finalTabIndex}
-  {...attrs}
+  {...rest}
 >
   <slot />
 </Tag>
