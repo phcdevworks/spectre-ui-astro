@@ -82,7 +82,7 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^2.5.0",
+    "@phcdevworks/spectre-tokens": "^2.6.0",
     "@phcdevworks/spectre-ui": "^1.5.0",
     "astro": "^6.1.3",
     "typescript": "^5.9 || ^6.0"
