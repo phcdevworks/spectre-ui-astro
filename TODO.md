@@ -67,7 +67,7 @@ downstream package safety, and controlled release handoff.
 
 ### P0: Contract Integrity
 
-- [ ] Add a single adapter contract manifest
+- [x] Add a single adapter contract manifest
   - File targets: `astro-adapter.contract.json`, validation scripts under
     `scripts/`, and contract-facing README references.
   - Acceptance criteria: one machine-readable file declares root exports,

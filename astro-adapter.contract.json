@@ -1,0 +1,110 @@
+{
+  "version": "2.4.0",
+  "rootExports": {
+    "components": [
+      "SpBadge",
+      "SpButton",
+      "SpCard",
+      "SpIconBox",
+      "SpInput",
+      "SpPricingCard",
+      "SpRating",
+      "SpTestimonial"
+    ],
+    "recipeHelpers": [
+      "getBadgeClasses",
+      "getButtonClasses",
+      "getCardClasses",
+      "getIconBoxClasses",
+      "getInputClasses",
+      "getInputErrorMessageClasses",
+      "getInputHelperTextClasses",
+      "getInputLabelClasses",
+      "getInputWrapperClasses",
+      "getPricingCardBadgeClasses",
+      "getPricingCardClasses",
+      "getPricingCardDescriptionClasses",
+      "getPricingCardPriceClasses",
+      "getPricingCardPriceContainerClasses",
+      "getRatingClasses",
+      "getRatingStarClasses",
+      "getRatingStarsClasses",
+      "getRatingTextClasses",
+      "getTestimonialAuthorClasses",
+      "getTestimonialAuthorInfoClasses",
+      "getTestimonialAuthorNameClasses",
+      "getTestimonialAuthorTitleClasses",
+      "getTestimonialClasses",
+      "getTestimonialQuoteClasses",
+      "spectreBaseStylesPath",
+      "spectreComponentsStylesPath",
+      "spectreIndexStylesPath",
+      "spectreStyles",
+      "spectreUtilitiesStylesPath"
+    ],
+    "typeExports": [
+      "BadgeRecipeOptions",
+      "BadgeSize",
+      "BadgeVariant",
+      "ButtonRecipeOptions",
+      "ButtonSize",
+      "ButtonVariant",
+      "CardRecipeOptions",
+      "CardVariant",
+      "IconBoxRecipeOptions",
+      "IconBoxSize",
+      "IconBoxVariant",
+      "InputRecipeOptions",
+      "InputSize",
+      "InputState",
+      "PricingCardRecipeOptions",
+      "RatingRecipeOptions",
+      "RatingSize",
+      "TestimonialRecipeOptions"
+    ]
+  },
+  "componentEntrypoints": [
+    "./components/SpBadge.astro",
+    "./components/SpButton.astro",
+    "./components/SpCard.astro",
+    "./components/SpIconBox.astro",
+    "./components/SpInput.astro",
+    "./components/SpPricingCard.astro",
+    "./components/SpRating.astro",
+    "./components/SpTestimonial.astro"
+  ],
+  "peerDependencies": {
+    "@phcdevworks/spectre-tokens": "^2.6.0",
+    "@phcdevworks/spectre-ui": "^1.5.0",
+    "astro": "^6.1.3",
+    "typescript": "^5.9 || ^6.0"
+  },
+  "upstreamBinding": {
+    "package": "@phcdevworks/spectre-ui",
+    "peerRange": "^1.5.0"
+  },
+  "thinAdapterInvariants": {
+    "noLocalCssOwnership": true,
+    "noTokenRedefinition": true,
+    "noUpstreamRecipeForks": true,
+    "upstreamPackagesMustBePeers": [
+      "@phcdevworks/spectre-ui",
+      "astro"
+    ]
+  },
+  "intentionallyUnsupported": {
+    "localCssHelpers": "CSS helper shortcuts are intentionally unsupported. All styling is delegated to @phcdevworks/spectre-ui recipe functions.",
+    "localTokenOwnership": "Token values and semantic meanings are intentionally not redefined here. @phcdevworks/spectre-tokens owns all design tokens.",
+    "litWebComponents": "Lit web component behavior is intentionally not duplicated here. @phcdevworks/spectre-components owns framework-agnostic web components."
+  },
+  "stableComponentFamilies": [
+    "badge",
+    "button",
+    "card",
+    "icon-box",
+    "input",
+    "pricing-card",
+    "rating",
+    "testimonial"
+  ]
+}
