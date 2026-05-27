@@ -15,7 +15,9 @@ interface SpButtonProps extends ButtonRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  id?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
   [key: string]: unknown;
 }
 
@@ -37,7 +39,9 @@ const {
   rel,
   type,
   tabindex,
+  id,
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
   ...rest
 } = Astro.props as SpButtonProps;
 
@@ -74,11 +78,13 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   target={Tag === "a" ? target : undefined}
   rel={Tag === "a" ? rel : undefined}
   type={finalType}
+  id={id}
   disabled={Tag === "button" && isDisabled ? true : undefined}
   role={Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-disabled={isDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
   tabindex={finalTabIndex}
   {...rest}
 >

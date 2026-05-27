@@ -51,4 +51,13 @@ describe("SpButton behavior", () => {
 
     expect(html).toContain('tabindex="-1"');
   });
+
+  it("renders with id and aria-describedby", async () => {
+    const html = await container.renderToString(SpButton, {
+      props: { id: "submit-btn", "aria-describedby": "submit-desc" },
+    });
+
+    expect(html).toContain('id="submit-btn"');
+    expect(html).toContain('aria-describedby="submit-desc"');
+  });
 });
