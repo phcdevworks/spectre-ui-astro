@@ -97,4 +97,13 @@ describe("SpIconBox behavior", () => {
     expect(html).toContain("sp-iconbox--full");
     expect(html).not.toContain('fullWidth="true"');
   });
+
+  it("renders id and aria-describedby", async () => {
+    const html = await container.renderToString(SpIconBox, {
+      props: { id: "my-iconbox", "aria-describedby": "desc-id" },
+    });
+
+    expect(html).toContain('id="my-iconbox"');
+    expect(html).toContain('aria-describedby="desc-id"');
+  });
 });
