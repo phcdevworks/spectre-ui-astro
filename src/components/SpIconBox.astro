@@ -15,7 +15,9 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  id?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
   fullWidth?: boolean;
 
   [key: string]: unknown;
@@ -39,7 +41,9 @@ const {
   rel,
   type,
   tabindex,
+  id,
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
   ...rest
 } = Astro.props as SpIconBoxProps;
 
@@ -81,7 +85,9 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   aria-disabled={isIconBoxDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
   tabindex={finalTabIndex}
+  id={id}
   {...rest}
 >
   <slot />
