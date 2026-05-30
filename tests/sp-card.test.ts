@@ -102,4 +102,13 @@ describe("SpCard accessibility and tabindex guarding", () => {
     const interactiveClasses = getCardClasses({ interactive: true });
     expect(html).toContain(interactiveClasses);
   });
+
+  it("renders id and aria-describedby", async () => {
+    const html = await container.renderToString(SpCard, {
+      props: { id: "my-card", "aria-describedby": "desc-id" },
+    });
+
+    expect(html).toContain('id="my-card"');
+    expect(html).toContain('aria-describedby="desc-id"');
+  });
 });

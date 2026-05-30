@@ -26,7 +26,9 @@ interface SpCardProps extends CardRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  id?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
 
   loading?: boolean;
   hovered?: boolean;
@@ -53,7 +55,9 @@ const {
   rel,
   type,
   tabindex,
+  id,
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
   ...rest
 } = Astro.props as SpCardProps;
 
@@ -94,7 +98,9 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   aria-disabled={isCardDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
   tabindex={finalTabIndex}
+  id={id}
   {...rest}
 >
   <slot />
