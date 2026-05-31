@@ -1,6 +1,7 @@
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 
+import contractJson from '../astro-adapter.contract.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
 
 type ExportValue = string | Record<string, string>;
@@ -70,6 +71,71 @@ function assertCopiedAstroComponentsExist(): void {
   }
 }
 
+function assertContractComponentEntrypointParity(exportsMap: Record<string, ExportValue>): void {
+  const contractEntrypoints = new Set(contractJson.componentEntrypoints as string[]);
+  const packageEntrypoints = new Set(Object.keys(exportsMap).filter((key) => key !== '.'));
+
+  const missing = [...contractEntrypoints].filter((ep) => !packageEntrypoints.has(ep));
+  if (missing.length > 0) {
+    throw new Error(
+      `Component entrypoints declared in contract but missing from package.json exports: ${missing.join(', ')}`,
+    );
+  }
+
+  const undeclared = [...packageEntrypoints].filter((ep) => !contractEntrypoints.has(ep));
+  if (undeclared.length > 0) {
+    throw new Error(
+      `Component entrypoints in package.json exports not declared in contract: ${undeclared.join(', ')}`,
+    );
+  }
+}
+
+function assertContractRootExportParity(): void {
+  const indexSource = readFileSync(resolve(repoRoot, 'src/index.ts'), 'utf-8');
+  const recipesSource = readFileSync(resolve(repoRoot, 'src/recipes/index.ts'), 'utf-8');
+
+  const missingComponents = (contractJson.rootExports.components as string[]).filter(
+    (name) => !indexSource.includes(name),
+  );
+  if (missingComponents.length > 0) {
+    throw new Error(
+      `Components declared in contract but missing from src/index.ts: ${missingComponents.join(', ')}`,
+    );
+  }
+
+  const allDeclaredHelpers = [
+    ...(contractJson.rootExports.recipeHelpers as string[]),
+    ...(contractJson.rootExports.typeExports as string[]),
+  ];
+  const missingHelpers = allDeclaredHelpers.filter((name) => !recipesSource.includes(name));
+  if (missingHelpers.length > 0) {
+    throw new Error(
+      `Recipe helpers/types declared in contract but missing from src/recipes/index.ts: ${missingHelpers.join(', ')}`,
+    );
+  }
+}
+
+function assertThinAdapterInvariants(): void {
+  const srcComponentsDir = resolve(repoRoot, 'src/components');
+  const astroFiles = readdirSync(srcComponentsDir).filter((f) => f.endsWith('.astro'));
+
+  for (const file of astroFiles) {
+    const source = readFileSync(resolve(srcComponentsDir, file), 'utf-8');
+
+    if (/<style[\s>]/i.test(source)) {
+      throw new Error(
+        `Thin-adapter violation in ${file}: <style> block found. CSS ownership must stay with @phcdevworks/spectre-ui.`,
+      );
+    }
+
+    if (/--[\w-]+\s*:/.test(source)) {
+      throw new Error(
+        `Thin-adapter violation in ${file}: CSS custom property definition found. Token definitions must stay upstream.`,
+      );
+    }
+  }
+}
+
 const exportsField = packageJson.exports as Record<string, ExportValue>;
 const runtimePaths = collectRuntimeExportPaths(exportsField);
 const typePaths = [packageJson.types];
@@ -116,3 +182,6 @@ assertPublishedPathsExist(runtimePaths, 'runtime export');
 assertPublishedPathsExist(typePaths, 'types');
 assertPublishedPathsExist(mainPaths, 'main');
 assertCopiedAstroComponentsExist();
+assertContractComponentEntrypointParity(exportsField);
+assertContractRootExportParity();
+assertThinAdapterInvariants();

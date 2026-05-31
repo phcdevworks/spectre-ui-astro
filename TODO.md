@@ -75,13 +75,13 @@ downstream package safety, and controlled release handoff.
     expectations, and intentionally unsupported local CSS helper shortcuts if
     relevant.
 
-- [ ] Harden root export parity
+- [x] Harden root export parity
   - File targets: `src/index.ts`, `package.json`, `astro-adapter.contract.json`,
     and export validation scripts.
   - Acceptance criteria: CI fails if root exports drift from the declared
     contract manifest, package metadata, built output, or documented public API.
 
-- [ ] Harden component entrypoint parity
+- [x] Harden component entrypoint parity
   - File targets: `src/components/*.astro`, `package.json`,
     `astro-adapter.contract.json`, and export validation scripts.
   - Acceptance criteria: CI fails if declared component entrypoints are missing,
@@ -94,7 +94,7 @@ downstream package safety, and controlled release handoff.
     explicitly, and validation fails if support silently drifts from the
     upstream UI surface this package claims to bind.
 
-- [ ] Enforce thin-adapter invariants
+- [x] Enforce thin-adapter invariants
   - File targets: validation scripts under `scripts/`, targeted tests under
     `tests/`, `README.md`, and `CONTRIBUTING.md` if guidance changes.
   - Acceptance criteria: validation protects against local CSS ownership drift,
