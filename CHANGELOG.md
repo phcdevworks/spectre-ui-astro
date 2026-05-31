@@ -6,6 +6,19 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Added
+
+- `validate-package-contract.ts` now validates root exports and recipe
+  helpers/types against `astro-adapter.contract.json`, so CI fails if
+  `src/index.ts` or `src/recipes/index.ts` drift from the declared public
+  surface.
+- `validate-package-contract.ts` now validates component entrypoints
+  bidirectionally against `astro-adapter.contract.json`, so CI fails if
+  `package.json` exports and the contract manifest diverge.
+- `validate-package-contract.ts` now enforces thin-adapter invariants by
+  rejecting `<style>` blocks and CSS custom property definitions in
+  `src/components/*.astro`, protecting against local CSS ownership drift.
+
 ## [2.4.0] - 2026-05-22
 
 Release Title: Interactive State Inference and Adapter Readiness
