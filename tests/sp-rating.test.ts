@@ -54,6 +54,15 @@ describe("SpRating accessibility", () => {
     expect(html).not.toContain('tabindex="-1"');
     expect(html).toContain("disabled");
   });
+
+  it("renders with id and aria-describedby", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { id: "rating-1", "aria-describedby": "rating-desc" },
+    });
+
+    expect(html).toContain('id="rating-1"');
+    expect(html).toContain('aria-describedby="rating-desc"');
+  });
 });
 
 describe("SpRating interactive behavior", () => {

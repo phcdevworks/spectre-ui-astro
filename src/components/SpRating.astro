@@ -35,7 +35,9 @@ interface SpRatingProps extends RatingRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  id?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
 
   [key: string]: unknown;
 }
@@ -59,7 +61,9 @@ const {
   rel,
   type,
   tabindex,
+  id,
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
   ...rest
 } = Astro.props as SpRatingProps;
 
@@ -105,10 +109,12 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
   aria-disabled={isRatingDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
   aria-valuenow={value}
   aria-valuemin={0}
   aria-valuemax={max}
   tabindex={finalTabIndex}
+  id={id}
   {...rest}
 >
   <span class={starsClasses} aria-hidden="true">
