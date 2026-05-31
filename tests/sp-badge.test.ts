@@ -77,3 +77,34 @@ describe("SpBadge interactivity and tabindex guarding", () => {
     expect(html).toContain(interactiveClasses);
   });
 });
+
+describe("SpBadge explicit attribute support", () => {
+  it("renders id and aria-describedby when provided", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: {
+        id: "my-badge",
+        "aria-describedby": "description-id",
+      },
+    });
+
+    expect(html).toContain('id="my-badge"');
+    expect(html).toContain('aria-describedby="description-id"');
+  });
+
+  it("does not leak id or aria-describedby twice when provided", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: {
+        id: "my-badge",
+        "aria-describedby": "description-id",
+      },
+    });
+
+    // Check for single occurrence of id="my-badge"
+    const idMatches = html.match(/id="my-badge"/g);
+    expect(idMatches).toHaveLength(1);
+
+    // Check for single occurrence of aria-describedby="description-id"
+    const ariaMatches = html.match(/aria-describedby="description-id"/g);
+    expect(ariaMatches).toHaveLength(1);
+  });
+});
