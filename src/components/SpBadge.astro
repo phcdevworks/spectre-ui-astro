@@ -16,7 +16,9 @@ interface SpBadgeProps extends BadgeRecipeOptions {
   type?: "button" | "submit" | "reset";
   datetime?: string;
   tabindex?: number;
+  id?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
 
   loading?: boolean;
 
@@ -41,7 +43,9 @@ const {
   type,
   datetime,
   tabindex,
+  id,
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
   ...rest
 } = Astro.props as SpBadgeProps;
 
@@ -82,8 +86,10 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   aria-disabled={isBadgeDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
   datetime={Tag === "time" ? datetime : undefined}
   tabindex={finalTabIndex}
+  id={id}
   {...rest}
 >
   <slot />
