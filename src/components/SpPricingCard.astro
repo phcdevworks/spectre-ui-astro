@@ -33,7 +33,9 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
 
   type?: "button" | "submit" | "reset";
   tabindex?: number;
+  id?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
 
   [key: string]: unknown;
 }
@@ -54,7 +56,9 @@ const {
   rel,
   type,
   tabindex,
+  id,
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
   ...rest
 } = Astro.props as SpPricingCardProps;
 
@@ -99,7 +103,9 @@ const descriptionClasses = getPricingCardDescriptionClasses();
   aria-disabled={isPricingCardDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
   aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
   tabindex={finalTabIndex}
+  id={id}
   {...rest}
 >
   <slot name="header" />
