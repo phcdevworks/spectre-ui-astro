@@ -84,6 +84,18 @@ describe("SpPricingCard behavior", () => {
     expect(html).not.toContain('fullHeight="true"');
   });
 
+  it("renders id and aria-describedby attributes when provided", async () => {
+    const html = await container.renderToString(SpPricingCard, {
+      props: {
+        id: "test-id",
+        "aria-describedby": "desc-id",
+      },
+    });
+
+    expect(html).toContain('id="test-id"');
+    expect(html).toContain('aria-describedby="desc-id"');
+  });
+
   describe("slot behavior", () => {
     it("does not render empty wrapper divs when slots are not provided", async () => {
       const html = await container.renderToString(SpPricingCard, {
