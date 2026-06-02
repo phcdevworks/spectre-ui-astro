@@ -97,14 +97,18 @@
     "localTokenOwnership": "Token values and semantic meanings are intentionally not redefined here. @phcdevworks/spectre-tokens owns all design tokens.",
     "litWebComponents": "Lit web component behavior is intentionally not duplicated here. @phcdevworks/spectre-components owns framework-agnostic web components."
   },
-  "stableComponentFamilies": [
-    "badge",
-    "button",
-    "card",
-    "icon-box",
-    "input",
-    "pricing-card",
-    "rating",
-    "testimonial"
-  ]
+  "componentFamilies": {
+    "stable": [
+      "badge",
+      "button",
+      "card",
+      "icon-box",
+      "input",
+      "pricing-card",
+      "rating",
+      "testimonial"
+    ],
+    "provisional": [],
+    "notYetSupported": []
+  }
 }

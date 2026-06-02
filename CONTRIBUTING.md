@@ -103,6 +103,30 @@ Step-by-step checklist:
 4. Update `README.md`, `CHANGELOG.md`, and relevant doc files if public behavior
    or guidance changed.
 
+## Contract Coverage Map
+
+This table shows which enforcer guards each area of the adapter contract. Use it to find the right test or script when an area breaks or needs to be extended.
+
+| Contract area | Enforcer |
+| --------------- | ---------- |
+| Root export surface (components + recipe helpers + types) | `tests/exports.test.ts` — "keeps the root runtime export surface intentional and stable" |
+| Root export parity with upstream recipe helpers | `tests/exports.test.ts` — "passes upstream recipe helpers through without redefining them" |
+| Component entrypoint alignment with source `.astro` files | `tests/exports.test.ts` — "keeps package.json component entry points aligned with actual Astro component files" |
+| Built runtime and type paths exist after build | `tests/exports.test.ts` — "keeps declared built runtime entry points truthful" |
+| Upstream peer contract declared (not a direct dep) | `tests/exports.test.ts` — "declares @phcdevworks/spectre-ui as the upstream peer contract" |
+| Astro host peer contract declared (not a direct dep) | `tests/exports.test.ts` — "declares Astro as the host framework peer contract" |
+| Built output files exist and match source components | `scripts/validate-package-contract.ts` — `assertCopiedAstroComponentsExist` |
+| Thin-adapter invariants (no local CSS, no token redefinition, no recipe forks) | `scripts/validate-package-contract.ts` — contract manifest `thinAdapterInvariants` + peer dep assertions |
+| Component family stability classification | `astro-adapter.contract.json` — `componentFamilies.stable / provisional / notYetSupported` |
+| SSR rendering correctness and ARIA wiring | `tests/rendering.test.ts` |
+| Component-level prop, slot, disabled, and DOM leakage behavior | `tests/sp-*.test.ts` |
+| README and examples alignment with adapter contract | `tests/docs-examples.test.ts` |
+
+Areas without automated enforcement (planned in P1):
+
+- README contract-facing section parity with declared exports
+- Built-package Astro consumer smoke tests
+
 ## Questions
 
 Open an issue or discussion in this repository if you want feedback before

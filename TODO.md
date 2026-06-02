@@ -1,5 +1,3 @@
-# TODO.md
-
 # Spectre UI Astro Execution Todo
 
 This todo list is aligned to the current repository and the roadmap in
@@ -123,13 +121,13 @@ downstream package safety, and controlled release handoff.
 
 ### P2: Release and Maintainer Clarity
 
-- [ ] Add a maintainer-facing contract coverage map
+- [x] Add a maintainer-facing contract coverage map
   - File targets: `CONTRIBUTING.md`.
   - Acceptance criteria: maintainers can quickly see which script or test
     enforces root exports, component entrypoints, upstream parity, thin-adapter
     invariants, README parity, and built-package smoke coverage.
 
-- [ ] Classify supported component families by stability
+- [x] Classify supported component families by stability
   - File targets: `astro-adapter.contract.json` and `README.md` if needed.
   - Acceptance criteria: stable, provisional, and not-yet-supported families are
     clear before further expansion.
