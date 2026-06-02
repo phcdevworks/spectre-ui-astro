@@ -588,6 +588,29 @@ import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonia
 
 The adapter does not export a CSS helper or path. Import the stylesheet directly from `@phcdevworks/spectre-ui/index.css`.
 
+## Component family stability
+
+Each component family is classified by its support status in this adapter.
+
+| Family | Status | Notes |
+|--------|--------|-------|
+| badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| button | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
+| pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
+
+**stable** — the component family is fully wired to upstream recipes, covered by SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking changes require a semver major bump.
+
+**provisional** — a family that is partially implemented or pending full test coverage. Not yet safe to depend on across minor releases.
+
+**not yet supported** — families present in the upstream Spectre UI surface that this adapter has not yet bound.
+
+The machine-readable classification lives in `astro-adapter.contract.json` under `componentFamilies`.
+
 ## Relationship to the rest of Spectre
 
 | Package | Owns |
