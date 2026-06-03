@@ -25,6 +25,18 @@ describe("SpTestimonial SSR rendering", () => {
     expect(html).toContain('aria-label="User testimonial"');
   });
 
+  it("renders explicit id and aria-describedby", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: {
+        id: "testimonial-1",
+        "aria-describedby": "description-1",
+      },
+    });
+
+    expect(html).toContain('id="testimonial-1"');
+    expect(html).toContain('aria-describedby="description-1"');
+  });
+
   it("applies tabindex=-1 to a disabled anchor", async () => {
     const html = await container.renderToString(SpTestimonial, {
       props: { as: "a", href: "/testimonials/1", disabled: true },
