@@ -102,6 +102,45 @@ describe("SpAlert interactivity and tabindex", () => {
     const html = await container.renderToString(SpAlert, { props: {} });
     expect(html).not.toContain("tabindex=");
   });
+
+  it("automatically infers interactive state when rendered as 'a' or 'button'", async () => {
+    const aHtml = await container.renderToString(SpAlert, { props: { as: "a", href: "#" } });
+    expect(aHtml).toContain("sp-alert--interactive");
+
+    const buttonHtml = await container.renderToString(SpAlert, { props: { as: "button" } });
+    expect(buttonHtml).toContain("sp-alert--interactive");
+  });
+
+  it("applies role='button' only to interactive non-native elements", async () => {
+    const divHtml = await container.renderToString(SpAlert, { props: { interactive: true } });
+    expect(divHtml).toContain('role="button"');
+
+    const buttonHtml = await container.renderToString(SpAlert, { props: { as: "button" } });
+    expect(buttonHtml).not.toContain('role="button"');
+
+    const aHtml = await container.renderToString(SpAlert, { props: { as: "a", href: "#" } });
+    expect(aHtml).not.toContain('role="button"');
+  });
+});
+
+describe("SpAlert polymorphic rendering", () => {
+  it("renders as 'a' with href and guards href when disabled", async () => {
+    const html = await container.renderToString(SpAlert, { props: { as: "a", href: "https://example.com" } });
+    expect(html).toContain('<a');
+    expect(html).toContain('href="https://example.com"');
+
+    const disabledHtml = await container.renderToString(SpAlert, { props: { as: "a", href: "https://example.com", disabled: true } });
+    expect(disabledHtml).not.toContain('href="https://example.com"');
+  });
+
+  it("renders as 'button' with type and handles disabled state", async () => {
+    const html = await container.renderToString(SpAlert, { props: { as: "button", type: "submit" } });
+    expect(html).toContain('<button');
+    expect(html).toContain('type="submit"');
+
+    const disabledHtml = await container.renderToString(SpAlert, { props: { as: "button", disabled: true } });
+    expect(disabledHtml).toContain('disabled');
+  });
 });
 
 describe("SpAlert element and slot rendering", () => {

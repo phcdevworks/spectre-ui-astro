@@ -3,7 +3,7 @@ import type { AlertRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getAlertClasses } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
-type SpAlertElement = "div" | "section" | "aside" | "article";
+type SpAlertElement = "div" | "section" | "aside" | "article" | "a" | "button";
 
 interface SpAlertProps extends AlertRecipeOptions {
   as?: SpAlertElement;
@@ -12,6 +12,12 @@ interface SpAlertProps extends AlertRecipeOptions {
   "aria-label"?: string;
   "aria-describedby"?: string;
   tabindex?: number;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+  type?: "button" | "submit" | "reset";
+
   [key: string]: unknown;
 }
 
@@ -32,36 +38,49 @@ const {
   "aria-label": ariaLabel,
   "aria-describedby": ariaDescribedby,
   tabindex,
+  href,
+  target,
+  rel,
+  type,
   ...rest
 } = Astro.props as SpAlertProps;
 
 const isAlertDisabled = disabled || loading;
+const isInteractive = interactive || Tag === "a" || Tag === "button";
 
 const classes = getAlertClasses({
   variant,
   size,
   dismissed,
   fullWidth,
-  interactive,
+  interactive: isInteractive,
+  disabled: isAlertDisabled,
+  loading,
   hovered,
   focused,
   active,
-  disabled: isAlertDisabled,
-  loading,
 });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
-const { finalTabIndex } = resolveInteractiveAttrs({
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   Tag,
   isDisabled: isAlertDisabled,
-  interactive,
+  href,
+  type,
   tabindex,
+  interactive: isInteractive,
 });
 ---
 
 <Tag
   class={finalClass}
   id={id}
+  href={finalHref}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  disabled={Tag === "button" && isAlertDisabled ? true : undefined}
+  role={isInteractive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
   aria-label={ariaLabel}
   aria-describedby={ariaDescribedby}
   aria-disabled={isAlertDisabled ? "true" : undefined}
