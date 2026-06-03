@@ -656,7 +656,7 @@ This project requires Node.js `^22.13.0 || >=24.0.0`.
 - `src/recipes/` — re-exported recipe bindings from `@phcdevworks/spectre-ui`
 - `src/index.ts` — package exports
 - `tests/` — unit, SSR, and contract tests
-- `examples/` — demo Astro app for manual validation
+- `examples/` — demo Astro app for manual validation (not a contract authority; see `examples/README.md`)
 - `scripts/` — packaging and contract validation scripts
 
 ### Troubleshooting

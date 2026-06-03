@@ -85,7 +85,7 @@ downstream package safety, and controlled release handoff.
   - Acceptance criteria: CI fails if declared component entrypoints are missing,
     undocumented, or inconsistent with the declared public contract.
 
-- [ ] Add stable upstream UI family parity checks
+- [x] Add stable upstream UI family parity checks
   - File targets: adapter parity tests under `tests/`, `src/components/`,
     `src/recipes/`, and `astro-adapter.contract.json`.
   - Acceptance criteria: stable supported Astro component families are declared
@@ -100,21 +100,21 @@ downstream package safety, and controlled release handoff.
 
 ### P1: Downstream Safety
 
-- [ ] Add built-package Astro consumer smoke tests
+- [x] Add built-package Astro consumer smoke tests
   - File targets: smoke tests under `tests/` and package build/test scripts if
     needed.
   - Acceptance criteria: tests exercise root package component imports, direct
     component entrypoint imports, documented helper/type re-exports, and
     expected built runtime and type artifacts.
 
-- [ ] Add README contract parity validation
+- [x] Add README contract parity validation
   - File targets: `README.md`, parity validation scripts under `scripts/`,
     `package.json`, and `astro-adapter.contract.json`.
   - Acceptance criteria: CI fails if README contract-facing sections drift from
     declared root exports, component entrypoints, helper/type re-exports, peer
     dependency expectations, or upstream CSS import guidance.
 
-- [ ] Clarify example boundary rules
+- [x] Clarify example boundary rules
   - File targets: `README.md`, `examples/`, and example docs if present.
   - Acceptance criteria: examples remain aligned to the documented contract and
     do not become a parallel source of truth for unsupported behavior.

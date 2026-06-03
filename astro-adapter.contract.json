@@ -109,6 +109,6 @@
       "testimonial"
     ],
     "provisional": [],
-    "notYetSupported": []
+    "notYetSupported": ["alert", "avatar", "spinner", "tag"]
   }
 }
