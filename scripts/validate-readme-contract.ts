@@ -46,4 +46,11 @@ for (const family of contractJson.componentFamilies.stable as string[]) {
   );
 }
 
+for (const family of contractJson.componentFamilies.notYetSupported as string[]) {
+  assertContains(
+    `| ${family} |`,
+    `README.md component family stability table is missing an entry for the not-yet-supported family: "${family}".`,
+  );
+}
+
 console.log('README contract parity: OK');

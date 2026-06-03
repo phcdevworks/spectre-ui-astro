@@ -139,19 +139,81 @@ downstream package safety, and controlled release handoff.
     `CHANGELOG.md [Unreleased]` adapter contract classification while Bradley
     Potts keeps final version authority.
 
+---
+
+## Phase 3 - Component Family Expansion
+
+Phase 3 binds the four upstream families currently declared as `notYetSupported`
+in `astro-adapter.contract.json`. All four have recipes available in
+`@phcdevworks/spectre-ui` ^1.7.0.
+
+### P0: Bind the four ready families
+
+Each family must follow the full delivery checklist: `.astro` component,
+recipe/type re-exports, tests, README docs, stability table update, and
+contract manifest update. Complete one family at a time and run `npm run check`
+before moving to the next.
+
+- [ ] Add `SpAlert` component
+  - File targets: `src/components/SpAlert.astro`, `src/recipes/index.ts`,
+    `src/index.ts`, `package.json`, `astro-adapter.contract.json`,
+    `tests/sp-alert.test.ts`, `tests/rendering.test.ts`, `README.md`.
+  - Acceptance criteria: `SpAlert` is exported from the package root and
+    `./components/SpAlert.astro` entrypoint, covered by SSR and prop tests,
+    documented in `README.md`, and classified as `stable` in the contract.
+
+- [ ] Add `SpAvatar` component
+  - File targets: `src/components/SpAvatar.astro`, `src/recipes/index.ts`,
+    `src/index.ts`, `package.json`, `astro-adapter.contract.json`,
+    `tests/sp-avatar.test.ts`, `tests/rendering.test.ts`, `README.md`.
+  - Acceptance criteria: same as `SpAlert`.
+
+- [ ] Add `SpSpinner` component
+  - File targets: `src/components/SpSpinner.astro`, `src/recipes/index.ts`,
+    `src/index.ts`, `package.json`, `astro-adapter.contract.json`,
+    `tests/sp-spinner.test.ts`, `tests/rendering.test.ts`, `README.md`.
+  - Acceptance criteria: same as `SpAlert`.
+
+- [ ] Add `SpTag` component
+  - File targets: `src/components/SpTag.astro`, `src/recipes/index.ts`,
+    `src/index.ts`, `package.json`, `astro-adapter.contract.json`,
+    `tests/sp-tag.test.ts`, `tests/rendering.test.ts`, `README.md`.
+  - Acceptance criteria: same as `SpAlert`.
+
+### P1: Peer dependency and release hygiene
+
+- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0`
+  - File targets: `package.json`, `astro-adapter.contract.json`.
+  - Acceptance criteria: the declared peer range matches the minimum version
+    that ships all four bound recipe families.
+
+- [ ] Update `CHANGELOG.md [Unreleased]` for the Phase 3 component additions
+  - Acceptance criteria: each new component family is documented as an additive
+    change before handoff to Bradley Potts for version bump and publish.
+
+---
+
+## Phase 4 - Token-Gated Expansion
+
+Phase 4 is future work gated on `@phcdevworks/spectre-tokens` releasing
+component-level tokens and `@phcdevworks/spectre-ui` publishing the
+corresponding recipe families. Do not start Phase 4 work until the upstream
+packages have published to npm.
+
+Planned families: nav, toast, tooltip, dropdown, modal.
+
+Track upstream readiness in `spectre-tokens` and `spectre-ui` before opening
+any Phase 4 work items.
+
+---
+
 ## Recommended Execution Order
 
-1. Add `astro-adapter.contract.json`.
-2. Harden root exports.
-3. Harden component entrypoints.
-4. Add stable upstream parity checks.
-5. Enforce thin-adapter invariants.
-6. Add built-package Astro smoke tests.
-7. Add README parity validation.
-8. Clarify example boundaries.
-9. Add maintainer coverage mapping.
-10. Classify supported component families by stability.
-11. Add semver proposal support after classification is dependable.
+1. Add `SpAlert`, `SpAvatar`, `SpSpinner`, `SpTag` one at a time.
+2. Bump peer dependency range to `^1.7.0`.
+3. Update `CHANGELOG.md [Unreleased]`.
+4. Hand off to Bradley Potts for version bump, commit, tag, and publish.
+5. Watch for upstream Phase 3 tokens + recipe wave before starting Phase 4.
 
 ## Explicitly Out of Scope
 
@@ -162,3 +224,4 @@ downstream package safety, and controlled release handoff.
 - Do not move Lit web component behavior into this package.
 - Do not treat examples as independent published packages or contract
   authorities.
+- Do not bind Phase 4 families before their recipes publish to npm.

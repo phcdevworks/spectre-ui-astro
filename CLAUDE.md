@@ -70,11 +70,15 @@ tests/
   exports.test.ts
   rendering.test.ts
   docs-examples.test.ts
+  upstream-parity.test.ts
+  smoke.test.ts
   sp-*.test.ts
 
 scripts/
   copy-components.ts
   validate-package-contract.ts
+  validate-readme-contract.ts
+  propose-version.ts
 
 examples/
 dist/
@@ -136,6 +140,10 @@ explicit `id` requirement and returns stable helper and error associations.
   DOM leakage behavior.
 - `docs-examples.test.ts` keeps README guidance and examples aligned with the
   adapter contract.
+- `upstream-parity.test.ts` guards upstream UI family parity — fails if
+  `@phcdevworks/spectre-ui` adds a recipe family not declared in the contract.
+- `smoke.test.ts` guards built-package artifacts — verifies `dist/` exports,
+  component entrypoints, and upstream helper pass-through after build.
 
 ## Code Standards
 
@@ -155,10 +163,12 @@ explicit `id` requirement and returns stable helper and error associations.
 
 ## Roadmap Priorities
 
-Work P0 items from `ROADMAP.md` and `TODO.md` before expanding component
-surface:
+The adapter foundation (Phases 1 and 2) is complete. Work items from
+`ROADMAP.md` and `TODO.md` in order:
 
-- Add a machine-readable adapter contract anchor.
-- Harden root export and component entrypoint parity validation.
-- Add stable upstream UI family parity checks.
-- Enforce thin-adapter invariants.
+- Add `SpAlert`, `SpAvatar`, `SpSpinner`, and `SpTag` components (Phase 3 —
+  all four recipes available in `@phcdevworks/spectre-ui` ^1.7.0).
+- Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0` when the
+  first Phase 3 component ships.
+- Watch `@phcdevworks/spectre-tokens` and `@phcdevworks/spectre-ui` for Phase 4
+  token-gated families (nav, toast, tooltip, dropdown, modal).

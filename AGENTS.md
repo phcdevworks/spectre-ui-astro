@@ -21,7 +21,10 @@ the Spectre system.
 | `JULES.md`                             | Protected                                 | Jules maintenance scope               |
 | `.github/copilot-instructions.md`      | Protected                                 | Copilot support guide                 |
 | `tests/exports.test.ts`                | Source — keep in sync                     | Guards public contract surface        |
+| `tests/upstream-parity.test.ts`        | Source — keep in sync                     | Guards upstream family parity         |
+| `tests/smoke.test.ts`                  | Source — keep in sync                     | Guards built-package artifacts        |
 | `scripts/validate-package-contract.ts` | Source — keep in sync                     | Post-build contract assertions        |
+| `scripts/validate-readme-contract.ts`  | Source — keep in sync                     | Post-build README parity assertions   |
 | `examples/`                            | Validation surface — not a contract       | Demo app; not independently published |
 
 ## Primary AI Developer
