@@ -1,5 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import {
+  getAlertClasses,
   getBadgeClasses,
   getButtonClasses,
   getCardClasses,
@@ -21,6 +22,7 @@ import {
 } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
+import SpAlert from "../src/components/SpAlert.astro";
 import SpBadge from "../src/components/SpBadge.astro";
 import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
@@ -266,5 +268,32 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-busy="true"');
     expect(html).toContain('aria-disabled="true"');
     expect(html).toContain('tabindex="-1"');
+  });
+
+  it("renders SpAlert with upstream classes and correct ARIA for disabled state", async () => {
+    const html = await container.renderToString(SpAlert, {
+      props: {
+        variant: "warning",
+        size: "lg",
+        disabled: true,
+      },
+    });
+
+    expect(html).toContain(getAlertClasses({ variant: "warning", size: "lg", disabled: true }));
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('tabindex="-1"');
+    expect(html).not.toMatch(/(^|\s)disabled="true"/);
+    expect(html).not.toContain('variant="warning"');
+  });
+
+  it("renders SpAlert with loading state and aria-busy", async () => {
+    const html = await container.renderToString(SpAlert, {
+      props: { variant: "info", loading: true },
+    });
+
+    expect(html).toContain(getAlertClasses({ variant: "info", loading: true, disabled: true }));
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).not.toContain('loading="true"');
   });
 });

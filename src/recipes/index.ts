@@ -1,4 +1,8 @@
 export {
+  getAlertClasses,
+  type AlertRecipeOptions,
+  type AlertSize,
+  type AlertVariant,
   getBadgeClasses,
   type BadgeRecipeOptions,
   type BadgeSize,
