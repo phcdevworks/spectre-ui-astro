@@ -63,7 +63,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsup --config tsup.config.ts && npm run build:types && node --experimental-strip-types scripts/copy-components.ts && node --experimental-strip-types scripts/validate-package-contract.ts",
+    "build": "tsup --config tsup.config.ts && npm run build:types && node --experimental-strip-types scripts/copy-components.ts && node --experimental-strip-types scripts/validate-package-contract.ts && node --experimental-strip-types scripts/validate-readme-contract.ts",
     "build:types": "tsc --project tsconfig.build.json",
     "check": "npm run ci:verify",
     "ci:verify": "npm run lint && npm run build && npm run typecheck && npm test",

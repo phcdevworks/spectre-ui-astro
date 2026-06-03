@@ -1,46 +1,32 @@
-# Astro Starter Kit: Minimal
+# spectre-ui-astro examples
 
-```sh
-npm create astro@latest -- --template minimal
+This directory contains a demo Astro application used for manual verification of `@phcdevworks/spectre-ui-astro`.
+
+## Purpose
+
+The examples app demonstrates correct consumption of the adapter's published contract: root package imports, direct component entrypoints, and recipe helper usage. It exists as a manual validation surface for contributors, not as a canonical reference.
+
+## Boundary rules
+
+- **Not a contract authority.** The examples app does not define, extend, or override the adapter's public API. The authoritative contract is `astro-adapter.contract.json` together with `src/index.ts` and `package.json` exports.
+- **Stable components only.** Examples must only import and use components and helpers declared as `stable` in `astro-adapter.contract.json`. Do not demonstrate provisional or not-yet-supported families as if they were part of the public API.
+- **No local styling.** The examples app may use Spectre layout utilities and design tokens for page layout, but must not introduce CSS that belongs to `@phcdevworks/spectre-ui`.
+- **Peer version alignment.** The `@phcdevworks/spectre-ui` dependency in `examples/package.json` must match the peer range declared in the root `package.json`. This is validated by `tests/docs-examples.test.ts`.
+
+## Setup
+
+```bash
+# From the examples/ directory
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The examples app depends on the adapter package via a local `file:..` link. Run `npm install` (not `npm ci`) after changes to the parent package.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page
-is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put
-any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into
-our [Discord server](https://astro.build/chat).
+| Command           | Purpose                                  |
+|-------------------|------------------------------------------|
+| `npm run dev`     | Start local dev server at localhost:4321 |
+| `npm run build`   | Build the static site to `./dist/`       |
+| `npm run preview` | Preview the production build             |
