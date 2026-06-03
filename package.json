@@ -47,6 +47,7 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./components/SpAlert.astro": "./dist/components/SpAlert.astro",
     "./components/SpBadge.astro": "./dist/components/SpBadge.astro",
     "./components/SpButton.astro": "./dist/components/SpButton.astro",
     "./components/SpCard.astro": "./dist/components/SpCard.astro",

@@ -14,7 +14,7 @@ Add one component at a time. Run `npm run check` before moving to the next.
 
 ### Components
 
-- [ ] `SpAlert`
+- [x] `SpAlert`
   - `src/components/SpAlert.astro`, recipe/type re-exports in
     `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
     `package.json`, contract entry in `astro-adapter.contract.json`,
