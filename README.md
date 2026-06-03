@@ -239,6 +239,32 @@ When `label`, `helperText`, or `errorMessage` is present, an explicit `id` is **
 
 ---
 
+### SpAlert
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `AlertVariant` | `"info"` | Visual style: `"info"` `"success"` `"warning"` `"danger"` `"neutral"` |
+| `size` | `AlertSize` | `"md"` | Size: `"sm"` `"md"` `"lg"` |
+| `as` | `"div" \| "section" \| "aside" \| "article"` | `"div"` | Rendered element |
+| `dismissed` | `boolean` | — | Applies dismissed state styling |
+| `interactive` | `boolean` | — | Adds hover/focus styles and `tabindex="0"` |
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `disabled` | `boolean` | — | Disables the alert |
+| `loading` | `boolean` | — | Loading state (also sets disabled behavior) |
+| `id` | `string` | — | Element ID |
+| `aria-label` | `string` | — | Accessible label |
+| `aria-describedby` | `string` | — | Associates a description element |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpAlert variant="success">Your changes have been saved.</SpAlert>
+<SpAlert variant="warning" size="sm">Session expires soon.</SpAlert>
+<SpAlert variant="danger" dismissed>This alert has been dismissed.</SpAlert>
+<SpAlert variant="info" as="aside" aria-label="Info notice">Read the docs.</SpAlert>
+```
+
+---
+
 ### SpBadge
 
 | Prop | Type | Default | Description |
@@ -594,6 +620,7 @@ Each component family is classified by its support status in this adapter.
 
 | Family | Status | Notes |
 |--------|--------|-------|
+| alert | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | button | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
@@ -602,7 +629,6 @@ Each component family is classified by its support status in this adapter.
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| alert | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 | avatar | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 | spinner | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 | tag | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |

@@ -2,6 +2,7 @@
   "version": "2.5.0",
   "rootExports": {
     "components": [
+      "SpAlert",
       "SpBadge",
       "SpButton",
       "SpCard",
@@ -79,6 +80,7 @@
     ]
   },
   "componentEntrypoints": [
+    "./components/SpAlert.astro",
     "./components/SpBadge.astro",
     "./components/SpButton.astro",
     "./components/SpCard.astro",
@@ -114,6 +116,7 @@
   },
   "componentFamilies": {
     "stable": [
+      "alert",
       "badge",
       "button",
       "card",
@@ -124,6 +127,6 @@
       "testimonial"
     ],
     "provisional": [],
-    "notYetSupported": ["alert", "avatar", "spinner", "tag"]
+    "notYetSupported": ["avatar", "spinner", "tag"]
   }
 }
