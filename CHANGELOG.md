@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Fixed
+
+- `SpAlert` now supports polymorphic rendering as `<a>` or `<button>` tags,
+  automatically infers its interactive state from the tag, and implements
+  proper accessibility guarding (role assignment and href suppression).
+
 ## [2.5.0] - 2026-06-03
 
 Release Title: Contract Hardening and Accessibility Parity
