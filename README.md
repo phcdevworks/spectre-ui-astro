@@ -602,6 +602,10 @@ Each component family is classified by its support status in this adapter.
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| alert | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
+| avatar | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
+| spinner | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
+| tag | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 
 **stable** — the component family is fully wired to upstream recipes, covered by SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking changes require a semver major bump.
 

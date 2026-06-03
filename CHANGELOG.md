@@ -8,6 +8,28 @@ reflects package releases published to npm.
 
 ### Added
 
+- `tests/upstream-parity.test.ts` — derives upstream component families from
+  `@phcdevworks/spectre-ui` recipe exports and cross-references them against
+  `astro-adapter.contract.json`. CI fails if upstream adds a recipe family not
+  declared in `stable`, `provisional`, or `notYetSupported`, or if a stable
+  family has no corresponding `.astro` component.
+- `tests/smoke.test.ts` — exercises the built `dist/` artifacts directly:
+  verifies `dist/index.js` component and helper exports, upstream pass-through
+  identity, component entrypoint files in `dist/components/`, and
+  `dist/index.d.ts` declarations.
+- `scripts/validate-readme-contract.ts` — fails the build if any
+  contract-declared component is missing a `### SpName` section in `README.md`,
+  or if the CSS import guidance, peer dependency reference, recipe helpers
+  section, or component family stability table entries drift from the manifest.
+- `astro-adapter.contract.json` `componentFamilies.notYetSupported` populated
+  with `alert`, `avatar`, `spinner`, and `tag` — the four upstream recipe
+  families available in `@phcdevworks/spectre-ui` ^1.7.0 that are not yet
+  bound by this adapter.
+- `examples/README.md` updated to document example app purpose, boundary rules
+  (not a contract authority, stable components only, no local styling), and
+  setup instructions.
+- README component family stability table now lists the four `notYetSupported`
+  families so consumers can see what is planned.
 - `validate-package-contract.ts` now validates root exports and recipe
   helpers/types against `astro-adapter.contract.json`, so CI fails if
   `src/index.ts` or `src/recipes/index.ts` drift from the declared public
