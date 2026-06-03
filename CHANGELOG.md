@@ -6,8 +6,34 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-06-03
+
+Release Title: Contract Hardening and Accessibility Parity
+
+### Fixed
+
+- `SpBadge`, `SpButton`, `SpCard`, `SpIconBox`, `SpPricingCard`, `SpRating`,
+  and `SpTestimonial` now pass through explicit `id` and `aria-describedby`
+  attributes, improving deterministic accessible associations for SSR output.
+- `SpInput` now uses upstream recipe helpers for its wrapper, label, helper
+  text, and error message parts instead of local class strings, keeping the
+  adapter thin and aligned with `@phcdevworks/spectre-ui`.
+- `SpInput` now treats `state="loading"` as functionally equivalent to
+  `loading={true}` and `state="disabled"` as functionally equivalent to
+  `disabled={true}`, including disabled styling and ARIA behavior.
+- `SpInput` now forwards disabled and loading state into the upstream input
+  recipe so rendered classes match the functional input state.
+- `SpTestimonial` now forwards `variant` to the upstream testimonial recipe
+  without leaking the prop to rendered markup.
+
 ### Added
 
+- Added `fullWidth` prop support for `SpIconBox`, forwarding the state to the
+  upstream icon box recipe without leaking adapter-only props to rendered
+  markup.
+- Added `astro-adapter.contract.json` as the machine-readable adapter contract
+  for root exports, component entrypoints, peer dependency expectations, stable
+  component families, and thin-adapter invariants.
 - `tests/upstream-parity.test.ts` — derives upstream component families from
   `@phcdevworks/spectre-ui` recipe exports and cross-references them against
   `astro-adapter.contract.json`. CI fails if upstream adds a recipe family not
@@ -21,6 +47,8 @@ reflects package releases published to npm.
   contract-declared component is missing a `### SpName` section in `README.md`,
   or if the CSS import guidance, peer dependency reference, recipe helpers
   section, or component family stability table entries drift from the manifest.
+- `scripts/propose-version.ts` — proposes a release version from changelog
+  classifications and dependency/package state.
 - `astro-adapter.contract.json` `componentFamilies.notYetSupported` populated
   with `alert`, `avatar`, `spinner`, and `tag` — the four upstream recipe
   families available in `@phcdevworks/spectre-ui` ^1.7.0 that are not yet
@@ -40,6 +68,26 @@ reflects package releases published to npm.
 - `validate-package-contract.ts` now enforces thin-adapter invariants by
   rejecting `<style>` blocks and CSS custom property definitions in
   `src/components/*.astro`, protecting against local CSS ownership drift.
+- Added regression coverage for the new `id`, `aria-describedby`, `fullWidth`,
+  testimonial variant, and `SpInput` state/recipe behavior.
+
+### Changed
+
+- Updated the peer dependency contract for `@phcdevworks/spectre-tokens` to
+  `^2.6.0`, while refreshing local development against
+  `@phcdevworks/spectre-tokens` `^2.7.0`,
+  `@phcdevworks/spectre-ui` `^1.7.0`, Astro `6.4.3`, Vitest `4.1.8`,
+  TypeScript-ESLint `8.60.1`, and npm `11.16.0`.
+- README now documents component family stability directly from the adapter
+  contract, including stable Astro families and upstream families that are not
+  yet supported.
+- `CONTRIBUTING.md` now includes a contract coverage map tying public adapter
+  surfaces to their enforcing tests or validation scripts.
+- `examples/README.md`, `ROADMAP.md`, and `TODO.md` were refreshed around the
+  adapter contract boundary, example-app authority, and remaining follow-up
+  priorities.
+- `src/recipes/index.ts` now re-exports the upstream input sub-part recipe
+  helpers used by `SpInput`.
 
 ## [2.4.0] - 2026-05-22
 
