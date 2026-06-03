@@ -5,84 +5,68 @@ suite. It binds the upstream `@phcdevworks/spectre-ui` styling contract into
 Astro-native components without redefining token meaning, CSS ownership, or
 recipe logic.
 
-## Current State (as of v2.4.x)
+---
 
-The adapter foundation is solid. Phases 1 and 2 are complete:
+## System Phase Context
 
-- Machine-readable adapter contract (`astro-adapter.contract.json`)
-- Root export and component entrypoint parity validation
-- Upstream UI family parity checks (`tests/upstream-parity.test.ts`)
-- Thin-adapter invariant enforcement (no local CSS, no token redefinition)
-- Built-package consumer smoke tests (`tests/smoke.test.ts`)
-- README contract parity validation (`scripts/validate-readme-contract.ts`)
-- Example boundary rules clarified (`examples/README.md`)
-- Maintainer contract coverage map in `CONTRIBUTING.md`
-- Eight stable component families: badge, button, card, icon-box, input,
-  pricing-card, rating, testimonial
+The three Spectre packages are moving in lock-step:
 
-Four upstream families are declared in the contract as `notYetSupported` and
-are targeted for Phase 3: alert, avatar, spinner, tag.
+| Package                         | Active Phase                                        |
+| ------------------------------- | --------------------------------------------------- |
+| `@phcdevworks/spectre-tokens`   | Phase 3 — token surface completion, vocab gaps      |
+| `@phcdevworks/spectre-ui`       | Phase 3 — token-gated semantic surface expansion    |
+| `@phcdevworks/spectre-ui-astro` | **Phase 3 — binding four ready component families** |
+
+Foundation is done across all three. The work now is expanding the component
+surface and closing the gap between what upstream ships and what this adapter
+exposes.
 
 ---
 
-## Phase 3: Component Family Expansion — Next
+## Phase 3: Component Family Expansion — Active
 
-`@phcdevworks/spectre-ui` v1.7.0 ships recipes for the four `notYetSupported`
-families. Binding them is the immediate next step.
+`@phcdevworks/spectre-ui` ^1.7.0 ships recipes for the four families currently
+declared as `notYetSupported`. Binding them is the current priority.
 
-### P0: Bind the four ready families
-
-Each family requires the same delivery pattern as existing stable components:
-
-| Family  | Upstream recipe     | Upstream version |
-| ------- | ------------------- | ---------------- |
-| alert   | `getAlertClasses`   | ^1.7.0           |
-| avatar  | `getAvatarClasses`  | ^1.7.0           |
-| spinner | `getSpinnerClasses` | ^1.7.0           |
-| tag     | `getTagClasses`     | ^1.7.0           |
+| Family  | Upstream recipe     | Status        |
+| ------- | ------------------- | ------------- |
+| alert   | `getAlertClasses`   | Ready to bind |
+| avatar  | `getAvatarClasses`  | Ready to bind |
+| spinner | `getSpinnerClasses` | Ready to bind |
+| tag     | `getTagClasses`     | Ready to bind |
 
 Deliverables for each family:
 
-1. `src/components/Sp{Family}.astro` — component following the established
-   adapter pattern
+1. `src/components/Sp{Family}.astro` following the established adapter pattern
 2. Recipe option types re-exported from `src/recipes/index.ts`
 3. Export from `src/index.ts`
 4. Component entrypoint in `package.json` exports
-5. Entry in `astro-adapter.contract.json` (move from `notYetSupported` to
-   `stable`)
+5. Move from `notYetSupported` to `stable` in `astro-adapter.contract.json`
 6. Focused tests under `tests/sp-{family}.test.ts`
 7. SSR rendering coverage in `tests/rendering.test.ts`
 8. Component section in `README.md` with prop table and usage examples
-9. Update stability table in `README.md`
-10. Update examples if consumer usage changes
+9. Stability table updated in `README.md`
+10. Examples updated if consumer usage changes
 
-Dependency notes: bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0`
-when the first of these components ships, since v1.5.x and v1.6.x do not include
-these recipes.
-
-Run `npm run check` after each family lands before moving to the next.
+Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0` when the first
+of these ships. Run `npm run check` after each family before moving to the next.
 
 ---
 
-## Phase 4: Token-Gated Expansion — Future
+## Phase 4: Token-Gated Expansion — Gated
 
-`@phcdevworks/spectre-ui` Phase 3 will add Nav, Toast, Tooltip, Dropdown, and
-Modal recipes, each gated on `@phcdevworks/spectre-tokens` releasing the
-required semantic tokens. Do not bind these until:
+Phase 4 families require `@phcdevworks/spectre-tokens` to publish
+component-level semantic tokens, and `@phcdevworks/spectre-ui` to ship the
+corresponding recipes. Watch both upstream changelogs before opening any
+Phase 4 work.
 
-1. The required tokens publish to npm in `@phcdevworks/spectre-tokens`
-2. `@phcdevworks/spectre-ui` publishes the corresponding recipes
-3. `npm view @phcdevworks/spectre-ui version` confirms the published version
-
-Planned families once upstream is ready:
-
-| Family   | Required spectre-tokens group |
-| -------- | ----------------------------- |
-| nav      | component.nav                 |
-| toast    | component.toast               |
-| tooltip  | component.tooltip             |
-| dropdown | component.dropdown            |
-| modal    | component.modal               |
+| Family   | Required spectre-tokens group | Upstream status |
+| -------- | ----------------------------- | --------------- |
+| nav      | component.nav                 | Not yet shipped |
+| toast    | component.toast               | Not yet shipped |
+| tooltip  | component.tooltip             | Not yet shipped |
+| dropdown | component.dropdown            | Not yet shipped |
+| modal    | component.modal               | Not yet shipped |
 
 Each will follow the same delivery pattern as Phase 3.
 
@@ -90,11 +74,9 @@ Each will follow the same delivery pattern as Phase 3.
 
 ## Adapter Expansion Rules
 
-When adding any new component family:
-
 - Call the upstream recipe function; do not compute class strings locally
-- Do not introduce `<style>` blocks or CSS custom property definitions
-- Do not add visual variants that do not exist in the upstream recipe
+- No `<style>` blocks or CSS custom property definitions
+- No visual variants that do not exist in the upstream recipe
 - Keep adapter-specific behavior additive and narrowly scoped to Astro
   ergonomics (slots, SSR accessibility wiring, `as` prop)
 - Declare the family in `astro-adapter.contract.json` before shipping
@@ -109,5 +91,4 @@ When adding any new component family:
 - Do not fork or locally reinterpret upstream recipe logic here
 - Do not bind upstream families before their recipes publish to npm
 - Do not expand framework responsibilities beyond Astro adapter delivery
-- Do not treat examples as independent published packages or contract
-  authorities
+- Do not treat examples as independent published packages or contract authorities
