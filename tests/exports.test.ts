@@ -34,6 +34,7 @@ function collectRuntimeExportPaths(exportsField: typeof packageJson.exports) {
 }
 
 const recipeRuntimeExports = [
+  "getAlertClasses",
   "getBadgeClasses",
   "getButtonClasses",
   "getCardClasses",

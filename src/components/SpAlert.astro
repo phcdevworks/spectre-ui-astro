@@ -1,0 +1,73 @@
+---
+import type { AlertRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getAlertClasses } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+
+type SpAlertElement = "div" | "section" | "aside" | "article";
+
+interface SpAlertProps extends AlertRecipeOptions {
+  as?: SpAlertElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  tabindex?: number;
+  [key: string]: unknown;
+}
+
+const {
+  variant,
+  size,
+  dismissed,
+  fullWidth,
+  interactive,
+  hovered,
+  focused,
+  active,
+  disabled,
+  loading,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  tabindex,
+  ...rest
+} = Astro.props as SpAlertProps;
+
+const isAlertDisabled = disabled || loading;
+
+const classes = getAlertClasses({
+  variant,
+  size,
+  dismissed,
+  fullWidth,
+  interactive,
+  hovered,
+  focused,
+  active,
+  disabled: isAlertDisabled,
+  loading,
+});
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const { finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isAlertDisabled,
+  interactive,
+  tabindex,
+});
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={isAlertDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
+  tabindex={finalTabIndex}
+  {...rest}
+>
+  <slot />
+</Tag>
