@@ -35,6 +35,7 @@ function collectRuntimeExportPaths(exportsField: typeof packageJson.exports) {
 
 const recipeRuntimeExports = [
   "getAlertClasses",
+  "getAvatarClasses",
   "getBadgeClasses",
   "getButtonClasses",
   "getCardClasses",
@@ -53,6 +54,8 @@ const recipeRuntimeExports = [
   "getRatingStarClasses",
   "getRatingStarsClasses",
   "getRatingTextClasses",
+  "getSpinnerClasses",
+  "getTagClasses",
   "getTestimonialAuthorClasses",
   "getTestimonialAuthorInfoClasses",
   "getTestimonialAuthorNameClasses",
