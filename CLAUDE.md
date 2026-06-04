@@ -2,9 +2,10 @@
 
 ## Project Identity
 
-**Package:** `@phcdevworks/spectre-ui-astro` **Layer:** L4 of the Spectre design
-suite - Astro adapter **Human owner:** Bradley Potts **Primary AI developer:** Claude Code
-(claude-sonnet-4-6)
+**Package:** `@phcdevworks/spectre-ui-astro`
+**Layer:** L4 — Astro adapter
+**Human owner:** Bradley Potts
+**Primary AI developer:** Claude Code (claude-sonnet-4-6)
 
 This file is the authoritative implementation guide for Claude Code operating in
 this repository. Shared agent roles, package boundaries, validation rules, and
