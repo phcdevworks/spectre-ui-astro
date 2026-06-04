@@ -3,8 +3,7 @@
 ## Project Identity
 
 **Package:** `@phcdevworks/spectre-ui-astro` **Layer:** L4 of the Spectre design
-suite - Astro adapter **Human owner:** Bradley Potts
-(brad.potts@coastdigitalgroup.com) **Primary AI developer:** Claude Code
+suite - Astro adapter **Human owner:** Bradley Potts **Primary AI developer:** Claude Code
 (claude-sonnet-4-6)
 
 This file is the authoritative implementation guide for Claude Code operating in
@@ -49,7 +48,7 @@ package exports, examples, or docs.
 
 ## File Structure
 
-```
+```text
 src/
   components/
     SpBadge.astro
