@@ -11,29 +11,28 @@ recipe logic.
 
 The three Spectre packages are moving in lock-step:
 
-| Package                         | Active Phase                                        |
-| ------------------------------- | --------------------------------------------------- |
-| `@phcdevworks/spectre-tokens`   | Phase 3 — token surface completion, vocab gaps      |
-| `@phcdevworks/spectre-ui`       | Phase 3 — token-gated semantic surface expansion    |
-| `@phcdevworks/spectre-ui-astro` | **Phase 3 — binding four ready component families** |
+| Package                         | Active Phase                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------ |
+| `@phcdevworks/spectre-tokens`   | Phase 3 — validation integrity; Phase 4 token surface expansion planned        |
+| `@phcdevworks/spectre-ui`       | Phase 3 — token-gated semantic surface expansion                               |
+| `@phcdevworks/spectre-ui-astro` | **Phase 3 — SpAlert + SpAvatar delivered; SpSpinner + SpTag remaining**        |
 
-Foundation is done across all three. The work now is expanding the component
-surface and closing the gap between what upstream ships and what this adapter
-exposes.
+Foundation is done across all three. The work now is closing the remaining two
+Phase 3 component families before Phase 4 token-gated expansion becomes unblocked.
 
 ---
 
 ## Phase 3: Component Family Expansion — Active
 
-`@phcdevworks/spectre-ui` ^1.7.0 ships recipes for the four families currently
-declared as `notYetSupported`. Binding them is the current priority.
+`@phcdevworks/spectre-ui` ^1.7.0 ships recipes for the four families. Two are
+delivered; two remain. `peerDependencies` is already bumped to `^1.7.0`.
 
-| Family  | Upstream recipe     | Status        |
-| ------- | ------------------- | ------------- |
-| alert   | `getAlertClasses`   | Ready to bind |
-| avatar  | `getAvatarClasses`  | Ready to bind |
-| spinner | `getSpinnerClasses` | Ready to bind |
-| tag     | `getTagClasses`     | Ready to bind |
+| Family  | Upstream recipe     | Status             |
+| ------- | ------------------- | ------------------ |
+| alert   | `getAlertClasses`   | Delivered — stable |
+| avatar  | `getAvatarClasses`  | Delivered — stable |
+| spinner | `getSpinnerClasses` | Ready to bind      |
+| tag     | `getTagClasses`     | Ready to bind      |
 
 Deliverables for each family:
 
