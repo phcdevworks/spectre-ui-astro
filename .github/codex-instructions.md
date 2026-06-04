@@ -1,4 +1,4 @@
-# Codex Instructions — Spectre UI Astro
+# Codex Instructions - Spectre UI Astro
 
 This is the GitHub-integrated Codex guide for
 `@phcdevworks/spectre-ui-astro`. Read `CODEX.md` for the full Codex playbook,

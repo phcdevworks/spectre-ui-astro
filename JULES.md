@@ -1,4 +1,4 @@
-# Jules Instructions for @phcdevworks/spectre-ui-astro
+# JULES.md - Spectre UI Astro
 
 ## Role
 
