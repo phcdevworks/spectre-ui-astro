@@ -1,0 +1,93 @@
+---
+import type { AvatarRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getAvatarClasses } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+
+type SpAvatarElement = "div" | "span" | "figure" | "a" | "button";
+
+interface SpAvatarProps extends AvatarRecipeOptions {
+  as?: SpAvatarElement;
+  class?: string;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+
+  type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  shape,
+  size,
+  interactive,
+  disabled,
+  loading,
+  hovered,
+  focused,
+  active,
+  fullWidth,
+  placeholder,
+  as: Tag = "div",
+  class: className,
+  href,
+  target,
+  rel,
+  type,
+  tabindex,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpAvatarProps;
+
+const isAvatarDisabled = disabled || loading;
+const isInteractive = interactive || Tag === "a" || Tag === "button";
+
+const classes = getAvatarClasses({
+  shape,
+  size,
+  interactive: isInteractive,
+  disabled: isAvatarDisabled,
+  loading,
+  hovered,
+  focused,
+  active,
+  fullWidth,
+  placeholder,
+});
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isAvatarDisabled,
+  href,
+  type,
+  tabindex,
+  interactive: isInteractive,
+});
+---
+
+<Tag
+  class={finalClass}
+  href={finalHref}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  disabled={Tag === "button" && isAvatarDisabled ? true : undefined}
+  role={isInteractive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
+  aria-disabled={isAvatarDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  tabindex={finalTabIndex}
+  id={id}
+  {...rest}
+>
+  <slot />
+</Tag>

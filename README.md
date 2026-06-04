@@ -13,7 +13,7 @@ Astro-native components for the [Spectre UI](https://github.com/phcdevworks/spec
 
 ## What Astro developers get
 
-- **Eight ready-to-use Astro components** — badges, buttons, cards, icon boxes, inputs, pricing cards, ratings, and testimonials
+- **Ten ready-to-use Astro components** — alerts, avatars, badges, buttons, cards, icon boxes, inputs, pricing cards, ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript, stable accessibility wiring
 - **Thin wrapper pattern** — styling comes entirely from `@phcdevworks/spectre-ui`; this package adds Astro slots, typed props, and framework ergonomics
 - **Re-exported recipe helpers** — use the same class functions the components use, directly from your Astro frontmatter or TypeScript
@@ -261,6 +261,38 @@ When `label`, `helperText`, or `errorMessage` is present, an explicit `id` is **
 <SpAlert variant="warning" size="sm">Session expires soon.</SpAlert>
 <SpAlert variant="danger" dismissed>This alert has been dismissed.</SpAlert>
 <SpAlert variant="info" as="aside" aria-label="Info notice">Read the docs.</SpAlert>
+```
+
+---
+
+### SpAvatar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `shape` | `AvatarShape` | `"circle"` | Shape: `"circle"` `"square"` |
+| `size` | `AvatarSize` | `"md"` | Size: `"xs"` `"sm"` `"md"` `"lg"` `"xl"` |
+| `as` | `"div" \| "span" \| "figure" \| "a" \| "button"` | `"div"` | Rendered element |
+| `interactive` | `boolean` | — | Adds hover/focus styles |
+| `disabled` | `boolean` | — | Disables the avatar |
+| `loading` | `boolean` | — | Loading state |
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `placeholder` | `boolean` | — | Applies placeholder styling |
+| `href` | `string` | — | URL when `as="a"` |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpAvatar size="lg">
+  <img src="/avatars/jane.jpg" alt="Jane Doe" />
+</SpAvatar>
+
+<SpAvatar shape="square" size="sm" placeholder>
+  JD
+</SpAvatar>
+
+<SpAvatar as="a" href="/profile" interactive>
+  <img src="/avatars/jane.jpg" alt="View profile" />
+</SpAvatar>
 ```
 
 ---
@@ -517,6 +549,8 @@ const links = [
 
 | Helper | For |
 |--------|-----|
+| `getAlertClasses` | Alert class generation |
+| `getAvatarClasses` | Avatar class generation |
 | `getButtonClasses` | Button class generation |
 | `getCardClasses` | Card class generation |
 | `getBadgeClasses` | Badge class generation |
@@ -538,7 +572,7 @@ const links = [
 | `getTestimonialAuthorNameClasses` | Author name element |
 | `getTestimonialAuthorTitleClasses` | Author title element |
 
-Recipe option and variant types are also re-exported: `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `TestimonialRecipeOptions`.
+Recipe option and variant types are also re-exported: `AlertRecipeOptions`, `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`, `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `TestimonialRecipeOptions`.
 
 ## What this package owns
 
@@ -587,7 +621,7 @@ Do not use this package when:
 
 ```ts
 import {
-  SpBadge, SpButton, SpCard, SpIconBox, SpInput,
+  SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpIconBox, SpInput,
   SpPricingCard, SpRating, SpTestimonial,
 } from '@phcdevworks/spectre-ui-astro'
 
@@ -602,6 +636,8 @@ import {
 ### Direct component entry points
 
 ```ts
+import SpAlert     from '@phcdevworks/spectre-ui-astro/components/SpAlert.astro'
+import SpAvatar    from '@phcdevworks/spectre-ui-astro/components/SpAvatar.astro'
 import SpBadge     from '@phcdevworks/spectre-ui-astro/components/SpBadge.astro'
 import SpButton    from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
 import SpCard      from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
@@ -621,6 +657,7 @@ Each component family is classified by its support status in this adapter.
 | Family | Status | Notes |
 |--------|--------|-------|
 | alert | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| avatar | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | button | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
@@ -629,7 +666,6 @@ Each component family is classified by its support status in this adapter.
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| avatar | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 | spinner | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 | tag | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 

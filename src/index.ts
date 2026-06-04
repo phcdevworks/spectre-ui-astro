@@ -1,5 +1,6 @@
 // Components (Astro)
 export { default as SpAlert } from "./components/SpAlert.astro";
+export { default as SpAvatar } from "./components/SpAvatar.astro";
 export { default as SpBadge } from "./components/SpBadge.astro";
 export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";

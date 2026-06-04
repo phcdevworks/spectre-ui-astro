@@ -3,6 +3,7 @@
   "rootExports": {
     "components": [
       "SpAlert",
+      "SpAvatar",
       "SpBadge",
       "SpButton",
       "SpCard",
@@ -81,6 +82,7 @@
   },
   "componentEntrypoints": [
     "./components/SpAlert.astro",
+    "./components/SpAvatar.astro",
     "./components/SpBadge.astro",
     "./components/SpButton.astro",
     "./components/SpCard.astro",
@@ -117,6 +119,7 @@
   "componentFamilies": {
     "stable": [
       "alert",
+      "avatar",
       "badge",
       "button",
       "card",
@@ -127,6 +130,6 @@
       "testimonial"
     ],
     "provisional": [],
-    "notYetSupported": ["avatar", "spinner", "tag"]
+    "notYetSupported": ["spinner", "tag"]
   }
 }
