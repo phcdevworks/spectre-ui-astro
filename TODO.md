@@ -10,6 +10,7 @@ CI-enforced. That work is done — do not revisit it.
 ## Phase 3 — Active Now
 
 All four Phase 3 recipes are live in `@phcdevworks/spectre-ui` ^1.7.0.
+`SpAlert` and `SpAvatar` are delivered. `SpSpinner` and `SpTag` remain.
 Add one component at a time. Run `npm run check` before moving to the next.
 
 ### Components
@@ -23,20 +24,37 @@ Add one component at a time. Run `npm run check` before moving to the next.
   - Done when: exported from root and `./components/SpAlert.astro`,
     covered by SSR + prop tests, documented, and `stable` in the contract.
 
-- [ ] `SpAvatar`
-  - Same delivery pattern as `SpAlert`.
+- [x] `SpAvatar`
+  - `src/components/SpAvatar.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-avatar.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpAvatar.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
 
 - [ ] `SpSpinner`
-  - Same delivery pattern as `SpAlert`.
+  - `src/components/SpSpinner.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-spinner.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpSpinner.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
 
 - [ ] `SpTag`
-  - Same delivery pattern as `SpAlert`.
+  - `src/components/SpTag.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-tag.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpTag.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
 
 ### Release
 
-- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0` in
-  `package.json` and `astro-adapter.contract.json` when the first Phase 3
-  component lands.
+- [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0` in
+  `package.json` and `astro-adapter.contract.json`.
 - [ ] Update `CHANGELOG.md [Unreleased]` for each new component family.
 - [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
 
