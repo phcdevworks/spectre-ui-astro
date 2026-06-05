@@ -1,0 +1,38 @@
+---
+import type { SpinnerRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSpinnerClasses } from "@phcdevworks/spectre-ui";
+
+type SpSpinnerElement = "div" | "span" | "i";
+
+interface SpSpinnerProps extends SpinnerRecipeOptions {
+  as?: SpSpinnerElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpSpinnerProps;
+
+const classes = getSpinnerClasses({
+  size,
+});
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  role="status"
+  aria-label={ariaLabel}
+  {...rest}
+>
+  <slot />
+</Tag>

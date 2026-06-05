@@ -3,6 +3,7 @@ import {
   SpBadge,
   SpCard,
   SpIconBox,
+  SpSpinner,
   getButtonClasses,
 } from "@phcdevworks/spectre-ui-astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -94,6 +95,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
             </svg>
           </SpIconBox>
+        </div>
+      </SpCard>
+
+      <SpCard variant="flat" class="sp-stack">
+        <h2>Spinner Sizes</h2>
+        <div class="sp-hstack inline">
+          <SpSpinner size="sm" aria-label="Small spinner" />
+          <SpSpinner size="md" aria-label="Medium spinner" />
+          <SpSpinner size="lg" aria-label="Large spinner" />
         </div>
       </SpCard>
 

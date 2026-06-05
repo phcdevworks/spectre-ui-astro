@@ -56,6 +56,7 @@
     "./components/SpInput.astro": "./dist/components/SpInput.astro",
     "./components/SpPricingCard.astro": "./dist/components/SpPricingCard.astro",
     "./components/SpRating.astro": "./dist/components/SpRating.astro",
+    "./components/SpSpinner.astro": "./dist/components/SpSpinner.astro",
     "./components/SpTestimonial.astro": "./dist/components/SpTestimonial.astro"
   },
   "files": [

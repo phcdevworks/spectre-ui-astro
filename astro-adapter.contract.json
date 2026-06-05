@@ -11,6 +11,7 @@
       "SpInput",
       "SpPricingCard",
       "SpRating",
+      "SpSpinner",
       "SpTestimonial"
     ],
     "recipeHelpers": [
@@ -90,6 +91,7 @@
     "./components/SpInput.astro",
     "./components/SpPricingCard.astro",
     "./components/SpRating.astro",
+    "./components/SpSpinner.astro",
     "./components/SpTestimonial.astro"
   ],
   "peerDependencies": {
@@ -127,9 +129,10 @@
       "input",
       "pricing-card",
       "rating",
+      "spinner",
       "testimonial"
     ],
     "provisional": [],
-    "notYetSupported": ["spinner", "tag"]
+    "notYetSupported": ["tag"]
   }
 }
