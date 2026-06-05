@@ -55,6 +55,7 @@ gates pass.
 | `COPILOT.md`                           | Protected                                 | Copilot support guide                 |
 | `JULES.md`                             | Protected                                 | Jules maintenance scope               |
 | `.github/copilot-instructions.md`      | Protected                                 | Copilot support guide                 |
+| `spectre.manifest.json`                | Source — keep in sync                     | Update when exports, Spectre dependencies, or stability change |
 | `tests/exports.test.ts`                | Source — keep in sync                     | Guards public contract surface        |
 | `tests/upstream-parity.test.ts`        | Source — keep in sync                     | Guards upstream family parity         |
 | `tests/smoke.test.ts`                  | Source — keep in sync                     | Guards built-package artifacts        |
@@ -286,3 +287,18 @@ unfilled. CodeRabbit's description check blocks such PRs.
 - `JULES.md` - bounded automated maintenance and commit rules.
 - `COPILOT.md` and `.github/copilot-instructions.md` - support-assistant
   guardrails.
+
+## Ecosystem Manifest
+
+`spectre.manifest.json` at the root is this package's declaration in the Spectre
+ecosystem contract, validated by `@phcdevworks/spectre-manifest`. It records role,
+layer, exports, and allowed Spectre dependency targets. `check:ecosystem` validates
+it as part of `npm run check`.
+
+Keep `spectre.manifest.json` in sync when:
+- Package exports in `package.json` are added or removed
+- A Spectre package dependency is added or removed
+- The package stability changes
+
+Do not add a `consumers` field — that belongs in the central
+`@phcdevworks/spectre-manifest` registry.
