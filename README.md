@@ -13,7 +13,7 @@ Astro-native components for the [Spectre UI](https://github.com/phcdevworks/spec
 
 ## What Astro developers get
 
-- **Ten ready-to-use Astro components** — alerts, avatars, badges, buttons, cards, icon boxes, inputs, pricing cards, ratings, and testimonials
+- **Eleven ready-to-use Astro components** — alerts, avatars, badges, buttons, cards, icon boxes, inputs, pricing cards, ratings, spinners, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript, stable accessibility wiring
 - **Thin wrapper pattern** — styling comes entirely from `@phcdevworks/spectre-ui`; this package adds Astro slots, typed props, and framework ergonomics
 - **Re-exported recipe helpers** — use the same class functions the components use, directly from your Astro frontmatter or TypeScript
@@ -72,6 +72,7 @@ import {
   SpIconBox,
   SpInput,
   SpPricingCard,
+  SpSpinner,
 } from '@phcdevworks/spectre-ui-astro'
 ---
 
@@ -103,6 +104,8 @@ import {
     <span slot="description">For growing teams.</span>
     <SpButton variant="primary" fullWidth>Choose plan</SpButton>
   </SpPricingCard>
+
+  <SpSpinner size="md" aria-label="Loading..." />
 </BaseLayout>
 ```
 
@@ -478,6 +481,23 @@ Named slots map to the structural sections of the testimonial. Slot wrappers ren
 
 ---
 
+### SpSpinner
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `SpinnerSize` | — | Size: `"sm"` `"md"` `"lg"` |
+| `as` | `"div" \| "span" \| "i"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element ID |
+| `aria-label` | `string` | — | Accessible label for the loading state |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpSpinner size="md" aria-label="Loading..." />
+<SpSpinner size="lg" as="span" class="custom-spinner" />
+```
+
+---
+
 ## Polymorphic rendering (`as` prop)
 
 Most components accept an `as` prop to change the rendered HTML element without changing component behavior or styling.
@@ -622,7 +642,7 @@ Do not use this package when:
 ```ts
 import {
   SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpIconBox, SpInput,
-  SpPricingCard, SpRating, SpTestimonial,
+  SpPricingCard, SpRating, SpSpinner, SpTestimonial,
 } from '@phcdevworks/spectre-ui-astro'
 
 import {
@@ -645,6 +665,7 @@ import SpIconBox   from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astr
 import SpInput     from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
 import SpPricingCard  from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpRating    from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
+import SpSpinner   from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
 ```
 
@@ -665,8 +686,8 @@ Each component family is classified by its support status in this adapter.
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| spinner | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| spinner | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 | tag | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 
 **stable** — the component family is fully wired to upstream recipes, covered by SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking changes require a semver major bump.

@@ -8,6 +8,9 @@ reflects package releases published to npm.
 
 ### Added
 
+- Added `SpSpinner` component, providing an Astro wrapper for the upstream
+  `getSpinnerClasses` recipe with polymorphic rendering and SSR-safe
+  accessibility.
 - Added `@phcdevworks/spectre-manifest` as a devDependency. `spectre.manifest.json`
   at the repo root declares this package's ecosystem role, layer, exports, and
   allowed dependency targets. `check:ecosystem` validates it in the check pipeline.

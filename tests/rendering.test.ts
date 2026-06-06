@@ -19,6 +19,7 @@ import {
   getRatingStarClasses,
   getRatingStarsClasses,
   getRatingTextClasses,
+  getSpinnerClasses,
 } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
@@ -30,6 +31,7 @@ import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 import SpRating from "../src/components/SpRating.astro";
+import SpSpinner from "../src/components/SpSpinner.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
 
 let container: AstroContainer;
@@ -295,5 +297,15 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-busy="true"');
     expect(html).toContain('aria-disabled="true"');
     expect(html).not.toContain('loading="true"');
+  });
+
+  it("renders SpSpinner with upstream classes and role='status'", async () => {
+    const html = await container.renderToString(SpSpinner, {
+      props: { size: "lg", as: "span" },
+    });
+
+    expect(html).toContain(getSpinnerClasses({ size: "lg" }));
+    expect(html).toContain('role="status"');
+    expect(html).toContain("<span");
   });
 });
