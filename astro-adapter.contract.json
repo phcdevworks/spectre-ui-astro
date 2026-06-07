@@ -11,6 +11,8 @@
       "SpInput",
       "SpPricingCard",
       "SpRating",
+      "SpSpinner",
+      "SpTag",
       "SpTestimonial"
     ],
     "recipeHelpers": [
@@ -74,6 +76,7 @@
       "RatingSize",
       "SpinnerRecipeOptions",
       "SpinnerSize",
+      "SpinnerVariant",
       "TagRecipeOptions",
       "TagSize",
       "TagVariant",
@@ -90,6 +93,8 @@
     "./components/SpInput.astro",
     "./components/SpPricingCard.astro",
     "./components/SpRating.astro",
+    "./components/SpSpinner.astro",
+    "./components/SpTag.astro",
     "./components/SpTestimonial.astro"
   ],
   "peerDependencies": {
@@ -127,9 +132,11 @@
       "input",
       "pricing-card",
       "rating",
+      "spinner",
+      "tag",
       "testimonial"
     ],
     "provisional": [],
-    "notYetSupported": ["spinner", "tag"]
+    "notYetSupported": []
   }
 }

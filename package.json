@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
@@ -56,6 +56,8 @@
     "./components/SpInput.astro": "./dist/components/SpInput.astro",
     "./components/SpPricingCard.astro": "./dist/components/SpPricingCard.astro",
     "./components/SpRating.astro": "./dist/components/SpRating.astro",
+    "./components/SpSpinner.astro": "./dist/components/SpSpinner.astro",
+    "./components/SpTag.astro": "./dist/components/SpTag.astro",
     "./components/SpTestimonial.astro": "./dist/components/SpTestimonial.astro"
   },
   "files": [
@@ -95,9 +97,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@phcdevworks/spectre-tokens": "^2.7.0",
-    "@phcdevworks/spectre-ui": "^1.7.0",
-    "@types/node": "^25.9.1",
+    "@phcdevworks/spectre-tokens": "^2.8.0",
+    "@phcdevworks/spectre-ui": "^1.8.0",
+    "@types/node": "^25.9.2",
     "@typescript-eslint/eslint-plugin": "^8.60.1",
     "@typescript-eslint/parser": "^8.60.1",
     "astro": "^6.4.4",

@@ -478,6 +478,58 @@ Named slots map to the structural sections of the testimonial. Slot wrappers ren
 
 ---
 
+### SpSpinner
+
+A non-interactive status indicator. Renders as `<div role="status">` with a default `aria-label` of `"Loading"`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `SpinnerVariant` | — | Color variant: `"primary"` `"secondary"` `"success"` `"warning"` `"danger"` `"info"` `"neutral"` `"accent"` `"cta"` |
+| `size` | `SpinnerSize` | `"md"` | Size: `"sm"` `"md"` `"lg"` |
+| `disabled` | `boolean` | — | Disabled state |
+| `loading` | `boolean` | — | Loading state (also sets disabled behavior) |
+| `aria-label` | `string` | `"Loading"` | Accessible label for the spinner |
+| `id` | `string` | — | Element ID |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpSpinner />
+<SpSpinner variant="primary" size="lg" />
+<SpSpinner loading aria-label="Saving changes" />
+```
+
+---
+
+### SpTag
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `TagVariant` | `"default"` | Visual style: `"default"` `"primary"` `"secondary"` `"success"` `"warning"` `"danger"` `"info"` `"neutral"` `"accent"` `"cta"` `"outline"` `"ghost"` |
+| `size` | `TagSize` | — | Size: `"sm"` `"md"` `"lg"` |
+| `as` | `"span" \| "div" \| "li" \| "a" \| "button"` | `"span"` | Rendered element |
+| `dismissible` | `boolean` | — | Applies dismissible styling |
+| `selected` | `boolean` | — | Applies selected state and `aria-pressed` |
+| `interactive` | `boolean` | — | Adds hover/focus styles and `tabindex="0"` |
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `disabled` | `boolean` | — | Disables the tag |
+| `loading` | `boolean` | — | Loading state (also sets disabled behavior) |
+| `href` | `string` | — | URL when `as="a"` |
+| `id` | `string` | — | Element ID |
+| `aria-label` | `string` | — | Accessible label |
+| `aria-describedby` | `string` | — | Associates a description element |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpTag>Default</SpTag>
+<SpTag variant="primary" size="sm">New</SpTag>
+<SpTag variant="success" selected>Active</SpTag>
+<SpTag variant="info" dismissible>Removable</SpTag>
+<SpTag as="a" href="/docs" variant="neutral" interactive>Docs</SpTag>
+<SpTag as="button" variant="primary" disabled>Unavailable</SpTag>
+```
+
+---
+
 ## Polymorphic rendering (`as` prop)
 
 Most components accept an `as` prop to change the rendered HTML element without changing component behavior or styling.

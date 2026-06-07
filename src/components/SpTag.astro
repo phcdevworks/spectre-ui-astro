@@ -1,0 +1,95 @@
+---
+import type { TagRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getTagClasses } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+
+type SpTagElement = "div" | "span" | "li" | "a" | "button";
+
+interface SpTagProps extends TagRecipeOptions {
+  as?: SpTagElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  tabindex?: number;
+
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
+  type?: "button" | "submit" | "reset";
+
+  [key: string]: unknown;
+}
+
+const {
+  variant,
+  size,
+  dismissible,
+  selected,
+  disabled,
+  loading,
+  interactive,
+  hovered,
+  focused,
+  active,
+  fullWidth,
+  as: Tag = "span",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  tabindex,
+  href,
+  target,
+  rel,
+  type,
+  ...rest
+} = Astro.props as SpTagProps;
+
+const isTagDisabled = disabled || loading;
+const isInteractive = interactive || Tag === "a" || Tag === "button";
+
+const classes = getTagClasses({
+  variant,
+  size,
+  dismissible,
+  selected,
+  interactive: isInteractive,
+  disabled: isTagDisabled,
+  loading,
+  hovered,
+  focused,
+  active,
+  fullWidth,
+});
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: isTagDisabled,
+  href,
+  type,
+  tabindex,
+  interactive: isInteractive,
+});
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  href={finalHref}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  disabled={Tag === "button" && isTagDisabled ? true : undefined}
+  role={isInteractive && Tag !== "button" && Tag !== "a" ? "button" : undefined}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={isTagDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
+  aria-pressed={selected !== undefined ? String(selected) : undefined}
+  tabindex={finalTabIndex}
+  {...rest}
+>
+  <slot />
+</Tag>

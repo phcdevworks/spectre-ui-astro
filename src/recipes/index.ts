@@ -45,6 +45,7 @@ export {
   getSpinnerClasses,
   type SpinnerRecipeOptions,
   type SpinnerSize,
+  type SpinnerVariant,
   getTagClasses,
   type TagRecipeOptions,
   type TagSize,

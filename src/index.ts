@@ -8,6 +8,8 @@ export { default as SpIconBox } from "./components/SpIconBox.astro";
 export { default as SpInput } from "./components/SpInput.astro";
 export { default as SpPricingCard } from "./components/SpPricingCard.astro";
 export { default as SpRating } from "./components/SpRating.astro";
+export { default as SpSpinner } from "./components/SpSpinner.astro";
+export { default as SpTag } from "./components/SpTag.astro";
 export { default as SpTestimonial } from "./components/SpTestimonial.astro";
 
 // Re-export all types and recipes

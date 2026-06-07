@@ -8,6 +8,15 @@ reflects package releases published to npm.
 
 ### Added
 
+- Added `SpSpinner` component. Renders as `<div role="status">` with a default
+  `aria-label` of `"Loading"`. Supports `variant`, `size`, `disabled`, and
+  `loading` props. `loading` implies disabled state and sets `aria-busy="true"`.
+- Added `SpTag` component with polymorphic `as` prop (`"span"` default, also
+  `"div"`, `"li"`, `"a"`, `"button"`). Supports `variant`, `size`, `dismissible`,
+  `selected` (with `aria-pressed`), `interactive`, `fullWidth`, `disabled`, and
+  `loading`. Follows the same interactive/ARIA guard pattern as `SpAlert`.
+- Exported `SpinnerVariant` type from the package root and recipes barrel.
+- Added `SpSpinner` and `SpTag` to the adapter contract as stable families.
 - Added `@phcdevworks/spectre-manifest` as a devDependency. `spectre.manifest.json`
   at the repo root declares this package's ecosystem role, layer, exports, and
   allowed dependency targets. `check:ecosystem` validates it in the check pipeline.
