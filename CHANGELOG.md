@@ -6,6 +6,10 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.6.0] - 2026-06-07
+
+Release Title: Phase 3 Component Completion and Ecosystem Manifest
+
 ### Added
 
 - Added `SpSpinner` component. Renders as `<div role="status">` with a default

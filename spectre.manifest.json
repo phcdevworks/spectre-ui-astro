@@ -43,6 +43,8 @@
         "./components/SpInput.astro",
         "./components/SpPricingCard.astro",
         "./components/SpRating.astro",
+        "./components/SpSpinner.astro",
+        "./components/SpTag.astro",
         "./components/SpTestimonial.astro"
       ],
       "dependencies": [
