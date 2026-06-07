@@ -674,7 +674,7 @@ Do not use this package when:
 ```ts
 import {
   SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpIconBox, SpInput,
-  SpPricingCard, SpRating, SpTestimonial,
+  SpPricingCard, SpRating, SpSpinner, SpTag, SpTestimonial,
 } from '@phcdevworks/spectre-ui-astro'
 
 import {
@@ -697,6 +697,8 @@ import SpIconBox   from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astr
 import SpInput     from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
 import SpPricingCard  from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpRating    from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
+import SpSpinner   from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
+import SpTag       from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
 ```
 
@@ -717,9 +719,9 @@ Each component family is classified by its support status in this adapter.
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| spinner | **stable** | Full prop, ARIA, and SSR coverage |
+| tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| spinner | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
-| tag | **not yet supported** | Upstream recipe available in `@phcdevworks/spectre-ui` ^1.7.0; Astro adapter planned |
 
 **stable** — the component family is fully wired to upstream recipes, covered by SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking changes require a semver major bump.
 

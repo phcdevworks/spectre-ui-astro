@@ -1,6 +1,6 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 3 — Component Family Expansion.**
+Active phase: **Phase 3 — Complete; 2.6.0 release handoff.**
 
 ---
 
@@ -111,9 +111,9 @@ Active phase: **Phase 3 — Component Family Expansion.**
 
 ## Phase 3 — Active Now
 
-All four Phase 3 recipes are live in `@phcdevworks/spectre-ui` ^1.7.0.
-`SpAlert` and `SpAvatar` are delivered. `SpSpinner` and `SpTag` remain.
-Add one component at a time. Run `npm run check` before moving to the next.
+All four Phase 3 recipes are live in `@phcdevworks/spectre-ui` ^1.7.0, and
+`SpAlert`, `SpAvatar`, `SpSpinner`, and `SpTag` are delivered. Run
+`npm run check` before release handoff.
 
 ### Components
 
@@ -157,7 +157,8 @@ Add one component at a time. Run `npm run check` before moving to the next.
 
 - [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0` in
   `package.json` and `astro-adapter.contract.json`.
-- [x] Update `CHANGELOG.md [Unreleased]` for each new component family.
+- [x] Move 2.6.0 changes from `CHANGELOG.md [Unreleased]` into the release
+  heading.
 - [x] Hand off to Bradley Potts for version bump, commit, tag, and publish.
 
 ---
