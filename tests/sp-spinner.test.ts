@@ -87,9 +87,17 @@ describe("SpSpinner ARIA and accessibility", () => {
 });
 
 describe("SpSpinner element and slot rendering", () => {
-  it("renders as div", async () => {
+  it("renders as div by default", async () => {
     const html = await container.renderToString(SpSpinner, { props: {} });
     expect(html).toContain("<div");
+  });
+
+  it("renders as the specified element without leaking 'as'", async () => {
+    for (const as of ["div", "span", "i"] as const) {
+      const html = await container.renderToString(SpSpinner, { props: { as } });
+      expect(html).toContain(`<${as}`);
+      expect(html).not.toContain(`as="${as}"`);
+    }
   });
 
   it("renders slot content", async () => {
