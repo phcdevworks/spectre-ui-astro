@@ -2,7 +2,10 @@
 import type { SpinnerRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getSpinnerClasses } from "@phcdevworks/spectre-ui";
 
+type SpSpinnerElement = "div" | "span" | "i";
+
 interface SpSpinnerProps extends SpinnerRecipeOptions {
+  as?: SpSpinnerElement;
   class?: string;
   id?: string;
   "aria-label"?: string;
@@ -14,6 +17,7 @@ const {
   size,
   disabled,
   loading,
+  as: Tag = "div",
   class: className,
   id,
   "aria-label": ariaLabel,
@@ -26,7 +30,7 @@ const classes = getSpinnerClasses({ variant, size, disabled: isDisabled, loading
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
-<div
+<Tag
   class={finalClass}
   id={id}
   role="status"
@@ -36,4 +40,4 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
   {...rest}
 >
   <slot />
-</div>
+</Tag>
