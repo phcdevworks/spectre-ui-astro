@@ -1,0 +1,39 @@
+---
+import type { SpinnerRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSpinnerClasses } from "@phcdevworks/spectre-ui";
+
+interface SpSpinnerProps extends SpinnerRecipeOptions {
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant,
+  size,
+  disabled,
+  loading,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpSpinnerProps;
+
+const isDisabled = disabled || loading;
+
+const classes = getSpinnerClasses({ variant, size, disabled: isDisabled, loading });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<div
+  class={finalClass}
+  id={id}
+  role="status"
+  aria-label={ariaLabel ?? "Loading"}
+  aria-busy={loading ? "true" : undefined}
+  aria-disabled={isDisabled ? "true" : undefined}
+  {...rest}
+>
+  <slot />
+</div>

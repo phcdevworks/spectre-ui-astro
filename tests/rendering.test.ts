@@ -19,6 +19,8 @@ import {
   getRatingStarClasses,
   getRatingStarsClasses,
   getRatingTextClasses,
+  getSpinnerClasses,
+  getTagClasses,
 } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
@@ -30,6 +32,8 @@ import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 import SpRating from "../src/components/SpRating.astro";
+import SpSpinner from "../src/components/SpSpinner.astro";
+import SpTag from "../src/components/SpTag.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
 
 let container: AstroContainer;
@@ -295,5 +299,63 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-busy="true"');
     expect(html).toContain('aria-disabled="true"');
     expect(html).not.toContain('loading="true"');
+  });
+
+  it("renders SpSpinner with upstream classes and correct ARIA defaults", async () => {
+    const html = await container.renderToString(SpSpinner, {
+      props: { variant: "primary", size: "lg" },
+    });
+
+    expect(html).toContain(getSpinnerClasses({ variant: "primary", size: "lg" }));
+    expect(html).toContain('role="status"');
+    expect(html).toContain('aria-label="Loading"');
+    expect(html).not.toContain('variant="primary"');
+    expect(html).not.toContain('size="lg"');
+  });
+
+  it("renders SpSpinner with loading state and aria-busy", async () => {
+    const html = await container.renderToString(SpSpinner, {
+      props: { loading: true, "aria-label": "Saving" },
+    });
+
+    expect(html).toContain(getSpinnerClasses({ loading: true, disabled: true }));
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('aria-label="Saving"');
+    expect(html).not.toContain('loading="true"');
+  });
+
+  it("renders SpTag with upstream classes and correct ARIA for disabled state", async () => {
+    const html = await container.renderToString(SpTag, {
+      props: { variant: "primary", size: "sm", disabled: true },
+    });
+
+    expect(html).toContain(getTagClasses({ variant: "primary", size: "sm", disabled: true }));
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('tabindex="-1"');
+    expect(html).not.toMatch(/(^|\s)disabled="true"/);
+    expect(html).not.toContain('variant="primary"');
+  });
+
+  it("renders SpTag as 'a' and guards href when loading", async () => {
+    const html = await container.renderToString(SpTag, {
+      props: { as: "a", href: "/docs", loading: true, variant: "info" },
+    });
+
+    expect(html).toContain(getTagClasses({ variant: "info", loading: true, disabled: true, interactive: true }));
+    expect(html).toContain('aria-disabled="true"');
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain('tabindex="-1"');
+    expect(html).not.toContain('href="/docs"');
+  });
+
+  it("renders SpTag with selected state and aria-pressed", async () => {
+    const html = await container.renderToString(SpTag, {
+      props: { selected: true, variant: "primary" },
+    });
+
+    expect(html).toContain("sp-tag--selected");
+    expect(html).toContain('aria-pressed="true"');
+    expect(html).not.toContain('selected="true"');
   });
 });
