@@ -9,46 +9,24 @@ recipe logic.
 
 ## System Phase Context
 
-The three Spectre packages are moving in lock-step:
-
-| Package                         | Active Phase                                                                   |
-| ------------------------------- | ------------------------------------------------------------------------------ |
-| `@phcdevworks/spectre-tokens`   | Phase 3 — validation integrity; Phase 4 token surface expansion planned        |
-| `@phcdevworks/spectre-ui`       | Phase 3 — token-gated semantic surface expansion                               |
-| `@phcdevworks/spectre-ui-astro` | **Phase 3 — SpAlert + SpAvatar delivered; SpSpinner + SpTag remaining**        |
-
-Foundation is done across all three. The work now is closing the remaining two
-Phase 3 component families before Phase 4 token-gated expansion becomes unblocked.
+| Package | Current state |
+| ------- | ------------- |
+| `@phcdevworks/spectre-tokens` | v2.8.0 — Phase 4 P2 active (component token groups) |
+| `@phcdevworks/spectre-ui` | v1.8.0 — Phase 3 P2 active (link, surface states, divider) |
+| `@phcdevworks/spectre-ui-astro` | v2.6.0 — Phase 3 complete; Phase 4 gated on upstream tokens |
 
 ---
 
-## Phase 3: Component Family Expansion — Active
+## Phase 3: Component Family Expansion — Delivered (v2.6.0)
 
-`@phcdevworks/spectre-ui` ^1.7.0 ships recipes for the four families. Two are
-delivered; two remain. `peerDependencies` is already bumped to `^1.7.0`.
+All four Phase 3 families shipped. `peerDependencies` bumped to `^1.7.0`.
 
 | Family  | Upstream recipe     | Status             |
 | ------- | ------------------- | ------------------ |
 | alert   | `getAlertClasses`   | Delivered — stable |
 | avatar  | `getAvatarClasses`  | Delivered — stable |
-| spinner | `getSpinnerClasses` | Ready to bind      |
-| tag     | `getTagClasses`     | Ready to bind      |
-
-Deliverables for each family:
-
-1. `src/components/Sp{Family}.astro` following the established adapter pattern
-2. Recipe option types re-exported from `src/recipes/index.ts`
-3. Export from `src/index.ts`
-4. Component entrypoint in `package.json` exports
-5. Move from `notYetSupported` to `stable` in `astro-adapter.contract.json`
-6. Focused tests under `tests/sp-{family}.test.ts`
-7. SSR rendering coverage in `tests/rendering.test.ts`
-8. Component section in `README.md` with prop table and usage examples
-9. Stability table updated in `README.md`
-10. Examples updated if consumer usage changes
-
-Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.7.0` when the first
-of these ships. Run `npm run check` after each family before moving to the next.
+| spinner | `getSpinnerClasses` | Delivered — stable |
+| tag     | `getTagClasses`     | Delivered — stable |
 
 ---
 
