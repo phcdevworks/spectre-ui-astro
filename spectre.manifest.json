@@ -39,13 +39,18 @@
         "./components/SpBadge.astro",
         "./components/SpButton.astro",
         "./components/SpCard.astro",
+        "./components/SpDropdown.astro",
         "./components/SpIconBox.astro",
         "./components/SpInput.astro",
+        "./components/SpModal.astro",
+        "./components/SpNav.astro",
         "./components/SpPricingCard.astro",
         "./components/SpRating.astro",
         "./components/SpSpinner.astro",
         "./components/SpTag.astro",
-        "./components/SpTestimonial.astro"
+        "./components/SpTestimonial.astro",
+        "./components/SpToast.astro",
+        "./components/SpTooltip.astro"
       ],
       "dependencies": [
         "@phcdevworks/spectre-tokens",
