@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.7.0] - 2026-06-10
+
+Release Title: Phase 4 Component Expansion
+
+Contract change type: additive
+
 ### Added
 
 - Added `SpNav` component. Renders as `<nav>` by default (also `"div"`,

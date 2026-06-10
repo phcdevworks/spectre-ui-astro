@@ -1,6 +1,6 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 4 — Complete; release handoff pending.**
+Active phase: **Phase 4 — Complete; release handoff prepared.**
 
 ---
 
@@ -230,9 +230,9 @@ handoff.
 - [x] Bump `peerDependencies["@phcdevworks/spectre-tokens"]` to `^2.9.0` and
   `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.9.0` in `package.json`
   and `astro-adapter.contract.json`.
-- [ ] Move Phase 4 changes from `CHANGELOG.md [Unreleased]` into the release
+- [x] Move Phase 4 changes from `CHANGELOG.md [Unreleased]` into the release
   heading.
-- [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
+- [x] Prepare version bump for Bradley Potts review, commit, tag, and publish.
 
 ---
 
