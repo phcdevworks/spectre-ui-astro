@@ -1,0 +1,50 @@
+---
+import type { ToastRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getToastClasses, getToastIconClasses } from "@phcdevworks/spectre-ui";
+
+type SpToastElement = "div" | "li" | "section";
+
+interface SpToastProps extends ToastRecipeOptions {
+  as?: SpToastElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  variant,
+  dismissed,
+  fullWidth,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpToastProps;
+
+const classes = getToastClasses({ variant, dismissed, fullWidth });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const iconClasses = getToastIconClasses({ variant });
+const hasIcon = Astro.slots.has("icon");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  aria-label={ariaLabel}
+  {...rest}
+>
+  {
+    hasIcon && (
+      <div class={iconClasses}>
+        <slot name="icon" />
+      </div>
+    )
+  }
+  <slot />
+</Tag>

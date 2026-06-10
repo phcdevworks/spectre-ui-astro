@@ -6,6 +6,30 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Added
+
+- Added `SpNav` component. Renders as `<nav>` by default (also `"div"`,
+  `"header"`, `"section"`). Supports `bordered`, `sticky`, and `fullWidth`.
+- Added `SpToast` component. Renders `role="status"`, `aria-live="polite"`,
+  and `aria-atomic="true"` by default. Supports `variant`, `dismissed`, and
+  `fullWidth`. A named `icon` slot is wrapped in `getToastIconClasses` styling
+  when used.
+- Added `SpTooltip` component. Renders `role="tooltip"` by default. Supports
+  `placement` and `visible`.
+- Added `SpDropdown` component. Renders the dropdown container. Supports
+  `fullWidth`.
+- Added `SpModal` component. Renders an overlay (`getModalOverlayClasses`)
+  wrapping the modal element (`getModalClasses`) with `role="dialog"` and
+  `aria-modal="true"`. Supports `open` and `fullWidth`.
+- Re-exported `getNavLinksClasses`, `getNavLinkClasses`,
+  `getToastIconClasses`, `getDropdownMenuClasses`, `getDropdownItemClasses`,
+  and their option/variant types for building nav links, toast icons, and
+  dropdown menus/items in component slots.
+- Added `SpNav`, `SpToast`, `SpTooltip`, `SpDropdown`, and `SpModal` to the
+  adapter contract as stable families (Phase 4).
+- Bumped `peerDependencies["@phcdevworks/spectre-tokens"]` to `^2.9.0` and
+  `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.9.0`.
+
 ## [2.6.0] - 2026-06-07
 
 Release Title: Phase 3 Component Completion and Ecosystem Manifest

@@ -1,0 +1,32 @@
+---
+import type { TooltipRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getTooltipClasses } from "@phcdevworks/spectre-ui";
+
+type SpTooltipElement = "div" | "span";
+
+interface SpTooltipProps extends TooltipRecipeOptions {
+  as?: SpTooltipElement;
+  class?: string;
+  id?: string;
+  role?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  placement,
+  visible,
+  as: Tag = "div",
+  class: className,
+  id,
+  role = "tooltip",
+  ...rest
+} = Astro.props as SpTooltipProps;
+
+const classes = getTooltipClasses({ placement, visible });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} role={role} {...rest}>
+  <slot />
+</Tag>

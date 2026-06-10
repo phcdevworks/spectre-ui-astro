@@ -4,12 +4,16 @@ import {
   getBadgeClasses,
   getButtonClasses,
   getCardClasses,
+  getDropdownClasses,
   getIconBoxClasses,
   getInputClasses,
   getInputErrorMessageClasses,
   getInputHelperTextClasses,
   getInputLabelClasses,
   getInputWrapperClasses,
+  getModalClasses,
+  getModalOverlayClasses,
+  getNavClasses,
   getPricingCardBadgeClasses,
   getPricingCardClasses,
   getPricingCardDescriptionClasses,
@@ -21,6 +25,8 @@ import {
   getRatingTextClasses,
   getSpinnerClasses,
   getTagClasses,
+  getToastClasses,
+  getTooltipClasses,
 } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 
@@ -28,12 +34,17 @@ import SpAlert from "../src/components/SpAlert.astro";
 import SpBadge from "../src/components/SpBadge.astro";
 import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
+import SpDropdown from "../src/components/SpDropdown.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
+import SpModal from "../src/components/SpModal.astro";
+import SpNav from "../src/components/SpNav.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 import SpRating from "../src/components/SpRating.astro";
 import SpSpinner from "../src/components/SpSpinner.astro";
 import SpTag from "../src/components/SpTag.astro";
+import SpToast from "../src/components/SpToast.astro";
+import SpTooltip from "../src/components/SpTooltip.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
 
 let container: AstroContainer;
@@ -357,5 +368,64 @@ describe("SSR rendering", () => {
     expect(html).toContain("sp-tag--selected");
     expect(html).toContain('aria-pressed="true"');
     expect(html).not.toContain('selected="true"');
+  });
+
+  it("renders SpNav with upstream classes", async () => {
+    const html = await container.renderToString(SpNav, {
+      props: { bordered: true, sticky: true },
+      slots: { default: "<a href=\"/\">Home</a>" },
+    });
+
+    expect(html).toContain(getNavClasses({ bordered: true, sticky: true }));
+    expect(html).toContain("<nav");
+    expect(html).toContain("Home");
+  });
+
+  it("renders SpToast with upstream classes, icon slot, and live region ARIA", async () => {
+    const html = await container.renderToString(SpToast, {
+      props: { variant: "success" },
+      slots: { icon: "<svg></svg>", default: "Saved successfully" },
+    });
+
+    expect(html).toContain(getToastClasses({ variant: "success" }));
+    expect(html).toContain('role="status"');
+    expect(html).toContain('aria-live="polite"');
+    expect(html).toContain("Saved successfully");
+  });
+
+  it("renders SpTooltip with upstream classes and role='tooltip'", async () => {
+    const html = await container.renderToString(SpTooltip, {
+      props: { placement: "bottom", visible: true },
+      slots: { default: "More information" },
+    });
+
+    expect(html).toContain(getTooltipClasses({ placement: "bottom", visible: true }));
+    expect(html).toContain('role="tooltip"');
+    expect(html).toContain("More information");
+  });
+
+  it("renders SpDropdown with upstream classes", async () => {
+    const html = await container.renderToString(SpDropdown, {
+      props: { fullWidth: true },
+      slots: { default: "Menu" },
+    });
+
+    expect(html).toContain(getDropdownClasses({ fullWidth: true }));
+    expect(html).toContain("Menu");
+  });
+
+  it("renders SpModal with overlay/modal classes and dialog ARIA when open", async () => {
+    const html = await container.renderToString(SpModal, {
+      props: { open: true, fullWidth: true, "aria-labelledby": "modal-title" },
+      slots: { default: "<h2 id=\"modal-title\">Confirm</h2>" },
+    });
+
+    expect(html).toContain(getModalOverlayClasses({ open: true }));
+    expect(html).toContain(getModalClasses({ open: true, fullWidth: true }));
+    expect(html).toContain('role="dialog"');
+    expect(html).toContain('aria-modal="true"');
+    expect(html).toContain('aria-labelledby="modal-title"');
+    expect(html).not.toContain('aria-hidden="true"');
+    expect(html).toContain("Confirm");
   });
 });

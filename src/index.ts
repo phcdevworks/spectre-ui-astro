@@ -4,13 +4,18 @@ export { default as SpAvatar } from "./components/SpAvatar.astro";
 export { default as SpBadge } from "./components/SpBadge.astro";
 export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";
+export { default as SpDropdown } from "./components/SpDropdown.astro";
 export { default as SpIconBox } from "./components/SpIconBox.astro";
 export { default as SpInput } from "./components/SpInput.astro";
+export { default as SpModal } from "./components/SpModal.astro";
+export { default as SpNav } from "./components/SpNav.astro";
 export { default as SpPricingCard } from "./components/SpPricingCard.astro";
 export { default as SpRating } from "./components/SpRating.astro";
 export { default as SpSpinner } from "./components/SpSpinner.astro";
 export { default as SpTag } from "./components/SpTag.astro";
 export { default as SpTestimonial } from "./components/SpTestimonial.astro";
+export { default as SpToast } from "./components/SpToast.astro";
+export { default as SpTooltip } from "./components/SpTooltip.astro";
 
 // Re-export all types and recipes
 export * from "./recipes/index";
