@@ -530,6 +530,145 @@ A non-interactive status indicator. Renders as `<div role="status">` with a defa
 
 ---
 
+### SpDropdown
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `as` | `"div" \| "nav"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element ID |
+| `class` | `string` | — | Additional CSS classes |
+
+`SpDropdown` renders the dropdown container only. Build the menu and items in the
+default slot using the re-exported `getDropdownMenuClasses` and
+`getDropdownItemClasses` helpers, since open/closed state and per-item
+active/disabled/hover/focus state are consumer-driven.
+
+```astro
+---
+import { SpDropdown, getDropdownMenuClasses, getDropdownItemClasses } from '@phcdevworks/spectre-ui-astro'
+
+const menuClass = getDropdownMenuClasses({ placement: 'bottom-start', open: true })
+const itemClass = getDropdownItemClasses()
+const activeItemClass = getDropdownItemClasses({ active: true })
+---
+
+<SpDropdown>
+  <button>Options</button>
+  <div class={menuClass} role="menu">
+    <a class={activeItemClass} href="/profile" role="menuitem">Profile</a>
+    <a class={itemClass} href="/settings" role="menuitem">Settings</a>
+  </div>
+</SpDropdown>
+```
+
+---
+
+### SpModal
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Applies open styling to the overlay and modal, and toggles `aria-hidden` |
+| `fullWidth` | `boolean` | — | Stretches the modal to full width |
+| `as` | `"div" \| "section"` | `"div"` | Rendered element for the modal |
+| `id` | `string` | — | Element ID for the modal |
+| `aria-label` | `string` | — | Accessible label for the modal |
+| `aria-labelledby` | `string` | — | Associates a title element |
+| `aria-describedby` | `string` | — | Associates a description element |
+| `class` | `string` | — | Additional CSS classes for the modal |
+
+`SpModal` renders an overlay element (`getModalOverlayClasses`) wrapping the
+modal element (`getModalClasses`), with `role="dialog"` and `aria-modal="true"`.
+Toggling `open` is consumer-driven (no client-side JS is included).
+
+```astro
+<SpModal open aria-labelledby="modal-title">
+  <h2 id="modal-title">Confirm deletion</h2>
+  <p>This action cannot be undone.</p>
+</SpModal>
+```
+
+---
+
+### SpNav
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `bordered` | `boolean` | — | Applies a border |
+| `sticky` | `boolean` | — | Applies sticky positioning |
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `as` | `"nav" \| "div" \| "header" \| "section"` | `"nav"` | Rendered element |
+| `id` | `string` | — | Element ID |
+| `aria-label` | `string` | — | Accessible label for the nav landmark |
+| `class` | `string` | — | Additional CSS classes |
+
+`SpNav` renders the nav container only. Build links in the default slot using
+the re-exported `getNavLinksClasses` and `getNavLinkClasses` helpers, since
+per-link active/disabled/hover/focus state is consumer-driven.
+
+```astro
+---
+import { SpNav, getNavLinksClasses, getNavLinkClasses } from '@phcdevworks/spectre-ui-astro'
+
+const linksClass = getNavLinksClasses()
+const activeLinkClass = getNavLinkClasses({ active: true })
+const linkClass = getNavLinkClasses()
+---
+
+<SpNav bordered sticky aria-label="Main">
+  <div class={linksClass}>
+    <a class={activeLinkClass} href="/" aria-current="page">Home</a>
+    <a class={linkClass} href="/about">About</a>
+  </div>
+</SpNav>
+```
+
+---
+
+### SpToast
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `ToastVariant` | `"info"` | Visual style: `"info"` `"success"` `"warning"` `"danger"` |
+| `dismissed` | `boolean` | — | Applies dismissed state styling |
+| `fullWidth` | `boolean` | — | Stretches to full width |
+| `as` | `"div" \| "li" \| "section"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element ID |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+`SpToast` renders `role="status"`, `aria-live="polite"`, and `aria-atomic="true"`
+by default. Pass content to a named `icon` slot to wrap it in
+`getToastIconClasses` styling; the wrapper is only rendered when the slot is
+used.
+
+```astro
+<SpToast variant="success">Changes saved.</SpToast>
+<SpToast variant="danger">
+  <Fragment slot="icon"><svg aria-hidden="true">...</svg></Fragment>
+  Something went wrong.
+</SpToast>
+```
+
+---
+
+### SpTooltip
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placement` | `TooltipPlacement` | `"top"` | Placement: `"top"` `"bottom"` `"left"` `"right"` |
+| `visible` | `boolean` | — | Applies visible state styling |
+| `as` | `"div" \| "span"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element ID |
+| `role` | `string` | `"tooltip"` | ARIA role |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpTooltip placement="bottom" visible>Save your changes</SpTooltip>
+```
+
+---
+
 ## Polymorphic rendering (`as` prop)
 
 Most components accept an `as` prop to change the rendered HTML element without changing component behavior or styling.
@@ -606,8 +745,16 @@ const links = [
 | `getButtonClasses` | Button class generation |
 | `getCardClasses` | Card class generation |
 | `getBadgeClasses` | Badge class generation |
+| `getDropdownClasses` | Dropdown root classes |
+| `getDropdownMenuClasses` | Dropdown menu container |
+| `getDropdownItemClasses` | Individual dropdown item |
 | `getIconBoxClasses` | Icon box class generation |
 | `getInputClasses` | Input class generation |
+| `getModalClasses` | Modal root classes |
+| `getModalOverlayClasses` | Modal overlay/backdrop classes |
+| `getNavClasses` | Nav root classes |
+| `getNavLinksClasses` | Nav links container |
+| `getNavLinkClasses` | Individual nav link |
 | `getPricingCardClasses` | Pricing card root classes |
 | `getPricingCardBadgeClasses` | Pricing card badge wrapper |
 | `getPricingCardPriceContainerClasses` | Pricing card price container |
@@ -623,8 +770,11 @@ const links = [
 | `getTestimonialAuthorInfoClasses` | Author info wrapper |
 | `getTestimonialAuthorNameClasses` | Author name element |
 | `getTestimonialAuthorTitleClasses` | Author title element |
+| `getToastClasses` | Toast root classes |
+| `getToastIconClasses` | Toast icon wrapper |
+| `getTooltipClasses` | Tooltip class generation |
 
-Recipe option and variant types are also re-exported: `AlertRecipeOptions`, `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`, `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `TestimonialRecipeOptions`.
+Recipe option and variant types are also re-exported: `AlertRecipeOptions`, `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`, `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `DropdownRecipeOptions`, `DropdownMenuRecipeOptions`, `DropdownItemRecipeOptions`, `DropdownPlacement`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`, `ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `TestimonialRecipeOptions`, `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`, `TooltipPlacement`.
 
 ## What this package owns
 
@@ -673,8 +823,9 @@ Do not use this package when:
 
 ```ts
 import {
-  SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpIconBox, SpInput,
-  SpPricingCard, SpRating, SpSpinner, SpTag, SpTestimonial,
+  SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpDropdown, SpIconBox,
+  SpInput, SpModal, SpNav, SpPricingCard, SpRating, SpSpinner, SpTag,
+  SpTestimonial, SpToast, SpTooltip,
 } from '@phcdevworks/spectre-ui-astro'
 
 import {
@@ -693,13 +844,18 @@ import SpAvatar    from '@phcdevworks/spectre-ui-astro/components/SpAvatar.astro
 import SpBadge     from '@phcdevworks/spectre-ui-astro/components/SpBadge.astro'
 import SpButton    from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
 import SpCard      from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
+import SpDropdown  from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
 import SpIconBox   from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput     from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
+import SpModal     from '@phcdevworks/spectre-ui-astro/components/SpModal.astro'
+import SpNav       from '@phcdevworks/spectre-ui-astro/components/SpNav.astro'
 import SpPricingCard  from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpRating    from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
 import SpSpinner   from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpTag       from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
+import SpToast     from '@phcdevworks/spectre-ui-astro/components/SpToast.astro'
+import SpTooltip   from '@phcdevworks/spectre-ui-astro/components/SpTooltip.astro'
 ```
 
 The adapter does not export a CSS helper or path. Import the stylesheet directly from `@phcdevworks/spectre-ui/index.css`.
@@ -715,13 +871,18 @@ Each component family is classified by its support status in this adapter.
 | badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | button | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| dropdown | **stable** | Full prop, slot, and SSR coverage |
 | icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
+| modal | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| nav | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | spinner | **stable** | Full prop, ARIA, and SSR coverage |
 | tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
 
 **stable** — the component family is fully wired to upstream recipes, covered by SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking changes require a semver major bump.
 

@@ -1,0 +1,33 @@
+---
+import type { NavRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getNavClasses } from "@phcdevworks/spectre-ui";
+
+type SpNavElement = "nav" | "div" | "header" | "section";
+
+interface SpNavProps extends NavRecipeOptions {
+  as?: SpNavElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  bordered,
+  sticky,
+  fullWidth,
+  as: Tag = "nav",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpNavProps;
+
+const classes = getNavClasses({ bordered, sticky, fullWidth });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
+  <slot />
+</Tag>

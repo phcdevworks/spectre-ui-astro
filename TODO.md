@@ -1,6 +1,6 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 3 — Complete; 2.6.0 release handoff.**
+Active phase: **Phase 4 — Complete; release handoff pending.**
 
 ---
 
@@ -163,27 +163,81 @@ All four Phase 3 recipes are live in `@phcdevworks/spectre-ui` ^1.7.0, and
 
 ---
 
-## Phase 4 — Gated on Upstream
+## Phase 4 — Token-Gated Expansion (Complete)
 
-Do not start until `@phcdevworks/spectre-tokens` publishes component-level
-tokens and `@phcdevworks/spectre-ui` ships the corresponding recipes.
+All five Phase 4 recipes are live in `@phcdevworks/spectre-ui` ^1.9.0 and
+`@phcdevworks/spectre-tokens` ^2.9.0, and `SpNav`, `SpToast`, `SpTooltip`,
+`SpDropdown`, and `SpModal` are delivered. Run `npm run check` before release
+handoff.
 
-| Family   | Required token group        | Upstream status |
-| -------- | --------------------------- | --------------- |
-| nav      | component.nav               | Not yet shipped |
-| toast    | component.toast             | Not yet shipped |
-| tooltip  | component.tooltip           | Not yet shipped |
-| dropdown | component.dropdown          | Not yet shipped |
-| modal    | component.modal             | Not yet shipped |
+| Family   | Required token group | Upstream status |
+| -------- | -------------------- | --------------- |
+| nav      | component.nav        | Shipped         |
+| toast    | component.toast      | Shipped         |
+| tooltip  | component.tooltip    | Shipped         |
+| dropdown | component.dropdown   | Shipped         |
+| modal    | component.modal      | Shipped         |
 
-Check `npm view @phcdevworks/spectre-ui version` and the `spectre-tokens`
-changelog before opening any Phase 4 work.
+### Phase 4 Components
+
+- [x] `SpNav`
+  - `src/components/SpNav.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-nav.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpNav.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
+
+- [x] `SpToast`
+  - `src/components/SpToast.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-toast.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpToast.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
+
+- [x] `SpTooltip`
+  - `src/components/SpTooltip.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-tooltip.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpTooltip.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
+
+- [x] `SpDropdown`
+  - `src/components/SpDropdown.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-dropdown.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpDropdown.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
+
+- [x] `SpModal`
+  - `src/components/SpModal.astro`, recipe/type re-exports in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-modal.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+  - Done when: exported from root and `./components/SpModal.astro`,
+    covered by SSR + prop tests, documented, and `stable` in the contract.
+
+### Phase 4 Release
+
+- [x] Bump `peerDependencies["@phcdevworks/spectre-tokens"]` to `^2.9.0` and
+  `peerDependencies["@phcdevworks/spectre-ui"]` to `^1.9.0` in `package.json`
+  and `astro-adapter.contract.json`.
+- [ ] Move Phase 4 changes from `CHANGELOG.md [Unreleased]` into the release
+  heading.
+- [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
 
 ---
 
 ## Out of Scope
 
 - No token redefinition, local CSS, or forked recipe logic.
-- No Phase 4 families before their upstream recipes publish to npm.
 - No Lit web component behavior here.
 - Examples are a validation surface, not an independently published package.

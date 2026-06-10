@@ -11,9 +11,9 @@ recipe logic.
 
 | Package | Current state |
 | ------- | ------------- |
-| `@phcdevworks/spectre-tokens` | v2.8.0 — Phase 4 P2 active (component token groups) |
-| `@phcdevworks/spectre-ui` | v1.8.0 — Phase 3 P2 active (link, surface states, divider) |
-| `@phcdevworks/spectre-ui-astro` | v2.6.0 — Phase 3 complete; Phase 4 gated on upstream tokens |
+| `@phcdevworks/spectre-tokens` | v2.9.0 — Phase 4 component token groups shipped |
+| `@phcdevworks/spectre-ui` | v1.9.0 — Phase 4 recipes shipped (nav, toast, tooltip, dropdown, modal) |
+| `@phcdevworks/spectre-ui-astro` | Phase 3 complete; Phase 4 components delivered, pending release |
 
 ---
 
@@ -30,22 +30,22 @@ All four Phase 3 families shipped. `peerDependencies` bumped to `^1.7.0`.
 
 ---
 
-## Phase 4: Token-Gated Expansion — Gated
+## Phase 4: Token-Gated Expansion — Delivered (pending release)
 
-Phase 4 families require `@phcdevworks/spectre-tokens` to publish
-component-level semantic tokens, and `@phcdevworks/spectre-ui` to ship the
-corresponding recipes. Watch both upstream changelogs before opening any
-Phase 4 work.
+`@phcdevworks/spectre-tokens` published component-level semantic tokens, and
+`@phcdevworks/spectre-ui` shipped the corresponding recipes. `peerDependencies`
+bumped to `@phcdevworks/spectre-tokens@^2.9.0` and
+`@phcdevworks/spectre-ui@^1.9.0`.
 
-| Family   | Required spectre-tokens group | Upstream status |
-| -------- | ----------------------------- | --------------- |
-| nav      | component.nav                 | Not yet shipped |
-| toast    | component.toast               | Not yet shipped |
-| tooltip  | component.tooltip             | Not yet shipped |
-| dropdown | component.dropdown            | Not yet shipped |
-| modal    | component.modal               | Not yet shipped |
+| Family | Required spectre-tokens group | Upstream status |
+| - | - | - |
+| nav | component.nav | Delivered — stable |
+| toast | component.toast | Delivered — stable |
+| tooltip | component.tooltip | Delivered — stable |
+| dropdown | component.dropdown | Delivered — stable |
+| modal | component.modal | Delivered — stable |
 
-Each will follow the same delivery pattern as Phase 3.
+Each followed the same delivery pattern as Phase 3.
 
 ---
 

@@ -1,0 +1,145 @@
+---
+import {
+  SpBadge,
+  SpButton,
+  SpCard,
+  SpDropdown,
+  SpModal,
+  SpNav,
+  SpToast,
+  SpTooltip,
+  getDropdownItemClasses,
+  getDropdownMenuClasses,
+  getNavLinkClasses,
+  getNavLinksClasses,
+} from "@phcdevworks/spectre-ui-astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const navLinkClasses = getNavLinkClasses({ active: false });
+const navLinkActiveClasses = getNavLinkClasses({ active: true });
+const dropdownItemClasses = getDropdownItemClasses({});
+---
+
+<BaseLayout title="Phase 4 — Spectre UI Astro">
+  <div class="sp-stack page">
+    <header class="sp-stack header">
+      <div class="sp-stack">
+        <p class="eyebrow">Spectre Examples</p>
+        <h1>Phase 4</h1>
+        <p class="subtitle">
+          Nav, Toast, Tooltip, Dropdown, and Modal components.
+        </p>
+      </div>
+    </header>
+
+    <section class="sp-stack">
+      <h2>Nav</h2>
+      <SpCard variant="flat" class="sp-stack">
+        <SpNav bordered>
+          <div class={getNavLinksClasses()}>
+            <a class={navLinkActiveClasses} href="#">Overview</a>
+            <a class={navLinkClasses} href="#">Docs</a>
+            <a class={navLinkClasses} href="#">Settings</a>
+          </div>
+        </SpNav>
+      </SpCard>
+    </section>
+
+    <section class="sp-stack">
+      <h2>Toast</h2>
+      <div class="sp-stack toast-stack">
+        <SpToast variant="info">Heads up — a new version is available.</SpToast>
+        <SpToast variant="success">Saved successfully.</SpToast>
+        <SpToast variant="warning">Your session will expire soon.</SpToast>
+        <SpToast variant="danger">Something went wrong.</SpToast>
+      </div>
+    </section>
+
+    <section class="sp-stack">
+      <h2>Tooltip</h2>
+      <SpCard variant="flat" class="sp-stack">
+        <div class="sp-hstack inline tooltip-row">
+          <SpTooltip placement="top" visible>Top tooltip</SpTooltip>
+          <SpTooltip placement="bottom" visible>Bottom tooltip</SpTooltip>
+          <SpTooltip placement="left" visible>Left tooltip</SpTooltip>
+          <SpTooltip placement="right" visible>Right tooltip</SpTooltip>
+        </div>
+      </SpCard>
+    </section>
+
+    <section class="sp-stack">
+      <h2>Dropdown</h2>
+      <SpCard variant="flat" class="sp-stack">
+        <SpDropdown>
+          <SpButton variant="secondary" size="sm">Options</SpButton>
+          <div class={getDropdownMenuClasses({ open: true })}>
+            <a class={dropdownItemClasses} href="#">Edit</a>
+            <a class={dropdownItemClasses} href="#">Duplicate</a>
+            <a class={getDropdownItemClasses({ disabled: true })} href="#">Archive</a>
+          </div>
+        </SpDropdown>
+      </SpCard>
+    </section>
+
+    <section class="sp-stack">
+      <h2>Modal</h2>
+      <SpModal open aria-labelledby="phase4-modal-title">
+        <h3 id="phase4-modal-title">Confirm action</h3>
+        <p>This is a preview of the SpModal component in its open state.</p>
+        <div class="sp-hstack form-actions">
+          <SpButton variant="primary" size="sm">Confirm</SpButton>
+          <SpButton variant="ghost" size="sm">Cancel</SpButton>
+          <SpBadge variant="info" size="sm">Preview</SpBadge>
+        </div>
+      </SpModal>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    gap: var(--sp-layout-section-gap-lg);
+    width: min(960px, 100%);
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-layout-stack-gap-sm);
+  }
+
+  .eyebrow {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: var(--sp-font-xs-size);
+    color: var(--sp-text-on-page-muted);
+    margin: 0;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: var(--sp-text-on-page-muted);
+    max-width: 60ch;
+  }
+
+  .toast-stack {
+    gap: var(--sp-layout-stack-gap-sm);
+  }
+
+  .inline {
+    display: flex;
+    gap: var(--sp-layout-stack-gap-sm);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .tooltip-row {
+    gap: var(--sp-layout-stack-gap-md);
+  }
+
+  .form-actions {
+    gap: var(--sp-layout-stack-gap-sm);
+    align-items: center;
+  }
+</style>

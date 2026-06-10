@@ -1,0 +1,29 @@
+---
+import type { DropdownRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getDropdownClasses } from "@phcdevworks/spectre-ui";
+
+type SpDropdownElement = "div" | "nav";
+
+interface SpDropdownProps extends DropdownRecipeOptions {
+  as?: SpDropdownElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  fullWidth,
+  as: Tag = "div",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpDropdownProps;
+
+const classes = getDropdownClasses({ fullWidth });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>
