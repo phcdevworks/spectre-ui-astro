@@ -30,8 +30,7 @@
 *.toml      text eol=lf
 *.json      text eol=lf
 *.sql       text eol=lf
-*.env       text eol=lf
-*.env.*     text eol=lf
+.env*       text eol=lf
 Dockerfile  text eol=lf
 devcontainer.json text eol=lf
 vite.config.* text eol=lf

@@ -13,7 +13,7 @@ recipe logic.
 | ------- | ------------- |
 | `@phcdevworks/spectre-tokens` | v2.9.0 — Phase 4 component token groups shipped |
 | `@phcdevworks/spectre-ui` | v1.9.0 — Phase 4 recipes shipped (nav, toast, tooltip, dropdown, modal) |
-| `@phcdevworks/spectre-ui-astro` | Phase 3 complete; Phase 4 components delivered, pending release |
+| `@phcdevworks/spectre-ui-astro` | v2.7.0 — Phase 3 and Phase 4 both delivered and released. No open phase |
 
 ---
 
@@ -30,7 +30,7 @@ All four Phase 3 families shipped. `peerDependencies` bumped to `^1.7.0`.
 
 ---
 
-## Phase 4: Token-Gated Expansion — Delivered (pending release)
+## Phase 4: Token-Gated Expansion — Delivered (v2.7.0)
 
 `@phcdevworks/spectre-tokens` published component-level semantic tokens, and
 `@phcdevworks/spectre-ui` shipped the corresponding recipes. `peerDependencies`

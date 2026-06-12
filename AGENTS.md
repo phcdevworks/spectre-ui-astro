@@ -32,41 +32,6 @@ is release-relevant.
 This repository is maintained by PHCDevworks and contains the Astro adapter for
 the Spectre system.
 
-## Primary AI Developer
-
-**Claude Code** (`claude-sonnet-4-6`) is the designated primary AI developer for
-this repository, maintained on behalf of Bradley Potts at PHCDevworks. All development is driven
-through Claude Code operating from `CLAUDE.md` as the authoritative working
-guide. Human final review and commit authority rests with Bradley Potts.
-
-Claude Code does not create git commits. Changes are prepared and validated,
-then handed off for human review and commit.
-
-For detailed commands, file structure, component patterns, testing strategy, and
-release workflow, see [`CLAUDE.md`](CLAUDE.md).
-
-## AI Operating Model
-
-This repository follows the Spectre AI factory model:
-
-| Agent          | Role                                                                                                         | Authority                                          |
-| -------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
-| Claude Code    | Lead developer responsible for primary implementation                                                        | `CLAUDE.md`                                        |
-| OpenAI Codex   | Documentation, releases, production stabilization, repo hygiene, and config standardization                  | `CODEX.md` and `.codex/`                           |
-| ChatGPT        | Strategy, coordination, prompt design, and external review — support layer only, no implementation ownership | —                                                  |
-| GitHub Copilot | General development assistance                                                                               | `COPILOT.md` and `.github/copilot-instructions.md` |
-| Google Jules   | Automated maintenance for small fixes, dependency updates, and micro-updates                                 | `JULES.md`                                         |
-
-Claude Code keeps implementation leadership. Codex keeps release and
-stabilization work clean. ChatGPT provides strategy and coordination support
-only. Copilot assists without owning decisions. Jules may only take bounded
-automated maintenance when configured for this repository.
-
-**Bradley Potts** holds final authority for all commits, merges, tags,
-publishing, and releases. No AI agent holds commit authority in this repository
-except Jules, which may commit bounded automated maintenance when all validation
-gates pass.
-
 ## File Ownership at a Glance
 
 | File / Path                            | Status                                    | Notes                                 |
