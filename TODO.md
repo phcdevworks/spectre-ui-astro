@@ -1,6 +1,8 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 4 — Complete; release handoff prepared.**
+Active phase: **None — Phase 3 and Phase 4 are complete and released (v2.7.0).
+Next phase opens once new upstream `@phcdevworks/spectre-ui` recipe families or
+`@phcdevworks/spectre-tokens` component-token groups are published.**
 
 ---
 
