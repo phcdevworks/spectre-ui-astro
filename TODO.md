@@ -238,6 +238,42 @@ handoff.
 
 ---
 
+## Phase 5 — Layout Components: Blocked (upstream recipes not yet shipped)
+
+`@phcdevworks/spectre-ui` does not yet export layout recipes
+(`getContainerClasses`, `getStackClasses`, `getSectionClasses` — tracked as
+"Phase 4b — Layout Recipe Expansion" in `spectre-ui/TODO.md`). Do not start
+this work until those recipes are published and the `spectre-ui` peer
+dependency range is bumped to cover them.
+
+### Components
+
+- [ ] `SpContainer`
+  - `src/components/SpContainer.astro` calling `getContainerClasses`, recipe
+    re-export in `src/recipes/index.ts`, export in `src/index.ts`, entrypoint
+    in `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-container.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
+
+- [ ] `SpStack`
+  - `src/components/SpStack.astro` calling `getStackClasses`, with a
+    `direction` prop (`vertical` | `horizontal`). Same delivery pattern as
+    above, `tests/sp-stack.test.ts`.
+
+- [ ] `SpSection`
+  - `src/components/SpSection.astro` calling `getSectionClasses`. Same
+    delivery pattern as above, `tests/sp-section.test.ts`.
+
+### Release
+
+- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to the version that
+  ships the layout recipes, in both `package.json` and
+  `astro-adapter.contract.json`.
+- [ ] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
+- [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
+
+---
+
 ## Out of Scope
 
 - No token redefinition, local CSS, or forked recipe logic.
