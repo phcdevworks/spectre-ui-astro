@@ -1,0 +1,39 @@
+---
+import type { StackRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getStackClasses } from "@phcdevworks/spectre-ui";
+
+type SpStackElement = "div" | "section" | "ul" | "ol" | "nav";
+
+interface SpStackProps extends StackRecipeOptions {
+  as?: SpStackElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  direction,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpStackProps;
+
+const classes = getStackClasses({ direction });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

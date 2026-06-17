@@ -4,6 +4,7 @@ import {
   getBadgeClasses,
   getButtonClasses,
   getCardClasses,
+  getContainerClasses,
   getDropdownClasses,
   getIconBoxClasses,
   getInputClasses,
@@ -23,7 +24,9 @@ import {
   getRatingStarClasses,
   getRatingStarsClasses,
   getRatingTextClasses,
+  getSectionClasses,
   getSpinnerClasses,
+  getStackClasses,
   getTagClasses,
   getToastClasses,
   getTooltipClasses,
@@ -34,6 +37,7 @@ import SpAlert from "../src/components/SpAlert.astro";
 import SpBadge from "../src/components/SpBadge.astro";
 import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
+import SpContainer from "../src/components/SpContainer.astro";
 import SpDropdown from "../src/components/SpDropdown.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
@@ -41,7 +45,9 @@ import SpModal from "../src/components/SpModal.astro";
 import SpNav from "../src/components/SpNav.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 import SpRating from "../src/components/SpRating.astro";
+import SpSection from "../src/components/SpSection.astro";
 import SpSpinner from "../src/components/SpSpinner.astro";
+import SpStack from "../src/components/SpStack.astro";
 import SpTag from "../src/components/SpTag.astro";
 import SpToast from "../src/components/SpToast.astro";
 import SpTooltip from "../src/components/SpTooltip.astro";
@@ -427,5 +433,33 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-labelledby="modal-title"');
     expect(html).not.toContain('aria-hidden="true"');
     expect(html).toContain("Confirm");
+  });
+
+  it("renders SpContainer with upstream classes", async () => {
+    const html = await container.renderToString(SpContainer, {
+      slots: { default: "Content" },
+    });
+
+    expect(html).toContain(getContainerClasses());
+    expect(html).toContain("Content");
+  });
+
+  it("renders SpSection with upstream classes", async () => {
+    const html = await container.renderToString(SpSection, {
+      slots: { default: "Content" },
+    });
+
+    expect(html).toContain(getSectionClasses());
+    expect(html).toContain("Content");
+  });
+
+  it("renders SpStack with direction-mapped upstream classes", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { direction: "horizontal" },
+      slots: { default: "Content" },
+    });
+
+    expect(html).toContain(getStackClasses({ direction: "horizontal" }));
+    expect(html).toContain("Content");
   });
 });
