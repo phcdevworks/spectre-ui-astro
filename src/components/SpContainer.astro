@@ -1,0 +1,38 @@
+---
+import type { ContainerRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getContainerClasses } from "@phcdevworks/spectre-ui";
+
+type SpContainerElement = "div" | "section" | "main" | "article" | "aside";
+
+interface SpContainerProps extends ContainerRecipeOptions {
+  as?: SpContainerElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpContainerProps;
+
+const classes = getContainerClasses({});
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

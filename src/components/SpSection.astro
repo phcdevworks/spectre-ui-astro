@@ -1,0 +1,38 @@
+---
+import type { SectionRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSectionClasses } from "@phcdevworks/spectre-ui";
+
+type SpSectionElement = "section" | "div" | "article" | "aside" | "main";
+
+interface SpSectionProps extends SectionRecipeOptions {
+  as?: SpSectionElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "section",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpSectionProps;
+
+const classes = getSectionClasses({});
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

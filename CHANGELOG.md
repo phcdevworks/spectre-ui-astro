@@ -6,6 +6,27 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.8.0] - 2026-06-17
+
+Release Title: Phase 5 Layout Component Expansion
+
+Contract change type: additive
+
+### Added
+
+- Added `SpContainer` component. Renders as `<div>` by default (also
+  `"section"`, `"main"`, `"article"`, `"aside"`). Calls `getContainerClasses`.
+- Added `SpStack` component. Renders as `<div>` by default (also `"section"`,
+  `"ul"`, `"ol"`, `"nav"`). Supports `direction` (`"vertical"` | `"horizontal"`)
+  mapped to `getStackClasses`.
+- Added `SpSection` component. Renders as `<section>` by default (also
+  `"div"`, `"article"`, `"aside"`, `"main"`). Calls `getSectionClasses`.
+- Added `SpContainer`, `SpStack`, and `SpSection` to the adapter contract as
+  stable families (Phase 5 — Layout Components).
+- Bumped `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.0.0` and
+  `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.1.0` to cover the
+  layout recipes.
+
 ## [2.7.0] - 2026-06-10
 
 Release Title: Phase 4 Component Expansion

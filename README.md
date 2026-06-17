@@ -211,6 +211,76 @@ The default slot renders any child content.
 
 ---
 
+### SpContainer
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | `"div" \| "section" \| "main" \| "article" \| "aside"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element id |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpContainer>
+  <p>Centered, max-width content.</p>
+</SpContainer>
+
+<SpContainer as="main" aria-label="Main content">
+  <p>Semantic main wrapper.</p>
+</SpContainer>
+```
+
+The default slot renders any child content.
+
+---
+
+### SpStack
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `StackDirection` | `"vertical"` | `"vertical"` \| `"horizontal"` |
+| `as` | `"div" \| "section" \| "ul" \| "ol" \| "nav"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element id |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpStack>
+  <p>Item one</p>
+  <p>Item two</p>
+</SpStack>
+
+<SpStack direction="horizontal" as="nav" aria-label="Primary">
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+</SpStack>
+```
+
+The default slot renders any child content.
+
+---
+
+### SpSection
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | `"section" \| "div" \| "article" \| "aside" \| "main"` | `"section"` | Rendered element |
+| `id` | `string` | — | Element id |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpSection aria-label="Features">
+  <SpContainer>
+    <h2>Features</h2>
+  </SpContainer>
+</SpSection>
+```
+
+The default slot renders any child content.
+
+---
+
 ### SpInput
 
 `SpInput` renders a labeled input group: wrapper, optional label, input, optional helper text, and optional error message.
@@ -777,6 +847,7 @@ const links = [
 | `getButtonClasses` | Button class generation |
 | `getCardClasses` | Card class generation |
 | `getBadgeClasses` | Badge class generation |
+| `getContainerClasses` | Container class generation |
 | `getDropdownClasses` | Dropdown root classes |
 | `getDropdownMenuClasses` | Dropdown menu container |
 | `getDropdownItemClasses` | Individual dropdown item |
@@ -796,6 +867,8 @@ const links = [
 | `getRatingStarsClasses` | Rating star container |
 | `getRatingStarClasses` | Individual star element |
 | `getRatingTextClasses` | Rating text element |
+| `getSectionClasses` | Section class generation |
+| `getStackClasses` | Stack class generation |
 | `getTestimonialClasses` | Testimonial root classes |
 | `getTestimonialQuoteClasses` | Quote wrapper |
 | `getTestimonialAuthorClasses` | Author section wrapper |
@@ -806,7 +879,7 @@ const links = [
 | `getToastIconClasses` | Toast icon wrapper |
 | `getTooltipClasses` | Tooltip class generation |
 
-Recipe option and variant types are also re-exported: `AlertRecipeOptions`, `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`, `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `DropdownRecipeOptions`, `DropdownMenuRecipeOptions`, `DropdownItemRecipeOptions`, `DropdownPlacement`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`, `ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `TestimonialRecipeOptions`, `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`, `TooltipPlacement`.
+Recipe option and variant types are also re-exported: `AlertRecipeOptions`, `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`, `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`, `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`, `ContainerRecipeOptions`, `DropdownRecipeOptions`, `DropdownMenuRecipeOptions`, `DropdownItemRecipeOptions`, `DropdownPlacement`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`, `ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`, `PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`, `StackRecipeOptions`, `StackDirection`, `TestimonialRecipeOptions`, `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`, `TooltipPlacement`.
 
 ## What this package owns
 
@@ -855,9 +928,9 @@ Do not use this package when:
 
 ```ts
 import {
-  SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpDropdown, SpIconBox,
-  SpInput, SpModal, SpNav, SpPricingCard, SpRating, SpSpinner, SpTag,
-  SpTestimonial, SpToast, SpTooltip,
+  SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpContainer, SpDropdown,
+  SpIconBox, SpInput, SpModal, SpNav, SpPricingCard, SpRating, SpSection,
+  SpSpinner, SpStack, SpTag, SpTestimonial, SpToast, SpTooltip,
 } from '@phcdevworks/spectre-ui-astro'
 
 import {
@@ -876,6 +949,7 @@ import SpAvatar    from '@phcdevworks/spectre-ui-astro/components/SpAvatar.astro
 import SpBadge     from '@phcdevworks/spectre-ui-astro/components/SpBadge.astro'
 import SpButton    from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
 import SpCard      from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
+import SpContainer from '@phcdevworks/spectre-ui-astro/components/SpContainer.astro'
 import SpDropdown  from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
 import SpIconBox   from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput     from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
@@ -883,7 +957,9 @@ import SpModal     from '@phcdevworks/spectre-ui-astro/components/SpModal.astro'
 import SpNav       from '@phcdevworks/spectre-ui-astro/components/SpNav.astro'
 import SpPricingCard  from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpRating    from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
+import SpSection   from '@phcdevworks/spectre-ui-astro/components/SpSection.astro'
 import SpSpinner   from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
+import SpStack     from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpTag       from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
 import SpToast     from '@phcdevworks/spectre-ui-astro/components/SpToast.astro'
@@ -903,6 +979,7 @@ Each component family is classified by its support status in this adapter.
 | badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | button | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| container | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | dropdown | **stable** | Full prop, slot, and SSR coverage |
 | icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
@@ -910,7 +987,9 @@ Each component family is classified by its support status in this adapter.
 | nav | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| section | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | spinner | **stable** | Full prop, ARIA, and SSR coverage |
+| stack | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
