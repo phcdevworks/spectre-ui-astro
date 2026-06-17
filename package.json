@@ -106,7 +106,7 @@
   },
   "devDependencies": {
     "@phcdevworks/spectre-tokens": "^3.0.0",
-    "@phcdevworks/spectre-ui": "^2.0.0",
+    "@phcdevworks/spectre-ui": "^2.1.0",
     "@types/node": "^25.9.3",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
