@@ -54,6 +54,7 @@
     "./components/SpCard.astro": "./dist/components/SpCard.astro",
     "./components/SpContainer.astro": "./dist/components/SpContainer.astro",
     "./components/SpDropdown.astro": "./dist/components/SpDropdown.astro",
+    "./components/SpGrid.astro": "./dist/components/SpGrid.astro",
     "./components/SpIconBox.astro": "./dist/components/SpIconBox.astro",
     "./components/SpInput.astro": "./dist/components/SpInput.astro",
     "./components/SpModal.astro": "./dist/components/SpModal.astro",
@@ -96,7 +97,7 @@
   },
   "peerDependencies": {
     "@phcdevworks/spectre-tokens": "^3.0.0",
-    "@phcdevworks/spectre-ui": "^2.1.0",
+    "@phcdevworks/spectre-ui": "^2.2.0",
     "astro": "^6.1.3",
     "typescript": "^5.9 || ^6.0"
   },

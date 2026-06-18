@@ -43,6 +43,7 @@ const recipeRuntimeExports = [
   "getDropdownClasses",
   "getDropdownItemClasses",
   "getDropdownMenuClasses",
+  "getGridClasses",
   "getIconBoxClasses",
   "getInputClasses",
   "getInputErrorMessageClasses",
