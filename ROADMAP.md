@@ -9,10 +9,10 @@ recipe logic.
 
 ## System Phase Context
 
-| Package | Current state |
-| ------- | ------------- |
-| `@phcdevworks/spectre-tokens` | v2.9.0 — Phase 4 component token groups shipped |
-| `@phcdevworks/spectre-ui` | v1.9.0 — Phase 4 recipes shipped (nav, toast, tooltip, dropdown, modal) |
+| Package                         | Current state                                                                                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@phcdevworks/spectre-tokens`   | v2.9.0 — Phase 4 component token groups shipped                                                                                                                |
+| `@phcdevworks/spectre-ui`       | v1.9.0 — Phase 4 recipes shipped (nav, toast, tooltip, dropdown, modal)                                                                                        |
 | `@phcdevworks/spectre-ui-astro` | v2.8.0 — Phase 3, Phase 4, and Phase 5 (layout components) delivered and released. Phase 6 (Grid component) open, blocked on upstream `spectre-ui` Grid recipe |
 
 ---
@@ -37,13 +37,13 @@ All four Phase 3 families shipped. `peerDependencies` bumped to `^1.7.0`.
 bumped to `@phcdevworks/spectre-tokens@^2.9.0` and
 `@phcdevworks/spectre-ui@^1.9.0`.
 
-| Family | Required spectre-tokens group | Upstream status |
-| - | - | - |
-| nav | component.nav | Delivered — stable |
-| toast | component.toast | Delivered — stable |
-| tooltip | component.tooltip | Delivered — stable |
-| dropdown | component.dropdown | Delivered — stable |
-| modal | component.modal | Delivered — stable |
+| Family   | Required spectre-tokens group | Upstream status    |
+| -------- | ----------------------------- | ------------------ |
+| nav      | component.nav                 | Delivered — stable |
+| toast    | component.toast               | Delivered — stable |
+| tooltip  | component.tooltip             | Delivered — stable |
+| dropdown | component.dropdown            | Delivered — stable |
+| modal    | component.modal               | Delivered — stable |
 
 Each followed the same delivery pattern as Phase 3.
 
@@ -51,15 +51,15 @@ Each followed the same delivery pattern as Phase 3.
 
 ## Phase 5: Layout Components — Delivered (v2.8.0)
 
-`@phcdevworks/spectre-ui` v2.1.0 shipped the layout recipes (tracked as
-"Phase 4b" in that package's roadmap). `peerDependencies` bumped to
+`@phcdevworks/spectre-ui` v2.1.0 shipped the layout recipes (tracked as "Phase
+4b" in that package's roadmap). `peerDependencies` bumped to
 `@phcdevworks/spectre-ui@^2.1.0` and `@phcdevworks/spectre-tokens@^3.0.0`.
 
-| Family | Required spectre-ui recipe | Upstream status |
-| - | - | - |
-| container | `getContainerClasses` | Delivered — stable |
-| stack | `getStackClasses` | Delivered — stable |
-| section | `getSectionClasses` | Delivered — stable |
+| Family    | Required spectre-ui recipe | Upstream status    |
+| --------- | -------------------------- | ------------------ |
+| container | `getContainerClasses`      | Delivered — stable |
+| stack     | `getStackClasses`          | Delivered — stable |
+| section   | `getSectionClasses`        | Delivered — stable |
 
 Each followed the same delivery pattern as Phase 3/Phase 4.
 
@@ -67,15 +67,15 @@ Each followed the same delivery pattern as Phase 3/Phase 4.
 
 ## Phase 6: Grid Component — Blocked
 
-Blocked on `@phcdevworks/spectre-ui` shipping a Grid recipe (tracked as
-"Phase 4c — Grid Recipe (v1)" in that package's roadmap). The underlying
-`breakpoints.*` and `layout.stack.gap.*` tokens are already published — the
-gap is the recipe layer, not tokens. This is the first adapter family backed
-by a responsive (breakpoint-aware) upstream recipe.
+Blocked on `@phcdevworks/spectre-ui` shipping a Grid recipe (tracked as "Phase
+4c — Grid Recipe (v1)" in that package's roadmap). The underlying
+`breakpoints.*` and `layout.stack.gap.*` tokens are already published — the gap
+is the recipe layer, not tokens. This is the first adapter family backed by a
+responsive (breakpoint-aware) upstream recipe.
 
 | Family | Required spectre-ui recipe | Upstream status |
-| - | - | - |
-| grid | `getGridClasses` | Not shipped |
+| ------ | -------------------------- | --------------- |
+| grid   | `getGridClasses`           | Not shipped     |
 
 Will follow the same delivery pattern as Phase 3/4/5 once unblocked. `SpGrid`
 props (`columns`, `gap`) map directly to upstream recipe options — no
@@ -105,4 +105,5 @@ upstream `spectre-ui` Phase 4c v2 ships and a real downstream need exists.
 - Do not fork or locally reinterpret upstream recipe logic here
 - Do not bind upstream families before their recipes publish to npm
 - Do not expand framework responsibilities beyond Astro adapter delivery
-- Do not treat examples as independent published packages or contract authorities
+- Do not treat examples as independent published packages or contract
+  authorities

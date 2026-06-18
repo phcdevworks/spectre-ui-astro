@@ -2,10 +2,9 @@
 
 ## Project Identity
 
-**Package:** `@phcdevworks/spectre-ui-astro`
-**Layer:** L3b — Astro adapter
-**Human owner:** Bradley Potts
-**Primary AI developer:** Claude Code (claude-sonnet-4-6)
+**Package:** `@phcdevworks/spectre-ui-astro` **Layer:** L3b — Astro adapter
+**Human owner:** Bradley Potts **Primary AI developer:** Claude Code
+(claude-sonnet-4-6)
 
 This file is the authoritative implementation guide for Claude Code operating in
 this repository. Shared agent roles, package boundaries, validation rules, and
@@ -113,16 +112,16 @@ synchronized whenever adapter behavior changes.
 
 ## Key Scripts Reference
 
-| Script | What it validates |
-| --- | --- |
-| `npm run build` | tsup bundle, type declarations, component copy, package contract, README contract |
-| `npm run lint` | ESLint across the package |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm test` | Vitest suite (exports, rendering, component, docs-examples, upstream-parity, smoke) |
-| `npm run ci:verify` | lint -> build -> typecheck -> test |
+| Script                    | What it validates                                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------- |
+| `npm run build`           | tsup bundle, type declarations, component copy, package contract, README contract                   |
+| `npm run lint`            | ESLint across the package                                                                           |
+| `npm run typecheck`       | `tsc --noEmit`                                                                                      |
+| `npm test`                | Vitest suite (exports, rendering, component, docs-examples, upstream-parity, smoke)                 |
+| `npm run ci:verify`       | lint -> build -> typecheck -> test                                                                  |
 | `npm run check:ecosystem` | `spectre.manifest.json` validity and ecosystem dependency check via `@phcdevworks/spectre-manifest` |
-| `npm run check` | `ci:verify` + `check:ecosystem` — the full validation gate |
-| `npm run release:propose` | proposes the next version based on `CHANGELOG.md [Unreleased]` classification |
+| `npm run check`           | `ci:verify` + `check:ecosystem` — the full validation gate                                          |
+| `npm run release:propose` | proposes the next version based on `CHANGELOG.md [Unreleased]` classification                       |
 
 ## Component Patterns
 
@@ -212,17 +211,16 @@ logic here.
   `errorMessage` is set — `resolveSpInputAccessibility` enforces this for
   deterministic SSR associations.
 - `tests/upstream-parity.test.ts` fails if `@phcdevworks/spectre-ui` adds a new
-  recipe family that is not yet declared in `astro-adapter.contract.json` —
-  this is the earliest signal that a new component phase may be needed.
-- `examples/` consumes this package via a local `file:..` dependency; do not
-  add a tracked example `package-lock.json` or rely on `npm ci` for it.
+  recipe family that is not yet declared in `astro-adapter.contract.json` — this
+  is the earliest signal that a new component phase may be needed.
+- `examples/` consumes this package via a local `file:..` dependency; do not add
+  a tracked example `package-lock.json` or rely on `npm ci` for it.
 
 ## Roadmap Priorities
 
 Phases 1 through 4 are complete and released (current version `2.7.0`; see
-`package.json` and `CHANGELOG.md`). There is no open phase. The next phase
-opens once either `@phcdevworks/spectre-ui` ships new recipe families beyond
-Phase 4 (nav, toast, tooltip, dropdown, modal), or `@phcdevworks/spectre-tokens`
+`package.json` and `CHANGELOG.md`). There is no open phase. The next phase opens
+once either `@phcdevworks/spectre-ui` ships new recipe families beyond Phase 4
+(nav, toast, tooltip, dropdown, modal), or `@phcdevworks/spectre-tokens`
 publishes new component-level token groups that gate further families. Check
-`ROADMAP.md` and `TODO.md` for current scope before starting new component
-work.
+`ROADMAP.md` and `TODO.md` for current scope before starting new component work.

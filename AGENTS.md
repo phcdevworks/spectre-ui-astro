@@ -2,22 +2,22 @@
 
 ## Repository Snapshot
 
-| Field | Value |
-|-------|-------|
-| Project team | `project-design` |
-| Repository role | Spectre L3b Astro adapter |
+| Field            | Value                           |
+| ---------------- | ------------------------------- |
+| Project team     | `project-design`                |
+| Repository role  | Spectre L3b Astro adapter       |
 | Package/artifact | `@phcdevworks/spectre-ui-astro` |
-| Validation gate | `npm run check` |
+| Validation gate  | `npm run check`                 |
 
 ## Standard Authority Model
 
-| Agent | Role | Authority |
-|-------|------|-----------|
-| Claude Code | Lead implementation and validation | [CLAUDE.md](CLAUDE.md) |
-| OpenAI Codex | Documentation, release readiness, stabilization, and repo hygiene | [CODEX.md](CODEX.md) |
-| ChatGPT | Strategy, coordination, prompt design, and external review | Support only |
-| GitHub Copilot | Development assistance | [COPILOT.md](COPILOT.md) |
-| Google Jules | Bounded automated maintenance | [JULES.md](JULES.md) |
+| Agent          | Role                                                              | Authority                |
+| -------------- | ----------------------------------------------------------------- | ------------------------ |
+| Claude Code    | Lead implementation and validation                                | [CLAUDE.md](CLAUDE.md)   |
+| OpenAI Codex   | Documentation, release readiness, stabilization, and repo hygiene | [CODEX.md](CODEX.md)     |
+| ChatGPT        | Strategy, coordination, prompt design, and external review        | Support only             |
+| GitHub Copilot | Development assistance                                            | [COPILOT.md](COPILOT.md) |
+| Google Jules   | Bounded automated maintenance                                     | [JULES.md](JULES.md)     |
 
 Bradley Potts holds final authority for commits, merges, tags, publishing, and
 releases.
@@ -34,28 +34,28 @@ the Spectre system.
 
 ## File Ownership at a Glance
 
-| File / Path                            | Status                                    | Notes                                 |
-| -------------------------------------- | ----------------------------------------- | ------------------------------------- |
-| `src/components/*.astro`               | Source — edit freely                      | Astro component implementations       |
-| `src/recipes/index.ts`                 | Source — edit freely                      | Re-exports from upstream only         |
-| `src/index.ts`                         | Source — keep in sync                     | Public package exports                |
-| `dist/`                                | Generated — do not edit by hand           | Output of `npm run build`             |
-| `package.json` exports                 | Source — keep in sync with `src/index.ts` | Must match source and docs            |
-| `README.md`                            | Source — keep in sync                     | Consumer-facing docs                  |
-| `CHANGELOG.md`                         | Source — append only                      | Follow Keep a Changelog format        |
-| `CLAUDE.md`                            | Protected                                 | Lead developer working guide          |
-| `AGENTS.md`                            | Protected                                 | Shared agent authority guide          |
-| `CODEX.md`                             | Protected                                 | Codex release and review guide        |
-| `COPILOT.md`                           | Protected                                 | Copilot support guide                 |
-| `JULES.md`                             | Protected                                 | Jules maintenance scope               |
-| `.github/copilot-instructions.md`      | Protected                                 | Copilot support guide                 |
+| File / Path                            | Status                                    | Notes                                                          |
+| -------------------------------------- | ----------------------------------------- | -------------------------------------------------------------- |
+| `src/components/*.astro`               | Source — edit freely                      | Astro component implementations                                |
+| `src/recipes/index.ts`                 | Source — edit freely                      | Re-exports from upstream only                                  |
+| `src/index.ts`                         | Source — keep in sync                     | Public package exports                                         |
+| `dist/`                                | Generated — do not edit by hand           | Output of `npm run build`                                      |
+| `package.json` exports                 | Source — keep in sync with `src/index.ts` | Must match source and docs                                     |
+| `README.md`                            | Source — keep in sync                     | Consumer-facing docs                                           |
+| `CHANGELOG.md`                         | Source — append only                      | Follow Keep a Changelog format                                 |
+| `CLAUDE.md`                            | Protected                                 | Lead developer working guide                                   |
+| `AGENTS.md`                            | Protected                                 | Shared agent authority guide                                   |
+| `CODEX.md`                             | Protected                                 | Codex release and review guide                                 |
+| `COPILOT.md`                           | Protected                                 | Copilot support guide                                          |
+| `JULES.md`                             | Protected                                 | Jules maintenance scope                                        |
+| `.github/copilot-instructions.md`      | Protected                                 | Copilot support guide                                          |
 | `spectre.manifest.json`                | Source — keep in sync                     | Update when exports, Spectre dependencies, or stability change |
-| `tests/exports.test.ts`                | Source — keep in sync                     | Guards public contract surface        |
-| `tests/upstream-parity.test.ts`        | Source — keep in sync                     | Guards upstream family parity         |
-| `tests/smoke.test.ts`                  | Source — keep in sync                     | Guards built-package artifacts        |
-| `scripts/validate-package-contract.ts` | Source — keep in sync                     | Post-build contract assertions        |
-| `scripts/validate-readme-contract.ts`  | Source — keep in sync                     | Post-build README parity assertions   |
-| `examples/`                            | Validation surface — not a contract       | Demo app; not independently published |
+| `tests/exports.test.ts`                | Source — keep in sync                     | Guards public contract surface                                 |
+| `tests/upstream-parity.test.ts`        | Source — keep in sync                     | Guards upstream family parity                                  |
+| `tests/smoke.test.ts`                  | Source — keep in sync                     | Guards built-package artifacts                                 |
+| `scripts/validate-package-contract.ts` | Source — keep in sync                     | Post-build contract assertions                                 |
+| `scripts/validate-readme-contract.ts`  | Source — keep in sync                     | Post-build README parity assertions                            |
+| `examples/`                            | Validation surface — not a contract       | Demo app; not independently published                          |
 
 ## Codex Support Role
 
@@ -285,11 +285,12 @@ unfilled. CodeRabbit's description check blocks such PRs.
 ## Ecosystem Manifest
 
 `spectre.manifest.json` at the root is this package's declaration in the Spectre
-ecosystem contract, validated by `@phcdevworks/spectre-manifest`. It records role,
-layer, exports, and allowed Spectre dependency targets. `check:ecosystem` validates
-it as part of `npm run check`.
+ecosystem contract, validated by `@phcdevworks/spectre-manifest`. It records
+role, layer, exports, and allowed Spectre dependency targets. `check:ecosystem`
+validates it as part of `npm run check`.
 
 Keep `spectre.manifest.json` in sync when:
+
 - Package exports in `package.json` are added or removed
 - A Spectre package dependency is added or removed
 - The package stability changes
