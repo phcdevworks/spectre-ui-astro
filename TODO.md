@@ -1,6 +1,6 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 5 is implemented and prepared for release as v2.8.0.
+Active phase: **Phase 6 is implemented and prepared for release as v2.9.0.
 Human review, commit, tag, and publish remain with Bradley Potts.**
 
 ---
@@ -292,8 +292,8 @@ components are implemented and `npm run check` passes.
 
 - [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.2.0`, in both
   `package.json` and `astro-adapter.contract.json`.
-- [ ] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
-- [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
+- [x] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
+- [x] Prepare version bump for Bradley Potts review, commit, tag, and publish.
 
 ### Phase 6 — Grid Component (v2, deferred)
 

@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.9.0] - 2026-06-18
+
+Release Title: Phase 6 Grid Component
+
+Contract change type: additive
+
 ### Added
 
 - Added `SpGrid` component. Renders as `<div>` by default (also `"section"`,
