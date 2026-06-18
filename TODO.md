@@ -271,6 +271,44 @@ components are implemented and `npm run check` passes.
 
 ---
 
+## Phase 6 — Grid Component (v1): Blocked (upstream recipe not yet shipped)
+
+`@phcdevworks/spectre-ui` does not yet export a Grid recipe (`getGridClasses`
+— tracked as "Phase 4c — Grid Recipe (v1)" in `spectre-ui/TODO.md`). Do not
+start this work until that recipe is published and the `spectre-ui` peer
+dependency range is bumped to cover it.
+
+### Components
+
+- [ ] `SpGrid`
+  - `src/components/SpGrid.astro` calling `getGridClasses`, with `columns`
+    (`1 | 2 | 3 | 4 | 6 | 12`) and `gap` (`sm | md | lg`) props mapped
+    directly to the upstream recipe options — no adapter-local interpretation
+    of column count or breakpoint behavior. Recipe re-export in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-grid.test.ts`, SSR coverage in `tests/rendering.test.ts`, prop
+    table and usage in `README.md`.
+
+### Release
+
+- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to the version that
+  ships the Grid recipe, in both `package.json` and
+  `astro-adapter.contract.json`.
+- [ ] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
+- [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
+
+### Phase 6 — Grid Component (v2, deferred)
+
+Matches upstream `spectre-ui` Phase 4c v2 scope. Only take on if upstream
+ships v2 recipe options and a real downstream adapter need exists.
+
+- [ ] Column span prop, once upstream supports it
+- [ ] Column/row offset props, once upstream supports it
+- [ ] Per-breakpoint column override prop, once upstream supports it
+
+---
+
 ## Out of Scope
 
 - No token redefinition, local CSS, or forked recipe logic.
