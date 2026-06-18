@@ -325,10 +325,10 @@ The default slot renders any child content.
 `SpInput` renders a labeled input group: wrapper, optional label, input,
 optional helper text, and optional error message.
 
-When `label`, `helperText`, or `errorMessage` is present, an explicit `id` is
-**required**. This is an SSR invariant — without a stable `id`, the
-`for`/`aria-describedby` associations would be nondeterministic. The component
-throws at render time if the requirement is violated.
+`SpInput` requires an explicit `id` whenever `label`, `helperText`, or
+`errorMessage` is present. This is an SSR invariant — without a stable `id`,
+the `for`/`aria-describedby` associations would be nondeterministic. The
+component throws at render time if the requirement is violated.
 
 | Prop           | Type                                 | Default | Description                                                                |
 | -------------- | ------------------------------------ | ------- | -------------------------------------------------------------------------- |
@@ -1079,29 +1079,29 @@ from `@phcdevworks/spectre-ui/index.css`.
 
 Each component family is classified by its support status in this adapter.
 
-| Family       | Status     | Notes                                                      |
-| ------------ | ---------- | ---------------------------------------------------------- |
-| alert        | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| avatar       | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| badge        | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| button       | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| card         | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| container    | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| dropdown     | **stable** | Full prop, slot, and SSR coverage                          |
-| grid         | **stable** | Full prop, slot, and SSR coverage                          |
-| icon-box     | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| input        | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
-| modal        | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| nav          | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| rating       | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| section      | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| spinner      | **stable** | Full prop, ARIA, and SSR coverage                          |
-| stack        | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| tag          | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| testimonial  | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| toast        | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
-| tooltip      | **stable** | Full prop, slot, ARIA, and SSR coverage                    |
+| Family | Status | Notes |
+|------|------|---------|
+| alert | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| avatar | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| button | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| container | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| dropdown | **stable** | Full prop, slot, and SSR coverage |
+| grid | **stable** | Full prop, slot, and SSR coverage |
+| icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
+| modal | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| nav | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| section | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| spinner | **stable** | Full prop, ARIA, and SSR coverage |
+| stack | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
 
 **stable** — the component family is fully wired to upstream recipes, covered by
 SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking
