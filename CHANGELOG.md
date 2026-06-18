@@ -17,10 +17,10 @@ Contract change type: additive
 - Added `SpGrid` component. Renders as `<div>` by default (also `"section"`,
   `"ul"`, `"ol"`). Supports `columns` (`1 | 2 | 3 | 4 | 6 | 12`) and `gap`
   (`"sm" | "md" | "lg"`) mapped directly to `getGridClasses`.
-- Added `SpGrid` to the adapter contract as a stable family
-  (Phase 6 — Grid Component v1).
-- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.2.0` to cover
-  the grid recipe.
+- Added `SpGrid` to the adapter contract as a stable family (Phase 6 — Grid
+  Component v1).
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.2.0` to cover the
+  grid recipe.
 
 ## [2.8.0] - 2026-06-17
 
@@ -35,13 +35,13 @@ Contract change type: additive
 - Added `SpStack` component. Renders as `<div>` by default (also `"section"`,
   `"ul"`, `"ol"`, `"nav"`). Supports `direction` (`"vertical"` | `"horizontal"`)
   mapped to `getStackClasses`.
-- Added `SpSection` component. Renders as `<section>` by default (also
-  `"div"`, `"article"`, `"aside"`, `"main"`). Calls `getSectionClasses`.
+- Added `SpSection` component. Renders as `<section>` by default (also `"div"`,
+  `"article"`, `"aside"`, `"main"`). Calls `getSectionClasses`.
 - Added `SpContainer`, `SpStack`, and `SpSection` to the adapter contract as
   stable families (Phase 5 — Layout Components).
 - Bumped `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.0.0` and
-  `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.1.0` to cover the
-  layout recipes.
+  `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.1.0` to cover the layout
+  recipes.
 
 ## [2.7.0] - 2026-06-10
 
@@ -53,8 +53,8 @@ Contract change type: additive
 
 - Added `SpNav` component. Renders as `<nav>` by default (also `"div"`,
   `"header"`, `"section"`). Supports `bordered`, `sticky`, and `fullWidth`.
-- Added `SpToast` component. Renders `role="status"`, `aria-live="polite"`,
-  and `aria-atomic="true"` by default. Supports `variant`, `dismissed`, and
+- Added `SpToast` component. Renders `role="status"`, `aria-live="polite"`, and
+  `aria-atomic="true"` by default. Supports `variant`, `dismissed`, and
   `fullWidth`. A named `icon` slot is wrapped in `getToastIconClasses` styling
   when used.
 - Added `SpTooltip` component. Renders `role="tooltip"` by default. Supports
@@ -64,10 +64,10 @@ Contract change type: additive
 - Added `SpModal` component. Renders an overlay (`getModalOverlayClasses`)
   wrapping the modal element (`getModalClasses`) with `role="dialog"` and
   `aria-modal="true"`. Supports `open` and `fullWidth`.
-- Re-exported `getNavLinksClasses`, `getNavLinkClasses`,
-  `getToastIconClasses`, `getDropdownMenuClasses`, `getDropdownItemClasses`,
-  and their option/variant types for building nav links, toast icons, and
-  dropdown menus/items in component slots.
+- Re-exported `getNavLinksClasses`, `getNavLinkClasses`, `getToastIconClasses`,
+  `getDropdownMenuClasses`, `getDropdownItemClasses`, and their option/variant
+  types for building nav links, toast icons, and dropdown menus/items in
+  component slots.
 - Added `SpNav`, `SpToast`, `SpTooltip`, `SpDropdown`, and `SpModal` to the
   adapter contract as stable families (Phase 4).
 - Bumped `peerDependencies["@phcdevworks/spectre-tokens"]` to `^2.9.0` and
@@ -83,20 +83,22 @@ Release Title: Phase 3 Component Completion and Ecosystem Manifest
   `aria-label` of `"Loading"`. Supports `variant`, `size`, `disabled`, and
   `loading` props. `loading` implies disabled state and sets `aria-busy="true"`.
 - Added `SpTag` component with polymorphic `as` prop (`"span"` default, also
-  `"div"`, `"li"`, `"a"`, `"button"`). Supports `variant`, `size`, `dismissible`,
-  `selected` (with `aria-pressed`), `interactive`, `fullWidth`, `disabled`, and
-  `loading`. Follows the same interactive/ARIA guard pattern as `SpAlert`.
+  `"div"`, `"li"`, `"a"`, `"button"`). Supports `variant`, `size`,
+  `dismissible`, `selected` (with `aria-pressed`), `interactive`, `fullWidth`,
+  `disabled`, and `loading`. Follows the same interactive/ARIA guard pattern as
+  `SpAlert`.
 - Exported `SpinnerVariant` type from the package root and recipes barrel.
 - Added `SpSpinner` and `SpTag` to the adapter contract as stable families.
-- Added `@phcdevworks/spectre-manifest` as a devDependency. `spectre.manifest.json`
-  at the repo root declares this package's ecosystem role, layer, exports, and
-  allowed dependency targets. `check:ecosystem` validates it in the check pipeline.
+- Added `@phcdevworks/spectre-manifest` as a devDependency.
+  `spectre.manifest.json` at the repo root declares this package's ecosystem
+  role, layer, exports, and allowed dependency targets. `check:ecosystem`
+  validates it in the check pipeline.
 
 ### Fixed
 
 - `SpAlert` now supports polymorphic rendering as `<a>` or `<button>` tags,
-  automatically infers its interactive state from the tag, and implements
-  proper accessibility guarding (role assignment and href suppression).
+  automatically infers its interactive state from the tag, and implements proper
+  accessibility guarding (role assignment and href suppression).
 
 ## [2.5.0] - 2026-06-03
 
@@ -104,8 +106,8 @@ Release Title: Contract Hardening and Accessibility Parity
 
 ### Fixed
 
-- `SpBadge`, `SpButton`, `SpCard`, `SpIconBox`, `SpPricingCard`, `SpRating`,
-  and `SpTestimonial` now pass through explicit `id` and `aria-describedby`
+- `SpBadge`, `SpButton`, `SpCard`, `SpIconBox`, `SpPricingCard`, `SpRating`, and
+  `SpTestimonial` now pass through explicit `id` and `aria-describedby`
   attributes, improving deterministic accessible associations for SSR output.
 - `SpInput` now uses upstream recipe helpers for its wrapper, label, helper
   text, and error message parts instead of local class strings, keeping the
@@ -143,8 +145,8 @@ Release Title: Contract Hardening and Accessibility Parity
   classifications and dependency/package state.
 - `astro-adapter.contract.json` `componentFamilies.notYetSupported` populated
   with `alert`, `avatar`, `spinner`, and `tag` — the four upstream recipe
-  families available in `@phcdevworks/spectre-ui` ^1.7.0 that are not yet
-  bound by this adapter.
+  families available in `@phcdevworks/spectre-ui` ^1.7.0 that are not yet bound
+  by this adapter.
 - `examples/README.md` updated to document example app purpose, boundary rules
   (not a contract authority, stable components only, no local styling), and
   setup instructions.
@@ -167,9 +169,8 @@ Release Title: Contract Hardening and Accessibility Parity
 
 - Updated the peer dependency contract for `@phcdevworks/spectre-tokens` to
   `^2.6.0`, while refreshing local development against
-  `@phcdevworks/spectre-tokens` `^2.7.0`,
-  `@phcdevworks/spectre-ui` `^1.7.0`, Astro `6.4.3`, Vitest `4.1.8`,
-  TypeScript-ESLint `8.60.1`, and npm `11.16.0`.
+  `@phcdevworks/spectre-tokens` `^2.7.0`, `@phcdevworks/spectre-ui` `^1.7.0`,
+  Astro `6.4.3`, Vitest `4.1.8`, TypeScript-ESLint `8.60.1`, and npm `11.16.0`.
 - README now documents component family stability directly from the adapter
   contract, including stable Astro families and upstream families that are not
   yet supported.
@@ -202,8 +203,8 @@ Release Title: Interactive State Inference and Adapter Readiness
 
 ### Changed
 
-- Synchronized components and re-exports with the latest upstream contracts
-  from `@phcdevworks/spectre-ui` v1.5.0 and `@phcdevworks/spectre-tokens` v2.5.0.
+- Synchronized components and re-exports with the latest upstream contracts from
+  `@phcdevworks/spectre-ui` v1.5.0 and `@phcdevworks/spectre-tokens` v2.5.0.
 - Clarified AI guidance and README layer language so this package is documented
   as the Astro adapter layer downstream of `@phcdevworks/spectre-ui`, while
   `@phcdevworks/spectre-components` owns framework-agnostic Lit web components.
@@ -234,21 +235,21 @@ Release Title: Slot Hygiene and Upstream Recipe Alignment
 
 ### Changed
 
-- Improved `SpPricingCard` SSR output by rendering badge, price, and
-  description wrapper elements only when their corresponding slots are provided.
+- Improved `SpPricingCard` SSR output by rendering badge, price, and description
+  wrapper elements only when their corresponding slots are provided.
 - Improved `SpTestimonial` SSR output by conditionally rendering quote, author,
   author info, author name, and author title wrappers based on populated slots.
 - Forwarded interactive state into shared attribute resolution for `SpButton`
-  and `SpIconBox` so non-native interactive elements receive consistent
-  tabindex guarding.
+  and `SpIconBox` so non-native interactive elements receive consistent tabindex
+  guarding.
 - Consolidated recipe re-exports through a single upstream
   `@phcdevworks/spectre-ui` export block while preserving the public adapter
   recipe surface.
 - Updated the package to `2.3.0`, aligned the published peer and local
   development contract around `@phcdevworks/spectre-ui` `^1.5.0`, refreshed
   local development against Astro `6.2.2`, ESLint `10.3.0`, and
-  TypeScript-ESLint `8.59.1`, and updated the example app dependencies and
-  Node engine range to match the adapter contract.
+  TypeScript-ESLint `8.59.1`, and updated the example app dependencies and Node
+  engine range to match the adapter contract.
 
 ## [2.2.0] - 2026-04-25
 
