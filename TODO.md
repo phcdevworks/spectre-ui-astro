@@ -271,16 +271,14 @@ components are implemented and `npm run check` passes.
 
 ---
 
-## Phase 6 — Grid Component (v1): Blocked (upstream recipe not yet shipped)
+## Phase 6 — Grid Component (v1): Implemented, prepared for release
 
-`@phcdevworks/spectre-ui` does not yet export a Grid recipe (`getGridClasses`
-— tracked as "Phase 4c — Grid Recipe (v1)" in `spectre-ui/TODO.md`). Do not
-start this work until that recipe is published and the `spectre-ui` peer
-dependency range is bumped to cover it.
+`@phcdevworks/spectre-ui` ^2.2.0 ships the Grid recipe (`getGridClasses`).
+`SpGrid` is implemented; run `npm run check` before release handoff.
 
 ### Components
 
-- [ ] `SpGrid`
+- [x] `SpGrid`
   - `src/components/SpGrid.astro` calling `getGridClasses`, with `columns`
     (`1 | 2 | 3 | 4 | 6 | 12`) and `gap` (`sm | md | lg`) props mapped
     directly to the upstream recipe options — no adapter-local interpretation
@@ -292,9 +290,8 @@ dependency range is bumped to cover it.
 
 ### Release
 
-- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to the version that
-  ships the Grid recipe, in both `package.json` and
-  `astro-adapter.contract.json`.
+- [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.2.0`, in both
+  `package.json` and `astro-adapter.contract.json`.
 - [ ] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
 - [ ] Hand off to Bradley Potts for version bump, commit, tag, and publish.
 

@@ -1,0 +1,40 @@
+---
+import type { GridRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getGridClasses } from "@phcdevworks/spectre-ui";
+
+type SpGridElement = "div" | "section" | "ul" | "ol";
+
+interface SpGridProps extends GridRecipeOptions {
+  as?: SpGridElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  columns,
+  gap,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpGridProps;
+
+const classes = getGridClasses({ columns, gap });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

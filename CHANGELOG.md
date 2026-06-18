@@ -6,6 +6,16 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Added
+
+- Added `SpGrid` component. Renders as `<div>` by default (also `"section"`,
+  `"ul"`, `"ol"`). Supports `columns` (`1 | 2 | 3 | 4 | 6 | 12`) and `gap`
+  (`"sm" | "md" | "lg"`) mapped directly to `getGridClasses`.
+- Added `SpGrid` to the adapter contract as a stable family
+  (Phase 6 — Grid Component v1).
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.2.0` to cover
+  the grid recipe.
+
 ## [2.8.0] - 2026-06-17
 
 Release Title: Phase 5 Layout Component Expansion

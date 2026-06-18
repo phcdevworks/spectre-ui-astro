@@ -6,6 +6,7 @@ import {
   getCardClasses,
   getContainerClasses,
   getDropdownClasses,
+  getGridClasses,
   getIconBoxClasses,
   getInputClasses,
   getInputErrorMessageClasses,
@@ -39,6 +40,7 @@ import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
 import SpContainer from "../src/components/SpContainer.astro";
 import SpDropdown from "../src/components/SpDropdown.astro";
+import SpGrid from "../src/components/SpGrid.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
 import SpModal from "../src/components/SpModal.astro";
@@ -460,6 +462,16 @@ describe("SSR rendering", () => {
     });
 
     expect(html).toContain(getStackClasses({ direction: "horizontal" }));
+    expect(html).toContain("Content");
+  });
+
+  it("renders SpGrid with columns/gap-mapped upstream classes", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { columns: 3, gap: "lg" },
+      slots: { default: "Content" },
+    });
+
+    expect(html).toContain(getGridClasses({ columns: 3, gap: "lg" }));
     expect(html).toContain("Content");
   });
 });

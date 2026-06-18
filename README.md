@@ -281,6 +281,29 @@ The default slot renders any child content.
 
 ---
 
+### SpGrid
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `GridColumns` | `1` | `1` \| `2` \| `3` \| `4` \| `6` \| `12` |
+| `gap` | `GridGap` | `"md"` | `"sm"` \| `"md"` \| `"lg"` |
+| `as` | `"div" \| "section" \| "ul" \| "ol"` | `"div"` | Rendered element |
+| `id` | `string` | — | Element id |
+| `aria-label` | `string` | — | Accessible label |
+| `class` | `string` | — | Additional CSS classes |
+
+```astro
+<SpGrid columns={3} gap="lg">
+  <SpCard>One</SpCard>
+  <SpCard>Two</SpCard>
+  <SpCard>Three</SpCard>
+</SpGrid>
+```
+
+The default slot renders any child content.
+
+---
+
 ### SpInput
 
 `SpInput` renders a labeled input group: wrapper, optional label, input, optional helper text, and optional error message.
@@ -929,7 +952,7 @@ Do not use this package when:
 ```ts
 import {
   SpAlert, SpAvatar, SpBadge, SpButton, SpCard, SpContainer, SpDropdown,
-  SpIconBox, SpInput, SpModal, SpNav, SpPricingCard, SpRating, SpSection,
+  SpGrid, SpIconBox, SpInput, SpModal, SpNav, SpPricingCard, SpRating, SpSection,
   SpSpinner, SpStack, SpTag, SpTestimonial, SpToast, SpTooltip,
 } from '@phcdevworks/spectre-ui-astro'
 
@@ -951,6 +974,7 @@ import SpButton    from '@phcdevworks/spectre-ui-astro/components/SpButton.astro
 import SpCard      from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
 import SpContainer from '@phcdevworks/spectre-ui-astro/components/SpContainer.astro'
 import SpDropdown  from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
+import SpGrid      from '@phcdevworks/spectre-ui-astro/components/SpGrid.astro'
 import SpIconBox   from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput     from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
 import SpModal     from '@phcdevworks/spectre-ui-astro/components/SpModal.astro'
@@ -981,6 +1005,7 @@ Each component family is classified by its support status in this adapter.
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | container | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | dropdown | **stable** | Full prop, slot, and SSR coverage |
+| grid | **stable** | Full prop, slot, and SSR coverage |
 | icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
 | modal | **stable** | Full prop, slot, ARIA, and SSR coverage |

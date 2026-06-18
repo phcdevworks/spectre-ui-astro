@@ -6,6 +6,7 @@ export { default as SpButton } from "./components/SpButton.astro";
 export { default as SpCard } from "./components/SpCard.astro";
 export { default as SpContainer } from "./components/SpContainer.astro";
 export { default as SpDropdown } from "./components/SpDropdown.astro";
+export { default as SpGrid } from "./components/SpGrid.astro";
 export { default as SpIconBox } from "./components/SpIconBox.astro";
 export { default as SpInput } from "./components/SpInput.astro";
 export { default as SpModal } from "./components/SpModal.astro";
