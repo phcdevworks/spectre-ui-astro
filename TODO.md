@@ -1,7 +1,7 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 6 is implemented and prepared for release as v2.9.0.
-Human review, commit, tag, and publish remain with Bradley Potts.**
+Active phase: **Phase 7 is implemented and prepared for release. Human
+review, version bump, commit, tag, and publish remain with Bradley Potts.**
 
 ---
 
@@ -303,6 +303,60 @@ ships v2 recipe options and a real downstream adapter need exists.
 - [ ] Column span prop, once upstream supports it
 - [ ] Column/row offset props, once upstream supports it
 - [ ] Per-breakpoint column override prop, once upstream supports it
+
+---
+
+## Phase 7 — App Shell Layout: Implemented, prepared for release
+
+`@phcdevworks/spectre-ui` v2.3.0 ships the Stack/Container option additions
+and Sidebar/Footer recipes (tracked as "Phase 4d — App Shell Layout:
+Stack/Container Options, Sidebar, Footer" in `spectre-ui/TODO.md`, done).
+`@phcdevworks/spectre-tokens` v3.1.0 ships the backing `layout.sidebar.width`
+and `layout.container.maxWidthProse` tokens. `peerDependencies` bumped to
+`@phcdevworks/spectre-ui@^2.3.0` and `@phcdevworks/spectre-tokens@^3.1.0` in
+both `package.json` and `astro-adapter.contract.json`. Run `npm run check`
+before release handoff.
+
+### Components and prop additions
+
+- [x] Added `basis` prop to `SpStack` and `maxWidth` prop to `SpContainer`,
+  mapping directly to the upstream recipe options (`StackBasis`,
+  `ContainerMaxWidth`).
+
+- [x] `SpSidebar`
+  - `src/components/SpSidebar.astro` calling the upstream Sidebar recipe,
+    same delivery pattern as `SpNav`: component file, recipe re-export,
+    export in `src/index.ts`, entrypoint in `package.json`, contract entry
+    in `astro-adapter.contract.json`, `tests/sp-sidebar.test.ts`, SSR
+    coverage in `tests/rendering.test.ts`, prop table and usage in
+    `README.md`.
+  - **Decided: slide-out drawer on mobile.** Upstream `spectre-ui` owns the
+    CSS contract only (off-canvas position, transition, backdrop, the
+    `data-sidebar-open` data-attribute selector contract, confirmed against
+    the published `spectre-ui` README). This package is the first in this
+    adapter to own actual interactive state: `SpSidebar` renders its own
+    wrapper element carrying `data-sidebar-open="false"` (SSR-safe, closed
+    by default, no layout shift on hydration), a hamburger toggle button
+    (`toggleLabel` prop for the accessible label), and the backdrop element
+    (`getSidebarBackdropClasses`). An inline `<script>` block binds the
+    click handler that flips the data-attribute and the backdrop-tap-to-close
+    behavior, scoped per-instance via a `data-sidebar-bound` guard.
+  - Decided against a separate hamburger trigger wired into `SpNav` usage —
+    `SpSidebar` owns its own toggle directly, which keeps the interactive
+    contract in one component instead of splitting it across two.
+
+- [x] `SpFooter`
+  - `src/components/SpFooter.astro` calling the upstream Footer recipe.
+    Same delivery pattern as above, `tests/sp-footer.test.ts`.
+
+### Release
+
+- [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.3.0` and
+  `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.1.0`, in both
+  `package.json` and `astro-adapter.contract.json`.
+- [x] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
+- [x] Prepare release handoff for Bradley Potts review, commit, tag, and
+  publish.
 
 ---
 

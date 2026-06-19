@@ -9,11 +9,11 @@ recipe logic.
 
 ## System Phase Context
 
-| Package                         | Current state                                                                                                                                                  |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@phcdevworks/spectre-tokens`   | v2.9.0 — Phase 4 component token groups shipped                                                                                                                |
-| `@phcdevworks/spectre-ui`       | v1.9.0 — Phase 4 recipes shipped (nav, toast, tooltip, dropdown, modal)                                                                                        |
-| `@phcdevworks/spectre-ui-astro` | v2.8.0 — Phase 3, Phase 4, and Phase 5 (layout components) delivered and released. Phase 6 (Grid component) open, blocked on upstream `spectre-ui` Grid recipe |
+| Package | Current state |
+| - | - |
+| `@phcdevworks/spectre-tokens` | v3.1.0 — sidebar width and container prose max-width tokens shipped |
+| `@phcdevworks/spectre-ui` | v2.3.0 — Stack/Container options, Sidebar, Footer recipes shipped (Phase 4d) |
+| `@phcdevworks/spectre-ui-astro` | v2.9.0 — Phase 3, Phase 4, Phase 5, and Phase 6 (Grid component) delivered and released. Phase 7 (app shell layout) implemented, prepared for release |
 
 ---
 
@@ -65,24 +65,51 @@ Each followed the same delivery pattern as Phase 3/Phase 4.
 
 ---
 
-## Phase 6: Grid Component — Blocked
+## Phase 6: Grid Component — Delivered (v2.9.0)
 
-Blocked on `@phcdevworks/spectre-ui` shipping a Grid recipe (tracked as "Phase
-4c — Grid Recipe (v1)" in that package's roadmap). The underlying
-`breakpoints.*` and `layout.stack.gap.*` tokens are already published — the gap
-is the recipe layer, not tokens. This is the first adapter family backed by a
-responsive (breakpoint-aware) upstream recipe.
+`@phcdevworks/spectre-ui` v2.2.0 shipped the Grid recipe (tracked as "Phase
+4c — Grid Recipe (v1)" in that package's roadmap). `peerDependencies` bumped
+to `@phcdevworks/spectre-ui@^2.2.0`. This was the first adapter family backed
+by a responsive (breakpoint-aware) upstream recipe.
 
 | Family | Required spectre-ui recipe | Upstream status |
-| ------ | -------------------------- | --------------- |
-| grid   | `getGridClasses`           | Not shipped     |
+| - | - | - |
+| grid | `getGridClasses` | Delivered — stable |
 
-Will follow the same delivery pattern as Phase 3/4/5 once unblocked. `SpGrid`
-props (`columns`, `gap`) map directly to upstream recipe options — no
-adapter-local interpretation of column count or breakpoint behavior.
+`SpGrid` props (`columns`, `gap`) map directly to upstream recipe options —
+no adapter-local interpretation of column count or breakpoint behavior.
 
 Phase 6 v2 (column span, offsets, per-breakpoint override) is deferred until
 upstream `spectre-ui` Phase 4c v2 ships and a real downstream need exists.
+
+---
+
+## Phase 7: App Shell Layout — Implemented, prepared for release
+
+`@phcdevworks/spectre-ui` v2.3.0 shipped the Stack/Container option additions
+and new Sidebar/Footer recipes (tracked as "Phase 4d — App Shell Layout:
+Stack/Container Options, Sidebar, Footer" in that package's roadmap).
+`peerDependencies` bumped to `@phcdevworks/spectre-ui@^2.3.0` and
+`@phcdevworks/spectre-tokens@^3.1.0`. `SpNav` already covers the top bar;
+this phase adds the sidebar and bottom-bar equivalents plus the width/max-
+width options `SpStack` and `SpContainer` were missing.
+
+| Family | Required spectre-ui addition | Upstream status |
+| - | - | - |
+| stack | width/basis option on `getStackClasses` | Delivered — stable |
+| container | `maxWidth` option on `getContainerClasses` | Delivered — stable |
+| sidebar | new Sidebar recipe | Delivered — stable |
+| footer | new Footer recipe | Delivered — stable |
+
+Followed the same delivery pattern as Phase 3/4/5/6. **Decided: slide-out
+drawer on mobile.** Upstream owns the off-canvas CSS contract
+(`data-sidebar-open` data-attribute, confirmed against the published
+`spectre-ui` README); this package owns the toggle interaction — the first
+interactive component in this adapter. `SpSidebar` renders its own
+hamburger trigger, click handler, SSR-safe closed-by-default state
+(`data-sidebar-open="false"` by default, no layout shift on hydration), and
+backdrop-tap-to-close, all within the component itself rather than split
+across `SpNav` and `SpSidebar`.
 
 ---
 

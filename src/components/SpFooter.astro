@@ -1,0 +1,32 @@
+---
+import type { FooterRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getFooterClasses } from "@phcdevworks/spectre-ui";
+
+type SpFooterElement = "footer" | "div" | "section";
+
+interface SpFooterProps extends FooterRecipeOptions {
+  as?: SpFooterElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  bordered,
+  fullWidth,
+  as: Tag = "footer",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpFooterProps;
+
+const classes = getFooterClasses({ bordered, fullWidth });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
+  <slot />
+</Tag>

@@ -46,4 +46,20 @@ describe("SpContainer rendering", () => {
     expect(html.match(/id="main-container"/g)).toHaveLength(1);
     expect(html).toContain('aria-label="Main content"');
   });
+
+  it("applies maxWidth classes when requested", async () => {
+    const html = await container.renderToString(SpContainer, {
+      props: { maxWidth: "prose" },
+    });
+
+    expect(html).toContain(getContainerClasses({ maxWidth: "prose" }));
+  });
+
+  it("does not leak the maxWidth prop to the DOM", async () => {
+    const html = await container.renderToString(SpContainer, {
+      props: { maxWidth: "prose" },
+    });
+
+    expect(html).not.toContain('maxWidth="prose"');
+  });
 });
