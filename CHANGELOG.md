@@ -6,6 +6,34 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [2.10.0] - 2026-06-19
+
+Release Title: Phase 7 App Shell Layout
+
+Contract change type: additive
+
+### Added
+
+- Added `SpSidebar` component. Renders as `<aside>` by default (also `"div"`,
+  `"nav"`). Calls `getSidebarClasses`. The first adapter component to own
+  interactive state: renders a wrapper with `data-sidebar-open="false"`
+  (closed by default, SSR-safe), a hamburger toggle button, and a backdrop
+  element (`getSidebarBackdropClasses`) that close the drawer on tap. Build
+  sidebar links in the default slot using the re-exported
+  `getSidebarLinkClasses` helper.
+- Added `SpFooter` component. Renders as `<footer>` by default (also `"div"`,
+  `"section"`). Supports `bordered` and `fullWidth`, mapped to
+  `getFooterClasses`.
+- Added `basis` prop to `SpStack`, mapped to `getStackClasses`. `"sidebar"`
+  gives a flex child a fixed sidebar width.
+- Added `maxWidth` prop to `SpContainer`, mapped to `getContainerClasses`.
+  `"prose"` bounds content to a readable line length.
+- Added `SpSidebar` and `SpFooter` to the adapter contract as stable families
+  (Phase 7 — App Shell Layout).
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.3.0` and
+  `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.1.0` to cover the
+  Stack/Container option additions and Sidebar/Footer recipes.
+
 ## [2.9.0] - 2026-06-18
 
 Release Title: Phase 6 Grid Component

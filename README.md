@@ -7,7 +7,7 @@
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 2.9.0                           |
+| Current version/status | 2.10.0                          |
 
 ## Standard Workflow
 
@@ -48,8 +48,9 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 
 ## What Astro developers get
 
-- **Ten ready-to-use Astro components** — alerts, avatars, badges, buttons,
-  cards, icon boxes, inputs, pricing cards, ratings, and testimonials
+- **Twenty-three ready-to-use Astro components** — alerts, avatars, badges,
+  buttons, cards, app shell layout, forms, navigation, overlays, feedback,
+  pricing, ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript,
   stable accessibility wiring
 - **Thin wrapper pattern** — styling comes entirely from
@@ -153,10 +154,12 @@ import {
 
 ## Components
 
-All components are SSR-safe and ship no client-side JavaScript. Styling comes
-from the upstream Spectre UI stylesheet — this package adds no local CSS. Every
-component accepts a `class` prop for additional classes and spreads unknown
-props onto the root element.
+All components are SSR-safe. Styling comes from the upstream Spectre UI
+stylesheet — this package adds no local CSS. Every component accepts a `class`
+prop for additional classes and spreads unknown props onto the root element.
+`SpSidebar` is the one exception to "no client-side JavaScript": it owns the
+toggle/backdrop-close interaction for its off-canvas drawer behavior, rendering
+closed by default with no layout shift on hydration.
 
 ---
 
@@ -229,12 +232,13 @@ The default slot renders any child content.
 
 ### SpContainer
 
-| Prop         | Type                                                   | Default | Description            |
-| ------------ | ------------------------------------------------------ | ------- | ---------------------- |
-| `as`         | `"div" \| "section" \| "main" \| "article" \| "aside"` | `"div"` | Rendered element       |
-| `id`         | `string`                                               | —       | Element id             |
-| `aria-label` | `string`                                               | —       | Accessible label       |
-| `class`      | `string`                                               | —       | Additional CSS classes |
+| Prop         | Type                                                   | Default | Description                                        |
+| ------------ | ------------------------------------------------------ | ------- | -------------------------------------------------- |
+| `maxWidth`   | `ContainerMaxWidth`                                    | —       | `"prose"` bounds content to a readable line length |
+| `as`         | `"div" \| "section" \| "main" \| "article" \| "aside"` | `"div"` | Rendered element                                   |
+| `id`         | `string`                                               | —       | Element id                                         |
+| `aria-label` | `string`                                               | —       | Accessible label                                   |
+| `class`      | `string`                                               | —       | Additional CSS classes                             |
 
 ```astro
 <SpContainer>
@@ -244,6 +248,10 @@ The default slot renders any child content.
 <SpContainer as="main" aria-label="Main content">
   <p>Semantic main wrapper.</p>
 </SpContainer>
+
+<SpContainer maxWidth="prose">
+  <p>Bounded to a readable line length.</p>
+</SpContainer>
 ```
 
 The default slot renders any child content.
@@ -252,13 +260,14 @@ The default slot renders any child content.
 
 ### SpStack
 
-| Prop         | Type                                          | Default      | Description                    |
-| ------------ | --------------------------------------------- | ------------ | ------------------------------ |
-| `direction`  | `StackDirection`                              | `"vertical"` | `"vertical"` \| `"horizontal"` |
-| `as`         | `"div" \| "section" \| "ul" \| "ol" \| "nav"` | `"div"`      | Rendered element               |
-| `id`         | `string`                                      | —            | Element id                     |
-| `aria-label` | `string`                                      | —            | Accessible label               |
-| `class`      | `string`                                      | —            | Additional CSS classes         |
+| Prop         | Type                                          | Default      | Description                                       |
+| ------------ | --------------------------------------------- | ------------ | ------------------------------------------------- |
+| `direction`  | `StackDirection`                              | `"vertical"` | `"vertical"` \| `"horizontal"`                    |
+| `basis`      | `StackBasis`                                  | —            | `"sidebar"` gives the stack a fixed sidebar width |
+| `as`         | `"div" \| "section" \| "ul" \| "ol" \| "nav"` | `"div"`      | Rendered element                                  |
+| `id`         | `string`                                      | —            | Element id                                        |
+| `aria-label` | `string`                                      | —            | Accessible label                                  |
+| `class`      | `string`                                      | —            | Additional CSS classes                            |
 
 ```astro
 <SpStack>
@@ -269,6 +278,10 @@ The default slot renders any child content.
 <SpStack direction="horizontal" as="nav" aria-label="Primary">
   <a href="/">Home</a>
   <a href="/about">About</a>
+</SpStack>
+
+<SpStack direction="horizontal" basis="sidebar">
+  <p>Fixed-width sidebar-shaped flex child.</p>
 </SpStack>
 ```
 
@@ -294,6 +307,47 @@ The default slot renders any child content.
 ```
 
 The default slot renders any child content.
+
+---
+
+### SpSidebar
+
+| Prop          | Type                        | Default            | Description                                      |
+| ------------- | --------------------------- | ------------------ | ------------------------------------------------ |
+| `bordered`    | `boolean`                   | —                  | Applies a right border                           |
+| `as`          | `"aside" \| "div" \| "nav"` | `"aside"`          | Rendered element for the sidebar itself          |
+| `id`          | `string`                    | —                  | Element ID for the sidebar                       |
+| `aria-label`  | `string`                    | —                  | Accessible label for the sidebar                 |
+| `toggleLabel` | `string`                    | `"Toggle sidebar"` | Accessible label for the hamburger toggle button |
+| `class`       | `string`                    | —                  | Additional CSS classes for the sidebar           |
+
+`SpSidebar` is the first adapter component to own interactive state. It renders
+a wrapper element with `data-sidebar-open="false"` (closed by default,
+SSR-safe), a hamburger toggle button, a backdrop element
+(`getSidebarBackdropClasses`), and the sidebar element itself
+(`getSidebarClasses`). Below `breakpoints.md` (768px), upstream
+`@phcdevworks/spectre-ui` CSS renders the sidebar off-canvas; toggling the
+button or tapping the backdrop flips `data-sidebar-open`, which upstream CSS
+reacts to. Above `breakpoints.md`, the sidebar docks inline and the toggle has
+no visible effect, matching the upstream CSS contract.
+
+Build sidebar links in the default slot using the re-exported
+`getSidebarLinkClasses` helper, since per-link active/disabled/hover/focus state
+is consumer-driven.
+
+```astro
+---
+import { SpSidebar, getSidebarLinkClasses } from '@phcdevworks/spectre-ui-astro'
+
+const linkClass = getSidebarLinkClasses()
+const activeLinkClass = getSidebarLinkClasses({ active: true })
+---
+
+<SpSidebar bordered aria-label="Primary">
+  <a class={activeLinkClass} href="/" aria-current="page">Home</a>
+  <a class={linkClass} href="/about">About</a>
+</SpSidebar>
+```
 
 ---
 
@@ -326,9 +380,9 @@ The default slot renders any child content.
 optional helper text, and optional error message.
 
 `SpInput` requires an explicit `id` whenever `label`, `helperText`, or
-`errorMessage` is present. This is an SSR invariant — without a stable `id`,
-the `for`/`aria-describedby` associations would be nondeterministic. The
-component throws at render time if the requirement is violated.
+`errorMessage` is present. This is an SSR invariant — without a stable `id`, the
+`for`/`aria-describedby` associations would be nondeterministic. The component
+throws at render time if the requirement is violated.
 
 | Prop           | Type                                 | Default | Description                                                                |
 | -------------- | ------------------------------------ | ------- | -------------------------------------------------------------------------- |
@@ -716,6 +770,27 @@ const activeItemClass = getDropdownItemClasses({ active: true })
 
 ---
 
+### SpFooter
+
+| Prop         | Type                             | Default    | Description             |
+| ------------ | -------------------------------- | ---------- | ----------------------- |
+| `bordered`   | `boolean`                        | —          | Applies a top border    |
+| `fullWidth`  | `boolean`                        | —          | Stretches to full width |
+| `as`         | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element        |
+| `id`         | `string`                         | —          | Element ID              |
+| `aria-label` | `string`                         | —          | Accessible label        |
+| `class`      | `string`                         | —          | Additional CSS classes  |
+
+```astro
+<SpFooter bordered>
+  <p>&copy; 2026 PHCDevworks</p>
+</SpFooter>
+```
+
+The default slot renders any child content.
+
+---
+
 ### SpModal
 
 | Prop               | Type                 | Default | Description                                                              |
@@ -923,6 +998,7 @@ const links = [
 | `getDropdownClasses`                  | Dropdown root classes          |
 | `getDropdownMenuClasses`              | Dropdown menu container        |
 | `getDropdownItemClasses`              | Individual dropdown item       |
+| `getFooterClasses`                    | Footer class generation        |
 | `getIconBoxClasses`                   | Icon box class generation      |
 | `getInputClasses`                     | Input class generation         |
 | `getModalClasses`                     | Modal root classes             |
@@ -940,6 +1016,9 @@ const links = [
 | `getRatingStarClasses`                | Individual star element        |
 | `getRatingTextClasses`                | Rating text element            |
 | `getSectionClasses`                   | Section class generation       |
+| `getSidebarClasses`                   | Sidebar root classes           |
+| `getSidebarLinkClasses`               | Individual sidebar link        |
+| `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop    |
 | `getStackClasses`                     | Stack class generation         |
 | `getTestimonialClasses`               | Testimonial root classes       |
 | `getTestimonialQuoteClasses`          | Quote wrapper                  |
@@ -955,15 +1034,16 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`,
 `BadgeRecipeOptions`, `BadgeVariant`, `BadgeSize`, `ButtonRecipeOptions`,
 `ButtonVariant`, `ButtonSize`, `CardRecipeOptions`, `CardVariant`,
-`ContainerRecipeOptions`, `DropdownRecipeOptions`, `DropdownMenuRecipeOptions`,
-`DropdownItemRecipeOptions`, `DropdownPlacement`, `IconBoxRecipeOptions`,
-`IconBoxVariant`, `IconBoxSize`, `InputRecipeOptions`, `InputState`,
-`InputSize`, `ModalRecipeOptions`, `ModalOverlayRecipeOptions`,
-`NavRecipeOptions`, `NavLinkRecipeOptions`, `PricingCardRecipeOptions`,
-`RatingRecipeOptions`, `SectionRecipeOptions`, `StackRecipeOptions`,
-`StackDirection`, `TestimonialRecipeOptions`, `ToastRecipeOptions`,
-`ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`,
-`TooltipPlacement`.
+`ContainerRecipeOptions`, `ContainerMaxWidth`, `DropdownRecipeOptions`,
+`DropdownMenuRecipeOptions`, `DropdownItemRecipeOptions`, `DropdownPlacement`,
+`FooterRecipeOptions`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`,
+`InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`,
+`ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`,
+`PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
+`SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `StackRecipeOptions`,
+`StackDirection`, `StackBasis`, `TestimonialRecipeOptions`,
+`ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
+`TooltipRecipeOptions`, `TooltipPlacement`.
 
 ## What this package owns
 
@@ -1022,6 +1102,7 @@ import {
   SpCard,
   SpContainer,
   SpDropdown,
+  SpFooter,
   SpGrid,
   SpIconBox,
   SpInput,
@@ -1030,6 +1111,7 @@ import {
   SpPricingCard,
   SpRating,
   SpSection,
+  SpSidebar,
   SpSpinner,
   SpStack,
   SpTag,
@@ -1056,6 +1138,7 @@ import SpButton from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
 import SpCard from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
 import SpContainer from '@phcdevworks/spectre-ui-astro/components/SpContainer.astro'
 import SpDropdown from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
+import SpFooter from '@phcdevworks/spectre-ui-astro/components/SpFooter.astro'
 import SpGrid from '@phcdevworks/spectre-ui-astro/components/SpGrid.astro'
 import SpIconBox from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
@@ -1064,6 +1147,7 @@ import SpNav from '@phcdevworks/spectre-ui-astro/components/SpNav.astro'
 import SpPricingCard from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpRating from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
 import SpSection from '@phcdevworks/spectre-ui-astro/components/SpSection.astro'
+import SpSidebar from '@phcdevworks/spectre-ui-astro/components/SpSidebar.astro'
 import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpTag from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
@@ -1080,7 +1164,7 @@ from `@phcdevworks/spectre-ui/index.css`.
 Each component family is classified by its support status in this adapter.
 
 | Family | Status | Notes |
-|------|------|---------|
+| --- | --- | --- |
 | alert | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | avatar | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
@@ -1088,6 +1172,7 @@ Each component family is classified by its support status in this adapter.
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | container | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | dropdown | **stable** | Full prop, slot, and SSR coverage |
+| footer | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | grid | **stable** | Full prop, slot, and SSR coverage |
 | icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
@@ -1096,6 +1181,7 @@ Each component family is classified by its support status in this adapter.
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | section | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| sidebar | **stable** | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction |
 | spinner | **stable** | Full prop, ARIA, and SSR coverage |
 | stack | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tag | **stable** | Full prop, slot, ARIA, and SSR coverage |

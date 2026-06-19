@@ -15,6 +15,7 @@ interface SpContainerProps extends ContainerRecipeOptions {
 }
 
 const {
+  maxWidth,
   as: Tag = "div",
   class: className,
   id,
@@ -23,7 +24,7 @@ const {
   ...rest
 } = Astro.props as SpContainerProps;
 
-const classes = getContainerClasses({});
+const classes = getContainerClasses({ maxWidth });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

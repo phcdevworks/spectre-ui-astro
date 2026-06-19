@@ -6,6 +6,7 @@ import {
   getCardClasses,
   getContainerClasses,
   getDropdownClasses,
+  getFooterClasses,
   getGridClasses,
   getIconBoxClasses,
   getInputClasses,
@@ -26,6 +27,7 @@ import {
   getRatingStarsClasses,
   getRatingTextClasses,
   getSectionClasses,
+  getSidebarClasses,
   getSpinnerClasses,
   getStackClasses,
   getTagClasses,
@@ -40,6 +42,7 @@ import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
 import SpContainer from "../src/components/SpContainer.astro";
 import SpDropdown from "../src/components/SpDropdown.astro";
+import SpFooter from "../src/components/SpFooter.astro";
 import SpGrid from "../src/components/SpGrid.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
@@ -48,6 +51,7 @@ import SpNav from "../src/components/SpNav.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 import SpRating from "../src/components/SpRating.astro";
 import SpSection from "../src/components/SpSection.astro";
+import SpSidebar from "../src/components/SpSidebar.astro";
 import SpSpinner from "../src/components/SpSpinner.astro";
 import SpStack from "../src/components/SpStack.astro";
 import SpTag from "../src/components/SpTag.astro";
@@ -473,5 +477,28 @@ describe("SSR rendering", () => {
 
     expect(html).toContain(getGridClasses({ columns: 3, gap: "lg" }));
     expect(html).toContain("Content");
+  });
+
+  it("renders SpFooter with upstream classes", async () => {
+    const html = await container.renderToString(SpFooter, {
+      props: { bordered: true },
+      slots: { default: "Content" },
+    });
+
+    expect(html).toContain(getFooterClasses({ bordered: true }));
+    expect(html).toContain("<footer");
+    expect(html).toContain("Content");
+  });
+
+  it("renders SpSidebar with upstream classes and SSR-safe closed state", async () => {
+    const html = await container.renderToString(SpSidebar, {
+      props: { bordered: true },
+      slots: { default: "<a href=\"/\">Home</a>" },
+    });
+
+    expect(html).toContain(getSidebarClasses({ bordered: true }));
+    expect(html).toContain("<aside");
+    expect(html).toContain('data-sidebar-open="false"');
+    expect(html).toContain("Home");
   });
 });

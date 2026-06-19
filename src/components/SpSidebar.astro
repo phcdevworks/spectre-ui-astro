@@ -1,0 +1,71 @@
+---
+import type { SidebarRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSidebarClasses, getSidebarBackdropClasses } from "@phcdevworks/spectre-ui";
+
+type SpSidebarElement = "aside" | "div" | "nav";
+
+interface SpSidebarProps extends SidebarRecipeOptions {
+  as?: SpSidebarElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  toggleLabel?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  bordered,
+  as: Tag = "aside",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  toggleLabel = "Toggle sidebar",
+  ...rest
+} = Astro.props as SpSidebarProps;
+
+const classes = getSidebarClasses({ bordered });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const backdropClass = getSidebarBackdropClasses();
+const wrapperId = id ? `${id}-shell` : undefined;
+---
+
+<div class="sp-sidebar-shell" id={wrapperId} data-sidebar-open="false">
+  <button
+    type="button"
+    class="sp-sidebar-toggle"
+    aria-label={toggleLabel}
+    data-sidebar-toggle
+  >
+    <slot name="toggle-icon">&#9776;</slot>
+  </button>
+  <div class={backdropClass} data-sidebar-backdrop></div>
+  <Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
+    <slot />
+  </Tag>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach((shell) => {
+    if (shell.dataset.sidebarBound === "true") return;
+    shell.dataset.sidebarBound = "true";
+
+    const toggle = shell.querySelector<HTMLElement>("[data-sidebar-toggle]");
+    const backdrop = shell.querySelector<HTMLElement>("[data-sidebar-backdrop]");
+
+    const close = () => {
+      shell.setAttribute("data-sidebar-open", "false");
+    };
+
+    const open = () => {
+      shell.setAttribute("data-sidebar-open", "true");
+    };
+
+    toggle?.addEventListener("click", () => {
+      const isOpen = shell.getAttribute("data-sidebar-open") === "true";
+      isOpen ? close() : open();
+    });
+
+    backdrop?.addEventListener("click", close);
+  });
+</script>

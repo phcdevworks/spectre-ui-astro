@@ -51,4 +51,20 @@ describe("SpStack rendering", () => {
 
     expect(html).toContain(`${getStackClasses({ direction: "vertical" })} custom-class`);
   });
+
+  it("applies basis classes when requested", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { basis: "sidebar" },
+    });
+
+    expect(html).toContain(getStackClasses({ basis: "sidebar" }));
+  });
+
+  it("does not leak the basis prop to the DOM", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { basis: "sidebar" },
+    });
+
+    expect(html).not.toContain('basis="sidebar"');
+  });
 });

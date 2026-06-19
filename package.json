@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
@@ -61,7 +61,9 @@
     "./components/SpNav.astro": "./dist/components/SpNav.astro",
     "./components/SpPricingCard.astro": "./dist/components/SpPricingCard.astro",
     "./components/SpRating.astro": "./dist/components/SpRating.astro",
+    "./components/SpFooter.astro": "./dist/components/SpFooter.astro",
     "./components/SpSection.astro": "./dist/components/SpSection.astro",
+    "./components/SpSidebar.astro": "./dist/components/SpSidebar.astro",
     "./components/SpSpinner.astro": "./dist/components/SpSpinner.astro",
     "./components/SpStack.astro": "./dist/components/SpStack.astro",
     "./components/SpTag.astro": "./dist/components/SpTag.astro",
@@ -96,8 +98,8 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^3.0.0",
-    "@phcdevworks/spectre-ui": "^2.2.0",
+    "@phcdevworks/spectre-tokens": "^3.1.0",
+    "@phcdevworks/spectre-ui": "^2.3.0",
     "astro": "^6.1.3",
     "typescript": "^5.9 || ^6.0"
   },
@@ -109,8 +111,8 @@
     "esbuild": "^0.28.1"
   },
   "devDependencies": {
-    "@phcdevworks/spectre-tokens": "^3.0.0",
-    "@phcdevworks/spectre-ui": "^2.2.0",
+    "@phcdevworks/spectre-tokens": "^3.1.0",
+    "@phcdevworks/spectre-ui": "^2.3.0",
     "@types/node": "^25.9.3",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
