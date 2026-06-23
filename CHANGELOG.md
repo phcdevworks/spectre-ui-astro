@@ -6,6 +6,17 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-06-24
+
+Release Title: Astro 7 Alignment
+
+Contract change type: breaking
+
+### Changed
+
+- Bumped the Astro host-framework peer dependency from `^6.1.3` to `^7.0.0`.
+- Aligned local development and the example app with Astro `^7.0.2`.
+
 ## [2.10.0] - 2026-06-19
 
 Release Title: Phase 7 App Shell Layout

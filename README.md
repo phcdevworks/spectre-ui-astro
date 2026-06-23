@@ -7,7 +7,7 @@
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 2.10.0                          |
+| Current version/status | 3.0.0                          |
 
 ## Standard Workflow
 
