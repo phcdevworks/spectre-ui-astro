@@ -403,11 +403,11 @@ pass `align: 'stretch'` through yet.
 
 - [x] Update `astro-adapter.contract.json` and `README.md` for both changes.
 
-- [ ] Move changes from `CHANGELOG.md [Unreleased]` into the release heading
+- [x] Move changes from `CHANGELOG.md [Unreleased]` into the release heading
   (entries are drafted under `[Unreleased]`; moving to a version heading
   happens at release time per the release procedure).
 
-- [ ] Prepare release handoff for Bradley Potts review, commit, tag, and
+- [x] Prepare release handoff for Bradley Potts review, commit, tag, and
   publish.
 
 ### Downstream unblock
