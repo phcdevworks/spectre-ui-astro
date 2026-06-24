@@ -165,13 +165,13 @@
   ],
   "peerDependencies": {
     "@phcdevworks/spectre-tokens": "^3.1.0",
-    "@phcdevworks/spectre-ui": "^2.3.0",
+    "@phcdevworks/spectre-ui": "^2.4.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
   },
   "upstreamBinding": {
     "package": "@phcdevworks/spectre-ui",
-    "peerRange": "^2.3.0"
+    "peerRange": "^2.4.0"
   },
   "thinAdapterInvariants": {
     "noLocalCssOwnership": true,

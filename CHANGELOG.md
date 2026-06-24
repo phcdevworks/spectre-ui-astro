@@ -6,6 +6,16 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Changed
+
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.4.0`.
+- `SpSidebar` now applies `getSidebarToggleClasses()` to its toggle button
+  instead of the hardcoded `sp-sidebar-toggle` string, fixing a z-index bug
+  where the backdrop sat above the toggle button once the sidebar was open.
+- `SpStack` gained an `align` prop (`"center" | "stretch"`) mapping to the
+  upstream `getStackClasses({ align })` option, defaulting to `"center"` to
+  match upstream's backward-compatible default.
+
 ## [3.0.0] - 2026-06-24
 
 Release Title: Astro 7 Alignment

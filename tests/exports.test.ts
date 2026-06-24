@@ -69,6 +69,7 @@ const recipeRuntimeExports = [
   "getSidebarBackdropClasses",
   "getSidebarClasses",
   "getSidebarLinkClasses",
+  "getSidebarToggleClasses",
   "getSpinnerClasses",
   "getStackClasses",
   "getTagClasses",
