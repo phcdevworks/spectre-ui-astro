@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-06-24
+
+Release Title: Phase 8 App Shell Hardening
+
+Contract change type: additive
+
 ### Changed
 
 - Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.4.0`.
