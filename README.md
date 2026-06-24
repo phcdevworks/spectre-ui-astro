@@ -264,6 +264,7 @@ The default slot renders any child content.
 | ------------ | --------------------------------------------- | ------------ | ------------------------------------------------- |
 | `direction`  | `StackDirection`                              | `"vertical"` | `"vertical"` \| `"horizontal"`                    |
 | `basis`      | `StackBasis`                                  | —            | `"sidebar"` gives the stack a fixed sidebar width |
+| `align`      | `StackAlign`                                  | `"center"`   | `"center"` \| `"stretch"` cross-axis alignment    |
 | `as`         | `"div" \| "section" \| "ul" \| "ol" \| "nav"` | `"div"`      | Rendered element                                  |
 | `id`         | `string`                                      | —            | Element id                                        |
 | `aria-label` | `string`                                      | —            | Accessible label                                  |
@@ -282,6 +283,11 @@ The default slot renders any child content.
 
 <SpStack direction="horizontal" basis="sidebar">
   <p>Fixed-width sidebar-shaped flex child.</p>
+</SpStack>
+
+<SpStack direction="horizontal" align="stretch">
+  <SpSidebar>...</SpSidebar>
+  <main>Stretches to match the sidebar's height.</main>
 </SpStack>
 ```
 
@@ -1019,6 +1025,7 @@ const links = [
 | `getSidebarClasses`                   | Sidebar root classes           |
 | `getSidebarLinkClasses`               | Individual sidebar link        |
 | `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop    |
+| `getSidebarToggleClasses`             | Sidebar toggle button classes  |
 | `getStackClasses`                     | Stack class generation         |
 | `getTestimonialClasses`               | Testimonial root classes       |
 | `getTestimonialQuoteClasses`          | Quote wrapper                  |
@@ -1041,7 +1048,7 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`,
 `PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
 `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `StackRecipeOptions`,
-`StackDirection`, `StackBasis`, `TestimonialRecipeOptions`,
+`StackDirection`, `StackBasis`, `StackAlign`, `TestimonialRecipeOptions`,
 `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
 `TooltipRecipeOptions`, `TooltipPlacement`.
 

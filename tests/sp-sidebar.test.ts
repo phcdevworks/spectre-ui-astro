@@ -1,5 +1,9 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { getSidebarClasses, getSidebarBackdropClasses } from "@phcdevworks/spectre-ui";
+import {
+  getSidebarClasses,
+  getSidebarBackdropClasses,
+  getSidebarToggleClasses,
+} from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpSidebar from "../src/components/SpSidebar.astro";
 
@@ -41,6 +45,11 @@ describe("SpSidebar SSR-safe interactive state", () => {
     const html = await container.renderToString(SpSidebar, { props: {} });
     expect(html).toContain("data-sidebar-toggle");
     expect(html).toContain('aria-label="Toggle sidebar"');
+  });
+
+  it("applies the toggle classes from getSidebarToggleClasses", async () => {
+    const html = await container.renderToString(SpSidebar, { props: {} });
+    expect(html).toContain(getSidebarToggleClasses());
   });
 
   it("renders a custom toggle label when provided", async () => {

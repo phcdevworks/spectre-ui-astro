@@ -1,6 +1,10 @@
 ---
 import type { SidebarRecipeOptions } from "@phcdevworks/spectre-ui";
-import { getSidebarClasses, getSidebarBackdropClasses } from "@phcdevworks/spectre-ui";
+import {
+  getSidebarClasses,
+  getSidebarBackdropClasses,
+  getSidebarToggleClasses,
+} from "@phcdevworks/spectre-ui";
 
 type SpSidebarElement = "aside" | "div" | "nav";
 
@@ -27,13 +31,14 @@ const {
 const classes = getSidebarClasses({ bordered });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 const backdropClass = getSidebarBackdropClasses();
+const toggleClass = getSidebarToggleClasses();
 const wrapperId = id ? `${id}-shell` : undefined;
 ---
 
 <div class="sp-sidebar-shell" id={wrapperId} data-sidebar-open="false">
   <button
     type="button"
-    class="sp-sidebar-toggle"
+    class={toggleClass}
     aria-label={toggleLabel}
     data-sidebar-toggle
   >

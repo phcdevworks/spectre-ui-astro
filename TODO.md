@@ -1,6 +1,6 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 7 is implemented and prepared for release. Human
+Active phase: **Phase 8 is implemented and prepared for release. Human
 review, version bump, commit, tag, and publish remain with Bradley Potts.**
 
 ---
@@ -357,6 +357,65 @@ before release handoff.
 - [x] Move changes from `CHANGELOG.md [Unreleased]` into the release heading.
 - [x] Prepare release handoff for Bradley Potts review, commit, tag, and
   publish.
+
+---
+
+## Phase 8 — Sidebar Toggle Z-Index Fix: Implemented, prepared for release
+
+`@phcdevworks/spectre-ui` v2.4.0 ships two additive fixes (tracked as "App
+Shell Hardening" in `spectre-ui/CHANGELOG.md`, released 2026-06-23):
+
+- **Stack `align` option** (`center` | `stretch`) on `getStackClasses`, so a
+  docked `SpSidebar` can stretch to match a taller main content column inside
+  an `.sp-hstack` row. `.sp-hstack` still defaults to `center` for backward
+  compatibility — callers must opt in.
+- **`getSidebarToggleClasses`**, a new recipe wrapping `.sp-sidebar-toggle`
+  with an explicit `--sp-component-sidebar-toggle-z-index` above the
+  backdrop's z-index. Fixes a real bug found in `docs-phcdevworks-com`: the
+  hamburger button could open the sidebar but not close it, because the
+  backdrop's z-index sat above the toggle button once open.
+
+Neither fix takes effect for Astro consumers until this package is updated —
+`src/components/SpSidebar.astro` currently hardcodes the literal class string
+`"sp-sidebar-toggle"` on the toggle `<button>` instead of calling the new
+`getSidebarToggleClasses()`, and `SpStack`/`SpContainer` callers have no way to
+pass `align: 'stretch'` through yet.
+
+### Required changes
+
+- [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.4.0` in
+  `package.json` and `astro-adapter.contract.json`.
+
+- [x] `SpSidebar`: import `getSidebarToggleClasses` from `@phcdevworks/spectre-ui`
+  and apply it to the toggle `<button>` instead of the hardcoded
+  `"sp-sidebar-toggle"` string in `src/components/SpSidebar.astro`.
+  - Done when: the rendered toggle button class comes from the recipe
+    function, not a literal string, and `tests/sp-sidebar.test.ts` asserts
+    this (add a case if the existing test only checks for class presence by
+    string match).
+
+- [x] `SpStack`: add an `align` prop (`'center' | 'stretch'`) mapping directly
+  to the new `getStackClasses({ align })` option, same delivery pattern as the
+  existing `direction`/`basis` props. Default stays `center` to match
+  upstream's backward-compatible default.
+  - Done when: `tests/sp-stack.test.ts` covers both values, `README.md` prop
+    table updated.
+
+- [x] Update `astro-adapter.contract.json` and `README.md` for both changes.
+
+- [ ] Move changes from `CHANGELOG.md [Unreleased]` into the release heading
+  (entries are drafted under `[Unreleased]`; moving to a version heading
+  happens at release time per the release procedure).
+
+- [ ] Prepare release handoff for Bradley Potts review, commit, tag, and
+  publish.
+
+### Downstream unblock
+
+Once published, `docs-phcdevworks-com` needs to bump its
+`@phcdevworks/spectre-ui-astro` dependency range to cover this release to
+actually receive the toggle z-index fix and use `SpStack`'s new `align="stretch"`
+option for the sidebar/main-content row.
 
 ---
 

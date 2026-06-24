@@ -67,4 +67,26 @@ describe("SpStack rendering", () => {
 
     expect(html).not.toContain('basis="sidebar"');
   });
+
+  it("defaults to center alignment", async () => {
+    const html = await container.renderToString(SpStack, { props: {} });
+
+    expect(html).toContain(getStackClasses({ align: "center" }));
+  });
+
+  it("applies stretch alignment classes when requested", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { align: "stretch" },
+    });
+
+    expect(html).toContain(getStackClasses({ align: "stretch" }));
+  });
+
+  it("does not leak the align prop to the DOM", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { align: "stretch" },
+    });
+
+    expect(html).not.toContain('align="stretch"');
+  });
 });
