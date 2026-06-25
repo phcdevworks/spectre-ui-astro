@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-06-25
+
+Release Title: Phase 9 Sidebar Composition Parity
+
+Contract change type: additive
+
 ### Changed
 
 - Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.5.0`.
