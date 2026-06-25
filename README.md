@@ -337,23 +337,35 @@ button or tapping the backdrop flips `data-sidebar-open`, which upstream CSS
 reacts to. Above `breakpoints.md`, the sidebar docks inline and the toggle has
 no visible effect, matching the upstream CSS contract.
 
-Build sidebar links in the default slot using the re-exported
-`getSidebarLinkClasses` helper, since per-link active/disabled/hover/focus state
-is consumer-driven.
+Build sidebar nav groups in the default slot using the re-exported
+`getSidebarHeaderClasses` and `getSidebarLinkClasses` helpers, since section
+headers and per-link active/disabled/hover/focus/level state are
+consumer-driven.
 
 ```astro
 ---
-import { SpSidebar, getSidebarLinkClasses } from '@phcdevworks/spectre-ui-astro'
+import {
+  SpSidebar,
+  getSidebarHeaderClasses,
+  getSidebarLinkClasses,
+} from '@phcdevworks/spectre-ui-astro'
 
+const headerClass = getSidebarHeaderClasses()
 const linkClass = getSidebarLinkClasses()
 const activeLinkClass = getSidebarLinkClasses({ active: true })
+const childLinkClass = getSidebarLinkClasses({ level: 'child' })
 ---
 
 <SpSidebar bordered aria-label="Primary">
+  <span class={headerClass}>Guides</span>
   <a class={activeLinkClass} href="/" aria-current="page">Home</a>
   <a class={linkClass} href="/about">About</a>
+  <a class={childLinkClass} href="/about/team">Team</a>
 </SpSidebar>
 ```
+
+`getSidebarLinkClasses`'s `level` option (`"parent" | "child"`, defaulting to
+`"parent"`) indents nested links under a section header.
 
 ---
 
@@ -1024,6 +1036,7 @@ const links = [
 | `getSectionClasses`                   | Section class generation       |
 | `getSidebarClasses`                   | Sidebar root classes           |
 | `getSidebarLinkClasses`               | Individual sidebar link        |
+| `getSidebarHeaderClasses`             | Sidebar section header         |
 | `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop    |
 | `getSidebarToggleClasses`             | Sidebar toggle button classes  |
 | `getStackClasses`                     | Stack class generation         |
@@ -1047,7 +1060,7 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`,
 `ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`,
 `PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
-`SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `StackRecipeOptions`,
+`SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `SidebarLinkLevel`, `StackRecipeOptions`,
 `StackDirection`, `StackBasis`, `StackAlign`, `TestimonialRecipeOptions`,
 `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
 `TooltipRecipeOptions`, `TooltipPlacement`.

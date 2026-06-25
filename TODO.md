@@ -419,32 +419,33 @@ option for the sidebar/main-content row.
 
 ---
 
-## Phase 9 — Sidebar Header/Indent and Full-Height Fix: Not started, blocked on upstream
+## Phase 9 — Sidebar Header/Indent and Full-Height Fix: Complete, pending release
 
-Blocked on `spectre-ui/TODO.md` Phase 5 P0 items: `.sp-sidebar` full-height
-fix when docked inline, new `getSidebarHeaderClasses()` recipe, and the
-`level` (`'parent' | 'child'`) option on `getSidebarLinkClasses`. Surfaced
-from `docs-phcdevworks-com`'s app shell — full request: full-height sidebar
-with no gap, visually distinguished section headers, and properly indented
+Was blocked on `spectre-ui/TODO.md` Phase 5 P0 items, now published in
+`@phcdevworks/spectre-ui@2.5.0`: `.sp-sidebar` full-height fix when docked
+inline, `getSidebarHeaderClasses()` recipe, and the `level`
+(`'parent' | 'child'`) option on `getSidebarLinkClasses`. Surfaced from
+`docs-phcdevworks-com`'s app shell — full request: full-height sidebar with
+no gap, visually distinguished section headers, and properly indented
 parent/child nav links.
 
-- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` once the upstream
-  recipe additions publish.
+- [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.5.0`.
 
-- [ ] `SpSidebar`: add a header-rendering path. Either accept a `header` prop
-  per nav group, or document the pattern of calling the re-exported
-  `getSidebarHeaderClasses()` directly on a `<span>`/`<p>` inside the default
-  slot (same pattern this adapter already uses for `SpDropdown`/`SpNav`
-  sub-elements that are consumer-composed rather than prop-driven). Decide
-  based on how `docs-phcdevworks-com` actually composes its nav groups —
-  don't invent a prop shape speculatively.
+- [x] `SpSidebar`: no prop change needed. Decided, based on how
+  `docs-phcdevworks-com`'s `DocsLayout.astro` actually composes its nav
+  groups (plain `<span>` headers and `<nav>` link lists inside `SpStack`
+  blocks in the default slot), to document and re-export
+  `getSidebarHeaderClasses()` for consumer-composed `<span>`/`<p>` headers —
+  same pattern this adapter already uses for the existing
+  `getSidebarLinkClasses` re-export, not a new prop.
 
-- [ ] `SpSidebarLink` (if one gets added) or the documented
-  `getSidebarLinkClasses` re-export: thread the new `level` option through,
-  same delivery pattern as `active`/`disabled`/`hovered`/`focused`.
+- [x] `getSidebarLinkClasses` re-export: the `level` option flows through
+  automatically since `SidebarLinkRecipeOptions` is re-exported by reference;
+  also re-exported the `SidebarLinkLevel` type for consumer typing.
 
-- [ ] Update `tests/sp-sidebar.test.ts`, `README.md` prop/recipe tables, and
-  `astro-adapter.contract.json` for whatever shape is decided above.
+- [x] Updated `tests/sp-sidebar.test.ts`, `tests/exports.test.ts`,
+  `README.md` prop/recipe tables, and `astro-adapter.contract.json` for the
+  new `getSidebarHeaderClasses` export and `SidebarLinkLevel` type.
 
 ### Downstream unblock
 

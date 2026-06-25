@@ -99,7 +99,7 @@
   },
   "peerDependencies": {
     "@phcdevworks/spectre-tokens": "^3.1.0",
-    "@phcdevworks/spectre-ui": "^2.4.0",
+    "@phcdevworks/spectre-ui": "^2.5.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
   },

@@ -6,6 +6,16 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Changed
+
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.5.0`.
+- Re-exported `getSidebarHeaderClasses` and the `SidebarLinkLevel` type from
+  `@phcdevworks/spectre-ui`, unblocking Phase 9 sidebar header and nested
+  link indentation. Consumers compose section headers and indented child
+  links directly in `SpSidebar`'s default slot using
+  `getSidebarHeaderClasses()` and `getSidebarLinkClasses({ level: "child" })`,
+  matching the existing consumer-composed pattern for `getSidebarLinkClasses`.
+
 ## [3.1.0] - 2026-06-24
 
 Release Title: Phase 8 App Shell Hardening

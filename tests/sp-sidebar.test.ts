@@ -3,6 +3,8 @@ import {
   getSidebarClasses,
   getSidebarBackdropClasses,
   getSidebarToggleClasses,
+  getSidebarHeaderClasses,
+  getSidebarLinkClasses,
 } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpSidebar from "../src/components/SpSidebar.astro";
@@ -101,5 +103,29 @@ describe("SpSidebar element and slot rendering", () => {
       slots: { default: '<a href="/">Home</a>' },
     });
     expect(html).toContain("Home");
+  });
+});
+
+describe("SpSidebar consumer-composed header and nested link classes", () => {
+  it("re-exports getSidebarHeaderClasses for consumer-composed section headers", async () => {
+    const html = await container.renderToString(SpSidebar, {
+      props: {},
+      slots: {
+        default: `<span class="${getSidebarHeaderClasses()}">Guides</span>`,
+      },
+    });
+    expect(html).toContain(getSidebarHeaderClasses());
+    expect(html).toContain("Guides");
+  });
+
+  it("re-exports getSidebarLinkClasses with the level option for indented child links", async () => {
+    const html = await container.renderToString(SpSidebar, {
+      props: {},
+      slots: {
+        default: `<a class="${getSidebarLinkClasses({ level: "child" })}" href="/child">Child link</a>`,
+      },
+    });
+    expect(html).toContain(getSidebarLinkClasses({ level: "child" }));
+    expect(getSidebarLinkClasses({ level: "child" })).not.toBe(getSidebarLinkClasses());
   });
 });
