@@ -419,6 +419,42 @@ option for the sidebar/main-content row.
 
 ---
 
+## Phase 9 — Sidebar Header/Indent and Full-Height Fix: Not started, blocked on upstream
+
+Blocked on `spectre-ui/TODO.md` Phase 5 P0 items: `.sp-sidebar` full-height
+fix when docked inline, new `getSidebarHeaderClasses()` recipe, and the
+`level` (`'parent' | 'child'`) option on `getSidebarLinkClasses`. Surfaced
+from `docs-phcdevworks-com`'s app shell — full request: full-height sidebar
+with no gap, visually distinguished section headers, and properly indented
+parent/child nav links.
+
+- [ ] Bump `peerDependencies["@phcdevworks/spectre-ui"]` once the upstream
+  recipe additions publish.
+
+- [ ] `SpSidebar`: add a header-rendering path. Either accept a `header` prop
+  per nav group, or document the pattern of calling the re-exported
+  `getSidebarHeaderClasses()` directly on a `<span>`/`<p>` inside the default
+  slot (same pattern this adapter already uses for `SpDropdown`/`SpNav`
+  sub-elements that are consumer-composed rather than prop-driven). Decide
+  based on how `docs-phcdevworks-com` actually composes its nav groups —
+  don't invent a prop shape speculatively.
+
+- [ ] `SpSidebarLink` (if one gets added) or the documented
+  `getSidebarLinkClasses` re-export: thread the new `level` option through,
+  same delivery pattern as `active`/`disabled`/`hovered`/`focused`.
+
+- [ ] Update `tests/sp-sidebar.test.ts`, `README.md` prop/recipe tables, and
+  `astro-adapter.contract.json` for whatever shape is decided above.
+
+### Downstream unblock
+
+Once published, `docs-phcdevworks-com` needs to bump its
+`@phcdevworks/spectre-ui-astro` dependency range and update
+`DocsLayout.astro` to use the new header/indent classes for its sidebar nav
+groups (Tokens, UI, UI Astro, Components, Base, Guides, Getting Started).
+
+---
+
 ## Out of Scope
 
 - No token redefinition, local CSS, or forked recipe logic.
