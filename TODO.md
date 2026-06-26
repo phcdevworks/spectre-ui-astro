@@ -456,6 +456,36 @@ groups (Tokens, UI, UI Astro, Components, Base, Guides, Getting Started).
 
 ---
 
+## Phase 10 — Form-Field Component Parity Gap (Blocked on Tokens)
+
+Cross-repo audit (`spectre-ui-astro` vs. `spectre-components`) found this
+adapter has no `SpCheckbox`, `SpFieldset`, `SpLabel`, `SpRadio`, `SpSelect`,
+or `SpTextarea`, even though `SpInput` and `SpButton` exist and
+`spectre-components` already ships Lit equivalents for all six. Gated on
+`@phcdevworks/spectre-tokens` Phase 7 and `@phcdevworks/spectre-ui` Phase 4e
+publishing the backing recipes first (`getCheckboxClasses`,
+`getRadioClasses`, `getSelectClasses`, `getTextareaClasses`,
+`getFieldsetClasses`, `getLabelClasses`).
+
+### P0: Add Components After Upstream Recipes Publish
+
+- [ ] Add `SpCheckbox.astro` once `getCheckboxClasses` publishes.
+
+- [ ] Add `SpRadio.astro` once `getRadioClasses` publishes.
+
+- [ ] Add `SpSelect.astro` once `getSelectClasses` publishes.
+
+- [ ] Add `SpTextarea.astro` once `getTextareaClasses` publishes.
+
+- [ ] Add `SpFieldset.astro` once `getFieldsetClasses` publishes.
+
+- [ ] Add `SpLabel.astro` once `getLabelClasses` publishes.
+
+Each component needs `astro-adapter.contract.json` update, README prop table
+entry, and focused tests, following the existing `SpInput` delivery pattern.
+
+---
+
 ## Out of Scope
 
 - No token redefinition, local CSS, or forked recipe logic.

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import contractJson from '../astro-adapter.contract.json' with { type: 'json' };
+import packageJson from '../package.json' with { type: 'json' };
 
 const repoRoot = resolve(import.meta.dirname, '..');
 const readme = readFileSync(resolve(repoRoot, 'README.md'), 'utf-8');
@@ -50,6 +51,18 @@ for (const family of contractJson.componentFamilies.notYetSupported as string[])
   assertContains(
     `| ${family} |`,
     `README.md component family stability table is missing an entry for the not-yet-supported family: "${family}".`,
+  );
+}
+
+const versionMatch = readme.match(/\|\s*Current version\/status\s*\|\s*([^\s|]+)\s*\|/i);
+if (!versionMatch) {
+  throw new Error(
+    'README.md is missing the "Current version/status" row in the Repository Snapshot table.',
+  );
+}
+if (versionMatch[1] !== packageJson.version) {
+  throw new Error(
+    `README.md "Current version/status" is "${versionMatch[1]}" but package.json version is "${packageJson.version}".`,
   );
 }
 
