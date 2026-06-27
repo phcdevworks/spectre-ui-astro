@@ -78,7 +78,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsup --config tsup.config.ts && npm run build:types && node --experimental-strip-types scripts/copy-components.ts && node --experimental-strip-types scripts/validate-package-contract.ts && node --experimental-strip-types scripts/validate-readme-contract.ts",
+    "build": "tsup --config tsup.config.ts && npm run build:types && node --experimental-strip-types scripts/copy-components.ts && node --experimental-strip-types scripts/validate-package-contract.ts && npm run validate:readme",
     "build:types": "tsc --project tsconfig.build.json",
     "check": "npm run ci:verify && npm run check:ecosystem",
     "ci:verify": "npm run lint && npm run build && npm run typecheck && npm test",
@@ -91,6 +91,8 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build",
+    "validate:readme": "node --experimental-strip-types scripts/validate-readme-contract.ts",
+    "check:version-sync": "npm run validate:readme",
     "check:ecosystem": "spectre-manifest-validate spectre.manifest.json && spectre-manifest-check spectre.manifest.json ."
   },
   "publishConfig": {
@@ -98,7 +100,7 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^3.1.0",
+    "@phcdevworks/spectre-tokens": "^3.2.0",
     "@phcdevworks/spectre-ui": "^2.5.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
@@ -112,15 +114,15 @@
   },
   "devDependencies": {
     "@phcdevworks/spectre-manifest": "^1.0.0",
-    "@phcdevworks/spectre-tokens": "^3.1.0",
+    "@phcdevworks/spectre-tokens": "^3.2.0",
     "@phcdevworks/spectre-ui": "^2.5.0",
     "@types/node": "^26.0.1",
     "@typescript-eslint/eslint-plugin": "^8.62.0",
     "@typescript-eslint/parser": "^8.62.0",
     "astro": "^7.0.3",
-    "eslint": "^10.5.0",
+    "eslint": "^10.6.0",
     "jiti": "^2.7.0",
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.0",
     "tsup": "^8.5.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",

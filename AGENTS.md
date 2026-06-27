@@ -32,6 +32,30 @@ is release-relevant.
 This repository is maintained by PHCDevworks and contains the Astro adapter for
 the Spectre system.
 
+## Upstream Requests and Roadmap Self-Expansion
+
+Full directive: project-team [AGENTS.md](../AGENTS.md) "Upstream Requests and
+Roadmap Self-Expansion." Applied to this repo:
+
+- This repo is L3b — its upstream is `spectre-ui` (and transitively
+  `spectre-tokens`). If an adapter needs a recipe option, shared type, or
+  styling behavior that doesn't exist upstream, append the request to
+  `spectre-ui/TODO.md` under `## Requested by Downstream`, dated, with the
+  reason and a link back to this repo's own TODO.md/ROADMAP.md. Never patch
+  around the gap with local styling logic (see Upstream-First Policy above).
+- Downstream consumers in `project-web` (`www-phcdevworks-com`,
+  `docs-phcdevworks-com`) may append component or contract requests to this
+  repo's own `TODO.md` under `## Requested by Downstream`. Keep that section
+  visible and separate from self-planned adapter work.
+- This repo's own [ROADMAP.md](ROADMAP.md) may be proactively expanded with new
+  or reordered phases by the agent's own analysis — but never mark a phase
+  delivered without `npm run check` passing, and never open a new component
+  phase against a `spectre-ui` recipe family that hasn't actually published
+  yet (see Roadmap Priorities in `CLAUDE.md`).
+- Surface any new TODO request or roadmap expansion in the handoff for Bradley
+  Potts in the same change it was made, and reflect cross-repo-relevant
+  changes in the project-team's own ROADMAP.md/TODO.md.
+
 ## File Ownership at a Glance
 
 | File / Path                            | Status                                    | Notes                                                          |
@@ -136,6 +160,8 @@ not redefine design ownership.
     independently reproducible packages, so they must not rely on tracked
     example lockfiles or `npm ci` in CI when consuming the parent package via a
     local file dependency.
+12. All `scripts/` tooling is TypeScript (`.ts`), run via
+    `node --experimental-strip-types`; never add a new `.js`/`.mjs` script.
 
 ## What This Repository Owns
 
