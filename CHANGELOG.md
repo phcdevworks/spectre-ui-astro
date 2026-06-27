@@ -6,6 +6,13 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Changed
+
+- Bumped `@phcdevworks/spectre-tokens` peer and dev dependency to `^3.2.0`,
+  closing dependency drift against the current published `project-design`
+  version. The upstream release was additive only — no source changes
+  required here.
+
 ## [3.2.0] - 2026-06-25
 
 Release Title: Phase 9 Sidebar Composition Parity
