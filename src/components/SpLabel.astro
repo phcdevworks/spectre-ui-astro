@@ -1,0 +1,39 @@
+---
+import type { LabelRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getLabelClasses } from "@phcdevworks/spectre-ui";
+
+interface SpLabelProps extends LabelRecipeOptions {
+  class?: string;
+  id?: string;
+  htmlFor?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  disabled,
+  required,
+  class: className,
+  id,
+  htmlFor,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpLabelProps;
+
+const classes = getLabelClasses({ disabled, required });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<label
+  class={finalClass}
+  id={id}
+  for={htmlFor}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</label>

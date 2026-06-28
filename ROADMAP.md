@@ -11,9 +11,9 @@ recipe logic.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v3.1.0 — sidebar width and container prose max-width tokens shipped |
-| `@phcdevworks/spectre-ui` | v2.3.0 — Stack/Container options, Sidebar, Footer recipes shipped (Phase 4d) |
-| `@phcdevworks/spectre-ui-astro` | v2.9.0 — Phase 3, Phase 4, Phase 5, and Phase 6 (Grid component) delivered and released. Phase 7 (app shell layout) implemented, prepared for release |
+| `@phcdevworks/spectre-tokens` | v3.2.0 — full token surface, including form-field component groups |
+| `@phcdevworks/spectre-ui` | v2.6.0 — Phase 9 sidebar header/indent recipes, Phase 10 form-field recipes (checkbox, radio, select, textarea, fieldset, label) shipped |
+| `@phcdevworks/spectre-ui-astro` | v3.2.0 — Phases 3–9 delivered and released. Phase 10 (form-field component parity) implemented, prepared for release |
 
 ---
 
@@ -110,6 +110,34 @@ hamburger trigger, click handler, SSR-safe closed-by-default state
 (`data-sidebar-open="false"` by default, no layout shift on hydration), and
 backdrop-tap-to-close, all within the component itself rather than split
 across `SpNav` and `SpSidebar`.
+
+---
+
+## Phase 10: Form-Field Component Parity Gap — Implemented, prepared for release
+
+Cross-repo audit (`spectre-ui-astro` vs. `spectre-components`) found this
+adapter had no form-field primitives even though `spectre-components` already
+shipped Lit equivalents for all six. Gated on `@phcdevworks/spectre-tokens`
+and `@phcdevworks/spectre-ui` publishing the backing recipes; cleared with
+`@phcdevworks/spectre-ui@2.6.0`. `peerDependencies` bumped to
+`@phcdevworks/spectre-ui@^2.6.0` and `@phcdevworks/spectre-tokens@^3.2.0`.
+
+| Family    | Required spectre-ui recipe                            | Upstream status    |
+| --------- | ------------------------------------------------------- | ------------------- |
+| checkbox  | `getCheckboxClasses`                                     | Delivered — stable |
+| radio     | `getRadioClasses`                                         | Delivered — stable |
+| select    | `getSelectClasses`                                        | Delivered — stable |
+| textarea  | `getTextareaClasses`                                      | Delivered — stable |
+| fieldset  | `getFieldsetClasses` / `getFieldsetLegendClasses`         | Delivered — stable |
+| label     | `getLabelClasses`                                         | Delivered — stable |
+
+Followed the same delivery pattern as Phase 3–9, simplified: none of the six
+recipes have `as`-polymorphism or an interactive-state machine, so the new
+components map directly to fixed native elements (`<input>`, `<select>`,
+`<textarea>`, `<fieldset>`, `<label>`) with no `resolveInteractiveAttrs`
+involvement. No accessibility-id association helper was added — association
+between `SpLabel`'s `for` and a control's `id` is the consumer's
+responsibility, same as plain HTML.
 
 ---
 

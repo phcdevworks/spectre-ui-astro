@@ -1,0 +1,50 @@
+---
+import type { RadioRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getRadioClasses } from "@phcdevworks/spectre-ui";
+
+interface SpRadioProps extends RadioRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  value?: string;
+  required?: boolean;
+  form?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  checked,
+  disabled,
+  class: className,
+  id,
+  name,
+  value,
+  required,
+  form,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpRadioProps;
+
+const classes = getRadioClasses({ checked, disabled });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<input
+  type="radio"
+  class={finalClass}
+  id={id}
+  name={name}
+  value={value}
+  checked={checked}
+  disabled={disabled}
+  required={required}
+  form={form}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+/>

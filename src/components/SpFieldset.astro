@@ -1,0 +1,48 @@
+---
+import type { FieldsetRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getFieldsetClasses, getFieldsetLegendClasses } from "@phcdevworks/spectre-ui";
+
+interface SpFieldsetProps extends FieldsetRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  form?: string;
+  legend?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  disabled,
+  class: className,
+  id,
+  name,
+  form,
+  legend,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpFieldsetProps;
+
+const classes = getFieldsetClasses({ disabled });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const legendClasses = getFieldsetLegendClasses();
+const visibleLegend = legend?.trim() ? legend : undefined;
+---
+
+<fieldset
+  class={finalClass}
+  id={id}
+  name={name}
+  disabled={disabled}
+  form={form}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
+  {visibleLegend && <legend class={legendClasses}>{visibleLegend}</legend>}
+  <slot />
+</fieldset>

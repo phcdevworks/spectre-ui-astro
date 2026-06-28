@@ -1,0 +1,53 @@
+---
+import type { SelectRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSelectClasses } from "@phcdevworks/spectre-ui";
+
+interface SpSelectProps extends SelectRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  value?: string;
+  required?: boolean;
+  multiple?: boolean;
+  form?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  disabled,
+  focused,
+  class: className,
+  id,
+  name,
+  value,
+  required,
+  multiple,
+  form,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpSelectProps;
+
+const classes = getSelectClasses({ disabled, focused });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<select
+  class={finalClass}
+  id={id}
+  name={name}
+  value={value}
+  disabled={disabled}
+  required={required}
+  multiple={multiple}
+  form={form}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
+  <slot />
+</select>

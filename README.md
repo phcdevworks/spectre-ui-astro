@@ -456,6 +456,169 @@ throws at render time if the requirement is violated.
 
 ---
 
+### SpLabel
+
+`SpLabel` renders a standalone `<label>`. Association with a form control is
+the consumer's responsibility, the same as plain HTML — pass `htmlFor`
+matching the control's `id`.
+
+| Prop               | Type      | Default | Description                       |
+| ------------------ | --------- | ------- | ---------------------------------- |
+| `disabled`         | `boolean` | —       | Disabled styling                   |
+| `required`         | `boolean` | —       | Required-field styling             |
+| `htmlFor`          | `string`  | —       | Renders the `for` attribute        |
+| `id`               | `string`  | —       | Element ID                         |
+| `aria-label`       | `string`  | —       | Accessible label                   |
+| `aria-describedby` | `string`  | —       | Associates a description element  |
+| `class`            | `string`  | —       | Additional CSS classes             |
+
+```astro
+<SpLabel htmlFor="email">Email</SpLabel>
+<SpInput id="email" type="email" />
+
+<SpLabel htmlFor="agree" required>I agree to the terms</SpLabel>
+```
+
+---
+
+### SpFieldset
+
+`SpFieldset` renders a `<fieldset>` with an optional `<legend>`. The legend
+only renders when `legend` is provided and non-empty.
+
+| Prop               | Type      | Default | Description                                |
+| ------------------ | --------- | ------- | -------------------------------------------- |
+| `disabled`         | `boolean` | —       | Disables every control inside the fieldset   |
+| `legend`           | `string`  | —       | Renders a `<legend>` with the recipe class   |
+| `name`             | `string`  | —       | Form field group name                        |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID             |
+| `id`               | `string`  | —       | Element ID                                   |
+| `aria-label`       | `string`  | —       | Accessible label                             |
+| `aria-describedby` | `string`  | —       | Associates a description element            |
+| `class`            | `string`  | —       | Additional CSS classes                       |
+
+```astro
+<SpFieldset legend="Contact details">
+  <SpLabel htmlFor="name">Name</SpLabel>
+  <SpInput id="name" name="name" />
+</SpFieldset>
+
+<SpFieldset disabled legend="Read-only section">
+  <SpInput id="readonly-field" value="Locked" disabled />
+</SpFieldset>
+```
+
+---
+
+### SpCheckbox
+
+`SpCheckbox` renders a native `<input type="checkbox">`.
+
+| Prop               | Type      | Default | Description                       |
+| ------------------ | --------- | ------- | ---------------------------------- |
+| `checked`          | `boolean` | —       | Checked state                      |
+| `disabled`         | `boolean` | —       | Disables the checkbox              |
+| `id`               | `string`  | —       | Element ID                         |
+| `name`             | `string`  | —       | Form field name                    |
+| `value`            | `string`  | —       | Form field value                   |
+| `required`         | `boolean` | —       | Marks the field required           |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID   |
+| `aria-label`       | `string`  | —       | Accessible label                   |
+| `aria-describedby` | `string`  | —       | Associates a description element  |
+| `class`            | `string`  | —       | Additional CSS classes             |
+
+```astro
+<SpLabel htmlFor="agree">I agree to the terms</SpLabel>
+<SpCheckbox id="agree" name="terms" />
+
+<SpCheckbox id="newsletter" name="subscribe" checked />
+<SpCheckbox id="locked" disabled />
+```
+
+---
+
+### SpRadio
+
+`SpRadio` renders a native `<input type="radio">`.
+
+| Prop               | Type      | Default | Description                             |
+| ------------------ | --------- | ------- | ----------------------------------------- |
+| `checked`          | `boolean` | —       | Checked state                             |
+| `disabled`         | `boolean` | —       | Disables the radio                        |
+| `id`               | `string`  | —       | Element ID                                |
+| `name`             | `string`  | —       | Form field name — shared across a group   |
+| `value`            | `string`  | —       | Form field value                          |
+| `required`         | `boolean` | —       | Marks the field required                  |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID          |
+| `aria-label`       | `string`  | —       | Accessible label                          |
+| `aria-describedby` | `string`  | —       | Associates a description element         |
+| `class`            | `string`  | —       | Additional CSS classes                    |
+
+```astro
+<SpLabel htmlFor="plan-pro">Pro</SpLabel>
+<SpRadio id="plan-pro" name="plan" value="pro" checked />
+
+<SpLabel htmlFor="plan-free">Free</SpLabel>
+<SpRadio id="plan-free" name="plan" value="free" />
+```
+
+---
+
+### SpSelect
+
+`SpSelect` renders a native `<select>`. Pass `<option>` elements as children.
+
+| Prop               | Type      | Default | Description                       |
+| ------------------ | --------- | ------- | ---------------------------------- |
+| `disabled`         | `boolean` | —       | Disables the select                |
+| `focused`          | `boolean` | —       | Applies focus styling              |
+| `id`               | `string`  | —       | Element ID                         |
+| `name`             | `string`  | —       | Form field name                    |
+| `value`            | `string`  | —       | Selected value                     |
+| `required`         | `boolean` | —       | Marks the field required           |
+| `multiple`         | `boolean` | —       | Allows multiple selection          |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID   |
+| `aria-label`       | `string`  | —       | Accessible label                   |
+| `aria-describedby` | `string`  | —       | Associates a description element  |
+| `class`            | `string`  | —       | Additional CSS classes             |
+
+```astro
+<SpLabel htmlFor="country">Country</SpLabel>
+<SpSelect id="country" name="country">
+  <option value="us">United States</option>
+  <option value="ca">Canada</option>
+</SpSelect>
+```
+
+---
+
+### SpTextarea
+
+`SpTextarea` renders a native `<textarea>`.
+
+| Prop               | Type      | Default | Description                       |
+| ------------------ | --------- | ------- | ---------------------------------- |
+| `disabled`         | `boolean` | —       | Disables the textarea              |
+| `focused`          | `boolean` | —       | Applies focus styling              |
+| `id`               | `string`  | —       | Element ID                         |
+| `name`             | `string`  | —       | Form field name                    |
+| `value`            | `string`  | —       | Default text content               |
+| `placeholder`      | `string`  | —       | Placeholder text                   |
+| `rows`             | `number`  | —       | Visible row count                  |
+| `required`         | `boolean` | —       | Marks the field required           |
+| `readonly`         | `boolean` | —       | Prevents editing                   |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID   |
+| `aria-label`       | `string`  | —       | Accessible label                   |
+| `aria-describedby` | `string`  | —       | Associates a description element  |
+| `class`            | `string`  | —       | Additional CSS classes             |
+
+```astro
+<SpLabel htmlFor="bio">Bio</SpLabel>
+<SpTextarea id="bio" name="bio" rows={4} placeholder="Tell us about yourself" />
+```
+
+---
+
 ### SpAlert
 
 | Prop               | Type                                         | Default  | Description                                                           |
@@ -1190,22 +1353,28 @@ Each component family is classified by its support status in this adapter.
 | badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | button | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| checkbox | **stable** | Full prop, ARIA, and SSR coverage |
 | container | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | dropdown | **stable** | Full prop, slot, and SSR coverage |
+| fieldset | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | footer | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | grid | **stable** | Full prop, slot, and SSR coverage |
 | icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
+| label | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | modal | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | nav | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| radio | **stable** | Full prop, ARIA, and SSR coverage |
 | rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | section | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| select | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | sidebar | **stable** | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction |
 | spinner | **stable** | Full prop, ARIA, and SSR coverage |
 | stack | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| textarea | **stable** | Full prop, ARIA, and SSR coverage |
 | toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
 

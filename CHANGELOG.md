@@ -6,12 +6,27 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+Contract change type: additive
+
+### Added
+
+- **Form-field components**: Added `SpCheckbox`, `SpRadio`, `SpSelect`,
+  `SpTextarea`, `SpFieldset`, and `SpLabel`, closing the Phase 10 parity gap
+  against `spectre-components`. Each wraps its corresponding
+  `@phcdevworks/spectre-ui@2.6.0` recipe (`getCheckboxClasses`,
+  `getRadioClasses`, `getSelectClasses`, `getTextareaClasses`,
+  `getFieldsetClasses`/`getFieldsetLegendClasses`, `getLabelClasses`) with no
+  local styling or accessibility-id association logic — association between
+  `SpLabel`'s `for` and a control's `id` is the consumer's responsibility,
+  same as plain HTML. All six are exported from the root package, declared
+  in `astro-adapter.contract.json` as `stable`, and covered by dedicated SSR
+  tests plus `tests/rendering.test.ts` coverage.
+
 ### Changed
 
-- Bumped `@phcdevworks/spectre-tokens` peer and dev dependency to `^3.2.0`,
-  closing dependency drift against the current published `project-design`
-  version. The upstream release was additive only — no source changes
-  required here.
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.6.0` and
+  `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.2.0`, closing
+  dependency drift against the current published `project-design` version.
 
 ## [3.2.0] - 2026-06-25
 

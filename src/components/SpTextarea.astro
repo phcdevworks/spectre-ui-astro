@@ -1,0 +1,56 @@
+---
+import type { TextareaRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getTextareaClasses } from "@phcdevworks/spectre-ui";
+
+interface SpTextareaProps extends TextareaRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  rows?: number;
+  required?: boolean;
+  readonly?: boolean;
+  form?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  disabled,
+  focused,
+  class: className,
+  id,
+  name,
+  value,
+  placeholder,
+  rows,
+  required,
+  readonly,
+  form,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpTextareaProps;
+
+const classes = getTextareaClasses({ disabled, focused });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<textarea
+  class={finalClass}
+  id={id}
+  name={name}
+  placeholder={placeholder}
+  rows={rows}
+  disabled={disabled}
+  required={required}
+  readonly={readonly}
+  form={form}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>{value}</textarea>
