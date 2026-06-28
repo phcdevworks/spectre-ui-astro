@@ -4,8 +4,11 @@ import {
   getBadgeClasses,
   getButtonClasses,
   getCardClasses,
+  getCheckboxClasses,
   getContainerClasses,
   getDropdownClasses,
+  getFieldsetClasses,
+  getFieldsetLegendClasses,
   getFooterClasses,
   getGridClasses,
   getIconBoxClasses,
@@ -14,6 +17,7 @@ import {
   getInputHelperTextClasses,
   getInputLabelClasses,
   getInputWrapperClasses,
+  getLabelClasses,
   getModalClasses,
   getModalOverlayClasses,
   getNavClasses,
@@ -22,15 +26,18 @@ import {
   getPricingCardDescriptionClasses,
   getPricingCardPriceClasses,
   getPricingCardPriceContainerClasses,
+  getRadioClasses,
   getRatingClasses,
   getRatingStarClasses,
   getRatingStarsClasses,
   getRatingTextClasses,
   getSectionClasses,
+  getSelectClasses,
   getSidebarClasses,
   getSpinnerClasses,
   getStackClasses,
   getTagClasses,
+  getTextareaClasses,
   getToastClasses,
   getTooltipClasses,
 } from "@phcdevworks/spectre-ui";
@@ -40,21 +47,27 @@ import SpAlert from "../src/components/SpAlert.astro";
 import SpBadge from "../src/components/SpBadge.astro";
 import SpButton from "../src/components/SpButton.astro";
 import SpCard from "../src/components/SpCard.astro";
+import SpCheckbox from "../src/components/SpCheckbox.astro";
 import SpContainer from "../src/components/SpContainer.astro";
 import SpDropdown from "../src/components/SpDropdown.astro";
+import SpFieldset from "../src/components/SpFieldset.astro";
 import SpFooter from "../src/components/SpFooter.astro";
 import SpGrid from "../src/components/SpGrid.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
+import SpLabel from "../src/components/SpLabel.astro";
 import SpModal from "../src/components/SpModal.astro";
 import SpNav from "../src/components/SpNav.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
+import SpRadio from "../src/components/SpRadio.astro";
 import SpRating from "../src/components/SpRating.astro";
 import SpSection from "../src/components/SpSection.astro";
+import SpSelect from "../src/components/SpSelect.astro";
 import SpSidebar from "../src/components/SpSidebar.astro";
 import SpSpinner from "../src/components/SpSpinner.astro";
 import SpStack from "../src/components/SpStack.astro";
 import SpTag from "../src/components/SpTag.astro";
+import SpTextarea from "../src/components/SpTextarea.astro";
 import SpToast from "../src/components/SpToast.astro";
 import SpTooltip from "../src/components/SpTooltip.astro";
 import type { SpInputProps } from "../src/components/sp-input.shared";
@@ -500,5 +513,68 @@ describe("SSR rendering", () => {
     expect(html).toContain("<aside");
     expect(html).toContain('data-sidebar-open="false"');
     expect(html).toContain("Home");
+  });
+
+  it("renders SpCheckbox with upstream classes", async () => {
+    const html = await container.renderToString(SpCheckbox, {
+      props: { checked: true, id: "agree" },
+    });
+
+    expect(html).toContain(getCheckboxClasses({ checked: true }));
+    expect(html).toContain('type="checkbox"');
+    expect(html).toContain('id="agree"');
+  });
+
+  it("renders SpRadio with upstream classes", async () => {
+    const html = await container.renderToString(SpRadio, {
+      props: { checked: true, name: "plan", value: "pro" },
+    });
+
+    expect(html).toContain(getRadioClasses({ checked: true }));
+    expect(html).toContain('type="radio"');
+    expect(html).toContain('name="plan"');
+  });
+
+  it("renders SpSelect with upstream classes and slotted options", async () => {
+    const html = await container.renderToString(SpSelect, {
+      props: { disabled: true },
+      slots: { default: '<option value="a">A</option>' },
+    });
+
+    expect(html).toContain(getSelectClasses({ disabled: true }));
+    expect(html).toContain("<select");
+    expect(html).toContain('<option value="a">A</option>');
+  });
+
+  it("renders SpTextarea with upstream classes and value content", async () => {
+    const html = await container.renderToString(SpTextarea, {
+      props: { focused: true, value: "Hello" },
+    });
+
+    expect(html).toContain(getTextareaClasses({ focused: true }));
+    expect(html).toContain("<textarea");
+    expect(html).toContain("Hello");
+  });
+
+  it("renders SpFieldset with upstream classes and a legend", async () => {
+    const html = await container.renderToString(SpFieldset, {
+      props: { disabled: true, legend: "Contact details" },
+      slots: { default: "<input type=\"text\" />" },
+    });
+
+    expect(html).toContain(getFieldsetClasses({ disabled: true }));
+    expect(html).toContain(`<legend class="${getFieldsetLegendClasses()}">Contact details</legend>`);
+    expect(html).toContain("<fieldset");
+  });
+
+  it("renders SpLabel with upstream classes and the for attribute", async () => {
+    const html = await container.renderToString(SpLabel, {
+      props: { required: true, htmlFor: "agree" },
+      slots: { default: "I agree to the terms" },
+    });
+
+    expect(html).toContain(getLabelClasses({ required: true }));
+    expect(html).toContain('for="agree"');
+    expect(html).toContain("I agree to the terms");
   });
 });

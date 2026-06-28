@@ -456,33 +456,63 @@ groups (Tokens, UI, UI Astro, Components, Base, Guides, Getting Started).
 
 ---
 
-## Phase 10 — Form-Field Component Parity Gap (Blocked on Tokens)
+## Phase 10 — Form-Field Component Parity Gap: Implemented, prepared for release
 
 Cross-repo audit (`spectre-ui-astro` vs. `spectre-components`) found this
-adapter has no `SpCheckbox`, `SpFieldset`, `SpLabel`, `SpRadio`, `SpSelect`,
+adapter had no `SpCheckbox`, `SpFieldset`, `SpLabel`, `SpRadio`, `SpSelect`,
 or `SpTextarea`, even though `SpInput` and `SpButton` exist and
-`spectre-components` already ships Lit equivalents for all six. Gated on
-`@phcdevworks/spectre-tokens` Phase 7 and `@phcdevworks/spectre-ui` Phase 4e
-publishing the backing recipes first (`getCheckboxClasses`,
-`getRadioClasses`, `getSelectClasses`, `getTextareaClasses`,
-`getFieldsetClasses`, `getLabelClasses`).
+`spectre-components` already ships Lit equivalents for all six. The gate
+(`@phcdevworks/spectre-tokens` Phase 7 and `@phcdevworks/spectre-ui` Phase 4e
+publishing the backing recipes) cleared with `@phcdevworks/spectre-ui@2.6.0`
+(`getCheckboxClasses`, `getRadioClasses`, `getSelectClasses`,
+`getTextareaClasses`, `getFieldsetClasses`/`getFieldsetLegendClasses`,
+`getLabelClasses`). Run `npm run check` before release handoff.
 
-### P0: Add Components After Upstream Recipes Publish
+### Components
 
-- [ ] Add `SpCheckbox.astro` once `getCheckboxClasses` publishes.
+- [x] `SpCheckbox`
+  - `src/components/SpCheckbox.astro` calling `getCheckboxClasses`, recipe
+    re-export in `src/recipes/index.ts`, export in `src/index.ts`, entrypoint
+    in `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-checkbox.test.ts`, SSR coverage in `tests/rendering.test.ts`,
+    prop table and usage in `README.md`.
 
-- [ ] Add `SpRadio.astro` once `getRadioClasses` publishes.
+- [x] `SpRadio`
+  - Same delivery pattern as `SpCheckbox`, calling `getRadioClasses`,
+    `tests/sp-radio.test.ts`.
 
-- [ ] Add `SpSelect.astro` once `getSelectClasses` publishes.
+- [x] `SpSelect`
+  - `src/components/SpSelect.astro` calling `getSelectClasses`, with a
+    default slot for `<option>` children. Same delivery pattern as above,
+    `tests/sp-select.test.ts`.
 
-- [ ] Add `SpTextarea.astro` once `getTextareaClasses` publishes.
+- [x] `SpTextarea`
+  - `src/components/SpTextarea.astro` calling `getTextareaClasses`. Same
+    delivery pattern as above, `tests/sp-textarea.test.ts`.
 
-- [ ] Add `SpFieldset.astro` once `getFieldsetClasses` publishes.
+- [x] `SpFieldset`
+  - `src/components/SpFieldset.astro` calling `getFieldsetClasses`, rendering
+    an optional `<legend>` via `getFieldsetLegendClasses()` when `legend` is
+    non-empty (mirrors the `spectre-components` `sp-fieldset` legend
+    pattern). Same delivery pattern as above, `tests/sp-fieldset.test.ts`.
 
-- [ ] Add `SpLabel.astro` once `getLabelClasses` publishes.
+- [x] `SpLabel`
+  - `src/components/SpLabel.astro` calling `getLabelClasses`, with `htmlFor`
+    mapped to the native `for` attribute (matching the Lit `sp-label`
+    `htmlFor` → `for` convention). No accessibility-id association helper —
+    association with a control's `id` is the consumer's responsibility, same
+    as plain HTML. Same delivery pattern as above, `tests/sp-label.test.ts`.
 
-Each component needs `astro-adapter.contract.json` update, README prop table
-entry, and focused tests, following the existing `SpInput` delivery pattern.
+### Release
+
+- [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.6.0` and
+  `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.2.0`, in both
+  `package.json` and `astro-adapter.contract.json`.
+- [x] Move changes from `CHANGELOG.md [Unreleased]` into the release heading
+  (entries are drafted under `[Unreleased]`; moving to a version heading
+  happens at release time per the release procedure).
+- [x] Prepare release handoff for Bradley Potts review, commit, tag, and
+  publish.
 
 ---
 
