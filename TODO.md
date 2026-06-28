@@ -1,7 +1,7 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 8 is implemented and prepared for release. Human
-review, version bump, commit, tag, and publish remain with Bradley Potts.**
+Active phase: **Phase 10 is delivered and prepared for npm release as 3.3.0.
+Human review, commit, tag, and publish remain with Bradley Potts.**
 
 ---
 
@@ -456,7 +456,7 @@ groups (Tokens, UI, UI Astro, Components, Base, Guides, Getting Started).
 
 ---
 
-## Phase 10 — Form-Field Component Parity Gap: Implemented, prepared for release
+## Phase 10 — Form-Field Component Parity Gap: Delivered, prepared for npm release
 
 Cross-repo audit (`spectre-ui-astro` vs. `spectre-components`) found this
 adapter had no `SpCheckbox`, `SpFieldset`, `SpLabel`, `SpRadio`, `SpSelect`,
@@ -508,9 +508,8 @@ publishing the backing recipes) cleared with `@phcdevworks/spectre-ui@2.6.0`
 - [x] Bump `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.6.0` and
   `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.2.0`, in both
   `package.json` and `astro-adapter.contract.json`.
-- [x] Move changes from `CHANGELOG.md [Unreleased]` into the release heading
-  (entries are drafted under `[Unreleased]`; moving to a version heading
-  happens at release time per the release procedure).
+- [x] Move changes from `CHANGELOG.md [Unreleased]` into the `3.3.0` release
+  heading.
 - [x] Prepare release handoff for Bradley Potts review, commit, tag, and
   publish.
 
