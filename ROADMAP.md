@@ -13,7 +13,7 @@ recipe logic.
 | - | - |
 | `@phcdevworks/spectre-tokens` | v3.2.0 — full token surface, including form-field component groups |
 | `@phcdevworks/spectre-ui` | v2.6.0 — Phase 9 sidebar header/indent recipes, Phase 10 form-field recipes (checkbox, radio, select, textarea, fieldset, label) shipped |
-| `@phcdevworks/spectre-ui-astro` | v3.2.0 — Phases 3–9 delivered and released. Phase 10 (form-field component parity) implemented, prepared for release |
+| `@phcdevworks/spectre-ui-astro` | v3.3.0 — Phases 3–10 delivered and prepared for npm release |
 
 ---
 
@@ -113,7 +113,7 @@ across `SpNav` and `SpSidebar`.
 
 ---
 
-## Phase 10: Form-Field Component Parity Gap — Implemented, prepared for release
+## Phase 10: Form-Field Component Parity Gap — Delivered, prepared for npm release
 
 Cross-repo audit (`spectre-ui-astro` vs. `spectre-components`) found this
 adapter had no form-field primitives even though `spectre-components` already
