@@ -42,6 +42,51 @@ describe("SpTextarea class and prop behavior", () => {
 
     expect(html).toContain("Hello world");
   });
+
+  it("applies size and shape classes", async () => {
+    const html = await container.renderToString(SpTextarea, {
+      props: { size: "lg", fullWidth: true, pill: true },
+    });
+
+    expect(html).toContain(
+      getTextareaClasses({ size: "lg", fullWidth: true, pill: true }),
+    );
+  });
+
+  it("applies invalid state class and aria-invalid", async () => {
+    const html = await container.renderToString(SpTextarea, {
+      props: { state: "invalid" },
+    });
+
+    expect(html).toContain(getTextareaClasses({ state: "invalid" }));
+    expect(html).toContain('aria-invalid="true"');
+  });
+
+  it("applies success state class", async () => {
+    const html = await container.renderToString(SpTextarea, {
+      props: { state: "success" },
+    });
+
+    expect(html).toContain(getTextareaClasses({ state: "success" }));
+  });
+
+  it("respects an explicit aria-invalid override", async () => {
+    const html = await container.renderToString(SpTextarea, {
+      props: { state: "invalid", "aria-invalid": "false" },
+    });
+
+    expect(html).toContain('aria-invalid="false"');
+  });
+
+  it("applies loading class and aria-busy, and does not leak the prop to the DOM", async () => {
+    const html = await container.renderToString(SpTextarea, {
+      props: { loading: true },
+    });
+
+    expect(html).toContain(getTextareaClasses({ loading: true }));
+    expect(html).toContain('aria-busy="true"');
+    expect(html).not.toContain('loading="true"');
+  });
 });
 
 describe("SpTextarea explicit attribute support", () => {

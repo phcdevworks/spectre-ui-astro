@@ -1,6 +1,7 @@
 ---
 import type { TextareaRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getTextareaClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpTextareaProps extends TextareaRecipeOptions {
   class?: string;
@@ -14,12 +15,18 @@ interface SpTextareaProps extends TextareaRecipeOptions {
   form?: string;
   "aria-label"?: string;
   "aria-describedby"?: string;
+  "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
 
   [key: string]: unknown;
 }
 
 const {
+  size,
+  state,
+  fullWidth,
+  pill,
   disabled,
+  loading,
   focused,
   class: className,
   id,
@@ -32,10 +39,13 @@ const {
   form,
   "aria-label": ariaLabel,
   "aria-describedby": ariaDescribedby,
+  "aria-invalid": ariaInvalid,
   ...rest
 } = Astro.props as SpTextareaProps;
 
-const classes = getTextareaClasses({ disabled, focused });
+const classes = getTextareaClasses(
+  omitUndefined({ size, state, fullWidth, pill, disabled, loading, focused }),
+);
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
@@ -50,7 +60,9 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
   readonly={readonly}
   form={form}
   aria-label={ariaLabel}
+  aria-invalid={ariaInvalid ?? (state === "invalid" ? "true" : undefined)}
   aria-describedby={ariaDescribedby}
   aria-disabled={disabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
   {...rest}
 >{value}</textarea>

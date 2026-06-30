@@ -3,6 +3,35 @@
 Active phase: **Phase 10 is delivered and prepared for npm release as 3.3.0.
 Human review, commit, tag, and publish remain with Bradley Potts.**
 
+## Post-Phase-10: Recipe Option Forwarding Gap (Complete, Unreleased)
+
+- [x] `SpSelect`/`SpTextarea` were only forwarding `disabled`/`focused` to
+  `getSelectClasses`/`getTextareaClasses`, silently dropping `size`,
+  `fullWidth`, `pill`, and the `state`/`loading` options added in
+  `@phcdevworks/spectre-ui@2.7.0` (invalid/success/loading states). Fixed by
+  forwarding the full `SelectRecipeOptions`/`TextareaRecipeOptions` surface,
+  following the `SpInput`/`getInputClasses` pattern, plus `aria-invalid`/
+  `aria-busy` wiring. Added `omitUndefined` helper
+  (`src/components/sp-recipe-options.shared.ts`) to satisfy
+  `exactOptionalPropertyTypes` when forwarding optional destructured props.
+  - File targets: `src/components/SpSelect.astro`,
+    `src/components/SpTextarea.astro`,
+    `src/components/sp-recipe-options.shared.ts`, `tests/sp-select.test.ts`,
+    `tests/sp-textarea.test.ts`
+  - Acceptance criteria: full recipe option surface reaches the upstream
+    recipe call; new tests cover size/shape classes, invalid/success state
+    classes + `aria-invalid`, and loading class + `aria-busy`; `npm run check`
+    passes.
+- [x] `peerDependencies` were stale (`@phcdevworks/spectre-tokens@^3.2.0`,
+  `@phcdevworks/spectre-ui@^2.6.0`) against the already-bumped
+  `devDependencies` (`^3.3.1`/`^2.7.0`), meaning consumers installing per the
+  published peer range were not guaranteed the token/recipe fixes. Bumped
+  `package.json` peerDependencies, `astro-adapter.contract.json`
+  peerDependencies/upstreamBinding, and `examples/package.json` to match.
+- [x] `CLAUDE.md` claimed "current version `2.7.0`" (that's spectre-ui's
+  version, not this package's) while `package.json`/`CHANGELOG.md` were
+  already at `3.3.0`. Corrected the roadmap-priorities note.
+
 ---
 
 ## Phase 1 — Contract Integrity (Complete)

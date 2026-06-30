@@ -1,6 +1,7 @@
 ---
 import type { SelectRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getSelectClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpSelectProps extends SelectRecipeOptions {
   class?: string;
@@ -12,12 +13,18 @@ interface SpSelectProps extends SelectRecipeOptions {
   form?: string;
   "aria-label"?: string;
   "aria-describedby"?: string;
+  "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
 
   [key: string]: unknown;
 }
 
 const {
+  size,
+  state,
+  fullWidth,
+  pill,
   disabled,
+  loading,
   focused,
   class: className,
   id,
@@ -28,10 +35,13 @@ const {
   form,
   "aria-label": ariaLabel,
   "aria-describedby": ariaDescribedby,
+  "aria-invalid": ariaInvalid,
   ...rest
 } = Astro.props as SpSelectProps;
 
-const classes = getSelectClasses({ disabled, focused });
+const classes = getSelectClasses(
+  omitUndefined({ size, state, fullWidth, pill, disabled, loading, focused }),
+);
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
@@ -45,8 +55,10 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
   multiple={multiple}
   form={form}
   aria-label={ariaLabel}
+  aria-invalid={ariaInvalid ?? (state === "invalid" ? "true" : undefined)}
   aria-describedby={ariaDescribedby}
   aria-disabled={disabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
   {...rest}
 >
   <slot />

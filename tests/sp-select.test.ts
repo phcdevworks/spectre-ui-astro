@@ -44,6 +44,51 @@ describe("SpSelect class and prop behavior", () => {
     expect(html).toContain("<select");
     expect(html).toContain('<option value="a">A</option>');
   });
+
+  it("applies size and shape classes", async () => {
+    const html = await container.renderToString(SpSelect, {
+      props: { size: "lg", fullWidth: true, pill: true },
+    });
+
+    expect(html).toContain(
+      getSelectClasses({ size: "lg", fullWidth: true, pill: true }),
+    );
+  });
+
+  it("applies invalid state class and aria-invalid", async () => {
+    const html = await container.renderToString(SpSelect, {
+      props: { state: "invalid" },
+    });
+
+    expect(html).toContain(getSelectClasses({ state: "invalid" }));
+    expect(html).toContain('aria-invalid="true"');
+  });
+
+  it("applies success state class", async () => {
+    const html = await container.renderToString(SpSelect, {
+      props: { state: "success" },
+    });
+
+    expect(html).toContain(getSelectClasses({ state: "success" }));
+  });
+
+  it("respects an explicit aria-invalid override", async () => {
+    const html = await container.renderToString(SpSelect, {
+      props: { state: "invalid", "aria-invalid": "false" },
+    });
+
+    expect(html).toContain('aria-invalid="false"');
+  });
+
+  it("applies loading class and aria-busy, and does not leak the prop to the DOM", async () => {
+    const html = await container.renderToString(SpSelect, {
+      props: { loading: true },
+    });
+
+    expect(html).toContain(getSelectClasses({ loading: true }));
+    expect(html).toContain('aria-busy="true"');
+    expect(html).not.toContain('loading="true"');
+  });
 });
 
 describe("SpSelect explicit attribute support", () => {
