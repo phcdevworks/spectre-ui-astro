@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.4.0] - 2026-06-30
+
+Release Title: Select and Textarea State Forwarding
+
+Contract change type: additive
+
 ### Changed
 
 - **`SpSelect`/`SpTextarea` full recipe option forwarding**: Both components
@@ -677,3 +683,35 @@ Release Title: Initial Astro Adapter Release
 - SSR-safe, framework-agnostic pure Astro components.
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
+
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.0...HEAD
+[3.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.3.0...3.4.0
+[3.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.2.0...3.3.0
+[3.2.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.1.0...3.2.0
+[3.1.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.0.0...3.1.0
+[3.0.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.10.0...3.0.0
+[2.10.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.9.0...2.10.0
+[2.9.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.8.0...2.9.0
+[2.8.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.7.0...2.8.0
+[2.7.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.6.0...2.7.0
+[2.6.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.5.0...2.6.0
+[2.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.4.0...2.5.0
+[2.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.3.0...2.4.0
+[2.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.2.0...2.3.0
+[2.2.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.1.0...2.2.0
+[2.1.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/2.0.0...2.1.0
+[2.0.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.7.0...2.0.0
+[1.7.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.6.0...1.7.0
+[1.6.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.5.0...1.6.0
+[1.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.4.0...1.5.0
+[1.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.3.0...1.4.0
+[1.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.1.1...1.2.0
+[1.1.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/1.0.0...1.1.0
+[1.0.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/0.5.0...1.0.0
+[0.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/0.0.2...0.3.0
+[0.0.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/0.0.1...0.0.2
+[0.0.1]: https://github.com/phcdevworks/spectre-ui-astro/tree/0.0.1
