@@ -6,6 +6,23 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Changed
+
+- **`SpSelect`/`SpTextarea` full recipe option forwarding**: Both components
+  now destructure and forward `size`, `state`, `fullWidth`, `pill`, and
+  `loading` to `getSelectClasses`/`getTextareaClasses`, in addition to the
+  existing `disabled`/`focused`. Previously only `disabled`/`focused` reached
+  the recipe call, silently dropping size/shape options and the new
+  invalid/success/loading states shipped in
+  `@phcdevworks/spectre-ui@2.7.0`. Both components also gained an explicit
+  `aria-invalid` prop (defaulting to `"true"` when `state="invalid"`) and
+  `aria-busy` (set when `loading`), matching `SpInput`'s accessibility
+  pattern.
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.7.0` and
+  `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.3.1`, closing
+  dependency drift against the current published `project-design` versions.
+  `astro-adapter.contract.json` and `examples/package.json` updated to match.
+
 ## [3.3.0] - 2026-06-28
 
 Release Title: Phase 10 Form-Field Component Parity

@@ -191,14 +191,14 @@
     "./components/SpTooltip.astro"
   ],
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^3.2.0",
-    "@phcdevworks/spectre-ui": "^2.6.0",
+    "@phcdevworks/spectre-tokens": "^3.3.1",
+    "@phcdevworks/spectre-ui": "^2.7.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
   },
   "upstreamBinding": {
     "package": "@phcdevworks/spectre-ui",
-    "peerRange": "^2.6.0"
+    "peerRange": "^2.7.0"
   },
   "thinAdapterInvariants": {
     "noLocalCssOwnership": true,
