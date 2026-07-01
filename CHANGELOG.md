@@ -8,7 +8,7 @@ reflects package releases published to npm.
 
 ## [3.4.0] - 2026-06-30
 
-Release Title: Select and Textarea State Forwarding
+**Release Title:** Phase 10 - Select and Textarea State Forwarding
 
 Contract change type: additive
 
@@ -31,7 +31,7 @@ Contract change type: additive
 
 ## [3.3.0] - 2026-06-28
 
-Release Title: Phase 10 Form-Field Component Parity
+**Release Title:** Phase 10 - Form-Field Component Parity
 
 Contract change type: additive
 
@@ -43,7 +43,7 @@ Contract change type: additive
   `@phcdevworks/spectre-ui@2.6.0` recipe (`getCheckboxClasses`,
   `getRadioClasses`, `getSelectClasses`, `getTextareaClasses`,
   `getFieldsetClasses`/`getFieldsetLegendClasses`, `getLabelClasses`) with no
-  local styling or accessibility-id association logic — association between
+  local styling or accessibility-id association logic - association between
   `SpLabel`'s `for` and a control's `id` is the consumer's responsibility,
   same as plain HTML. All six are exported from the root package, declared
   in `astro-adapter.contract.json` as `stable`, and covered by dedicated SSR
@@ -57,7 +57,7 @@ Contract change type: additive
 
 ## [3.2.0] - 2026-06-25
 
-Release Title: Phase 9 Sidebar Composition Parity
+**Release Title:** Phase 9 - Sidebar Composition Parity
 
 Contract change type: additive
 
@@ -73,7 +73,7 @@ Contract change type: additive
 
 ## [3.1.0] - 2026-06-24
 
-Release Title: Phase 8 App Shell Hardening
+**Release Title:** Phase 8 - App Shell Hardening
 
 Contract change type: additive
 
@@ -89,7 +89,7 @@ Contract change type: additive
 
 ## [3.0.0] - 2026-06-24
 
-Release Title: Astro 7 Alignment
+**Release Title:** Phase 8 - Astro 7 Alignment
 
 Contract change type: breaking
 
@@ -100,7 +100,7 @@ Contract change type: breaking
 
 ## [2.10.0] - 2026-06-19
 
-Release Title: Phase 7 App Shell Layout
+**Release Title:** Phase 7 - App Shell Layout
 
 Contract change type: additive
 
@@ -121,14 +121,14 @@ Contract change type: additive
 - Added `maxWidth` prop to `SpContainer`, mapped to `getContainerClasses`.
   `"prose"` bounds content to a readable line length.
 - Added `SpSidebar` and `SpFooter` to the adapter contract as stable families
-  (Phase 7 — App Shell Layout).
+  (Phase 7 - App Shell Layout).
 - Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.3.0` and
   `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.1.0` to cover the
   Stack/Container option additions and Sidebar/Footer recipes.
 
 ## [2.9.0] - 2026-06-18
 
-Release Title: Phase 6 Grid Component
+**Release Title:** Phase 6 - Grid Component
 
 Contract change type: additive
 
@@ -137,14 +137,14 @@ Contract change type: additive
 - Added `SpGrid` component. Renders as `<div>` by default (also `"section"`,
   `"ul"`, `"ol"`). Supports `columns` (`1 | 2 | 3 | 4 | 6 | 12`) and `gap`
   (`"sm" | "md" | "lg"`) mapped directly to `getGridClasses`.
-- Added `SpGrid` to the adapter contract as a stable family (Phase 6 — Grid
+- Added `SpGrid` to the adapter contract as a stable family (Phase 6 - Grid
   Component v1).
 - Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.2.0` to cover the
   grid recipe.
 
 ## [2.8.0] - 2026-06-17
 
-Release Title: Phase 5 Layout Component Expansion
+**Release Title:** Phase 5 - Layout Component Expansion
 
 Contract change type: additive
 
@@ -158,14 +158,14 @@ Contract change type: additive
 - Added `SpSection` component. Renders as `<section>` by default (also `"div"`,
   `"article"`, `"aside"`, `"main"`). Calls `getSectionClasses`.
 - Added `SpContainer`, `SpStack`, and `SpSection` to the adapter contract as
-  stable families (Phase 5 — Layout Components).
+  stable families (Phase 5 - Layout Components).
 - Bumped `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.0.0` and
   `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.1.0` to cover the layout
   recipes.
 
 ## [2.7.0] - 2026-06-10
 
-Release Title: Phase 4 Component Expansion
+**Release Title:** Phase 4 - Component Expansion
 
 Contract change type: additive
 
@@ -195,7 +195,9 @@ Contract change type: additive
 
 ## [2.6.0] - 2026-06-07
 
-Release Title: Phase 3 Component Completion and Ecosystem Manifest
+**Release Title:** Phase 3 - Component Completion and Ecosystem Manifest
+
+Contract change type: additive
 
 ### Added
 
@@ -222,7 +224,9 @@ Release Title: Phase 3 Component Completion and Ecosystem Manifest
 
 ## [2.5.0] - 2026-06-03
 
-Release Title: Contract Hardening and Accessibility Parity
+**Release Title:** Phase 3 - Contract Hardening and Accessibility Parity
+
+Contract change type: additive
 
 ### Fixed
 
@@ -248,23 +252,23 @@ Release Title: Contract Hardening and Accessibility Parity
 - Added `astro-adapter.contract.json` as the machine-readable adapter contract
   for root exports, component entrypoints, peer dependency expectations, stable
   component families, and thin-adapter invariants.
-- `tests/upstream-parity.test.ts` — derives upstream component families from
+- `tests/upstream-parity.test.ts` - derives upstream component families from
   `@phcdevworks/spectre-ui` recipe exports and cross-references them against
   `astro-adapter.contract.json`. CI fails if upstream adds a recipe family not
   declared in `stable`, `provisional`, or `notYetSupported`, or if a stable
   family has no corresponding `.astro` component.
-- `tests/smoke.test.ts` — exercises the built `dist/` artifacts directly:
+- `tests/smoke.test.ts` - exercises the built `dist/` artifacts directly:
   verifies `dist/index.js` component and helper exports, upstream pass-through
   identity, component entrypoint files in `dist/components/`, and
   `dist/index.d.ts` declarations.
-- `scripts/validate-readme-contract.ts` — fails the build if any
+- `scripts/validate-readme-contract.ts` - fails the build if any
   contract-declared component is missing a `### SpName` section in `README.md`,
   or if the CSS import guidance, peer dependency reference, recipe helpers
   section, or component family stability table entries drift from the manifest.
-- `scripts/propose-version.ts` — proposes a release version from changelog
+- `scripts/propose-version.ts` - proposes a release version from changelog
   classifications and dependency/package state.
 - `astro-adapter.contract.json` `componentFamilies.notYetSupported` populated
-  with `alert`, `avatar`, `spinner`, and `tag` — the four upstream recipe
+  with `alert`, `avatar`, `spinner`, and `tag` - the four upstream recipe
   families available in `@phcdevworks/spectre-ui` ^1.7.0 that are not yet bound
   by this adapter.
 - `examples/README.md` updated to document example app purpose, boundary rules
@@ -304,7 +308,9 @@ Release Title: Contract Hardening and Accessibility Parity
 
 ## [2.4.0] - 2026-05-22
 
-Release Title: Interactive State Inference and Adapter Readiness
+**Release Title:** Phase 3 - Interactive State Inference and Adapter Readiness
+
+Contract change type: additive
 
 ### Fixed
 
@@ -340,7 +346,9 @@ Release Title: Interactive State Inference and Adapter Readiness
 
 ## [2.3.0] - 2026-05-05
 
-Release Title: Slot Hygiene and Upstream Recipe Alignment
+**Release Title:** Phase 2 - Slot Hygiene and Upstream Recipe Alignment
+
+Contract change type: additive
 
 ### Added
 
@@ -373,7 +381,9 @@ Release Title: Slot Hygiene and Upstream Recipe Alignment
 
 ## [2.2.0] - 2026-04-25
 
-Release Title: Interactive State Parity and Shared Attribute Guarding
+**Release Title:** Phase 2 - Interactive State Parity and Shared Attribute Guarding
+
+Contract change type: additive
 
 ### Added
 
@@ -410,7 +420,9 @@ Release Title: Interactive State Parity and Shared Attribute Guarding
 
 ## [2.1.0] - 2026-04-18
 
-Release Title: Accessibility Parity and Upstream Alignment
+**Release Title:** Phase 2 - Accessibility Parity and Upstream Alignment
+
+Contract change type: additive
 
 ### Added
 
@@ -436,7 +448,9 @@ Release Title: Accessibility Parity and Upstream Alignment
 
 ## [2.0.3] - 2026-04-11
 
-Release Title: Accessibility Hardening and Release Workflow Cleanup
+**Release Title:** Phase 2 - Accessibility Hardening and Release Workflow Cleanup
+
+Contract change type: additive
 
 ### Added
 
@@ -462,7 +476,9 @@ Release Title: Accessibility Hardening and Release Workflow Cleanup
 
 ## [2.0.2] - 2026-04-05
 
-Release Title: Loading Support and Adapter Guardrails
+**Release Title:** Phase 2 - Loading Support and Adapter Guardrails
+
+Contract change type: additive
 
 ### Added
 
@@ -486,7 +502,9 @@ Release Title: Loading Support and Adapter Guardrails
 
 ## [2.0.1] - 2026-03-29
 
-Release Title: Polymorphism Expansion Across Astro Components
+**Release Title:** Phase 2 - Polymorphism Expansion Across Astro Components
+
+Contract change type: additive
 
 ### Added
 
@@ -504,7 +522,9 @@ Release Title: Polymorphism Expansion Across Astro Components
 
 ## [2.0.0] - 2026-03-22
 
-Release Title: Astro 6 and Node 22 Alignment
+**Release Title:** Phase 2 - Astro 6 and Node 22 Alignment
+
+Contract change type: breaking
 
 ### Changed
 
@@ -516,7 +536,9 @@ Release Title: Astro 6 and Node 22 Alignment
 
 ## [1.1.0] - 2026-03-22
 
-Release Title: Component Parity and Polymorphic Refinement
+**Release Title:** Phase 1 - Component Parity and Polymorphic Refinement
+
+Contract change type: additive
 
 ### Added
 
@@ -535,7 +557,9 @@ Release Title: Component Parity and Polymorphic Refinement
 
 ## [1.0.0] - 2026-03-17
 
-Release Title: Stable Astro Release
+**Release Title:** Phase 1 - Stable Astro Release
+
+Contract change type: breaking
 
 ### Added
 
@@ -547,7 +571,9 @@ Release Title: Stable Astro Release
 
 ## [0.1.1] - 2026-01-04
 
-Release Title: Badge Expansion and Example Coverage
+**Release Title:** Phase 0 - Badge Expansion and Example Coverage
+
+Contract change type: additive
 
 ### Added
 
@@ -572,7 +598,9 @@ Release Title: Badge Expansion and Example Coverage
 
 ## [0.1.0] - 2025-12-16
 
-Release Title: Export Cleanup and Accessibility Improvements
+**Release Title:** Phase 0 - Export Cleanup and Accessibility Improvements
+
+Contract change type: additive
 
 ### Added
 
@@ -601,7 +629,9 @@ Release Title: Export Cleanup and Accessibility Improvements
 
 ## [0.0.3] - 2025-12-08
 
-Release Title: Example App Refresh
+**Release Title:** Phase 0 - Example App Refresh
+
+Contract change type: additive
 
 ### Added
 
@@ -639,7 +669,9 @@ Release Title: Example App Refresh
 
 ## [0.0.2] - 2025-11-30
 
-Release Title: Typed Astro Foundations
+**Release Title:** Phase 0 - Typed Astro Foundations
+
+Contract change type: additive
 
 ### Added
 
@@ -664,7 +696,9 @@ Release Title: Typed Astro Foundations
 
 ## [0.0.1] - 2025-11-28
 
-Release Title: Initial Astro Adapter Release
+**Release Title:** Phase 0 - Initial Astro Adapter Release
+
+Contract change type: additive
 
 ### Added
 
