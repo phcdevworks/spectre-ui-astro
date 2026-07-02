@@ -6,7 +6,10 @@ and publish by Bradley Potts.**
 ## 3.4.1 Patch Release Prep (Complete, Unreleased)
 
 - [x] Bumped package metadata from `3.4.0` to `3.4.1`.
-- [x] Refreshed local tooling versions for `astro` and `@types/node`.
+- [x] Refreshed local tooling versions for `astro`, `@types/node`, and
+  `@phcdevworks/spectre-ui`.
+- [x] Bumped the `@phcdevworks/spectre-ui` peer, contract, and example ranges
+  to `^2.7.1`.
 - [x] Synchronized release-readiness docs and ecosystem manifest exports with
   the current adapter surface.
 

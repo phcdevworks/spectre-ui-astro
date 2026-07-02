@@ -16,7 +16,10 @@ Contract change type: N/A
 
 - Prepared the package for the `3.4.1` patch release by refreshing release
   metadata and local tooling versions. Updated local development dependencies
-  for Astro and Node types while keeping the public adapter contract unchanged.
+  for Astro, Node types, and `@phcdevworks/spectre-ui`.
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.7.1` so
+  consumers install the same upstream patch floor this adapter release was
+  validated against.
 - Synchronized release-readiness documentation and ecosystem manifest exports
   with the already-published component surface.
 
