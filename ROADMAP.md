@@ -11,9 +11,9 @@ recipe logic.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v3.2.0 — full token surface, including form-field component groups |
-| `@phcdevworks/spectre-ui` | v2.6.0 — Phase 9 sidebar header/indent recipes, Phase 10 form-field recipes (checkbox, radio, select, textarea, fieldset, label) shipped |
-| `@phcdevworks/spectre-ui-astro` | v3.3.0 — Phases 3–10 delivered and prepared for npm release |
+| `@phcdevworks/spectre-tokens` | v3.3.1 — full token surface, including form-field component groups and current recipe-state support |
+| `@phcdevworks/spectre-ui` | v2.7.0 — Phase 10 form-field recipes plus select/textarea state option support shipped |
+| `@phcdevworks/spectre-ui-astro` | v3.4.1 — Phases 3–10 delivered; patch release prepared for npm release |
 
 ---
 

@@ -7,7 +7,7 @@
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 3.4.0                          |
+| Current version/status | 3.4.1                          |
 
 ## Standard Workflow
 
@@ -48,7 +48,7 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 
 ## What Astro developers get
 
-- **Twenty-three ready-to-use Astro components** — alerts, avatars, badges,
+- **Twenty-nine ready-to-use Astro components** — alerts, avatars, badges,
   buttons, cards, app shell layout, forms, navigation, overlays, feedback,
   pricing, ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript,

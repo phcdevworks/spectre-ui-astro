@@ -6,6 +6,20 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.4.1] - 2026-07-02
+
+**Release Title:** Release Metadata and Tooling Patch
+
+Contract change type: N/A
+
+### Changed
+
+- Prepared the package for the `3.4.1` patch release by refreshing release
+  metadata and local tooling versions. Updated local development dependencies
+  for Astro and Node types while keeping the public adapter contract unchanged.
+- Synchronized release-readiness documentation and ecosystem manifest exports
+  with the already-published component surface.
+
 ## [3.4.0] - 2026-06-30
 
 **Release Title:** Phase 10 - Select and Textarea State Forwarding
@@ -718,7 +732,8 @@ Contract change type: additive
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.0...HEAD
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.1...HEAD
+[3.4.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.0...3.4.1
 [3.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.3.0...3.4.0
 [3.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.2.0...3.3.0
 [3.2.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.1.0...3.2.0
