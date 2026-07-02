@@ -8,7 +8,7 @@ reflects package releases published to npm.
 
 ## [3.4.1] - 2026-07-02
 
-**Release Title:** Release Metadata and Tooling Patch
+**Release Title:** Phase 10 - Release Metadata and Tooling Patch
 
 Contract change type: N/A
 
