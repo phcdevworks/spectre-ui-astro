@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
@@ -122,10 +122,10 @@
     "@phcdevworks/spectre-manifest": "^1.0.0",
     "@phcdevworks/spectre-tokens": "^3.3.1",
     "@phcdevworks/spectre-ui": "^2.7.0",
-    "@types/node": "^26.0.1",
+    "@types/node": "^26.1.0",
     "@typescript-eslint/eslint-plugin": "^8.62.1",
     "@typescript-eslint/parser": "^8.62.1",
-    "astro": "^7.0.4",
+    "astro": "^7.0.5",
     "eslint": "^10.6.0",
     "jiti": "^2.7.0",
     "prettier": "^3.9.4",

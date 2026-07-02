@@ -1,9 +1,16 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **Phase 10 is delivered and prepared for npm release as 3.3.0.
-Human review, commit, tag, and publish remain with Bradley Potts.**
+Active phase: **3.4.1 patch release is prepared for human review, commit, tag,
+and publish by Bradley Potts.**
 
-## Post-Phase-10: Recipe Option Forwarding Gap (Complete, Unreleased)
+## 3.4.1 Patch Release Prep (Complete, Unreleased)
+
+- [x] Bumped package metadata from `3.4.0` to `3.4.1`.
+- [x] Refreshed local tooling versions for `astro` and `@types/node`.
+- [x] Synchronized release-readiness docs and ecosystem manifest exports with
+  the current adapter surface.
+
+## Post-Phase-10: Recipe Option Forwarding Gap (Complete, Released in 3.4.0)
 
 - [x] `SpSelect`/`SpTextarea` were only forwarding `disabled`/`focused` to
   `getSelectClasses`/`getTextareaClasses`, silently dropping `size`,
