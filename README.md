@@ -1283,22 +1283,28 @@ import {
   SpBadge,
   SpButton,
   SpCard,
+  SpCheckbox,
   SpContainer,
   SpDropdown,
+  SpFieldset,
   SpFooter,
   SpGrid,
   SpIconBox,
   SpInput,
+  SpLabel,
   SpModal,
   SpNav,
   SpPricingCard,
+  SpRadio,
   SpRating,
   SpSection,
+  SpSelect,
   SpSidebar,
   SpSpinner,
   SpStack,
   SpTag,
   SpTestimonial,
+  SpTextarea,
   SpToast,
   SpTooltip
 } from '@phcdevworks/spectre-ui-astro'
@@ -1319,22 +1325,28 @@ import SpAvatar from '@phcdevworks/spectre-ui-astro/components/SpAvatar.astro'
 import SpBadge from '@phcdevworks/spectre-ui-astro/components/SpBadge.astro'
 import SpButton from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
 import SpCard from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
+import SpCheckbox from '@phcdevworks/spectre-ui-astro/components/SpCheckbox.astro'
 import SpContainer from '@phcdevworks/spectre-ui-astro/components/SpContainer.astro'
 import SpDropdown from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
+import SpFieldset from '@phcdevworks/spectre-ui-astro/components/SpFieldset.astro'
 import SpFooter from '@phcdevworks/spectre-ui-astro/components/SpFooter.astro'
 import SpGrid from '@phcdevworks/spectre-ui-astro/components/SpGrid.astro'
 import SpIconBox from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
+import SpLabel from '@phcdevworks/spectre-ui-astro/components/SpLabel.astro'
 import SpModal from '@phcdevworks/spectre-ui-astro/components/SpModal.astro'
 import SpNav from '@phcdevworks/spectre-ui-astro/components/SpNav.astro'
 import SpPricingCard from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
+import SpRadio from '@phcdevworks/spectre-ui-astro/components/SpRadio.astro'
 import SpRating from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
 import SpSection from '@phcdevworks/spectre-ui-astro/components/SpSection.astro'
+import SpSelect from '@phcdevworks/spectre-ui-astro/components/SpSelect.astro'
 import SpSidebar from '@phcdevworks/spectre-ui-astro/components/SpSidebar.astro'
 import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpTag from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
+import SpTextarea from '@phcdevworks/spectre-ui-astro/components/SpTextarea.astro'
 import SpToast from '@phcdevworks/spectre-ui-astro/components/SpToast.astro'
 import SpTooltip from '@phcdevworks/spectre-ui-astro/components/SpTooltip.astro'
 ```

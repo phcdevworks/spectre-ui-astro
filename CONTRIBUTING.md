@@ -122,11 +122,8 @@ to find the right test or script when an area breaks or needs to be extended.
 | SSR rendering correctness and ARIA wiring                                      | `tests/rendering.test.ts`                                                                                       |
 | Component-level prop, slot, disabled, and DOM leakage behavior                 | `tests/sp-*.test.ts`                                                                                            |
 | README and examples alignment with adapter contract                            | `tests/docs-examples.test.ts`                                                                                   |
-
-Areas without automated enforcement (planned in P1):
-
-- README contract-facing section parity with declared exports
-- Built-package Astro consumer smoke tests
+| README contract-facing section parity with declared exports                    | `scripts/validate-readme-contract.ts`                                                                           |
+| Built-package Astro consumer smoke tests                                       | `tests/smoke.test.ts`                                                                                           |
 
 ## Questions
 
