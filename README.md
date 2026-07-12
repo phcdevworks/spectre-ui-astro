@@ -1,5 +1,14 @@
 # @phcdevworks/spectre-ui-astro
 
+`@phcdevworks/spectre-ui-astro` is the Astro adapter package of the Spectre
+system. It adapts Spectre UI's class recipes into Astro components for Astro
+applications that consume the core Spectre UI contract.
+
+Maintained by [PHCDevworks](https://go.phcdev.co). It depends on
+`@phcdevworks/spectre-ui` for its CSS and recipe contracts, so Astro
+applications consume Spectre's design system through typed components
+instead of hand-rolling markup or styling against the recipes directly.
+
 ## Repository Snapshot
 
 | Field                  | Value                           |
