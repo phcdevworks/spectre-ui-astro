@@ -81,31 +81,6 @@ Roadmap Self-Expansion." Applied to this repo:
 | `scripts/validate-readme-contract.ts`  | Source — keep in sync                     | Post-build README parity assertions                            |
 | `examples/`                            | Validation surface — not a contract       | Demo app; not independently published                          |
 
-## Codex Support Role
-
-OpenAI Codex acts as the documentation, release-readiness, production
-stabilization, repo hygiene, and config standardization agent for this
-repository. Codex keeps Claude Code's lead implementation work in check by
-reviewing contract integrity, dependency classification, SSR safety,
-documentation parity, examples, validation, and release handoff readiness.
-
-Codex-specific operating guidance lives in [`CODEX.md`](CODEX.md). Release
-checks and change-review templates live under [`.codex/`](.codex/README.md).
-
-## GitHub Copilot Support Role
-
-GitHub Copilot provides general development assistance: targeted edits,
-refactors, documentation synchronization, GitHub workflow support, and
-validation awareness. Copilot does not own implementation direction, release
-decisions, or final handoff authority.
-
-## Google Jules Maintenance Role
-
-Google Jules is reserved for automated maintenance: small fixes, dependency
-updates, generated-output synchronization, and micro-updates. Jules must stay
-within the task prompt and must not take on adapter feature ownership or release
-decisions.
-
 ## Mission
 
 Deliver the upstream `@phcdevworks/spectre-ui` contract through Astro-native
@@ -303,7 +278,8 @@ unfilled. CodeRabbit's description check blocks such PRs.
 
 - `CLAUDE.md` - primary implementation workflow.
 - `CODEX.md` - documentation, release, stabilization, validation review, and
-  handoff workflow.
+  handoff workflow. Release checks and change-review templates live under
+  [`.codex/`](.codex/README.md).
 - `JULES.md` - bounded automated maintenance and commit rules.
 - `COPILOT.md` and `.github/copilot-instructions.md` - support-assistant
   guardrails.
