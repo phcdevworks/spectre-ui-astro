@@ -1,9 +1,17 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **3.4.1 patch release is prepared for human review, commit, tag,
-and publish by Bradley Potts.**
+Active phase: **3.4.2 maintenance patch is prepared for human review, commit,
+tag, and publish by Bradley Potts.**
 
-## 3.4.1 Patch Release Prep (Complete, Unreleased)
+## 3.4.2 Maintenance Patch Prep (Complete, Unreleased)
+
+- [x] Aligned consumer and maintainer documentation with the existing package
+  contract and validation coverage.
+- [x] Refreshed development tooling without changing published peer dependency
+  ranges or runtime behavior.
+- [x] Bumped and synchronized release metadata to `3.4.2`.
+
+## 3.4.1 Patch Release Prep (Complete, Released)
 
 - [x] Bumped package metadata from `3.4.0` to `3.4.1`.
 - [x] Refreshed local tooling versions for `astro`, `@types/node`, and

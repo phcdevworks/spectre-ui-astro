@@ -16,7 +16,7 @@ instead of hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 3.4.1                          |
+| Current version/status | 3.4.2                          |
 
 ## Standard Workflow
 
