@@ -14,6 +14,8 @@ interface SpSidebarProps extends SidebarRecipeOptions {
   id?: string;
   "aria-label"?: string;
   toggleLabel?: string;
+  /** Suppress the built-in toggle button, e.g. when rendering SpSidebarToggle in SpNav instead. */
+  hideToggle?: boolean;
 
   [key: string]: unknown;
 }
@@ -25,6 +27,7 @@ const {
   id,
   "aria-label": ariaLabel,
   toggleLabel = "Toggle sidebar",
+  hideToggle = false,
   ...rest
 } = Astro.props as SpSidebarProps;
 
@@ -33,17 +36,23 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 const backdropClass = getSidebarBackdropClasses();
 const toggleClass = getSidebarToggleClasses();
 const wrapperId = id ? `${id}-shell` : undefined;
+const shellId = wrapperId ?? "sp-sidebar-shell-default";
 ---
 
-<div class="sp-sidebar-shell" id={wrapperId} data-sidebar-open="false">
-  <button
-    type="button"
-    class={toggleClass}
-    aria-label={toggleLabel}
-    data-sidebar-toggle
-  >
-    <slot name="toggle-icon">&#9776;</slot>
-  </button>
+<div class="sp-sidebar-shell" id={shellId} data-sidebar-open="false">
+  {
+    !hideToggle && (
+      <button
+        type="button"
+        class={toggleClass}
+        aria-label={toggleLabel}
+        data-sidebar-toggle
+        data-sidebar-shell-target={shellId}
+      >
+        <slot name="toggle-icon">&#9776;</slot>
+      </button>
+    )
+  }
   <div class={backdropClass} data-sidebar-backdrop></div>
   <Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
     <slot />
@@ -51,11 +60,10 @@ const wrapperId = id ? `${id}-shell` : undefined;
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach((shell) => {
+  function bindSidebar(shell: HTMLElement) {
     if (shell.dataset.sidebarBound === "true") return;
     shell.dataset.sidebarBound = "true";
 
-    const toggle = shell.querySelector<HTMLElement>("[data-sidebar-toggle]");
     const backdrop = shell.querySelector<HTMLElement>("[data-sidebar-backdrop]");
 
     const close = () => {
@@ -66,11 +74,17 @@ const wrapperId = id ? `${id}-shell` : undefined;
       shell.setAttribute("data-sidebar-open", "true");
     };
 
-    toggle?.addEventListener("click", () => {
+    const toggleHandler = () => {
       const isOpen = shell.getAttribute("data-sidebar-open") === "true";
       isOpen ? close() : open();
-    });
+    };
+
+    document
+      .querySelectorAll<HTMLElement>(`[data-sidebar-toggle][data-sidebar-shell-target="${shell.id}"]`)
+      .forEach((toggle) => toggle.addEventListener("click", toggleHandler));
 
     backdrop?.addEventListener("click", close);
-  });
+  }
+
+  document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach(bindSidebar);
 </script>

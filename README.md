@@ -327,14 +327,15 @@ The default slot renders any child content.
 
 ### SpSidebar
 
-| Prop          | Type                        | Default            | Description                                      |
-| ------------- | --------------------------- | ------------------ | ------------------------------------------------ |
-| `bordered`    | `boolean`                   | —                  | Applies a right border                           |
-| `as`          | `"aside" \| "div" \| "nav"` | `"aside"`          | Rendered element for the sidebar itself          |
-| `id`          | `string`                    | —                  | Element ID for the sidebar                       |
-| `aria-label`  | `string`                    | —                  | Accessible label for the sidebar                 |
-| `toggleLabel` | `string`                    | `"Toggle sidebar"` | Accessible label for the hamburger toggle button |
-| `class`       | `string`                    | —                  | Additional CSS classes for the sidebar           |
+| Prop          | Type                        | Default             | Description                                                                                        |
+| ------------- | --------------------------- | ------------------- | --------------------------------------------------------------------------------------------------- |
+| `bordered`    | `boolean`                   | —                   | Applies a right border                                                                             |
+| `as`          | `"aside" \| "div" \| "nav"` | `"aside"`           | Rendered element for the sidebar itself                                                            |
+| `id`          | `string`                    | —                   | Element ID for the sidebar                                                                          |
+| `aria-label`  | `string`                    | —                   | Accessible label for the sidebar                                                                    |
+| `toggleLabel` | `string`                    | `"Toggle sidebar"`  | Accessible label for the hamburger toggle button                                                    |
+| `hideToggle`  | `boolean`                   | `false`             | Suppresses the built-in toggle button, e.g. when placing `SpSidebarToggle` inside `SpNav` instead   |
+| `class`       | `string`                    | —                   | Additional CSS classes for the sidebar                                                              |
 
 `SpSidebar` is the first adapter component to own interactive state. It renders
 a wrapper element with `data-sidebar-open="false"` (closed by default,
@@ -345,6 +346,25 @@ SSR-safe), a hamburger toggle button, a backdrop element
 button or tapping the backdrop flips `data-sidebar-open`, which upstream CSS
 reacts to. Above `breakpoints.md`, the sidebar docks inline and the toggle has
 no visible effect, matching the upstream CSS contract.
+
+To integrate the hamburger toggle into a top `SpNav` bar instead of leaving it
+next to the off-canvas sidebar, pass `hideToggle` to `SpSidebar` and render
+`SpSidebarToggle` inside `SpNav`, pointing its `for` prop at the sidebar's
+`id`:
+
+```astro
+<SpNav bordered sticky fullWidth>
+  <SpSidebarToggle for="docs-sidebar" />
+</SpNav>
+
+<SpSidebar id="docs-sidebar" hideToggle bordered aria-label="Primary">
+  ...
+</SpSidebar>
+```
+
+Both buttons (the built-in one and `SpSidebarToggle`) share the same
+`.sp-sidebar-toggle` styling, so they always match the current theme via
+`--sp-component-sidebar-toggle-*` tokens.
 
 Build sidebar nav groups in the default slot using the re-exported
 `getSidebarHeaderClasses` and `getSidebarLinkClasses` helpers, since section

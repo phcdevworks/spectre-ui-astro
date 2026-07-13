@@ -21,6 +21,7 @@ export { default as SpRating } from "./components/SpRating.astro";
 export { default as SpSection } from "./components/SpSection.astro";
 export { default as SpSelect } from "./components/SpSelect.astro";
 export { default as SpSidebar } from "./components/SpSidebar.astro";
+export { default as SpSidebarToggle } from "./components/SpSidebarToggle.astro";
 export { default as SpSpinner } from "./components/SpSpinner.astro";
 export { default as SpStack } from "./components/SpStack.astro";
 export { default as SpTag } from "./components/SpTag.astro";
