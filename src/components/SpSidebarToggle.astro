@@ -1,0 +1,34 @@
+---
+import { getSidebarToggleClasses } from "@phcdevworks/spectre-ui";
+
+interface SpSidebarToggleProps {
+  /** id of the SpSidebar this toggle controls (pass the same `id` prop given to SpSidebar). */
+  for: string;
+  label?: string;
+  class?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  for: sidebarId,
+  label = "Toggle sidebar",
+  class: className,
+  ...rest
+} = Astro.props as SpSidebarToggleProps;
+
+const toggleClass = getSidebarToggleClasses();
+const finalClass = [toggleClass, className].filter(Boolean).join(" ");
+const shellId = `${sidebarId}-shell`;
+---
+
+<button
+  type="button"
+  class={finalClass}
+  aria-label={label}
+  data-sidebar-toggle
+  data-sidebar-shell-target={shellId}
+  {...rest}
+>
+  <slot name="toggle-icon">&#9776;</slot>
+</button>

@@ -56,6 +56,7 @@
         "./components/SpSection.astro",
         "./components/SpSelect.astro",
         "./components/SpSidebar.astro",
+        "./components/SpSidebarToggle.astro",
         "./components/SpSpinner.astro",
         "./components/SpStack.astro",
         "./components/SpTag.astro",
