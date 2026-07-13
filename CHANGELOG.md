@@ -6,6 +6,25 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.4.2] - 2026-07-14
+
+**Release Title:** Maintenance - Documentation and Tooling Alignment
+
+Contract change type: N/A
+
+### Changed
+
+- Aligned the README's root-import and direct-component-entrypoint examples
+  with the form components already published in the package contract, and
+  refreshed maintainer documentation for the existing README and built-package
+  validation coverage.
+- Refined package and repository documentation and updated the declared npm
+  package-manager version.
+- Refreshed development tooling, including Astro, Spectre UI, the ecosystem
+  manifest validator, linting, formatting, testing, and TypeScript execution
+  dependencies. Published peer dependency ranges and runtime behavior are
+  unchanged.
+
 ## [3.4.1] - 2026-07-02
 
 **Release Title:** Phase 10 - Release Metadata and Tooling Patch
@@ -735,7 +754,8 @@ Contract change type: additive
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.1...HEAD
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.2...HEAD
+[3.4.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.1...3.4.2
 [3.4.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.0...3.4.1
 [3.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.3.0...3.4.0
 [3.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.2.0...3.3.0

@@ -13,7 +13,7 @@ recipe logic.
 | - | - |
 | `@phcdevworks/spectre-tokens` | v3.3.1 — full token surface, including form-field component groups and current recipe-state support |
 | `@phcdevworks/spectre-ui` | v2.7.1 — Phase 10 form-field recipes plus select/textarea state option support shipped |
-| `@phcdevworks/spectre-ui-astro` | v3.4.1 — Phases 3–10 delivered; patch release prepared for npm release |
+| `@phcdevworks/spectre-ui-astro` | v3.4.2 — Phases 3–10 delivered; maintenance patch prepared for review |
 
 ---
 
