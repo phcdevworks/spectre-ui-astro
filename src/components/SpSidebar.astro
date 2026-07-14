@@ -87,4 +87,7 @@ const shellId = wrapperId ?? "sp-sidebar-shell-default";
   }
 
   document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach(bindSidebar);
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach(bindSidebar);
+  });
 </script>
