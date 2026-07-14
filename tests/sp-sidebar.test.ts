@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import {
   getSidebarClasses,
@@ -7,6 +9,7 @@ import {
   getSidebarLinkClasses,
 } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
+
 import SpSidebar from "../src/components/SpSidebar.astro";
 
 let container: AstroContainer;
@@ -41,6 +44,8 @@ describe("SpSidebar SSR-safe interactive state", () => {
   it("renders closed by default with no layout shift on hydration", async () => {
     const html = await container.renderToString(SpSidebar, { props: {} });
     expect(html).toContain('data-sidebar-open="false"');
+    expect(html).toContain('aria-expanded="false"');
+    expect(html).not.toContain("sp-sidebar-shell-default");
   });
 
   it("renders a hamburger toggle button with an accessible label", async () => {
@@ -60,6 +65,26 @@ describe("SpSidebar SSR-safe interactive state", () => {
     });
     expect(html).toContain('aria-label="Open navigation"');
     expect(html).not.toContain('toggleLabel="Open navigation"');
+  });
+
+  it("can suppress the built-in toggle for an external SpSidebarToggle", async () => {
+    const html = await container.renderToString(SpSidebar, {
+      props: { id: "docs-sidebar", hideToggle: true },
+    });
+
+    expect(html).toContain('id="docs-sidebar-shell"');
+    expect(html).not.toContain("data-sidebar-toggle");
+    expect(html).not.toContain('hideToggle="true"');
+  });
+
+  it("rebinds newly swapped sidebar shells after Astro navigation", () => {
+    const source = readFileSync(
+      new URL("../src/components/SpSidebar.astro", import.meta.url),
+      "utf8",
+    );
+
+    expect(source).toContain('document.addEventListener("astro:page-load", bindSidebars)');
+    expect(source).toContain('toggle.dataset.sidebarToggleBound === "true"');
   });
 
   it("renders a backdrop element for click-to-close", async () => {

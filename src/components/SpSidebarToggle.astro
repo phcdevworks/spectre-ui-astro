@@ -26,6 +26,8 @@ const shellId = `${sidebarId}-shell`;
   type="button"
   class={finalClass}
   aria-label={label}
+  aria-controls={shellId}
+  aria-expanded="false"
   data-sidebar-toggle
   data-sidebar-shell-target={shellId}
   {...rest}

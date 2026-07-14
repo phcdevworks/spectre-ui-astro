@@ -81,6 +81,8 @@ export {
   getSelectClasses,
   type SelectRecipeOptions,
   getSidebarClasses,
+  getSidebarGroupClasses,
+  getSidebarGroupSummaryClasses,
   getSidebarLinkClasses,
   getSidebarHeaderClasses,
   getSidebarBackdropClasses,

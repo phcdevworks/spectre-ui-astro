@@ -16,7 +16,7 @@ instead of hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 3.4.2                          |
+| Current version/status | 3.5.0                          |
 
 ## Standard Workflow
 
@@ -57,7 +57,7 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 
 ## What Astro developers get
 
-- **Twenty-nine ready-to-use Astro components** — alerts, avatars, badges,
+- **Thirty ready-to-use Astro components** — alerts, avatars, badges,
   buttons, cards, app shell layout, forms, navigation, overlays, feedback,
   pricing, ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript,
@@ -395,6 +395,21 @@ const childLinkClass = getSidebarLinkClasses({ level: 'child' })
 
 `getSidebarLinkClasses`'s `level` option (`"parent" | "child"`, defaulting to
 `"parent"`) indents nested links under a section header.
+
+---
+
+### SpSidebarToggle
+
+| Prop    | Type     | Default            | Description                                      |
+| ------- | -------- | ------------------ | ------------------------------------------------ |
+| `for`   | `string` | —                  | Required `id` of the `SpSidebar` to control      |
+| `label` | `string` | `"Toggle sidebar"` | Accessible label for the toggle button           |
+| `class` | `string` | —                  | Additional CSS classes for the toggle button     |
+
+`SpSidebarToggle` renders a button that can live outside `SpSidebar`, such as
+inside `SpNav`. Its `for` prop must match the target sidebar's `id`. The
+sidebar wiring binds again after Astro client-side navigation so newly swapped
+sidebar shells remain interactive.
 
 ---
 
@@ -1227,6 +1242,8 @@ const links = [
 | `getRatingTextClasses`                | Rating text element            |
 | `getSectionClasses`                   | Section class generation       |
 | `getSidebarClasses`                   | Sidebar root classes           |
+| `getSidebarGroupClasses`              | Collapsible sidebar group      |
+| `getSidebarGroupSummaryClasses`       | Sidebar group summary          |
 | `getSidebarLinkClasses`               | Individual sidebar link        |
 | `getSidebarHeaderClasses`             | Sidebar section header         |
 | `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop    |
@@ -1329,6 +1346,7 @@ import {
   SpSection,
   SpSelect,
   SpSidebar,
+  SpSidebarToggle,
   SpSpinner,
   SpStack,
   SpTag,
@@ -1371,6 +1389,7 @@ import SpRating from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
 import SpSection from '@phcdevworks/spectre-ui-astro/components/SpSection.astro'
 import SpSelect from '@phcdevworks/spectre-ui-astro/components/SpSelect.astro'
 import SpSidebar from '@phcdevworks/spectre-ui-astro/components/SpSidebar.astro'
+import SpSidebarToggle from '@phcdevworks/spectre-ui-astro/components/SpSidebarToggle.astro'
 import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpTag from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'

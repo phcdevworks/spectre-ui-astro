@@ -1,5 +1,5 @@
 {
-  "version": "3.4.2",
+  "version": "3.5.0",
   "rootExports": {
     "components": [
       "SpAlert",
@@ -24,6 +24,7 @@
       "SpSection",
       "SpSelect",
       "SpSidebar",
+      "SpSidebarToggle",
       "SpSpinner",
       "SpStack",
       "SpTag",
@@ -73,8 +74,11 @@
       "getSelectClasses",
       "getSidebarBackdropClasses",
       "getSidebarClasses",
+      "getSidebarGroupClasses",
+      "getSidebarGroupSummaryClasses",
       "getSidebarHeaderClasses",
       "getSidebarLinkClasses",
+      "getSidebarToggleClasses",
       "getSpinnerClasses",
       "getStackClasses",
       "getTagClasses",
@@ -145,6 +149,7 @@
       "SpinnerSize",
       "SpinnerVariant",
       "StackBasis",
+      "StackAlign",
       "StackDirection",
       "StackRecipeOptions",
       "TagRecipeOptions",
@@ -182,6 +187,7 @@
     "./components/SpSection.astro",
     "./components/SpSelect.astro",
     "./components/SpSidebar.astro",
+    "./components/SpSidebarToggle.astro",
     "./components/SpSpinner.astro",
     "./components/SpStack.astro",
     "./components/SpTag.astro",
@@ -192,13 +198,13 @@
   ],
   "peerDependencies": {
     "@phcdevworks/spectre-tokens": "^3.3.1",
-    "@phcdevworks/spectre-ui": "^2.7.1",
+    "@phcdevworks/spectre-ui": "^2.8.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
   },
   "upstreamBinding": {
     "package": "@phcdevworks/spectre-ui",
-    "peerRange": "^2.7.1"
+    "peerRange": "^2.8.0"
   },
   "thinAdapterInvariants": {
     "noLocalCssOwnership": true,

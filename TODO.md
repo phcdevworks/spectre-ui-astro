@@ -1,9 +1,20 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **3.4.2 maintenance patch is prepared for human review, commit,
+Active phase: **3.5.0 sidebar composition release is prepared for human review, commit,
 tag, and publish by Bradley Potts.**
 
-## 3.4.2 Maintenance Patch Prep (Complete, Unreleased)
+## 3.5.0 Sidebar Composition Release Prep (Complete, Unreleased)
+
+- [x] Added and documented `SpSidebarToggle` plus `SpSidebar.hideToggle` for
+  external sidebar-control composition.
+- [x] Rebind sidebar interaction after Astro client-side navigation.
+- [x] Synchronized root exports, component entrypoints, contract metadata,
+  tests, examples, and release notes.
+- [x] Aligned the upstream peer contract and sidebar helper re-exports with
+  `@phcdevworks/spectre-ui@^2.8.0`.
+- [x] Bumped and synchronized release metadata to `3.5.0`.
+
+## 3.4.2 Maintenance Patch Prep (Complete, Released)
 
 - [x] Aligned consumer and maintainer documentation with the existing package
   contract and validation coverage.

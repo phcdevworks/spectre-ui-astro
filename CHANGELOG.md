@@ -6,6 +6,40 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.5.0] - 2026-07-14
+
+**Release Title:** Sidebar External Toggle and Upstream 2.8 Alignment
+
+Contract change type: additive
+
+### Added
+
+- Added the `SpSidebarToggle` Astro component as both a root export and direct
+  component entrypoint. Its required `for` prop targets an `SpSidebar` by id,
+  allowing the toggle to be composed inside navigation or other page chrome.
+- Added `SpSidebar.hideToggle` so consumers can suppress the built-in toggle
+  when using an external `SpSidebarToggle`.
+- Re-exported the upstream `getSidebarGroupClasses()` and
+  `getSidebarGroupSummaryClasses()` helpers for consumer-composed collapsible
+  sidebar navigation groups.
+
+### Changed
+
+- Bumped the `@phcdevworks/spectre-ui` peer, contract, example, and local
+  development ranges to `^2.8.0`, adopting the complete upstream sidebar
+  toggle styling and collapsible group recipe contract.
+- Refreshed Astro and TypeScript ESLint development dependencies with
+  synchronized lockfile metadata.
+
+### Fixed
+
+- Rebinds sidebar interaction after Astro client-side navigation so newly
+  swapped sidebar shells and their external toggles remain interactive without
+  accumulating stale toggle listeners.
+- Removed the shared fallback shell id from id-less sidebars, preventing
+  duplicate ids when multiple self-contained sidebars render on one page, and
+  synchronized toggle `aria-expanded` state with the drawer state.
+
 ## [3.4.2] - 2026-07-14
 
 **Release Title:** Maintenance - Documentation and Tooling Alignment
@@ -754,7 +788,8 @@ Contract change type: additive
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.2...HEAD
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.5.0...HEAD
+[3.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.2...3.5.0
 [3.4.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.1...3.4.2
 [3.4.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.0...3.4.1
 [3.4.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.3.0...3.4.0
