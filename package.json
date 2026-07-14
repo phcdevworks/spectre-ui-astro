@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "3.4.2",
+  "version": "3.5.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system. It adapts Spectre UI's class recipes into Astro components for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
@@ -69,6 +69,7 @@
     "./components/SpSection.astro": "./dist/components/SpSection.astro",
     "./components/SpSelect.astro": "./dist/components/SpSelect.astro",
     "./components/SpSidebar.astro": "./dist/components/SpSidebar.astro",
+    "./components/SpSidebarToggle.astro": "./dist/components/SpSidebarToggle.astro",
     "./components/SpSpinner.astro": "./dist/components/SpSpinner.astro",
     "./components/SpStack.astro": "./dist/components/SpStack.astro",
     "./components/SpTag.astro": "./dist/components/SpTag.astro",
@@ -107,7 +108,7 @@
   },
   "peerDependencies": {
     "@phcdevworks/spectre-tokens": "^3.3.1",
-    "@phcdevworks/spectre-ui": "^2.7.1",
+    "@phcdevworks/spectre-ui": "^2.8.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
   },

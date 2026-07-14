@@ -36,18 +36,19 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
 const backdropClass = getSidebarBackdropClasses();
 const toggleClass = getSidebarToggleClasses();
 const wrapperId = id ? `${id}-shell` : undefined;
-const shellId = wrapperId ?? "sp-sidebar-shell-default";
 ---
 
-<div class="sp-sidebar-shell" id={shellId} data-sidebar-open="false">
+<div class="sp-sidebar-shell" id={wrapperId} data-sidebar-open="false">
   {
     !hideToggle && (
       <button
         type="button"
         class={toggleClass}
         aria-label={toggleLabel}
+        aria-controls={wrapperId}
+        aria-expanded="false"
         data-sidebar-toggle
-        data-sidebar-shell-target={shellId}
+        data-sidebar-shell-target={wrapperId}
       >
         <slot name="toggle-icon">&#9776;</slot>
       </button>
@@ -60,34 +61,58 @@ const shellId = wrapperId ?? "sp-sidebar-shell-default";
 </div>
 
 <script>
+  function getSidebarToggles(shell: HTMLElement) {
+    const toggles = new Set(
+      shell.querySelectorAll<HTMLElement>("[data-sidebar-toggle]"),
+    );
+
+    if (shell.id) {
+      document
+        .querySelectorAll<HTMLElement>("[data-sidebar-toggle][data-sidebar-shell-target]")
+        .forEach((toggle) => {
+          if (toggle.dataset.sidebarShellTarget === shell.id) toggles.add(toggle);
+        });
+    }
+
+    return toggles;
+  }
+
+  function setSidebarOpen(shell: HTMLElement, isOpen: boolean) {
+    shell.setAttribute("data-sidebar-open", String(isOpen));
+    getSidebarToggles(shell).forEach((toggle) => {
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  }
+
+  function bindSidebarToggle(toggle: HTMLElement) {
+    if (toggle.dataset.sidebarToggleBound === "true") return;
+    toggle.dataset.sidebarToggleBound = "true";
+
+    toggle.addEventListener("click", () => {
+      const target = toggle.dataset.sidebarShellTarget;
+      const shell = target
+        ? document.getElementById(target)
+        : toggle.closest<HTMLElement>(".sp-sidebar-shell");
+
+      if (!shell) return;
+      setSidebarOpen(shell, shell.getAttribute("data-sidebar-open") !== "true");
+    });
+  }
+
   function bindSidebar(shell: HTMLElement) {
     if (shell.dataset.sidebarBound === "true") return;
     shell.dataset.sidebarBound = "true";
 
-    const backdrop = shell.querySelector<HTMLElement>("[data-sidebar-backdrop]");
-
-    const close = () => {
-      shell.setAttribute("data-sidebar-open", "false");
-    };
-
-    const open = () => {
-      shell.setAttribute("data-sidebar-open", "true");
-    };
-
-    const toggleHandler = () => {
-      const isOpen = shell.getAttribute("data-sidebar-open") === "true";
-      isOpen ? close() : open();
-    };
-
-    document
-      .querySelectorAll<HTMLElement>(`[data-sidebar-toggle][data-sidebar-shell-target="${shell.id}"]`)
-      .forEach((toggle) => toggle.addEventListener("click", toggleHandler));
-
-    backdrop?.addEventListener("click", close);
+    shell
+      .querySelector<HTMLElement>("[data-sidebar-backdrop]")
+      ?.addEventListener("click", () => setSidebarOpen(shell, false));
   }
 
-  document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach(bindSidebar);
-  document.addEventListener("astro:page-load", () => {
+  function bindSidebars() {
     document.querySelectorAll<HTMLElement>(".sp-sidebar-shell").forEach(bindSidebar);
-  });
+    document.querySelectorAll<HTMLElement>("[data-sidebar-toggle]").forEach(bindSidebarToggle);
+  }
+
+  bindSidebars();
+  document.addEventListener("astro:page-load", bindSidebars);
 </script>
