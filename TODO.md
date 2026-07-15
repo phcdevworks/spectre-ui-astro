@@ -1,9 +1,9 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **3.6.0 nav alignment release is prepared for human review,
+Active phase: **3.6.0 Phase 11 nav alignment release is prepared for human review,
 commit, tag, and publish by Bradley Potts.**
 
-## 3.6.0 Nav Alignment Release Prep (Complete, Unreleased)
+## 3.6.0 Phase 11 Nav Alignment Release Prep (Complete, Unreleased)
 
 - [x] Forwarded `SpNav.align` to the upstream nav recipe and re-exported the
   `NavAlign` type.
