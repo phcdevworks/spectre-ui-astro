@@ -27,7 +27,7 @@ Contract change type: additive
 
 ## [3.5.0] - 2026-07-14
 
-**Release Title:** Sidebar External Toggle and Upstream 2.8 Alignment
+**Release Title:** Phase 11 - Sidebar External Toggle and Upstream 2.8 Alignment
 
 Contract change type: additive
 
@@ -61,7 +61,7 @@ Contract change type: additive
 
 ## [3.4.2] - 2026-07-14
 
-**Release Title:** Maintenance - Documentation and Tooling Alignment
+**Release Title:** Phase 10 - Maintenance - Documentation and Tooling Alignment
 
 Contract change type: N/A
 
