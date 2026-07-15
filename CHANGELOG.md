@@ -6,6 +6,25 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.6.0] - 2026-07-15
+
+**Release Title:** Nav Alignment and Upstream 2.9 Alignment
+
+Contract change type: additive
+
+### Added
+
+- Added the `SpNav.align` option with `"start"`, `"center"`, and `"end"`
+  values, forwarding alignment directly to the upstream `getNavClasses()`
+  recipe without leaking the adapter prop to rendered markup.
+- Re-exported the upstream `NavAlign` type for typed consumer composition.
+
+### Changed
+
+- Bumped the `@phcdevworks/spectre-ui` peer, contract, example, and local
+  development ranges to `^2.9.0`, the first upstream release that provides
+  the nav alignment recipe contract.
+
 ## [3.5.0] - 2026-07-14
 
 **Release Title:** Sidebar External Toggle and Upstream 2.8 Alignment
@@ -788,7 +807,8 @@ Contract change type: additive
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.5.0...HEAD
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.6.0...HEAD
+[3.6.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.5.0...3.6.0
 [3.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.2...3.5.0
 [3.4.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.1...3.4.2
 [3.4.1]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.0...3.4.1

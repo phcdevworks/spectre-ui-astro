@@ -12,8 +12,8 @@ recipe logic.
 | Package | Current state |
 | - | - |
 | `@phcdevworks/spectre-tokens` | v3.3.1 — full token surface, including form-field component groups and current recipe-state support |
-| `@phcdevworks/spectre-ui` | v2.8.0 — collapsible sidebar group helpers and complete toggle styling shipped |
-| `@phcdevworks/spectre-ui-astro` | v3.5.0 — external sidebar toggle composition and upstream 2.8 alignment prepared for review |
+| `@phcdevworks/spectre-ui` | v2.9.0 — nav alignment recipe option shipped |
+| `@phcdevworks/spectre-ui-astro` | v3.6.0 — nav alignment and upstream 2.9 alignment prepared for review |
 
 ---
 

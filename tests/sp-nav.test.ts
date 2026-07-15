@@ -34,6 +34,15 @@ describe("SpNav class and prop behavior", () => {
     expect(html).not.toContain('fullWidth="fullWidth"');
   });
 
+  it("applies alignment classes and does not leak the prop", async () => {
+    for (const align of ["start", "center", "end"] as const) {
+      const html = await container.renderToString(SpNav, { props: { align } });
+      expect(html).toContain(getNavClasses({ align }));
+      expect(html).toContain(`sp-nav--align-${align}`);
+      expect(html).not.toContain(`align="${align}"`);
+    }
+  });
+
   it("merges additional className with recipe classes", async () => {
     const html = await container.renderToString(SpNav, { props: { class: "my-nav", bordered: true } });
     expect(html).toContain("sp-nav--bordered");

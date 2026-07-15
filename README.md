@@ -16,7 +16,7 @@ instead of hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 3.5.0                          |
+| Current version/status | 3.6.0                          |
 
 ## Standard Workflow
 
@@ -1049,6 +1049,7 @@ Toggling `open` is consumer-driven (no client-side JS is included).
 | `bordered`   | `boolean`                                 | —       | Applies a border                      |
 | `sticky`     | `boolean`                                 | —       | Applies sticky positioning            |
 | `fullWidth`  | `boolean`                                 | —       | Stretches to full width               |
+| `align`      | `NavAlign`                                | —       | Aligns content: `"start"`, `"center"`, or `"end"` |
 | `as`         | `"nav" \| "div" \| "header" \| "section"` | `"nav"` | Rendered element                      |
 | `id`         | `string`                                  | —       | Element ID                            |
 | `aria-label` | `string`                                  | —       | Accessible label for the nav landmark |
@@ -1067,7 +1068,7 @@ const activeLinkClass = getNavLinkClasses({ active: true })
 const linkClass = getNavLinkClasses()
 ---
 
-<SpNav bordered sticky aria-label="Main">
+<SpNav bordered sticky align="center" aria-label="Main">
   <div class={linksClass}>
     <a class={activeLinkClass} href="/" aria-current="page">Home</a>
     <a class={linkClass} href="/about">About</a>
@@ -1267,7 +1268,7 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `DropdownMenuRecipeOptions`, `DropdownItemRecipeOptions`, `DropdownPlacement`,
 `FooterRecipeOptions`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`,
 `InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`,
-`ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavLinkRecipeOptions`,
+`ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavAlign`, `NavLinkRecipeOptions`,
 `PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
 `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `SidebarLinkLevel`, `StackRecipeOptions`,
 `StackDirection`, `StackBasis`, `StackAlign`, `TestimonialRecipeOptions`,
