@@ -12,7 +12,7 @@ commit, tag, and publish by Bradley Potts.**
 - [x] Synchronized the peer, adapter contract, example, README, and release
   metadata with `@phcdevworks/spectre-ui@^2.9.0`.
 
-## 3.5.0 Sidebar Composition Release Prep (Complete, Released)
+## 3.5.0 Phase 11 Sidebar Composition Release Prep (Complete, Released)
 
 - [x] Added and documented `SpSidebarToggle` plus `SpSidebar.hideToggle` for
   external sidebar-control composition.
@@ -23,7 +23,7 @@ commit, tag, and publish by Bradley Potts.**
   `@phcdevworks/spectre-ui@^2.8.0`.
 - [x] Bumped and synchronized release metadata to `3.5.0`.
 
-## 3.4.2 Maintenance Patch Prep (Complete, Released)
+## 3.4.2 Phase 10 Maintenance Patch Prep (Complete, Released)
 
 - [x] Aligned consumer and maintainer documentation with the existing package
   contract and validation coverage.
