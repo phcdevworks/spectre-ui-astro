@@ -17,6 +17,7 @@ const {
   bordered,
   sticky,
   fullWidth,
+  align,
   as: Tag = "nav",
   class: className,
   id,
@@ -24,7 +25,7 @@ const {
   ...rest
 } = Astro.props as SpNavProps;
 
-const classes = getNavClasses({ bordered, sticky, fullWidth });
+const classes = getNavClasses({ bordered, sticky, fullWidth, align });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
