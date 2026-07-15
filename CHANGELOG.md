@@ -8,7 +8,7 @@ reflects package releases published to npm.
 
 ## [3.6.0] - 2026-07-15
 
-**Release Title:** Nav Alignment and Upstream 2.9 Alignment
+**Release Title:** Phase 11 - Nav Alignment and Upstream 2.9 Alignment
 
 Contract change type: additive
 
