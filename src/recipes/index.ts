@@ -61,6 +61,7 @@ export {
   getNavLinksClasses,
   getNavLinkClasses,
   type NavRecipeOptions,
+  type NavAlign,
   type NavLinkRecipeOptions,
   getPricingCardClasses,
   getPricingCardBadgeClasses,
