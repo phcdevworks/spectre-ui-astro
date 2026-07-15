@@ -397,11 +397,11 @@ describe("SSR rendering", () => {
 
   it("renders SpNav with upstream classes", async () => {
     const html = await container.renderToString(SpNav, {
-      props: { bordered: true, sticky: true },
+      props: { bordered: true, sticky: true, align: "center" },
       slots: { default: "<a href=\"/\">Home</a>" },
     });
 
-    expect(html).toContain(getNavClasses({ bordered: true, sticky: true }));
+    expect(html).toContain(getNavClasses({ bordered: true, sticky: true, align: "center" }));
     expect(html).toContain("<nav");
     expect(html).toContain("Home");
   });

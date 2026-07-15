@@ -1,5 +1,5 @@
 {
-  "version": "3.5.0",
+  "version": "3.6.0",
   "rootExports": {
     "components": [
       "SpAlert",
@@ -134,6 +134,7 @@
       "LabelRecipeOptions",
       "ModalOverlayRecipeOptions",
       "ModalRecipeOptions",
+      "NavAlign",
       "NavLinkRecipeOptions",
       "NavRecipeOptions",
       "PricingCardRecipeOptions",
@@ -198,13 +199,13 @@
   ],
   "peerDependencies": {
     "@phcdevworks/spectre-tokens": "^3.3.1",
-    "@phcdevworks/spectre-ui": "^2.8.0",
+    "@phcdevworks/spectre-ui": "^2.9.0",
     "astro": "^7.0.0",
     "typescript": "^5.9 || ^6.0"
   },
   "upstreamBinding": {
     "package": "@phcdevworks/spectre-ui",
-    "peerRange": "^2.8.0"
+    "peerRange": "^2.9.0"
   },
   "thinAdapterInvariants": {
     "noLocalCssOwnership": true,

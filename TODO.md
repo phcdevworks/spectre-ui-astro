@@ -1,9 +1,18 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **3.5.0 sidebar composition release is prepared for human review, commit,
-tag, and publish by Bradley Potts.**
+Active phase: **3.6.0 nav alignment release is prepared for human review,
+commit, tag, and publish by Bradley Potts.**
 
-## 3.5.0 Sidebar Composition Release Prep (Complete, Unreleased)
+## 3.6.0 Nav Alignment Release Prep (Complete, Unreleased)
+
+- [x] Forwarded `SpNav.align` to the upstream nav recipe and re-exported the
+  `NavAlign` type.
+- [x] Added focused SSR coverage for all supported alignment values and DOM
+  prop leakage.
+- [x] Synchronized the peer, adapter contract, example, README, and release
+  metadata with `@phcdevworks/spectre-ui@^2.9.0`.
+
+## 3.5.0 Sidebar Composition Release Prep (Complete, Released)
 
 - [x] Added and documented `SpSidebarToggle` plus `SpSidebar.hideToggle` for
   external sidebar-control composition.
