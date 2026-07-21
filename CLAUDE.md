@@ -218,7 +218,7 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 10 are complete and released (current version `3.4.1`; see
+Phases 1 through 11 are complete and released (current version `3.7.0`; see
 `package.json` and `CHANGELOG.md`). There is no open phase. The next phase opens
 once either `@phcdevworks/spectre-ui` ships new recipe families beyond Phase 4
 (nav, toast, tooltip, dropdown, modal), or `@phcdevworks/spectre-tokens`
