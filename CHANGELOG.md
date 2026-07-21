@@ -6,6 +6,17 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+Contract change type: additive
+
+### Changed
+
+- Widened the `typescript` peer dependency range to add TypeScript 7
+  support: `^5.9 || ^6.0` → `^5.0 || ^6.0 || ^7.0`. Internal tooling
+  (ESLint/typescript-eslint) runs against TypeScript 6 via an
+  `npm:@typescript/typescript6` alias since `typescript-eslint` does not yet
+  support TypeScript 7's programmatic API; TypeScript 7's native compiler is
+  available via the `@typescript/native` devDependency alias.
+
 ## [3.6.0] - 2026-07-15
 
 **Release Title:** Phase 11 - Nav Alignment and Upstream 2.9 Alignment
