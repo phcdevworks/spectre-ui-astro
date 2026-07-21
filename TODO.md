@@ -1,9 +1,18 @@
 # Spectre UI Astro Execution Todo
 
-Active phase: **3.6.0 Phase 11 nav alignment release is prepared for human review,
+Active phase: **3.7.0 Phase 11 TypeScript 7 peer support is prepared for human review,
 commit, tag, and publish by Bradley Potts.**
 
-## 3.6.0 Phase 11 Nav Alignment Release Prep (Complete, Unreleased)
+## 3.7.0 Phase 11 TypeScript 7 Peer Support Release Prep (Complete, Unreleased)
+
+- [x] Widened the consumer TypeScript peer range to support TypeScript 5, 6,
+  and 7.
+- [x] Kept lint tooling on the compatible TypeScript 6 API while making the
+  TypeScript 7 native compiler available for local validation.
+- [x] Synchronized release metadata and added package-to-contract parity
+  validation for versions and peer dependencies.
+
+## 3.6.0 Phase 11 Nav Alignment Release Prep (Complete, Released)
 
 - [x] Forwarded `SpNav.align` to the upstream nav recipe and re-exported the
   `NavAlign` type.

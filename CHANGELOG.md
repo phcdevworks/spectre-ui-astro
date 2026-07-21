@@ -6,6 +6,10 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [3.7.0] - 2026-07-21
+
+**Release Title:** Phase 11 - TypeScript 7 Peer Support
+
 Contract change type: additive
 
 ### Changed
@@ -16,6 +20,10 @@ Contract change type: additive
   `npm:@typescript/typescript6` alias since `typescript-eslint` does not yet
   support TypeScript 7's programmatic API; TypeScript 7's native compiler is
   available via the `@typescript/native` devDependency alias.
+- Synchronized the adapter contract with the widened TypeScript peer range and
+  added build-time validation for package version and peer-dependency parity.
+- Raised the example app's Astro baseline to `^7.1.3`, matching the validated
+  local toolchain and avoiding advisories affecting its prior resolved version.
 
 ## [3.6.0] - 2026-07-15
 
@@ -818,7 +826,8 @@ Contract change type: additive
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.6.0...HEAD
+[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.7.0...HEAD
+[3.7.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.6.0...3.7.0
 [3.6.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.5.0...3.6.0
 [3.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.2...3.5.0
 [3.4.2]: https://github.com/phcdevworks/spectre-ui-astro/compare/3.4.1...3.4.2

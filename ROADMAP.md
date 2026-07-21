@@ -13,7 +13,7 @@ recipe logic.
 | - | - |
 | `@phcdevworks/spectre-tokens` | v3.3.1 — full token surface, including form-field component groups and current recipe-state support |
 | `@phcdevworks/spectre-ui` | v2.9.0 — nav alignment recipe option shipped |
-| `@phcdevworks/spectre-ui-astro` | v3.6.0 — Phase 11 nav alignment and upstream 2.9 alignment prepared for review |
+| `@phcdevworks/spectre-ui-astro` | v3.7.0 — Phase 11 TypeScript 7 peer support prepared for review |
 
 ---
 

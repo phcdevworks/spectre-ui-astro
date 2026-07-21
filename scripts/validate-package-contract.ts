@@ -141,12 +141,33 @@ const runtimePaths = collectRuntimeExportPaths(exportsField);
 const typePaths = [packageJson.types];
 const mainPaths = [packageJson.main];
 const upstreamContractPackage = '@phcdevworks/spectre-ui';
+const contractPeerDependencies = contractJson.peerDependencies as Record<string, string>;
+const packagePeerDependencies = packageJson.peerDependencies as Record<string, string>;
 const upstreamPeerRange = (packageJson.peerDependencies as Record<string, string> | undefined)?.[upstreamContractPackage];
 const astroHostPackage = 'astro';
 const astroPeerRange = (packageJson.peerDependencies as Record<string, string> | undefined)?.[astroHostPackage];
 
 if ('module' in packageJson) {
   throw new Error('package.json should not declare a separate module field for this ESM-only package.');
+}
+
+if (contractJson.version !== packageJson.version) {
+  throw new Error(
+    `Adapter contract version ${contractJson.version} does not match package version ${packageJson.version}.`,
+  );
+}
+
+const contractPeerEntries = Object.entries(contractPeerDependencies).sort(([left], [right]) =>
+  left.localeCompare(right),
+);
+const packagePeerEntries = Object.entries(packagePeerDependencies).sort(([left], [right]) =>
+  left.localeCompare(right),
+);
+
+if (JSON.stringify(contractPeerEntries) !== JSON.stringify(packagePeerEntries)) {
+  throw new Error(
+    'Adapter contract peerDependencies do not match package.json peerDependencies.',
+  );
 }
 
 if ('require' in (exportsField['.'] as Record<string, string>)) {
