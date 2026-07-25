@@ -3,6 +3,32 @@
 Active phase: **3.7.0 Phase 11 TypeScript 7 peer support is prepared for human review,
 commit, tag, and publish by Bradley Potts.**
 
+## Phase 12 — SpText Component (requested by downstream, not started)
+
+- [ ] Add `SpText` calling `getTextClasses` from `@phcdevworks/spectre-ui`.
+      Requested by `spectre-base` (2026-07-23) while converting
+      `spectre-theme/` PHP templates off hand-rolled CSS onto `sp-*`
+      components; tracked upstream in `spectre-ui`'s `TODO.md` Phase 4g and
+      in `spectre-components`'s `TODO.md` "Requested by Downstream". The
+      blocking gap is closed: `@phcdevworks/spectre-ui` Phase 4g shipped
+      `getTextClasses` (single recipe, `size`/`variant`/`family?` options —
+      `xs`–`6xl` scale, `default`/`muted`/`subtle`/`meta`/`brand` color
+      roles, `sans`/`serif`/`mono` family).
+  - Bump the declared `@phcdevworks/spectre-ui` peer range to cover the
+    version that publishes `getTextClasses`, in both `package.json` and
+    `astro-adapter.contract.json`.
+  - `src/components/SpText.astro` should accept an `as` prop (`h1`–`h6`,
+    `p`, `span`, defaulting to `p`) that swaps the rendered tag without
+    changing the `getTextClasses` call — same single-element-many-options
+    shape decided in `spectre-ui`'s `TODO.md` Phase 4g, so this adapter does
+    not need a separate `SpHeading` component.
+  - Same delivery pattern as `SpLabel`/`SpFieldset`: recipe re-export in
+    `src/recipes/index.ts`, export in `src/index.ts`, entrypoint in
+    `package.json`, contract entry in `astro-adapter.contract.json`,
+    `tests/sp-text.test.ts`, SSR coverage in `tests/rendering.test.ts`, prop
+    table and usage in `README.md`.
+  - Needs explicit approval from Bradley Potts before implementation.
+
 ## 3.7.0 Phase 11 TypeScript 7 Peer Support Release Prep (Complete, Unreleased)
 
 - [x] Widened the consumer TypeScript peer range to support TypeScript 5, 6,
