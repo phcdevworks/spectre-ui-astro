@@ -182,10 +182,11 @@ explicit `id` requirement and returns stable helper and error associations.
 
 ## Release Procedure
 
-1. Update `CHANGELOG.md` by moving `[Unreleased]` items under a version heading.
-2. Bump `package.json`.
-3. Run `npm run check`.
-4. Hand off to Bradley Potts for review, commit, tag, and `npm publish`.
+Claude Code implements features and fixes with a `CHANGELOG.md [Unreleased]`
+entry classified per change. Cutting the release itself — version bump,
+changelog versioning, `v<version>` tag, and GitHub Release — is Codex's job;
+see `CODEX.md` "Release Review Checklist" for the full procedure. `npm
+publish` stays with Bradley Potts regardless of who prepares the release.
 
 ## What This Package Does Not Own
 
