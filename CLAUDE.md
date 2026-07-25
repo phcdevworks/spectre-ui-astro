@@ -12,24 +12,17 @@ PR requirements live in `AGENTS.md`.
 
 ## Multi-Agent Team
 
-`AGENTS.md` is the shared guide for agent roles, edit boundaries, package
-ownership, validation, and PR requirements. Claude Code remains the lead
-implementation authority for Astro adapter source changes and architecture.
-Resolve implementation conflicts by referencing this file together with
-`AGENTS.md`, `src/index.ts`, `package.json`, and
-`scripts/validate-package-contract.ts`.
+Full roster, authority table, and PR requirements: [AGENTS.md](AGENTS.md).
+Claude Code remains the lead implementation authority for Astro adapter
+source changes and architecture. Resolve implementation conflicts by
+referencing this file together with `AGENTS.md`, `src/index.ts`,
+`package.json`, and `scripts/validate-package-contract.ts`.
 
 ## Commit Policy
 
-Claude Code does not create git commits in this repository. Prepare changes, run
-validation, and leave staging, committing, tagging, and publishing to human
-review.
-
-## Pull Request Creation
-
-Follow the shared PR requirements in `AGENTS.md`. Claude Code prepares validated
-changes for human review; Bradley Potts handles final commit, merge, tag, and
-release authority.
+See [AGENTS.md](AGENTS.md) for the full grant of authority. Claude Code
+applies it here: run all validation before committing, then stage, commit,
+tag, and push without per-action confirmation.
 
 ## The One Rule That Overrides Everything
 

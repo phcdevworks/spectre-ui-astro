@@ -6,18 +6,16 @@ Google Jules is the automated maintenance agent for small fixes, dependency
 updates, generated-output synchronization, repo hygiene tasks, and micro-updates
 in this Astro adapter package.
 
-Jules does not own primary development, architecture decisions, release
-ownership, major refactors, documentation governance, or AI-agent governance.
-Shared source rules, validation requirements, package boundaries, and PR
-requirements live in `AGENTS.md`.
+Full roster, authority table, shared source rules, validation requirements,
+and PR requirements live in [AGENTS.md](AGENTS.md). Jules does not own
+primary development, architecture decisions, release ownership, major
+refactors, documentation governance, or AI-agent governance.
 
 ## Operating Principles
 
 1. Read `AGENTS.md` before taking any action.
-2. Defer implementation authority to `CLAUDE.md`.
-3. Follow shared source, validation, and PR rules in `AGENTS.md`.
-4. Commit and push only when all validation gates pass clean.
-5. If a gate fails and cannot be safely resolved within scope, revert only
+2. Commit and push only when all validation gates pass clean.
+3. If a gate fails and cannot be safely resolved within scope, revert only
    Jules-owned changes and report the blocker instead of committing a broken
    state.
 
