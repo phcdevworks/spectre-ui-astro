@@ -55,7 +55,7 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 [Changelog](CHANGELOG.md) | [Roadmap](ROADMAP.md) |
 [Security Policy](SECURITY.md)
 
-## What Astro developers get
+## What Astro Developers Get
 
 - **Thirty ready-to-use Astro components** — alerts, avatars, badges,
   buttons, cards, app shell layout, forms, navigation, overlays, feedback,
@@ -67,6 +67,50 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
   framework ergonomics
 - **Re-exported recipe helpers** — use the same class functions the components
   use, directly from your Astro frontmatter or TypeScript
+
+## What This Package Owns
+
+- Astro-native component delivery for Spectre UI recipes and classes
+- Astro-friendly, SSR-safe component interfaces and composition patterns
+- Type-safe framework bindings for the upstream Spectre UI contract
+- Adapter-level ergonomics that make `@phcdevworks/spectre-ui` straightforward
+  to consume in Astro projects
+- A reference implementation for future Spectre framework adapters
+
+Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine
+it.
+
+## What This Package Does Not Own
+
+- Design values or token meaning —
+  [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
+- Core CSS, utilities, Tailwind helpers, or class recipe logic —
+  [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)
+- Local styling systems that diverge from the shared Spectre contract
+
+## When To Use This Package
+
+Use `@phcdevworks/spectre-ui-astro` when:
+
+- you are building an Astro project and want Spectre UI components as
+  first-class Astro components
+- you need SSR-safe, type-safe component interfaces that bind the upstream
+  `@phcdevworks/spectre-ui` recipe contract without reimplementing it
+- you want to compose with Spectre's shared recipe helpers from TypeScript in an
+  Astro project
+
+## When Not To Use This Package
+
+Do not use this package when:
+
+- you are using a different framework (React, Vue, Svelte, etc.) — this package
+  is Astro-only
+- you want to define custom tokens or override Spectre's design values — that
+  belongs in `@phcdevworks/spectre-tokens`
+- you want to add or change class recipes, CSS utilities, or Tailwind helpers —
+  that belongs in `@phcdevworks/spectre-ui`
+- you need a framework-agnostic styling contract — consume
+  `@phcdevworks/spectre-ui` directly
 
 ## Installation
 
@@ -85,7 +129,7 @@ If your project works with Spectre design tokens directly:
 npm install @phcdevworks/spectre-tokens
 ```
 
-## CSS setup
+## CSS Setup
 
 This package ships no CSS. Add the Spectre UI stylesheet once in your Astro
 layout:
@@ -115,7 +159,7 @@ const { title = 'My Astro site' } = Astro.props
 All Spectre components pick up the stylesheet through the layout. Do not import
 it per-component — CSS ownership stays with `@phcdevworks/spectre-ui`.
 
-## Quick start
+## Quick Start
 
 ```astro
 ---
@@ -1122,7 +1166,7 @@ used.
 
 ---
 
-## Polymorphic rendering (`as` prop)
+## Polymorphic Rendering (`as` prop)
 
 Most components accept an `as` prop to change the rendered HTML element without
 changing component behavior or styling.
@@ -1155,7 +1199,7 @@ defaults to `"button"` to prevent accidental form submission. Pass
 `span` adds `role="button"` and `tabindex="0"` automatically. Use this only when
 a native `button` or `a` is genuinely impractical.
 
-## SSR and static site behavior
+## SSR And Static Site Behavior
 
 `@phcdevworks/spectre-ui-astro` works in all Astro output modes: `"static"`,
 `"server"`, and `"hybrid"`.
@@ -1186,7 +1230,7 @@ message. This applies in both SSR and static builds.
 Astro handles CSS bundling and injection in both SSR and static builds — no
 runtime style injection occurs from this package.
 
-## Recipe helpers
+## Recipe Helpers
 
 The package re-exports class recipe functions from `@phcdevworks/spectre-ui`.
 Use these when you need Spectre-aligned class names outside of the Astro
@@ -1275,51 +1319,7 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
 `TooltipRecipeOptions`, `TooltipPlacement`.
 
-## What this package owns
-
-- Astro-native component delivery for Spectre UI recipes and classes
-- Astro-friendly, SSR-safe component interfaces and composition patterns
-- Type-safe framework bindings for the upstream Spectre UI contract
-- Adapter-level ergonomics that make `@phcdevworks/spectre-ui` straightforward
-  to consume in Astro projects
-- A reference implementation for future Spectre framework adapters
-
-Golden rule: bind the upstream Spectre UI contract for Astro, do not redefine
-it.
-
-## What this package does not own
-
-- Design values or token meaning —
-  [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
-- Core CSS, utilities, Tailwind helpers, or class recipe logic —
-  [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)
-- Local styling systems that diverge from the shared Spectre contract
-
-## When to use this package
-
-Use `@phcdevworks/spectre-ui-astro` when:
-
-- you are building an Astro project and want Spectre UI components as
-  first-class Astro components
-- you need SSR-safe, type-safe component interfaces that bind the upstream
-  `@phcdevworks/spectre-ui` recipe contract without reimplementing it
-- you want to compose with Spectre's shared recipe helpers from TypeScript in an
-  Astro project
-
-## When not to use this package
-
-Do not use this package when:
-
-- you are using a different framework (React, Vue, Svelte, etc.) — this package
-  is Astro-only
-- you want to define custom tokens or override Spectre's design values — that
-  belongs in `@phcdevworks/spectre-tokens`
-- you want to add or change class recipes, CSS utilities, or Tailwind helpers —
-  that belongs in `@phcdevworks/spectre-ui`
-- you need a framework-agnostic styling contract — consume
-  `@phcdevworks/spectre-ui` directly
-
-## Package exports
+## Package Exports
 
 ### Root imports
 
@@ -1403,7 +1403,7 @@ import SpTooltip from '@phcdevworks/spectre-ui-astro/components/SpTooltip.astro'
 The adapter does not export a CSS helper or path. Import the stylesheet directly
 from `@phcdevworks/spectre-ui/index.css`.
 
-## Component family stability
+## Component Family Stability
 
 Each component family is classified by its support status in this adapter.
 
@@ -1452,7 +1452,7 @@ this adapter has not yet bound.
 The machine-readable classification lives in `astro-adapter.contract.json` under
 `componentFamilies`.
 
-## Relationship to the rest of Spectre
+## Relationship To The Rest Of Spectre
 
 | Package                                                                        | Owns                                                          |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------- |
@@ -1533,17 +1533,17 @@ npm run check
 
 This runs: lint → build → typecheck → tests. All steps must pass.
 
-## AI and automation boundaries
+## AI And Automation Boundaries
 
 Claude Code (`claude-sonnet-4-6`) is the primary development agent for this
-repository. Codex handles releases and production stabilization. Jules handles
-small automated fixes and micro-updates. GitHub Copilot provides development
-support.
+repository. Codex handles releases, including cutting tagged releases and
+GitHub Releases, and production stabilization. Jules handles small automated
+fixes and micro-updates. GitHub Copilot provides development support.
 
-Claude Code, Codex, and Copilot do not create git commits by default. Jules may
-commit only bounded automated maintenance when the `JULES.md` scope and
-validation gates pass. Release decisions, tags, and publishing remain with
-Bradley Potts.
+All AI agents with repository access (Claude Code, Codex, Copilot, Jules)
+have commit, push, and tag authority in this repository. Publishing to npm
+remains Bradley Potts's sole authority. See [AGENTS.md](AGENTS.md) for the
+full commit-policy and release-authority grant.
 
 **Protected from automated change:** SSR rendering invariants, the thin-adapter
 rule (no local CSS, no token redefinition, no recipe reimplementation), and the
