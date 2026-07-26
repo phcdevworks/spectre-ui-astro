@@ -31,13 +31,13 @@ assertContains(
 );
 
 assertContains(
-  '## Recipe helpers',
-  'README.md must include a "## Recipe helpers" section documenting re-exported helpers.',
+  '## Recipe Helpers',
+  'README.md must include a "## Recipe Helpers" section documenting re-exported helpers.',
 );
 
 assertContains(
-  '## Component family stability',
-  'README.md must include a "## Component family stability" section aligned with the contract.',
+  '## Component Family Stability',
+  'README.md must include a "## Component Family Stability" section aligned with the contract.',
 );
 
 for (const family of contractJson.componentFamilies.stable as string[]) {
