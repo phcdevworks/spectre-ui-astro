@@ -17,7 +17,6 @@
     "astro-component-library",
     "typescript",
     "ssr",
-    "tailwindcss",
     "design-tokens"
   ],
   "author": "PHCDevworks",
@@ -108,8 +107,8 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^3.3.1",
-    "@phcdevworks/spectre-ui": "^2.9.0",
+    "@phcdevworks/spectre-tokens": "^4.0.0",
+    "@phcdevworks/spectre-ui": "^3.0.0",
     "astro": "^7.0.0",
     "typescript": "^5.0 || ^6.0 || ^7.0"
   },
@@ -122,8 +121,8 @@
   },
   "devDependencies": {
     "@phcdevworks/spectre-manifest": "^1.1.0",
-    "@phcdevworks/spectre-tokens": "^3.5.0",
-    "@phcdevworks/spectre-ui": "^2.10.0",
+    "@phcdevworks/spectre-tokens": "^4.0.0",
+    "@phcdevworks/spectre-ui": "^3.0.0",
     "@types/node": "^26.1.1",
     "@typescript-eslint/eslint-plugin": "^8.65.0",
     "@typescript-eslint/parser": "^8.65.0",
