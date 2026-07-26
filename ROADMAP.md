@@ -11,9 +11,9 @@ recipe logic.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v3.3.1 — full token surface, including form-field component groups and current recipe-state support |
-| `@phcdevworks/spectre-ui` | v2.9.0 — nav alignment recipe option shipped |
-| `@phcdevworks/spectre-ui-astro` | v3.7.0 — Phase 11 TypeScript 7 peer support prepared for review |
+| `@phcdevworks/spectre-tokens` | v4.0.0 — Tailwind integration removed; expanded token contract shipped |
+| `@phcdevworks/spectre-ui` | v3.0.0 — Tailwind export removed; typography recipe shipped |
+| `@phcdevworks/spectre-ui-astro` | v4.0.0 — Phase 12 Spectre v4/v3 alignment |
 
 ---
 
@@ -138,6 +138,20 @@ components map directly to fixed native elements (`<input>`, `<select>`,
 involvement. No accessibility-id association helper was added — association
 between `SpLabel`'s `for` and a control's `id` is the consumer's
 responsibility, same as plain HTML.
+
+---
+
+## Phase 12: Spectre v4/v3 Alignment — Delivered (v4.0.0)
+
+Aligned the adapter with `@phcdevworks/spectre-tokens@^4.0.0` and
+`@phcdevworks/spectre-ui@^3.0.0`. Removed stale Tailwind integration metadata
+and documentation after the upstream export was deleted. Precompiled Spectre UI
+CSS and recipe helpers remain the styling contract.
+
+The new upstream `getTextClasses` typography recipe and its types are
+re-exported for consumer composition. The `text` family is tracked as not yet
+supported until an Astro-native `SpText` component is implemented with the
+standard adapter coverage.
 
 ---
 

@@ -6,6 +6,10 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-07-26
+
+**Release Title:** Phase 12 - Spectre v4/v3 Alignment
+
 Contract change type: breaking
 
 ### Added
@@ -24,6 +28,8 @@ Contract change type: breaking
   `@phcdevworks/spectre-ui/tailwind` export from adapter metadata and
   documentation. Precompiled Spectre UI CSS and recipe helpers remain the
   supported styling contract.
+- Refreshed the ESLint and Prettier development toolchain with synchronized
+  lockfile metadata.
 
 ## [3.7.0] - 2026-07-21
 
