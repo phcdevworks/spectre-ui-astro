@@ -96,7 +96,6 @@
       "description": "Layer 2 styling contract.",
       "exports": [
         ".",
-        "./tailwind",
         "./index.css",
         "./base.css",
         "./components.css",

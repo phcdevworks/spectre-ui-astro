@@ -88,6 +88,7 @@ const recipeRuntimeExports = [
   "getTestimonialAuthorTitleClasses",
   "getTestimonialClasses",
   "getTestimonialQuoteClasses",
+  "getTextClasses",
   "getTextareaClasses",
   "getToastClasses",
   "getToastIconClasses",

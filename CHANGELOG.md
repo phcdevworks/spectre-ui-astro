@@ -6,6 +6,25 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+Contract change type: breaking
+
+### Added
+
+- Re-exported the new upstream `getTextClasses` typography recipe and its
+  `TextFamily`, `TextRecipeOptions`, `TextSize`, and `TextVariant` types. The
+  `text` family is recorded as not yet supported by an Astro component.
+
+### Changed
+
+- Raised the required Spectre peer ranges to
+  `@phcdevworks/spectre-tokens@^4.0.0` and
+  `@phcdevworks/spectre-ui@^3.0.0`, aligning the adapter and example app with
+  the new major upstream contracts.
+- Removed stale Tailwind integration claims and the deleted
+  `@phcdevworks/spectre-ui/tailwind` export from adapter metadata and
+  documentation. Precompiled Spectre UI CSS and recipe helpers remain the
+  supported styling contract.
+
 ## [3.7.0] - 2026-07-21
 
 **Release Title:** Phase 11 - TypeScript 7 Peer Support

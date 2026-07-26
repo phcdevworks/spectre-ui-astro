@@ -84,7 +84,7 @@ it.
 
 - Design values or token meaning —
   [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens)
-- Core CSS, utilities, Tailwind helpers, or class recipe logic —
+- Core CSS, utilities, or class recipe logic —
   [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)
 - Local styling systems that diverge from the shared Spectre contract
 
@@ -107,7 +107,7 @@ Do not use this package when:
   is Astro-only
 - you want to define custom tokens or override Spectre's design values — that
   belongs in `@phcdevworks/spectre-tokens`
-- you want to add or change class recipes, CSS utilities, or Tailwind helpers —
+- you want to add or change class recipes or CSS utilities —
   that belongs in `@phcdevworks/spectre-ui`
 - you need a framework-agnostic styling contract — consume
   `@phcdevworks/spectre-ui` directly
@@ -122,6 +122,9 @@ npm install @phcdevworks/spectre-ui-astro @phcdevworks/spectre-ui
 recipes, and design system behavior that powers every component in this package.
 Install this package inside an Astro project; `astro` is also a peer dependency
 supplied by the consuming app.
+
+Spectre no longer ships a Tailwind CSS integration. Use the precompiled
+`@phcdevworks/spectre-ui` CSS entry points and recipe helpers shown below.
 
 If your project works with Spectre design tokens directly:
 
@@ -1300,6 +1303,7 @@ const links = [
 | `getTestimonialAuthorInfoClasses`     | Author info wrapper            |
 | `getTestimonialAuthorNameClasses`     | Author name element            |
 | `getTestimonialAuthorTitleClasses`    | Author title element           |
+| `getTextClasses`                      | Typography class generation    |
 | `getToastClasses`                     | Toast root classes             |
 | `getToastIconClasses`                 | Toast icon wrapper             |
 | `getTooltipClasses`                   | Tooltip class generation       |
@@ -1316,6 +1320,7 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
 `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `SidebarLinkLevel`, `StackRecipeOptions`,
 `StackDirection`, `StackBasis`, `StackAlign`, `TestimonialRecipeOptions`,
+`TextRecipeOptions`, `TextSize`, `TextVariant`, `TextFamily`,
 `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
 `TooltipRecipeOptions`, `TooltipPlacement`.
 
@@ -1436,6 +1441,7 @@ Each component family is classified by its support status in this adapter.
 | tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | textarea | **stable** | Full prop, ARIA, and SSR coverage |
+| text | **not yet supported** | Upstream recipe is re-exported; no Astro component yet |
 | toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
 
@@ -1457,7 +1463,7 @@ The machine-readable classification lives in `astro-adapter.contract.json` under
 | Package                                                                        | Owns                                                          |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------- |
 | [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) | Design values, semantic token meaning, and token contracts    |
-| [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)         | CSS, utilities, Tailwind helpers, and type-safe class recipes |
+| [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)         | CSS, utilities, and type-safe class recipes                   |
 | `@phcdevworks/spectre-components`                                              | Framework-agnostic Lit web component behavior                 |
 | `@phcdevworks/spectre-ui-astro`                                                | Astro-native adapter delivery and framework ergonomics        |
 
