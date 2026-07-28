@@ -37,6 +37,7 @@ this file does not restate delivered work.
 | 10 | Form-field parity — Checkbox, Radio, Select, Textarea, Fieldset, Label | 3.3.0 |
 | 11 | Sidebar composition (`SpSidebarToggle`), Nav `align` forwarding, TypeScript 5/6/7 peer support | 3.4.1–3.7.0 |
 | 12 | Spectre v4/v3 alignment — Tailwind integration removed, `getTextClasses` re-export | 4.0.0 |
+| 13 | `SpText` component — closes the `text` family gap (Phase 4g parity), requested by `spectre-base` | Unreleased |
 
 Deferred-not-abandoned sub-scope from delivered phases (see "What's Next"
 below): Grid v2 (column span, offsets, per-breakpoint override).
@@ -46,12 +47,9 @@ below): Grid v2 (column span, offsets, per-breakpoint override).
 ## What's Next
 
 No phase is fully open right now. The only concrete pending item is
-evidence-gated behind explicit maintainer approval — tracked in
-[TODO.md](TODO.md) rather than as a numbered phase here:
+evidence-gated — tracked in [TODO.md](TODO.md) rather than as a numbered
+phase here:
 
-- **`SpText` component** — `@phcdevworks/spectre-ui` Phase 4g shipped
-  `getTextClasses`; requested by `spectre-base` (2026-07-23). Needs explicit
-  approval from Bradley Potts before implementation.
 - **Grid v2** — column span, offsets, per-breakpoint override. Deferred until
   upstream `spectre-ui` Phase 4c v2 ships and a real downstream need exists.
 

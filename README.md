@@ -372,6 +372,28 @@ The default slot renders any child content.
 
 ---
 
+### SpText
+
+| Prop      | Type                                                            | Default | Description             |
+| --------- | ---------------------------------------------------------------- | ------- | ------------------------ |
+| `as`      | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"`  | `"p"`   | Rendered element         |
+| `size`    | `TextSize`                                                        | —       | Upstream type scale      |
+| `variant` | `TextVariant`                                                     | —       | Upstream color role      |
+| `family`  | `TextFamily`                                                      | —       | Upstream font family     |
+| `id`      | `string`                                                          | —       | Element id               |
+| `class`   | `string`                                                          | —       | Additional CSS classes   |
+
+```astro
+<SpText as="h2" size="2xl" variant="brand">Section heading</SpText>
+<SpText variant="muted">Supporting copy.</SpText>
+```
+
+The default slot renders any child content. `SpText` maps directly to
+`getTextClasses` — there is no separate `SpHeading` component; use the `as`
+prop to render any heading level or `p`/`span`.
+
+---
+
 ### SpSidebar
 
 | Prop          | Type                        | Default             | Description                                                                                        |
@@ -1357,6 +1379,7 @@ import {
   SpStack,
   SpTag,
   SpTestimonial,
+  SpText,
   SpTextarea,
   SpToast,
   SpTooltip
@@ -1400,6 +1423,7 @@ import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpTag from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
+import SpText from '@phcdevworks/spectre-ui-astro/components/SpText.astro'
 import SpTextarea from '@phcdevworks/spectre-ui-astro/components/SpTextarea.astro'
 import SpToast from '@phcdevworks/spectre-ui-astro/components/SpToast.astro'
 import SpTooltip from '@phcdevworks/spectre-ui-astro/components/SpTooltip.astro'
@@ -1440,8 +1464,8 @@ Each component family is classified by its support status in this adapter.
 | stack | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| text | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | textarea | **stable** | Full prop, ARIA, and SSR coverage |
-| text | **not yet supported** | Upstream recipe is re-exported; no Astro component yet |
 | toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
 

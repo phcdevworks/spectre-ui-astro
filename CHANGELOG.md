@@ -6,6 +6,14 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Added
+
+- Added `SpText`, calling the upstream `getTextClasses` recipe. Accepts an
+  `as` prop (`h1`–`h6`, `p`, `span`, defaulting to `p`) that swaps the
+  rendered tag without changing the recipe call, so no separate `SpHeading`
+  component is needed. Closes the `text` family gap tracked as "not yet
+  supported" since 4.0.0. Requested by `spectre-base`.
+
 ## [4.0.0] - 2026-07-26
 
 **Release Title:** Phase 12 - Spectre v4/v3 Alignment

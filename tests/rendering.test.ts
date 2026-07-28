@@ -37,6 +37,7 @@ import {
   getSpinnerClasses,
   getStackClasses,
   getTagClasses,
+  getTextClasses,
   getTextareaClasses,
   getToastClasses,
   getTooltipClasses,
@@ -67,6 +68,7 @@ import SpSidebar from "../src/components/SpSidebar.astro";
 import SpSpinner from "../src/components/SpSpinner.astro";
 import SpStack from "../src/components/SpStack.astro";
 import SpTag from "../src/components/SpTag.astro";
+import SpText from "../src/components/SpText.astro";
 import SpTextarea from "../src/components/SpTextarea.astro";
 import SpToast from "../src/components/SpToast.astro";
 import SpTooltip from "../src/components/SpTooltip.astro";
@@ -469,6 +471,15 @@ describe("SSR rendering", () => {
     });
 
     expect(html).toContain(getSectionClasses());
+    expect(html).toContain("Content");
+  });
+
+  it("renders SpText with upstream classes", async () => {
+    const html = await container.renderToString(SpText, {
+      slots: { default: "Content" },
+    });
+
+    expect(html).toContain(getTextClasses());
     expect(html).toContain("Content");
   });
 

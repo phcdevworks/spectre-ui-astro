@@ -26,6 +26,7 @@ export { default as SpSpinner } from "./components/SpSpinner.astro";
 export { default as SpStack } from "./components/SpStack.astro";
 export { default as SpTag } from "./components/SpTag.astro";
 export { default as SpTestimonial } from "./components/SpTestimonial.astro";
+export { default as SpText } from "./components/SpText.astro";
 export { default as SpTextarea } from "./components/SpTextarea.astro";
 export { default as SpToast } from "./components/SpToast.astro";
 export { default as SpTooltip } from "./components/SpTooltip.astro";

@@ -1,0 +1,41 @@
+---
+import type { TextRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getTextClasses } from "@phcdevworks/spectre-ui";
+
+type SpTextElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+
+interface SpTextProps extends TextRecipeOptions {
+  as?: SpTextElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "p",
+  size,
+  variant,
+  family,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpTextProps;
+
+const classes = getTextClasses({ size, variant, family });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

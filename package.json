@@ -73,6 +73,7 @@
     "./components/SpStack.astro": "./dist/components/SpStack.astro",
     "./components/SpTag.astro": "./dist/components/SpTag.astro",
     "./components/SpTestimonial.astro": "./dist/components/SpTestimonial.astro",
+    "./components/SpText.astro": "./dist/components/SpText.astro",
     "./components/SpTextarea.astro": "./dist/components/SpTextarea.astro",
     "./components/SpToast.astro": "./dist/components/SpToast.astro",
     "./components/SpTooltip.astro": "./dist/components/SpTooltip.astro"
@@ -122,12 +123,12 @@
   "devDependencies": {
     "@phcdevworks/spectre-manifest": "^1.1.0",
     "@phcdevworks/spectre-tokens": "^4.0.0",
-    "@phcdevworks/spectre-ui": "^3.0.0",
-    "@types/node": "^26.1.1",
+    "@phcdevworks/spectre-ui": "^3.1.0",
+    "@types/node": "^26.1.2",
     "@typescript-eslint/eslint-plugin": "^8.65.0",
     "@typescript-eslint/parser": "^8.65.0",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "astro": "^7.1.3",
+    "astro": "^7.1.4",
     "eslint": "^10.8.0",
     "jiti": "^2.7.0",
     "prettier": "^3.9.6",

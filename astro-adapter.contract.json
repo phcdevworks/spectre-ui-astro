@@ -29,6 +29,7 @@
       "SpStack",
       "SpTag",
       "SpTestimonial",
+      "SpText",
       "SpTextarea",
       "SpToast",
       "SpTooltip"
@@ -198,6 +199,7 @@
     "./components/SpStack.astro",
     "./components/SpTag.astro",
     "./components/SpTestimonial.astro",
+    "./components/SpText.astro",
     "./components/SpTextarea.astro",
     "./components/SpToast.astro",
     "./components/SpTooltip.astro"
@@ -254,13 +256,12 @@
       "stack",
       "tag",
       "testimonial",
+      "text",
       "textarea",
       "toast",
       "tooltip"
     ],
     "provisional": [],
-    "notYetSupported": [
-      "text"
-    ]
+    "notYetSupported": []
   }
 }
