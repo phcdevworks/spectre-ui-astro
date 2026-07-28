@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.1.0] - 2026-07-29
+
+**Release Title:** Phase 13 - SpText Component
+
+Contract change type: additive
+
 ### Added
 
 - Added `SpText`, calling the upstream `getTextClasses` recipe. Accepts an
@@ -13,6 +19,10 @@ reflects package releases published to npm.
   rendered tag without changing the recipe call, so no separate `SpHeading`
   component is needed. Closes the `text` family gap tracked as "not yet
   supported" since 4.0.0. Requested by `spectre-base`.
+
+### Changed
+
+- Aligned the example app with Astro 7.1 and TypeScript 7.
 
 ## [4.0.0] - 2026-07-26
 

@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system. It adapts Spectre UI's class recipes into Astro components for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
