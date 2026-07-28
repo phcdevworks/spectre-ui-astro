@@ -5,6 +5,10 @@ suite. It binds the upstream `@phcdevworks/spectre-ui` styling contract into
 Astro-native components without redefining token meaning, CSS ownership, or
 recipe logic.
 
+This document tracks what's next. For what already shipped and why, see
+[CHANGELOG.md](CHANGELOG.md) (release-by-release detail) and git history —
+this file does not restate delivered work.
+
 ---
 
 ## System Phase Context
@@ -17,141 +21,44 @@ recipe logic.
 
 ---
 
-## Phase 3: Component Family Expansion — Delivered (v2.6.0)
+## Delivered Phases
 
-All four Phase 3 families shipped. `peerDependencies` bumped to `^1.7.0`.
-
-| Family  | Upstream recipe     | Status             |
-| ------- | ------------------- | ------------------ |
-| alert   | `getAlertClasses`   | Delivered — stable |
-| avatar  | `getAvatarClasses`  | Delivered — stable |
-| spinner | `getSpinnerClasses` | Delivered — stable |
-| tag     | `getTagClasses`     | Delivered — stable |
-
----
-
-## Phase 4: Token-Gated Expansion — Delivered (v2.7.0)
-
-`@phcdevworks/spectre-tokens` published component-level semantic tokens, and
-`@phcdevworks/spectre-ui` shipped the corresponding recipes. `peerDependencies`
-bumped to `@phcdevworks/spectre-tokens@^2.9.0` and
-`@phcdevworks/spectre-ui@^1.9.0`.
-
-| Family   | Required spectre-tokens group | Upstream status    |
-| -------- | ----------------------------- | ------------------ |
-| nav      | component.nav                 | Delivered — stable |
-| toast    | component.toast               | Delivered — stable |
-| tooltip  | component.tooltip             | Delivered — stable |
-| dropdown | component.dropdown            | Delivered — stable |
-| modal    | component.modal               | Delivered — stable |
-
-Each followed the same delivery pattern as Phase 3.
-
----
-
-## Phase 5: Layout Components — Delivered (v2.8.0)
-
-`@phcdevworks/spectre-ui` v2.1.0 shipped the layout recipes (tracked as "Phase
-4b" in that package's roadmap). `peerDependencies` bumped to
-`@phcdevworks/spectre-ui@^2.1.0` and `@phcdevworks/spectre-tokens@^3.0.0`.
-
-| Family    | Required spectre-ui recipe | Upstream status    |
-| --------- | -------------------------- | ------------------ |
-| container | `getContainerClasses`      | Delivered — stable |
-| stack     | `getStackClasses`          | Delivered — stable |
-| section   | `getSectionClasses`        | Delivered — stable |
-
-Each followed the same delivery pattern as Phase 3/Phase 4.
-
----
-
-## Phase 6: Grid Component — Delivered (v2.9.0)
-
-`@phcdevworks/spectre-ui` v2.2.0 shipped the Grid recipe (tracked as "Phase
-4c — Grid Recipe (v1)" in that package's roadmap). `peerDependencies` bumped
-to `@phcdevworks/spectre-ui@^2.2.0`. This was the first adapter family backed
-by a responsive (breakpoint-aware) upstream recipe.
-
-| Family | Required spectre-ui recipe | Upstream status |
+| Phase | Summary | Shipped in |
 | - | - | - |
-| grid | `getGridClasses` | Delivered — stable |
+| 1 | Contract integrity — `astro-adapter.contract.json`, root export/component entrypoint parity, thin-adapter invariants | pre-2.6.0 |
+| 2 | Downstream safety — built-package smoke tests, README contract parity, maintainer coverage map, family stability classification | pre-2.6.0 |
+| 3 | Alert, Avatar, Spinner, Tag components | 2.6.0 |
+| 4 | Nav, Toast, Tooltip, Dropdown, Modal components (token-gated) | 2.7.0 |
+| 5 | Layout components — Container, Stack, Section | 2.8.0 |
+| 6 v1 | Grid component | 2.9.0 |
+| 7 | App shell layout — Sidebar, Footer, Stack `basis`/Container `maxWidth` options, sidebar off-canvas interaction | 2.3.0-range |
+| 8 | Sidebar toggle z-index fix, Stack `align` option | 2.4.0-range |
+| 9 | Sidebar header/indent, full-height fix | 2.5.0-range |
+| 10 | Form-field parity — Checkbox, Radio, Select, Textarea, Fieldset, Label | 3.3.0 |
+| 11 | Sidebar composition (`SpSidebarToggle`), Nav `align` forwarding, TypeScript 5/6/7 peer support | 3.4.1–3.7.0 |
+| 12 | Spectre v4/v3 alignment — Tailwind integration removed, `getTextClasses` re-export | 4.0.0 |
 
-`SpGrid` props (`columns`, `gap`) map directly to upstream recipe options —
-no adapter-local interpretation of column count or breakpoint behavior.
-
-Phase 6 v2 (column span, offsets, per-breakpoint override) is deferred until
-upstream `spectre-ui` Phase 4c v2 ships and a real downstream need exists.
-
----
-
-## Phase 7: App Shell Layout — Implemented, prepared for release
-
-`@phcdevworks/spectre-ui` v2.3.0 shipped the Stack/Container option additions
-and new Sidebar/Footer recipes (tracked as "Phase 4d — App Shell Layout:
-Stack/Container Options, Sidebar, Footer" in that package's roadmap).
-`peerDependencies` bumped to `@phcdevworks/spectre-ui@^2.3.0` and
-`@phcdevworks/spectre-tokens@^3.1.0`. `SpNav` already covers the top bar;
-this phase adds the sidebar and bottom-bar equivalents plus the width/max-
-width options `SpStack` and `SpContainer` were missing.
-
-| Family | Required spectre-ui addition | Upstream status |
-| - | - | - |
-| stack | width/basis option on `getStackClasses` | Delivered — stable |
-| container | `maxWidth` option on `getContainerClasses` | Delivered — stable |
-| sidebar | new Sidebar recipe | Delivered — stable |
-| footer | new Footer recipe | Delivered — stable |
-
-Followed the same delivery pattern as Phase 3/4/5/6. **Decided: slide-out
-drawer on mobile.** Upstream owns the off-canvas CSS contract
-(`data-sidebar-open` data-attribute, confirmed against the published
-`spectre-ui` README); this package owns the toggle interaction — the first
-interactive component in this adapter. `SpSidebar` renders its own
-hamburger trigger, click handler, SSR-safe closed-by-default state
-(`data-sidebar-open="false"` by default, no layout shift on hydration), and
-backdrop-tap-to-close, all within the component itself rather than split
-across `SpNav` and `SpSidebar`.
+Deferred-not-abandoned sub-scope from delivered phases (see "What's Next"
+below): Grid v2 (column span, offsets, per-breakpoint override).
 
 ---
 
-## Phase 10: Form-Field Component Parity Gap — Delivered, prepared for npm release
+## What's Next
 
-Cross-repo audit (`spectre-ui-astro` vs. `spectre-components`) found this
-adapter had no form-field primitives even though `spectre-components` already
-shipped Lit equivalents for all six. Gated on `@phcdevworks/spectre-tokens`
-and `@phcdevworks/spectre-ui` publishing the backing recipes; cleared with
-`@phcdevworks/spectre-ui@2.6.0`. `peerDependencies` bumped to
-`@phcdevworks/spectre-ui@^2.6.0` and `@phcdevworks/spectre-tokens@^3.2.0`.
+No phase is fully open right now. The only concrete pending item is
+evidence-gated behind explicit maintainer approval — tracked in
+[TODO.md](TODO.md) rather than as a numbered phase here:
 
-| Family    | Required spectre-ui recipe                            | Upstream status    |
-| --------- | ------------------------------------------------------- | ------------------- |
-| checkbox  | `getCheckboxClasses`                                     | Delivered — stable |
-| radio     | `getRadioClasses`                                         | Delivered — stable |
-| select    | `getSelectClasses`                                        | Delivered — stable |
-| textarea  | `getTextareaClasses`                                      | Delivered — stable |
-| fieldset  | `getFieldsetClasses` / `getFieldsetLegendClasses`         | Delivered — stable |
-| label     | `getLabelClasses`                                         | Delivered — stable |
+- **`SpText` component** — `@phcdevworks/spectre-ui` Phase 4g shipped
+  `getTextClasses`; requested by `spectre-base` (2026-07-23). Needs explicit
+  approval from Bradley Potts before implementation.
+- **Grid v2** — column span, offsets, per-breakpoint override. Deferred until
+  upstream `spectre-ui` Phase 4c v2 ships and a real downstream need exists.
 
-Followed the same delivery pattern as Phase 3–9, simplified: none of the six
-recipes have `as`-polymorphism or an interactive-state machine, so the new
-components map directly to fixed native elements (`<input>`, `<select>`,
-`<textarea>`, `<fieldset>`, `<label>`) with no `resolveInteractiveAttrs`
-involvement. No accessibility-id association helper was added — association
-between `SpLabel`'s `for` and a control's `id` is the consumer's
-responsibility, same as plain HTML.
-
----
-
-## Phase 12: Spectre v4/v3 Alignment — Delivered (v4.0.0)
-
-Aligned the adapter with `@phcdevworks/spectre-tokens@^4.0.0` and
-`@phcdevworks/spectre-ui@^3.0.0`. Removed stale Tailwind integration metadata
-and documentation after the upstream export was deleted. Precompiled Spectre UI
-CSS and recipe helpers remain the styling contract.
-
-The new upstream `getTextClasses` typography recipe and its types are
-re-exported for consumer composition. The `text` family is tracked as not yet
-supported until an Astro-native `SpText` component is implemented with the
-standard adapter coverage.
+New family or contract work beyond the above opens only when
+`@phcdevworks/spectre-ui` publishes a new recipe family or
+`@phcdevworks/spectre-tokens` publishes a new component-level token group that
+gates further families.
 
 ---
 
