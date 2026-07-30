@@ -61,6 +61,7 @@
     "./components/SpLabel.astro": "./dist/components/SpLabel.astro",
     "./components/SpModal.astro": "./dist/components/SpModal.astro",
     "./components/SpNav.astro": "./dist/components/SpNav.astro",
+    "./components/SpNavItem.astro": "./dist/components/SpNavItem.astro",
     "./components/SpPricingCard.astro": "./dist/components/SpPricingCard.astro",
     "./components/SpRadio.astro": "./dist/components/SpRadio.astro",
     "./components/SpRating.astro": "./dist/components/SpRating.astro",

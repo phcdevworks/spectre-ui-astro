@@ -7,6 +7,7 @@ import {
   getCheckboxClasses,
   getContainerClasses,
   getDropdownClasses,
+  getDropdownMenuClasses,
   getFieldsetClasses,
   getFieldsetLegendClasses,
   getFooterClasses,
@@ -21,6 +22,7 @@ import {
   getModalClasses,
   getModalOverlayClasses,
   getNavClasses,
+  getNavLinkClasses,
   getPricingCardBadgeClasses,
   getPricingCardClasses,
   getPricingCardDescriptionClasses,
@@ -59,6 +61,7 @@ import SpInput from "../src/components/SpInput.astro";
 import SpLabel from "../src/components/SpLabel.astro";
 import SpModal from "../src/components/SpModal.astro";
 import SpNav from "../src/components/SpNav.astro";
+import SpNavItem from "../src/components/SpNavItem.astro";
 import SpPricingCard from "../src/components/SpPricingCard.astro";
 import SpRadio from "../src/components/SpRadio.astro";
 import SpRating from "../src/components/SpRating.astro";
@@ -406,6 +409,32 @@ describe("SSR rendering", () => {
     expect(html).toContain(getNavClasses({ bordered: true, sticky: true, align: "center" }));
     expect(html).toContain("<nav");
     expect(html).toContain("Home");
+  });
+
+  it("renders SpNavItem as a plain link by default", async () => {
+    const html = await container.renderToString(SpNavItem, {
+      props: { href: "/about", label: "About" },
+    });
+
+    expect(html).toContain(getNavLinkClasses());
+    expect(html).toContain('href="/about"');
+    expect(html).toContain("About");
+    expect(html).not.toContain("data-sp-nav-item-trigger");
+  });
+
+  it("renders SpNavItem as a dropdown trigger with menu when dropdown is true", async () => {
+    const html = await container.renderToString(SpNavItem, {
+      props: { dropdown: true, label: "Products", open: true, placement: "bottom-end" },
+      slots: { default: "<a href=\"/products/a\">Product A</a>" },
+    });
+
+    expect(html).toContain("data-sp-nav-item-trigger");
+    expect(html).toContain("data-sp-nav-item-menu");
+    expect(html).toContain(getDropdownMenuClasses({ open: true, placement: "bottom-end" }));
+    expect(html).toContain('aria-haspopup="true"');
+    expect(html).toContain('aria-expanded="true"');
+    expect(html).toContain("Products");
+    expect(html).toContain("Product A");
   });
 
   it("renders SpToast with upstream classes, icon slot, and live region ARIA", async () => {

@@ -1,0 +1,61 @@
+---
+import type { DropdownPlacement } from "@phcdevworks/spectre-ui";
+import { getDropdownClasses, getDropdownMenuClasses, getNavLinkClasses } from "@phcdevworks/spectre-ui";
+
+interface SpNavItemProps {
+  dropdown?: boolean;
+  href?: string;
+  label?: string;
+  open?: boolean;
+  placement?: DropdownPlacement;
+  class?: string;
+  id?: string;
+  title?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  dropdown = false,
+  href,
+  label,
+  open = false,
+  placement = "bottom-start",
+  class: className,
+  id,
+  title,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpNavItemProps;
+
+const navLinkClasses = getNavLinkClasses();
+const finalNavLinkClass = [navLinkClasses, className].filter(Boolean).join(" ");
+const wrapperClasses = getDropdownClasses();
+const menuClasses = getDropdownMenuClasses({ open, placement });
+---
+
+{
+  dropdown ? (
+    <div class={wrapperClasses} id={id} title={title}>
+      <button
+        type="button"
+        class={finalNavLinkClass}
+        data-sp-nav-item-trigger
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : "false"}
+        aria-label={ariaLabel ?? label}
+        {...rest}
+      >
+        <slot name="trigger">{label}</slot>
+      </button>
+      <div class={menuClasses} data-sp-nav-item-menu>
+        <slot />
+      </div>
+    </div>
+  ) : (
+    <a href={href} class={finalNavLinkClass} id={id} title={title} aria-label={ariaLabel} {...rest}>
+      <slot>{label}</slot>
+    </a>
+  )
+}

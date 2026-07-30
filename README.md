@@ -1147,6 +1147,47 @@ const linkClass = getNavLinkClasses()
 
 ---
 
+### SpNavItem
+
+| Prop         | Type                | Default          | Description                                                |
+| ------------ | ------------------- | ---------------- | ----------------------------------------------------------- |
+| `dropdown`   | `boolean`           | —                | Renders a dropdown trigger + menu instead of a plain link  |
+| `href`       | `string`            | —                | Link target when `dropdown` is not set                     |
+| `label`      | `string`            | —                | Trigger/link text when no content is projected             |
+| `open`       | `boolean`           | —                | Applies open styling to the menu (dropdown mode only)      |
+| `placement`  | `DropdownPlacement` | `"bottom-start"` | Menu position (dropdown mode only)                          |
+| `id`         | `string`            | —                | Element ID                                                  |
+| `title`      | `string`            | —                | Title attribute                                             |
+| `aria-label` | `string`            | —                | Accessible label for the link or trigger button             |
+| `class`      | `string`            | —                | Additional CSS classes                                      |
+
+Place `SpNavItem` inside `SpNav` alongside plain links. In link mode it renders
+an `<a>` styled with `getNavLinkClasses`. In dropdown mode it renders a
+`getDropdownClasses` wrapper around a `getNavLinkClasses`-styled trigger
+`<button>` (`data-sp-nav-item-trigger`, `aria-haspopup`, `aria-expanded`) and a
+`getDropdownMenuClasses` menu panel (`data-sp-nav-item-menu`) that receives the
+default slot. Toggling `open` and wiring click/outside-click/escape behavior is
+consumer-driven — no client-side JS is included; use
+`@phcdevworks/spectre-components`'s `sp-nav-item` if you want that behavior
+built in. Use a `trigger` named slot to project custom trigger content instead
+of `label`.
+
+```astro
+---
+import { SpNav, SpNavItem } from '@phcdevworks/spectre-ui-astro'
+---
+
+<SpNav aria-label="Main">
+  <SpNavItem href="/">Home</SpNavItem>
+  <SpNavItem dropdown label="Products" open placement="bottom-end">
+    <a href="/products/a">Product A</a>
+    <a href="/products/b">Product B</a>
+  </SpNavItem>
+</SpNav>
+```
+
+---
+
 ### SpToast
 
 | Prop         | Type                         | Default  | Description                                               |

@@ -15,6 +15,7 @@ export { default as SpInput } from "./components/SpInput.astro";
 export { default as SpLabel } from "./components/SpLabel.astro";
 export { default as SpModal } from "./components/SpModal.astro";
 export { default as SpNav } from "./components/SpNav.astro";
+export { default as SpNavItem } from "./components/SpNavItem.astro";
 export { default as SpPricingCard } from "./components/SpPricingCard.astro";
 export { default as SpRadio } from "./components/SpRadio.astro";
 export { default as SpRating } from "./components/SpRating.astro";

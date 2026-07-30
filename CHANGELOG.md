@@ -6,6 +6,15 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Added
+
+- Added `SpNavItem`, calling the upstream `getDropdownClasses`,
+  `getDropdownMenuClasses`, and `getNavLinkClasses` recipes. Renders a plain
+  `<a>` link by default, or a dropdown trigger `<button>` + menu panel when
+  `dropdown` is set, matching the `sp-nav-item` component added to
+  `@phcdevworks/spectre-components`. Open/close and interaction state stay
+  consumer-driven, since this package ships no client-side JS.
+
 ## [4.1.0] - 2026-07-29
 
 **Release Title:** Phase 13 - SpText Component
