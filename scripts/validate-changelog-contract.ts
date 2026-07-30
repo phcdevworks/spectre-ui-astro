@@ -10,12 +10,12 @@ if (releases.length === 0) {
 
 const invalidTitles = releases
   .map((release) => ({ version: release[1] ?? "unknown", title: release[2] ?? "" }))
-  .filter(({ title }) => !/^Phase \d+ - .+/.test(title))
+  .filter(({ title }) => !/^(?:Phase \d+|No single roadmap phase) - .+/.test(title))
   .map(({ version, title }) => `${version}: ${title}`);
 
 if (invalidTitles.length > 0) {
   throw new Error(
-    `Release titles must use the \"Phase N - Title\" format:\n${invalidTitles.join("\n")}`,
+    `Release titles must use the \"Phase N - Title\" or \"No single roadmap phase - Title\" format:\n${invalidTitles.join("\n")}`,
   );
 }
 

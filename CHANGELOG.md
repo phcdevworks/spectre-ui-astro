@@ -6,6 +6,12 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.2.0] - 2026-07-31
+
+**Release Title:** No single roadmap phase - SpNavItem Component
+
+Contract change type: additive
+
 ### Added
 
 - Added `SpNavItem`, calling the upstream `getDropdownClasses`,

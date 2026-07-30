@@ -17,7 +17,7 @@ this file does not restate delivered work.
 | - | - |
 | `@phcdevworks/spectre-tokens` | v4.0.0 — Tailwind integration removed; expanded token contract shipped |
 | `@phcdevworks/spectre-ui` | v3.0.0 — Tailwind export removed; typography recipe shipped |
-| `@phcdevworks/spectre-ui-astro` | v4.0.0 — Phase 12 Spectre v4/v3 alignment |
+| `@phcdevworks/spectre-ui-astro` | v4.2.0 — `SpNavItem` parity (no single roadmap phase) |
 
 ---
 
@@ -37,7 +37,7 @@ this file does not restate delivered work.
 | 10 | Form-field parity — Checkbox, Radio, Select, Textarea, Fieldset, Label | 3.3.0 |
 | 11 | Sidebar composition (`SpSidebarToggle`), Nav `align` forwarding, TypeScript 5/6/7 peer support | 3.4.1–3.7.0 |
 | 12 | Spectre v4/v3 alignment — Tailwind integration removed, `getTextClasses` re-export | 4.0.0 |
-| 13 | `SpText` component — closes the `text` family gap (Phase 4g parity), requested by `spectre-base` | Unreleased |
+| 13 | `SpText` component — closes the `text` family gap (Phase 4g parity), requested by `spectre-base` | 4.1.0 |
 
 Deferred-not-abandoned sub-scope from delivered phases (see "What's Next"
 below): Grid v2 (column span, offsets, per-breakpoint override).
