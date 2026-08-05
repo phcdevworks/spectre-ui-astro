@@ -17,7 +17,7 @@ this file does not restate delivered work.
 | - | - |
 | `@phcdevworks/spectre-tokens` | v4.1.0 — `TOKEN_REFERENCE.md` generated reference added |
 | `@phcdevworks/spectre-ui` | v3.2.0 — `getTextClasses` `transform` option and `getGridClasses` Grid v2 `span` option shipped |
-| `@phcdevworks/spectre-ui-astro` | Unreleased — `SpText` `transform` and `SpGrid` `span` parity (Phase 15), consuming spectre-ui 3.2.0 |
+| `@phcdevworks/spectre-ui-astro` | v4.3.0 — `SpText` `transform` and `SpGrid` `span` parity (Phase 15), consuming spectre-ui 3.2.0 |
 
 ---
 
@@ -39,7 +39,7 @@ this file does not restate delivered work.
 | 12 | Spectre v4/v3 alignment — Tailwind integration removed, `getTextClasses` re-export | 4.0.0 |
 | 13 | `SpText` component — closes the `text` family gap (Phase 4g parity), requested by `spectre-base` | 4.1.0 |
 | 14 | `SpNavItem` component — nav composition parity | 4.2.0 |
-| 15 | `SpText` `transform` and `SpGrid` `span` (Grid v2) parity, consuming `spectre-ui@3.2.0` | Unreleased |
+| 15 | `SpText` `transform` and `SpGrid` `span` (Grid v2) parity, consuming `spectre-ui@3.2.0` | 4.3.0 |
 
 Deferred-not-abandoned sub-scope from delivered phases (see "What's Next"
 below): Grid v2 column/row offsets and custom track sizing.

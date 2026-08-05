@@ -228,7 +228,7 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 14 are complete and released (current version `4.2.0`; see
+Phases 1 through 15 are complete and released (current version `4.3.0`; see
 `package.json` and `CHANGELOG.md`). There is no open phase. The next phase opens
 once either `@phcdevworks/spectre-ui` ships a new recipe family or
 `@phcdevworks/spectre-tokens` publishes a new component-level token group that

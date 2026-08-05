@@ -6,6 +6,10 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.3.0] - 2026-08-05
+
+**Release Title:** Phase 15 - Text Transform and Grid Span Parity
+
 Contract change type: additive
 
 ### Added
