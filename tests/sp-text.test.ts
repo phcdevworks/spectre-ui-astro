@@ -40,6 +40,22 @@ describe("SpText rendering", () => {
     );
   });
 
+  it("forwards transform to the upstream recipe", async () => {
+    const html = await container.renderToString(SpText, {
+      props: { transform: "uppercase" },
+    });
+
+    expect(html).toContain(getTextClasses({ transform: "uppercase" }));
+  });
+
+  it("does not leak the transform prop to the DOM", async () => {
+    const html = await container.renderToString(SpText, {
+      props: { transform: "uppercase" },
+    });
+
+    expect(html).not.toContain('transform="uppercase"');
+  });
+
   it("merges a custom class with the upstream classes", async () => {
     const html = await container.renderToString(SpText, {
       props: { class: "custom-class" },

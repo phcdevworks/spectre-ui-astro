@@ -58,20 +58,36 @@ src/
     SpBadge.astro
     SpButton.astro
     SpCard.astro
+    SpCheckbox.astro
+    SpContainer.astro
     SpDropdown.astro
+    SpFieldset.astro
+    SpFooter.astro
+    SpGrid.astro
     SpIconBox.astro
     SpInput.astro
+    SpLabel.astro
     SpModal.astro
     SpNav.astro
+    SpNavItem.astro
     SpPricingCard.astro
+    SpRadio.astro
     SpRating.astro
+    SpSection.astro
+    SpSelect.astro
+    SpSidebar.astro
+    SpSidebarToggle.astro
     SpSpinner.astro
+    SpStack.astro
     SpTag.astro
     SpTestimonial.astro
+    SpText.astro
+    SpTextarea.astro
     SpToast.astro
     SpTooltip.astro
     sp-input.shared.ts
     sp-interactive.shared.ts
+    sp-recipe-options.shared.ts
   recipes/
     index.ts
   index.ts
@@ -212,9 +228,9 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 11 are complete and released (current version `3.7.0`; see
+Phases 1 through 14 are complete and released (current version `4.2.0`; see
 `package.json` and `CHANGELOG.md`). There is no open phase. The next phase opens
-once either `@phcdevworks/spectre-ui` ships new recipe families beyond Phase 4
-(nav, toast, tooltip, dropdown, modal), or `@phcdevworks/spectre-tokens`
-publishes new component-level token groups that gate further families. Check
-`ROADMAP.md` and `TODO.md` for current scope before starting new component work.
+once either `@phcdevworks/spectre-ui` ships a new recipe family or
+`@phcdevworks/spectre-tokens` publishes a new component-level token group that
+gates further families. Check `ROADMAP.md` and `TODO.md` for current scope
+before starting new component work.

@@ -1,6 +1,7 @@
 ---
 import type { GridRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getGridClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpGridElement = "div" | "section" | "ul" | "ol";
 
@@ -17,6 +18,7 @@ interface SpGridProps extends GridRecipeOptions {
 const {
   columns,
   gap,
+  span,
   as: Tag = "div",
   class: className,
   id,
@@ -25,7 +27,7 @@ const {
   ...rest
 } = Astro.props as SpGridProps;
 
-const classes = getGridClasses({ columns, gap });
+const classes = getGridClasses(omitUndefined({ columns, gap, span }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

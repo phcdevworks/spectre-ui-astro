@@ -6,6 +6,25 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+Contract change type: additive
+
+### Added
+
+- Added a `transform` prop to `SpText`, forwarding to the upstream
+  `getTextClasses` `transform` option (`"none" | "uppercase" | "lowercase" |
+  "capitalize"`) added in `@phcdevworks/spectre-ui@3.2.0`. Re-exported the
+  `TextTransform` type.
+- Added a `span` prop to `SpGrid` (Grid v2), forwarding to the upstream
+  `getGridClasses` `span` option added in `@phcdevworks/spectre-ui@3.2.0`.
+  Accepts a single column-span value (`1`-`12` or `full`) or a
+  per-breakpoint `{ base, md, lg }` object. Re-exported the `GridSpan` and
+  `GridSpanOptions` types. Closes the Grid v2 item tracked in `ROADMAP.md`.
+
+### Changed
+
+- Bumped the `@phcdevworks/spectre-tokens` peer dependency from `^4.0.0` to
+  `^4.1.0` and `@phcdevworks/spectre-ui` from `^3.0.0` to `^3.2.0`.
+
 ## [4.2.0] - 2026-07-31
 
 **Release Title:** No single roadmap phase - SpNavItem Component

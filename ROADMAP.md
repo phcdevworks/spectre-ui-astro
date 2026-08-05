@@ -15,9 +15,9 @@ this file does not restate delivered work.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v4.0.0 — Tailwind integration removed; expanded token contract shipped |
-| `@phcdevworks/spectre-ui` | v3.1.0 — Tailwind export removed; typography recipe and utility-class engine shipped |
-| `@phcdevworks/spectre-ui-astro` | v4.2.0 — `SpNavItem` parity (Phase 14) |
+| `@phcdevworks/spectre-tokens` | v4.1.0 — `TOKEN_REFERENCE.md` generated reference added |
+| `@phcdevworks/spectre-ui` | v3.2.0 — `getTextClasses` `transform` option and `getGridClasses` Grid v2 `span` option shipped |
+| `@phcdevworks/spectre-ui-astro` | Unreleased — `SpText` `transform` and `SpGrid` `span` parity (Phase 15), consuming spectre-ui 3.2.0 |
 
 ---
 
@@ -39,9 +39,10 @@ this file does not restate delivered work.
 | 12 | Spectre v4/v3 alignment — Tailwind integration removed, `getTextClasses` re-export | 4.0.0 |
 | 13 | `SpText` component — closes the `text` family gap (Phase 4g parity), requested by `spectre-base` | 4.1.0 |
 | 14 | `SpNavItem` component — nav composition parity | 4.2.0 |
+| 15 | `SpText` `transform` and `SpGrid` `span` (Grid v2) parity, consuming `spectre-ui@3.2.0` | Unreleased |
 
 Deferred-not-abandoned sub-scope from delivered phases (see "What's Next"
-below): Grid v2 (column span, offsets, per-breakpoint override).
+below): Grid v2 column/row offsets and custom track sizing.
 
 ---
 
@@ -51,8 +52,9 @@ No phase is fully open right now. The only concrete pending item is
 evidence-gated — tracked in [TODO.md](TODO.md) rather than as a numbered
 phase here:
 
-- **Grid v2** — column span, offsets, per-breakpoint override. Deferred until
-  upstream `spectre-ui` Phase 4c v2 ships and a real downstream need exists.
+- **Grid v2 offsets/track sizing** — column/row offsets, custom track
+  sizing. Deferred until a real downstream need exists; column span shipped
+  in Phase 15.
 
 New family or contract work beyond the above opens only when
 `@phcdevworks/spectre-ui` publishes a new recipe family or

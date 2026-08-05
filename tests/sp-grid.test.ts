@@ -36,6 +36,31 @@ describe("SpGrid rendering", () => {
     expect(html).not.toContain('gap="lg"');
   });
 
+  it("applies span classes for a single span value", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { span: 6 },
+    });
+
+    expect(html).toContain(getGridClasses({ span: 6 }));
+  });
+
+  it("applies span classes for a per-breakpoint span object", async () => {
+    const spanOptions = { base: "full" as const, md: 6 as const, lg: 4 as const };
+    const html = await container.renderToString(SpGrid, {
+      props: { span: spanOptions },
+    });
+
+    expect(html).toContain(getGridClasses({ span: spanOptions }));
+  });
+
+  it("does not leak the span prop to the DOM", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { span: 6 },
+    });
+
+    expect(html).not.toContain('span="6"');
+  });
+
   it("renders the requested element via the 'as' prop", async () => {
     const html = await container.renderToString(SpGrid, {
       props: { as: "ul" },

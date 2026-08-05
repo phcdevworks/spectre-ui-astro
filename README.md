@@ -380,12 +380,14 @@ The default slot renders any child content.
 | `size`    | `TextSize`                                                        | —       | Upstream type scale      |
 | `variant` | `TextVariant`                                                     | —       | Upstream color role      |
 | `family`  | `TextFamily`                                                      | —       | Upstream font family     |
+| `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"` |
 | `id`      | `string`                                                          | —       | Element id               |
 | `class`   | `string`                                                          | —       | Additional CSS classes   |
 
 ```astro
 <SpText as="h2" size="2xl" variant="brand">Section heading</SpText>
 <SpText variant="muted">Supporting copy.</SpText>
+<SpText as="span" transform="uppercase" size="sm">Eyebrow label</SpText>
 ```
 
 The default slot renders any child content. `SpText` maps directly to
@@ -488,6 +490,7 @@ sidebar shells remain interactive.
 | ------------ | ------------------------------------ | ------- | --------------------------------------- |
 | `columns`    | `GridColumns`                        | `1`     | `1` \| `2` \| `3` \| `4` \| `6` \| `12` |
 | `gap`        | `GridGap`                            | `"md"`  | `"sm"` \| `"md"` \| `"lg"`              |
+| `span`       | `GridSpan \| GridSpanOptions`        | —       | Column span for a grid item: a single value or `{ base?, md?, lg? }` per breakpoint |
 | `as`         | `"div" \| "section" \| "ul" \| "ol"` | `"div"` | Rendered element                        |
 | `id`         | `string`                             | —       | Element id                              |
 | `aria-label` | `string`                             | —       | Accessible label                        |
@@ -499,9 +502,17 @@ sidebar shells remain interactive.
   <SpCard>Two</SpCard>
   <SpCard>Three</SpCard>
 </SpGrid>
+
+<SpGrid columns={12} gap="lg">
+  <SpCard span={{ base: 'full', md: 6, lg: 4 }}>One</SpCard>
+  <SpCard span={{ base: 'full', md: 6, lg: 8 }}>Two</SpCard>
+</SpGrid>
 ```
 
-The default slot renders any child content.
+The default slot renders any child content. `span` is set on individual grid
+items (not the `SpGrid` wrapper) and accepts either a single `GridSpan` value
+or a per-breakpoint `GridSpanOptions` object; it maps directly to
+`getGridClasses`'s `span` option.
 
 ---
 
@@ -1383,9 +1394,10 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
 `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `SidebarLinkLevel`, `StackRecipeOptions`,
 `StackDirection`, `StackBasis`, `StackAlign`, `TestimonialRecipeOptions`,
-`TextRecipeOptions`, `TextSize`, `TextVariant`, `TextFamily`,
+`TextRecipeOptions`, `TextSize`, `TextVariant`, `TextFamily`, `TextTransform`,
 `ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
-`TooltipRecipeOptions`, `TooltipPlacement`.
+`TooltipRecipeOptions`, `TooltipPlacement`, `GridRecipeOptions`,
+`GridColumns`, `GridGap`, `GridSpan`, `GridSpanOptions`.
 
 ## Package Exports
 

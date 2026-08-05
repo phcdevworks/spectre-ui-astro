@@ -1,6 +1,7 @@
 ---
 import type { TextRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getTextClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpTextElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 
@@ -19,6 +20,7 @@ const {
   size,
   variant,
   family,
+  transform,
   class: className,
   id,
   "aria-label": ariaLabel,
@@ -26,7 +28,7 @@ const {
   ...rest
 } = Astro.props as SpTextProps;
 
-const classes = getTextClasses({ size, variant, family });
+const classes = getTextClasses(omitUndefined({ size, variant, family, transform }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
