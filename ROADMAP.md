@@ -16,7 +16,7 @@ this file does not restate delivered work.
 | Package | Current state |
 | - | - |
 | `@phcdevworks/spectre-tokens` | v4.1.0 — `TOKEN_REFERENCE.md` generated reference added |
-| `@phcdevworks/spectre-ui` | v3.2.0 — `getTextClasses` `transform` option and `getGridClasses` Grid v2 `span` option shipped |
+| `@phcdevworks/spectre-ui` | v3.3.0 — layout utilities released on GitHub; npm publication and production follow-up contracts pending |
 | `@phcdevworks/spectre-ui-astro` | v4.3.0 — `SpText` `transform` and `SpGrid` `span` parity (Phase 15), consuming spectre-ui 3.2.0 |
 
 ---
@@ -48,13 +48,12 @@ below): Grid v2 column/row offsets and custom track sizing.
 
 ## What's Next
 
-No phase is fully open right now. The only concrete pending item is
-evidence-gated — tracked in [TODO.md](TODO.md) rather than as a numbered
-phase here:
+### Phase 16 — Production Layout Parity Audit
 
-- **Grid v2 offsets/track sizing** — column/row offsets, custom track
-  sizing. Deferred until a real downstream need exists; column span shipped
-  in Phase 15.
+downstream integration has supplied concrete downstream evidence for custom tracks,
+Footer semantics, and wide-menu composition. After those upstream contracts
+publish, audit the Astro surface and add only the typed adapter props actually
+required; plain CSS utilities remain upstream-only. See [TODO.md](TODO.md).
 
 New family or contract work beyond the above opens only when
 `@phcdevworks/spectre-ui` publishes a new recipe family or

@@ -229,8 +229,7 @@ logic here.
 ## Roadmap Priorities
 
 Phases 1 through 15 are complete and released (current version `4.3.0`; see
-`package.json` and `CHANGELOG.md`). There is no open phase. The next phase opens
-once either `@phcdevworks/spectre-ui` ships a new recipe family or
-`@phcdevworks/spectre-tokens` publishes a new component-level token group that
-gates further families. Check `ROADMAP.md` and `TODO.md` for current scope
-before starting new component work.
+`package.json` and `CHANGELOG.md`). Phase 16 is open but upstream-publication
+gated: audit adapter parity after the production-backed Footer, custom-track,
+and wide-menu contracts ship. Check `ROADMAP.md` and `TODO.md` for exact scope
+before starting work.
