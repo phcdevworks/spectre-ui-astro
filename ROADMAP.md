@@ -50,10 +50,11 @@ below): Grid v2 column/row offsets and custom track sizing.
 
 ### Phase 16 — Production Layout Parity Audit
 
-downstream integration has supplied concrete downstream evidence for custom tracks,
-Footer semantics, and wide-menu composition. After those upstream contracts
-publish, audit the Astro surface and add only the typed adapter props actually
-required; plain CSS utilities remain upstream-only. See [TODO.md](TODO.md).
+A production integration supplied concrete downstream evidence for custom
+tracks, Footer semantics, and wide-menu composition. After those upstream
+contracts publish, audit the Astro surface and add only the typed adapter props
+actually required; plain CSS utilities remain upstream-only. See
+[TODO.md](TODO.md).
 
 New family or contract work beyond the above opens only when
 `@phcdevworks/spectre-ui` publishes a new recipe family or

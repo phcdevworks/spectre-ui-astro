@@ -82,6 +82,11 @@ public behavior or contract impact, and unresolved risks. Do not edit generated
 outputs directly. Do not update [CHANGELOG.md](CHANGELOG.md) unless the change
 is release-relevant.
 
+External customer, vendor, user, client-site, and private-project identities
+are confidential. Never record identifying names, repositories, domains,
+accounts, or handles in tracked artifacts or handoffs; use anonymous role-based
+wording such as "a downstream integration" or "a production consumer."
+
 This repository is maintained by PHCDevworks and contains the Astro adapter for
 the Spectre system.
 
