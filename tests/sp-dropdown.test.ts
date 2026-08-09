@@ -27,6 +27,13 @@ describe("SpDropdown class and prop behavior", () => {
     expect(html).toContain("sp-dropdown--full");
     expect(html).toContain("my-dropdown");
   });
+
+  it("applies mega class and does not leak the prop", async () => {
+    const html = await container.renderToString(SpDropdown, { props: { mega: true } });
+    expect(html).toContain(getDropdownClasses({ mega: true }));
+    expect(html).not.toContain('mega="true"');
+    expect(html).not.toContain('mega="mega"');
+  });
 });
 
 describe("SpDropdown element and slot rendering", () => {

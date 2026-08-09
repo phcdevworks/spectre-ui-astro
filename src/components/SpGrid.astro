@@ -18,7 +18,15 @@ interface SpGridProps extends GridRecipeOptions {
 const {
   columns,
   gap,
+  columnGap,
+  rowGap,
   span,
+  offset,
+  rowSpan,
+  rowOffset,
+  order,
+  leadingTracks,
+  fixedTracks,
   as: Tag = "div",
   class: className,
   id,
@@ -27,7 +35,21 @@ const {
   ...rest
 } = Astro.props as SpGridProps;
 
-const classes = getGridClasses(omitUndefined({ columns, gap, span }));
+const classes = getGridClasses(
+  omitUndefined({
+    columns,
+    gap,
+    columnGap,
+    rowGap,
+    span,
+    offset,
+    rowSpan,
+    rowOffset,
+    order,
+    leadingTracks,
+    fixedTracks,
+  }),
+);
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

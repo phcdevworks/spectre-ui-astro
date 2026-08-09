@@ -77,4 +77,66 @@ describe("SpGrid rendering", () => {
 
     expect(html).toContain(`${getGridClasses()} custom-class`);
   });
+
+  it("applies columnGap and rowGap classes", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { columnGap: "sm", rowGap: "lg" },
+    });
+
+    expect(html).toContain(getGridClasses({ columnGap: "sm", rowGap: "lg" }));
+    expect(html).not.toContain('columnGap="sm"');
+    expect(html).not.toContain('rowGap="lg"');
+  });
+
+  it("applies offset classes for a single value and a per-breakpoint object", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { offset: 2 },
+    });
+    expect(html).toContain(getGridClasses({ offset: 2 }));
+
+    const offsetOptions = { base: 0 as const, md: 2 as const, lg: 4 as const };
+    const htmlPerBreakpoint = await container.renderToString(SpGrid, {
+      props: { offset: offsetOptions },
+    });
+    expect(htmlPerBreakpoint).toContain(getGridClasses({ offset: offsetOptions }));
+  });
+
+  it("applies rowSpan and rowOffset classes", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { rowSpan: 3, rowOffset: 1 },
+    });
+
+    expect(html).toContain(getGridClasses({ rowSpan: 3, rowOffset: 1 }));
+    expect(html).not.toContain('rowSpan="3"');
+    expect(html).not.toContain('rowOffset="1"');
+  });
+
+  it("applies order classes for a single value and a per-breakpoint object", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { order: "first" },
+    });
+    expect(html).toContain(getGridClasses({ order: "first" }));
+
+    const orderOptions = { base: "last" as const, md: 2 as const };
+    const htmlPerBreakpoint = await container.renderToString(SpGrid, {
+      props: { order: orderOptions },
+    });
+    expect(htmlPerBreakpoint).toContain(getGridClasses({ order: orderOptions }));
+  });
+
+  it("applies leadingTracks classes", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { leadingTracks: { weight: 2 } },
+    });
+
+    expect(html).toContain(getGridClasses({ leadingTracks: { weight: 2 } }));
+  });
+
+  it("applies fixedTracks classes", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { fixedTracks: { count: 3 } },
+    });
+
+    expect(html).toContain(getGridClasses({ fixedTracks: { count: 3 } }));
+  });
 });

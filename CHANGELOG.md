@@ -6,6 +6,41 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+Contract change type: additive
+
+### Added
+
+- Completed Grid v2 parity on `SpGrid`: added `columnGap`, `rowGap`,
+  `offset`, `rowSpan`, `rowOffset`, `order`, `leadingTracks`, and
+  `fixedTracks` props, forwarding to the matching `getGridClasses` options
+  added in `@phcdevworks/spectre-ui@4.0.0`. `leadingTracks`/`fixedTracks`
+  enable custom track sizing without hand-rolled `grid-template-columns`.
+  Re-exported the `GridOffset`, `GridOffsetOptions`, `GridOrder`,
+  `GridOrderOptions`, `GridLeadingWeight`, `GridLeadingWeightOptions`,
+  `GridLeadingTracksOptions`, `GridFixedTrackCount`, and
+  `GridFixedTracksOptions` types. Closes the Grid v2 deferred sub-scope
+  tracked in `ROADMAP.md`.
+- Added a `mega` prop to `SpDropdown`, forwarding to the upstream
+  `getDropdownClasses` `mega` option added in `@phcdevworks/spectre-ui@4.0.0`,
+  for wide-menu panels anchored to the nearest positioned ancestor instead of
+  the trigger.
+- Added a `mega` prop to `SpNavItem` (dropdown mode), forwarding to both the
+  `getDropdownClasses` wrapper and the `getDropdownMenuClasses` menu panel,
+  matching upstream's paired `mega` contract.
+- Re-exported the new Footer sub-recipe helpers — `getFooterHeadingClasses`,
+  `getFooterTextClasses`, `getFooterMutedClasses`, `getFooterLinksClasses`,
+  `getFooterLinkClasses`, `getFooterDividerClasses`, and
+  `getFooterChipClasses` — and their `FooterLinkRecipeOptions` and
+  `FooterChipRecipeOptions` types, added in `@phcdevworks/spectre-ui@4.0.0`.
+  Consumer-driven footer content (headings, text, links, dividers, chips)
+  follows the same re-export-only pattern as `SpNav`'s
+  `getNavLinksClasses`/`getNavLinkClasses`; no new Astro components.
+
+### Changed
+
+- Bumped the `@phcdevworks/spectre-ui` peer dependency from `^3.2.0` to
+  `^4.0.0`.
+
 ## [4.3.0] - 2026-08-05
 
 **Release Title:** Phase 15 - Text Transform and Grid Span Parity

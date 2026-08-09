@@ -16,8 +16,8 @@ this file does not restate delivered work.
 | Package | Current state |
 | - | - |
 | `@phcdevworks/spectre-tokens` | v4.1.0 — `TOKEN_REFERENCE.md` generated reference added |
-| `@phcdevworks/spectre-ui` | v3.3.0 — layout utilities released on GitHub; npm publication and production follow-up contracts pending |
-| `@phcdevworks/spectre-ui-astro` | v4.3.0 — `SpText` `transform` and `SpGrid` `span` parity (Phase 15), consuming spectre-ui 3.2.0 |
+| `@phcdevworks/spectre-ui` | v4.0.0 — Grid v2 custom tracks/offsets, Footer sub-recipes, and Dropdown `mega` published |
+| `@phcdevworks/spectre-ui-astro` | v4.3.0 released; Phase 16 parity work in `[Unreleased]`, consuming spectre-ui 4.0.0 |
 
 ---
 
@@ -40,26 +40,16 @@ this file does not restate delivered work.
 | 13 | `SpText` component — closes the `text` family gap (Phase 4g parity), requested by `spectre-base` | 4.1.0 |
 | 14 | `SpNavItem` component — nav composition parity | 4.2.0 |
 | 15 | `SpText` `transform` and `SpGrid` `span` (Grid v2) parity, consuming `spectre-ui@3.2.0` | 4.3.0 |
-
-Deferred-not-abandoned sub-scope from delivered phases (see "What's Next"
-below): Grid v2 column/row offsets and custom track sizing.
+| 16 | Production Layout Parity Audit — Grid v2 column/row offsets and custom track sizing (`SpGrid`), Footer sub-recipe re-exports, Dropdown/NavItem `mega` wide-menu support, consuming `spectre-ui@4.0.0` | `[Unreleased]` |
 
 ---
 
 ## What's Next
 
-### Phase 16 — Production Layout Parity Audit
-
-A production integration supplied concrete downstream evidence for custom
-tracks, Footer semantics, and wide-menu composition. After those upstream
-contracts publish, audit the Astro surface and add only the typed adapter props
-actually required; plain CSS utilities remain upstream-only. See
-[TODO.md](TODO.md).
-
-New family or contract work beyond the above opens only when
-`@phcdevworks/spectre-ui` publishes a new recipe family or
-`@phcdevworks/spectre-tokens` publishes a new component-level token group that
-gates further families.
+New family or contract work opens only when `@phcdevworks/spectre-ui`
+publishes a new recipe family or `@phcdevworks/spectre-tokens` publishes a
+new component-level token group that gates further families. See
+[TODO.md](TODO.md) for the active work queue.
 
 ---
 

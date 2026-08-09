@@ -486,15 +486,23 @@ sidebar shells remain interactive.
 
 ### SpGrid
 
-| Prop         | Type                                 | Default | Description                             |
-| ------------ | ------------------------------------ | ------- | --------------------------------------- |
-| `columns`    | `GridColumns`                        | `1`     | `1` \| `2` \| `3` \| `4` \| `6` \| `12` |
-| `gap`        | `GridGap`                            | `"md"`  | `"sm"` \| `"md"` \| `"lg"`              |
-| `span`       | `GridSpan \| GridSpanOptions`        | —       | Column span for a grid item: a single value or `{ base?, md?, lg? }` per breakpoint |
-| `as`         | `"div" \| "section" \| "ul" \| "ol"` | `"div"` | Rendered element                        |
-| `id`         | `string`                             | —       | Element id                              |
-| `aria-label` | `string`                             | —       | Accessible label                        |
-| `class`      | `string`                             | —       | Additional CSS classes                  |
+| Prop           | Type                                  | Default | Description                             |
+| -------------- | ------------------------------------- | ------- | --------------------------------------- |
+| `columns`      | `GridColumns`                         | `1`     | `1` \| `2` \| `3` \| `4` \| `6` \| `12` |
+| `gap`          | `GridGap`                             | `"md"`  | `"sm"` \| `"md"` \| `"lg"`              |
+| `columnGap`    | `GridGap`                             | —       | Column-axis gap override                |
+| `rowGap`       | `GridGap`                             | —       | Row-axis gap override                   |
+| `span`         | `GridSpan \| GridSpanOptions`         | —       | Column span for a grid item: a single value or `{ base?, md?, lg? }` per breakpoint |
+| `offset`       | `GridOffset \| GridOffsetOptions`     | —       | Column offset for a grid item: `0`-`11` or `{ base?, md?, lg? }` |
+| `rowSpan`      | `GridSpan \| GridSpanOptions`         | —       | Row span for a grid item, same shape as `span` |
+| `rowOffset`    | `GridOffset \| GridOffsetOptions`     | —       | Row offset for a grid item, same shape as `offset` |
+| `order`        | `GridOrder \| GridOrderOptions`       | —       | Visual order for a grid item: `"first"` \| `"last"` \| `"none"` \| `1`-`12`, or per breakpoint |
+| `leadingTracks`| `GridLeadingTracksOptions`            | —       | `{ weight }` — proportional leading-track sizing without hand-rolled `grid-template-columns` |
+| `fixedTracks`  | `GridFixedTracksOptions`              | —       | `{ count }` — fixed track count for custom track layouts |
+| `as`           | `"div" \| "section" \| "ul" \| "ol"`  | `"div"` | Rendered element                        |
+| `id`           | `string`                              | —       | Element id                              |
+| `aria-label`   | `string`                              | —       | Accessible label                        |
+| `class`        | `string`                              | —       | Additional CSS classes                  |
 
 ```astro
 <SpGrid columns={3} gap="lg">
@@ -507,12 +515,21 @@ sidebar shells remain interactive.
   <SpCard span={{ base: 'full', md: 6, lg: 4 }}>One</SpCard>
   <SpCard span={{ base: 'full', md: 6, lg: 8 }}>Two</SpCard>
 </SpGrid>
+
+<SpGrid leadingTracks={{ weight: 2 }} fixedTracks={{ count: 2 }} gap="lg">
+  <SpCard offset={2} rowSpan={2}>Leads two fixed trailing tracks</SpCard>
+  <SpCard order="last">Second track</SpCard>
+</SpGrid>
 ```
 
-The default slot renders any child content. `span` is set on individual grid
-items (not the `SpGrid` wrapper) and accepts either a single `GridSpan` value
-or a per-breakpoint `GridSpanOptions` object; it maps directly to
-`getGridClasses`'s `span` option.
+The default slot renders any child content. `span`, `offset`, `rowSpan`,
+`rowOffset`, and `order` are set on individual grid items (not the `SpGrid`
+wrapper) and each accepts either a single value or a per-breakpoint
+`{ base?, md?, lg? }` object; they map directly to the matching
+`getGridClasses` option of the same name. `leadingTracks` and `fixedTracks`
+are set on the `SpGrid` wrapper itself and map to `getGridClasses`'s
+`leadingTracks`/`fixedTracks` options for custom track sizing without a
+downstream consumer hand-rolling `grid-template-columns`.
 
 ---
 
@@ -1046,6 +1063,7 @@ default `aria-label` of `"Loading"`.
 | Prop        | Type             | Default | Description             |
 | ----------- | ---------------- | ------- | ----------------------- |
 | `fullWidth` | `boolean`        | —       | Stretches to full width |
+| `mega`      | `boolean`        | —       | Anchors the menu to the nearest positioned ancestor (e.g. `SpNav`) instead of this trigger wrapper, for wide-menu panels that span the nav row rather than tracking trigger width |
 | `as`        | `"div" \| "nav"` | `"div"` | Rendered element        |
 | `id`        | `string`         | —       | Element ID              |
 | `class`     | `string`         | —       | Additional CSS classes  |
@@ -1053,7 +1071,9 @@ default `aria-label` of `"Loading"`.
 `SpDropdown` renders the dropdown container only. Build the menu and items in
 the default slot using the re-exported `getDropdownMenuClasses` and
 `getDropdownItemClasses` helpers, since open/closed state and per-item
-active/disabled/hover/focus state are consumer-driven.
+active/disabled/hover/focus state are consumer-driven. Pair `mega` here with
+`mega` on the `getDropdownMenuClasses` call that styles the menu panel —
+`SpNavItem`'s `mega` prop does this pairing for you in dropdown mode.
 
 ```astro
 ---
@@ -1093,6 +1113,50 @@ const activeItemClass = getDropdownItemClasses({ active: true })
 ```
 
 The default slot renders any child content.
+
+Build footer content in the default slot using the re-exported
+`getFooterHeadingClasses`, `getFooterTextClasses`, `getFooterMutedClasses`,
+`getFooterLinksClasses`, `getFooterLinkClasses`, `getFooterDividerClasses`,
+and `getFooterChipClasses` helpers, since section headings, link lists,
+per-link active/disabled/hover/focus state, and chip disabled/hover/focus
+state are consumer-driven — the same pattern as `SpNav`'s
+`getNavLinksClasses`/`getNavLinkClasses` and `SpSidebar`'s
+`getSidebarHeaderClasses`/`getSidebarLinkClasses`.
+
+```astro
+---
+import {
+  SpFooter,
+  getFooterHeadingClasses,
+  getFooterTextClasses,
+  getFooterMutedClasses,
+  getFooterLinksClasses,
+  getFooterLinkClasses,
+  getFooterDividerClasses,
+  getFooterChipClasses,
+} from '@phcdevworks/spectre-ui-astro'
+
+const headingClass = getFooterHeadingClasses()
+const linksClass = getFooterLinksClasses()
+const linkClass = getFooterLinkClasses()
+const activeLinkClass = getFooterLinkClasses({ active: true })
+const chipClass = getFooterChipClasses()
+---
+
+<SpFooter bordered>
+  <p class={getFooterTextClasses()}>&copy; 2026 PHCDevworks</p>
+  <p class={getFooterMutedClasses()}>All rights reserved.</p>
+  <hr class={getFooterDividerClasses()} />
+  <div>
+    <span class={headingClass}>Product</span>
+    <nav class={linksClass}>
+      <a class={activeLinkClass} href="/">Home</a>
+      <a class={linkClass} href="/docs">Docs</a>
+    </nav>
+  </div>
+  <span class={chipClass}>Beta</span>
+</SpFooter>
+```
 
 ---
 
@@ -1167,6 +1231,7 @@ const linkClass = getNavLinkClasses()
 | `label`      | `string`            | —                | Trigger/link text when no content is projected             |
 | `open`       | `boolean`           | —                | Applies open styling to the menu (dropdown mode only)      |
 | `placement`  | `DropdownPlacement` | `"bottom-start"` | Menu position (dropdown mode only)                          |
+| `mega`       | `boolean`           | —                | Wide-menu mode (dropdown mode only): anchors the menu to the nearest positioned ancestor and spans its full width instead of tracking trigger width |
 | `id`         | `string`            | —                | Element ID                                                  |
 | `title`      | `string`            | —                | Title attribute                                             |
 | `aria-label` | `string`            | —                | Accessible label for the link or trigger button             |
@@ -1177,8 +1242,9 @@ an `<a>` styled with `getNavLinkClasses`. In dropdown mode it renders a
 `getDropdownClasses` wrapper around a `getNavLinkClasses`-styled trigger
 `<button>` (`data-sp-nav-item-trigger`, `aria-haspopup`, `aria-expanded`) and a
 `getDropdownMenuClasses` menu panel (`data-sp-nav-item-menu`) that receives the
-default slot. Toggling `open` and wiring click/outside-click/escape behavior is
-consumer-driven — no client-side JS is included; use
+default slot. `mega` is forwarded to both calls, matching upstream's paired
+`mega` contract. Toggling `open` and wiring click/outside-click/escape
+behavior is consumer-driven — no client-side JS is included; use
 `@phcdevworks/spectre-components`'s `sp-nav-item` if you want that behavior
 built in. Use a `trigger` named slot to project custom trigger content instead
 of `label`.
@@ -1193,6 +1259,13 @@ import { SpNav, SpNavItem } from '@phcdevworks/spectre-ui-astro'
   <SpNavItem dropdown label="Products" open placement="bottom-end">
     <a href="/products/a">Product A</a>
     <a href="/products/b">Product B</a>
+  </SpNavItem>
+  <SpNavItem dropdown mega label="Solutions" open>
+    <SpGrid columns={3} gap="lg">
+      <a href="/solutions/a">Solution A</a>
+      <a href="/solutions/b">Solution B</a>
+      <a href="/solutions/c">Solution C</a>
+    </SpGrid>
   </SpNavItem>
 </SpNav>
 ```

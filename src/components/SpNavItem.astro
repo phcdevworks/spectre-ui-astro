@@ -8,6 +8,7 @@ interface SpNavItemProps {
   label?: string;
   open?: boolean;
   placement?: DropdownPlacement;
+  mega?: boolean;
   class?: string;
   id?: string;
   title?: string;
@@ -22,6 +23,7 @@ const {
   label,
   open = false,
   placement = "bottom-start",
+  mega,
   class: className,
   id,
   title,
@@ -31,8 +33,8 @@ const {
 
 const navLinkClasses = getNavLinkClasses();
 const finalNavLinkClass = [navLinkClasses, className].filter(Boolean).join(" ");
-const wrapperClasses = getDropdownClasses();
-const menuClasses = getDropdownMenuClasses({ open, placement });
+const wrapperClasses = getDropdownClasses({ mega });
+const menuClasses = getDropdownMenuClasses({ open, placement, mega });
 ---
 
 {

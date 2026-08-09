@@ -437,6 +437,17 @@ describe("SSR rendering", () => {
     expect(html).toContain("Product A");
   });
 
+  it("applies mega to both the SpNavItem dropdown wrapper and menu", async () => {
+    const html = await container.renderToString(SpNavItem, {
+      props: { dropdown: true, label: "Products", mega: true },
+      slots: { default: "<a href=\"/products/a\">Product A</a>" },
+    });
+
+    expect(html).toContain(getDropdownClasses({ mega: true }));
+    expect(html).toContain(getDropdownMenuClasses({ open: false, placement: "bottom-start", mega: true }));
+    expect(html).not.toContain('mega="true"');
+  });
+
   it("renders SpToast with upstream classes, icon slot, and live region ARIA", async () => {
     const html = await container.renderToString(SpToast, {
       props: { variant: "success" },
