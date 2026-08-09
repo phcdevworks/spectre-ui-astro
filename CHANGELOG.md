@@ -6,6 +6,10 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.4.0] - 2026-08-09
+
+**Release Title:** Production Layout and Compact Button Parity
+
 Contract change type: additive
 
 ### Added
