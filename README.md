@@ -233,6 +233,7 @@ closed by default with no layout shift on hydration.
 | `fullWidth`  | `boolean`                                    | —          | Stretches to fill its container                        |
 | `iconOnly`   | `boolean`                                    | —          | Removes text padding for icon-only buttons             |
 | `pill`       | `boolean`                                    | —          | Fully rounded corners                                  |
+| `compact`    | `boolean`                                    | —          | Shrinks the visible box below the min touch target; an invisible `::after` preserves the accessible hit area |
 | `hovered`    | `boolean`                                    | —          | Force-applies hover styling                            |
 | `focused`    | `boolean`                                    | —          | Force-applies focus styling                            |
 | `active`     | `boolean`                                    | —          | Force-applies active styling                           |

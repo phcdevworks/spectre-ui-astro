@@ -35,11 +35,17 @@ Contract change type: additive
   Consumer-driven footer content (headings, text, links, dividers, chips)
   follows the same re-export-only pattern as `SpNav`'s
   `getNavLinksClasses`/`getNavLinkClasses`; no new Astro components.
+- Added a `compact` prop to `SpButton`, forwarding to the upstream
+  `getButtonClasses` `compact` option added in `@phcdevworks/spectre-ui@4.0.0`.
+  Shrinks the visible box below the minimum touch target while an invisible
+  `::after` pseudo-element preserves the full accessible hit area, for dense
+  secondary actions.
 
 ### Changed
 
 - Bumped the `@phcdevworks/spectre-ui` peer dependency from `^3.2.0` to
-  `^4.0.0`.
+  `^4.0.0` and the `@phcdevworks/spectre-tokens` peer dependency from
+  `^4.1.0` to `^4.3.0`.
 
 ## [4.3.0] - 2026-08-05
 

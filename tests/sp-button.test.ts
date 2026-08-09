@@ -1,4 +1,5 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { getButtonClasses } from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpButton from "../src/components/SpButton.astro";
 
@@ -50,6 +51,16 @@ describe("SpButton behavior", () => {
     });
 
     expect(html).toContain('tabindex="-1"');
+  });
+
+  it("applies compact class and does not leak the prop to DOM", async () => {
+    const html = await container.renderToString(SpButton, {
+      props: { compact: true },
+    });
+
+    expect(html).toContain(getButtonClasses({ compact: true }));
+    expect(html).not.toContain('compact="true"');
+    expect(html).not.toContain('compact="compact"');
   });
 
   it("renders with id and aria-describedby", async () => {
