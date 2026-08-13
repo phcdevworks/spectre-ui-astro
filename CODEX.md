@@ -13,6 +13,12 @@ documentation parity, examples, validation, and release handoff readiness.
 Codex has commit, push, and tag authority for its own scope of work —
 validate changes, then stage, commit, and push.
 
+Codex is also responsible for executing git operations on Claude Code's
+behalf in this repo, now that Claude Code has zero git access: when Claude
+Code hands off validated work, Codex — not Claude Code — stages, commits,
+tags, and pushes it, in addition to Codex's own documentation and hygiene
+commits.
+
 ## Operating Principles
 
 1. Protect the Astro adapter contract before optimizing implementation details.
