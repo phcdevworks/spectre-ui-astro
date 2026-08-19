@@ -59,6 +59,8 @@ export {
   type GridLeadingTracksOptions,
   type GridFixedTrackCount,
   type GridFixedTracksOptions,
+  type GridTemplate,
+  type GridExplicitTemplateOptions,
   getIconBoxClasses,
   type IconBoxRecipeOptions,
   type IconBoxSize,

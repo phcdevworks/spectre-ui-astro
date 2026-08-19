@@ -139,4 +139,24 @@ describe("SpGrid rendering", () => {
 
     expect(html).toContain(getGridClasses({ fixedTracks: { count: 3 } }));
   });
+
+  it("applies explicitTemplate classes", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { explicitTemplate: { template: "edge-fluid-edge" } },
+    });
+
+    expect(html).toContain(
+      getGridClasses({ explicitTemplate: { template: "edge-fluid-edge" } }),
+    );
+
+    const htmlWithWeight = await container.renderToString(SpGrid, {
+      props: { explicitTemplate: { template: "label-fluid-fluid", weight: 2 } },
+    });
+
+    expect(htmlWithWeight).toContain(
+      getGridClasses({
+        explicitTemplate: { template: "label-fluid-fluid", weight: 2 },
+      }),
+    );
+  });
 });

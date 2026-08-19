@@ -6,6 +6,35 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.5.0] - 2026-08-19
+
+**Release Title:** Explicit Grid Templates and Rating State Parity
+
+Contract change type: additive
+
+### Fixed
+
+- `SpRating` now forwards `disabled` to `getRatingTextClasses` for the
+  optional text label (the default slot), matching `getRatingStarsClasses`
+  and `getRatingStarClasses`, which already received it. Previously the
+  label rendered without `sp-rating-text--disabled` when the rating was
+  disabled. Found auditing this adapter against `@phcdevworks/spectre-components`'s
+  `sp-rating`, which already wired this option through.
+
+### Added
+
+- Added an `explicitTemplate` prop to `SpGrid`, forwarding to the
+  `getGridClasses` `explicitTemplate` option added in
+  `@phcdevworks/spectre-ui@4.1.0`: a named, finite set of asymmetric
+  column-template shapes (`"edge-fluid-edge"`, `"label-fluid-fluid"`) for
+  layouts `columns`/`span`/`leadingTracks`/`fixedTracks` cannot express.
+  Mutually exclusive with those options, matching the upstream contract.
+  Re-exported the `GridTemplate` and `GridExplicitTemplateOptions` types,
+  unblocked by `@phcdevworks/spectre-ui@4.1.1` adding them to its own
+  `recipes` barrel.
+- Bumped the `@phcdevworks/spectre-tokens` peer dependency range to
+  `^4.4.0` and `@phcdevworks/spectre-ui` to `^4.1.1`.
+
 ## [4.4.0] - 2026-08-09
 
 **Release Title:** Production Layout and Compact Button Parity

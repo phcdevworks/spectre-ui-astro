@@ -55,6 +55,23 @@ describe("SpRating accessibility", () => {
     expect(html).toContain("disabled");
   });
 
+  it("applies the disabled text class when disabled with a text label", async () => {
+    const html = await container.renderToString(SpRating, {
+      props: { disabled: true },
+      slots: { default: "4 out of 5" },
+    });
+
+    expect(html).toContain("sp-rating-text--disabled");
+  });
+
+  it("omits the disabled text class when not disabled", async () => {
+    const html = await container.renderToString(SpRating, {
+      slots: { default: "4 out of 5" },
+    });
+
+    expect(html).not.toContain("sp-rating-text--disabled");
+  });
+
   it("renders with id and aria-describedby", async () => {
     const html = await container.renderToString(SpRating, {
       props: { id: "rating-1", "aria-describedby": "rating-desc" },

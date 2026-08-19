@@ -93,7 +93,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
 });
 
 const starsClasses = getRatingStarsClasses();
-const textClasses = getRatingTextClasses();
+const textClasses = getRatingTextClasses({ disabled: isRatingDisabled });
 
 const stars = Array.from({ length: max }, (_, i) => i < value);
 ---

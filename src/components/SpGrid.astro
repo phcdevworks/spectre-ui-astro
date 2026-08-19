@@ -27,6 +27,7 @@ const {
   order,
   leadingTracks,
   fixedTracks,
+  explicitTemplate,
   as: Tag = "div",
   class: className,
   id,
@@ -48,6 +49,7 @@ const classes = getGridClasses(
     order,
     leadingTracks,
     fixedTracks,
+    explicitTemplate,
   }),
 );
 const finalClass = [classes, className].filter(Boolean).join(" ");

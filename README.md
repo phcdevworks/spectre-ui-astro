@@ -16,7 +16,7 @@ instead of hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.4.0                           |
+| Current version/status | 4.5.0                           |
 
 ## Standard Workflow
 
@@ -500,6 +500,7 @@ sidebar shells remain interactive.
 | `order`        | `GridOrder \| GridOrderOptions`       | —       | Visual order for a grid item: `"first"` \| `"last"` \| `"none"` \| `1`-`12`, or per breakpoint |
 | `leadingTracks`| `GridLeadingTracksOptions`            | —       | `{ weight }` — proportional leading-track sizing without hand-rolled `grid-template-columns` |
 | `fixedTracks`  | `GridFixedTracksOptions`              | —       | `{ count }` — fixed track count for custom track layouts |
+| `explicitTemplate` | `GridExplicitTemplateOptions`     | —       | `{ template, weight? }` — named asymmetric column template (`"edge-fluid-edge"` \| `"label-fluid-fluid"`); mutually exclusive with `columns`/`leadingTracks`/`fixedTracks` |
 | `as`           | `"div" \| "section" \| "ul" \| "ol"`  | `"div"` | Rendered element                        |
 | `id`           | `string`                              | —       | Element id                              |
 | `aria-label`   | `string`                              | —       | Accessible label                        |
@@ -521,16 +522,26 @@ sidebar shells remain interactive.
   <SpCard offset={2} rowSpan={2}>Leads two fixed trailing tracks</SpCard>
   <SpCard order="last">Second track</SpCard>
 </SpGrid>
+
+<SpGrid explicitTemplate={{ template: "edge-fluid-edge" }} gap="md">
+  <SpIconBox>Logo</SpIconBox>
+  <SpNav>Nav links</SpNav>
+  <SpButton>CTA</SpButton>
+</SpGrid>
 ```
 
 The default slot renders any child content. `span`, `offset`, `rowSpan`,
 `rowOffset`, and `order` are set on individual grid items (not the `SpGrid`
 wrapper) and each accepts either a single value or a per-breakpoint
 `{ base?, md?, lg? }` object; they map directly to the matching
-`getGridClasses` option of the same name. `leadingTracks` and `fixedTracks`
-are set on the `SpGrid` wrapper itself and map to `getGridClasses`'s
-`leadingTracks`/`fixedTracks` options for custom track sizing without a
-downstream consumer hand-rolling `grid-template-columns`.
+`getGridClasses` option of the same name. `leadingTracks`, `fixedTracks`, and
+`explicitTemplate` are set on the `SpGrid` wrapper itself and map to
+`getGridClasses`'s options of the same name. `explicitTemplate` selects a
+named, finite asymmetric column shape (`"edge-fluid-edge"` for a logo/nav/CTA
+row, `"label-fluid-fluid"` for a fixed leading label column plus two
+differently-weighted fluid columns) for layouts that `columns`/`span`/
+`leadingTracks`/`fixedTracks` cannot express, and is mutually exclusive with
+those column-sizing options.
 
 ---
 
