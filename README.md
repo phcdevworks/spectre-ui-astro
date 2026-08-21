@@ -6,8 +6,8 @@ applications that consume the core Spectre UI contract.
 
 Maintained by [PHCDevworks](https://go.phcdev.co). It depends on
 `@phcdevworks/spectre-ui` for its CSS and recipe contracts, so Astro
-applications consume Spectre's design system through typed components
-instead of hand-rolling markup or styling against the recipes directly.
+applications consume Spectre's design system through typed components instead of
+hand-rolling markup or styling against the recipes directly.
 
 ## Repository Snapshot
 
@@ -16,7 +16,7 @@ instead of hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.5.0                           |
+| Current version/status | 4.6.0                           |
 
 ## Standard Workflow
 
@@ -57,9 +57,9 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 
 ## What Astro Developers Get
 
-- **Thirty ready-to-use Astro components** — alerts, avatars, badges,
-  buttons, cards, app shell layout, forms, navigation, overlays, feedback,
-  pricing, ratings, and testimonials
+- **Thirty ready-to-use Astro components** — alerts, avatars, badges, buttons,
+  cards, app shell layout, forms, navigation, overlays, feedback, pricing,
+  ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript,
   stable accessibility wiring
 - **Thin wrapper pattern** — styling comes entirely from
@@ -107,8 +107,8 @@ Do not use this package when:
   is Astro-only
 - you want to define custom tokens or override Spectre's design values — that
   belongs in `@phcdevworks/spectre-tokens`
-- you want to add or change class recipes or CSS utilities —
-  that belongs in `@phcdevworks/spectre-ui`
+- you want to add or change class recipes or CSS utilities — that belongs in
+  `@phcdevworks/spectre-ui`
 - you need a framework-agnostic styling contract — consume
   `@phcdevworks/spectre-ui` directly
 
@@ -221,25 +221,25 @@ closed by default with no layout shift on hydration.
 
 ### SpButton
 
-| Prop         | Type                                         | Default    | Description                                            |
-| ------------ | -------------------------------------------- | ---------- | ------------------------------------------------------ |
-| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"`      |
-| `size`       | `ButtonSize`                                 | —          | Size: `"sm"` `"md"` `"lg"`                             |
-| `as`         | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element                                       |
-| `href`       | `string`                                     | —          | URL when `as="a"`                                      |
-| `type`       | `"button" \| "submit" \| "reset"`            | `"button"` | Button type (button elements only)                     |
-| `disabled`   | `boolean`                                    | —          | Disables the element; suppresses navigation on anchors |
-| `loading`    | `boolean`                                    | —          | Loading state; implies `disabled`                      |
-| `fullWidth`  | `boolean`                                    | —          | Stretches to fill its container                        |
-| `iconOnly`   | `boolean`                                    | —          | Removes text padding for icon-only buttons             |
-| `pill`       | `boolean`                                    | —          | Fully rounded corners                                  |
+| Prop         | Type                                         | Default    | Description                                                                                                  |
+| ------------ | -------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
+| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"`                                                            |
+| `size`       | `ButtonSize`                                 | —          | Size: `"sm"` `"md"` `"lg"`                                                                                   |
+| `as`         | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element                                                                                             |
+| `href`       | `string`                                     | —          | URL when `as="a"`                                                                                            |
+| `type`       | `"button" \| "submit" \| "reset"`            | `"button"` | Button type (button elements only)                                                                           |
+| `disabled`   | `boolean`                                    | —          | Disables the element; suppresses navigation on anchors                                                       |
+| `loading`    | `boolean`                                    | —          | Loading state; implies `disabled`                                                                            |
+| `fullWidth`  | `boolean`                                    | —          | Stretches to fill its container                                                                              |
+| `iconOnly`   | `boolean`                                    | —          | Removes text padding for icon-only buttons                                                                   |
+| `pill`       | `boolean`                                    | —          | Fully rounded corners                                                                                        |
 | `compact`    | `boolean`                                    | —          | Shrinks the visible box below the min touch target; an invisible `::after` preserves the accessible hit area |
-| `hovered`    | `boolean`                                    | —          | Force-applies hover styling                            |
-| `focused`    | `boolean`                                    | —          | Force-applies focus styling                            |
-| `active`     | `boolean`                                    | —          | Force-applies active styling                           |
-| `aria-label` | `string`                                     | —          | Accessible label                                       |
-| `tabindex`   | `number`                                     | —          | Tab index override                                     |
-| `class`      | `string`                                     | —          | Additional CSS classes                                 |
+| `hovered`    | `boolean`                                    | —          | Force-applies hover styling                                                                                  |
+| `focused`    | `boolean`                                    | —          | Force-applies focus styling                                                                                  |
+| `active`     | `boolean`                                    | —          | Force-applies active styling                                                                                 |
+| `aria-label` | `string`                                     | —          | Accessible label                                                                                             |
+| `tabindex`   | `number`                                     | —          | Tab index override                                                                                           |
+| `class`      | `string`                                     | —          | Additional CSS classes                                                                                       |
 
 ```astro
 <SpButton variant="primary" size="lg">Get started</SpButton>
@@ -322,6 +322,7 @@ The default slot renders any child content.
 | `direction`  | `StackDirection`                              | `"vertical"` | `"vertical"` \| `"horizontal"`                    |
 | `basis`      | `StackBasis`                                  | —            | `"sidebar"` gives the stack a fixed sidebar width |
 | `align`      | `StackAlign`                                  | `"center"`   | `"center"` \| `"stretch"` cross-axis alignment    |
+| `gap`        | `StackGap`                                    | `"md"`       | `"sm"` \| `"md"` \| `"lg"` spacing between items  |
 | `as`         | `"div" \| "section" \| "ul" \| "ol" \| "nav"` | `"div"`      | Rendered element                                  |
 | `id`         | `string`                                      | —            | Element id                                        |
 | `aria-label` | `string`                                      | —            | Accessible label                                  |
@@ -345,6 +346,11 @@ The default slot renders any child content.
 <SpStack direction="horizontal" align="stretch">
   <SpSidebar>...</SpSidebar>
   <main>Stretches to match the sidebar's height.</main>
+</SpStack>
+
+<SpStack gap="lg">
+  <p>Item one</p>
+  <p>Item two</p>
 </SpStack>
 ```
 
@@ -375,15 +381,15 @@ The default slot renders any child content.
 
 ### SpText
 
-| Prop      | Type                                                            | Default | Description             |
-| --------- | ---------------------------------------------------------------- | ------- | ------------------------ |
-| `as`      | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"`  | `"p"`   | Rendered element         |
-| `size`    | `TextSize`                                                        | —       | Upstream type scale      |
-| `variant` | `TextVariant`                                                     | —       | Upstream color role      |
-| `family`  | `TextFamily`                                                      | —       | Upstream font family     |
+| Prop        | Type                                                            | Default | Description                                                  |
+| ----------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------ |
+| `as`        | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"` | `"p"`   | Rendered element                                             |
+| `size`      | `TextSize`                                                      | —       | Upstream type scale                                          |
+| `variant`   | `TextVariant`                                                   | —       | Upstream color role                                          |
+| `family`    | `TextFamily`                                                    | —       | Upstream font family                                         |
 | `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"` |
-| `id`      | `string`                                                          | —       | Element id               |
-| `class`   | `string`                                                          | —       | Additional CSS classes   |
+| `id`        | `string`                                                        | —       | Element id                                                   |
+| `class`     | `string`                                                        | —       | Additional CSS classes                                       |
 
 ```astro
 <SpText as="h2" size="2xl" variant="brand">Section heading</SpText>
@@ -392,22 +398,22 @@ The default slot renders any child content.
 ```
 
 The default slot renders any child content. `SpText` maps directly to
-`getTextClasses` — there is no separate `SpHeading` component; use the `as`
-prop to render any heading level or `p`/`span`.
+`getTextClasses` — there is no separate `SpHeading` component; use the `as` prop
+to render any heading level or `p`/`span`.
 
 ---
 
 ### SpSidebar
 
-| Prop          | Type                        | Default             | Description                                                                                        |
-| ------------- | --------------------------- | ------------------- | --------------------------------------------------------------------------------------------------- |
-| `bordered`    | `boolean`                   | —                   | Applies a right border                                                                             |
-| `as`          | `"aside" \| "div" \| "nav"` | `"aside"`           | Rendered element for the sidebar itself                                                            |
-| `id`          | `string`                    | —                   | Element ID for the sidebar                                                                          |
-| `aria-label`  | `string`                    | —                   | Accessible label for the sidebar                                                                    |
-| `toggleLabel` | `string`                    | `"Toggle sidebar"`  | Accessible label for the hamburger toggle button                                                    |
-| `hideToggle`  | `boolean`                   | `false`             | Suppresses the built-in toggle button, e.g. when placing `SpSidebarToggle` inside `SpNav` instead   |
-| `class`       | `string`                    | —                   | Additional CSS classes for the sidebar                                                              |
+| Prop          | Type                        | Default            | Description                                                                                       |
+| ------------- | --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------- |
+| `bordered`    | `boolean`                   | —                  | Applies a right border                                                                            |
+| `as`          | `"aside" \| "div" \| "nav"` | `"aside"`          | Rendered element for the sidebar itself                                                           |
+| `id`          | `string`                    | —                  | Element ID for the sidebar                                                                        |
+| `aria-label`  | `string`                    | —                  | Accessible label for the sidebar                                                                  |
+| `toggleLabel` | `string`                    | `"Toggle sidebar"` | Accessible label for the hamburger toggle button                                                  |
+| `hideToggle`  | `boolean`                   | `false`            | Suppresses the built-in toggle button, e.g. when placing `SpSidebarToggle` inside `SpNav` instead |
+| `class`       | `string`                    | —                  | Additional CSS classes for the sidebar                                                            |
 
 `SpSidebar` is the first adapter component to own interactive state. It renders
 a wrapper element with `data-sidebar-open="false"` (closed by default,
@@ -421,8 +427,7 @@ no visible effect, matching the upstream CSS contract.
 
 To integrate the hamburger toggle into a top `SpNav` bar instead of leaving it
 next to the off-canvas sidebar, pass `hideToggle` to `SpSidebar` and render
-`SpSidebarToggle` inside `SpNav`, pointing its `for` prop at the sidebar's
-`id`:
+`SpSidebarToggle` inside `SpNav`, pointing its `for` prop at the sidebar's `id`:
 
 ```astro
 <SpNav bordered sticky fullWidth>
@@ -438,73 +443,83 @@ Both buttons (the built-in one and `SpSidebarToggle`) share the same
 `.sp-sidebar-toggle` styling, so they always match the current theme via
 `--sp-component-sidebar-toggle-*` tokens.
 
-Build sidebar nav groups in the default slot using the re-exported
-`getSidebarHeaderClasses` and `getSidebarLinkClasses` helpers, since section
-headers and per-link active/disabled/hover/focus/level state are
-consumer-driven.
+Build sidebar nav groups in the default slot using `SpSidebarLink` for each link
+and the re-exported `getSidebarHeaderClasses` helper for section headers, since
+section headers are consumer-driven.
 
 ```astro
 ---
-import {
-  SpSidebar,
-  getSidebarHeaderClasses,
-  getSidebarLinkClasses,
-} from '@phcdevworks/spectre-ui-astro'
+import { SpSidebar, SpSidebarLink, getSidebarHeaderClasses } from '@phcdevworks/spectre-ui-astro'
 
 const headerClass = getSidebarHeaderClasses()
-const linkClass = getSidebarLinkClasses()
-const activeLinkClass = getSidebarLinkClasses({ active: true })
-const childLinkClass = getSidebarLinkClasses({ level: 'child' })
 ---
 
 <SpSidebar bordered aria-label="Primary">
   <span class={headerClass}>Guides</span>
-  <a class={activeLinkClass} href="/" aria-current="page">Home</a>
-  <a class={linkClass} href="/about">About</a>
-  <a class={childLinkClass} href="/about/team">Team</a>
+  <SpSidebarLink href="/" active>Home</SpSidebarLink>
+  <SpSidebarLink href="/about">About</SpSidebarLink>
+  <SpSidebarLink href="/about/team" level="child">Team</SpSidebarLink>
 </SpSidebar>
 ```
 
-`getSidebarLinkClasses`'s `level` option (`"parent" | "child"`, defaulting to
-`"parent"`) indents nested links under a section header.
+---
+
+### SpSidebarLink
+
+| Prop         | Type               | Default    | Description                                               |
+| ------------ | ------------------ | ---------- | --------------------------------------------------------- |
+| `href`       | `string`           | —          | Link target; suppressed when `disabled`                   |
+| `active`     | `boolean`          | `false`    | Marks the link current (`aria-current="page"`)            |
+| `disabled`   | `boolean`          | `false`    | Suppresses `href`, sets `aria-disabled` and `tabindex=-1` |
+| `hovered`    | `boolean`          | `false`    | Forces hover-state classes                                |
+| `focused`    | `boolean`          | `false`    | Forces focus-state classes                                |
+| `level`      | `SidebarLinkLevel` | `"parent"` | `"parent"` \| `"child"` — indents nested links            |
+| `id`         | `string`           | —          | Element id                                                |
+| `title`      | `string`           | —          | Native title attribute                                    |
+| `aria-label` | `string`           | —          | Accessible label                                          |
+| `class`      | `string`           | —          | Additional CSS classes                                    |
+
+`SpSidebarLink` renders a single `<a>`, backed by `getSidebarLinkClasses`. The
+`level` option indents nested links under a section header.
 
 ---
 
 ### SpSidebarToggle
 
-| Prop    | Type     | Default            | Description                                      |
-| ------- | -------- | ------------------ | ------------------------------------------------ |
-| `for`   | `string` | —                  | Required `id` of the `SpSidebar` to control      |
-| `label` | `string` | `"Toggle sidebar"` | Accessible label for the toggle button           |
-| `class` | `string` | —                  | Additional CSS classes for the toggle button     |
+| Prop    | Type     | Default            | Description                                  |
+| ------- | -------- | ------------------ | -------------------------------------------- |
+| `for`   | `string` | —                  | Required `id` of the `SpSidebar` to control  |
+| `label` | `string` | `"Toggle sidebar"` | Accessible label for the toggle button       |
+| `class` | `string` | —                  | Additional CSS classes for the toggle button |
 
 `SpSidebarToggle` renders a button that can live outside `SpSidebar`, such as
-inside `SpNav`. Its `for` prop must match the target sidebar's `id`. The
-sidebar wiring binds again after Astro client-side navigation so newly swapped
-sidebar shells remain interactive.
+inside `SpNav`. Its `for` prop must match the target sidebar's `id`. The sidebar
+wiring binds again after Astro client-side navigation so newly swapped sidebar
+shells remain interactive.
 
 ---
 
 ### SpGrid
 
-| Prop           | Type                                  | Default | Description                             |
-| -------------- | ------------------------------------- | ------- | --------------------------------------- |
-| `columns`      | `GridColumns`                         | `1`     | `1` \| `2` \| `3` \| `4` \| `6` \| `12` |
-| `gap`          | `GridGap`                             | `"md"`  | `"sm"` \| `"md"` \| `"lg"`              |
-| `columnGap`    | `GridGap`                             | —       | Column-axis gap override                |
-| `rowGap`       | `GridGap`                             | —       | Row-axis gap override                   |
-| `span`         | `GridSpan \| GridSpanOptions`         | —       | Column span for a grid item: a single value or `{ base?, md?, lg? }` per breakpoint |
-| `offset`       | `GridOffset \| GridOffsetOptions`     | —       | Column offset for a grid item: `0`-`11` or `{ base?, md?, lg? }` |
-| `rowSpan`      | `GridSpan \| GridSpanOptions`         | —       | Row span for a grid item, same shape as `span` |
-| `rowOffset`    | `GridOffset \| GridOffsetOptions`     | —       | Row offset for a grid item, same shape as `offset` |
-| `order`        | `GridOrder \| GridOrderOptions`       | —       | Visual order for a grid item: `"first"` \| `"last"` \| `"none"` \| `1`-`12`, or per breakpoint |
-| `leadingTracks`| `GridLeadingTracksOptions`            | —       | `{ weight }` — proportional leading-track sizing without hand-rolled `grid-template-columns` |
-| `fixedTracks`  | `GridFixedTracksOptions`              | —       | `{ count }` — fixed track count for custom track layouts |
-| `explicitTemplate` | `GridExplicitTemplateOptions`     | —       | `{ template, weight? }` — named asymmetric column template (`"edge-fluid-edge"` \| `"label-fluid-fluid"`); mutually exclusive with `columns`/`leadingTracks`/`fixedTracks` |
-| `as`           | `"div" \| "section" \| "ul" \| "ol"`  | `"div"` | Rendered element                        |
-| `id`           | `string`                              | —       | Element id                              |
-| `aria-label`   | `string`                              | —       | Accessible label                        |
-| `class`        | `string`                              | —       | Additional CSS classes                  |
+| Prop               | Type                                 | Default | Description                                                                                                                                                                |
+| ------------------ | ------------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns`          | `GridColumns`                        | `1`     | `1` \| `2` \| `3` \| `4` \| `6` \| `12`                                                                                                                                    |
+| `gap`              | `GridGap`                            | `"md"`  | `"sm"` \| `"md"` \| `"lg"`                                                                                                                                                 |
+| `columnGap`        | `GridGap`                            | —       | Column-axis gap override                                                                                                                                                   |
+| `rowGap`           | `GridGap`                            | —       | Row-axis gap override                                                                                                                                                      |
+| `span`             | `GridSpan \| GridSpanOptions`        | —       | Column span for a grid item: a single value or `{ base?, md?, lg? }` per breakpoint                                                                                        |
+| `offset`           | `GridOffset \| GridOffsetOptions`    | —       | Column offset for a grid item: `0`-`11` or `{ base?, md?, lg? }`                                                                                                           |
+| `rowSpan`          | `GridSpan \| GridSpanOptions`        | —       | Row span for a grid item, same shape as `span`                                                                                                                             |
+| `rowOffset`        | `GridOffset \| GridOffsetOptions`    | —       | Row offset for a grid item, same shape as `offset`                                                                                                                         |
+| `order`            | `GridOrder \| GridOrderOptions`      | —       | Visual order for a grid item: `"first"` \| `"last"` \| `"none"` \| `1`-`12`, or per breakpoint                                                                             |
+| `align`            | `GridAlign`                          | —       | `"start"` \| `"center"` \| `"end"` \| `"baseline"` \| `"stretch"` cross-axis cell alignment                                                                                |
+| `leadingTracks`    | `GridLeadingTracksOptions`           | —       | `{ weight }` — proportional leading-track sizing without hand-rolled `grid-template-columns`                                                                               |
+| `fixedTracks`      | `GridFixedTracksOptions`             | —       | `{ count }` — fixed track count for custom track layouts                                                                                                                   |
+| `explicitTemplate` | `GridExplicitTemplateOptions`        | —       | `{ template, weight? }` — named asymmetric column template (`"edge-fluid-edge"` \| `"label-fluid-fluid"`); mutually exclusive with `columns`/`leadingTracks`/`fixedTracks` |
+| `as`               | `"div" \| "section" \| "ul" \| "ol"` | `"div"` | Rendered element                                                                                                                                                           |
+| `id`               | `string`                             | —       | Element id                                                                                                                                                                 |
+| `aria-label`       | `string`                             | —       | Accessible label                                                                                                                                                           |
+| `class`            | `string`                             | —       | Additional CSS classes                                                                                                                                                     |
 
 ```astro
 <SpGrid columns={3} gap="lg">
@@ -528,20 +543,25 @@ sidebar shells remain interactive.
   <SpNav>Nav links</SpNav>
   <SpButton>CTA</SpButton>
 </SpGrid>
+
+<SpGrid columns={3} align="center">
+  <SpCard>One</SpCard>
+  <SpCard>Two, taller content</SpCard>
+  <SpCard>Three</SpCard>
+</SpGrid>
 ```
 
 The default slot renders any child content. `span`, `offset`, `rowSpan`,
 `rowOffset`, and `order` are set on individual grid items (not the `SpGrid`
 wrapper) and each accepts either a single value or a per-breakpoint
-`{ base?, md?, lg? }` object; they map directly to the matching
-`getGridClasses` option of the same name. `leadingTracks`, `fixedTracks`, and
-`explicitTemplate` are set on the `SpGrid` wrapper itself and map to
-`getGridClasses`'s options of the same name. `explicitTemplate` selects a
-named, finite asymmetric column shape (`"edge-fluid-edge"` for a logo/nav/CTA
-row, `"label-fluid-fluid"` for a fixed leading label column plus two
-differently-weighted fluid columns) for layouts that `columns`/`span`/
-`leadingTracks`/`fixedTracks` cannot express, and is mutually exclusive with
-those column-sizing options.
+`{ base?, md?, lg? }` object; they map directly to the matching `getGridClasses`
+option of the same name. `leadingTracks`, `fixedTracks`, and `explicitTemplate`
+are set on the `SpGrid` wrapper itself and map to `getGridClasses`'s options of
+the same name. `explicitTemplate` selects a named, finite asymmetric column
+shape (`"edge-fluid-edge"` for a logo/nav/CTA row, `"label-fluid-fluid"` for a
+fixed leading label column plus two differently-weighted fluid columns) for
+layouts that `columns`/`span`/ `leadingTracks`/`fixedTracks` cannot express, and
+is mutually exclusive with those column-sizing options.
 
 ---
 
@@ -611,19 +631,19 @@ throws at render time if the requirement is violated.
 
 ### SpLabel
 
-`SpLabel` renders a standalone `<label>`. Association with a form control is
-the consumer's responsibility, the same as plain HTML — pass `htmlFor`
-matching the control's `id`.
+`SpLabel` renders a standalone `<label>`. Association with a form control is the
+consumer's responsibility, the same as plain HTML — pass `htmlFor` matching the
+control's `id`.
 
-| Prop               | Type      | Default | Description                       |
-| ------------------ | --------- | ------- | ---------------------------------- |
-| `disabled`         | `boolean` | —       | Disabled styling                   |
-| `required`         | `boolean` | —       | Required-field styling             |
-| `htmlFor`          | `string`  | —       | Renders the `for` attribute        |
-| `id`               | `string`  | —       | Element ID                         |
-| `aria-label`       | `string`  | —       | Accessible label                   |
-| `aria-describedby` | `string`  | —       | Associates a description element  |
-| `class`            | `string`  | —       | Additional CSS classes             |
+| Prop               | Type      | Default | Description                      |
+| ------------------ | --------- | ------- | -------------------------------- |
+| `disabled`         | `boolean` | —       | Disabled styling                 |
+| `required`         | `boolean` | —       | Required-field styling           |
+| `htmlFor`          | `string`  | —       | Renders the `for` attribute      |
+| `id`               | `string`  | —       | Element ID                       |
+| `aria-label`       | `string`  | —       | Accessible label                 |
+| `aria-describedby` | `string`  | —       | Associates a description element |
+| `class`            | `string`  | —       | Additional CSS classes           |
 
 ```astro
 <SpLabel htmlFor="email">Email</SpLabel>
@@ -636,19 +656,19 @@ matching the control's `id`.
 
 ### SpFieldset
 
-`SpFieldset` renders a `<fieldset>` with an optional `<legend>`. The legend
-only renders when `legend` is provided and non-empty.
+`SpFieldset` renders a `<fieldset>` with an optional `<legend>`. The legend only
+renders when `legend` is provided and non-empty.
 
 | Prop               | Type      | Default | Description                                |
-| ------------------ | --------- | ------- | -------------------------------------------- |
-| `disabled`         | `boolean` | —       | Disables every control inside the fieldset   |
-| `legend`           | `string`  | —       | Renders a `<legend>` with the recipe class   |
-| `name`             | `string`  | —       | Form field group name                        |
-| `form`             | `string`  | —       | Associates with a `<form>` by ID             |
-| `id`               | `string`  | —       | Element ID                                   |
-| `aria-label`       | `string`  | —       | Accessible label                             |
-| `aria-describedby` | `string`  | —       | Associates a description element            |
-| `class`            | `string`  | —       | Additional CSS classes                       |
+| ------------------ | --------- | ------- | ------------------------------------------ |
+| `disabled`         | `boolean` | —       | Disables every control inside the fieldset |
+| `legend`           | `string`  | —       | Renders a `<legend>` with the recipe class |
+| `name`             | `string`  | —       | Form field group name                      |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID           |
+| `id`               | `string`  | —       | Element ID                                 |
+| `aria-label`       | `string`  | —       | Accessible label                           |
+| `aria-describedby` | `string`  | —       | Associates a description element           |
+| `class`            | `string`  | —       | Additional CSS classes                     |
 
 ```astro
 <SpFieldset legend="Contact details">
@@ -667,18 +687,18 @@ only renders when `legend` is provided and non-empty.
 
 `SpCheckbox` renders a native `<input type="checkbox">`.
 
-| Prop               | Type      | Default | Description                       |
-| ------------------ | --------- | ------- | ---------------------------------- |
-| `checked`          | `boolean` | —       | Checked state                      |
-| `disabled`         | `boolean` | —       | Disables the checkbox              |
-| `id`               | `string`  | —       | Element ID                         |
-| `name`             | `string`  | —       | Form field name                    |
-| `value`            | `string`  | —       | Form field value                   |
-| `required`         | `boolean` | —       | Marks the field required           |
-| `form`             | `string`  | —       | Associates with a `<form>` by ID   |
-| `aria-label`       | `string`  | —       | Accessible label                   |
-| `aria-describedby` | `string`  | —       | Associates a description element  |
-| `class`            | `string`  | —       | Additional CSS classes             |
+| Prop               | Type      | Default | Description                      |
+| ------------------ | --------- | ------- | -------------------------------- |
+| `checked`          | `boolean` | —       | Checked state                    |
+| `disabled`         | `boolean` | —       | Disables the checkbox            |
+| `id`               | `string`  | —       | Element ID                       |
+| `name`             | `string`  | —       | Form field name                  |
+| `value`            | `string`  | —       | Form field value                 |
+| `required`         | `boolean` | —       | Marks the field required         |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID |
+| `aria-label`       | `string`  | —       | Accessible label                 |
+| `aria-describedby` | `string`  | —       | Associates a description element |
+| `class`            | `string`  | —       | Additional CSS classes           |
 
 ```astro
 <SpLabel htmlFor="agree">I agree to the terms</SpLabel>
@@ -695,17 +715,17 @@ only renders when `legend` is provided and non-empty.
 `SpRadio` renders a native `<input type="radio">`.
 
 | Prop               | Type      | Default | Description                             |
-| ------------------ | --------- | ------- | ----------------------------------------- |
-| `checked`          | `boolean` | —       | Checked state                             |
-| `disabled`         | `boolean` | —       | Disables the radio                        |
-| `id`               | `string`  | —       | Element ID                                |
-| `name`             | `string`  | —       | Form field name — shared across a group   |
-| `value`            | `string`  | —       | Form field value                          |
-| `required`         | `boolean` | —       | Marks the field required                  |
-| `form`             | `string`  | —       | Associates with a `<form>` by ID          |
-| `aria-label`       | `string`  | —       | Accessible label                          |
-| `aria-describedby` | `string`  | —       | Associates a description element         |
-| `class`            | `string`  | —       | Additional CSS classes                    |
+| ------------------ | --------- | ------- | --------------------------------------- |
+| `checked`          | `boolean` | —       | Checked state                           |
+| `disabled`         | `boolean` | —       | Disables the radio                      |
+| `id`               | `string`  | —       | Element ID                              |
+| `name`             | `string`  | —       | Form field name — shared across a group |
+| `value`            | `string`  | —       | Form field value                        |
+| `required`         | `boolean` | —       | Marks the field required                |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID        |
+| `aria-label`       | `string`  | —       | Accessible label                        |
+| `aria-describedby` | `string`  | —       | Associates a description element        |
+| `class`            | `string`  | —       | Additional CSS classes                  |
 
 ```astro
 <SpLabel htmlFor="plan-pro">Pro</SpLabel>
@@ -721,19 +741,19 @@ only renders when `legend` is provided and non-empty.
 
 `SpSelect` renders a native `<select>`. Pass `<option>` elements as children.
 
-| Prop               | Type      | Default | Description                       |
-| ------------------ | --------- | ------- | ---------------------------------- |
-| `disabled`         | `boolean` | —       | Disables the select                |
-| `focused`          | `boolean` | —       | Applies focus styling              |
-| `id`               | `string`  | —       | Element ID                         |
-| `name`             | `string`  | —       | Form field name                    |
-| `value`            | `string`  | —       | Selected value                     |
-| `required`         | `boolean` | —       | Marks the field required           |
-| `multiple`         | `boolean` | —       | Allows multiple selection          |
-| `form`             | `string`  | —       | Associates with a `<form>` by ID   |
-| `aria-label`       | `string`  | —       | Accessible label                   |
-| `aria-describedby` | `string`  | —       | Associates a description element  |
-| `class`            | `string`  | —       | Additional CSS classes             |
+| Prop               | Type      | Default | Description                      |
+| ------------------ | --------- | ------- | -------------------------------- |
+| `disabled`         | `boolean` | —       | Disables the select              |
+| `focused`          | `boolean` | —       | Applies focus styling            |
+| `id`               | `string`  | —       | Element ID                       |
+| `name`             | `string`  | —       | Form field name                  |
+| `value`            | `string`  | —       | Selected value                   |
+| `required`         | `boolean` | —       | Marks the field required         |
+| `multiple`         | `boolean` | —       | Allows multiple selection        |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID |
+| `aria-label`       | `string`  | —       | Accessible label                 |
+| `aria-describedby` | `string`  | —       | Associates a description element |
+| `class`            | `string`  | —       | Additional CSS classes           |
 
 ```astro
 <SpLabel htmlFor="country">Country</SpLabel>
@@ -749,21 +769,21 @@ only renders when `legend` is provided and non-empty.
 
 `SpTextarea` renders a native `<textarea>`.
 
-| Prop               | Type      | Default | Description                       |
-| ------------------ | --------- | ------- | ---------------------------------- |
-| `disabled`         | `boolean` | —       | Disables the textarea              |
-| `focused`          | `boolean` | —       | Applies focus styling              |
-| `id`               | `string`  | —       | Element ID                         |
-| `name`             | `string`  | —       | Form field name                    |
-| `value`            | `string`  | —       | Default text content               |
-| `placeholder`      | `string`  | —       | Placeholder text                   |
-| `rows`             | `number`  | —       | Visible row count                  |
-| `required`         | `boolean` | —       | Marks the field required           |
-| `readonly`         | `boolean` | —       | Prevents editing                   |
-| `form`             | `string`  | —       | Associates with a `<form>` by ID   |
-| `aria-label`       | `string`  | —       | Accessible label                   |
-| `aria-describedby` | `string`  | —       | Associates a description element  |
-| `class`            | `string`  | —       | Additional CSS classes             |
+| Prop               | Type      | Default | Description                      |
+| ------------------ | --------- | ------- | -------------------------------- |
+| `disabled`         | `boolean` | —       | Disables the textarea            |
+| `focused`          | `boolean` | —       | Applies focus styling            |
+| `id`               | `string`  | —       | Element ID                       |
+| `name`             | `string`  | —       | Form field name                  |
+| `value`            | `string`  | —       | Default text content             |
+| `placeholder`      | `string`  | —       | Placeholder text                 |
+| `rows`             | `number`  | —       | Visible row count                |
+| `required`         | `boolean` | —       | Marks the field required         |
+| `readonly`         | `boolean` | —       | Prevents editing                 |
+| `form`             | `string`  | —       | Associates with a `<form>` by ID |
+| `aria-label`       | `string`  | —       | Accessible label                 |
+| `aria-describedby` | `string`  | —       | Associates a description element |
+| `class`            | `string`  | —       | Additional CSS classes           |
 
 ```astro
 <SpLabel htmlFor="bio">Bio</SpLabel>
@@ -1072,13 +1092,13 @@ default `aria-label` of `"Loading"`.
 
 ### SpDropdown
 
-| Prop        | Type             | Default | Description             |
-| ----------- | ---------------- | ------- | ----------------------- |
-| `fullWidth` | `boolean`        | —       | Stretches to full width |
+| Prop        | Type             | Default | Description                                                                                                                                                                       |
+| ----------- | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fullWidth` | `boolean`        | —       | Stretches to full width                                                                                                                                                           |
 | `mega`      | `boolean`        | —       | Anchors the menu to the nearest positioned ancestor (e.g. `SpNav`) instead of this trigger wrapper, for wide-menu panels that span the nav row rather than tracking trigger width |
-| `as`        | `"div" \| "nav"` | `"div"` | Rendered element        |
-| `id`        | `string`         | —       | Element ID              |
-| `class`     | `string`         | —       | Additional CSS classes  |
+| `as`        | `"div" \| "nav"` | `"div"` | Rendered element                                                                                                                                                                  |
+| `id`        | `string`         | —       | Element ID                                                                                                                                                                        |
+| `class`     | `string`         | —       | Additional CSS classes                                                                                                                                                            |
 
 `SpDropdown` renders the dropdown container only. Build the menu and items in
 the default slot using the re-exported `getDropdownMenuClasses` and
@@ -1126,33 +1146,28 @@ const activeItemClass = getDropdownItemClasses({ active: true })
 
 The default slot renders any child content.
 
-Build footer content in the default slot using the re-exported
-`getFooterHeadingClasses`, `getFooterTextClasses`, `getFooterMutedClasses`,
-`getFooterLinksClasses`, `getFooterLinkClasses`, `getFooterDividerClasses`,
-and `getFooterChipClasses` helpers, since section headings, link lists,
-per-link active/disabled/hover/focus state, and chip disabled/hover/focus
-state are consumer-driven — the same pattern as `SpNav`'s
-`getNavLinksClasses`/`getNavLinkClasses` and `SpSidebar`'s
-`getSidebarHeaderClasses`/`getSidebarLinkClasses`.
+Build footer content in the default slot using `SpFooterLink` and `SpFooterChip`
+for interactive elements, and the re-exported `getFooterHeadingClasses`,
+`getFooterTextClasses`, `getFooterMutedClasses`, `getFooterLinksClasses`, and
+`getFooterDividerClasses` helpers for the surrounding structure, since section
+headings and link lists are consumer-driven — the same pattern as `SpNav`'s
+`getNavLinksClasses` and `SpSidebar`'s `getSidebarHeaderClasses`.
 
 ```astro
 ---
 import {
   SpFooter,
+  SpFooterLink,
+  SpFooterChip,
   getFooterHeadingClasses,
   getFooterTextClasses,
   getFooterMutedClasses,
   getFooterLinksClasses,
-  getFooterLinkClasses,
   getFooterDividerClasses,
-  getFooterChipClasses,
 } from '@phcdevworks/spectre-ui-astro'
 
 const headingClass = getFooterHeadingClasses()
 const linksClass = getFooterLinksClasses()
-const linkClass = getFooterLinkClasses()
-const activeLinkClass = getFooterLinkClasses({ active: true })
-const chipClass = getFooterChipClasses()
 ---
 
 <SpFooter bordered>
@@ -1162,13 +1177,47 @@ const chipClass = getFooterChipClasses()
   <div>
     <span class={headingClass}>Product</span>
     <nav class={linksClass}>
-      <a class={activeLinkClass} href="/">Home</a>
-      <a class={linkClass} href="/docs">Docs</a>
+      <SpFooterLink href="/" active>Home</SpFooterLink>
+      <SpFooterLink href="/docs">Docs</SpFooterLink>
     </nav>
   </div>
-  <span class={chipClass}>Beta</span>
+  <SpFooterChip>Beta</SpFooterChip>
 </SpFooter>
 ```
+
+---
+
+### SpFooterLink
+
+| Prop         | Type      | Default | Description                                               |
+| ------------ | --------- | ------- | --------------------------------------------------------- |
+| `href`       | `string`  | —       | Link target; suppressed when `disabled`                   |
+| `active`     | `boolean` | `false` | Marks the link current (`aria-current="page"`)            |
+| `disabled`   | `boolean` | `false` | Suppresses `href`, sets `aria-disabled` and `tabindex=-1` |
+| `hovered`    | `boolean` | `false` | Forces hover-state classes                                |
+| `focused`    | `boolean` | `false` | Forces focus-state classes                                |
+| `id`         | `string`  | —       | Element id                                                |
+| `title`      | `string`  | —       | Native title attribute                                    |
+| `aria-label` | `string`  | —       | Accessible label                                          |
+| `class`      | `string`  | —       | Additional CSS classes                                    |
+
+`SpFooterLink` renders a single `<a>`, backed by `getFooterLinkClasses`.
+
+---
+
+### SpFooterChip
+
+| Prop         | Type      | Default | Description                    |
+| ------------ | --------- | ------- | ------------------------------ |
+| `disabled`   | `boolean` | `false` | Applies disabled-state classes |
+| `hovered`    | `boolean` | `false` | Forces hover-state classes     |
+| `focused`    | `boolean` | `false` | Forces focus-state classes     |
+| `id`         | `string`  | —       | Element id                     |
+| `title`      | `string`  | —       | Native title attribute         |
+| `aria-label` | `string`  | —       | Accessible label               |
+| `class`      | `string`  | —       | Additional CSS classes         |
+
+`SpFooterChip` renders a single `<span>`, backed by `getFooterChipClasses`.
 
 ---
 
@@ -1200,16 +1249,16 @@ Toggling `open` is consumer-driven (no client-side JS is included).
 
 ### SpNav
 
-| Prop         | Type                                      | Default | Description                           |
-| ------------ | ----------------------------------------- | ------- | ------------------------------------- |
-| `bordered`   | `boolean`                                 | —       | Applies a border                      |
-| `sticky`     | `boolean`                                 | —       | Applies sticky positioning            |
-| `fullWidth`  | `boolean`                                 | —       | Stretches to full width               |
+| Prop         | Type                                      | Default | Description                                       |
+| ------------ | ----------------------------------------- | ------- | ------------------------------------------------- |
+| `bordered`   | `boolean`                                 | —       | Applies a border                                  |
+| `sticky`     | `boolean`                                 | —       | Applies sticky positioning                        |
+| `fullWidth`  | `boolean`                                 | —       | Stretches to full width                           |
 | `align`      | `NavAlign`                                | —       | Aligns content: `"start"`, `"center"`, or `"end"` |
-| `as`         | `"nav" \| "div" \| "header" \| "section"` | `"nav"` | Rendered element                      |
-| `id`         | `string`                                  | —       | Element ID                            |
-| `aria-label` | `string`                                  | —       | Accessible label for the nav landmark |
-| `class`      | `string`                                  | —       | Additional CSS classes                |
+| `as`         | `"nav" \| "div" \| "header" \| "section"` | `"nav"` | Rendered element                                  |
+| `id`         | `string`                                  | —       | Element ID                                        |
+| `aria-label` | `string`                                  | —       | Accessible label for the nav landmark             |
+| `class`      | `string`                                  | —       | Additional CSS classes                            |
 
 `SpNav` renders the nav container only. Build links in the default slot using
 the re-exported `getNavLinksClasses` and `getNavLinkClasses` helpers, since
@@ -1236,18 +1285,18 @@ const linkClass = getNavLinkClasses()
 
 ### SpNavItem
 
-| Prop         | Type                | Default          | Description                                                |
-| ------------ | ------------------- | ---------------- | ----------------------------------------------------------- |
-| `dropdown`   | `boolean`           | —                | Renders a dropdown trigger + menu instead of a plain link  |
-| `href`       | `string`            | —                | Link target when `dropdown` is not set                     |
-| `label`      | `string`            | —                | Trigger/link text when no content is projected             |
-| `open`       | `boolean`           | —                | Applies open styling to the menu (dropdown mode only)      |
-| `placement`  | `DropdownPlacement` | `"bottom-start"` | Menu position (dropdown mode only)                          |
+| Prop         | Type                | Default          | Description                                                                                                                                         |
+| ------------ | ------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dropdown`   | `boolean`           | —                | Renders a dropdown trigger + menu instead of a plain link                                                                                           |
+| `href`       | `string`            | —                | Link target when `dropdown` is not set                                                                                                              |
+| `label`      | `string`            | —                | Trigger/link text when no content is projected                                                                                                      |
+| `open`       | `boolean`           | —                | Applies open styling to the menu (dropdown mode only)                                                                                               |
+| `placement`  | `DropdownPlacement` | `"bottom-start"` | Menu position (dropdown mode only)                                                                                                                  |
 | `mega`       | `boolean`           | —                | Wide-menu mode (dropdown mode only): anchors the menu to the nearest positioned ancestor and spans its full width instead of tracking trigger width |
-| `id`         | `string`            | —                | Element ID                                                  |
-| `title`      | `string`            | —                | Title attribute                                             |
-| `aria-label` | `string`            | —                | Accessible label for the link or trigger button             |
-| `class`      | `string`            | —                | Additional CSS classes                                      |
+| `id`         | `string`            | —                | Element ID                                                                                                                                          |
+| `title`      | `string`            | —                | Title attribute                                                                                                                                     |
+| `aria-label` | `string`            | —                | Accessible label for the link or trigger button                                                                                                     |
+| `class`      | `string`            | —                | Additional CSS classes                                                                                                                              |
 
 Place `SpNavItem` inside `SpNav` alongside plain links. In link mode it renders
 an `<a>` styled with `getNavLinkClasses`. In dropdown mode it renders a
@@ -1255,8 +1304,8 @@ an `<a>` styled with `getNavLinkClasses`. In dropdown mode it renders a
 `<button>` (`data-sp-nav-item-trigger`, `aria-haspopup`, `aria-expanded`) and a
 `getDropdownMenuClasses` menu panel (`data-sp-nav-item-menu`) that receives the
 default slot. `mega` is forwarded to both calls, matching upstream's paired
-`mega` contract. Toggling `open` and wiring click/outside-click/escape
-behavior is consumer-driven — no client-side JS is included; use
+`mega` contract. Toggling `open` and wiring click/outside-click/escape behavior
+is consumer-driven — no client-side JS is included; use
 `@phcdevworks/spectre-components`'s `sp-nav-item` if you want that behavior
 built in. Use a `trigger` named slot to project custom trigger content instead
 of `label`.
@@ -1475,14 +1524,15 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `DropdownMenuRecipeOptions`, `DropdownItemRecipeOptions`, `DropdownPlacement`,
 `FooterRecipeOptions`, `IconBoxRecipeOptions`, `IconBoxVariant`, `IconBoxSize`,
 `InputRecipeOptions`, `InputState`, `InputSize`, `ModalRecipeOptions`,
-`ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavAlign`, `NavLinkRecipeOptions`,
-`PricingCardRecipeOptions`, `RatingRecipeOptions`, `SectionRecipeOptions`,
-`SidebarRecipeOptions`, `SidebarLinkRecipeOptions`, `SidebarLinkLevel`, `StackRecipeOptions`,
-`StackDirection`, `StackBasis`, `StackAlign`, `TestimonialRecipeOptions`,
-`TextRecipeOptions`, `TextSize`, `TextVariant`, `TextFamily`, `TextTransform`,
-`ToastRecipeOptions`, `ToastIconRecipeOptions`, `ToastVariant`,
-`TooltipRecipeOptions`, `TooltipPlacement`, `GridRecipeOptions`,
-`GridColumns`, `GridGap`, `GridSpan`, `GridSpanOptions`.
+`ModalOverlayRecipeOptions`, `NavRecipeOptions`, `NavAlign`,
+`NavLinkRecipeOptions`, `PricingCardRecipeOptions`, `RatingRecipeOptions`,
+`SectionRecipeOptions`, `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`,
+`SidebarLinkLevel`, `StackRecipeOptions`, `StackDirection`, `StackBasis`,
+`StackAlign`, `TestimonialRecipeOptions`, `TextRecipeOptions`, `TextSize`,
+`TextVariant`, `TextFamily`, `TextTransform`, `ToastRecipeOptions`,
+`ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`,
+`TooltipPlacement`, `GridRecipeOptions`, `GridColumns`, `GridGap`, `GridSpan`,
+`GridSpanOptions`.
 
 ## Package Exports
 
@@ -1606,6 +1656,7 @@ Each component family is classified by its support status in this adapter.
 | textarea | **stable** | Full prop, ARIA, and SSR coverage |
 | toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
 | tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
+| prose | **not yet supported** | `getProseClasses` added in `@phcdevworks/spectre-ui@4.2.0`; no adapter component yet |
 
 **stable** — the component family is fully wired to upstream recipes, covered by
 SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking
@@ -1622,12 +1673,12 @@ The machine-readable classification lives in `astro-adapter.contract.json` under
 
 ## Relationship To The Rest Of Spectre
 
-| Package                                                                        | Owns                                                          |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) | Design values, semantic token meaning, and token contracts    |
-| [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)         | CSS, utilities, and type-safe class recipes                   |
-| `@phcdevworks/spectre-components`                                              | Framework-agnostic Lit web component behavior                 |
-| `@phcdevworks/spectre-ui-astro`                                                | Astro-native adapter delivery and framework ergonomics        |
+| Package                                                                        | Owns                                                       |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| [`@phcdevworks/spectre-tokens`](https://github.com/phcdevworks/spectre-tokens) | Design values, semantic token meaning, and token contracts |
+| [`@phcdevworks/spectre-ui`](https://github.com/phcdevworks/spectre-ui)         | CSS, utilities, and type-safe class recipes                |
+| `@phcdevworks/spectre-components`                                              | Framework-agnostic Lit web component behavior              |
+| `@phcdevworks/spectre-ui-astro`                                                | Astro-native adapter delivery and framework ergonomics     |
 
 Tokens define meaning. UI defines the styling contract. Components define
 framework-agnostic custom element behavior. This package defines Astro delivery
@@ -1704,14 +1755,15 @@ This runs: lint → build → typecheck → tests. All steps must pass.
 ## AI And Automation Boundaries
 
 Claude Code (`claude-sonnet-4-6`) is the primary development agent for this
-repository. Codex handles releases, including cutting tagged releases and
-GitHub Releases, and production stabilization. Jules handles small automated
-fixes and micro-updates. GitHub Copilot provides development support.
+repository. Codex handles releases, including cutting tagged releases and GitHub
+Releases, and production stabilization. Jules handles small automated fixes and
+micro-updates. GitHub Copilot provides development support.
 
-All AI agents with repository access (Claude Code, Codex, Copilot, Jules)
-have commit, push, and tag authority in this repository. Publishing to npm
-remains Bradley Potts's sole authority. See [AGENTS.md](AGENTS.md) for the
-full commit-policy and release-authority grant.
+Codex, Copilot, and Jules have commit, push, and tag authority in this
+repository. Claude Code has no git access and hands validated work to Codex or
+the human maintainer. Publishing to npm remains the human maintainer's sole
+authority. See [AGENTS.md](AGENTS.md) for the full commit policy and
+release-authority grant.
 
 **Protected from automated change:** SSR rendering invariants, the thin-adapter
 rule (no local CSS, no token redefinition, no recipe reimplementation), and the

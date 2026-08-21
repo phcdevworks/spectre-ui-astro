@@ -1,0 +1,44 @@
+---
+import type { FooterLinkRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getFooterLinkClasses } from "@phcdevworks/spectre-ui";
+
+interface SpFooterLinkProps extends FooterLinkRecipeOptions {
+  href?: string;
+  class?: string;
+  id?: string;
+  title?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  active,
+  disabled,
+  hovered,
+  focused,
+  href,
+  class: className,
+  id,
+  title,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpFooterLinkProps;
+
+const classes = getFooterLinkClasses({ active, disabled, hovered, focused });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<a
+  class={finalClass}
+  href={disabled ? undefined : href}
+  id={id}
+  title={title}
+  aria-label={ariaLabel}
+  aria-current={active ? "page" : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  tabindex={disabled ? -1 : undefined}
+  {...rest}
+>
+  <slot />
+</a>

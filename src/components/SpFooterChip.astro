@@ -1,0 +1,38 @@
+---
+import type { FooterChipRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getFooterChipClasses } from "@phcdevworks/spectre-ui";
+
+interface SpFooterChipProps extends FooterChipRecipeOptions {
+  class?: string;
+  id?: string;
+  title?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  disabled,
+  hovered,
+  focused,
+  class: className,
+  id,
+  title,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpFooterChipProps;
+
+const classes = getFooterChipClasses({ disabled, hovered, focused });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<span
+  class={finalClass}
+  id={id}
+  title={title}
+  aria-label={ariaLabel}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
+  <slot />
+</span>

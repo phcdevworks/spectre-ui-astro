@@ -6,6 +6,43 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.6.0] - 2026-08-21
+
+**Release Title:** Astro Navigation Helpers and Layout Parity
+
+Contract change type: additive
+
+### Added
+
+- Bumped `@phcdevworks/spectre-tokens` to `^4.5.0` and `@phcdevworks/spectre-ui`
+  to `^4.3.0`, and caught up to the new recipe surface those releases shipped:
+  - `SpGrid` — new `align` prop (`start`/`center`/`end`/`baseline`/`stretch`),
+    surfacing `getGridClasses`' `align` option added in `spectre-ui` 4.2.0.
+  - `SpStack` — new `gap` prop (`sm`/`md`/`lg`, default `md`), surfacing
+    `getStackClasses`' `gap` option added in `spectre-ui` 4.3.0.
+  Matches the parity work `@phcdevworks/spectre-components` shipped in
+  `1.17.0` for the same two upstream options.
+- New `SpFooterLink` and `SpFooterChip` components, backed by
+  `getFooterLinkClasses`/`getFooterChipClasses`. Previously `SpFooter`'s
+  README guidance had consumers hand-build `<a>`/`<span>` elements from the
+  bare recipe helpers; these give the same interactive-element treatment
+  `SpTag`/`SpBadge` already have (`active`/`disabled`/`hovered`/`focused`).
+  Closes a component-surface gap versus `@phcdevworks/spectre-components`'s
+  `sp-footer-link`/`sp-footer-chip` (shipped there in `1.16.0`).
+- New `SpSidebarLink` component, backed by `getSidebarLinkClasses`, replacing
+  the README's prior hand-built `<a>` guidance for `SpSidebar` nav groups.
+  Closes a component-surface gap versus `@phcdevworks/spectre-components`'s
+  `sp-sidebar-link` (shipped there in `1.16.0`).
+- `GridAlign` and `StackGap` types are now re-exported from
+  `src/recipes/index.ts` alongside the other `SpGrid`/`SpStack` option types
+  — previously usable only through `GridRecipeOptions`/`StackRecipeOptions`,
+  not by name.
+- Declared the `prose` recipe family (`getProseClasses`, added in
+  `spectre-ui` 4.2.0) as `notYetSupported` in `astro-adapter.contract.json`
+  and the README's Component Family Stability table — no adapter component
+  exists for it yet, and `spectre-components` has no `sp-prose` equivalent
+  either.
+
 ## [4.5.0] - 2026-08-19
 
 **Release Title:** Explicit Grid Templates and Rating State Parity

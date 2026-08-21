@@ -36,6 +36,22 @@ describe("SpGrid rendering", () => {
     expect(html).not.toContain('gap="lg"');
   });
 
+  it("applies align classes when requested", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { align: "center" },
+    });
+
+    expect(html).toContain(getGridClasses({ align: "center" }));
+  });
+
+  it("does not leak the align prop to the DOM", async () => {
+    const html = await container.renderToString(SpGrid, {
+      props: { align: "center" },
+    });
+
+    expect(html).not.toContain('align="center"');
+  });
+
   it("applies span classes for a single span value", async () => {
     const html = await container.renderToString(SpGrid, {
       props: { span: 6 },

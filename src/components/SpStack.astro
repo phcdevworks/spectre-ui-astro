@@ -18,6 +18,7 @@ const {
   direction,
   basis,
   align,
+  gap,
   as: Tag = "div",
   class: className,
   id,
@@ -26,7 +27,7 @@ const {
   ...rest
 } = Astro.props as SpStackProps;
 
-const classes = getStackClasses({ direction, basis, align });
+const classes = getStackClasses({ direction, basis, align, gap });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

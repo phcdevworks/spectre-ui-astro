@@ -89,4 +89,20 @@ describe("SpStack rendering", () => {
 
     expect(html).not.toContain('align="stretch"');
   });
+
+  it("applies gap classes when requested", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { gap: "lg" },
+    });
+
+    expect(html).toContain(getStackClasses({ gap: "lg" }));
+  });
+
+  it("does not leak the gap prop to the DOM", async () => {
+    const html = await container.renderToString(SpStack, {
+      props: { gap: "lg" },
+    });
+
+    expect(html).not.toContain('gap="lg"');
+  });
 });

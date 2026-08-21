@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "4.5.0",
+  "version": "4.6.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro adapter package of the Spectre system. It adapts Spectre UI's class recipes into Astro components for Astro applications that consume the core Spectre UI contract.",
   "keywords": [
     "phcdevworks",
@@ -66,9 +66,12 @@
     "./components/SpRadio.astro": "./dist/components/SpRadio.astro",
     "./components/SpRating.astro": "./dist/components/SpRating.astro",
     "./components/SpFooter.astro": "./dist/components/SpFooter.astro",
+    "./components/SpFooterChip.astro": "./dist/components/SpFooterChip.astro",
+    "./components/SpFooterLink.astro": "./dist/components/SpFooterLink.astro",
     "./components/SpSection.astro": "./dist/components/SpSection.astro",
     "./components/SpSelect.astro": "./dist/components/SpSelect.astro",
     "./components/SpSidebar.astro": "./dist/components/SpSidebar.astro",
+    "./components/SpSidebarLink.astro": "./dist/components/SpSidebarLink.astro",
     "./components/SpSidebarToggle.astro": "./dist/components/SpSidebarToggle.astro",
     "./components/SpSpinner.astro": "./dist/components/SpSpinner.astro",
     "./components/SpStack.astro": "./dist/components/SpStack.astro",
@@ -109,8 +112,8 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^4.4.0",
-    "@phcdevworks/spectre-ui": "^4.1.1",
+    "@phcdevworks/spectre-tokens": "^4.5.0",
+    "@phcdevworks/spectre-ui": "^4.3.0",
     "astro": "^7.0.0",
     "typescript": "^5.0 || ^6.0 || ^7.0"
   },
@@ -123,8 +126,8 @@
   },
   "devDependencies": {
     "@phcdevworks/spectre-manifest": "^1.1.0",
-    "@phcdevworks/spectre-tokens": "^4.4.0",
-    "@phcdevworks/spectre-ui": "^4.1.1",
+    "@phcdevworks/spectre-tokens": "^4.5.0",
+    "@phcdevworks/spectre-ui": "^4.3.0",
     "@types/node": "^26.2.0",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
     "@typescript-eslint/parser": "^8.67.0",

@@ -15,9 +15,9 @@ this file does not restate delivered work.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v4.3.0 — current adapter peer baseline |
-| `@phcdevworks/spectre-ui` | v4.0.0 — Grid v2 custom tracks/offsets, Footer sub-recipes, and Dropdown `mega` published |
-| `@phcdevworks/spectre-ui-astro` | v4.4.0 — Phase 16 production layout and compact button parity, consuming spectre-ui 4.0.0 |
+| `@phcdevworks/spectre-tokens` | v4.5.0 — current adapter peer baseline |
+| `@phcdevworks/spectre-ui` | v4.3.0 — current adapter recipe baseline |
+| `@phcdevworks/spectre-ui-astro` | v4.6.0 — Phase 17 navigation helpers and layout parity, consuming spectre-ui 4.3.0 |
 
 ---
 
@@ -41,6 +41,7 @@ this file does not restate delivered work.
 | 14 | `SpNavItem` component — nav composition parity | 4.2.0 |
 | 15 | `SpText` `transform` and `SpGrid` `span` (Grid v2) parity, consuming `spectre-ui@3.2.0` | 4.3.0 |
 | 16 | Production Layout Parity Audit — Grid v2 column/row offsets and custom track sizing (`SpGrid`), Footer sub-recipe re-exports, Dropdown/NavItem `mega` wide-menu support, and compact buttons, consuming `spectre-ui@4.0.0` | 4.4.0 |
+| 17 | Navigation Helper and Layout Parity — `SpFooterLink`, `SpFooterChip`, `SpSidebarLink`, Grid alignment, and Stack gap support, consuming `spectre-ui@4.3.0` | 4.6.0 |
 
 ---
 

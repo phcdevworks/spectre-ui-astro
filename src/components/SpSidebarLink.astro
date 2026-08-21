@@ -1,0 +1,45 @@
+---
+import type { SidebarLinkRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSidebarLinkClasses } from "@phcdevworks/spectre-ui";
+
+interface SpSidebarLinkProps extends SidebarLinkRecipeOptions {
+  href?: string;
+  class?: string;
+  id?: string;
+  title?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  active,
+  disabled,
+  hovered,
+  focused,
+  level,
+  href,
+  class: className,
+  id,
+  title,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpSidebarLinkProps;
+
+const classes = getSidebarLinkClasses({ active, disabled, hovered, focused, level });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<a
+  class={finalClass}
+  href={disabled ? undefined : href}
+  id={id}
+  title={title}
+  aria-label={ariaLabel}
+  aria-current={active ? "page" : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  tabindex={disabled ? -1 : undefined}
+  {...rest}
+>
+  <slot />
+</a>
