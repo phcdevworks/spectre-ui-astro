@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.6.0                           |
+| Current version/status | 4.7.0                           |
 
 ## Standard Workflow
 
@@ -223,7 +223,7 @@ closed by default with no layout shift on hydration.
 
 | Prop         | Type                                         | Default    | Description                                                                                                  |
 | ------------ | -------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"`                                                            |
+| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"` `"inverse"`                                                |
 | `size`       | `ButtonSize`                                 | —          | Size: `"sm"` `"md"` `"lg"`                                                                                   |
 | `as`         | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element                                                                                             |
 | `href`       | `string`                                     | —          | URL when `as="a"`                                                                                            |
@@ -258,7 +258,7 @@ closed by default with no layout shift on hydration.
 | `variant`     | `CardVariant`                                                                | —       | Visual style: `"elevated"` `"outline"` `"flat"` `"ghost"`             |
 | `as`          | `"div" \| "section" \| "article" \| "aside" \| "a" \| "button" \| "li" \| …` | `"div"` | Rendered element                                                      |
 | `interactive` | `boolean`                                                                    | —       | Adds hover/focus styles; adds `role="button"` for non-native elements |
-| `padded`      | `boolean`                                                                    | —       | Applies inner padding                                                 |
+| `padded`      | `boolean \| "sm" \| "md" \| "lg"`                                            | —       | Applies inner padding                                                 |
 | `fullHeight`  | `boolean`                                                                    | —       | Stretches to full container height                                    |
 | `disabled`    | `boolean`                                                                    | —       | Disables the card; suppresses navigation on anchors                   |
 | `loading`     | `boolean`                                                                    | —       | Loading state                                                         |
@@ -289,13 +289,13 @@ The default slot renders any child content.
 
 ### SpContainer
 
-| Prop         | Type                                                   | Default | Description                                        |
-| ------------ | ------------------------------------------------------ | ------- | -------------------------------------------------- |
-| `maxWidth`   | `ContainerMaxWidth`                                    | —       | `"prose"` bounds content to a readable line length |
-| `as`         | `"div" \| "section" \| "main" \| "article" \| "aside"` | `"div"` | Rendered element                                   |
-| `id`         | `string`                                               | —       | Element id                                         |
-| `aria-label` | `string`                                               | —       | Accessible label                                   |
-| `class`      | `string`                                               | —       | Additional CSS classes                             |
+| Prop         | Type                                                   | Default | Description                                                            |
+| ------------ | ------------------------------------------------------ | ------- | ---------------------------------------------------------------------- |
+| `maxWidth`   | `ContainerMaxWidth`                                    | —       | `"prose"` bounds content to a readable line length; `"wide"` widens it |
+| `as`         | `"div" \| "section" \| "main" \| "article" \| "aside"` | `"div"` | Rendered element                                                       |
+| `id`         | `string`                                               | —       | Element id                                                             |
+| `aria-label` | `string`                                               | —       | Accessible label                                                       |
+| `class`      | `string`                                               | —       | Additional CSS classes                                                 |
 
 ```astro
 <SpContainer>
@@ -381,15 +381,15 @@ The default slot renders any child content.
 
 ### SpText
 
-| Prop        | Type                                                            | Default | Description                                                  |
-| ----------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------ |
-| `as`        | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"` | `"p"`   | Rendered element                                             |
-| `size`      | `TextSize`                                                      | —       | Upstream type scale                                          |
-| `variant`   | `TextVariant`                                                   | —       | Upstream color role                                          |
-| `family`    | `TextFamily`                                                    | —       | Upstream font family                                         |
-| `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"` |
-| `id`        | `string`                                                        | —       | Element id                                                   |
-| `class`     | `string`                                                        | —       | Additional CSS classes                                       |
+| Prop        | Type                                                            | Default | Description                                                                          |
+| ----------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `as`        | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"` | `"p"`   | Rendered element                                                                     |
+| `size`      | `TextSize`                                                      | —       | Upstream type scale                                                                  |
+| `variant`   | `TextVariant`                                                   | —       | Upstream color role, including `"onInverse"`/`"onInverseMuted"` for on-dark surfaces |
+| `family`    | `TextFamily`                                                    | —       | Upstream font family                                                                 |
+| `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"`                         |
+| `id`        | `string`                                                        | —       | Element id                                                                           |
+| `class`     | `string`                                                        | —       | Additional CSS classes                                                               |
 
 ```astro
 <SpText as="h2" size="2xl" variant="brand">Section heading</SpText>
@@ -852,19 +852,19 @@ renders when `legend` is provided and non-empty.
 
 ### SpBadge
 
-| Prop          | Type                                                             | Default  | Description                                                           |
-| ------------- | ---------------------------------------------------------------- | -------- | --------------------------------------------------------------------- |
-| `variant`     | `BadgeVariant`                                                   | —        | Visual style: `"primary"` `"success"` `"warning"` `"danger"` `"info"` |
-| `size`        | `BadgeSize`                                                      | —        | Size: `"sm"` `"md"` `"lg"`                                            |
-| `as`          | `"span" \| "div" \| "a" \| "button" \| "li" \| "time" \| "mark"` | `"span"` | Rendered element                                                      |
-| `interactive` | `boolean`                                                        | —        | Adds hover/focus styles                                               |
-| `fullWidth`   | `boolean`                                                        | —        | Stretches to full width                                               |
-| `disabled`    | `boolean`                                                        | —        | Disables the badge                                                    |
-| `loading`     | `boolean`                                                        | —        | Loading state                                                         |
-| `href`        | `string`                                                         | —        | URL when `as="a"`                                                     |
-| `datetime`    | `string`                                                         | —        | Datetime value when `as="time"`                                       |
-| `aria-label`  | `string`                                                         | —        | Accessible label                                                      |
-| `class`       | `string`                                                         | —        | Additional CSS classes                                                |
+| Prop          | Type                                                             | Default  | Description                                                                       |
+| ------------- | ---------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------- |
+| `variant`     | `BadgeVariant`                                                   | —        | Visual style: `"primary"` `"success"` `"warning"` `"danger"` `"info"` `"inverse"` |
+| `size`        | `BadgeSize`                                                      | —        | Size: `"sm"` `"md"` `"lg"`                                                        |
+| `as`          | `"span" \| "div" \| "a" \| "button" \| "li" \| "time" \| "mark"` | `"span"` | Rendered element                                                                  |
+| `interactive` | `boolean`                                                        | —        | Adds hover/focus styles                                                           |
+| `fullWidth`   | `boolean`                                                        | —        | Stretches to full width                                                           |
+| `disabled`    | `boolean`                                                        | —        | Disables the badge                                                                |
+| `loading`     | `boolean`                                                        | —        | Loading state                                                                     |
+| `href`        | `string`                                                         | —        | URL when `as="a"`                                                                 |
+| `datetime`    | `string`                                                         | —        | Datetime value when `as="time"`                                                   |
+| `aria-label`  | `string`                                                         | —        | Accessible label                                                                  |
+| `class`       | `string`                                                         | —        | Additional CSS classes                                                            |
 
 ```astro
 <SpBadge variant="success">Active</SpBadge>
@@ -1002,14 +1002,15 @@ always pass `aria-label` for screen readers.
 Named slots map to the structural sections of the testimonial. Slot wrappers
 render only when their slot is populated.
 
-| Prop          | Type                                                   | Default | Description                        |
-| ------------- | ------------------------------------------------------ | ------- | ---------------------------------- |
-| `fullHeight`  | `boolean`                                              | —       | Stretches to full container height |
-| `interactive` | `boolean`                                              | —       | Adds hover/focus styles            |
-| `disabled`    | `boolean`                                              | —       | Disables the testimonial           |
-| `loading`     | `boolean`                                              | —       | Loading state                      |
-| `as`          | `"div" \| "section" \| "article" \| "blockquote" \| …` | `"div"` | Rendered element                   |
-| `class`       | `string`                                               | —       | Additional CSS classes             |
+| Prop          | Type                                                   | Default      | Description                        |
+| ------------- | ------------------------------------------------------ | ------------ | ---------------------------------- |
+| `variant`     | `"elevated" \| "flat" \| "outline" \| "ghost"`         | `"elevated"` | Visual style                       |
+| `fullHeight`  | `boolean`                                              | —            | Stretches to full container height |
+| `interactive` | `boolean`                                              | —            | Adds hover/focus styles            |
+| `disabled`    | `boolean`                                              | —            | Disables the testimonial           |
+| `loading`     | `boolean`                                              | —            | Loading state                      |
+| `as`          | `"div" \| "section" \| "article" \| "blockquote" \| …` | `"div"`      | Rendered element                   |
+| `class`       | `string`                                               | —            | Additional CSS classes             |
 
 | Slot           | Description                     |
 | -------------- | ------------------------------- |

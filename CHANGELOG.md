@@ -6,6 +6,39 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.7.0] - 2026-09-01
+
+**Release Title:** Inverse Surface Recipe Alignment
+
+Contract change type: additive
+
+### Added
+
+- Bumped `@phcdevworks/spectre-tokens` to `^4.7.0` and `@phcdevworks/spectre-ui`
+  to `^5.0.0` (peer and dev ranges, plus the `examples/` app), picking up the
+  new inverse-surface recipe surface those releases shipped. No adapter code
+  changes were required — every affected component (`SpCard`, `SpBadge`,
+  `SpButton`, `SpText`, `SpContainer`, `SpTestimonial`) already extends the
+  upstream recipe option types and passes props straight through, so the new
+  union members are available for free:
+  - `SpCard`'s `padded` prop now also accepts `'sm'`/`'lg'` (in addition to
+    `boolean`), from `getCardClasses`' new `component.card.padding` scale.
+  - `SpBadge` and `SpButton` gained an `inverse` variant, from
+    `getBadgeClasses`/`getButtonClasses`' new on-dark treatment.
+  - `SpText` gained `onInverse`/`onInverseMuted` variants.
+  - `SpContainer`'s `maxWidth` prop now also accepts `'wide'`.
+  - `getSurfaceClasses`-backed markup can opt into `.sp-surface--inverse`.
+- Documented `SpTestimonial`'s previously-undocumented `variant` prop and its
+  new `'elevated'` default in the README (inline union, since upstream does
+  not export a `TestimonialVariant` type name — unlike every other recipe
+  family's variant type).
+- `spectre-ui` 5.0.0's breaking recipe-default changes (boolean options no
+  longer defaulting to `true` when omitted; `getTestimonialClasses()`
+  defaulting `variant` to `'elevated'`) required no adapter changes: `SpCard`,
+  `SpSpinner`, and `SpTestimonial` already forward `padded`/`loading`/`variant`
+  unresolved, and this package's own README/tests never documented or
+  asserted the old implicit defaults.
+
 ## [4.6.0] - 2026-08-21
 
 **Release Title:** Astro Navigation Helpers and Layout Parity

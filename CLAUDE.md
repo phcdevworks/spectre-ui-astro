@@ -246,7 +246,7 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 17 are complete and released (current version `4.6.0`; see
+Phases 1 through 17 are complete and released (current version `4.7.0`; see
 `package.json` and `CHANGELOG.md`). There is no open phase. New family or
 contract work opens only after its upstream recipe or typed contract is
 published. Check `ROADMAP.md` and `TODO.md` for exact scope before starting

@@ -15,9 +15,9 @@ this file does not restate delivered work.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v4.5.0 — current adapter peer baseline |
-| `@phcdevworks/spectre-ui` | v4.3.0 — current adapter recipe baseline |
-| `@phcdevworks/spectre-ui-astro` | v4.6.0 — Phase 17 navigation helpers and layout parity, consuming spectre-ui 4.3.0 |
+| `@phcdevworks/spectre-tokens` | v4.7.0 — current adapter peer baseline |
+| `@phcdevworks/spectre-ui` | v5.0.0 — current adapter recipe baseline |
+| `@phcdevworks/spectre-ui-astro` | v4.7.0 — inverse-surface recipe alignment, consuming spectre-ui 5.0.0 |
 
 ---
 
