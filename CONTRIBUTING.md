@@ -34,8 +34,11 @@ structure, adapters define delivery.
 2. Install dependencies with `npm install`.
 3. Run `npm run check` to confirm everything builds, type-checks, and tests
    cleanly before making changes.
-4. If needed, validate rendering in the `examples/` app by running
-   `npm install && npm run build` from within `examples/`.
+4. Validate the consumer build by running
+   `npm install --package-lock=false && npm run build` from within `examples/`.
+   CI runs this after `npm run check` on both Node matrix entries. Rebuild the
+   parent adapter first after source changes; the app consumes its `dist/`
+   output through a local `file:..` link.
 
 `@phcdevworks/spectre-ui` is a required peer dependency for consumers and should
 remain the source of truth for shared recipes, classes, and CSS.
@@ -44,7 +47,7 @@ remain the source of truth for shared recipes, classes, and CSS.
 
 - `src/components/`: Astro components
 - `src/recipes/`: recipe and type re-exports
-- `examples/`: Astro example app for manual verification
+- `examples/`: Astro example app for CI build validation and manual verification
 - `dist/`: generated package output
 
 ## Contribution Guidelines
@@ -60,8 +63,8 @@ remain the source of truth for shared recipes, classes, and CSS.
 ### Code and tooling
 
 - Follow Astro and TypeScript best practices.
-- Run `npm run check` before opening a pull request — it runs lint, build,
-  typecheck, and tests in sequence and is the single CI gate.
+- Run `npm run check` before committing — it runs lint, build, typecheck,
+  tests, and ecosystem validation. CI also installs and builds `examples/`.
 - Use the example app when you need to verify rendering behavior manually.
 
 ### Documentation

@@ -43,3 +43,11 @@ jobs:
 
       - name: Run validation suite
         run: npm run check
+
+      - name: Install example app dependencies
+        working-directory: examples
+        run: npm install --package-lock=false
+
+      - name: Build example app against the local adapter
+        working-directory: examples
+        run: npm run build

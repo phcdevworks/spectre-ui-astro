@@ -1,10 +1,10 @@
 # spectre-ui-astro examples
 
-This directory contains a demo Astro application used for manual verification of `@phcdevworks/spectre-ui-astro`.
+This directory contains a demo Astro application used for CI build validation and manual verification of `@phcdevworks/spectre-ui-astro`.
 
 ## Purpose
 
-The examples app demonstrates correct consumption of the adapter's published contract: root package imports, direct component entrypoints, and recipe helper usage. It exists as a manual validation surface for contributors, not as a canonical reference.
+The examples app demonstrates consumption of the adapter's published contract through root package imports and recipe helpers. CI builds it against the local adapter on every supported Node matrix entry. It is a validation surface for contributors, not a canonical reference.
 
 ## Boundary rules
 
@@ -16,12 +16,14 @@ The examples app demonstrates correct consumption of the adapter's published con
 ## Setup
 
 ```bash
-# From the examples/ directory
-npm install
+# Build the adapter from the repository root first
+npm run build
+cd examples
+npm install --package-lock=false
 npm run dev
 ```
 
-The examples app depends on the adapter package via a local `file:..` link. Run `npm install` (not `npm ci`) after changes to the parent package.
+The examples app depends on the adapter package via a local `file:..` link. Rebuild the parent package after source changes, and rerun `npm install --package-lock=false` when dependencies change. Do not use `npm ci` or track an example lockfile for this local-link setup.
 
 ## Commands
 
