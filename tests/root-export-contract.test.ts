@@ -18,6 +18,25 @@ describe('root export contract validation', () => {
     ).not.toThrow()
   })
 
+  it.each([
+    ['component alias', 'export { default as ExtraButton } from "./components/SpButton.astro";', '', 'ExtraButton'],
+    ['helper alias', '', 'export { getButtonClasses as extraHelper } from "@phcdevworks/spectre-ui";', 'extraHelper'],
+    ['type alias', '', 'export type { ButtonRecipeOptions as ExtraOptions } from "@phcdevworks/spectre-ui";', 'ExtraOptions'],
+    ['root type alias', 'export type { ButtonRecipeOptions as ExtraOptions } from "@phcdevworks/spectre-ui";', '', 'ExtraOptions'],
+    ['root wildcard', 'export * from "./extra";', '', './extra'],
+    ['recipe wildcard', '', 'export * from "@phcdevworks/spectre-ui";', '@phcdevworks/spectre-ui'],
+    ['type wildcard', '', 'export type * from "@phcdevworks/spectre-ui";', '@phcdevworks/spectre-ui'],
+    ['namespace', '', 'export * as extraRecipes from "@phcdevworks/spectre-ui";', 'extraRecipes'],
+  ])('rejects an undeclared %s export', (_label, indexAddition, recipeAddition, name) => {
+    expect(() =>
+      assertContractRootExports(
+        `${index}\n${indexAddition}`,
+        `${recipes}\n${recipeAddition}`,
+        contract.rootExports
+      )
+    ).toThrow(name)
+  })
+
   it('rejects a missing component even when its name remains in a comment and path', () => {
     const changed = index.replace(
       'default as SpButton',

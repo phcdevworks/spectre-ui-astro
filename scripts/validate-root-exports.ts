@@ -16,29 +16,34 @@ function collectExports(source: string) {
   const runtime = new Set<string>()
   const types = new Set<string>()
   const barrels = new Set<string>()
+  const typeBarrels = new Set<string>()
 
   for (const statement of file.statements) {
     if (!ts.isExportDeclaration(statement)) continue
 
     if (!statement.exportClause) {
       if (
-        !statement.isTypeOnly &&
         statement.moduleSpecifier &&
         ts.isStringLiteral(statement.moduleSpecifier)
       ) {
-        barrels.add(statement.moduleSpecifier.text)
+        const targets = statement.isTypeOnly ? typeBarrels : barrels
+        targets.add(statement.moduleSpecifier.text)
       }
       continue
     }
 
-    if (!ts.isNamedExports(statement.exportClause)) continue
+    if (ts.isNamespaceExport(statement.exportClause)) {
+      const names = statement.isTypeOnly ? types : runtime
+      names.add(statement.exportClause.name.text)
+      continue
+    }
     for (const element of statement.exportClause.elements) {
       const names = statement.isTypeOnly || element.isTypeOnly ? types : runtime
       names.add(element.name.text)
     }
   }
 
-  return { runtime, types, barrels }
+  return { runtime, types, barrels, typeBarrels }
 }
 
 export function assertContractRootExports(
@@ -72,6 +77,25 @@ export function assertContractRootExports(
   if (missing.length > 0) {
     throw new Error(
       `Recipe helpers/types declared in contract but missing from src/recipes/index.ts: ${missing.join(', ')}`
+    )
+  }
+
+  const componentNames = new Set(contract.components)
+  const helperNames = new Set(contract.recipeHelpers)
+  const typeNames = new Set(contract.typeExports)
+  const undeclared = [
+    ...[...index.runtime].filter((name) => !componentNames.has(name)),
+    ...index.types,
+    ...[...recipes.runtime].filter((name) => !helperNames.has(name)),
+    ...[...recipes.types].filter((name) => !typeNames.has(name)),
+    ...[...index.barrels].filter((path) => path !== './recipes/index'),
+    ...index.typeBarrels,
+    ...recipes.barrels,
+    ...recipes.typeBarrels,
+  ]
+  if (undeclared.length > 0) {
+    throw new Error(
+      `Public re-exports not declared in the root export contract: ${undeclared.join(', ')}`
     )
   }
 }

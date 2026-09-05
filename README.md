@@ -1529,10 +1529,10 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `NavLinkRecipeOptions`, `PricingCardRecipeOptions`, `RatingRecipeOptions`,
 `SectionRecipeOptions`, `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`,
 `SidebarLinkLevel`, `StackRecipeOptions`, `StackDirection`, `StackBasis`,
-`StackAlign`, `TestimonialRecipeOptions`, `TextRecipeOptions`, `TextSize`,
+`StackAlign`, `StackGap`, `TestimonialRecipeOptions`, `TextRecipeOptions`, `TextSize`,
 `TextVariant`, `TextFamily`, `TextTransform`, `ToastRecipeOptions`,
 `ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`,
-`TooltipPlacement`, `GridRecipeOptions`, `GridColumns`, `GridGap`, `GridSpan`,
+`TooltipPlacement`, `GridRecipeOptions`, `GridAlign`, `GridColumns`, `GridGap`, `GridSpan`,
 `GridSpanOptions`.
 
 ## Package Exports
