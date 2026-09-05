@@ -5,6 +5,7 @@
     "module": "esnext",
     "target": "es2020",
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "types": [],
     "sourceMap": true,
     "declaration": true,

@@ -3,6 +3,7 @@ import { basename, resolve } from 'node:path';
 
 import contractJson from '../astro-adapter.contract.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
+import { assertContractRootExports } from './validate-root-exports.ts';
 
 type ExportValue = string | Record<string, string>;
 
@@ -94,25 +95,7 @@ function assertContractRootExportParity(): void {
   const indexSource = readFileSync(resolve(repoRoot, 'src/index.ts'), 'utf-8');
   const recipesSource = readFileSync(resolve(repoRoot, 'src/recipes/index.ts'), 'utf-8');
 
-  const missingComponents = (contractJson.rootExports.components as string[]).filter(
-    (name) => !indexSource.includes(name),
-  );
-  if (missingComponents.length > 0) {
-    throw new Error(
-      `Components declared in contract but missing from src/index.ts: ${missingComponents.join(', ')}`,
-    );
-  }
-
-  const allDeclaredHelpers = [
-    ...(contractJson.rootExports.recipeHelpers as string[]),
-    ...(contractJson.rootExports.typeExports as string[]),
-  ];
-  const missingHelpers = allDeclaredHelpers.filter((name) => !recipesSource.includes(name));
-  if (missingHelpers.length > 0) {
-    throw new Error(
-      `Recipe helpers/types declared in contract but missing from src/recipes/index.ts: ${missingHelpers.join(', ')}`,
-    );
-  }
+  assertContractRootExports(indexSource, recipesSource, contractJson.rootExports);
 }
 
 function assertThinAdapterInvariants(): void {
