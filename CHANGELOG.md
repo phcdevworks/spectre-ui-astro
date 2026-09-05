@@ -6,6 +6,32 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.8.0] - 2026-09-05
+
+**Release Title:** Contract and Consumer Validation
+
+Contract change type: semantic change
+
+### Changed
+
+- Upgraded the development and validation stack, including Astro 7.3.1,
+  ESLint 10.10.0, and Vitest 5.0.0, while preserving the existing consumer
+  peer ranges. Local validation now exercises the latest compatible Spectre
+  UI and token packages.
+- CI now installs and builds the six-page example application against the
+  locally built adapter on both supported Node matrix entries, catching
+  integration failures beyond the package-level test suite.
+
+### Fixed
+
+- Hardened root-export validation to reject undeclared component, recipe,
+  type, namespace, and wildcard re-exports. The public contract and README
+  inventory now include the already-exported `GridAlign` and `StackGap` types.
+- Restored ecosystem-manifest parity for `SpFooterChip`, `SpFooterLink`,
+  `SpNavItem`, `SpSidebarLink`, and `SpText`, and added validation that prevents
+  package exports and manifest exports from drifting again.
+- Corrected the README component total from thirty to thirty-five.
+
 ## [4.7.0] - 2026-09-01
 
 **Release Title:** Inverse Surface Recipe Alignment

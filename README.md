@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.7.0                           |
+| Current version/status | 4.8.0                           |
 
 ## Standard Workflow
 
@@ -57,7 +57,7 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 
 ## What Astro Developers Get
 
-- **Thirty ready-to-use Astro components** — alerts, avatars, badges, buttons,
+- **Thirty-five ready-to-use Astro components** — alerts, avatars, badges, buttons,
   cards, app shell layout, forms, navigation, overlays, feedback, pricing,
   ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript,

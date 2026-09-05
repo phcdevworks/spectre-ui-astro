@@ -3,6 +3,7 @@ import { basename, resolve } from 'node:path';
 
 import contractJson from '../astro-adapter.contract.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
+import manifestJson from '../spectre.manifest.json' with { type: 'json' };
 import { assertContractRootExports } from './validate-root-exports.ts';
 
 type ExportValue = string | Record<string, string>;
@@ -87,6 +88,19 @@ function assertContractComponentEntrypointParity(exportsMap: Record<string, Expo
   if (undeclared.length > 0) {
     throw new Error(
       `Component entrypoints in package.json exports not declared in contract: ${undeclared.join(', ')}`,
+    );
+  }
+}
+
+function assertManifestExportParity(exportsMap: Record<string, ExportValue>): void {
+  const packageExports = Object.keys(exportsMap).sort();
+  const manifestExports = manifestJson.packages['@phcdevworks/spectre-ui-astro'].exports
+    .slice()
+    .sort();
+
+  if (JSON.stringify(packageExports) !== JSON.stringify(manifestExports)) {
+    throw new Error(
+      `Ecosystem manifest exports do not match package.json exports. Expected ${packageExports.join(', ')}, received ${manifestExports.join(', ')}.`,
     );
   }
 }
@@ -187,5 +201,6 @@ assertPublishedPathsExist(typePaths, 'types');
 assertPublishedPathsExist(mainPaths, 'main');
 assertCopiedAstroComponentsExist();
 assertContractComponentEntrypointParity(exportsField);
+assertManifestExportParity(exportsField);
 assertContractRootExportParity();
 assertThinAdapterInvariants();

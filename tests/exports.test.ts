@@ -5,6 +5,7 @@ import * as upstream from "@phcdevworks/spectre-ui";
 import { describe, expect, it } from "vitest";
 
 import packageJson from "../package.json";
+import manifestJson from "../spectre.manifest.json";
 import * as adapter from "../src/index";
 
 const repoRoot = resolve(import.meta.dirname, "..");
@@ -144,6 +145,12 @@ describe("package export surface", () => {
     );
 
     expect(exportKeys).toEqual(expectedComponentKeys);
+  });
+
+  it("keeps ecosystem manifest exports aligned with package.json", () => {
+    const manifestExports = manifestJson.packages["@phcdevworks/spectre-ui-astro"].exports;
+
+    expect([...manifestExports].sort()).toEqual(Object.keys(packageJson.exports).sort());
   });
 
   it("keeps the root runtime export surface intentional and stable", () => {

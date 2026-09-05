@@ -17,7 +17,7 @@ this file does not restate delivered work.
 | - | - |
 | `@phcdevworks/spectre-tokens` | v4.7.0 — current adapter peer baseline |
 | `@phcdevworks/spectre-ui` | v5.0.0 — current adapter recipe baseline |
-| `@phcdevworks/spectre-ui-astro` | v4.7.0 — inverse-surface recipe alignment, consuming spectre-ui 5.0.0 |
+| `@phcdevworks/spectre-ui-astro` | v4.8.0 — contract and consumer validation hardening |
 
 ---
 
