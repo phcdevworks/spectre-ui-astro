@@ -6,6 +6,11 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+### Changed
+
+- Standardized the package summary against the approved PHCDevworks product
+  description.
+
 ## [4.8.0] - 2026-09-05
 
 **Release Title:** Contract and Consumer Validation
