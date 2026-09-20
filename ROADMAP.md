@@ -15,9 +15,9 @@ this file does not restate delivered work.
 
 | Package | Current state |
 | - | - |
-| `@phcdevworks/spectre-tokens` | v4.7.0 — current adapter peer baseline |
-| `@phcdevworks/spectre-ui` | v5.0.0 — current adapter recipe baseline |
-| `@phcdevworks/spectre-ui-astro` | v4.8.0 — contract and consumer validation hardening |
+| `@phcdevworks/spectre-tokens` | v4.9.0 — current adapter peer baseline |
+| `@phcdevworks/spectre-ui` | v5.2.0 — current adapter recipe baseline |
+| `@phcdevworks/spectre-ui-astro` | v4.9.0 — accent rails and viewport dropdowns |
 
 ---
 
@@ -42,6 +42,7 @@ this file does not restate delivered work.
 | 15 | `SpText` `transform` and `SpGrid` `span` (Grid v2) parity, consuming `spectre-ui@3.2.0` | 4.3.0 |
 | 16 | Production Layout Parity Audit — Grid v2 column/row offsets and custom track sizing (`SpGrid`), Footer sub-recipe re-exports, Dropdown/NavItem `mega` wide-menu support, and compact buttons, consuming `spectre-ui@4.0.0` | 4.4.0 |
 | 17 | Navigation Helper and Layout Parity — `SpFooterLink`, `SpFooterChip`, `SpSidebarLink`, Grid alignment, and Stack gap support, consuming `spectre-ui@4.3.0` | 4.6.0 |
+| 18 | Accent-rail parity sweep — `SpCard` forwards `accent`/`accentColor`; `SpTestimonial`, `SpPricingCard`, `SpNav`, `SpFooter`, `SpModal`, `SpToast`, `SpTooltip`, and `SpNavItem`'s dropdown menu gain the same; `SpBadge` gains `accentRail`/`accentRailColor`; `SpDropdown`/`SpNavItem` gain the `viewport` full-width menu tier; `getCardBleedClasses` re-exported for full-bleed card children — consuming `spectre-ui@5.2.0` | 4.9.0 |
 
 ---
 

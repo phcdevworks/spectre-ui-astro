@@ -16,6 +16,8 @@ interface SpTooltipProps extends TooltipRecipeOptions {
 const {
   placement,
   visible,
+  accent,
+  accentColor,
   as: Tag = "div",
   class: className,
   id,
@@ -23,7 +25,7 @@ const {
   ...rest
 } = Astro.props as SpTooltipProps;
 
-const classes = getTooltipClasses({ placement, visible });
+const classes = getTooltipClasses({ placement, visible, accent, accentColor });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

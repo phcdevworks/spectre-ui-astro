@@ -48,6 +48,15 @@ describe("SpNav class and prop behavior", () => {
     expect(html).toContain("sp-nav--bordered");
     expect(html).toContain("my-nav");
   });
+
+  it("forwards accent and accentColor to the recipe and does not leak them", async () => {
+    const html = await container.renderToString(SpNav, {
+      props: { accent: "left", accentColor: "success" },
+    });
+    expect(html).toContain(getNavClasses({ accent: "left", accentColor: "success" }));
+    expect(html).not.toContain('accent="left"');
+    expect(html).not.toContain('accentColor="success"');
+  });
 });
 
 describe("SpNav element and slot rendering", () => {

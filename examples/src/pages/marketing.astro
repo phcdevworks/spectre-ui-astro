@@ -38,7 +38,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <SpCard variant="elevated">
+      <SpCard variant="elevated" accent="left">
         <div class="sp-stack feature">
           <h3 class="card-title">
             <SpIconBox variant="primary" size="sm" aria-hidden="true">
@@ -120,7 +120,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <SpButton slot="footer" variant="secondary" style="width:100%">Choose Starter</SpButton>
         </SpPricingCard>
 
-        <SpPricingCard featured={true}>
+        <SpPricingCard featured={true} accent="top">
           <h3 slot="header" style="margin:0;">Pro</h3>
           <span slot="badge">Popular</span>
           <span slot="price">$29 / mo</span>
@@ -147,10 +147,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         <div class="sp-stack" style="gap: var(--sp-layout-stack-gap-md);">
           <SpCard variant="elevated">
-            <SpTestimonial>
+            <SpTestimonial accent="left">
               <p slot="quote" style="margin:0;">"Spectre UI has fundamentally changed how quickly we can prototype and ship our Astro projects. It's an absolute game-changer."</p>
-              <div slot="author-name">Jane Doe</div>
-              <div slot="author-title">Frontend Lead at Acme Corp</div>
+              <div slot="author-name">A design systems lead</div>
+              <div slot="author-title">Production consumer</div>
             </SpTestimonial>
             <SpRating value={5} max={5} style="margin-top:1rem" />
           </SpCard>

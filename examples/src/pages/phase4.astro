@@ -49,7 +49,7 @@ const dropdownItemClasses = getDropdownItemClasses({});
       <h2>Toast</h2>
       <div class="sp-stack toast-stack">
         <SpToast variant="info">Heads up — a new version is available.</SpToast>
-        <SpToast variant="success">Saved successfully.</SpToast>
+        <SpToast variant="success" accent="left" accentColor="success">Saved successfully.</SpToast>
         <SpToast variant="warning">Your session will expire soon.</SpToast>
         <SpToast variant="danger">Something went wrong.</SpToast>
       </div>
@@ -60,7 +60,7 @@ const dropdownItemClasses = getDropdownItemClasses({});
       <SpCard variant="flat" class="sp-stack">
         <div class="sp-hstack inline tooltip-row">
           <SpTooltip placement="top" visible>Top tooltip</SpTooltip>
-          <SpTooltip placement="bottom" visible>Bottom tooltip</SpTooltip>
+          <SpTooltip placement="bottom" visible accent="top">Bottom tooltip</SpTooltip>
           <SpTooltip placement="left" visible>Left tooltip</SpTooltip>
           <SpTooltip placement="right" visible>Right tooltip</SpTooltip>
         </div>
@@ -70,9 +70,9 @@ const dropdownItemClasses = getDropdownItemClasses({});
     <section class="sp-stack">
       <h2>Dropdown</h2>
       <SpCard variant="flat" class="sp-stack">
-        <SpDropdown>
+        <SpDropdown viewport>
           <SpButton variant="secondary" size="sm">Options</SpButton>
-          <div class={getDropdownMenuClasses({ open: true })}>
+          <div class={getDropdownMenuClasses({ open: true, viewport: true })}>
             <a class={dropdownItemClasses} href="#">Edit</a>
             <a class={dropdownItemClasses} href="#">Duplicate</a>
             <a class={getDropdownItemClasses({ disabled: true })} href="#">Archive</a>
@@ -83,13 +83,13 @@ const dropdownItemClasses = getDropdownItemClasses({});
 
     <section class="sp-stack">
       <h2>Modal</h2>
-      <SpModal open aria-labelledby="phase4-modal-title">
+      <SpModal open accent="top" aria-labelledby="phase4-modal-title">
         <h3 id="phase4-modal-title">Confirm action</h3>
         <p>This is a preview of the SpModal component in its open state.</p>
         <div class="sp-hstack form-actions">
           <SpButton variant="primary" size="sm">Confirm</SpButton>
           <SpButton variant="ghost" size="sm">Cancel</SpButton>
-          <SpBadge variant="info" size="sm">Preview</SpBadge>
+          <SpBadge variant="info" size="sm" accentRail="left">Preview</SpBadge>
         </div>
       </SpModal>
     </section>

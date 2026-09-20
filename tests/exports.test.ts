@@ -39,6 +39,7 @@ const recipeRuntimeExports = [
   "getAvatarClasses",
   "getBadgeClasses",
   "getButtonClasses",
+  "getCardBleedClasses",
   "getCardClasses",
   "getCheckboxClasses",
   "getContainerClasses",

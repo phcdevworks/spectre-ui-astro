@@ -43,6 +43,8 @@ interface SpPricingCardProps extends PricingCardRecipeOptions {
 const {
   featured,
   fullHeight,
+  accent,
+  accentColor,
   interactive,
   disabled,
   loading,
@@ -68,6 +70,8 @@ const isInteractive = interactive || Tag === "a" || Tag === "button";
 const classes = getPricingCardClasses({
   featured,
   fullHeight,
+  accent,
+  accentColor,
   interactive: isInteractive,
   disabled: isPricingCardDisabled,
   loading,

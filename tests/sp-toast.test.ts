@@ -41,6 +41,15 @@ describe("SpToast class and prop behavior", () => {
     expect(html).toContain("sp-toast--success");
     expect(html).toContain("my-toast");
   });
+
+  it("forwards accent and accentColor to the recipe and does not leak them", async () => {
+    const html = await container.renderToString(SpToast, {
+      props: { accent: "left", accentColor: "success" },
+    });
+    expect(html).toContain(getToastClasses({ accent: "left", accentColor: "success" }));
+    expect(html).not.toContain('accent="left"');
+    expect(html).not.toContain('accentColor="success"');
+  });
 });
 
 describe("SpToast ARIA and accessibility", () => {

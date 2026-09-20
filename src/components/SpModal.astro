@@ -18,6 +18,8 @@ interface SpModalProps extends ModalRecipeOptions {
 const {
   open,
   fullWidth,
+  accent,
+  accentColor,
   as: Tag = "div",
   class: className,
   id,
@@ -28,7 +30,7 @@ const {
 } = Astro.props as SpModalProps;
 
 const overlayClasses = getModalOverlayClasses({ open });
-const modalClasses = getModalClasses({ open, fullWidth });
+const modalClasses = getModalClasses({ open, fullWidth, accent, accentColor });
 const finalClass = [modalClasses, className].filter(Boolean).join(" ");
 const isHidden = !open;
 ---

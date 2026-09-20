@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "4.8.0",
+  "version": "4.9.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro integration for the Spectre system. It brings Spectre's design contracts and interface components into Astro applications through a native, server-rendering-friendly API.",
   "keywords": [
     "phcdevworks",
@@ -112,8 +112,8 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^4.7.0",
-    "@phcdevworks/spectre-ui": "^5.0.0",
+    "@phcdevworks/spectre-tokens": "^4.9.0",
+    "@phcdevworks/spectre-ui": "^5.2.0",
     "astro": "^7.0.0",
     "typescript": "^5.0 || ^6.0 || ^7.0"
   },
@@ -126,18 +126,18 @@
   },
   "devDependencies": {
     "@phcdevworks/spectre-manifest": "^1.2.0",
-    "@phcdevworks/spectre-tokens": "^4.8.0",
-    "@phcdevworks/spectre-ui": "^5.0.1",
-    "@types/node": "^26.5.1",
+    "@phcdevworks/spectre-tokens": "^4.9.0",
+    "@phcdevworks/spectre-ui": "^5.2.0",
+    "@types/node": "^26.6.2",
     "@typescript-eslint/eslint-plugin": "^8.70.0",
     "@typescript-eslint/parser": "^8.70.0",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "astro": "^7.3.2",
-    "eslint": "^10.10.0",
+    "astro": "^7.3.3",
+    "eslint": "^10.11.0",
     "jiti": "^2.7.0",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "tsup": "^8.5.1",
-    "tsx": "^4.23.13",
+    "tsx": "^4.23.14",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.70.0",
     "vitest": "^5.0.1"

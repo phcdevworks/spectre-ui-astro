@@ -38,6 +38,23 @@ describe("SpCard class and state behavior", () => {
 
     expect(html).toContain(getCardClasses({ hovered: true, focused: true }));
   });
+
+  it("forwards accent and accentColor to the recipe", async () => {
+    const html = await container.renderToString(SpCard, {
+      props: { accent: "left", accentColor: "success" },
+    });
+
+    expect(html).toContain(getCardClasses({ accent: "left", accentColor: "success" }));
+  });
+
+  it("omits accent classes when accent is not set", async () => {
+    const html = await container.renderToString(SpCard, {
+      props: { variant: "outline" },
+    });
+
+    expect(html).toContain(getCardClasses({ variant: "outline" }));
+    expect(html).not.toContain("sp-card--accent-");
+  });
 });
 
 describe("SpCard accessibility and tabindex guarding", () => {

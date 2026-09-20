@@ -1,5 +1,5 @@
 ---
-import type { DropdownPlacement } from "@phcdevworks/spectre-ui";
+import type { DropdownAccentColor, DropdownAccentEdge, DropdownPlacement } from "@phcdevworks/spectre-ui";
 import { getDropdownClasses, getDropdownMenuClasses, getNavLinkClasses } from "@phcdevworks/spectre-ui";
 
 interface SpNavItemProps {
@@ -9,6 +9,9 @@ interface SpNavItemProps {
   open?: boolean;
   placement?: DropdownPlacement;
   mega?: boolean;
+  viewport?: boolean;
+  accent?: DropdownAccentEdge;
+  accentColor?: DropdownAccentColor;
   class?: string;
   id?: string;
   title?: string;
@@ -24,6 +27,9 @@ const {
   open = false,
   placement = "bottom-start",
   mega,
+  viewport,
+  accent,
+  accentColor,
   class: className,
   id,
   title,
@@ -33,8 +39,8 @@ const {
 
 const navLinkClasses = getNavLinkClasses();
 const finalNavLinkClass = [navLinkClasses, className].filter(Boolean).join(" ");
-const wrapperClasses = getDropdownClasses({ mega });
-const menuClasses = getDropdownMenuClasses({ open, placement, mega });
+const wrapperClasses = getDropdownClasses({ mega, viewport });
+const menuClasses = getDropdownMenuClasses({ open, placement, mega, viewport, accent, accentColor });
 ---
 
 {

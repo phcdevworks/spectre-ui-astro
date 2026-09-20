@@ -39,6 +39,22 @@ describe("SpBadge class and prop behavior", () => {
     expect(html).not.toContain('fullWidth="true"');
     expect(html).not.toContain('fullWidth="fullWidth"');
   });
+
+  it("applies accentRail and accentRailColor classes and does not leak the props to DOM", async () => {
+    const html = await container.renderToString(SpBadge, {
+      props: { accentRail: "left", accentRailColor: "success" },
+    });
+
+    expect(html).toContain(getBadgeClasses({ accentRail: "left", accentRailColor: "success" }));
+    expect(html).not.toContain('accentRail="left"');
+    expect(html).not.toContain('accentRailColor="success"');
+  });
+
+  it("omits accent rail classes when accentRail is not set", async () => {
+    const html = await container.renderToString(SpBadge, { props: {} });
+
+    expect(html).not.toContain("sp-badge--accent-rail-");
+  });
 });
 
 describe("SpBadge interactivity and tabindex guarding", () => {

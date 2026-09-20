@@ -7,16 +7,6 @@ changelog lives in git history for the commits that made those calls.
 
 There is no other open implementation phase.
 
-## Card Edge Accents
-
-- [ ] Add card edge-accent adapter support after the corresponding
-      `spectre-ui` recipe options publish. Expose and forward the shared accent
-      color and `top | right | bottom | left` position options without local
-      CSS or duplicated validation, preserve current output when omitted, and
-      update adapter contract coverage, documentation, tests, and examples.
-      The upstream request was filed on 2026-09-18 in
-      [spectre-ui/TODO.md](../spectre-ui/TODO.md#requested-by-downstream).
-
 ## Explicitly Out of Scope
 
 - No token redefinition, local CSS, or forked recipe logic.

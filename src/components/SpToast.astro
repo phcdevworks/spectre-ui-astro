@@ -17,6 +17,8 @@ const {
   variant,
   dismissed,
   fullWidth,
+  accent,
+  accentColor,
   as: Tag = "div",
   class: className,
   id,
@@ -24,7 +26,7 @@ const {
   ...rest
 } = Astro.props as SpToastProps;
 
-const classes = getToastClasses({ variant, dismissed, fullWidth });
+const classes = getToastClasses({ variant, dismissed, fullWidth, accent, accentColor });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 const iconClasses = getToastIconClasses({ variant });
 const hasIcon = Astro.slots.has("icon");

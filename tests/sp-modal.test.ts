@@ -34,6 +34,15 @@ describe("SpModal class and prop behavior", () => {
     const html = await container.renderToString(SpModal, { props: { class: "my-modal" } });
     expect(html).toContain("my-modal");
   });
+
+  it("forwards accent and accentColor to the modal classes and does not leak them", async () => {
+    const html = await container.renderToString(SpModal, {
+      props: { accent: "left", accentColor: "success" },
+    });
+    expect(html).toContain(getModalClasses({ accent: "left", accentColor: "success" }));
+    expect(html).not.toContain('accent="left"');
+    expect(html).not.toContain('accentColor="success"');
+  });
 });
 
 describe("SpModal ARIA and accessibility", () => {

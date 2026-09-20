@@ -35,6 +35,15 @@ describe("SpFooter class and prop behavior", () => {
     expect(html).toContain("sp-footer--bordered");
     expect(html).toContain("my-footer");
   });
+
+  it("forwards accent and accentColor to the recipe and does not leak them", async () => {
+    const html = await container.renderToString(SpFooter, {
+      props: { accent: "left", accentColor: "success" },
+    });
+    expect(html).toContain(getFooterClasses({ accent: "left", accentColor: "success" }));
+    expect(html).not.toContain('accent="left"');
+    expect(html).not.toContain('accentColor="success"');
+  });
 });
 
 describe("SpFooter element and slot rendering", () => {

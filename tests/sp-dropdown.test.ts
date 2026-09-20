@@ -34,6 +34,13 @@ describe("SpDropdown class and prop behavior", () => {
     expect(html).not.toContain('mega="true"');
     expect(html).not.toContain('mega="mega"');
   });
+
+  it("applies viewport class and does not leak the prop", async () => {
+    const html = await container.renderToString(SpDropdown, { props: { viewport: true } });
+    expect(html).toContain(getDropdownClasses({ viewport: true }));
+    expect(html).not.toContain('viewport="true"');
+    expect(html).not.toContain('viewport="viewport"');
+  });
 });
 
 describe("SpDropdown element and slot rendering", () => {

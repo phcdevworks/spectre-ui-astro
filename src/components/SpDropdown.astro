@@ -15,13 +15,14 @@ interface SpDropdownProps extends DropdownRecipeOptions {
 const {
   fullWidth,
   mega,
+  viewport,
   as: Tag = "div",
   class: className,
   id,
   ...rest
 } = Astro.props as SpDropdownProps;
 
-const classes = getDropdownClasses({ fullWidth, mega });
+const classes = getDropdownClasses({ fullWidth, mega, viewport });
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

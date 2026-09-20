@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.8.0                           |
+| Current version/status | 4.9.0                           |
 
 ## Standard Workflow
 
@@ -253,18 +253,20 @@ closed by default with no layout shift on hydration.
 
 ### SpCard
 
-| Prop          | Type                                                                         | Default | Description                                                           |
-| ------------- | ---------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| `variant`     | `CardVariant`                                                                | —       | Visual style: `"elevated"` `"outline"` `"flat"` `"ghost"`             |
-| `as`          | `"div" \| "section" \| "article" \| "aside" \| "a" \| "button" \| "li" \| …` | `"div"` | Rendered element                                                      |
-| `interactive` | `boolean`                                                                    | —       | Adds hover/focus styles; adds `role="button"` for non-native elements |
-| `padded`      | `boolean \| "sm" \| "md" \| "lg"`                                            | —       | Applies inner padding                                                 |
-| `fullHeight`  | `boolean`                                                                    | —       | Stretches to full container height                                    |
-| `disabled`    | `boolean`                                                                    | —       | Disables the card; suppresses navigation on anchors                   |
-| `loading`     | `boolean`                                                                    | —       | Loading state                                                         |
-| `href`        | `string`                                                                     | —       | URL when `as="a"`                                                     |
-| `aria-label`  | `string`                                                                     | —       | Accessible label                                                      |
-| `class`       | `string`                                                                     | —       | Additional CSS classes                                                |
+| Prop          | Type                                                                         | Default   | Description                                                           |
+| ------------- | ---------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------- |
+| `variant`     | `CardVariant`                                                                | —         | Visual style: `"elevated"` `"outline"` `"flat"` `"ghost"`             |
+| `as`          | `"div" \| "section" \| "article" \| "aside" \| "a" \| "button" \| "li" \| …` | `"div"`   | Rendered element                                                      |
+| `interactive` | `boolean`                                                                    | —         | Adds hover/focus styles; adds `role="button"` for non-native elements |
+| `padded`      | `boolean \| "sm" \| "md" \| "lg"`                                            | —         | Applies inner padding                                                 |
+| `accent`      | `CardAccentEdge`                                                             | —         | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"`           |
+| `accentColor` | `CardAccentColor`                                                            | `"brand"` | Rail color, used when `accent` is set                                 |
+| `fullHeight`  | `boolean`                                                                    | —         | Stretches to full container height                                    |
+| `disabled`    | `boolean`                                                                    | —         | Disables the card; suppresses navigation on anchors                   |
+| `loading`     | `boolean`                                                                    | —         | Loading state                                                         |
+| `href`        | `string`                                                                     | —         | URL when `as="a"`                                                     |
+| `aria-label`  | `string`                                                                     | —         | Accessible label                                                      |
+| `class`       | `string`                                                                     | —         | Additional CSS classes                                                |
 
 ```astro
 <SpCard variant="elevated">
@@ -281,9 +283,31 @@ closed by default with no layout shift on hydration.
 <SpCard variant="elevated" as="a" href="/post/1" interactive aria-label="Read post">
   <h2>Clickable card</h2>
 </SpCard>
+
+<!-- Accent rail -->
+<SpCard variant="outline" accent="left" accentColor="success">
+  <h2>Highlighted card</h2>
+</SpCard>
 ```
 
 The default slot renders any child content.
+
+`SpCard` does not have a dedicated bleed slot. For a child (media, a flush
+internal surface) that should run through the card's padding on one or more
+edges, style it directly with the re-exported `getCardBleedClasses` helper:
+
+```astro
+---
+import { SpCard, getCardBleedClasses } from '@phcdevworks/spectre-ui-astro'
+
+const bleedClass = getCardBleedClasses({ edges: 'top', padded: 'md' })
+---
+
+<SpCard padded="md">
+  <img class={bleedClass} src="/media/hero.jpg" alt="" />
+  <p>Card body content, still padded normally.</p>
+</SpCard>
+```
 
 ---
 
@@ -852,26 +876,33 @@ renders when `legend` is provided and non-empty.
 
 ### SpBadge
 
-| Prop          | Type                                                             | Default  | Description                                                                       |
-| ------------- | ---------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------- |
-| `variant`     | `BadgeVariant`                                                   | —        | Visual style: `"primary"` `"success"` `"warning"` `"danger"` `"info"` `"inverse"` |
-| `size`        | `BadgeSize`                                                      | —        | Size: `"sm"` `"md"` `"lg"`                                                        |
-| `as`          | `"span" \| "div" \| "a" \| "button" \| "li" \| "time" \| "mark"` | `"span"` | Rendered element                                                                  |
-| `interactive` | `boolean`                                                        | —        | Adds hover/focus styles                                                           |
-| `fullWidth`   | `boolean`                                                        | —        | Stretches to full width                                                           |
-| `disabled`    | `boolean`                                                        | —        | Disables the badge                                                                |
-| `loading`     | `boolean`                                                        | —        | Loading state                                                                     |
-| `href`        | `string`                                                         | —        | URL when `as="a"`                                                                 |
-| `datetime`    | `string`                                                         | —        | Datetime value when `as="time"`                                                   |
-| `aria-label`  | `string`                                                         | —        | Accessible label                                                                  |
-| `class`       | `string`                                                         | —        | Additional CSS classes                                                            |
+| Prop              | Type                                                             | Default   | Description                                                                       |
+| ----------------- | ---------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------- |
+| `variant`         | `BadgeVariant`                                                   | —         | Visual style: `"primary"` `"success"` `"warning"` `"danger"` `"info"` `"inverse"` |
+| `size`            | `BadgeSize`                                                      | —         | Size: `"sm"` `"md"` `"lg"`                                                        |
+| `as`              | `"span" \| "div" \| "a" \| "button" \| "li" \| "time" \| "mark"` | `"span"`  | Rendered element                                                                  |
+| `interactive`     | `boolean`                                                        | —         | Adds hover/focus styles                                                           |
+| `fullWidth`       | `boolean`                                                        | —         | Stretches to full width                                                           |
+| `accentRail`      | `BadgeAccentRailEdge`                                            | —         | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"`                       |
+| `accentRailColor` | `BadgeAccentRailColor`                                           | `"brand"` | Rail color, used when `accentRail` is set                                         |
+| `disabled`        | `boolean`                                                        | —         | Disables the badge                                                                |
+| `loading`         | `boolean`                                                        | —         | Loading state                                                                     |
+| `href`            | `string`                                                         | —         | URL when `as="a"`                                                                 |
+| `datetime`        | `string`                                                         | —         | Datetime value when `as="time"`                                                   |
+| `aria-label`      | `string`                                                         | —         | Accessible label                                                                  |
+| `class`           | `string`                                                         | —         | Additional CSS classes                                                            |
 
 ```astro
 <SpBadge variant="success">Active</SpBadge>
 <SpBadge variant="warning" size="sm">Beta</SpBadge>
 <SpBadge variant="primary" as="a" href="/changelog" interactive>New</SpBadge>
 <SpBadge variant="danger" as="time" datetime="2025-01-01">Jan 2025</SpBadge>
+<SpBadge accentRail="left" accentRailColor="success">Verified</SpBadge>
 ```
+
+`accentRail`/`accentRailColor` are named distinctly from `variant` because
+`variant="accent"` already names badge's single-tone brand-accent fill; the
+rail is an unrelated, additive edge decoration.
 
 ---
 
@@ -917,15 +948,17 @@ meaning.
 Named slots map to the structural sections of the pricing card. Slot wrappers
 render only when their slot is populated — empty slots produce no markup.
 
-| Prop          | Type                                   | Default | Description                                 |
-| ------------- | -------------------------------------- | ------- | ------------------------------------------- |
-| `featured`    | `boolean`                              | —       | Highlights the card as the recommended tier |
-| `fullHeight`  | `boolean`                              | —       | Stretches to full container height          |
-| `interactive` | `boolean`                              | —       | Adds hover/focus styles                     |
-| `disabled`    | `boolean`                              | —       | Disables the card                           |
-| `loading`     | `boolean`                              | —       | Loading state                               |
-| `as`          | `"div" \| "section" \| "article" \| …` | `"div"` | Rendered element                            |
-| `class`       | `string`                               | —       | Additional CSS classes                      |
+| Prop          | Type                                   | Default   | Description                                                 |
+| ------------- | -------------------------------------- | --------- | ----------------------------------------------------------- |
+| `featured`    | `boolean`                              | —         | Highlights the card as the recommended tier                 |
+| `fullHeight`  | `boolean`                              | —         | Stretches to full container height                          |
+| `accent`      | `PricingCardAccentEdge`                | —         | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
+| `accentColor` | `PricingCardAccentColor`               | `"brand"` | Rail color, used when `accent` is set                       |
+| `interactive` | `boolean`                              | —         | Adds hover/focus styles                                     |
+| `disabled`    | `boolean`                              | —         | Disables the card                                           |
+| `loading`     | `boolean`                              | —         | Loading state                                               |
+| `as`          | `"div" \| "section" \| "article" \| …` | `"div"`   | Rendered element                                            |
+| `class`       | `string`                               | —         | Additional CSS classes                                      |
 
 | Slot          | Description                    |
 | ------------- | ------------------------------ |
@@ -1002,15 +1035,17 @@ always pass `aria-label` for screen readers.
 Named slots map to the structural sections of the testimonial. Slot wrappers
 render only when their slot is populated.
 
-| Prop          | Type                                                   | Default      | Description                        |
-| ------------- | ------------------------------------------------------ | ------------ | ---------------------------------- |
-| `variant`     | `"elevated" \| "flat" \| "outline" \| "ghost"`         | `"elevated"` | Visual style                       |
-| `fullHeight`  | `boolean`                                              | —            | Stretches to full container height |
-| `interactive` | `boolean`                                              | —            | Adds hover/focus styles            |
-| `disabled`    | `boolean`                                              | —            | Disables the testimonial           |
-| `loading`     | `boolean`                                              | —            | Loading state                      |
-| `as`          | `"div" \| "section" \| "article" \| "blockquote" \| …` | `"div"`      | Rendered element                   |
-| `class`       | `string`                                               | —            | Additional CSS classes             |
+| Prop          | Type                                                   | Default      | Description                                                 |
+| ------------- | ------------------------------------------------------ | ------------ | ----------------------------------------------------------- |
+| `variant`     | `"elevated" \| "flat" \| "outline" \| "ghost"`         | `"elevated"` | Visual style                                                |
+| `fullHeight`  | `boolean`                                              | —            | Stretches to full container height                          |
+| `accent`      | `TestimonialAccentEdge`                                | —            | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
+| `accentColor` | `TestimonialAccentColor`                               | `"brand"`    | Rail color, used when `accent` is set                       |
+| `interactive` | `boolean`                                              | —            | Adds hover/focus styles                                     |
+| `disabled`    | `boolean`                                              | —            | Disables the testimonial                                    |
+| `loading`     | `boolean`                                              | —            | Loading state                                               |
+| `as`          | `"div" \| "section" \| "article" \| "blockquote" \| …` | `"div"`      | Rendered element                                            |
+| `class`       | `string`                                               | —            | Additional CSS classes                                      |
 
 | Slot           | Description                     |
 | -------------- | ------------------------------- |
@@ -1097,6 +1132,7 @@ default `aria-label` of `"Loading"`.
 | ----------- | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `fullWidth` | `boolean`        | —       | Stretches to full width                                                                                                                                                           |
 | `mega`      | `boolean`        | —       | Anchors the menu to the nearest positioned ancestor (e.g. `SpNav`) instead of this trigger wrapper, for wide-menu panels that span the nav row rather than tracking trigger width |
+| `viewport`  | `boolean`        | —       | Breaks the menu out to the full browser viewport width instead of tracking the trigger or nearest positioned ancestor. Takes precedence over `mega` when both are set on the menu |
 | `as`        | `"div" \| "nav"` | `"div"` | Rendered element                                                                                                                                                                  |
 | `id`        | `string`         | —       | Element ID                                                                                                                                                                        |
 | `class`     | `string`         | —       | Additional CSS classes                                                                                                                                                            |
@@ -1104,9 +1140,11 @@ default `aria-label` of `"Loading"`.
 `SpDropdown` renders the dropdown container only. Build the menu and items in
 the default slot using the re-exported `getDropdownMenuClasses` and
 `getDropdownItemClasses` helpers, since open/closed state and per-item
-active/disabled/hover/focus state are consumer-driven. Pair `mega` here with
-`mega` on the `getDropdownMenuClasses` call that styles the menu panel —
-`SpNavItem`'s `mega` prop does this pairing for you in dropdown mode.
+active/disabled/hover/focus state are consumer-driven. Pair `mega` (or
+`viewport`) here with the matching option on the `getDropdownMenuClasses` call
+that styles the menu panel — `SpNavItem`'s `mega`/`viewport` props do this
+pairing for you in dropdown mode. `getDropdownMenuClasses` also accepts
+`accent`/`accentColor` for an optional decorative rail on the menu panel.
 
 ```astro
 ---
@@ -1130,14 +1168,16 @@ const activeItemClass = getDropdownItemClasses({ active: true })
 
 ### SpFooter
 
-| Prop         | Type                             | Default    | Description             |
-| ------------ | -------------------------------- | ---------- | ----------------------- |
-| `bordered`   | `boolean`                        | —          | Applies a top border    |
-| `fullWidth`  | `boolean`                        | —          | Stretches to full width |
-| `as`         | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element        |
-| `id`         | `string`                         | —          | Element ID              |
-| `aria-label` | `string`                         | —          | Accessible label        |
-| `class`      | `string`                         | —          | Additional CSS classes  |
+| Prop          | Type                             | Default    | Description                                                 |
+| ------------- | -------------------------------- | ---------- | ----------------------------------------------------------- |
+| `bordered`    | `boolean`                        | —          | Applies a top border                                        |
+| `fullWidth`   | `boolean`                        | —          | Stretches to full width                                     |
+| `accent`      | `FooterAccentEdge`               | —          | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
+| `accentColor` | `FooterAccentColor`              | `"brand"`  | Rail color, used when `accent` is set                       |
+| `as`          | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element                                            |
+| `id`          | `string`                         | —          | Element ID                                                  |
+| `aria-label`  | `string`                         | —          | Accessible label                                            |
+| `class`       | `string`                         | —          | Additional CSS classes                                      |
 
 ```astro
 <SpFooter bordered>
@@ -1224,16 +1264,18 @@ const linksClass = getFooterLinksClasses()
 
 ### SpModal
 
-| Prop               | Type                 | Default | Description                                                              |
-| ------------------ | -------------------- | ------- | ------------------------------------------------------------------------ |
-| `open`             | `boolean`            | —       | Applies open styling to the overlay and modal, and toggles `aria-hidden` |
-| `fullWidth`        | `boolean`            | —       | Stretches the modal to full width                                        |
-| `as`               | `"div" \| "section"` | `"div"` | Rendered element for the modal                                           |
-| `id`               | `string`             | —       | Element ID for the modal                                                 |
-| `aria-label`       | `string`             | —       | Accessible label for the modal                                           |
-| `aria-labelledby`  | `string`             | —       | Associates a title element                                               |
-| `aria-describedby` | `string`             | —       | Associates a description element                                         |
-| `class`            | `string`             | —       | Additional CSS classes for the modal                                     |
+| Prop               | Type                 | Default   | Description                                                              |
+| ------------------ | -------------------- | --------- | ------------------------------------------------------------------------ |
+| `open`             | `boolean`            | —         | Applies open styling to the overlay and modal, and toggles `aria-hidden` |
+| `fullWidth`        | `boolean`            | —         | Stretches the modal to full width                                        |
+| `accent`           | `ModalAccentEdge`    | —         | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"`              |
+| `accentColor`      | `ModalAccentColor`   | `"brand"` | Rail color, used when `accent` is set                                    |
+| `as`               | `"div" \| "section"` | `"div"`   | Rendered element for the modal                                           |
+| `id`               | `string`             | —         | Element ID for the modal                                                 |
+| `aria-label`       | `string`             | —         | Accessible label for the modal                                           |
+| `aria-labelledby`  | `string`             | —         | Associates a title element                                               |
+| `aria-describedby` | `string`             | —         | Associates a description element                                         |
+| `class`            | `string`             | —         | Additional CSS classes for the modal                                     |
 
 `SpModal` renders an overlay element (`getModalOverlayClasses`) wrapping the
 modal element (`getModalClasses`), with `role="dialog"` and `aria-modal="true"`.
@@ -1250,16 +1292,18 @@ Toggling `open` is consumer-driven (no client-side JS is included).
 
 ### SpNav
 
-| Prop         | Type                                      | Default | Description                                       |
-| ------------ | ----------------------------------------- | ------- | ------------------------------------------------- |
-| `bordered`   | `boolean`                                 | —       | Applies a border                                  |
-| `sticky`     | `boolean`                                 | —       | Applies sticky positioning                        |
-| `fullWidth`  | `boolean`                                 | —       | Stretches to full width                           |
-| `align`      | `NavAlign`                                | —       | Aligns content: `"start"`, `"center"`, or `"end"` |
-| `as`         | `"nav" \| "div" \| "header" \| "section"` | `"nav"` | Rendered element                                  |
-| `id`         | `string`                                  | —       | Element ID                                        |
-| `aria-label` | `string`                                  | —       | Accessible label for the nav landmark             |
-| `class`      | `string`                                  | —       | Additional CSS classes                            |
+| Prop          | Type                                      | Default   | Description                                                 |
+| ------------- | ----------------------------------------- | --------- | ----------------------------------------------------------- |
+| `bordered`    | `boolean`                                 | —         | Applies a border                                            |
+| `sticky`      | `boolean`                                 | —         | Applies sticky positioning                                  |
+| `fullWidth`   | `boolean`                                 | —         | Stretches to full width                                     |
+| `align`       | `NavAlign`                                | —         | Aligns content: `"start"`, `"center"`, or `"end"`           |
+| `accent`      | `NavAccentEdge`                           | —         | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
+| `accentColor` | `NavAccentColor`                          | `"brand"` | Rail color, used when `accent` is set                       |
+| `as`          | `"nav" \| "div" \| "header" \| "section"` | `"nav"`   | Rendered element                                            |
+| `id`          | `string`                                  | —         | Element ID                                                  |
+| `aria-label`  | `string`                                  | —         | Accessible label for the nav landmark                       |
+| `class`       | `string`                                  | —         | Additional CSS classes                                      |
 
 `SpNav` renders the nav container only. Build links in the default slot using
 the re-exported `getNavLinksClasses` and `getNavLinkClasses` helpers, since
@@ -1286,26 +1330,30 @@ const linkClass = getNavLinkClasses()
 
 ### SpNavItem
 
-| Prop         | Type                | Default          | Description                                                                                                                                         |
-| ------------ | ------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dropdown`   | `boolean`           | —                | Renders a dropdown trigger + menu instead of a plain link                                                                                           |
-| `href`       | `string`            | —                | Link target when `dropdown` is not set                                                                                                              |
-| `label`      | `string`            | —                | Trigger/link text when no content is projected                                                                                                      |
-| `open`       | `boolean`           | —                | Applies open styling to the menu (dropdown mode only)                                                                                               |
-| `placement`  | `DropdownPlacement` | `"bottom-start"` | Menu position (dropdown mode only)                                                                                                                  |
-| `mega`       | `boolean`           | —                | Wide-menu mode (dropdown mode only): anchors the menu to the nearest positioned ancestor and spans its full width instead of tracking trigger width |
-| `id`         | `string`            | —                | Element ID                                                                                                                                          |
-| `title`      | `string`            | —                | Title attribute                                                                                                                                     |
-| `aria-label` | `string`            | —                | Accessible label for the link or trigger button                                                                                                     |
-| `class`      | `string`            | —                | Additional CSS classes                                                                                                                              |
+| Prop          | Type                  | Default          | Description                                                                                                                                           |
+| ------------- | --------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dropdown`    | `boolean`             | —                | Renders a dropdown trigger + menu instead of a plain link                                                                                             |
+| `href`        | `string`              | —                | Link target when `dropdown` is not set                                                                                                                |
+| `label`       | `string`              | —                | Trigger/link text when no content is projected                                                                                                        |
+| `open`        | `boolean`             | —                | Applies open styling to the menu (dropdown mode only)                                                                                                 |
+| `placement`   | `DropdownPlacement`   | `"bottom-start"` | Menu position (dropdown mode only)                                                                                                                    |
+| `mega`        | `boolean`             | —                | Wide-menu mode (dropdown mode only): anchors the menu to the nearest positioned ancestor and spans its full width instead of tracking trigger width   |
+| `viewport`    | `boolean`             | —                | Full-viewport-width mode (dropdown mode only): breaks the menu out to the full browser viewport width. Takes precedence over `mega` when both are set |
+| `accent`      | `DropdownAccentEdge`  | —                | Decorative rail edge on the menu panel (dropdown mode only): `"top"` `"right"` `"bottom"` `"left"`                                                    |
+| `accentColor` | `DropdownAccentColor` | `"brand"`        | Rail color, used when `accent` is set                                                                                                                 |
+| `id`          | `string`              | —                | Element ID                                                                                                                                            |
+| `title`       | `string`              | —                | Title attribute                                                                                                                                       |
+| `aria-label`  | `string`              | —                | Accessible label for the link or trigger button                                                                                                       |
+| `class`       | `string`              | —                | Additional CSS classes                                                                                                                                |
 
 Place `SpNavItem` inside `SpNav` alongside plain links. In link mode it renders
 an `<a>` styled with `getNavLinkClasses`. In dropdown mode it renders a
 `getDropdownClasses` wrapper around a `getNavLinkClasses`-styled trigger
 `<button>` (`data-sp-nav-item-trigger`, `aria-haspopup`, `aria-expanded`) and a
 `getDropdownMenuClasses` menu panel (`data-sp-nav-item-menu`) that receives the
-default slot. `mega` is forwarded to both calls, matching upstream's paired
-`mega` contract. Toggling `open` and wiring click/outside-click/escape behavior
+default slot. `mega` and `viewport` are forwarded to both calls, matching
+upstream's paired `mega`/`viewport` contract; `accent`/`accentColor` are
+forwarded to the menu panel only. Toggling `open` and wiring click/outside-click/escape behavior
 is consumer-driven — no client-side JS is included; use
 `@phcdevworks/spectre-components`'s `sp-nav-item` if you want that behavior
 built in. Use a `trigger` named slot to project custom trigger content instead
@@ -1336,15 +1384,17 @@ import { SpNav, SpNavItem } from '@phcdevworks/spectre-ui-astro'
 
 ### SpToast
 
-| Prop         | Type                         | Default  | Description                                               |
-| ------------ | ---------------------------- | -------- | --------------------------------------------------------- |
-| `variant`    | `ToastVariant`               | `"info"` | Visual style: `"info"` `"success"` `"warning"` `"danger"` |
-| `dismissed`  | `boolean`                    | —        | Applies dismissed state styling                           |
-| `fullWidth`  | `boolean`                    | —        | Stretches to full width                                   |
-| `as`         | `"div" \| "li" \| "section"` | `"div"`  | Rendered element                                          |
-| `id`         | `string`                     | —        | Element ID                                                |
-| `aria-label` | `string`                     | —        | Accessible label                                          |
-| `class`      | `string`                     | —        | Additional CSS classes                                    |
+| Prop          | Type                         | Default   | Description                                                 |
+| ------------- | ---------------------------- | --------- | ----------------------------------------------------------- |
+| `variant`     | `ToastVariant`               | `"info"`  | Visual style: `"info"` `"success"` `"warning"` `"danger"`   |
+| `dismissed`   | `boolean`                    | —         | Applies dismissed state styling                             |
+| `fullWidth`   | `boolean`                    | —         | Stretches to full width                                     |
+| `accent`      | `ToastAccentEdge`            | —         | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
+| `accentColor` | `ToastAccentColor`           | `"brand"` | Rail color, used when `accent` is set                       |
+| `as`          | `"div" \| "li" \| "section"` | `"div"`   | Rendered element                                            |
+| `id`          | `string`                     | —         | Element ID                                                  |
+| `aria-label`  | `string`                     | —         | Accessible label                                            |
+| `class`       | `string`                     | —         | Additional CSS classes                                      |
 
 `SpToast` renders `role="status"`, `aria-live="polite"`, and
 `aria-atomic="true"` by default. Pass content to a named `icon` slot to wrap it
@@ -1363,14 +1413,16 @@ used.
 
 ### SpTooltip
 
-| Prop        | Type               | Default     | Description                                      |
-| ----------- | ------------------ | ----------- | ------------------------------------------------ |
-| `placement` | `TooltipPlacement` | `"top"`     | Placement: `"top"` `"bottom"` `"left"` `"right"` |
-| `visible`   | `boolean`          | —           | Applies visible state styling                    |
-| `as`        | `"div" \| "span"`  | `"div"`     | Rendered element                                 |
-| `id`        | `string`           | —           | Element ID                                       |
-| `role`      | `string`           | `"tooltip"` | ARIA role                                        |
-| `class`     | `string`           | —           | Additional CSS classes                           |
+| Prop          | Type                 | Default     | Description                                                 |
+| ------------- | -------------------- | ----------- | ----------------------------------------------------------- |
+| `placement`   | `TooltipPlacement`   | `"top"`     | Placement: `"top"` `"bottom"` `"left"` `"right"`            |
+| `visible`     | `boolean`            | —           | Applies visible state styling                               |
+| `accent`      | `TooltipAccentEdge`  | —           | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
+| `accentColor` | `TooltipAccentColor` | `"brand"`   | Rail color, used when `accent` is set                       |
+| `as`          | `"div" \| "span"`    | `"div"`     | Rendered element                                            |
+| `id`          | `string`             | —           | Element ID                                                  |
+| `role`        | `string`             | `"tooltip"` | ARIA role                                                   |
+| `class`       | `string`             | —           | Additional CSS classes                                      |
 
 ```astro
 <SpTooltip placement="bottom" visible>Save your changes</SpTooltip>
@@ -1469,53 +1521,54 @@ const links = [
 </nav>
 ```
 
-| Helper                                | For                            |
-| ------------------------------------- | ------------------------------ |
-| `getAlertClasses`                     | Alert class generation         |
-| `getAvatarClasses`                    | Avatar class generation        |
-| `getButtonClasses`                    | Button class generation        |
-| `getCardClasses`                      | Card class generation          |
-| `getBadgeClasses`                     | Badge class generation         |
-| `getContainerClasses`                 | Container class generation     |
-| `getDropdownClasses`                  | Dropdown root classes          |
-| `getDropdownMenuClasses`              | Dropdown menu container        |
-| `getDropdownItemClasses`              | Individual dropdown item       |
-| `getFooterClasses`                    | Footer class generation        |
-| `getIconBoxClasses`                   | Icon box class generation      |
-| `getInputClasses`                     | Input class generation         |
-| `getModalClasses`                     | Modal root classes             |
-| `getModalOverlayClasses`              | Modal overlay/backdrop classes |
-| `getNavClasses`                       | Nav root classes               |
-| `getNavLinksClasses`                  | Nav links container            |
-| `getNavLinkClasses`                   | Individual nav link            |
-| `getPricingCardClasses`               | Pricing card root classes      |
-| `getPricingCardBadgeClasses`          | Pricing card badge wrapper     |
-| `getPricingCardPriceContainerClasses` | Pricing card price container   |
-| `getPricingCardPriceClasses`          | Pricing card price element     |
-| `getPricingCardDescriptionClasses`    | Pricing card description       |
-| `getRatingClasses`                    | Rating root classes            |
-| `getRatingStarsClasses`               | Rating star container          |
-| `getRatingStarClasses`                | Individual star element        |
-| `getRatingTextClasses`                | Rating text element            |
-| `getSectionClasses`                   | Section class generation       |
-| `getSidebarClasses`                   | Sidebar root classes           |
-| `getSidebarGroupClasses`              | Collapsible sidebar group      |
-| `getSidebarGroupSummaryClasses`       | Sidebar group summary          |
-| `getSidebarLinkClasses`               | Individual sidebar link        |
-| `getSidebarHeaderClasses`             | Sidebar section header         |
-| `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop    |
-| `getSidebarToggleClasses`             | Sidebar toggle button classes  |
-| `getStackClasses`                     | Stack class generation         |
-| `getTestimonialClasses`               | Testimonial root classes       |
-| `getTestimonialQuoteClasses`          | Quote wrapper                  |
-| `getTestimonialAuthorClasses`         | Author section wrapper         |
-| `getTestimonialAuthorInfoClasses`     | Author info wrapper            |
-| `getTestimonialAuthorNameClasses`     | Author name element            |
-| `getTestimonialAuthorTitleClasses`    | Author title element           |
-| `getTextClasses`                      | Typography class generation    |
-| `getToastClasses`                     | Toast root classes             |
-| `getToastIconClasses`                 | Toast icon wrapper             |
-| `getTooltipClasses`                   | Tooltip class generation       |
+| Helper                                | For                                               |
+| ------------------------------------- | ------------------------------------------------- |
+| `getAlertClasses`                     | Alert class generation                            |
+| `getAvatarClasses`                    | Avatar class generation                           |
+| `getButtonClasses`                    | Button class generation                           |
+| `getCardClasses`                      | Card class generation                             |
+| `getCardBleedClasses`                 | Full-bleed child composition inside a padded card |
+| `getBadgeClasses`                     | Badge class generation                            |
+| `getContainerClasses`                 | Container class generation                        |
+| `getDropdownClasses`                  | Dropdown root classes                             |
+| `getDropdownMenuClasses`              | Dropdown menu container                           |
+| `getDropdownItemClasses`              | Individual dropdown item                          |
+| `getFooterClasses`                    | Footer class generation                           |
+| `getIconBoxClasses`                   | Icon box class generation                         |
+| `getInputClasses`                     | Input class generation                            |
+| `getModalClasses`                     | Modal root classes                                |
+| `getModalOverlayClasses`              | Modal overlay/backdrop classes                    |
+| `getNavClasses`                       | Nav root classes                                  |
+| `getNavLinksClasses`                  | Nav links container                               |
+| `getNavLinkClasses`                   | Individual nav link                               |
+| `getPricingCardClasses`               | Pricing card root classes                         |
+| `getPricingCardBadgeClasses`          | Pricing card badge wrapper                        |
+| `getPricingCardPriceContainerClasses` | Pricing card price container                      |
+| `getPricingCardPriceClasses`          | Pricing card price element                        |
+| `getPricingCardDescriptionClasses`    | Pricing card description                          |
+| `getRatingClasses`                    | Rating root classes                               |
+| `getRatingStarsClasses`               | Rating star container                             |
+| `getRatingStarClasses`                | Individual star element                           |
+| `getRatingTextClasses`                | Rating text element                               |
+| `getSectionClasses`                   | Section class generation                          |
+| `getSidebarClasses`                   | Sidebar root classes                              |
+| `getSidebarGroupClasses`              | Collapsible sidebar group                         |
+| `getSidebarGroupSummaryClasses`       | Sidebar group summary                             |
+| `getSidebarLinkClasses`               | Individual sidebar link                           |
+| `getSidebarHeaderClasses`             | Sidebar section header                            |
+| `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop                       |
+| `getSidebarToggleClasses`             | Sidebar toggle button classes                     |
+| `getStackClasses`                     | Stack class generation                            |
+| `getTestimonialClasses`               | Testimonial root classes                          |
+| `getTestimonialQuoteClasses`          | Quote wrapper                                     |
+| `getTestimonialAuthorClasses`         | Author section wrapper                            |
+| `getTestimonialAuthorInfoClasses`     | Author info wrapper                               |
+| `getTestimonialAuthorNameClasses`     | Author name element                               |
+| `getTestimonialAuthorTitleClasses`    | Author title element                              |
+| `getTextClasses`                      | Typography class generation                       |
+| `getToastClasses`                     | Toast root classes                                |
+| `getToastIconClasses`                 | Toast icon wrapper                                |
+| `getTooltipClasses`                   | Tooltip class generation                          |
 
 Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`,

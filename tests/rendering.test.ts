@@ -448,6 +448,30 @@ describe("SSR rendering", () => {
     expect(html).not.toContain('mega="true"');
   });
 
+  it("applies viewport to both the SpNavItem dropdown wrapper and menu", async () => {
+    const html = await container.renderToString(SpNavItem, {
+      props: { dropdown: true, label: "Products", viewport: true },
+      slots: { default: "<a href=\"/products/a\">Product A</a>" },
+    });
+
+    expect(html).toContain(getDropdownClasses({ viewport: true }));
+    expect(html).toContain(getDropdownMenuClasses({ open: false, placement: "bottom-start", viewport: true }));
+    expect(html).not.toContain('viewport="true"');
+  });
+
+  it("forwards accent and accentColor to the SpNavItem menu and does not leak them", async () => {
+    const html = await container.renderToString(SpNavItem, {
+      props: { dropdown: true, label: "Products", accent: "left", accentColor: "success" },
+      slots: { default: "<a href=\"/products/a\">Product A</a>" },
+    });
+
+    expect(html).toContain(
+      getDropdownMenuClasses({ open: false, placement: "bottom-start", accent: "left", accentColor: "success" }),
+    );
+    expect(html).not.toContain('accent="left"');
+    expect(html).not.toContain('accentColor="success"');
+  });
+
   it("renders SpToast with upstream classes, icon slot, and live region ARIA", async () => {
     const html = await container.renderToString(SpToast, {
       props: { variant: "success" },

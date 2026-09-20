@@ -84,6 +84,15 @@ describe("SpPricingCard behavior", () => {
     expect(html).not.toContain('fullHeight="true"');
   });
 
+  it("forwards accent and accentColor to the recipe and does not leak them to DOM", async () => {
+    const props = { accent: "left", accentColor: "success" } as const;
+    const html = await container.renderToString(SpPricingCard, { props });
+
+    expect(html).toContain(getPricingCardClasses(props));
+    expect(html).not.toContain('accent="left"');
+    expect(html).not.toContain('accentColor="success"');
+  });
+
   it("renders id and aria-describedby attributes when provided", async () => {
     const html = await container.renderToString(SpPricingCard, {
       props: {

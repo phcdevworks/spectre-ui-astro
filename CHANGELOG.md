@@ -6,10 +6,44 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.9.0] - 2026-09-20
+
+**Release Title:** Accent Rails and Viewport Dropdowns
+
+Contract change type: additive
+
+### Added
+
+- `SpCard` now forwards `accent` and `accentColor` to `getCardClasses`,
+  exposing the upstream card edge-accent rail (`@phcdevworks/spectre-ui`
+  5.1.0+) without local CSS or duplicated validation. Existing output is
+  unchanged when both props are omitted.
+- Closed a components-wide accent-rail parity gap against
+  `@phcdevworks/spectre-ui` 5.1.0–5.2.0: `SpTestimonial`, `SpPricingCard`,
+  `SpNav`, `SpFooter`, `SpModal`, `SpToast`, and `SpTooltip` now forward
+  `accent`/`accentColor`; `SpBadge` forwards `accentRail`/`accentRailColor`
+  (named distinctly upstream since `variant="accent"` already names badge's
+  single-tone fill); and `SpNavItem`'s dropdown menu forwards
+  `accent`/`accentColor`. Previously these props existed on the recipe option
+  types but silently fell through to `...rest` and leaked onto the DOM as raw
+  attributes instead of applying any class.
+- `SpDropdown` and `SpNavItem` now forward the upstream `viewport` option
+  (full-viewport-width dropdown menus, `@phcdevworks/spectre-ui` 5.2.0) to
+  both the trigger wrapper and menu panel, alongside the existing `mega`
+  pairing.
+- Re-exported `getCardBleedClasses` (plus `CardBleedRecipeOptions`,
+  `CardBleedEdge`, `CardBleedPaddingSize`) from `@phcdevworks/spectre-ui`
+  5.1.0 for full-bleed child composition inside a padded `SpCard`.
+- Re-exported the upstream accent edge and color types documented by each
+  affected component.
+
 ### Changed
 
 - Standardized the package summary against the approved PHCDevworks product
   description.
+- Raised the `@phcdevworks/spectre-ui` peer baseline to `^5.2.0` and the
+  `@phcdevworks/spectre-tokens` peer baseline to `^4.9.0`, matching the
+  minimum upstream contracts required by the new recipe options.
 
 ## [4.8.0] - 2026-09-05
 

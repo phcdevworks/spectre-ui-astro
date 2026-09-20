@@ -94,6 +94,16 @@ describe("SpTestimonial SSR rendering", () => {
     expect(html).toContain("sp-testimonial--ghost");
     expect(html).not.toMatch(/\svariant=["']/);
   });
+
+  it("forwards accent and accentColor to the recipe and does not leak them to the DOM", async () => {
+    const html = await container.renderToString(SpTestimonial, {
+      props: { accent: "left", accentColor: "success" },
+    });
+
+    expect(html).toContain(getTestimonialClasses({ accent: "left", accentColor: "success" }));
+    expect(html).not.toMatch(/\saccent=["']/);
+    expect(html).not.toMatch(/\saccentColor=["']/);
+  });
 });
 
 describe("SpTestimonial slot rendering", () => {
