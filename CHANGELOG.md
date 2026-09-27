@@ -6,6 +6,10 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.10.0] - 2026-09-27
+
+**Release Title:** Complete Recipe and Composition Parity
+
 Contract change type: additive
 
 ### Added
