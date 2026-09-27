@@ -13,6 +13,21 @@ function assertContains(text: string, errorMessage: string): void {
   }
 }
 
+function assertFamilyTableRow(family: string, status: string): void {
+  const escapedFamily = family.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escapedStatus = status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const rowPattern = new RegExp(
+    `^\\|\\s*${escapedFamily}\\s*\\|\\s*\\*\\*${escapedStatus}\\*\\*\\s*\\|`,
+    'm',
+  );
+
+  if (!rowPattern.test(readme)) {
+    throw new Error(
+      `README.md component family stability table is missing a ${status} entry for: "${family}".`,
+    );
+  }
+}
+
 for (const componentName of contractJson.rootExports.components as string[]) {
   assertContains(
     `### ${componentName}`,
@@ -41,17 +56,11 @@ assertContains(
 );
 
 for (const family of contractJson.componentFamilies.stable as string[]) {
-  assertContains(
-    `| ${family} |`,
-    `README.md component family stability table is missing an entry for the stable family: "${family}".`,
-  );
+  assertFamilyTableRow(family, 'stable');
 }
 
 for (const family of contractJson.componentFamilies.notYetSupported as string[]) {
-  assertContains(
-    `| ${family} |`,
-    `README.md component family stability table is missing an entry for the not-yet-supported family: "${family}".`,
-  );
+  assertFamilyTableRow(family, 'not yet supported');
 }
 
 const versionMatch = readme.match(/\|\s*Current version\/status\s*\|\s*([^\s|]+)\s*\|/i);

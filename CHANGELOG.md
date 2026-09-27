@@ -6,6 +6,31 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+Contract change type: additive
+
+### Added
+
+- Added Astro-native wrappers for the published Tabs/TabPanel,
+  Accordion/AccordionItem, Breadcrumb, ListGroup/ListGroupItem, Offcanvas,
+  Carousel, Table, Pagination, and Stepper recipe families. The wrappers keep
+  state explicit and deterministic for SSR, use semantic native markup where
+  available, and delegate every visual class to `@phcdevworks/spectre-ui`.
+- Expanded `SpAlert` with the upstream `dismissible` contract, icon and dismiss
+  slots, accessible dismiss labeling, the `brand` variant, and pass-through
+  exports for `getAlertIconClasses` and `getAlertDismissClasses`.
+- Re-exported every upstream helper and public recipe type needed to compose
+  the new families outside the opinionated Astro wrappers.
+
+### Changed
+
+- Raised the `@phcdevworks/spectre-ui` peer baseline to `^5.3.0` and the
+  `@phcdevworks/spectre-tokens` peer baseline to `^4.11.0`.
+- Declared the additional upstream recipe families introduced by the updated
+  dependency as not yet supported, keeping adapter parity explicit without
+  expanding this approved component batch.
+- Made README family-table validation insensitive to Markdown column alignment
+  and hardened existing tests against Astro's development source attributes.
+
 ## [4.9.0] - 2026-09-20
 
 **Release Title:** Accent Rails and Viewport Dropdowns

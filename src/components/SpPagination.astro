@@ -1,0 +1,106 @@
+---
+import type { PaginationRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getPaginationClasses,
+  getPaginationEllipsisClasses,
+  getPaginationItemClasses,
+} from "@phcdevworks/spectre-ui";
+
+type PageEntry = number | "ellipsis";
+
+interface SpPaginationProps extends PaginationRecipeOptions {
+  page?: number;
+  total?: number;
+  siblings?: number;
+  hrefTemplate?: string;
+  previousLabel?: string;
+  nextLabel?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+function pageRange(page: number, total: number, siblings: number): PageEntry[] {
+  const pages = (from: number, to: number): number[] =>
+    Array.from({ length: Math.max(to - from + 1, 0) }, (_, index) => from + index);
+
+  if (total <= siblings * 2 + 5) return pages(1, total);
+
+  const left = Math.max(page - siblings, 1);
+  const right = Math.min(page + siblings, total);
+  const leftGap = left > 3;
+  const rightGap = right < total - 2;
+  const edgeCount = siblings * 2 + 3;
+
+  if (!leftGap) return [...pages(1, edgeCount), "ellipsis", total];
+  if (!rightGap) return [1, "ellipsis", ...pages(total - edgeCount + 1, total)];
+  return [1, "ellipsis", ...pages(left, right), "ellipsis", total];
+}
+
+const {
+  size,
+  page: pageInput = 1,
+  total: totalInput = 1,
+  siblings: siblingsInput = 1,
+  hrefTemplate,
+  previousLabel = "Previous",
+  nextLabel = "Next",
+  class: className,
+  id,
+  "aria-label": ariaLabel = "Pagination",
+  ...rest
+} = Astro.props as SpPaginationProps;
+
+const total = Math.max(1, Math.trunc(totalInput));
+const page = Math.min(total, Math.max(1, Math.trunc(pageInput)));
+const siblings = Math.max(0, Math.trunc(siblingsInput));
+const finalClass = [getPaginationClasses({ size }), className].filter(Boolean).join(" ");
+const hrefFor = (target: number) =>
+  hrefTemplate?.split("{page}").join(String(target));
+---
+
+<nav id={id} aria-label={ariaLabel} {...rest}>
+  <ul class={finalClass}>
+    <li>
+      <a
+        class={getPaginationItemClasses({ disabled: page === 1 })}
+        href={page === 1 ? undefined : hrefFor(page - 1)}
+        aria-disabled={page === 1 ? "true" : undefined}
+        tabindex={page === 1 ? -1 : undefined}
+        data-page={page - 1}
+      >{previousLabel}</a>
+    </li>
+    {
+      pageRange(page, total, siblings).map((entry) =>
+        entry === "ellipsis" ? (
+          <li>
+            <span class={getPaginationEllipsisClasses()} aria-hidden="true">…</span>
+          </li>
+        ) : (
+          <li>
+            <a
+              class={getPaginationItemClasses({ active: entry === page })}
+              href={entry === page ? undefined : hrefFor(entry)}
+              aria-current={entry === page ? "page" : undefined}
+              aria-label={`Page ${entry}`}
+              data-page={entry}
+            >
+              {entry}
+            </a>
+          </li>
+        ),
+      )
+    }
+    <li>
+      <a
+        class={getPaginationItemClasses({ disabled: page === total })}
+        href={page === total ? undefined : hrefFor(page + 1)}
+        aria-disabled={page === total ? "true" : undefined}
+        tabindex={page === total ? -1 : undefined}
+        data-page={page + 1}
+      >{nextLabel}</a>
+    </li>
+  </ul>
+</nav>

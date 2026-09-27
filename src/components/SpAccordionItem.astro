@@ -1,0 +1,58 @@
+---
+import {
+  getAccordionHeaderClasses,
+  getAccordionIconClasses,
+  getAccordionItemClasses,
+  getAccordionPanelClasses,
+} from "@phcdevworks/spectre-ui";
+
+interface SpAccordionItemProps {
+  open?: boolean;
+  disabled?: boolean;
+  hovered?: boolean;
+  focused?: boolean;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  open = false,
+  disabled = false,
+  hovered,
+  focused,
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpAccordionItemProps;
+
+const finalClass = [
+  getAccordionItemClasses({ expanded: open, disabled }),
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+const headerClass = getAccordionHeaderClasses({
+  expanded: open,
+  disabled,
+  hovered,
+  focused,
+});
+---
+
+<details class={finalClass} id={id} open={open ? true : undefined} {...rest}>
+  <summary
+    class={headerClass}
+    aria-disabled={disabled ? "true" : undefined}
+    tabindex={disabled ? -1 : undefined}
+  >
+    <slot name="header" />
+    <span class={getAccordionIconClasses({ expanded: open })} aria-hidden="true">
+      <slot name="icon">⌄</slot>
+    </span>
+  </summary>
+  <div class={getAccordionPanelClasses({ expanded: open })}>
+    <slot />
+  </div>
+</details>

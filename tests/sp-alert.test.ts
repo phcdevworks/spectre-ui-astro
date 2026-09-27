@@ -1,5 +1,9 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { getAlertClasses } from "@phcdevworks/spectre-ui";
+import {
+  getAlertClasses,
+  getAlertDismissClasses,
+  getAlertIconClasses,
+} from "@phcdevworks/spectre-ui";
 import { beforeAll, describe, expect, it } from "vitest";
 import SpAlert from "../src/components/SpAlert.astro";
 
@@ -16,7 +20,7 @@ describe("SpAlert class and prop behavior", () => {
   });
 
   it("renders correct classes for each variant without leaking the prop", async () => {
-    for (const variant of ["info", "success", "warning", "danger", "neutral"] as const) {
+    for (const variant of ["info", "success", "warning", "danger", "neutral", "brand"] as const) {
       const html = await container.renderToString(SpAlert, { props: { variant } });
       expect(html).toContain(`sp-alert--${variant}`);
       expect(html).not.toContain(`variant="${variant}"`);
@@ -161,6 +165,20 @@ describe("SpAlert element and slot rendering", () => {
       slots: { default: "Operation complete." },
     });
     expect(html).toContain("Operation complete.");
+  });
+
+  it("renders icon and dismiss slots with upstream sub-recipe classes", async () => {
+    const html = await container.renderToString(SpAlert, {
+      props: { dismissible: true, dismissLabel: "Close notice" },
+      slots: { icon: "i", default: "Notice", "dismiss-icon": "x" },
+    });
+
+    expect(html).toContain(getAlertClasses({ dismissible: true, interactive: false, disabled: false }));
+    expect(html).toContain(getAlertIconClasses());
+    expect(html).toContain(getAlertDismissClasses());
+    expect(html).toContain('aria-label="Close notice"');
+    expect(html).not.toContain('dismissible="true"');
+    expect(html).not.toContain('dismissLabel=');
   });
 });
 

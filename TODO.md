@@ -1,11 +1,13 @@
 # Spectre UI Astro Execution Todo
 
-Phases 1 through 17 are complete — see [ROADMAP.md](ROADMAP.md) for the
-delivered-phases summary and [CHANGELOG.md](CHANGELOG.md) for
-release-by-release detail. Design-decision rationale that doesn't belong in a
-changelog lives in git history for the commits that made those calls.
+Phases 1 through 19 are complete — see [ROADMAP.md](ROADMAP.md) for the
+delivered-phases summary and [CHANGELOG.md](CHANGELOG.md) for release-by-release
+detail. Design-decision rationale that doesn't belong in a changelog lives in
+git history for the commits that made those calls.
 
-There is no other open implementation phase.
+## Requested by Downstream
+
+- None.
 
 ## Explicitly Out of Scope
 

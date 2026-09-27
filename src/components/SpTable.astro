@@ -1,0 +1,47 @@
+---
+import type { TableRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getTableClasses, getTableWrapperClasses } from "@phcdevworks/spectre-ui";
+
+interface SpTableProps extends TableRecipeOptions {
+  class?: string;
+  wrapperClass?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  striped,
+  hoverable,
+  bordered,
+  class: className,
+  wrapperClass,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  ...rest
+} = Astro.props as SpTableProps;
+
+const tableClass = [getTableClasses({ size, striped, hoverable, bordered }), className]
+  .filter(Boolean)
+  .join(" ");
+const finalWrapperClass = [getTableWrapperClasses(), wrapperClass]
+  .filter(Boolean)
+  .join(" ");
+const hasAccessibleName = Boolean(ariaLabel || ariaLabelledby);
+---
+
+<div
+  class={finalWrapperClass}
+  role={hasAccessibleName ? "region" : undefined}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  tabindex={hasAccessibleName ? 0 : undefined}
+>
+  <table class={tableClass} id={id} {...rest}>
+    <slot />
+  </table>
+</div>

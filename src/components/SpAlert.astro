@@ -1,6 +1,10 @@
 ---
 import type { AlertRecipeOptions } from "@phcdevworks/spectre-ui";
-import { getAlertClasses } from "@phcdevworks/spectre-ui";
+import {
+  getAlertClasses,
+  getAlertDismissClasses,
+  getAlertIconClasses,
+} from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
 
 type SpAlertElement = "div" | "section" | "aside" | "article" | "a" | "button";
@@ -11,6 +15,7 @@ interface SpAlertProps extends AlertRecipeOptions {
   id?: string;
   "aria-label"?: string;
   "aria-describedby"?: string;
+  dismissLabel?: string;
   tabindex?: number;
 
   href?: string;
@@ -25,6 +30,7 @@ const {
   variant,
   size,
   dismissed,
+  dismissible,
   fullWidth,
   interactive,
   hovered,
@@ -37,6 +43,7 @@ const {
   id,
   "aria-label": ariaLabel,
   "aria-describedby": ariaDescribedby,
+  dismissLabel = "Dismiss",
   tabindex,
   href,
   target,
@@ -52,6 +59,7 @@ const classes = getAlertClasses({
   variant,
   size,
   dismissed,
+  dismissible,
   fullWidth,
   interactive: isInteractive,
   disabled: isAlertDisabled,
@@ -88,5 +96,24 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   tabindex={finalTabIndex}
   {...rest}
 >
+  {
+    Astro.slots.has("icon") && (
+      <span class={getAlertIconClasses()}>
+        <slot name="icon" />
+      </span>
+    )
+  }
   <slot />
+  {
+    dismissible && (
+      <button
+        class={getAlertDismissClasses()}
+        type="button"
+        aria-label={dismissLabel}
+        data-sp-alert-dismiss
+      >
+        <slot name="dismiss-icon">×</slot>
+      </button>
+    )
+  }
 </Tag>

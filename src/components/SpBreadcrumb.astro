@@ -1,0 +1,68 @@
+---
+import {
+  getBreadcrumbClasses,
+  getBreadcrumbItemClasses,
+  getBreadcrumbLinkClasses,
+  getBreadcrumbSeparatorClasses,
+} from "@phcdevworks/spectre-ui";
+
+export interface SpBreadcrumbItem {
+  label: string;
+  href?: string;
+  current?: boolean;
+}
+
+interface SpBreadcrumbProps {
+  items: SpBreadcrumbItem[];
+  separator?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  items,
+  separator,
+  class: className,
+  id,
+  "aria-label": ariaLabel = "Breadcrumb",
+  ...rest
+} = Astro.props as SpBreadcrumbProps;
+
+const finalClass = [
+  getBreadcrumbClasses({ customSeparator: separator !== undefined }),
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<nav id={id} aria-label={ariaLabel} {...rest}>
+  <ol class={finalClass}>
+    {
+      items.map((item, index) => (
+        <li class={getBreadcrumbItemClasses({ current: item.current })}>
+          {item.href && !item.current ? (
+            <a class={getBreadcrumbLinkClasses()} href={item.href}>
+              {item.label}
+            </a>
+          ) : (
+            <span
+              class={getBreadcrumbLinkClasses()}
+              aria-current={item.current ? "page" : undefined}
+            >
+              {item.label}
+            </span>
+          )}
+          {separator !== undefined && index < items.length - 1 && (
+            <span class={getBreadcrumbSeparatorClasses()} aria-hidden="true">
+              {separator}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

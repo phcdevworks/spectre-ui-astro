@@ -1,0 +1,78 @@
+---
+import type { CarouselRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getCarouselCaptionClasses,
+  getCarouselClasses,
+  getCarouselControlClasses,
+  getCarouselIndicatorsClasses,
+  getCarouselViewportClasses,
+} from "@phcdevworks/spectre-ui";
+
+interface SpCarouselProps extends CarouselRecipeOptions {
+  as?: "section" | "div";
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  previousLabel?: string;
+  nextLabel?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  fade,
+  as: Tag = "section",
+  class: className,
+  id,
+  "aria-label": ariaLabel = "Carousel",
+  previousLabel = "Previous slide",
+  nextLabel = "Next slide",
+  ...rest
+} = Astro.props as SpCarouselProps;
+
+const finalClass = [getCarouselClasses({ fade }), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} role="region" aria-roledescription="carousel" aria-label={ariaLabel} {...rest}>
+  <div class={getCarouselViewportClasses()}>
+    <slot />
+  </div>
+  {
+    Astro.slots.has("previous") && (
+      <button
+        class={getCarouselControlClasses({ direction: "prev" })}
+        type="button"
+        aria-label={previousLabel}
+        data-sp-carousel-control="prev"
+      >
+        <slot name="previous" />
+      </button>
+    )
+  }
+  {
+    Astro.slots.has("next") && (
+      <button
+        class={getCarouselControlClasses({ direction: "next" })}
+        type="button"
+        aria-label={nextLabel}
+        data-sp-carousel-control="next"
+      >
+        <slot name="next" />
+      </button>
+    )
+  }
+  {
+    Astro.slots.has("indicators") && (
+      <div class={getCarouselIndicatorsClasses()}>
+        <slot name="indicators" />
+      </div>
+    )
+  }
+  {
+    Astro.slots.has("caption") && (
+      <div class={getCarouselCaptionClasses()}>
+        <slot name="caption" />
+      </div>
+    )
+  }
+</Tag>

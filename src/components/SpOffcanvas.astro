@@ -1,0 +1,73 @@
+---
+import type { OffcanvasRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getOffcanvasBackdropClasses,
+  getOffcanvasBodyClasses,
+  getOffcanvasClasses,
+  getOffcanvasFooterClasses,
+  getOffcanvasHeaderClasses,
+} from "@phcdevworks/spectre-ui";
+
+interface SpOffcanvasProps extends OffcanvasRecipeOptions {
+  as?: "aside" | "div" | "section";
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  placement,
+  open = false,
+  as: Tag = "aside",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpOffcanvasProps;
+
+const finalClass = [getOffcanvasClasses({ placement, open }), className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div
+  class={getOffcanvasBackdropClasses({ open })}
+  aria-hidden="true"
+  data-sp-offcanvas-backdrop
+></div>
+<Tag
+  class={finalClass}
+  id={id}
+  role="dialog"
+  aria-modal="true"
+  aria-hidden={open ? undefined : "true"}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  aria-describedby={ariaDescribedby}
+  hidden={open ? undefined : true}
+  {...rest}
+>
+  {
+    Astro.slots.has("header") && (
+      <div class={getOffcanvasHeaderClasses()}>
+        <slot name="header" />
+      </div>
+    )
+  }
+  <div class={getOffcanvasBodyClasses()}>
+    <slot />
+  </div>
+  {
+    Astro.slots.has("footer") && (
+      <div class={getOffcanvasFooterClasses()}>
+        <slot name="footer" />
+      </div>
+    )
+  }
+</Tag>

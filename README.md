@@ -1,8 +1,8 @@
 # @phcdevworks/spectre-ui-astro
 
-`@phcdevworks/spectre-ui-astro` is the Astro integration for the Spectre
-system. It brings Spectre's design contracts and interface components into
-Astro applications through a native, server-rendering-friendly API.
+`@phcdevworks/spectre-ui-astro` is the Astro integration for the Spectre system.
+It brings Spectre's design contracts and interface components into Astro
+applications through a native, server-rendering-friendly API.
 
 Maintained by [PHCDevworks](https://go.phcdev.co). It depends on
 `@phcdevworks/spectre-ui` for its CSS and recipe contracts, so Astro
@@ -57,9 +57,9 @@ writing CSS, redefining tokens, or reimplementing recipe logic.
 
 ## What Astro Developers Get
 
-- **Thirty-five ready-to-use Astro components** — alerts, avatars, badges, buttons,
-  cards, app shell layout, forms, navigation, overlays, feedback, pricing,
-  ratings, and testimonials
+- **Forty-seven ready-to-use Astro components** — alerts, avatars, badges,
+  buttons, cards, app shell layout, forms, navigation, overlays, feedback,
+  pricing, ratings, and testimonials
 - **SSR-safe by default** — deterministic markup, no client-side JavaScript,
   stable accessibility wiring
 - **Thin wrapper pattern** — styling comes entirely from
@@ -818,25 +818,28 @@ renders when `legend` is provided and non-empty.
 
 ### SpAlert
 
-| Prop               | Type                                         | Default  | Description                                                           |
-| ------------------ | -------------------------------------------- | -------- | --------------------------------------------------------------------- |
-| `variant`          | `AlertVariant`                               | `"info"` | Visual style: `"info"` `"success"` `"warning"` `"danger"` `"neutral"` |
-| `size`             | `AlertSize`                                  | `"md"`   | Size: `"sm"` `"md"` `"lg"`                                            |
-| `as`               | `"div" \| "section" \| "aside" \| "article"` | `"div"`  | Rendered element                                                      |
-| `dismissed`        | `boolean`                                    | —        | Applies dismissed state styling                                       |
-| `interactive`      | `boolean`                                    | —        | Adds hover/focus styles and `tabindex="0"`                            |
-| `fullWidth`        | `boolean`                                    | —        | Stretches to full width                                               |
-| `disabled`         | `boolean`                                    | —        | Disables the alert                                                    |
-| `loading`          | `boolean`                                    | —        | Loading state (also sets disabled behavior)                           |
-| `id`               | `string`                                     | —        | Element ID                                                            |
-| `aria-label`       | `string`                                     | —        | Accessible label                                                      |
-| `aria-describedby` | `string`                                     | —        | Associates a description element                                      |
-| `class`            | `string`                                     | —        | Additional CSS classes                                                |
+| Prop               | Type                                         | Default     | Description                                                                     |
+| ------------------ | -------------------------------------------- | ----------- | ------------------------------------------------------------------------------- |
+| `variant`          | `AlertVariant`                               | `"info"`    | Visual style: `"info"` `"success"` `"warning"` `"danger"` `"neutral"` `"brand"` |
+| `size`             | `AlertSize`                                  | `"md"`      | Size: `"sm"` `"md"` `"lg"`                                                      |
+| `as`               | `"div" \| "section" \| "aside" \| "article"` | `"div"`     | Rendered element                                                                |
+| `dismissed`        | `boolean`                                    | —           | Applies dismissed state styling                                                 |
+| `dismissible`      | `boolean`                                    | —           | Reserves and renders a dismiss control                                          |
+| `dismissLabel`     | `string`                                     | `"Dismiss"` | Accessible label for the dismiss control                                        |
+| `interactive`      | `boolean`                                    | —           | Adds hover/focus styles and `tabindex="0"`                                      |
+| `fullWidth`        | `boolean`                                    | —           | Stretches to full width                                                         |
+| `disabled`         | `boolean`                                    | —           | Disables the alert                                                              |
+| `loading`          | `boolean`                                    | —           | Loading state (also sets disabled behavior)                                     |
+| `id`               | `string`                                     | —           | Element ID                                                                      |
+| `aria-label`       | `string`                                     | —           | Accessible label                                                                |
+| `aria-describedby` | `string`                                     | —           | Associates a description element                                                |
+| `class`            | `string`                                     | —           | Additional CSS classes                                                          |
 
 ```astro
 <SpAlert variant="success">Your changes have been saved.</SpAlert>
 <SpAlert variant="warning" size="sm">Session expires soon.</SpAlert>
 <SpAlert variant="danger" dismissed>This alert has been dismissed.</SpAlert>
+<SpAlert variant="brand" dismissible><span slot="icon">i</span>New feature available.</SpAlert>
 <SpAlert variant="info" as="aside" aria-label="Info notice">Read the docs.</SpAlert>
 ```
 
@@ -901,8 +904,8 @@ renders when `legend` is provided and non-empty.
 ```
 
 `accentRail`/`accentRailColor` are named distinctly from `variant` because
-`variant="accent"` already names badge's single-tone brand-accent fill; the
-rail is an unrelated, additive edge decoration.
+`variant="accent"` already names badge's single-tone brand-accent fill; the rail
+is an unrelated, additive edge decoration.
 
 ---
 
@@ -1353,11 +1356,11 @@ an `<a>` styled with `getNavLinkClasses`. In dropdown mode it renders a
 `getDropdownMenuClasses` menu panel (`data-sp-nav-item-menu`) that receives the
 default slot. `mega` and `viewport` are forwarded to both calls, matching
 upstream's paired `mega`/`viewport` contract; `accent`/`accentColor` are
-forwarded to the menu panel only. Toggling `open` and wiring click/outside-click/escape behavior
-is consumer-driven — no client-side JS is included; use
-`@phcdevworks/spectre-components`'s `sp-nav-item` if you want that behavior
-built in. Use a `trigger` named slot to project custom trigger content instead
-of `label`.
+forwarded to the menu panel only. Toggling `open` and wiring
+click/outside-click/escape behavior is consumer-driven — no client-side JS is
+included; use `@phcdevworks/spectre-components`'s `sp-nav-item` if you want that
+behavior built in. Use a `trigger` named slot to project custom trigger content
+instead of `label`.
 
 ```astro
 ---
@@ -1427,6 +1430,80 @@ used.
 ```astro
 <SpTooltip placement="bottom" visible>Save your changes</SpTooltip>
 ```
+
+---
+
+### SpTabs
+
+`SpTabs` renders a deterministic tab list from `tabs`; pair each definition with
+an `SpTabPanel` using the same `id`. Selection is controlled by `activeId`.
+
+```astro
+<SpTabs tabs={[{ id: 'overview', label: 'Overview' }, { id: 'activity', label: 'Activity' }]} activeId="overview">
+  <SpTabPanel id="overview" active>Overview content</SpTabPanel>
+  <SpTabPanel id="activity">Activity content</SpTabPanel>
+</SpTabs>
+```
+
+### SpTabPanel
+
+`SpTabPanel` renders a `role="tabpanel"` associated with the matching tab
+button. Pass `active` to expose it and `disabled` to keep it hidden.
+
+### SpAccordion
+
+`SpAccordion` applies the upstream group recipe. Use `flush` for edge-to-edge
+composition and place `SpAccordionItem` children in its default slot.
+
+### SpAccordionItem
+
+`SpAccordionItem` uses native `<details>`/`<summary>` markup, with `header` and
+optional `icon` slots plus the default panel slot. `open` sets the initial
+expanded state without client JavaScript.
+
+### SpBreadcrumb
+
+Pass an `items` array of `{ label, href?, current? }`. Current items receive
+`aria-current="page"`; setting `separator` uses the custom-separator recipe.
+
+### SpListGroup
+
+`SpListGroup` forwards `flush`, `horizontal`, `accent`, and `accentColor` and
+accepts `div`, `ul`, `ol`, or `nav` through `as`.
+
+### SpListGroupItem
+
+`SpListGroupItem` supports `div`, `li`, `a`, and `button` roots and forwards
+interactive, active, selected, disabled, hover, and focus states. Named
+`heading` and `text` slots receive the matching sub-recipe classes.
+
+### SpOffcanvas
+
+`SpOffcanvas` renders a controlled backdrop and dialog panel. Use `open` and
+`placement`, with named `header`/`footer` slots and the default body slot.
+
+### SpCarousel
+
+`SpCarousel` provides the root, viewport, optional previous/next controls,
+indicator wrapper, and caption. Compose slides and indicators with the
+re-exported `getCarouselSlideClasses` and `getCarouselIndicatorClasses`.
+
+### SpTable
+
+`SpTable` renders a responsive wrapper and semantic `<table>`, forwarding
+`size`, `striped`, `hoverable`, and `bordered`. Use `getTableRowClasses` for
+contextual or selected rows.
+
+### SpPagination
+
+`SpPagination` renders page ranges from `page`, `total`, and `siblings`. Set
+`hrefTemplate` with a `{page}` placeholder for crawlable links.
+
+### SpStepper
+
+`SpStepper` renders an ordered list from `steps` and derives `done`, `active`,
+and `pending` states from the zero-based `current` index. A step-level `state`
+overrides the derived state.
 
 ---
 
@@ -1523,11 +1600,16 @@ const links = [
 
 | Helper                                | For                                               |
 | ------------------------------------- | ------------------------------------------------- |
+| `getAccordion*Classes`                | Accordion root and item structure                 |
 | `getAlertClasses`                     | Alert class generation                            |
+| `getAlertIconClasses`                 | Alert icon wrapper                                |
+| `getAlertDismissClasses`              | Alert dismiss control                             |
 | `getAvatarClasses`                    | Avatar class generation                           |
 | `getButtonClasses`                    | Button class generation                           |
+| `getBreadcrumb*Classes`               | Breadcrumb root and item structure                |
 | `getCardClasses`                      | Card class generation                             |
 | `getCardBleedClasses`                 | Full-bleed child composition inside a padded card |
+| `getCarousel*Classes`                 | Carousel root, slides, controls, and indicators   |
 | `getBadgeClasses`                     | Badge class generation                            |
 | `getContainerClasses`                 | Container class generation                        |
 | `getDropdownClasses`                  | Dropdown root classes                             |
@@ -1536,11 +1618,14 @@ const links = [
 | `getFooterClasses`                    | Footer class generation                           |
 | `getIconBoxClasses`                   | Icon box class generation                         |
 | `getInputClasses`                     | Input class generation                            |
+| `getListGroup*Classes`                | List-group root and item structure                |
 | `getModalClasses`                     | Modal root classes                                |
 | `getModalOverlayClasses`              | Modal overlay/backdrop classes                    |
 | `getNavClasses`                       | Nav root classes                                  |
 | `getNavLinksClasses`                  | Nav links container                               |
 | `getNavLinkClasses`                   | Individual nav link                               |
+| `getOffcanvas*Classes`                | Offcanvas panel and backdrop structure            |
+| `getPagination*Classes`               | Pagination root, items, and ellipsis              |
 | `getPricingCardClasses`               | Pricing card root classes                         |
 | `getPricingCardBadgeClasses`          | Pricing card badge wrapper                        |
 | `getPricingCardPriceContainerClasses` | Pricing card price container                      |
@@ -1559,6 +1644,9 @@ const links = [
 | `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop                       |
 | `getSidebarToggleClasses`             | Sidebar toggle button classes                     |
 | `getStackClasses`                     | Stack class generation                            |
+| `getStepper*Classes`                  | Stepper root, steps, indicators, and labels       |
+| `getTable*Classes`                    | Table wrapper, table, and row classes             |
+| `getTabs*Classes`                     | Tabs root, list, items, and panels                |
 | `getTestimonialClasses`               | Testimonial root classes                          |
 | `getTestimonialQuoteClasses`          | Quote wrapper                                     |
 | `getTestimonialAuthorClasses`         | Author section wrapper                            |
@@ -1582,11 +1670,15 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `NavLinkRecipeOptions`, `PricingCardRecipeOptions`, `RatingRecipeOptions`,
 `SectionRecipeOptions`, `SidebarRecipeOptions`, `SidebarLinkRecipeOptions`,
 `SidebarLinkLevel`, `StackRecipeOptions`, `StackDirection`, `StackBasis`,
-`StackAlign`, `StackGap`, `TestimonialRecipeOptions`, `TextRecipeOptions`, `TextSize`,
-`TextVariant`, `TextFamily`, `TextTransform`, `ToastRecipeOptions`,
+`StackAlign`, `StackGap`, `TestimonialRecipeOptions`, `TextRecipeOptions`,
+`TextSize`, `TextVariant`, `TextFamily`, `TextTransform`, `ToastRecipeOptions`,
 `ToastIconRecipeOptions`, `ToastVariant`, `TooltipRecipeOptions`,
-`TooltipPlacement`, `GridRecipeOptions`, `GridAlign`, `GridColumns`, `GridGap`, `GridSpan`,
-`GridSpanOptions`.
+`TooltipPlacement`, `GridRecipeOptions`, `GridAlign`, `GridColumns`, `GridGap`,
+`GridSpan`, `GridSpanOptions`.
+
+The corresponding accordion, breadcrumb, carousel, list-group, offcanvas,
+pagination, stepper, table, and tabs recipe option, variant, size, placement,
+orientation, state, and accent types are also re-exported.
 
 ## Package Exports
 
@@ -1594,11 +1686,15 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 
 ```ts
 import {
+  SpAccordion,
+  SpAccordionItem,
   SpAlert,
   SpAvatar,
   SpBadge,
   SpButton,
+  SpBreadcrumb,
   SpCard,
+  SpCarousel,
   SpCheckbox,
   SpContainer,
   SpDropdown,
@@ -1608,8 +1704,12 @@ import {
   SpIconBox,
   SpInput,
   SpLabel,
+  SpListGroup,
+  SpListGroupItem,
   SpModal,
   SpNav,
+  SpOffcanvas,
+  SpPagination,
   SpPricingCard,
   SpRadio,
   SpRating,
@@ -1619,6 +1719,10 @@ import {
   SpSidebarToggle,
   SpSpinner,
   SpStack,
+  SpStepper,
+  SpTabPanel,
+  SpTable,
+  SpTabs,
   SpTag,
   SpTestimonial,
   SpText,
@@ -1639,10 +1743,14 @@ import {
 
 ```ts
 import SpAlert from '@phcdevworks/spectre-ui-astro/components/SpAlert.astro'
+import SpAccordion from '@phcdevworks/spectre-ui-astro/components/SpAccordion.astro'
+import SpAccordionItem from '@phcdevworks/spectre-ui-astro/components/SpAccordionItem.astro'
 import SpAvatar from '@phcdevworks/spectre-ui-astro/components/SpAvatar.astro'
 import SpBadge from '@phcdevworks/spectre-ui-astro/components/SpBadge.astro'
 import SpButton from '@phcdevworks/spectre-ui-astro/components/SpButton.astro'
+import SpBreadcrumb from '@phcdevworks/spectre-ui-astro/components/SpBreadcrumb.astro'
 import SpCard from '@phcdevworks/spectre-ui-astro/components/SpCard.astro'
+import SpCarousel from '@phcdevworks/spectre-ui-astro/components/SpCarousel.astro'
 import SpCheckbox from '@phcdevworks/spectre-ui-astro/components/SpCheckbox.astro'
 import SpContainer from '@phcdevworks/spectre-ui-astro/components/SpContainer.astro'
 import SpDropdown from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
@@ -1652,8 +1760,12 @@ import SpGrid from '@phcdevworks/spectre-ui-astro/components/SpGrid.astro'
 import SpIconBox from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
 import SpLabel from '@phcdevworks/spectre-ui-astro/components/SpLabel.astro'
+import SpListGroup from '@phcdevworks/spectre-ui-astro/components/SpListGroup.astro'
+import SpListGroupItem from '@phcdevworks/spectre-ui-astro/components/SpListGroupItem.astro'
 import SpModal from '@phcdevworks/spectre-ui-astro/components/SpModal.astro'
 import SpNav from '@phcdevworks/spectre-ui-astro/components/SpNav.astro'
+import SpOffcanvas from '@phcdevworks/spectre-ui-astro/components/SpOffcanvas.astro'
+import SpPagination from '@phcdevworks/spectre-ui-astro/components/SpPagination.astro'
 import SpPricingCard from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpRadio from '@phcdevworks/spectre-ui-astro/components/SpRadio.astro'
 import SpRating from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
@@ -1663,6 +1775,10 @@ import SpSidebar from '@phcdevworks/spectre-ui-astro/components/SpSidebar.astro'
 import SpSidebarToggle from '@phcdevworks/spectre-ui-astro/components/SpSidebarToggle.astro'
 import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
+import SpStepper from '@phcdevworks/spectre-ui-astro/components/SpStepper.astro'
+import SpTabPanel from '@phcdevworks/spectre-ui-astro/components/SpTabPanel.astro'
+import SpTable from '@phcdevworks/spectre-ui-astro/components/SpTable.astro'
+import SpTabs from '@phcdevworks/spectre-ui-astro/components/SpTabs.astro'
 import SpTag from '@phcdevworks/spectre-ui-astro/components/SpTag.astro'
 import SpTestimonial from '@phcdevworks/spectre-ui-astro/components/SpTestimonial.astro'
 import SpText from '@phcdevworks/spectre-ui-astro/components/SpText.astro'
@@ -1678,39 +1794,60 @@ from `@phcdevworks/spectre-ui/index.css`.
 
 Each component family is classified by its support status in this adapter.
 
-| Family | Status | Notes |
-| --- | --- | --- |
-| alert | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| avatar | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| badge | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| button | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| card | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| checkbox | **stable** | Full prop, ARIA, and SSR coverage |
-| container | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| dropdown | **stable** | Full prop, slot, and SSR coverage |
-| fieldset | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| footer | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| grid | **stable** | Full prop, slot, and SSR coverage |
-| icon-box | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| input | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage |
-| label | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| modal | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| nav | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| pricing-card | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| radio | **stable** | Full prop, ARIA, and SSR coverage |
-| rating | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| section | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| select | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| sidebar | **stable** | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction |
-| spinner | **stable** | Full prop, ARIA, and SSR coverage |
-| stack | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| tag | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| testimonial | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| text | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| textarea | **stable** | Full prop, ARIA, and SSR coverage |
-| toast | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| tooltip | **stable** | Full prop, slot, ARIA, and SSR coverage |
-| prose | **not yet supported** | `getProseClasses` added in `@phcdevworks/spectre-ui@4.2.0`; no adapter component yet |
+| Family               | Status                | Notes                                                                                |
+| -------------------- | --------------------- | ------------------------------------------------------------------------------------ |
+| accordion            | **stable**            | Native details semantics, slot, state, and SSR coverage                              |
+| alert                | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| avatar               | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| badge                | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| button               | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| breadcrumb           | **stable**            | Item, current-page, separator, and SSR coverage                                      |
+| card                 | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| carousel             | **stable**            | Shell, controls, slot, ARIA, and SSR coverage                                        |
+| checkbox             | **stable**            | Full prop, ARIA, and SSR coverage                                                    |
+| container            | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| dropdown             | **stable**            | Full prop, slot, and SSR coverage                                                    |
+| fieldset             | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| footer               | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| grid                 | **stable**            | Full prop, slot, and SSR coverage                                                    |
+| icon-box             | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| input                | **stable**            | Full prop, ARIA, SSR, and explicit `id` invariant coverage                           |
+| label                | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| list-group           | **stable**            | Root/item, interaction-state, slot, and SSR coverage                                 |
+| modal                | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| nav                  | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| offcanvas            | **stable**            | Controlled panel, backdrop, slot, ARIA, and SSR coverage                             |
+| pagination           | **stable**            | Range, link-template, ARIA, and SSR coverage                                         |
+| pricing-card         | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| radio                | **stable**            | Full prop, ARIA, and SSR coverage                                                    |
+| rating               | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| section              | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| select               | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| sidebar              | **stable**            | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction                     |
+| spinner              | **stable**            | Full prop, ARIA, and SSR coverage                                                    |
+| stack                | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| stepper              | **stable**            | Derived/explicit state, ARIA, and SSR coverage                                       |
+| table                | **stable**            | Responsive wrapper, semantic table, and SSR coverage                                 |
+| tabs                 | **stable**            | Controlled selection, panel association, ARIA, and SSR coverage                      |
+| tag                  | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| testimonial          | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| text                 | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| textarea             | **stable**            | Full prop, ARIA, and SSR coverage                                                    |
+| toast                | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| tooltip              | **stable**            | Full prop, slot, ARIA, and SSR coverage                                              |
+| choice-card          | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| datepicker           | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| day                  | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| display              | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| external-auth-button | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| file-input           | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| heading              | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| lead                 | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| popover              | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| progress             | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| prose                | **not yet supported** | `getProseClasses` added in `@phcdevworks/spectre-ui@4.2.0`; no adapter component yet |
+| range                | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
+| switch               | **not yet supported** | Upstream recipe published; Astro wrapper not yet scheduled                           |
 
 **stable** — the component family is fully wired to upstream recipes, covered by
 SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking

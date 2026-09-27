@@ -1,0 +1,76 @@
+---
+import {
+  getTabsClasses,
+  getTabsItemClasses,
+  getTabsListClasses,
+  type TabsRecipeOptions,
+} from "@phcdevworks/spectre-ui";
+
+export interface SpTabDefinition {
+  id: string;
+  label: string;
+  disabled?: boolean;
+}
+
+interface SpTabsProps extends TabsRecipeOptions {
+  tabs: SpTabDefinition[];
+  activeId?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  tabs,
+  activeId,
+  variant,
+  vertical,
+  fullWidth,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  ...rest
+} = Astro.props as SpTabsProps;
+
+const resolvedActiveId =
+  tabs.find((tab) => tab.id === activeId && !tab.disabled)?.id ??
+  tabs.find((tab) => !tab.disabled)?.id;
+const classes = getTabsClasses({ variant, vertical, fullWidth });
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<div class={finalClass} id={id} {...rest}>
+  <div
+    class={getTabsListClasses()}
+    role="tablist"
+    aria-label={ariaLabel}
+    aria-labelledby={ariaLabelledby}
+    aria-orientation={vertical ? "vertical" : undefined}
+  >
+    {
+      tabs.map((tab) => {
+        const active = tab.id === resolvedActiveId;
+        return (
+          <button
+            class={getTabsItemClasses({ active, disabled: tab.disabled })}
+            id={`${tab.id}-tab`}
+            type="button"
+            role="tab"
+            aria-controls={tab.id}
+            aria-selected={active ? "true" : "false"}
+            disabled={tab.disabled ? true : undefined}
+            tabindex={active ? 0 : -1}
+            data-sp-tab-id={tab.id}
+          >
+            {tab.label}
+          </button>
+        );
+      })
+    }
+  </div>
+  <slot activeId={resolvedActiveId} />
+</div>

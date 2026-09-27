@@ -1,0 +1,36 @@
+---
+import type { ListGroupRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getListGroupClasses } from "@phcdevworks/spectre-ui";
+
+interface SpListGroupProps extends ListGroupRecipeOptions {
+  as?: "div" | "ul" | "ol" | "nav";
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  flush,
+  horizontal,
+  accent,
+  accentColor,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpListGroupProps;
+
+const finalClass = [
+  getListGroupClasses({ flush, horizontal, accent, accentColor }),
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
+  <slot />
+</Tag>

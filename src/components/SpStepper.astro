@@ -1,0 +1,60 @@
+---
+import type { StepperOrientation, StepperStepState } from "@phcdevworks/spectre-ui";
+import {
+  getStepperClasses,
+  getStepperIndicatorClasses,
+  getStepperLabelClasses,
+  getStepperStepClasses,
+} from "@phcdevworks/spectre-ui";
+
+export interface SpStepperStep {
+  label: string;
+  state?: StepperStepState;
+}
+
+interface SpStepperProps {
+  steps: SpStepperStep[];
+  current?: number;
+  orientation?: StepperOrientation;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  steps,
+  current: currentInput = 0,
+  orientation,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpStepperProps;
+
+const current = Math.max(0, Math.trunc(currentInput));
+const stateFor = (step: SpStepperStep, index: number): StepperStepState =>
+  step.state ?? (index < current ? "done" : index === current ? "active" : "pending");
+const finalClass = [getStepperClasses({ orientation }), className].filter(Boolean).join(" ");
+---
+
+<ol class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
+  {
+    steps.map((step, index) => {
+      const state = stateFor(step, index);
+      return (
+        <li
+          class={getStepperStepClasses({ state })}
+          aria-current={state === "active" ? "step" : undefined}
+          data-state={state}
+        >
+          <span class={getStepperIndicatorClasses()} aria-hidden="true">
+            {state === "done" ? "✓" : index + 1}
+          </span>
+          <span class={getStepperLabelClasses()}>{step.label}</span>
+        </li>
+      );
+    })
+  }
+</ol>

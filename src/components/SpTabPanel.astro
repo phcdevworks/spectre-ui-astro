@@ -1,0 +1,38 @@
+---
+import { getTabsPanelClasses } from "@phcdevworks/spectre-ui";
+
+interface SpTabPanelProps {
+  id: string;
+  active?: boolean;
+  disabled?: boolean;
+  class?: string;
+  tabindex?: number;
+
+  [key: string]: unknown;
+}
+
+const {
+  id,
+  active = false,
+  disabled = false,
+  class: className,
+  tabindex = 0,
+  ...rest
+} = Astro.props as SpTabPanelProps;
+
+const finalClass = [getTabsPanelClasses(), className].filter(Boolean).join(" ");
+const isHidden = !active || disabled;
+---
+
+<div
+  class={finalClass}
+  id={id}
+  role="tabpanel"
+  aria-labelledby={`${id}-tab`}
+  aria-disabled={disabled ? "true" : undefined}
+  hidden={isHidden ? true : undefined}
+  tabindex={isHidden ? -1 : tabindex}
+  {...rest}
+>
+  <slot />
+</div>

@@ -92,7 +92,7 @@ describe('root export contract validation', () => {
 
   it('rejects a missing recipe barrel even when the declaration remains in a comment', () => {
     const changed = index.replace(
-      'export * from "./recipes/index";',
+      /export \* from ["']\.\/recipes\/index["'];?/,
       '// export * from "./recipes/index";'
     )
     expect(() =>

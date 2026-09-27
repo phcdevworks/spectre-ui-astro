@@ -1,0 +1,94 @@
+---
+import type { ListGroupItemRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getListGroupItemClasses,
+  getListGroupItemHeadingClasses,
+  getListGroupItemTextClasses,
+} from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+
+type SpListGroupItemElement = "div" | "li" | "a" | "button";
+
+interface SpListGroupItemProps extends ListGroupItemRecipeOptions {
+  as?: SpListGroupItemElement;
+  class?: string;
+  id?: string;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  interactive,
+  active,
+  selected,
+  disabled,
+  hovered,
+  focused,
+  as: Tag = "div",
+  class: className,
+  id,
+  href,
+  type,
+  tabindex,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpListGroupItemProps;
+
+const isInteractive = interactive || Tag === "a" || Tag === "button";
+const finalClass = [
+  getListGroupItemClasses({
+    interactive: isInteractive,
+    active,
+    selected,
+    disabled,
+    hovered,
+    focused,
+  }),
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: Boolean(disabled),
+  href,
+  type,
+  tabindex,
+  interactive: isInteractive,
+});
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  href={finalHref}
+  type={finalType}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  role={isInteractive && Tag !== "a" && Tag !== "button" ? "button" : undefined}
+  aria-label={ariaLabel}
+  aria-current={active ? "true" : undefined}
+  aria-selected={selected ? "true" : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  tabindex={finalTabIndex}
+  {...rest}
+>
+  {
+    Astro.slots.has("heading") && (
+      <div class={getListGroupItemHeadingClasses()}>
+        <slot name="heading" />
+      </div>
+    )
+  }
+  {
+    Astro.slots.has("text") && (
+      <div class={getListGroupItemTextClasses()}>
+        <slot name="text" />
+      </div>
+    )
+  }
+  <slot />
+</Tag>

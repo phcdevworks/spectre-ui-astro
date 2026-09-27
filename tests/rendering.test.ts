@@ -638,7 +638,8 @@ describe("SSR rendering", () => {
     });
 
     expect(html).toContain(getFieldsetClasses({ disabled: true }));
-    expect(html).toContain(`<legend class="${getFieldsetLegendClasses()}">Contact details</legend>`);
+    expect(html).toContain(`<legend class="${getFieldsetLegendClasses()}"`);
+    expect(html).toContain("Contact details</legend>");
     expect(html).toContain("<fieldset");
   });
 

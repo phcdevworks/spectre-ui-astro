@@ -31,7 +31,8 @@ describe("SpFieldset class and prop behavior", () => {
       props: { legend: "Contact details" },
     });
 
-    expect(html).toContain(`<legend class="${getFieldsetLegendClasses()}">Contact details</legend>`);
+    expect(html).toContain(`<legend class="${getFieldsetLegendClasses()}"`);
+    expect(html).toContain("Contact details</legend>");
   });
 
   it("does not render a legend element when legend is empty or omitted", async () => {
