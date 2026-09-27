@@ -4,12 +4,18 @@
 
 For every TODO item Claude Code completes, use this sequence in the same change:
 
-1. Keep the item in `TODO.md` while implementation or verification is in progress.
-2. Confirm every acceptance criterion is met and the repository's required tests and validation gate pass.
-3. Only after verification passes, remove the completed item from `TODO.md` immediately; do not leave it active or checked off.
-4. Update `CHANGELOG.md` under `[Unreleased]` as usual, update the applicable `ROADMAP.md` shipped/status table and phase text, and update every other affected status or dependency reference.
+1. Keep the item in `TODO.md` while implementation or verification is in
+   progress.
+2. Confirm every acceptance criterion is met and the repository's required tests
+   and validation gate pass.
+3. Only after verification passes, remove the completed item from `TODO.md`
+   immediately; do not leave it active or checked off.
+4. Update `CHANGELOG.md` under `[Unreleased]` as usual, update the applicable
+   `ROADMAP.md` shipped/status table and phase text, and update every other
+   affected status or dependency reference.
 
-If implementation is incomplete or any required check fails, keep the TODO item open and do not describe the work as shipped.
+If implementation is incomplete or any required check fails, keep the TODO item
+open and do not describe the work as shipped.
 
 ## Project Identity
 
@@ -24,22 +30,21 @@ PR requirements live in `AGENTS.md`.
 ## Multi-Agent Team
 
 Full roster, authority table, and PR requirements: [AGENTS.md](AGENTS.md).
-Claude Code remains the lead implementation authority for Astro adapter
-source changes and architecture. Resolve implementation conflicts by
-referencing this file together with `AGENTS.md`, `src/index.ts`,
-`package.json`, and `scripts/validate-package-contract.ts`.
+Claude Code remains the lead implementation authority for Astro adapter source
+changes and architecture. Resolve implementation conflicts by referencing this
+file together with `AGENTS.md`, `src/index.ts`, `package.json`, and
+`scripts/validate-package-contract.ts`.
 
 ## Git Access — Denied
 
 **Claude Code has zero git access in this repo, as part of a companywide
-policy.** Claude Code must not run `git commit`, `git push`, `git tag`, or
-any other git command — read-only or mutating — here. This supersedes the
-prior commit/push/tag grant described in this repo's `AGENTS.md`. OpenAI
-Codex now executes all git operations for this repo; see `AGENTS.md` and
-`CODEX.md`.
+policy.** Claude Code must not run `git commit`, `git push`, `git tag`, or any
+other git command — read-only or mutating — here. This supersedes the prior
+commit/push/tag grant described in this repo's `AGENTS.md`. OpenAI Codex now
+executes all git operations for this repo; see `AGENTS.md` and `CODEX.md`.
 
-When work is ready, Claude Code stops short of any git command and hands off
-to Codex (or Bradley Potts) with a summary of files changed and validation
+When work is ready, Claude Code stops short of any git command and hands off to
+Codex (or Bradley Potts) with a summary of files changed and validation
 performed (`npm run check`).
 
 ## The One Rule That Overrides Everything
@@ -56,7 +61,7 @@ recipe, the fix belongs upstream, not in this repository.
 ```bash
 npm install               # install dependencies
 npm run build             # tsup + types + component copy + package contract validation
-npm run typecheck         # tsc --noEmit
+npm run typecheck         # tsc --noEmit + astro check
 npm run lint              # eslint .
 npm test                  # vitest run
 npm run check             # full validation gate via ci:verify
@@ -71,32 +76,77 @@ package exports, examples, or docs.
 ```text
 src/
   components/
+    SpAccordion.astro
+    SpAccordionItem.astro
     SpAlert.astro
     SpAvatar.astro
     SpBadge.astro
+    SpBreadcrumb.astro
     SpButton.astro
     SpCard.astro
+    SpCardBleed.astro
+    SpCarousel.astro
+    SpCarouselIndicator.astro
+    SpCarouselSlide.astro
     SpCheckbox.astro
+    SpChoiceCard.astro
     SpContainer.astro
+    SpDatepicker.astro
+    SpDay.astro
+    SpDisplay.astro
     SpDropdown.astro
+    SpDropdownDivider.astro
+    SpDropdownHeader.astro
+    SpDropdownItem.astro
+    SpDropdownMenu.astro
+    SpExternalAuthButton.astro
     SpFieldset.astro
+    SpFileInput.astro
     SpFooter.astro
+    SpFooterChip.astro
+    SpFooterDivider.astro
+    SpFooterHeading.astro
+    SpFooterLink.astro
+    SpFooterLinks.astro
+    SpFooterText.astro
     SpGrid.astro
+    SpHeading.astro
     SpIconBox.astro
     SpInput.astro
+    SpInputGroup.astro
+    SpInputGroupAddon.astro
     SpLabel.astro
+    SpLead.astro
+    SpListGroup.astro
+    SpListGroupItem.astro
     SpModal.astro
     SpNav.astro
     SpNavItem.astro
+    SpNavLinks.astro
+    SpOffcanvas.astro
+    SpPagination.astro
+    SpPopover.astro
     SpPricingCard.astro
+    SpProgress.astro
+    SpProse.astro
     SpRadio.astro
+    SpRange.astro
     SpRating.astro
     SpSection.astro
     SpSelect.astro
     SpSidebar.astro
+    SpSidebarGroup.astro
+    SpSidebarHeader.astro
+    SpSidebarLink.astro
     SpSidebarToggle.astro
     SpSpinner.astro
     SpStack.astro
+    SpStepper.astro
+    SpSwitch.astro
+    SpTabPanel.astro
+    SpTable.astro
+    SpTableRow.astro
+    SpTabs.astro
     SpTag.astro
     SpTestimonial.astro
     SpText.astro
@@ -143,7 +193,7 @@ synchronized whenever adapter behavior changes.
 | ------------------------- | --------------------------------------------------------------------------------------------------- |
 | `npm run build`           | tsup bundle, type declarations, component copy, package contract, README contract                   |
 | `npm run lint`            | ESLint across the package                                                                           |
-| `npm run typecheck`       | `tsc --noEmit`                                                                                      |
+| `npm run typecheck`       | `tsc --noEmit`, then `astro check` over the Astro components                                        |
 | `npm test`                | Vitest suite (exports, rendering, component, docs-examples, upstream-parity, smoke)                 |
 | `npm run ci:verify`       | lint -> build -> typecheck -> test                                                                  |
 | `npm run check:ecosystem` | `spectre.manifest.json` validity and ecosystem dependency check via `@phcdevworks/spectre-manifest` |
@@ -218,9 +268,9 @@ explicit `id` requirement and returns stable helper and error associations.
 
 Claude Code implements features and fixes with a `CHANGELOG.md [Unreleased]`
 entry classified per change. Cutting the release itself — version bump,
-changelog versioning, `v<version>` tag, and GitHub Release — is Codex's job;
-see `CODEX.md` "Release Review Checklist" for the full procedure. `npm
-publish` stays with Bradley Potts regardless of who prepares the release.
+changelog versioning, `v<version>` tag, and GitHub Release — is Codex's job; see
+`CODEX.md` "Release Review Checklist" for the full procedure. `npm publish`
+stays with Bradley Potts regardless of who prepares the release.
 
 ## What This Package Does Not Own
 
@@ -246,8 +296,7 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 17 are complete and released (current version `4.7.0`; see
-`package.json` and `CHANGELOG.md`). There is no open phase. New family or
-contract work opens only after its upstream recipe or typed contract is
-published. Check `ROADMAP.md` and `TODO.md` for exact scope before starting
-work.
+Phases 1 through 21 are released (current version `4.10.0`; see `package.json`
+and `CHANGELOG.md`). There is no open phase. New family or contract work opens
+only after its upstream recipe or typed contract is published. Check
+`ROADMAP.md` and `TODO.md` for exact scope before starting work.

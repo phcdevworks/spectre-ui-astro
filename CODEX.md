@@ -85,7 +85,7 @@ Audit sequence:
 2. `README.md` for consumer-facing installation, usage, component APIs, and
    package overview.
 3. `CONTRIBUTING.md` for human contributor workflow.
-4. `CLAUDE.md`, `CODEX.md`, `JULES.md`, and `COPILOT.md` for role-specific
+4. `CLAUDE.md`, `CODEX.md`, `JULES.md`, `GROK.md`, and `COPILOT.md` for role-specific
    instructions only (roster and authority table live in `AGENTS.md`).
 5. `ROADMAP.md` and `TODO.md` for strategy and phased execution.
 6. `CHANGELOG.md` for public change classification.

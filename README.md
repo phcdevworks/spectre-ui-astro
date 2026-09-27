@@ -36,6 +36,7 @@ hand-rolling markup or styling against the recipes directly.
 | Codex       | [CODEX.md](CODEX.md)         |
 | Copilot     | [COPILOT.md](COPILOT.md)     |
 | Jules       | [JULES.md](JULES.md)         |
+| Grok        | [GROK.md](GROK.md)           |
 | Roadmap     | [ROADMAP.md](ROADMAP.md)     |
 | Todo        | [TODO.md](TODO.md)           |
 | Changelog   | [CHANGELOG.md](CHANGELOG.md) |
