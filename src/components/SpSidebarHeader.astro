@@ -1,0 +1,26 @@
+---
+import { getSidebarHeaderClasses } from "@phcdevworks/spectre-ui";
+
+type SpSidebarHeaderElement = "div" | "p" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+interface SpSidebarHeaderProps {
+  as?: SpSidebarHeaderElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "div",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpSidebarHeaderProps;
+
+const finalClass = [getSidebarHeaderClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

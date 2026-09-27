@@ -1,0 +1,47 @@
+---
+import type { DropdownMenuRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getDropdownMenuClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpDropdownMenuElement = "div" | "ul";
+
+interface SpDropdownMenuProps extends DropdownMenuRecipeOptions {
+  as?: SpDropdownMenuElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  placement,
+  open,
+  mega,
+  viewport,
+  accent,
+  accentColor,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  ...rest
+} = Astro.props as SpDropdownMenuProps;
+
+const classes = getDropdownMenuClasses(
+  omitUndefined({ placement, open, mega, viewport, accent, accentColor }),
+);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  {...rest}
+>
+  <slot />
+</Tag>

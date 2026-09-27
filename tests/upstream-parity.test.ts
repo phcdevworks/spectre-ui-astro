@@ -5,6 +5,7 @@ import * as upstream from "@phcdevworks/spectre-ui";
 import { describe, expect, it } from "vitest";
 
 import contractJson from "../astro-adapter.contract.json";
+import * as adapterRecipes from "../src/recipes/index";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const componentsDir = resolve(repoRoot, "src/components");
@@ -13,14 +14,27 @@ function camelToKebab(str: string): string {
   return str.replace(/([A-Z])/g, (_, c: string) => `-${c.toLowerCase()}`).replace(/^-/, "");
 }
 
+const upstreamHelpers = Object.keys(upstream)
+  .filter((name) => /^get[A-Z]/.test(name) && name.endsWith("Classes"))
+  .sort();
+
+const declaredFamilies = new Set([
+  ...(contractJson.componentFamilies.stable as string[]),
+  ...(contractJson.componentFamilies.provisional as string[]),
+  ...(contractJson.componentFamilies.notYetSupported as string[]),
+]);
+
+// A helper whose name extends another helper's (e.g. dropdown-menu) is treated
+// as a sub-part of that family unless the contract declares it as its own
+// family (e.g. input-group). Every helper must still be re-exported below, so a
+// new hyphenated family cannot hide behind a shorter prefix.
 function deriveUpstreamFamilies(): string[] {
-  const candidates = Object.keys(upstream)
-    .filter((name) => /^get[A-Z]/.test(name) && name.endsWith("Classes"))
-    .map((name) => camelToKebab(name.slice(3, -7)))
-    .sort();
+  const candidates = upstreamHelpers.map((name) => camelToKebab(name.slice(3, -7)));
 
   return candidates.filter(
-    (family) => !candidates.some((other) => other !== family && family.startsWith(`${other}-`)),
+    (family) =>
+      declaredFamilies.has(family) ||
+      !candidates.some((other) => other !== family && family.startsWith(`${other}-`)),
   );
 }
 
@@ -29,14 +43,25 @@ function familyToComponentName(family: string): string {
 }
 
 describe("upstream UI family parity", () => {
+  it("re-exports every upstream recipe helper", () => {
+    const missing = upstreamHelpers.filter((name) => !(name in adapterRecipes));
+    expect(
+      missing,
+      `Upstream recipe helpers not re-exported from src/recipes/index.ts: ${missing.join(", ")}`,
+    ).toHaveLength(0);
+  });
+
+  it("declares every upstream recipe helper in the contract", () => {
+    const declared = new Set(contractJson.rootExports.recipeHelpers as string[]);
+    const undeclared = upstreamHelpers.filter((name) => !declared.has(name));
+    expect(
+      undeclared,
+      `Upstream recipe helpers missing from astro-adapter.contract.json rootExports.recipeHelpers: ${undeclared.join(", ")}`,
+    ).toHaveLength(0);
+  });
+
   it("declares all upstream recipe families in the contract", () => {
     const upstreamFamilies = deriveUpstreamFamilies();
-    const declaredFamilies = new Set([
-      ...(contractJson.componentFamilies.stable as string[]),
-      ...(contractJson.componentFamilies.provisional as string[]),
-      ...(contractJson.componentFamilies.notYetSupported as string[]),
-    ]);
-
     const undeclared = upstreamFamilies.filter((f) => !declaredFamilies.has(f));
     expect(
       undeclared,

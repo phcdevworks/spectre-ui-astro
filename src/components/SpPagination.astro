@@ -5,6 +5,7 @@ import {
   getPaginationEllipsisClasses,
   getPaginationItemClasses,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type PageEntry = number | "ellipsis";
 
@@ -56,7 +57,7 @@ const {
 const total = Math.max(1, Math.trunc(totalInput));
 const page = Math.min(total, Math.max(1, Math.trunc(pageInput)));
 const siblings = Math.max(0, Math.trunc(siblingsInput));
-const finalClass = [getPaginationClasses({ size }), className].filter(Boolean).join(" ");
+const finalClass = [getPaginationClasses(omitUndefined({ size })), className].filter(Boolean).join(" ");
 const hrefFor = (target: number) =>
   hrefTemplate?.split("{page}").join(String(target));
 ---

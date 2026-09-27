@@ -1,0 +1,64 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { PopoverRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getPopoverArrowClasses,
+  getPopoverBodyClasses,
+  getPopoverClasses,
+  getPopoverHeaderClasses,
+} from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpPopoverElement = "div" | "section" | "aside";
+
+interface SpPopoverProps extends PopoverRecipeOptions {
+  as?: SpPopoverElement;
+  title?: string;
+  arrow?: boolean;
+  class?: string;
+  id?: string;
+  role?: HTMLAttributes<"div">["role"];
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  placement,
+  open,
+  as: Tag = "div",
+  title,
+  arrow = true,
+  class: className,
+  id,
+  role = "dialog",
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpPopoverProps;
+
+const classes = getPopoverClasses(omitUndefined({ placement, open }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const hasHeader = Boolean(title) || Astro.slots.has("header");
+const headerId = hasHeader && id ? `${id}-header` : undefined;
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  role={role}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabel ? undefined : headerId}
+  {...rest}
+>
+  {
+    hasHeader && (
+      <div class={getPopoverHeaderClasses()} id={headerId}>
+        <slot name="header">{title}</slot>
+      </div>
+    )
+  }
+  <div class={getPopoverBodyClasses()}>
+    <slot />
+  </div>
+  {arrow && <span class={getPopoverArrowClasses()} aria-hidden="true" />}
+</Tag>

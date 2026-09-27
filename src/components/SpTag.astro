@@ -2,6 +2,7 @@
 import type { TagRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getTagClasses } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpTagElement = "div" | "span" | "li" | "a" | "button";
 
@@ -49,7 +50,7 @@ const {
 const isTagDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getTagClasses({
+const classes = getTagClasses(omitUndefined({
   variant,
   size,
   dismissible,
@@ -61,7 +62,7 @@ const classes = getTagClasses({
   focused,
   active,
   fullWidth,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
@@ -87,7 +88,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
   aria-describedby={ariaDescribedby}
   aria-disabled={isTagDisabled ? "true" : undefined}
   aria-busy={loading ? "true" : undefined}
-  aria-pressed={selected !== undefined ? String(selected) : undefined}
+  aria-pressed={selected === undefined ? undefined : selected ? "true" : "false"}
   tabindex={finalTabIndex}
   {...rest}
 >

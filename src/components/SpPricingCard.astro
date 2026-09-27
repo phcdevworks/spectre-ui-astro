@@ -8,6 +8,7 @@ import {
   type PricingCardRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpPricingCardElement =
   | "div"
@@ -67,7 +68,7 @@ const {
 const isPricingCardDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getPricingCardClasses({
+const classes = getPricingCardClasses(omitUndefined({
   featured,
   fullHeight,
   accent,
@@ -78,7 +79,7 @@ const classes = getPricingCardClasses({
   hovered,
   focused,
   active,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({

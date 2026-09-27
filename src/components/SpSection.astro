@@ -1,6 +1,7 @@
 ---
 import type { SectionRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getSectionClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpSectionElement = "section" | "div" | "article" | "aside" | "main";
 
@@ -15,6 +16,8 @@ interface SpSectionProps extends SectionRecipeOptions {
 }
 
 const {
+  spacing,
+  gap,
   as: Tag = "section",
   class: className,
   id,
@@ -23,7 +26,7 @@ const {
   ...rest
 } = Astro.props as SpSectionProps;
 
-const classes = getSectionClasses({});
+const classes = getSectionClasses(omitUndefined({ spacing, gap }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

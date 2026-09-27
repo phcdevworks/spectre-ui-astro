@@ -1,6 +1,7 @@
 ---
 import type { FooterChipRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getFooterChipClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpFooterChipProps extends FooterChipRecipeOptions {
   class?: string;
@@ -22,7 +23,7 @@ const {
   ...rest
 } = Astro.props as SpFooterChipProps;
 
-const classes = getFooterChipClasses({ disabled, hovered, focused });
+const classes = getFooterChipClasses(omitUndefined({ disabled, hovered, focused }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

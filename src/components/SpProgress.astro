@@ -1,0 +1,88 @@
+---
+import type {
+  ProgressBarRecipeOptions,
+  ProgressRecipeOptions,
+} from "@phcdevworks/spectre-ui";
+import {
+  getProgressBarClasses,
+  getProgressClasses,
+  getProgressLabelClasses,
+} from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpProgressProps extends ProgressRecipeOptions, ProgressBarRecipeOptions {
+  value?: number;
+  min?: number;
+  max?: number;
+  label?: string;
+  valueText?: string;
+  class?: string;
+  barClass?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  variant,
+  indeterminate,
+  value,
+  min = 0,
+  max = 100,
+  label,
+  valueText,
+  class: className,
+  barClass,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  ...rest
+} = Astro.props as SpProgressProps;
+
+const isIndeterminate = indeterminate || value === undefined;
+const span = max - min;
+const clamped =
+  value === undefined ? undefined : Math.min(max, Math.max(min, value));
+const percent =
+  clamped === undefined || span <= 0 ? 0 : ((clamped - min) / span) * 100;
+
+const trackClass = [getProgressClasses(omitUndefined({ size })), className]
+  .filter(Boolean)
+  .join(" ");
+const finalBarClass = [
+  getProgressBarClasses(omitUndefined({ variant, indeterminate: isIndeterminate })),
+  barClass,
+]
+  .filter(Boolean)
+  .join(" ");
+const labelId = label && id ? `${id}-label` : undefined;
+---
+
+{
+  label && (
+    <span class={getProgressLabelClasses()} id={labelId}>
+      {label}
+    </span>
+  )
+}
+<div
+  class={trackClass}
+  id={id}
+  role="progressbar"
+  aria-valuemin={min}
+  aria-valuemax={max}
+  aria-valuenow={isIndeterminate ? undefined : clamped}
+  aria-valuetext={valueText}
+  aria-label={ariaLabel ?? (labelId ? undefined : label)}
+  aria-labelledby={ariaLabelledby ?? labelId}
+  aria-busy={isIndeterminate ? "true" : undefined}
+  {...rest}
+>
+  <div
+    class={finalBarClass}
+    style={isIndeterminate ? undefined : { width: `${percent}%` }}
+  />
+</div>

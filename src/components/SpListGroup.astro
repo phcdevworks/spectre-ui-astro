@@ -1,6 +1,7 @@
 ---
 import type { ListGroupRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getListGroupClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpListGroupProps extends ListGroupRecipeOptions {
   as?: "div" | "ul" | "ol" | "nav";
@@ -24,7 +25,7 @@ const {
 } = Astro.props as SpListGroupProps;
 
 const finalClass = [
-  getListGroupClasses({ flush, horizontal, accent, accentColor }),
+  getListGroupClasses(omitUndefined({ flush, horizontal, accent, accentColor })),
   className,
 ]
   .filter(Boolean)

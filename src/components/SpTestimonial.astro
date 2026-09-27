@@ -9,6 +9,7 @@ import {
   type TestimonialRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpTestimonialElement =
   | "div"
@@ -68,7 +69,7 @@ const {
 const isTestimonialDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getTestimonialClasses({
+const classes = getTestimonialClasses(omitUndefined({
   variant,
   fullHeight,
   accent,
@@ -79,7 +80,7 @@ const classes = getTestimonialClasses({
   active,
   disabled: isTestimonialDisabled,
   loading,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({

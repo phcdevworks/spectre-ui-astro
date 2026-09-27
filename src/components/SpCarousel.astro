@@ -7,6 +7,7 @@ import {
   getCarouselIndicatorsClasses,
   getCarouselViewportClasses,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpCarouselProps extends CarouselRecipeOptions {
   as?: "section" | "div";
@@ -30,7 +31,7 @@ const {
   ...rest
 } = Astro.props as SpCarouselProps;
 
-const finalClass = [getCarouselClasses({ fade }), className].filter(Boolean).join(" ");
+const finalClass = [getCarouselClasses(omitUndefined({ fade })), className].filter(Boolean).join(" ");
 ---
 
 <Tag class={finalClass} id={id} role="region" aria-roledescription="carousel" aria-label={ariaLabel} {...rest}>

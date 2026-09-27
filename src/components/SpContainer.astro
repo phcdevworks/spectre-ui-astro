@@ -1,6 +1,7 @@
 ---
 import type { ContainerRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getContainerClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpContainerElement = "div" | "section" | "main" | "article" | "aside";
 
@@ -16,6 +17,7 @@ interface SpContainerProps extends ContainerRecipeOptions {
 
 const {
   maxWidth,
+  padding,
   as: Tag = "div",
   class: className,
   id,
@@ -24,7 +26,7 @@ const {
   ...rest
 } = Astro.props as SpContainerProps;
 
-const classes = getContainerClasses({ maxWidth });
+const classes = getContainerClasses(omitUndefined({ maxWidth, padding }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

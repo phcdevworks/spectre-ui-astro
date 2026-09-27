@@ -6,6 +6,7 @@ import {
   getListGroupItemTextClasses,
 } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpListGroupItemElement = "div" | "li" | "a" | "button";
 
@@ -40,14 +41,14 @@ const {
 
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 const finalClass = [
-  getListGroupItemClasses({
+  getListGroupItemClasses(omitUndefined({
     interactive: isInteractive,
     active,
     selected,
     disabled,
     hovered,
     focused,
-  }),
+  })),
   className,
 ]
   .filter(Boolean)

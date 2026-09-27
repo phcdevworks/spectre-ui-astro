@@ -1,6 +1,7 @@
 ---
 import type { ModalRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getModalClasses, getModalOverlayClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpModalElement = "div" | "section";
 
@@ -29,8 +30,8 @@ const {
   ...rest
 } = Astro.props as SpModalProps;
 
-const overlayClasses = getModalOverlayClasses({ open });
-const modalClasses = getModalClasses({ open, fullWidth, accent, accentColor });
+const overlayClasses = getModalOverlayClasses(omitUndefined({ open }));
+const modalClasses = getModalClasses(omitUndefined({ open, fullWidth, accent, accentColor }));
 const finalClass = [modalClasses, className].filter(Boolean).join(" ");
 const isHidden = !open;
 ---

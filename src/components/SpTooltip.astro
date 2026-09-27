@@ -1,6 +1,8 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import type { TooltipRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getTooltipClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpTooltipElement = "div" | "span";
 
@@ -8,7 +10,7 @@ interface SpTooltipProps extends TooltipRecipeOptions {
   as?: SpTooltipElement;
   class?: string;
   id?: string;
-  role?: string;
+  role?: HTMLAttributes<"div">["role"];
 
   [key: string]: unknown;
 }
@@ -25,7 +27,7 @@ const {
   ...rest
 } = Astro.props as SpTooltipProps;
 
-const classes = getTooltipClasses({ placement, visible, accent, accentColor });
+const classes = getTooltipClasses(omitUndefined({ placement, visible, accent, accentColor }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

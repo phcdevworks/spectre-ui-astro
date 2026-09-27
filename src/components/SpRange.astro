@@ -1,0 +1,68 @@
+---
+import type { RangeRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getRangeClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpRangeProps extends RangeRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  value?: number;
+  min?: number;
+  max?: number;
+  step?: number | "any";
+  required?: boolean;
+  form?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  disabled,
+  focused,
+  class: className,
+  id,
+  name,
+  value,
+  min = 0,
+  max = 100,
+  step,
+  required,
+  form,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpRangeProps;
+
+const classes = getRangeClasses(omitUndefined({ disabled, focused }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+// WebKit/Blink paint the filled track from this upstream-owned custom property.
+const span = max - min;
+const fill =
+  value === undefined || span <= 0
+    ? undefined
+    : `${Math.min(100, Math.max(0, ((value - min) / span) * 100))}%`;
+const fillStyle = fill ? { "--sp-component-range-value": fill } : undefined;
+---
+
+<input
+  type="range"
+  class={finalClass}
+  id={id}
+  name={name}
+  value={value}
+  min={min}
+  max={max}
+  step={step}
+  disabled={disabled}
+  required={required}
+  form={form}
+  style={fillStyle}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+/>

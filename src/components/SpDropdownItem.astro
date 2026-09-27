@@ -1,0 +1,65 @@
+---
+import type { DropdownItemRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getDropdownItemClasses } from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpDropdownItemElement = "a" | "button" | "li" | "div";
+
+interface SpDropdownItemProps extends DropdownItemRecipeOptions {
+  as?: SpDropdownItemElement;
+  class?: string;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  active,
+  selected,
+  disabled,
+  hovered,
+  focused,
+  as,
+  class: className,
+  href,
+  type,
+  tabindex,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpDropdownItemProps;
+
+const Tag = as ?? (href ? "a" : "button");
+const classes = getDropdownItemClasses(
+  omitUndefined({ active, selected, disabled, hovered, focused }),
+);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled: disabled,
+  href,
+  type,
+  tabindex,
+});
+---
+
+<Tag
+  class={finalClass}
+  href={finalHref}
+  type={finalType}
+  id={id}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  aria-current={selected && Tag === "a" ? "page" : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  aria-label={ariaLabel}
+  tabindex={finalTabIndex}
+  {...rest}
+>
+  <slot />
+</Tag>

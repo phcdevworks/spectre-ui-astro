@@ -4,23 +4,23 @@ export function resolveInteractiveAttrs({
   href,
   type,
   tabindex,
-  interactive,
+  interactive
 }: {
-  Tag: string;
-  isDisabled: boolean | undefined;
-  href?: string;
-  type?: "button" | "submit" | "reset";
-  tabindex?: number;
-  interactive?: boolean;
+  Tag: string
+  isDisabled: boolean | undefined
+  href?: string | undefined
+  type?: 'button' | 'submit' | 'reset' | undefined
+  tabindex?: number | undefined
+  interactive?: boolean | undefined
 }) {
   return {
-    finalType: Tag === "button" ? (type ?? "button") : undefined,
-    finalHref: Tag === "a" && !isDisabled ? href : undefined,
+    finalType: Tag === 'button' ? (type ?? 'button') : undefined,
+    finalHref: Tag === 'a' && !isDisabled ? href : undefined,
     finalTabIndex:
-      Tag !== "button" && isDisabled
+      Tag !== 'button' && isDisabled
         ? -1
-        : interactive && Tag !== "button" && Tag !== "a"
+        : interactive && Tag !== 'button' && Tag !== 'a'
           ? (tabindex ?? 0)
-          : tabindex,
-  };
+          : tabindex
+  }
 }

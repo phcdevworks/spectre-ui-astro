@@ -1,6 +1,7 @@
 ---
 import type { CheckboxRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getCheckboxClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpCheckboxProps extends CheckboxRecipeOptions {
   class?: string;
@@ -29,7 +30,7 @@ const {
   ...rest
 } = Astro.props as SpCheckboxProps;
 
-const classes = getCheckboxClasses({ checked, disabled });
+const classes = getCheckboxClasses(omitUndefined({ checked, disabled }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

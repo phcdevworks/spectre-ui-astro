@@ -1,0 +1,62 @@
+---
+import type { FileInputRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getFileInputClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpFileInputProps extends FileInputRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  accept?: string;
+  multiple?: boolean;
+  capture?: "user" | "environment";
+  required?: boolean;
+  form?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  state,
+  fullWidth,
+  disabled,
+  focused,
+  class: className,
+  id,
+  name,
+  accept,
+  multiple,
+  capture,
+  required,
+  form,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpFileInputProps;
+
+const classes = getFileInputClasses(
+  omitUndefined({ size, state, fullWidth, disabled, focused }),
+);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<input
+  type="file"
+  class={finalClass}
+  id={id}
+  name={name}
+  accept={accept}
+  multiple={multiple}
+  capture={capture}
+  disabled={disabled}
+  required={required}
+  form={form}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-invalid={state === "invalid" ? "true" : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+/>

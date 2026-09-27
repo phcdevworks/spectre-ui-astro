@@ -6,6 +6,7 @@ import {
   getStepperLabelClasses,
   getStepperStepClasses,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 export interface SpStepperStep {
   label: string;
@@ -36,7 +37,7 @@ const {
 const current = Math.max(0, Math.trunc(currentInput));
 const stateFor = (step: SpStepperStep, index: number): StepperStepState =>
   step.state ?? (index < current ? "done" : index === current ? "active" : "pending");
-const finalClass = [getStepperClasses({ orientation }), className].filter(Boolean).join(" ");
+const finalClass = [getStepperClasses(omitUndefined({ orientation })), className].filter(Boolean).join(" ");
 ---
 
 <ol class={finalClass} id={id} aria-label={ariaLabel} {...rest}>

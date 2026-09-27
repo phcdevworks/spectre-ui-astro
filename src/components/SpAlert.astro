@@ -6,6 +6,7 @@ import {
   getAlertIconClasses,
 } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpAlertElement = "div" | "section" | "aside" | "article" | "a" | "button";
 
@@ -55,7 +56,7 @@ const {
 const isAlertDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getAlertClasses({
+const classes = getAlertClasses(omitUndefined({
   variant,
   size,
   dismissed,
@@ -67,7 +68,7 @@ const classes = getAlertClasses({
   hovered,
   focused,
   active,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({

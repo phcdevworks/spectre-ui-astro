@@ -1,6 +1,7 @@
 ---
 import type { FieldsetRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getFieldsetClasses, getFieldsetLegendClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpFieldsetProps extends FieldsetRecipeOptions {
   class?: string;
@@ -26,7 +27,7 @@ const {
   ...rest
 } = Astro.props as SpFieldsetProps;
 
-const classes = getFieldsetClasses({ disabled });
+const classes = getFieldsetClasses(omitUndefined({ disabled }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 const legendClasses = getFieldsetLegendClasses();
 const visibleLegend = legend?.trim() ? legend : undefined;

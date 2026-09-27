@@ -1,12 +1,17 @@
 ---
 import type { DropdownAccentColor, DropdownAccentEdge, DropdownPlacement } from "@phcdevworks/spectre-ui";
 import { getDropdownClasses, getDropdownMenuClasses, getNavLinkClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpNavItemProps {
   dropdown?: boolean;
   href?: string;
   label?: string;
   open?: boolean;
+  active?: boolean;
+  disabled?: boolean;
+  hovered?: boolean;
+  focused?: boolean;
   placement?: DropdownPlacement;
   mega?: boolean;
   viewport?: boolean;
@@ -25,6 +30,10 @@ const {
   href,
   label,
   open = false,
+  active,
+  disabled,
+  hovered,
+  focused,
   placement = "bottom-start",
   mega,
   viewport,
@@ -37,10 +46,10 @@ const {
   ...rest
 } = Astro.props as SpNavItemProps;
 
-const navLinkClasses = getNavLinkClasses();
+const navLinkClasses = getNavLinkClasses(omitUndefined({ active, disabled, hovered, focused }));
 const finalNavLinkClass = [navLinkClasses, className].filter(Boolean).join(" ");
-const wrapperClasses = getDropdownClasses({ mega, viewport });
-const menuClasses = getDropdownMenuClasses({ open, placement, mega, viewport, accent, accentColor });
+const wrapperClasses = getDropdownClasses(omitUndefined({ mega, viewport }));
+const menuClasses = getDropdownMenuClasses(omitUndefined({ open, placement, mega, viewport, accent, accentColor }));
 ---
 
 {
@@ -50,6 +59,7 @@ const menuClasses = getDropdownMenuClasses({ open, placement, mega, viewport, ac
         type="button"
         class={finalNavLinkClass}
         data-sp-nav-item-trigger
+        disabled={disabled ? true : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : "false"}
         aria-label={ariaLabel ?? label}
@@ -62,7 +72,17 @@ const menuClasses = getDropdownMenuClasses({ open, placement, mega, viewport, ac
       </div>
     </div>
   ) : (
-    <a href={href} class={finalNavLinkClass} id={id} title={title} aria-label={ariaLabel} {...rest}>
+    <a
+      href={disabled ? undefined : href}
+      class={finalNavLinkClass}
+      id={id}
+      title={title}
+      aria-label={ariaLabel}
+      aria-current={active ? "page" : undefined}
+      aria-disabled={disabled ? "true" : undefined}
+      tabindex={disabled ? -1 : undefined}
+      {...rest}
+    >
       <slot>{label}</slot>
     </a>
   )

@@ -5,6 +5,7 @@ import {
   getBreadcrumbLinkClasses,
   getBreadcrumbSeparatorClasses,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 export interface SpBreadcrumbItem {
   label: string;
@@ -32,7 +33,7 @@ const {
 } = Astro.props as SpBreadcrumbProps;
 
 const finalClass = [
-  getBreadcrumbClasses({ customSeparator: separator !== undefined }),
+  getBreadcrumbClasses(omitUndefined({ customSeparator: separator !== undefined })),
   className,
 ]
   .filter(Boolean)
@@ -43,7 +44,7 @@ const finalClass = [
   <ol class={finalClass}>
     {
       items.map((item, index) => (
-        <li class={getBreadcrumbItemClasses({ current: item.current })}>
+        <li class={getBreadcrumbItemClasses({ current: item.current ?? false })}>
           {item.href && !item.current ? (
             <a class={getBreadcrumbLinkClasses()} href={item.href}>
               {item.label}

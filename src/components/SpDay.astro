@@ -1,0 +1,57 @@
+---
+import type { DayRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getDayClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpDayElement = "button" | "a" | "span" | "div" | "td";
+
+interface SpDayProps extends DayRecipeOptions {
+  as?: SpDayElement;
+  date?: string;
+  href?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  selected,
+  today,
+  outsideMonth,
+  disabled,
+  hovered,
+  focused,
+  as: Tag = "button",
+  date,
+  href,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpDayProps;
+
+const classes = getDayClasses(
+  omitUndefined({ selected, today, outsideMonth, disabled, hovered, focused }),
+);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const isAction = Tag === "button" || Tag === "a";
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  type={Tag === "button" ? "button" : undefined}
+  href={Tag === "a" && !disabled ? href : undefined}
+  disabled={Tag === "button" && disabled ? true : undefined}
+  data-date={date}
+  aria-label={ariaLabel}
+  aria-pressed={Tag === "button" ? (selected ? "true" : "false") : undefined}
+  aria-selected={!isAction && selected ? "true" : undefined}
+  aria-current={today ? "date" : undefined}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+>
+  <slot />
+</Tag>

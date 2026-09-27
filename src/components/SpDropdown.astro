@@ -1,6 +1,7 @@
 ---
 import type { DropdownRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getDropdownClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpDropdownElement = "div" | "nav";
 
@@ -22,7 +23,7 @@ const {
   ...rest
 } = Astro.props as SpDropdownProps;
 
-const classes = getDropdownClasses({ fullWidth, mega, viewport });
+const classes = getDropdownClasses(omitUndefined({ fullWidth, mega, viewport }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

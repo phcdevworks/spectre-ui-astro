@@ -1,6 +1,7 @@
 ---
 import type { SpinnerRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getSpinnerClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpSpinnerElement = "div" | "span" | "i";
 
@@ -26,7 +27,7 @@ const {
 
 const isDisabled = disabled || loading;
 
-const classes = getSpinnerClasses({ variant, size, disabled: isDisabled, loading });
+const classes = getSpinnerClasses(omitUndefined({ variant, size, disabled: isDisabled, loading }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

@@ -2,6 +2,7 @@
 import type { ButtonRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getButtonClasses } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpButtonElement = "button" | "a" | "span" | "div" | "li";
 
@@ -48,7 +49,7 @@ const {
 
 const isDisabled = disabled || loading;
 
-const classes = getButtonClasses({
+const classes = getButtonClasses(omitUndefined({
   variant,
   size,
   fullWidth,
@@ -60,7 +61,7 @@ const classes = getButtonClasses({
   hovered,
   focused,
   active,
-});
+}));
 
 const finalClass = [classes, className].filter(Boolean).join(" ");
 

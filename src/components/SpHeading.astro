@@ -1,0 +1,41 @@
+---
+import type { HeadingRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getHeadingClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
+
+interface SpHeadingProps extends HeadingRecipeOptions {
+  as?: SpHeadingElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  level,
+  as,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpHeadingProps;
+
+const Tag = as ?? level ?? "h2";
+const classes = getHeadingClasses(omitUndefined({ level }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

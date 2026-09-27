@@ -1,6 +1,7 @@
 ---
 import type { TableRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getTableClasses, getTableWrapperClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpTableProps extends TableRecipeOptions {
   class?: string;
@@ -25,7 +26,7 @@ const {
   ...rest
 } = Astro.props as SpTableProps;
 
-const tableClass = [getTableClasses({ size, striped, hoverable, bordered }), className]
+const tableClass = [getTableClasses(omitUndefined({ size, striped, hoverable, bordered })), className]
   .filter(Boolean)
   .join(" ");
 const finalWrapperClass = [getTableWrapperClasses(), wrapperClass]

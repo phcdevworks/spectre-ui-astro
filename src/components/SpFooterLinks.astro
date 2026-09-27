@@ -1,0 +1,28 @@
+---
+import { getFooterLinksClasses } from "@phcdevworks/spectre-ui";
+
+type SpFooterLinksElement = "ul" | "ol" | "div" | "nav";
+
+interface SpFooterLinksProps {
+  as?: SpFooterLinksElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "ul",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpFooterLinksProps;
+
+const finalClass = [getFooterLinksClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>
+  <slot />
+</Tag>

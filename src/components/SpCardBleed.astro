@@ -1,0 +1,31 @@
+---
+import type { CardBleedRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getCardBleedClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpCardBleedElement = "div" | "figure" | "section";
+
+interface SpCardBleedProps extends CardBleedRecipeOptions {
+  as?: SpCardBleedElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  edges,
+  padded,
+  as: Tag = "div",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpCardBleedProps;
+
+const classes = getCardBleedClasses(omitUndefined({ edges, padded }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

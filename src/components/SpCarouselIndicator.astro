@@ -1,0 +1,37 @@
+---
+import type { CarouselIndicatorRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getCarouselIndicatorClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpCarouselIndicatorProps extends CarouselIndicatorRecipeOptions {
+  "aria-label": string;
+  target?: string;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  active,
+  "aria-label": ariaLabel,
+  target,
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpCarouselIndicatorProps;
+
+const classes = getCarouselIndicatorClasses(omitUndefined({ active }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<button
+  type="button"
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-current={active ? "true" : undefined}
+  aria-controls={target}
+  data-sp-carousel-indicator
+  {...rest}
+></button>

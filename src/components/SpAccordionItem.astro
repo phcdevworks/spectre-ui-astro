@@ -5,6 +5,7 @@ import {
   getAccordionItemClasses,
   getAccordionPanelClasses,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpAccordionItemProps {
   open?: boolean;
@@ -28,17 +29,17 @@ const {
 } = Astro.props as SpAccordionItemProps;
 
 const finalClass = [
-  getAccordionItemClasses({ expanded: open, disabled }),
+  getAccordionItemClasses(omitUndefined({ expanded: open, disabled })),
   className,
 ]
   .filter(Boolean)
   .join(" ");
-const headerClass = getAccordionHeaderClasses({
+const headerClass = getAccordionHeaderClasses(omitUndefined({
   expanded: open,
   disabled,
   hovered,
   focused,
-});
+}));
 ---
 
 <details class={finalClass} id={id} open={open ? true : undefined} {...rest}>

@@ -1,0 +1,26 @@
+---
+import { getInputGroupAddonClasses } from "@phcdevworks/spectre-ui";
+
+type SpInputGroupAddonElement = "span" | "div" | "label";
+
+interface SpInputGroupAddonProps {
+  as?: SpInputGroupAddonElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "span",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpInputGroupAddonProps;
+
+const finalClass = [getInputGroupAddonClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

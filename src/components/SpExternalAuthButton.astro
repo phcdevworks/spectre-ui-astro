@@ -1,0 +1,83 @@
+---
+import type { ExternalAuthButtonRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getExternalAuthButtonClasses,
+  getExternalAuthButtonIconClasses,
+} from "@phcdevworks/spectre-ui";
+import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpExternalAuthButtonElement = "button" | "a";
+
+interface SpExternalAuthButtonProps extends ExternalAuthButtonRecipeOptions {
+  as?: SpExternalAuthButtonElement;
+  class?: string;
+  href?: string;
+  rel?: string;
+  type?: "button" | "submit" | "reset";
+  tabindex?: number;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  fullWidth,
+  disabled,
+  loading,
+  hovered,
+  focused,
+  active,
+  as: Tag = "button",
+  class: className,
+  href,
+  rel,
+  type,
+  tabindex,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpExternalAuthButtonProps;
+
+const isDisabled = disabled || loading;
+const classes = getExternalAuthButtonClasses(
+  omitUndefined({ fullWidth, disabled: isDisabled, loading, hovered, focused, active }),
+);
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const hasIcon = Astro.slots.has("icon");
+
+const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
+  Tag,
+  isDisabled,
+  href,
+  type,
+  tabindex,
+});
+---
+
+<Tag
+  class={finalClass}
+  href={finalHref}
+  rel={Tag === "a" ? rel : undefined}
+  type={finalType}
+  id={id}
+  disabled={Tag === "button" && isDisabled ? true : undefined}
+  aria-disabled={isDisabled ? "true" : undefined}
+  aria-busy={loading ? "true" : undefined}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  tabindex={finalTabIndex}
+  {...rest}
+>
+  {
+    hasIcon && (
+      <span class={getExternalAuthButtonIconClasses()} aria-hidden="true">
+        <slot name="icon" />
+      </span>
+    )
+  }
+  <slot />
+</Tag>

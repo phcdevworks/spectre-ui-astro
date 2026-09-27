@@ -5,6 +5,7 @@ import {
   getTabsListClasses,
   type TabsRecipeOptions,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 export interface SpTabDefinition {
   id: string;
@@ -39,7 +40,7 @@ const {
 const resolvedActiveId =
   tabs.find((tab) => tab.id === activeId && !tab.disabled)?.id ??
   tabs.find((tab) => !tab.disabled)?.id;
-const classes = getTabsClasses({ variant, vertical, fullWidth });
+const classes = getTabsClasses(omitUndefined({ variant, vertical, fullWidth }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 
@@ -56,7 +57,7 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
         const active = tab.id === resolvedActiveId;
         return (
           <button
-            class={getTabsItemClasses({ active, disabled: tab.disabled })}
+            class={getTabsItemClasses({ active, disabled: tab.disabled ?? false })}
             id={`${tab.id}-tab`}
             type="button"
             role="tab"
@@ -72,5 +73,5 @@ const finalClass = [classes, className].filter(Boolean).join(" ");
       })
     }
   </div>
-  <slot activeId={resolvedActiveId} />
+  <slot />
 </div>

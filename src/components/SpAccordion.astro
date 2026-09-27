@@ -1,6 +1,7 @@
 ---
 import type { AccordionRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getAccordionClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpAccordionProps extends AccordionRecipeOptions {
   as?: "div" | "section";
@@ -20,7 +21,7 @@ const {
   ...rest
 } = Astro.props as SpAccordionProps;
 
-const finalClass = [getAccordionClasses({ flush }), className].filter(Boolean).join(" ");
+const finalClass = [getAccordionClasses(omitUndefined({ flush })), className].filter(Boolean).join(" ");
 ---
 
 <Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>

@@ -1,0 +1,54 @@
+---
+import type { SwitchRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSwitchClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpSwitchProps extends SwitchRecipeOptions {
+  class?: string;
+  id?: string;
+  name?: string;
+  value?: string;
+  required?: boolean;
+  form?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  checked,
+  disabled,
+  focused,
+  class: className,
+  id,
+  name,
+  value,
+  required,
+  form,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpSwitchProps;
+
+const classes = getSwitchClasses(omitUndefined({ size, checked, disabled, focused }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<input
+  type="checkbox"
+  role="switch"
+  class={finalClass}
+  id={id}
+  name={name}
+  value={value}
+  checked={checked}
+  disabled={disabled}
+  required={required}
+  form={form}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  aria-disabled={disabled ? "true" : undefined}
+  {...rest}
+/>

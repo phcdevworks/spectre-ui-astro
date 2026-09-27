@@ -6,10 +6,12 @@ import {
   getInputHelperTextClasses,
   getInputErrorMessageClasses,
 } from "@phcdevworks/spectre-ui";
+import type { InputState } from "@phcdevworks/spectre-ui";
 import {
   resolveSpInputAccessibility,
   type SpInputProps,
 } from "./sp-input.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 const {
   state,
@@ -53,7 +55,7 @@ const { inputId, helperId, errorId, describedBy } =
     "aria-describedby": ariaDescribedby,
   });
 
-const effectiveState = isInputLoading
+const effectiveState: InputState | undefined = isInputLoading
   ? "loading"
   : isInputDisabled
     ? "disabled"
@@ -61,7 +63,7 @@ const effectiveState = isInputLoading
       ? "error"
       : state;
 
-const classes = getInputClasses({
+const classes = getInputClasses(omitUndefined({
   state: effectiveState,
   size,
   fullWidth,
@@ -71,12 +73,12 @@ const classes = getInputClasses({
   active,
   disabled: isInputDisabled,
   loading: isInputLoading,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const wrapperClasses = getInputWrapperClasses();
-const labelClasses = getInputLabelClasses({ disabled: isInputDisabled });
-const helperTextClasses = getInputHelperTextClasses({ disabled: isInputDisabled });
+const labelClasses = getInputLabelClasses(omitUndefined({ disabled: isInputDisabled }));
+const helperTextClasses = getInputHelperTextClasses(omitUndefined({ disabled: isInputDisabled }));
 const errorMessageClasses = getInputErrorMessageClasses();
 ---
 

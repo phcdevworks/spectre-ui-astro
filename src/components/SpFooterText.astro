@@ -1,0 +1,29 @@
+---
+import { getFooterMutedClasses, getFooterTextClasses } from "@phcdevworks/spectre-ui";
+
+type SpFooterTextElement = "p" | "div" | "span" | "small";
+
+interface SpFooterTextProps {
+  as?: SpFooterTextElement;
+  muted?: boolean;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "p",
+  muted = false,
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpFooterTextProps;
+
+const classes = muted ? getFooterMutedClasses() : getFooterTextClasses();
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

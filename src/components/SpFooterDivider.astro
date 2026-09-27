@@ -1,0 +1,15 @@
+---
+import { getFooterDividerClasses } from "@phcdevworks/spectre-ui";
+
+interface SpFooterDividerProps {
+  class?: string;
+
+  [key: string]: unknown;
+}
+
+const { class: className, ...rest } = Astro.props as SpFooterDividerProps;
+
+const finalClass = [getFooterDividerClasses(), className].filter(Boolean).join(" ");
+---
+
+<hr class={finalClass} {...rest} />

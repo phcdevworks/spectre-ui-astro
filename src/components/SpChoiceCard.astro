@@ -1,0 +1,70 @@
+---
+import type { ChoiceCardRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getCheckboxClasses,
+  getChoiceCardClasses,
+  getRadioClasses,
+} from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpChoiceCardProps extends ChoiceCardRecipeOptions {
+  type?: "radio" | "checkbox";
+  checked?: boolean;
+  class?: string;
+  inputClass?: string;
+  id?: string;
+  name?: string;
+  value?: string;
+  required?: boolean;
+  form?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  type = "radio",
+  checked,
+  selected,
+  disabled,
+  hovered,
+  focused,
+  class: className,
+  inputClass,
+  id,
+  name,
+  value,
+  required,
+  form,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpChoiceCardProps;
+
+const cardClass = [
+  getChoiceCardClasses(omitUndefined({ selected, disabled, hovered, focused })),
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+const indicatorClasses =
+  type === "checkbox"
+    ? getCheckboxClasses(omitUndefined({ checked, disabled }))
+    : getRadioClasses(omitUndefined({ checked, disabled }));
+const finalInputClass = [indicatorClasses, inputClass].filter(Boolean).join(" ");
+---
+
+<label class={cardClass} {...rest}>
+  <input
+    type={type}
+    class={finalInputClass}
+    id={id}
+    name={name}
+    value={value}
+    checked={checked}
+    disabled={disabled}
+    required={required}
+    form={form}
+    aria-describedby={ariaDescribedby}
+  />
+  <slot />
+</label>

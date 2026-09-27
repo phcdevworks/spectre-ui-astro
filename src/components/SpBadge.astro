@@ -2,6 +2,7 @@
 import type { BadgeRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getBadgeClasses } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpBadgeElement = "span" | "div" | "a" | "button" | "li" | "time" | "mark";
 
@@ -31,6 +32,7 @@ const {
   fullWidth,
   accentRail,
   accentRailColor,
+  dot,
   interactive,
   disabled,
   loading,
@@ -54,19 +56,20 @@ const {
 const isBadgeDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getBadgeClasses({
+const classes = getBadgeClasses(omitUndefined({
   variant,
   size,
   fullWidth,
   accentRail,
   accentRailColor,
+  dot,
   interactive: isInteractive,
   disabled: isBadgeDisabled,
   loading,
   hovered,
   focused,
   active,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({

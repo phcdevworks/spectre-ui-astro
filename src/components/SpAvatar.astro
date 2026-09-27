@@ -2,6 +2,7 @@
 import type { AvatarRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getAvatarClasses } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpAvatarElement = "div" | "span" | "figure" | "a" | "button";
 
@@ -49,7 +50,7 @@ const {
 const isAvatarDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getAvatarClasses({
+const classes = getAvatarClasses(omitUndefined({
   shape,
   size,
   interactive: isInteractive,
@@ -60,7 +61,7 @@ const classes = getAvatarClasses({
   active,
   fullWidth,
   placeholder,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({

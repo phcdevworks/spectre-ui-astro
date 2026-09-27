@@ -1,6 +1,7 @@
 ---
 import type { FooterRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getFooterClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpFooterElement = "footer" | "div" | "section";
 
@@ -25,7 +26,7 @@ const {
   ...rest
 } = Astro.props as SpFooterProps;
 
-const classes = getFooterClasses({ bordered, fullWidth, accent, accentColor });
+const classes = getFooterClasses(omitUndefined({ bordered, fullWidth, accent, accentColor }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

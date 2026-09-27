@@ -1,0 +1,26 @@
+---
+import { getNavLinksClasses } from "@phcdevworks/spectre-ui";
+
+type SpNavLinksElement = "div" | "ul";
+
+interface SpNavLinksProps {
+  as?: SpNavLinksElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "div",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpNavLinksProps;
+
+const finalClass = [getNavLinksClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

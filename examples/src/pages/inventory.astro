@@ -1,0 +1,173 @@
+---
+import {
+  SpAccordion,
+  SpAccordionItem,
+  SpAlert,
+  SpBreadcrumb,
+  SpCard,
+  SpCarousel,
+  SpCarouselIndicator,
+  SpCarouselSlide,
+  SpHeading,
+  SpLead,
+  SpListGroup,
+  SpListGroupItem,
+  SpOffcanvas,
+  SpPagination,
+  SpSection,
+  SpStack,
+  SpStepper,
+  SpTabPanel,
+  SpTable,
+  SpTableRow,
+  SpTabs,
+} from "@phcdevworks/spectre-ui-astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const tabs = [
+  { id: "inventory-overview", label: "Overview" },
+  { id: "inventory-activity", label: "Activity" },
+  { id: "inventory-archived", label: "Archived", disabled: true },
+];
+
+const rows = [
+  { name: "Tokens", layer: "L1", status: "Published" },
+  { name: "UI", layer: "L2", status: "Published" },
+  { name: "UI Astro", layer: "L3b", status: "Unreleased", selected: true },
+];
+---
+
+<BaseLayout title="Inventory — Spectre UI Astro">
+  <SpStack gap="lg">
+    <SpStack gap="sm">
+      <SpHeading level="h1">Component inventory</SpHeading>
+      <SpLead>
+        Tabs, Accordion, Breadcrumb, List Group, Offcanvas, Carousel, Table,
+        Alert, Pagination, and Stepper.
+      </SpLead>
+    </SpStack>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Breadcrumb">
+      <SpHeading level="h2">Breadcrumb</SpHeading>
+      <SpBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Examples", href: "/inventory" },
+          { label: "Inventory", current: true },
+        ]}
+      />
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Tabs">
+      <SpHeading level="h2">Tabs</SpHeading>
+      <SpTabs tabs={tabs} activeId="inventory-overview" aria-label="Inventory views">
+        <SpTabPanel id="inventory-overview" active>
+          Overview content is visible because its tab is active.
+        </SpTabPanel>
+        <SpTabPanel id="inventory-activity">Activity content.</SpTabPanel>
+        <SpTabPanel id="inventory-archived" disabled>Archived content.</SpTabPanel>
+      </SpTabs>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Accordion">
+      <SpHeading level="h2">Accordion</SpHeading>
+      <SpAccordion>
+        <SpAccordionItem open>
+          <span slot="header">Shipping</span>
+          Orders ship within two business days.
+        </SpAccordionItem>
+        <SpAccordionItem>
+          <span slot="header">Returns</span>
+          Returns are accepted within thirty days.
+        </SpAccordionItem>
+        <SpAccordionItem disabled>
+          <span slot="header">Warranty (unavailable)</span>
+          Warranty details.
+        </SpAccordionItem>
+      </SpAccordion>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="List group">
+      <SpHeading level="h2">List group</SpHeading>
+      <SpListGroup as="ul" accent="left" accentColor="brand">
+        <SpListGroupItem as="li" active>
+          <span slot="heading">Active item</span>
+          <span slot="text">Highlighted with the active state.</span>
+        </SpListGroupItem>
+        <SpListGroupItem as="a" href="#">Linked item</SpListGroupItem>
+        <SpListGroupItem as="button" disabled>Disabled item</SpListGroupItem>
+      </SpListGroup>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Carousel">
+      <SpHeading level="h2">Carousel</SpHeading>
+      <SpCarousel aria-label="Highlights">
+        <SpCarouselSlide id="inventory-slide-1" active aria-label="1 of 2">
+          <SpCard variant="elevated">First slide</SpCard>
+        </SpCarouselSlide>
+        <SpCarouselSlide id="inventory-slide-2" aria-label="2 of 2">
+          <SpCard variant="elevated">Second slide</SpCard>
+        </SpCarouselSlide>
+        <Fragment slot="indicators">
+          <SpCarouselIndicator active target="inventory-slide-1" aria-label="Go to slide 1" />
+          <SpCarouselIndicator target="inventory-slide-2" aria-label="Go to slide 2" />
+        </Fragment>
+      </SpCarousel>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Table">
+      <SpHeading level="h2">Table</SpHeading>
+      <SpTable striped hoverable aria-label="Spectre packages">
+        <thead>
+          <tr><th>Package</th><th>Layer</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <SpTableRow selected={row.selected}>
+                <td>{row.name}</td>
+                <td>{row.layer}</td>
+                <td>{row.status}</td>
+              </SpTableRow>
+            ))
+          }
+        </tbody>
+      </SpTable>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Alert">
+      <SpHeading level="h2">Alert</SpHeading>
+      <SpAlert variant="info">Heads up — a new version is available.</SpAlert>
+      <SpAlert variant="success" dismissible dismissLabel="Dismiss success message">
+        Changes saved.
+      </SpAlert>
+      <SpAlert variant="brand">Brand-toned announcement.</SpAlert>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Pagination">
+      <SpHeading level="h2">Pagination</SpHeading>
+      <SpPagination page={4} total={9} hrefTemplate="/inventory?page={page}" />
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Stepper">
+      <SpHeading level="h2">Stepper</SpHeading>
+      <SpStepper
+        current={1}
+        aria-label="Checkout progress"
+        steps={[{ label: "Cart" }, { label: "Shipping" }, { label: "Payment" }]}
+      />
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Offcanvas">
+      <SpHeading level="h2">Offcanvas</SpHeading>
+      <SpLead>
+        Offcanvas is a controlled overlay; it renders closed here so it does not
+        cover the page. Set <code>open</code> to show it.
+      </SpLead>
+      <SpOffcanvas placement="end" aria-label="Filters">
+        <span slot="header">Filters</span>
+        Filter controls.
+      </SpOffcanvas>
+    </SpSection>
+  </SpStack>
+</BaseLayout>

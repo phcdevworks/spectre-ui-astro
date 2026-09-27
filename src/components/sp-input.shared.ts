@@ -1,87 +1,91 @@
-import type { InputRecipeOptions } from "@phcdevworks/spectre-ui";
+import type { InputRecipeOptions } from '@phcdevworks/spectre-ui'
+import type { HTMLAttributes } from 'astro/types'
 
 type SpInputElement =
-  | "div"
-  | "section"
-  | "article"
-  | "aside"
-  | "header"
-  | "footer"
-  | "main"
-  | "form"
-  | "fieldset"
-  | "li"
-  | "nav";
+  | 'div'
+  | 'section'
+  | 'article'
+  | 'aside'
+  | 'header'
+  | 'footer'
+  | 'main'
+  | 'form'
+  | 'fieldset'
+  | 'li'
+  | 'nav'
 
 interface SpInputBaseProps extends InputRecipeOptions {
-  as?: SpInputElement;
-  class?: string;
-  disabled?: boolean;
-  loading?: boolean;
-  focused?: boolean;
-  hovered?: boolean;
-  active?: boolean;
-  name?: string;
-  value?: string | number;
-  placeholder?: string;
-  required?: boolean;
-  readonly?: boolean;
-  type?: string;
-  autocomplete?: string;
-  "aria-label"?: string;
-  "aria-describedby"?: string;
-  "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
-  [key: string]: unknown;
+  as?: SpInputElement
+  class?: string
+  disabled?: boolean
+  loading?: boolean
+  focused?: boolean
+  hovered?: boolean
+  active?: boolean
+  name?: string
+  value?: string | number
+  placeholder?: string
+  required?: boolean
+  readonly?: boolean
+  type?: HTMLAttributes<'input'>['type']
+  autocomplete?: string
+  'aria-label'?: string
+  'aria-describedby'?: string
+  'aria-invalid'?: boolean | 'true' | 'false' | 'grammar' | 'spelling'
+  [key: string]: unknown
 }
 
 type SpInputAssociatedProps = {
-  id: string;
-  label?: string;
-  helperText?: string;
-  errorMessage?: string;
-};
+  id: string
+  label?: string
+  helperText?: string
+  errorMessage?: string
+}
 
 type SpInputStandaloneProps = {
-  id?: string;
-  label?: undefined;
-  helperText?: undefined;
-  errorMessage?: undefined;
-};
+  id?: string
+  label?: undefined
+  helperText?: undefined
+  errorMessage?: undefined
+}
 
 export type SpInputProps = SpInputBaseProps &
-  (SpInputAssociatedProps | SpInputStandaloneProps);
+  (SpInputAssociatedProps | SpInputStandaloneProps)
 
 export function resolveSpInputAccessibility({
   id,
   label,
   helperText,
   errorMessage,
-  "aria-describedby": ariaDescribedby,
-}: Pick<
-  SpInputProps,
-  "id" | "label" | "helperText" | "errorMessage" | "aria-describedby"
->) {
-  const requiresStableId = Boolean(label || helperText || errorMessage);
+  'aria-describedby': ariaDescribedby
+}: {
+  id?: string | undefined
+  label?: string | undefined
+  helperText?: string | undefined
+  errorMessage?: string | undefined
+  'aria-describedby'?: string | undefined
+}) {
+  const requiresStableId = Boolean(label || helperText || errorMessage)
 
   if (requiresStableId && !id) {
     throw new Error(
-      "SpInput requires an explicit `id` when using `label`, `helperText`, or `errorMessage` so SSR markup remains deterministic.",
-    );
+      'SpInput requires an explicit `id` when using `label`, `helperText`, or `errorMessage` so SSR markup remains deterministic.'
+    )
   }
 
-  const helperId = id && helperText ? `${id}-helper` : undefined;
-  const errorId = id && errorMessage ? `${id}-error` : undefined;
+  const helperId = id && helperText ? `${id}-helper` : undefined
+  const errorId = id && errorMessage ? `${id}-error` : undefined
 
   // Follow the rendering logic in SpInput.astro: errorMessage suppresses helperText.
-  const activeGeneratedId = errorId ?? helperId;
+  const activeGeneratedId = errorId ?? helperId
   const mergedDescribedBy = [ariaDescribedby, activeGeneratedId]
     .filter(Boolean)
-    .join(" ");
+    .join(' ')
 
   return {
     inputId: id,
     helperId,
     errorId,
-    describedBy: mergedDescribedBy || undefined,
-  };
+    describedBy: mergedDescribedBy || undefined
+  }
 }

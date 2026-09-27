@@ -1,6 +1,7 @@
 ---
 import type { StackRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getStackClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpStackElement = "div" | "section" | "ul" | "ol" | "nav";
 
@@ -27,7 +28,7 @@ const {
   ...rest
 } = Astro.props as SpStackProps;
 
-const classes = getStackClasses({ direction, basis, align, gap });
+const classes = getStackClasses(omitUndefined({ direction, basis, align, gap }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

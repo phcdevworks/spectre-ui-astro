@@ -1,0 +1,15 @@
+---
+import { getDropdownDividerClasses } from "@phcdevworks/spectre-ui";
+
+interface SpDropdownDividerProps {
+  class?: string;
+
+  [key: string]: unknown;
+}
+
+const { class: className, ...rest } = Astro.props as SpDropdownDividerProps;
+
+const finalClass = [getDropdownDividerClasses(), className].filter(Boolean).join(" ");
+---
+
+<hr class={finalClass} {...rest} />

@@ -1,6 +1,7 @@
 ---
 import type { SidebarLinkRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getSidebarLinkClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpSidebarLinkProps extends SidebarLinkRecipeOptions {
   href?: string;
@@ -26,7 +27,7 @@ const {
   ...rest
 } = Astro.props as SpSidebarLinkProps;
 
-const classes = getSidebarLinkClasses({ active, disabled, hovered, focused, level });
+const classes = getSidebarLinkClasses(omitUndefined({ active, disabled, hovered, focused, level }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

@@ -7,6 +7,7 @@ import {
   type RatingRecipeOptions,
 } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpRatingElement =
   | "div"
@@ -70,7 +71,7 @@ const {
 const isRatingDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getRatingClasses({
+const classes = getRatingClasses(omitUndefined({
   size,
   interactive: isInteractive,
   disabled: isRatingDisabled,
@@ -80,7 +81,7 @@ const classes = getRatingClasses({
   active,
   pill,
   fullWidth,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
@@ -93,7 +94,7 @@ const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({
 });
 
 const starsClasses = getRatingStarsClasses();
-const textClasses = getRatingTextClasses({ disabled: isRatingDisabled });
+const textClasses = getRatingTextClasses(omitUndefined({ disabled: isRatingDisabled }));
 
 const stars = Array.from({ length: max }, (_, i) => i < value);
 ---
@@ -121,7 +122,7 @@ const stars = Array.from({ length: max }, (_, i) => i < value);
     {
       stars.map((isFilled) => (
         <span class={getRatingStarClasses(isFilled)}>
-          <slot name="star-icon" isFilled={isFilled}>
+          <slot name="star-icon">
             ★
           </slot>
         </span>

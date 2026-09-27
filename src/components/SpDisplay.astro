@@ -1,0 +1,41 @@
+---
+import type { DisplayRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getDisplayClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpDisplayElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
+
+interface SpDisplayProps extends DisplayRecipeOptions {
+  as?: SpDisplayElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  level,
+  as,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpDisplayProps;
+
+const Tag = as ?? (`h${level ?? 1}` as SpDisplayElement);
+const classes = getDisplayClasses(omitUndefined({ level }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

@@ -1,0 +1,133 @@
+---
+import {
+  getDatepickerClasses,
+  getDatepickerGridClasses,
+  getDatepickerHeaderClasses,
+  getDatepickerWeekdayClasses,
+} from "@phcdevworks/spectre-ui";
+import SpDay from "./SpDay.astro";
+
+interface SpDatepickerProps {
+  year: number;
+  month: number;
+  selected?: string;
+  today?: string;
+  min?: string;
+  max?: string;
+  disabledDates?: string[];
+  weekStartsOn?: 0 | 1;
+  showOutsideDays?: boolean;
+  locale?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  year,
+  month,
+  selected,
+  today,
+  min,
+  max,
+  disabledDates = [],
+  weekStartsOn = 0,
+  showOutsideDays = true,
+  locale = "en-US",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpDatepickerProps;
+
+if (!Number.isInteger(month) || month < 1 || month > 12) {
+  throw new Error("SpDatepicker `month` must be an integer from 1 to 12.");
+}
+
+const utc = (y: number, m: number, d: number) => new Date(Date.UTC(y, m - 1, d));
+const iso = (date: Date) => date.toISOString().slice(0, 10);
+const format = (options: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat(locale, { ...options, timeZone: "UTC" });
+
+const first = utc(year, month, 1);
+const leading = (first.getUTCDay() - weekStartsOn + 7) % 7;
+const daysInMonth = utc(year, month + 1, 0).getUTCDate();
+const cellCount = Math.ceil((leading + daysInMonth) / 7) * 7;
+const disabledSet = new Set(disabledDates);
+
+const dayLabel = format({ weekday: "long", year: "numeric", month: "long", day: "numeric" });
+const cells = Array.from({ length: cellCount }, (_, index) => {
+  const date = utc(year, month, index - leading + 1);
+  const value = iso(date);
+  const outsideMonth = date.getUTCMonth() !== month - 1;
+  return {
+    value,
+    day: date.getUTCDate(),
+    label: dayLabel.format(date),
+    outsideMonth,
+    hidden: outsideMonth && !showOutsideDays,
+    selected: value === selected,
+    today: value === today,
+    disabled:
+      disabledSet.has(value) ||
+      (min !== undefined && value < min) ||
+      (max !== undefined && value > max),
+  };
+});
+
+const weekdayShort = format({ weekday: "short" });
+const weekdayLong = format({ weekday: "long" });
+const weekdays = Array.from({ length: 7 }, (_, index) => {
+  // 2023-01-01 was a Sunday.
+  const date = utc(2023, 1, 1 + ((index + weekStartsOn) % 7));
+  return { short: weekdayShort.format(date), long: weekdayLong.format(date) };
+});
+
+const title = format({ month: "long", year: "numeric" }).format(first);
+const titleId = id ? `${id}-title` : undefined;
+const finalClass = [getDatepickerClasses(), className].filter(Boolean).join(" ");
+---
+
+<div
+  class={finalClass}
+  id={id}
+  role="group"
+  aria-label={ariaLabel ?? (titleId ? undefined : title)}
+  aria-labelledby={ariaLabel ? undefined : titleId}
+  {...rest}
+>
+  <div class={getDatepickerHeaderClasses()}>
+    <slot name="previous" />
+    <span id={titleId} aria-live="polite">{title}</span>
+    <slot name="next" />
+  </div>
+  <div class={getDatepickerGridClasses()}>
+    {
+      weekdays.map((weekday) => (
+        <abbr class={getDatepickerWeekdayClasses()} title={weekday.long}>
+          {weekday.short}
+        </abbr>
+      ))
+    }
+    {
+      cells.map((cell) =>
+        cell.hidden ? (
+          <span aria-hidden="true" />
+        ) : (
+          <SpDay
+            date={cell.value}
+            selected={cell.selected}
+            today={cell.today}
+            outsideMonth={cell.outsideMonth}
+            disabled={cell.disabled}
+            aria-label={cell.label}
+          >
+            {cell.day}
+          </SpDay>
+        ),
+      )
+    }
+  </div>
+</div>

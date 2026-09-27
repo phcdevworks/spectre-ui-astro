@@ -1,6 +1,7 @@
 ---
 import { getCardClasses, type CardRecipeOptions } from "@phcdevworks/spectre-ui";
 import { resolveInteractiveAttrs } from "./sp-interactive.shared";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpCardElement =
   | "div"
@@ -66,7 +67,7 @@ const {
 const isCardDisabled = disabled || loading;
 const isInteractive = interactive || Tag === "a" || Tag === "button";
 
-const classes = getCardClasses({
+const classes = getCardClasses(omitUndefined({
   variant,
   interactive: isInteractive,
   padded,
@@ -78,7 +79,7 @@ const classes = getCardClasses({
   hovered,
   focused,
   active,
-});
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 
 const { finalType, finalHref, finalTabIndex } = resolveInteractiveAttrs({

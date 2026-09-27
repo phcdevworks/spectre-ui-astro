@@ -1,0 +1,26 @@
+---
+import { getFooterHeadingClasses } from "@phcdevworks/spectre-ui";
+
+type SpFooterHeadingElement = "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
+
+interface SpFooterHeadingProps {
+  as?: SpFooterHeadingElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "h2",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpFooterHeadingProps;
+
+const finalClass = [getFooterHeadingClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

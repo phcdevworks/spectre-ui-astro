@@ -1,6 +1,7 @@
 ---
 import type { RadioRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getRadioClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 interface SpRadioProps extends RadioRecipeOptions {
   class?: string;
@@ -29,7 +30,7 @@ const {
   ...rest
 } = Astro.props as SpRadioProps;
 
-const classes = getRadioClasses({ checked, disabled });
+const classes = getRadioClasses(omitUndefined({ checked, disabled }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

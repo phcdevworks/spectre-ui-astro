@@ -1,0 +1,21 @@
+---
+import { getLeadClasses } from "@phcdevworks/spectre-ui";
+
+type SpLeadElement = "p" | "div" | "span";
+
+interface SpLeadProps {
+  as?: SpLeadElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const { as: Tag = "p", class: className, id, ...rest } = Astro.props as SpLeadProps;
+
+const finalClass = [getLeadClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} {...rest}>
+  <slot />
+</Tag>

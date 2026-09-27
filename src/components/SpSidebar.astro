@@ -5,6 +5,7 @@ import {
   getSidebarBackdropClasses,
   getSidebarToggleClasses,
 } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpSidebarElement = "aside" | "div" | "nav";
 
@@ -31,7 +32,7 @@ const {
   ...rest
 } = Astro.props as SpSidebarProps;
 
-const classes = getSidebarClasses({ bordered });
+const classes = getSidebarClasses(omitUndefined({ bordered }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 const backdropClass = getSidebarBackdropClasses();
 const toggleClass = getSidebarToggleClasses();

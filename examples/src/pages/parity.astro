@@ -1,0 +1,216 @@
+---
+import {
+  SpAlert,
+  SpBadge,
+  SpButton,
+  SpCard,
+  SpCardBleed,
+  SpChoiceCard,
+  SpContainer,
+  SpDatepicker,
+  SpDisplay,
+  SpDropdown,
+  SpDropdownDivider,
+  SpDropdownHeader,
+  SpDropdownItem,
+  SpDropdownMenu,
+  SpExternalAuthButton,
+  SpFileInput,
+  SpFooter,
+  SpFooterDivider,
+  SpFooterHeading,
+  SpFooterLink,
+  SpFooterLinks,
+  SpFooterText,
+  SpGrid,
+  SpHeading,
+  SpInput,
+  SpInputGroup,
+  SpInputGroupAddon,
+  SpLabel,
+  SpLead,
+  SpPopover,
+  SpProgress,
+  SpProse,
+  SpRange,
+  SpSection,
+  SpSidebarGroup,
+  SpSidebarHeader,
+  SpSidebarLink,
+  SpStack,
+  SpSwitch,
+} from "@phcdevworks/spectre-ui-astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Recipe parity — Spectre UI Astro">
+  <SpStack gap="lg">
+    <SpStack gap="sm">
+      <SpDisplay level={3} as="h1">Full recipe parity</SpDisplay>
+      <SpLead>
+        Wrappers for every remaining Spectre UI 5.3.0 family: typography, form
+        controls, overlays, progress, and calendars.
+      </SpLead>
+    </SpStack>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Typography">
+      <SpHeading level="h2">Typography</SpHeading>
+      <SpDisplay level={5} as="p">Display level 5</SpDisplay>
+      <SpHeading level="h4" as="h3">Heading styled as h4, rendered as h3</SpHeading>
+      <SpLead>A lead paragraph introduces the section.</SpLead>
+      <SpProse as="article">
+        <p>
+          Prose styles long-form <strong>CMS content</strong> without
+          per-element classes.
+        </p>
+        <ul>
+          <li>Lists</li>
+          <li>Links and emphasis</li>
+        </ul>
+      </SpProse>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Form controls">
+      <SpHeading level="h2">Form controls</SpHeading>
+      <SpGrid columns={2} gap="md">
+        <SpStack gap="sm">
+          <SpLabel htmlFor="parity-alerts">Email alerts</SpLabel>
+          <SpSwitch id="parity-alerts" name="alerts" checked />
+          <SpSwitch size="sm" aria-label="Disabled switch" disabled />
+        </SpStack>
+        <SpStack gap="sm">
+          <SpLabel htmlFor="parity-volume">Volume</SpLabel>
+          <SpRange id="parity-volume" name="volume" value={40} />
+        </SpStack>
+        <SpStack gap="sm">
+          <SpLabel htmlFor="parity-upload">Attachment</SpLabel>
+          <SpFileInput id="parity-upload" name="upload" accept="image/*" fullWidth />
+          <SpFileInput aria-label="Invalid upload" state="invalid" size="sm" />
+        </SpStack>
+        <SpStack gap="sm">
+          <SpLabel htmlFor="parity-price">Price</SpLabel>
+          <SpInputGroup aria-label="Price">
+            <SpInputGroupAddon>$</SpInputGroupAddon>
+            <SpInput id="parity-price" name="price" placeholder="0.00" />
+            <SpButton variant="secondary">Apply</SpButton>
+          </SpInputGroup>
+        </SpStack>
+      </SpGrid>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Choice cards">
+      <SpHeading level="h2">Choice cards</SpHeading>
+      <SpGrid columns={3} gap="sm">
+        <SpChoiceCard name="parity-shipping" value="standard" checked>
+          <strong>Standard</strong> — 3–5 days
+        </SpChoiceCard>
+        <SpChoiceCard name="parity-shipping" value="express">
+          <strong>Express</strong> — next day
+        </SpChoiceCard>
+        <SpChoiceCard name="parity-shipping" value="pickup" disabled>
+          <strong>Pickup</strong> — unavailable
+        </SpChoiceCard>
+      </SpGrid>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="External sign-in">
+      <SpHeading level="h2">External sign-in</SpHeading>
+      <SpContainer maxWidth="prose" padding="sm">
+        <SpStack gap="sm">
+          <SpExternalAuthButton fullWidth>
+            <SpBadge slot="icon" dot variant="neutral" aria-hidden="true" />
+            Continue with Provider
+          </SpExternalAuthButton>
+          <SpExternalAuthButton fullWidth loading>Connecting…</SpExternalAuthButton>
+        </SpStack>
+      </SpContainer>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Progress">
+      <SpHeading level="h2">Progress</SpHeading>
+      <SpProgress id="parity-upload-progress" label="Uploading" value={65} />
+      <SpProgress
+        id="parity-quota"
+        label="Storage quota"
+        value={92}
+        variant="warning"
+        size="sm"
+      />
+      <SpProgress aria-label="Loading" variant="neutral" />
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Popover">
+      <SpHeading level="h2">Popover</SpHeading>
+      <div class="sp-relative sp-inline-block sp-self-start">
+        <SpButton variant="secondary" aria-describedby="parity-popover">
+          Details
+        </SpButton>
+        <SpPopover id="parity-popover" placement="right" open title="Plan details">
+          Includes unlimited projects and priority support.
+        </SpPopover>
+      </div>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Composition parts">
+      <SpHeading level="h2">Composition parts</SpHeading>
+      <SpGrid columns={2} gap="md">
+        <SpCard padded="lg">
+          <SpCardBleed edges={["top", "left", "right"]} padded="lg">
+            <SpAlert variant="brand">Featured plan</SpAlert>
+          </SpCardBleed>
+          <SpLead>Card with a full-bleed top band.</SpLead>
+        </SpCard>
+        <SpDropdown>
+          <SpButton variant="secondary" size="sm">Options</SpButton>
+          <SpDropdownMenu open aria-label="Options">
+            <SpDropdownHeader>Account</SpDropdownHeader>
+            <SpDropdownItem href="#" selected>Profile</SpDropdownItem>
+            <SpDropdownItem href="#">Settings</SpDropdownItem>
+            <SpDropdownDivider />
+            <SpDropdownItem disabled>Archive</SpDropdownItem>
+          </SpDropdownMenu>
+        </SpDropdown>
+        <SpCard variant="flat">
+          <SpSidebarHeader>Docs</SpSidebarHeader>
+          <SpSidebarGroup label="Guides" open>
+            <SpStack gap="sm">
+              <SpSidebarLink href="#">Introduction</SpSidebarLink>
+              <SpSidebarLink href="#">Theming</SpSidebarLink>
+            </SpStack>
+          </SpSidebarGroup>
+        </SpCard>
+      </SpGrid>
+      <SpFooter>
+        <SpFooterHeading as="h3">Company</SpFooterHeading>
+        <SpFooterLinks aria-label="Company">
+          <li><SpFooterLink href="#">About</SpFooterLink></li>
+          <li><SpFooterLink href="#">Careers</SpFooterLink></li>
+        </SpFooterLinks>
+        <SpFooterDivider />
+        <SpFooterText>Built with Spectre.</SpFooterText>
+        <SpFooterText muted>Example footer content.</SpFooterText>
+      </SpFooter>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Datepicker">
+      <SpHeading level="h2">Datepicker</SpHeading>
+      <SpDatepicker
+        class="sp-self-start"
+        id="parity-calendar"
+        year={2026}
+        month={9}
+        selected="2026-09-15"
+        today="2026-09-27"
+        max="2026-09-29"
+        disabledDates={["2026-09-10"]}
+      >
+        <SpButton slot="previous" variant="ghost" size="sm" aria-label="Previous month">
+          ‹
+        </SpButton>
+        <SpButton slot="next" variant="ghost" size="sm" aria-label="Next month">
+          ›
+        </SpButton>
+      </SpDatepicker>
+    </SpSection>
+  </SpStack>
+</BaseLayout>

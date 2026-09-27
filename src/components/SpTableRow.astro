@@ -1,0 +1,33 @@
+---
+import type { TableRowRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getTableRowClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpTableRowProps extends TableRowRecipeOptions {
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  variant,
+  selected,
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpTableRowProps;
+
+const classes = getTableRowClasses(omitUndefined({ variant, selected }));
+const finalClass = [classes, className].filter(Boolean).join(" ") || undefined;
+---
+
+<tr
+  class={finalClass}
+  id={id}
+  aria-selected={selected === undefined ? undefined : selected ? "true" : "false"}
+  data-variant={variant}
+  {...rest}
+>
+  <slot />
+</tr>

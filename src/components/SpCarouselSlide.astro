@@ -1,0 +1,39 @@
+---
+import type { CarouselSlideRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getCarouselSlideClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpCarouselSlideElement = "div" | "figure" | "li";
+
+interface SpCarouselSlideProps extends CarouselSlideRecipeOptions {
+  as?: SpCarouselSlideElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  active,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpCarouselSlideProps;
+
+const classes = getCarouselSlideClasses(omitUndefined({ active }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  role="group"
+  aria-roledescription="slide"
+  aria-label={ariaLabel}
+  {...rest}
+>
+  <slot />
+</Tag>

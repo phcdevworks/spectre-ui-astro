@@ -21,7 +21,9 @@
       "title": "Build",
       "description": "Composition and application-facing packages.",
       "order": 20,
-      "dependsOn": ["foundation"]
+      "dependsOn": [
+        "foundation"
+      ]
     }
   },
   "packages": {
@@ -32,46 +34,76 @@
       "description": "Astro adapter for the Spectre system. Provides Astro component wrappers that consume the Spectre UI styling contract and design tokens.",
       "exports": [
         ".",
-        "./components/SpAlert.astro",
         "./components/SpAccordion.astro",
         "./components/SpAccordionItem.astro",
+        "./components/SpAlert.astro",
         "./components/SpAvatar.astro",
         "./components/SpBadge.astro",
-        "./components/SpButton.astro",
         "./components/SpBreadcrumb.astro",
+        "./components/SpButton.astro",
         "./components/SpCard.astro",
+        "./components/SpCardBleed.astro",
         "./components/SpCarousel.astro",
+        "./components/SpCarouselIndicator.astro",
+        "./components/SpCarouselSlide.astro",
         "./components/SpCheckbox.astro",
+        "./components/SpChoiceCard.astro",
         "./components/SpContainer.astro",
+        "./components/SpDatepicker.astro",
+        "./components/SpDay.astro",
+        "./components/SpDisplay.astro",
         "./components/SpDropdown.astro",
+        "./components/SpDropdownDivider.astro",
+        "./components/SpDropdownHeader.astro",
+        "./components/SpDropdownItem.astro",
+        "./components/SpDropdownMenu.astro",
+        "./components/SpExternalAuthButton.astro",
         "./components/SpFieldset.astro",
+        "./components/SpFileInput.astro",
         "./components/SpFooter.astro",
         "./components/SpFooterChip.astro",
+        "./components/SpFooterDivider.astro",
+        "./components/SpFooterHeading.astro",
         "./components/SpFooterLink.astro",
+        "./components/SpFooterLinks.astro",
+        "./components/SpFooterText.astro",
         "./components/SpGrid.astro",
+        "./components/SpHeading.astro",
         "./components/SpIconBox.astro",
         "./components/SpInput.astro",
+        "./components/SpInputGroup.astro",
+        "./components/SpInputGroupAddon.astro",
         "./components/SpLabel.astro",
+        "./components/SpLead.astro",
         "./components/SpListGroup.astro",
         "./components/SpListGroupItem.astro",
         "./components/SpModal.astro",
         "./components/SpNav.astro",
         "./components/SpNavItem.astro",
+        "./components/SpNavLinks.astro",
         "./components/SpOffcanvas.astro",
         "./components/SpPagination.astro",
+        "./components/SpPopover.astro",
         "./components/SpPricingCard.astro",
+        "./components/SpProgress.astro",
+        "./components/SpProse.astro",
         "./components/SpRadio.astro",
+        "./components/SpRange.astro",
         "./components/SpRating.astro",
         "./components/SpSection.astro",
         "./components/SpSelect.astro",
         "./components/SpSidebar.astro",
+        "./components/SpSidebarGroup.astro",
+        "./components/SpSidebarHeader.astro",
         "./components/SpSidebarLink.astro",
         "./components/SpSidebarToggle.astro",
         "./components/SpSpinner.astro",
         "./components/SpStack.astro",
         "./components/SpStepper.astro",
+        "./components/SpSwitch.astro",
         "./components/SpTabPanel.astro",
         "./components/SpTable.astro",
+        "./components/SpTableRow.astro",
         "./components/SpTabs.astro",
         "./components/SpTag.astro",
         "./components/SpTestimonial.astro",
@@ -84,7 +116,10 @@
         "@phcdevworks/spectre-tokens",
         "@phcdevworks/spectre-ui"
       ],
-      "allowedTargets": ["layer:foundation", "external"],
+      "allowedTargets": [
+        "layer:foundation",
+        "external"
+      ],
       "notes": [
         "Build-layer package. Depends on foundation-layer packages spectre-tokens and spectre-ui.",
         "Astro component files (.astro) in dist/ are copied from src/ at build time — never hand-edit dist/.",
@@ -96,7 +131,10 @@
       "layer": "foundation",
       "stability": "stable",
       "description": "Design-token source for the Spectre system.",
-      "exports": [".", "./index.css"]
+      "exports": [
+        ".",
+        "./index.css"
+      ]
     },
     "@phcdevworks/spectre-ui": {
       "role": "styling-contract",
@@ -116,14 +154,19 @@
     "dependencyDirection": [
       {
         "fromLayer": "foundation",
-        "allowedLayers": ["foundation"],
+        "allowedLayers": [
+          "foundation"
+        ],
         "notes": [
           "Foundation packages may depend only on other foundation packages or external libraries."
         ]
       },
       {
         "fromLayer": "build",
-        "allowedLayers": ["foundation", "build"],
+        "allowedLayers": [
+          "foundation",
+          "build"
+        ],
         "notes": [
           "Build-layer packages may depend on foundation packages and other build-layer packages."
         ]

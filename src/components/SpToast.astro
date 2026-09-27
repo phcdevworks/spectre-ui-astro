@@ -1,6 +1,7 @@
 ---
 import type { ToastRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getToastClasses, getToastIconClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpToastElement = "div" | "li" | "section";
 
@@ -26,9 +27,9 @@ const {
   ...rest
 } = Astro.props as SpToastProps;
 
-const classes = getToastClasses({ variant, dismissed, fullWidth, accent, accentColor });
+const classes = getToastClasses(omitUndefined({ variant, dismissed, fullWidth, accent, accentColor }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
-const iconClasses = getToastIconClasses({ variant });
+const iconClasses = getToastIconClasses(omitUndefined({ variant }));
 const hasIcon = Astro.slots.has("icon");
 ---
 

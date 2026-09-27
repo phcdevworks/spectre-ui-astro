@@ -18,16 +18,63 @@ Contract change type: additive
 - Expanded `SpAlert` with the upstream `dismissible` contract, icon and dismiss
   slots, accessible dismiss labeling, the `brand` variant, and pass-through
   exports for `getAlertIconClasses` and `getAlertDismissClasses`.
-- Re-exported every upstream helper and public recipe type needed to compose
-  the new families outside the opinionated Astro wrappers.
+- Re-exported every upstream helper and public recipe type needed to compose the
+  new families outside the opinionated Astro wrappers.
+- Reached full `@phcdevworks/spectre-ui@5.3.0` recipe parity with stable Astro
+  wrappers for every remaining upstream family: `SpChoiceCard`, `SpDatepicker`
+  (deterministic SSR month grid driven by ISO dates) and `SpDay`, `SpDisplay`,
+  `SpHeading`, `SpLead`, `SpProse`, `SpExternalAuthButton`, `SpFileInput`,
+  `SpInputGroup` and `SpInputGroupAddon`, `SpPopover`, `SpProgress`, `SpRange`,
+  and `SpSwitch`.
+- Re-exported the remaining upstream helpers and types:
+  `getDropdownHeaderClasses`, `getDropdownDividerClasses`, every helper for the
+  families above, and `CardPaddingSize`, `ContainerPadding`, `SectionSpacing`,
+  `SectionGap`, `GridColStart`, `GridColStartOptions`, `GridTemplateOptions`,
+  and `GridFixedTrackCountOptions`.
+- Reached composition parity with `@phcdevworks/spectre-components` with Astro
+  part components for the sub-parts it styles on marked children at runtime:
+  `SpCardBleed`, `SpDropdownMenu`, `SpDropdownItem`, `SpDropdownHeader`,
+  `SpDropdownDivider`, `SpFooterHeading`, `SpFooterText` (with `muted`),
+  `SpFooterLinks`, `SpFooterDivider`, `SpNavLinks`, `SpSidebarGroup`,
+  `SpSidebarHeader`, `SpTableRow`, `SpCarouselSlide`, and `SpCarouselIndicator`.
+  Each part delegates to its upstream recipe and renders its classes during SSR.
+  Client behavior such as focus traps and keyboard handling stays with
+  spectre-components.
+- Added `inventory` and `parity` pages to the examples app. They render every
+  Phase 19 and Phase 20 family using Spectre layout components only, with no
+  local styles.
+
+### Fixed
+
+- `SpBadge` now forwards `dot`, `SpContainer` forwards `padding`, `SpSection`
+  forwards `spacing` and `gap`, and `SpGrid` forwards `colStart`. These options
+  existed on the upstream recipe option types, but the wrappers dropped them
+  into `...rest`, so they rendered as raw DOM attributes and applied no class.
+- `SpNavItem` now forwards `active`, `disabled`, `hovered`, and `focused` to
+  `getNavLinkClasses`. Active links get `aria-current="page"`. Disabled links
+  drop their `href`, and disabled dropdown triggers become `disabled`.
+- Fixed the 65 type errors that the new `astro check` step found in
+  `src/components/*.astro`. Recipe options now go through `omitUndefined` to
+  satisfy `exactOptionalPropertyTypes`. `role` and input `type` props use
+  Astro's HTML attribute types. `SpTag` passes a typed `aria-pressed`. Rendered
+  output is unchanged.
+- Removed attributes passed to `<slot>` in `SpRating` and `SpTabs`. Astro
+  ignores these, so output is unchanged. The README no longer claims the
+  `SpRating` `star-icon` slot receives `isFilled`.
 
 ### Changed
 
 - Raised the `@phcdevworks/spectre-ui` peer baseline to `^5.3.0` and the
   `@phcdevworks/spectre-tokens` peer baseline to `^4.11.0`.
-- Declared the additional upstream recipe families introduced by the updated
-  dependency as not yet supported, keeping adapter parity explicit without
-  expanding this approved component batch.
+- Every upstream recipe family is now declared stable in
+  `astro-adapter.contract.json`; `notYetSupported` is empty.
+- `tests/upstream-parity.test.ts` now fails when any upstream `get*Classes`
+  helper is not re-exported or not declared in the contract. Family derivation
+  also respects families the contract declares, so a hyphenated family such as
+  `input-group` is no longer hidden behind the shorter `input` prefix.
+- `npm run typecheck` now runs `astro check` after `tsc --noEmit`, so Astro
+  component frontmatter and templates are type-checked in the gate
+  (`@astrojs/check` added as a dev dependency).
 - Made README family-table validation insensitive to Markdown column alignment
   and hardened existing tests against Astro's development source attributes.
 
@@ -39,10 +86,10 @@ Contract change type: additive
 
 ### Added
 
-- `SpCard` now forwards `accent` and `accentColor` to `getCardClasses`,
-  exposing the upstream card edge-accent rail (`@phcdevworks/spectre-ui`
-  5.1.0+) without local CSS or duplicated validation. Existing output is
-  unchanged when both props are omitted.
+- `SpCard` now forwards `accent` and `accentColor` to `getCardClasses`, exposing
+  the upstream card edge-accent rail (`@phcdevworks/spectre-ui` 5.1.0+) without
+  local CSS or duplicated validation. Existing output is unchanged when both
+  props are omitted.
 - Closed a components-wide accent-rail parity gap against
   `@phcdevworks/spectre-ui` 5.1.0–5.2.0: `SpTestimonial`, `SpPricingCard`,
   `SpNav`, `SpFooter`, `SpModal`, `SpToast`, and `SpTooltip` now forward
@@ -53,12 +100,11 @@ Contract change type: additive
   types but silently fell through to `...rest` and leaked onto the DOM as raw
   attributes instead of applying any class.
 - `SpDropdown` and `SpNavItem` now forward the upstream `viewport` option
-  (full-viewport-width dropdown menus, `@phcdevworks/spectre-ui` 5.2.0) to
-  both the trigger wrapper and menu panel, alongside the existing `mega`
-  pairing.
+  (full-viewport-width dropdown menus, `@phcdevworks/spectre-ui` 5.2.0) to both
+  the trigger wrapper and menu panel, alongside the existing `mega` pairing.
 - Re-exported `getCardBleedClasses` (plus `CardBleedRecipeOptions`,
-  `CardBleedEdge`, `CardBleedPaddingSize`) from `@phcdevworks/spectre-ui`
-  5.1.0 for full-bleed child composition inside a padded `SpCard`.
+  `CardBleedEdge`, `CardBleedPaddingSize`) from `@phcdevworks/spectre-ui` 5.1.0
+  for full-bleed child composition inside a padded `SpCard`.
 - Re-exported the upstream accent edge and color types documented by each
   affected component.
 
@@ -67,8 +113,8 @@ Contract change type: additive
 - Standardized the package summary against the approved PHCDevworks product
   description.
 - Raised the `@phcdevworks/spectre-ui` peer baseline to `^5.2.0` and the
-  `@phcdevworks/spectre-tokens` peer baseline to `^4.9.0`, matching the
-  minimum upstream contracts required by the new recipe options.
+  `@phcdevworks/spectre-tokens` peer baseline to `^4.9.0`, matching the minimum
+  upstream contracts required by the new recipe options.
 
 ## [4.8.0] - 2026-09-05
 
@@ -78,19 +124,19 @@ Contract change type: semantic change
 
 ### Changed
 
-- Upgraded the development and validation stack, including Astro 7.3.1,
-  ESLint 10.10.0, and Vitest 5.0.0, while preserving the existing consumer
-  peer ranges. Local validation now exercises the latest compatible Spectre
-  UI and token packages.
+- Upgraded the development and validation stack, including Astro 7.3.1, ESLint
+  10.10.0, and Vitest 5.0.0, while preserving the existing consumer peer ranges.
+  Local validation now exercises the latest compatible Spectre UI and token
+  packages.
 - CI now installs and builds the six-page example application against the
   locally built adapter on both supported Node matrix entries, catching
   integration failures beyond the package-level test suite.
 
 ### Fixed
 
-- Hardened root-export validation to reject undeclared component, recipe,
-  type, namespace, and wildcard re-exports. The public contract and README
-  inventory now include the already-exported `GridAlign` and `StackGap` types.
+- Hardened root-export validation to reject undeclared component, recipe, type,
+  namespace, and wildcard re-exports. The public contract and README inventory
+  now include the already-exported `GridAlign` and `StackGap` types.
 - Restored ecosystem-manifest parity for `SpFooterChip`, `SpFooterLink`,
   `SpNavItem`, `SpSidebarLink`, and `SpText`, and added validation that prevents
   package exports and manifest exports from drifting again.
@@ -119,15 +165,15 @@ Contract change type: additive
   - `SpContainer`'s `maxWidth` prop now also accepts `'wide'`.
   - `getSurfaceClasses`-backed markup can opt into `.sp-surface--inverse`.
 - Documented `SpTestimonial`'s previously-undocumented `variant` prop and its
-  new `'elevated'` default in the README (inline union, since upstream does
-  not export a `TestimonialVariant` type name — unlike every other recipe
-  family's variant type).
+  new `'elevated'` default in the README (inline union, since upstream does not
+  export a `TestimonialVariant` type name — unlike every other recipe family's
+  variant type).
 - `spectre-ui` 5.0.0's breaking recipe-default changes (boolean options no
-  longer defaulting to `true` when omitted; `getTestimonialClasses()`
-  defaulting `variant` to `'elevated'`) required no adapter changes: `SpCard`,
-  `SpSpinner`, and `SpTestimonial` already forward `padded`/`loading`/`variant`
-  unresolved, and this package's own README/tests never documented or
-  asserted the old implicit defaults.
+  longer defaulting to `true` when omitted; `getTestimonialClasses()` defaulting
+  `variant` to `'elevated'`) required no adapter changes: `SpCard`, `SpSpinner`,
+  and `SpTestimonial` already forward `padded`/`loading`/`variant` unresolved,
+  and this package's own README/tests never documented or asserted the old
+  implicit defaults.
 
 ## [4.6.0] - 2026-08-21
 
@@ -142,29 +188,28 @@ Contract change type: additive
   - `SpGrid` — new `align` prop (`start`/`center`/`end`/`baseline`/`stretch`),
     surfacing `getGridClasses`' `align` option added in `spectre-ui` 4.2.0.
   - `SpStack` — new `gap` prop (`sm`/`md`/`lg`, default `md`), surfacing
-    `getStackClasses`' `gap` option added in `spectre-ui` 4.3.0.
-  Matches the parity work `@phcdevworks/spectre-components` shipped in
-  `1.17.0` for the same two upstream options.
+    `getStackClasses`' `gap` option added in `spectre-ui` 4.3.0. Matches the
+    parity work `@phcdevworks/spectre-components` shipped in `1.17.0` for the
+    same two upstream options.
 - New `SpFooterLink` and `SpFooterChip` components, backed by
-  `getFooterLinkClasses`/`getFooterChipClasses`. Previously `SpFooter`'s
-  README guidance had consumers hand-build `<a>`/`<span>` elements from the
-  bare recipe helpers; these give the same interactive-element treatment
-  `SpTag`/`SpBadge` already have (`active`/`disabled`/`hovered`/`focused`).
-  Closes a component-surface gap versus `@phcdevworks/spectre-components`'s
+  `getFooterLinkClasses`/`getFooterChipClasses`. Previously `SpFooter`'s README
+  guidance had consumers hand-build `<a>`/`<span>` elements from the bare recipe
+  helpers; these give the same interactive-element treatment `SpTag`/`SpBadge`
+  already have (`active`/`disabled`/`hovered`/`focused`). Closes a
+  component-surface gap versus `@phcdevworks/spectre-components`'s
   `sp-footer-link`/`sp-footer-chip` (shipped there in `1.16.0`).
 - New `SpSidebarLink` component, backed by `getSidebarLinkClasses`, replacing
   the README's prior hand-built `<a>` guidance for `SpSidebar` nav groups.
   Closes a component-surface gap versus `@phcdevworks/spectre-components`'s
   `sp-sidebar-link` (shipped there in `1.16.0`).
 - `GridAlign` and `StackGap` types are now re-exported from
-  `src/recipes/index.ts` alongside the other `SpGrid`/`SpStack` option types
-  — previously usable only through `GridRecipeOptions`/`StackRecipeOptions`,
-  not by name.
-- Declared the `prose` recipe family (`getProseClasses`, added in
-  `spectre-ui` 4.2.0) as `notYetSupported` in `astro-adapter.contract.json`
-  and the README's Component Family Stability table — no adapter component
-  exists for it yet, and `spectre-components` has no `sp-prose` equivalent
-  either.
+  `src/recipes/index.ts` alongside the other `SpGrid`/`SpStack` option types —
+  previously usable only through `GridRecipeOptions`/`StackRecipeOptions`, not
+  by name.
+- Declared the `prose` recipe family (`getProseClasses`, added in `spectre-ui`
+  4.2.0) as `notYetSupported` in `astro-adapter.contract.json` and the README's
+  Component Family Stability table — no adapter component exists for it yet, and
+  `spectre-components` has no `sp-prose` equivalent either.
 
 ## [4.5.0] - 2026-08-19
 
@@ -174,11 +219,11 @@ Contract change type: additive
 
 ### Fixed
 
-- `SpRating` now forwards `disabled` to `getRatingTextClasses` for the
-  optional text label (the default slot), matching `getRatingStarsClasses`
-  and `getRatingStarClasses`, which already received it. Previously the
-  label rendered without `sp-rating-text--disabled` when the rating was
-  disabled. Found auditing this adapter against `@phcdevworks/spectre-components`'s
+- `SpRating` now forwards `disabled` to `getRatingTextClasses` for the optional
+  text label (the default slot), matching `getRatingStarsClasses` and
+  `getRatingStarClasses`, which already received it. Previously the label
+  rendered without `sp-rating-text--disabled` when the rating was disabled.
+  Found auditing this adapter against `@phcdevworks/spectre-components`'s
   `sp-rating`, which already wired this option through.
 
 ### Added
@@ -190,10 +235,10 @@ Contract change type: additive
   layouts `columns`/`span`/`leadingTracks`/`fixedTracks` cannot express.
   Mutually exclusive with those options, matching the upstream contract.
   Re-exported the `GridTemplate` and `GridExplicitTemplateOptions` types,
-  unblocked by `@phcdevworks/spectre-ui@4.1.1` adding them to its own
-  `recipes` barrel.
-- Bumped the `@phcdevworks/spectre-tokens` peer dependency range to
-  `^4.4.0` and `@phcdevworks/spectre-ui` to `^4.1.1`.
+  unblocked by `@phcdevworks/spectre-ui@4.1.1` adding them to its own `recipes`
+  barrel.
+- Bumped the `@phcdevworks/spectre-tokens` peer dependency range to `^4.4.0` and
+  `@phcdevworks/spectre-ui` to `^4.1.1`.
 
 ## [4.4.0] - 2026-08-09
 
@@ -203,16 +248,15 @@ Contract change type: additive
 
 ### Added
 
-- Completed Grid v2 parity on `SpGrid`: added `columnGap`, `rowGap`,
-  `offset`, `rowSpan`, `rowOffset`, `order`, `leadingTracks`, and
-  `fixedTracks` props, forwarding to the matching `getGridClasses` options
-  added in `@phcdevworks/spectre-ui@4.0.0`. `leadingTracks`/`fixedTracks`
-  enable custom track sizing without hand-rolled `grid-template-columns`.
-  Re-exported the `GridOffset`, `GridOffsetOptions`, `GridOrder`,
-  `GridOrderOptions`, `GridLeadingWeight`, `GridLeadingWeightOptions`,
-  `GridLeadingTracksOptions`, `GridFixedTrackCount`, and
-  `GridFixedTracksOptions` types. Closes the Grid v2 deferred sub-scope
-  tracked in `ROADMAP.md`.
+- Completed Grid v2 parity on `SpGrid`: added `columnGap`, `rowGap`, `offset`,
+  `rowSpan`, `rowOffset`, `order`, `leadingTracks`, and `fixedTracks` props,
+  forwarding to the matching `getGridClasses` options added in
+  `@phcdevworks/spectre-ui@4.0.0`. `leadingTracks`/`fixedTracks` enable custom
+  track sizing without hand-rolled `grid-template-columns`. Re-exported the
+  `GridOffset`, `GridOffsetOptions`, `GridOrder`, `GridOrderOptions`,
+  `GridLeadingWeight`, `GridLeadingWeightOptions`, `GridLeadingTracksOptions`,
+  `GridFixedTrackCount`, and `GridFixedTracksOptions` types. Closes the Grid v2
+  deferred sub-scope tracked in `ROADMAP.md`.
 - Added a `mega` prop to `SpDropdown`, forwarding to the upstream
   `getDropdownClasses` `mega` option added in `@phcdevworks/spectre-ui@4.0.0`,
   for wide-menu panels anchored to the nearest positioned ancestor instead of
@@ -222,12 +266,12 @@ Contract change type: additive
   matching upstream's paired `mega` contract.
 - Re-exported the new Footer sub-recipe helpers — `getFooterHeadingClasses`,
   `getFooterTextClasses`, `getFooterMutedClasses`, `getFooterLinksClasses`,
-  `getFooterLinkClasses`, `getFooterDividerClasses`, and
-  `getFooterChipClasses` — and their `FooterLinkRecipeOptions` and
-  `FooterChipRecipeOptions` types, added in `@phcdevworks/spectre-ui@4.0.0`.
-  Consumer-driven footer content (headings, text, links, dividers, chips)
-  follows the same re-export-only pattern as `SpNav`'s
-  `getNavLinksClasses`/`getNavLinkClasses`; no new Astro components.
+  `getFooterLinkClasses`, `getFooterDividerClasses`, and `getFooterChipClasses`
+  — and their `FooterLinkRecipeOptions` and `FooterChipRecipeOptions` types,
+  added in `@phcdevworks/spectre-ui@4.0.0`. Consumer-driven footer content
+  (headings, text, links, dividers, chips) follows the same re-export-only
+  pattern as `SpNav`'s `getNavLinksClasses`/`getNavLinkClasses`; no new Astro
+  components.
 - Added a `compact` prop to `SpButton`, forwarding to the upstream
   `getButtonClasses` `compact` option added in `@phcdevworks/spectre-ui@4.0.0`.
   Shrinks the visible box below the minimum touch target while an invisible
@@ -236,9 +280,9 @@ Contract change type: additive
 
 ### Changed
 
-- Bumped the `@phcdevworks/spectre-ui` peer dependency from `^3.2.0` to
-  `^4.0.0` and the `@phcdevworks/spectre-tokens` peer dependency from
-  `^4.1.0` to `^4.3.0`.
+- Bumped the `@phcdevworks/spectre-ui` peer dependency from `^3.2.0` to `^4.0.0`
+  and the `@phcdevworks/spectre-tokens` peer dependency from `^4.1.0` to
+  `^4.3.0`.
 
 ## [4.3.0] - 2026-08-05
 
@@ -249,14 +293,14 @@ Contract change type: additive
 ### Added
 
 - Added a `transform` prop to `SpText`, forwarding to the upstream
-  `getTextClasses` `transform` option (`"none" | "uppercase" | "lowercase" |
-  "capitalize"`) added in `@phcdevworks/spectre-ui@3.2.0`. Re-exported the
-  `TextTransform` type.
+  `getTextClasses` `transform` option
+  (`"none" | "uppercase" | "lowercase" | "capitalize"`) added in
+  `@phcdevworks/spectre-ui@3.2.0`. Re-exported the `TextTransform` type.
 - Added a `span` prop to `SpGrid` (Grid v2), forwarding to the upstream
   `getGridClasses` `span` option added in `@phcdevworks/spectre-ui@3.2.0`.
-  Accepts a single column-span value (`1`-`12` or `full`) or a
-  per-breakpoint `{ base, md, lg }` object. Re-exported the `GridSpan` and
-  `GridSpanOptions` types. Closes the Grid v2 item tracked in `ROADMAP.md`.
+  Accepts a single column-span value (`1`-`12` or `full`) or a per-breakpoint
+  `{ base, md, lg }` object. Re-exported the `GridSpan` and `GridSpanOptions`
+  types. Closes the Grid v2 item tracked in `ROADMAP.md`.
 
 ### Changed
 
@@ -286,11 +330,11 @@ Contract change type: additive
 
 ### Added
 
-- Added `SpText`, calling the upstream `getTextClasses` recipe. Accepts an
-  `as` prop (`h1`–`h6`, `p`, `span`, defaulting to `p`) that swaps the
-  rendered tag without changing the recipe call, so no separate `SpHeading`
-  component is needed. Closes the `text` family gap tracked as "not yet
-  supported" since 4.0.0. Requested by `spectre-base`.
+- Added `SpText`, calling the upstream `getTextClasses` recipe. Accepts an `as`
+  prop (`h1`–`h6`, `p`, `span`, defaulting to `p`) that swaps the rendered tag
+  without changing the recipe call, so no separate `SpHeading` component is
+  needed. Closes the `text` family gap tracked as "not yet supported" since
+  4.0.0. Requested by `spectre-base`.
 
 ### Changed
 
@@ -311,9 +355,8 @@ Contract change type: breaking
 ### Changed
 
 - Raised the required Spectre peer ranges to
-  `@phcdevworks/spectre-tokens@^4.0.0` and
-  `@phcdevworks/spectre-ui@^3.0.0`, aligning the adapter and example app with
-  the new major upstream contracts.
+  `@phcdevworks/spectre-tokens@^4.0.0` and `@phcdevworks/spectre-ui@^3.0.0`,
+  aligning the adapter and example app with the new major upstream contracts.
 - Removed stale Tailwind integration claims and the deleted
   `@phcdevworks/spectre-ui/tailwind` export from adapter metadata and
   documentation. Precompiled Spectre UI CSS and recipe helpers remain the
@@ -329,8 +372,8 @@ Contract change type: additive
 
 ### Changed
 
-- Widened the `typescript` peer dependency range to add TypeScript 7
-  support: `^5.9 || ^6.0` → `^5.0 || ^6.0 || ^7.0`. Internal tooling
+- Widened the `typescript` peer dependency range to add TypeScript 7 support:
+  `^5.9 || ^6.0` → `^5.0 || ^6.0 || ^7.0`. Internal tooling
   (ESLint/typescript-eslint) runs against TypeScript 6 via an
   `npm:@typescript/typescript6` alias since `typescript-eslint` does not yet
   support TypeScript 7's programmatic API; TypeScript 7's native compiler is
@@ -348,16 +391,16 @@ Contract change type: additive
 
 ### Added
 
-- Added the `SpNav.align` option with `"start"`, `"center"`, and `"end"`
-  values, forwarding alignment directly to the upstream `getNavClasses()`
-  recipe without leaking the adapter prop to rendered markup.
+- Added the `SpNav.align` option with `"start"`, `"center"`, and `"end"` values,
+  forwarding alignment directly to the upstream `getNavClasses()` recipe without
+  leaking the adapter prop to rendered markup.
 - Re-exported the upstream `NavAlign` type for typed consumer composition.
 
 ### Changed
 
 - Bumped the `@phcdevworks/spectre-ui` peer, contract, example, and local
-  development ranges to `^2.9.0`, the first upstream release that provides
-  the nav alignment recipe contract.
+  development ranges to `^2.9.0`, the first upstream release that provides the
+  nav alignment recipe contract.
 
 ## [3.5.0] - 2026-07-14
 
@@ -379,8 +422,8 @@ Contract change type: additive
 ### Changed
 
 - Bumped the `@phcdevworks/spectre-ui` peer, contract, example, and local
-  development ranges to `^2.8.0`, adopting the complete upstream sidebar
-  toggle styling and collapsible group recipe contract.
+  development ranges to `^2.8.0`, adopting the complete upstream sidebar toggle
+  styling and collapsible group recipe contract.
 - Refreshed Astro and TypeScript ESLint development dependencies with
   synchronized lockfile metadata.
 
@@ -401,10 +444,10 @@ Contract change type: N/A
 
 ### Changed
 
-- Aligned the README's root-import and direct-component-entrypoint examples
-  with the form components already published in the package contract, and
-  refreshed maintainer documentation for the existing README and built-package
-  validation coverage.
+- Aligned the README's root-import and direct-component-entrypoint examples with
+  the form components already published in the package contract, and refreshed
+  maintainer documentation for the existing README and built-package validation
+  coverage.
 - Refined package and repository documentation and updated the declared npm
   package-manager version.
 - Refreshed development tooling, including Astro, Spectre UI, the ecosystem
@@ -423,9 +466,9 @@ Contract change type: N/A
 - Prepared the package for the `3.4.1` patch release by refreshing release
   metadata and local tooling versions. Updated local development dependencies
   for Astro, Node types, and `@phcdevworks/spectre-ui`.
-- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.7.1` so
-  consumers install the same upstream patch floor this adapter release was
-  validated against.
+- Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.7.1` so consumers
+  install the same upstream patch floor this adapter release was validated
+  against.
 - Synchronized release-readiness documentation and ecosystem manifest exports
   with the already-published component surface.
 
@@ -437,16 +480,15 @@ Contract change type: additive
 
 ### Changed
 
-- **`SpSelect`/`SpTextarea` full recipe option forwarding**: Both components
-  now destructure and forward `size`, `state`, `fullWidth`, `pill`, and
-  `loading` to `getSelectClasses`/`getTextareaClasses`, in addition to the
-  existing `disabled`/`focused`. Previously only `disabled`/`focused` reached
-  the recipe call, silently dropping size/shape options and the new
-  invalid/success/loading states shipped in
-  `@phcdevworks/spectre-ui@2.7.0`. Both components also gained an explicit
-  `aria-invalid` prop (defaulting to `"true"` when `state="invalid"`) and
-  `aria-busy` (set when `loading`), matching `SpInput`'s accessibility
-  pattern.
+- **`SpSelect`/`SpTextarea` full recipe option forwarding**: Both components now
+  destructure and forward `size`, `state`, `fullWidth`, `pill`, and `loading` to
+  `getSelectClasses`/`getTextareaClasses`, in addition to the existing
+  `disabled`/`focused`. Previously only `disabled`/`focused` reached the recipe
+  call, silently dropping size/shape options and the new invalid/success/loading
+  states shipped in `@phcdevworks/spectre-ui@2.7.0`. Both components also gained
+  an explicit `aria-invalid` prop (defaulting to `"true"` when
+  `state="invalid"`) and `aria-busy` (set when `loading`), matching `SpInput`'s
+  accessibility pattern.
 - Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.7.0` and
   `peerDependencies["@phcdevworks/spectre-tokens"]` to `^3.3.1`, closing
   dependency drift against the current published `project-design` versions.
@@ -467,10 +509,10 @@ Contract change type: additive
   `getRadioClasses`, `getSelectClasses`, `getTextareaClasses`,
   `getFieldsetClasses`/`getFieldsetLegendClasses`, `getLabelClasses`) with no
   local styling or accessibility-id association logic - association between
-  `SpLabel`'s `for` and a control's `id` is the consumer's responsibility,
-  same as plain HTML. All six are exported from the root package, declared
-  in `astro-adapter.contract.json` as `stable`, and covered by dedicated SSR
-  tests plus `tests/rendering.test.ts` coverage.
+  `SpLabel`'s `for` and a control's `id` is the consumer's responsibility, same
+  as plain HTML. All six are exported from the root package, declared in
+  `astro-adapter.contract.json` as `stable`, and covered by dedicated SSR tests
+  plus `tests/rendering.test.ts` coverage.
 
 ### Changed
 
@@ -488,11 +530,11 @@ Contract change type: additive
 
 - Bumped `peerDependencies["@phcdevworks/spectre-ui"]` to `^2.5.0`.
 - Re-exported `getSidebarHeaderClasses` and the `SidebarLinkLevel` type from
-  `@phcdevworks/spectre-ui`, unblocking Phase 9 sidebar header and nested
-  link indentation. Consumers compose section headers and indented child
-  links directly in `SpSidebar`'s default slot using
-  `getSidebarHeaderClasses()` and `getSidebarLinkClasses({ level: "child" })`,
-  matching the existing consumer-composed pattern for `getSidebarLinkClasses`.
+  `@phcdevworks/spectre-ui`, unblocking Phase 9 sidebar header and nested link
+  indentation. Consumers compose section headers and indented child links
+  directly in `SpSidebar`'s default slot using `getSidebarHeaderClasses()` and
+  `getSidebarLinkClasses({ level: "child" })`, matching the existing
+  consumer-composed pattern for `getSidebarLinkClasses`.
 
 ## [3.1.0] - 2026-06-24
 
@@ -531,11 +573,11 @@ Contract change type: additive
 
 - Added `SpSidebar` component. Renders as `<aside>` by default (also `"div"`,
   `"nav"`). Calls `getSidebarClasses`. The first adapter component to own
-  interactive state: renders a wrapper with `data-sidebar-open="false"`
-  (closed by default, SSR-safe), a hamburger toggle button, and a backdrop
-  element (`getSidebarBackdropClasses`) that close the drawer on tap. Build
-  sidebar links in the default slot using the re-exported
-  `getSidebarLinkClasses` helper.
+  interactive state: renders a wrapper with `data-sidebar-open="false"` (closed
+  by default, SSR-safe), a hamburger toggle button, and a backdrop element
+  (`getSidebarBackdropClasses`) that close the drawer on tap. Build sidebar
+  links in the default slot using the re-exported `getSidebarLinkClasses`
+  helper.
 - Added `SpFooter` component. Renders as `<footer>` by default (also `"div"`,
   `"section"`). Supports `bordered` and `fullWidth`, mapped to
   `getFooterClasses`.
@@ -804,7 +846,8 @@ Contract change type: additive
 
 ## [2.2.0] - 2026-04-25
 
-**Release Title:** Phase 2 - Interactive State Parity and Shared Attribute Guarding
+**Release Title:** Phase 2 - Interactive State Parity and Shared Attribute
+Guarding
 
 Contract change type: additive
 
@@ -871,7 +914,8 @@ Contract change type: additive
 
 ## [2.0.3] - 2026-04-11
 
-**Release Title:** Phase 2 - Accessibility Hardening and Release Workflow Cleanup
+**Release Title:** Phase 2 - Accessibility Hardening and Release Workflow
+Cleanup
 
 Contract change type: additive
 
@@ -1141,7 +1185,8 @@ Contract change type: additive
 - Integration with `@phcdevworks/spectre-ui` for all styling (no style
   duplication).
 
-[unreleased]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.7.0...HEAD
+[unreleased]:
+  https://github.com/phcdevworks/spectre-ui-astro/compare/v3.7.0...HEAD
 [3.7.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.5.0...v3.6.0
 [3.5.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.4.2...v3.5.0
@@ -1151,8 +1196,10 @@ Contract change type: additive
 [3.3.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v3.0.0...v3.1.0
-[3.0.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v2.10.0...v3.0.0
-[2.10.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v2.9.0...v2.10.0
+[3.0.0]:
+  https://github.com/phcdevworks/spectre-ui-astro/compare/v2.10.0...v3.0.0
+[2.10.0]:
+  https://github.com/phcdevworks/spectre-ui-astro/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/phcdevworks/spectre-ui-astro/compare/v2.6.0...v2.7.0

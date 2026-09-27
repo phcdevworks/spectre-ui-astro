@@ -1,0 +1,34 @@
+---
+import { getSidebarGroupClasses, getSidebarGroupSummaryClasses } from "@phcdevworks/spectre-ui";
+
+interface SpSidebarGroupProps {
+  label?: string;
+  open?: boolean;
+  class?: string;
+  summaryClass?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  label,
+  open = false,
+  class: className,
+  summaryClass,
+  id,
+  ...rest
+} = Astro.props as SpSidebarGroupProps;
+
+const finalClass = [getSidebarGroupClasses(), className].filter(Boolean).join(" ");
+const finalSummaryClass = [getSidebarGroupSummaryClasses(), summaryClass]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<details class={finalClass} id={id} open={open} {...rest}>
+  <summary class={finalSummaryClass}>
+    <slot name="summary">{label}</slot>
+  </summary>
+  <slot />
+</details>
