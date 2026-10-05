@@ -12,9 +12,12 @@ import {
   SpLead,
   SpListGroup,
   SpListGroupItem,
+  SpLogoCloud,
+  SpLogoCloudItem,
   SpOffcanvas,
   SpPagination,
   SpSection,
+  SpSkeleton,
   SpStack,
   SpStepper,
   SpTabPanel,
@@ -97,6 +100,22 @@ const rows = [
         <SpListGroupItem as="a" href="#">Linked item</SpListGroupItem>
         <SpListGroupItem as="button" disabled>Disabled item</SpListGroupItem>
       </SpListGroup>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Logo cloud">
+      <SpHeading level="h2">Logo cloud</SpHeading>
+      <SpLogoCloud as="ul" size="sm" fill="card" muted aria-label="Partners">
+        <SpLogoCloudItem as="li">Partner A</SpLogoCloudItem>
+        <SpLogoCloudItem as="li">Partner B</SpLogoCloudItem>
+      </SpLogoCloud>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Skeleton">
+      <SpHeading level="h2">Skeleton</SpHeading>
+      <SpStack gap="sm" aria-busy="true">
+        <SpSkeleton shape="circle" animated />
+        <SpSkeleton />
+      </SpStack>
     </SpSection>
 
     <SpSection spacing="sm" gap="sm" aria-label="Carousel">

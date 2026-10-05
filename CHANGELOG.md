@@ -6,6 +6,41 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.11.0] - 2026-10-05
+
+**Release Title:** Skeleton and Logo Cloud Parity
+
+Contract change type: additive
+
+### Added
+
+- Reached parity with `@phcdevworks/spectre-components` 1.22.0 and full
+  `@phcdevworks/spectre-ui` 5.4.0 recipe parity:
+  - `SpSkeleton` on `getSkeletonClasses`, with `shape` (`text` | `rect` |
+    `circle`) and `animated`. The placeholder renders `aria-hidden="true"`.
+  - `SpLogoCloud` on `getLogoCloudClasses`, with `size`, `fill`, and `muted`,
+    and the `SpLogoCloudItem` tile part on `getLogoCloudItemClasses`. Lit's
+    `sp-logo-cloud` styles its direct children at runtime, so SSR markup uses
+    the part component instead.
+  - `SpFooter` forwards `appearance` (`dark` | `light` | `system`) and
+    `surface` (`page` | `card` | `subtle` | `inverse` | `hero`).
+  - `SpSection` forwards `hero` (`sm` | `md` | `lg`) and `attached`.
+  - `SpText` forwards `weight` (`400`–`900`).
+  - `SpNavItem` forwards `fullWidth` to `getDropdownClasses`, matching
+    `sp-nav-item`; it previously leaked to the DOM as an attribute.
+  - The `xl`, `2xl`, `3xl`, and `4xl` layout steps reach `SpSection`,
+    `SpStack`, `SpGrid`, and `SpContainer` through the upstream option types.
+- Re-exported `getSkeletonClasses`, `getLogoCloudClasses`,
+  `getLogoCloudItemClasses`, and the `SkeletonRecipeOptions`, `SkeletonShape`,
+  `LogoCloudRecipeOptions`, `LogoCloudSize`, `LogoCloudFill`,
+  `FooterAppearance`, `FooterSurface`, and `TextWeight` types.
+
+### Changed
+
+- Raised the peer ranges to `@phcdevworks/spectre-ui` `^5.4.0` and
+  `@phcdevworks/spectre-tokens` `^4.12.0`, which the new recipes and options
+  require.
+
 ## [4.10.0] - 2026-09-27
 
 **Release Title:** Complete Recipe and Composition Parity

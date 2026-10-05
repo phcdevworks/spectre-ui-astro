@@ -21,6 +21,7 @@ const {
   variant,
   family,
   transform,
+  weight,
   class: className,
   id,
   "aria-label": ariaLabel,
@@ -28,7 +29,7 @@ const {
   ...rest
 } = Astro.props as SpTextProps;
 
-const classes = getTextClasses(omitUndefined({ size, variant, family, transform }));
+const classes = getTextClasses(omitUndefined({ size, variant, family, transform, weight }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

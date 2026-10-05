@@ -1,0 +1,29 @@
+---
+import type { SkeletonRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSkeletonClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpSkeletonElement = "div" | "span";
+
+interface SpSkeletonProps extends SkeletonRecipeOptions {
+  as?: SpSkeletonElement;
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  shape,
+  animated,
+  as: Tag = "div",
+  class: className,
+  id,
+  ...rest
+} = Astro.props as SpSkeletonProps;
+
+const classes = getSkeletonClasses(omitUndefined({ shape, animated }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag class={finalClass} id={id} aria-hidden="true" {...rest} />

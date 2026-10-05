@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.10.0                          |
+| Current version/status | 4.11.0                          |
 
 ## Standard Workflow
 
@@ -212,6 +212,8 @@ import {
   SpLead,
   SpListGroup,
   SpListGroupItem,
+  SpLogoCloud,
+  SpLogoCloudItem,
   SpModal,
   SpNav,
   SpNavItem,
@@ -232,6 +234,7 @@ import {
   SpSidebarHeader,
   SpSidebarLink,
   SpSidebarToggle,
+  SpSkeleton,
   SpSpinner,
   SpStack,
   SpStepper,
@@ -461,6 +464,8 @@ The default slot renders any child content.
 | ------------ | ------------------------------------------------------ | ----------- | ---------------------------------------------------------------------- |
 | `spacing`    | `SectionSpacing`                                       | —           | Block padding step: `"sm"` `"md"` `"lg"`; omission keeps the default   |
 | `gap`        | `SectionGap`                                           | —           | Stacks direct children with the section gap step: `"sm"` `"md"` `"lg"` |
+| `hero`       | `"sm" \| "md" \| "lg"`                                 | —           | Asymmetric hero padding (more above than below); replaces `spacing`    |
+| `attached`   | `boolean`                                              | —           | Drops the top padding of a band that belongs to the section above      |
 | `as`         | `"section" \| "div" \| "article" \| "aside" \| "main"` | `"section"` | Rendered element                                                       |
 | `id`         | `string`                                               | —           | Element id                                                             |
 | `aria-label` | `string`                                               | —           | Accessible label                                                       |
@@ -474,7 +479,9 @@ The default slot renders any child content.
 </SpSection>
 ```
 
-The default slot renders any child content.
+The default slot renders any child content. `spacing` and `gap` also accept the
+`"xl"` `"2xl"` `"3xl"` `"4xl"` steps from `@phcdevworks/spectre-ui` 5.4.0, as do
+the `SpStack` and `SpGrid` gaps and the `SpContainer` padding.
 
 ---
 
@@ -487,6 +494,7 @@ The default slot renders any child content.
 | `variant`   | `TextVariant`                                                   | —       | Upstream color role, including `"onInverse"`/`"onInverseMuted"` for on-dark surfaces |
 | `family`    | `TextFamily`                                                    | —       | Upstream font family                                                                 |
 | `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"`                         |
+| `weight`    | `TextWeight`                                                    | —       | `400`–`900`; overrides the weight the `size` preset carries                          |
 | `id`        | `string`                                                        | —       | Element id                                                                           |
 | `class`     | `string`                                                        | —       | Additional CSS classes                                                               |
 
@@ -1141,13 +1149,13 @@ render only when their slot is populated.
   </p>
   <img
     slot="author-image"
-    src="/avatars/jane.jpg"
-    alt="Jane Doe"
+    src="/avatars/profile.jpg"
+    alt="Product team lead"
     width="40"
     height="40"
   />
-  <span slot="author-name">Jane Doe</span>
-  <span slot="author-title">Frontend Lead at Acme Corp</span>
+  <span slot="author-name">Product team lead</span>
+  <span slot="author-title">A production consumer</span>
 </SpTestimonial>
 ```
 
@@ -1172,6 +1180,28 @@ default `aria-label` of `"Loading"`.
 <SpSpinner />
 <SpSpinner variant="primary" size="lg" />
 <SpSpinner loading aria-label="Saving changes" />
+```
+
+---
+
+### SpSkeleton
+
+A loading placeholder. It renders with `aria-hidden="true"`, so put
+`aria-busy="true"` on the region it stands in for.
+
+| Prop       | Type                           | Default  | Description                                                    |
+| ---------- | ------------------------------ | -------- | -------------------------------------------------------------- |
+| `shape`    | `"text" \| "rect" \| "circle"` | `"text"` | `rect` fills the box you size through `class`                  |
+| `animated` | `boolean`                      | —        | Shimmer sweep; it stops under `prefers-reduced-motion: reduce` |
+| `as`       | `"div" \| "span"`              | `"div"`  | Rendered element                                               |
+| `id`       | `string`                       | —        | Element ID                                                     |
+| `class`    | `string`                       | —        | Additional CSS classes                                         |
+
+```astro
+<div aria-busy="true">
+  <SpSkeleton shape="circle" animated />
+  <SpSkeleton />
+</div>
 ```
 
 ---
@@ -1248,16 +1278,18 @@ const activeItemClass = getDropdownItemClasses({ active: true })
 
 ### SpFooter
 
-| Prop          | Type                             | Default    | Description                                                 |
-| ------------- | -------------------------------- | ---------- | ----------------------------------------------------------- |
-| `bordered`    | `boolean`                        | —          | Applies a top border                                        |
-| `fullWidth`   | `boolean`                        | —          | Stretches to full width                                     |
-| `accent`      | `FooterAccentEdge`               | —          | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"` |
-| `accentColor` | `FooterAccentColor`              | `"brand"`  | Rail color, used when `accent` is set                       |
-| `as`          | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element                                            |
-| `id`          | `string`                         | —          | Element ID                                                  |
-| `aria-label`  | `string`                         | —          | Accessible label                                            |
-| `class`       | `string`                         | —          | Additional CSS classes                                      |
+| Prop          | Type                             | Default    | Description                                                        |
+| ------------- | -------------------------------- | ---------- | ------------------------------------------------------------------ |
+| `bordered`    | `boolean`                        | —          | Applies a top border                                               |
+| `fullWidth`   | `boolean`                        | —          | Stretches to full width                                            |
+| `accent`      | `FooterAccentEdge`               | —          | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"`        |
+| `accentColor` | `FooterAccentColor`              | `"brand"`  | Rail color, used when `accent` is set                              |
+| `appearance`  | `FooterAppearance`               | `"dark"`   | Palette: `"dark"` `"light"` `"system"`                             |
+| `surface`     | `FooterSurface`                  | —          | Background role: `"page"` `"card"` `"subtle"` `"inverse"` `"hero"` |
+| `as`          | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element                                                   |
+| `id`          | `string`                         | —          | Element ID                                                         |
+| `aria-label`  | `string`                         | —          | Accessible label                                                   |
+| `class`       | `string`                         | —          | Additional CSS classes                                             |
 
 ```astro
 <SpFooter bordered>
@@ -1556,6 +1588,24 @@ accepts `div`, `ul`, `ol`, or `nav` through `as`.
 `SpListGroupItem` supports `div`, `li`, `a`, and `button` roots and forwards
 interactive, active, selected, disabled, hover, and focus states. Named
 `heading` and `text` slots receive the matching sub-recipe classes.
+
+### SpLogoCloud
+
+`SpLogoCloud` forwards `size` (`sm` | `md` | `lg`), `fill` (`subtle` | `card` |
+`none`), and `muted` to `getLogoCloudClasses`, and accepts `div`, `ul`, or
+`section` through `as`. With `muted`, marks are grayscale until hover or focus.
+
+### SpLogoCloudItem
+
+`SpLogoCloudItem` is one tile, styled by `getLogoCloudItemClasses`. It renders a
+`div`, `li`, or `a` root; `href` is only kept on `a`. The Lit `sp-logo-cloud`
+styles its direct children at runtime, so SSR markup uses this part instead.
+
+```astro
+<SpLogoCloud as="ul" size="sm" muted aria-label="Partners">
+  <SpLogoCloudItem as="li"><img src="/partner-logo.svg" alt="Partner logo" /></SpLogoCloudItem>
+</SpLogoCloud>
+```
 
 ### SpOffcanvas
 
@@ -1987,6 +2037,7 @@ const links = [
 | `getInputGroup*Classes`               | Input group wrapper and addon                     |
 | `getLeadClasses`                      | Lead paragraph typography                         |
 | `getListGroup*Classes`                | List-group root and item structure                |
+| `getLogoCloud*Classes`                | Logo cloud root and tile                          |
 | `getModalClasses`                     | Modal root classes                                |
 | `getModalOverlayClasses`              | Modal overlay/backdrop classes                    |
 | `getNavClasses`                       | Nav root classes                                  |
@@ -2015,6 +2066,7 @@ const links = [
 | `getSidebarHeaderClasses`             | Sidebar section header                            |
 | `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop                       |
 | `getSidebarToggleClasses`             | Sidebar toggle button classes                     |
+| `getSkeletonClasses`                  | Skeleton loading placeholder                      |
 | `getStackClasses`                     | Stack class generation                            |
 | `getStepper*Classes`                  | Stepper root, steps, indicators, and labels       |
 | `getSwitchClasses`                    | Toggle switch                                     |
@@ -2051,10 +2103,11 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 
 The corresponding accordion, breadcrumb, carousel, choice-card, datepicker, day,
 display, external-auth-button, file-input, heading, input-group, list-group,
-offcanvas, pagination, popover, progress, prose, range, stepper, switch, table,
-and tabs recipe option, variant, size, placement, orientation, state, and accent
-types are also re-exported, as are the container padding, section spacing/gap,
-card padding, and grid column-start types. Every public `get*Classes` helper
+logo-cloud, offcanvas, pagination, popover, progress, prose, range, skeleton,
+stepper, switch, table, and tabs recipe option, variant, size, placement,
+orientation, state, and accent types are also re-exported, as are the container
+padding, section spacing/gap, card padding, grid column-start, footer
+appearance/surface, and text weight types. Every public `get*Classes` helper
 from `@phcdevworks/spectre-ui` is re-exported; the upstream parity test fails if
 one is missed.
 
@@ -2084,6 +2137,8 @@ import {
   SpLabel,
   SpListGroup,
   SpListGroupItem,
+  SpLogoCloud,
+  SpLogoCloudItem,
   SpModal,
   SpNav,
   SpOffcanvas,
@@ -2095,6 +2150,7 @@ import {
   SpSelect,
   SpSidebar,
   SpSidebarToggle,
+  SpSkeleton,
   SpSpinner,
   SpStack,
   SpStepper,
@@ -2163,6 +2219,8 @@ import SpLabel from '@phcdevworks/spectre-ui-astro/components/SpLabel.astro'
 import SpLead from '@phcdevworks/spectre-ui-astro/components/SpLead.astro'
 import SpListGroup from '@phcdevworks/spectre-ui-astro/components/SpListGroup.astro'
 import SpListGroupItem from '@phcdevworks/spectre-ui-astro/components/SpListGroupItem.astro'
+import SpLogoCloud from '@phcdevworks/spectre-ui-astro/components/SpLogoCloud.astro'
+import SpLogoCloudItem from '@phcdevworks/spectre-ui-astro/components/SpLogoCloudItem.astro'
 import SpModal from '@phcdevworks/spectre-ui-astro/components/SpModal.astro'
 import SpNav from '@phcdevworks/spectre-ui-astro/components/SpNav.astro'
 import SpNavItem from '@phcdevworks/spectre-ui-astro/components/SpNavItem.astro'
@@ -2183,6 +2241,7 @@ import SpSidebarGroup from '@phcdevworks/spectre-ui-astro/components/SpSidebarGr
 import SpSidebarHeader from '@phcdevworks/spectre-ui-astro/components/SpSidebarHeader.astro'
 import SpSidebarLink from '@phcdevworks/spectre-ui-astro/components/SpSidebarLink.astro'
 import SpSidebarToggle from '@phcdevworks/spectre-ui-astro/components/SpSidebarToggle.astro'
+import SpSkeleton from '@phcdevworks/spectre-ui-astro/components/SpSkeleton.astro'
 import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpStepper from '@phcdevworks/spectre-ui-astro/components/SpStepper.astro'
@@ -2235,6 +2294,7 @@ Each component family is classified by its support status in this adapter.
 | label                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | lead                 | **stable** | Element override, slot, and SSR coverage                           |
 | list-group           | **stable** | Root/item, interaction-state, slot, and SSR coverage               |
+| logo-cloud           | **stable** | Root/tile, size/fill/muted, and SSR coverage                       |
 | modal                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | nav                  | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | offcanvas            | **stable** | Controlled panel, backdrop, slot, ARIA, and SSR coverage           |
@@ -2249,6 +2309,7 @@ Each component family is classified by its support status in this adapter.
 | section              | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | select               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | sidebar              | **stable** | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction   |
+| skeleton             | **stable** | Shape/animation, `aria-hidden`, and SSR coverage                   |
 | spinner              | **stable** | Full prop, ARIA, and SSR coverage                                  |
 | stack                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | stepper              | **stable** | Derived/explicit state, ARIA, and SSR coverage                     |

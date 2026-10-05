@@ -19,6 +19,8 @@ const {
   fullWidth,
   accent,
   accentColor,
+  appearance,
+  surface,
   as: Tag = "footer",
   class: className,
   id,
@@ -26,7 +28,14 @@ const {
   ...rest
 } = Astro.props as SpFooterProps;
 
-const classes = getFooterClasses(omitUndefined({ bordered, fullWidth, accent, accentColor }));
+const classes = getFooterClasses(omitUndefined({
+  bordered,
+  fullWidth,
+  accent,
+  accentColor,
+  appearance,
+  surface,
+}));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 ---
 

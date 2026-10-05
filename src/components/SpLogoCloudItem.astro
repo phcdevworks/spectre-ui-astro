@@ -1,0 +1,36 @@
+---
+import { getLogoCloudItemClasses } from "@phcdevworks/spectre-ui";
+
+type SpLogoCloudItemElement = "div" | "li" | "a";
+
+interface SpLogoCloudItemProps {
+  as?: SpLogoCloudItemElement;
+  class?: string;
+  id?: string;
+  href?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "div",
+  class: className,
+  id,
+  href,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpLogoCloudItemProps;
+
+const finalClass = [getLogoCloudItemClasses(), className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  href={Tag === "a" ? href : undefined}
+  aria-label={ariaLabel}
+  {...rest}
+>
+  <slot />
+</Tag>

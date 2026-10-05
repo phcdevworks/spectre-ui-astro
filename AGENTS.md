@@ -164,6 +164,31 @@ Roadmap Self-Expansion." Applied to this repo:
   Potts in the same change it was made, and reflect cross-repo-relevant
   changes in the project-team's own ROADMAP.md/TODO.md.
 
+## Catching Up With spectre-tokens
+
+`spectre-tokens/DOWNSTREAM_PARITY.md` is the catch-up checklist for
+everything `spectre-tokens` publishes. It groups every `--sp-*` CSS variable
+in `@phcdevworks/spectre-tokens/index.css` into the family a recipe,
+stylesheet, or component consumes, and marks which ones vary by color mode.
+It is regenerated on every tokens build, so it always matches the published
+CSS. It is a derived artifact: `spectre-tokens/tokens/` and
+`contract.manifest.json` stay the source of truth for what a token means.
+
+To see what this repo still has to consume, run from `spectre-tokens` (read-only;
+it never modifies the scanned repo):
+
+```bash
+npm run audit:parity -- spectre-ui-astro
+```
+
+It prints each family as a checklist (`[x]` fully referenced, `[ ]` with the
+missing variables listed, "no consumer" if nothing uses it yet), scanning
+`spectre-ui-astro/src`.
+
+This adapter wraps `spectre-ui` recipes and never reads token values itself,
+so use the checklist to see which new families need a component prop once
+`spectre-ui` ships the recipe, not to consume variables directly.
+
 ## File Ownership at a Glance
 
 | File / Path                            | Status                                    | Notes                                                          |

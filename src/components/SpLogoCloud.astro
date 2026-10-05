@@ -1,0 +1,42 @@
+---
+import type { LogoCloudRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getLogoCloudClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpLogoCloudElement = "div" | "ul" | "section";
+
+interface SpLogoCloudProps extends LogoCloudRecipeOptions {
+  as?: SpLogoCloudElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  fill,
+  muted,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  ...rest
+} = Astro.props as SpLogoCloudProps;
+
+const classes = getLogoCloudClasses(omitUndefined({ size, fill, muted }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  {...rest}
+>
+  <slot />
+</Tag>

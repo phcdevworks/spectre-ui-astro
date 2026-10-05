@@ -13,11 +13,11 @@ file does not restate delivered work.
 
 ## System Phase Context
 
-| Package                         | Current state                                                                |
-| ------------------------------- | ---------------------------------------------------------------------------- |
-| `@phcdevworks/spectre-tokens`   | v4.11.0 — current adapter peer baseline                                      |
-| `@phcdevworks/spectre-ui`       | v5.3.0 — current adapter recipe baseline                                     |
-| `@phcdevworks/spectre-ui-astro` | v4.10.0 — full UI 5.3.0 recipe and Components composition parity |
+| Package                         | Current state                                                                            |
+| ------------------------------- | ---------------------------------------------------------------------------------------- |
+| `@phcdevworks/spectre-tokens`   | v4.12.0 — current adapter peer baseline                                                  |
+| `@phcdevworks/spectre-ui`       | v5.4.0 — current adapter recipe baseline                                                 |
+| `@phcdevworks/spectre-ui-astro` | v4.11.0 — full UI 5.4.0 and Components 1.22.0 parity                               |
 
 ---
 
@@ -46,6 +46,7 @@ file does not restate delivered work.
 | 19    | Bootstrap-scale inventory expansion — Tabs/TabPanel, Accordion/AccordionItem, Breadcrumb, ListGroup/ListGroupItem, Offcanvas, Carousel, Table, expanded Alert composition, Pagination, and Stepper; consuming `spectre-ui@5.3.0` and `spectre-tokens@4.11.0`                                                                                                                                                                   | 4.10.0      |
 | 20    | Full `spectre-ui@5.3.0` recipe parity — ChoiceCard, Datepicker/Day, Display, Heading, Lead, Prose, ExternalAuthButton, FileInput, InputGroup/InputGroupAddon, Popover, Progress, Range, and Switch; every upstream helper/type re-exported; Badge `dot`, Container `padding`, Section `spacing`/`gap`, Grid `colStart`, and NavItem link-state forwarding; parity test fails on any unexported upstream helper                 | 4.10.0      |
 | 21    | spectre-components composition parity — part components for card bleed, dropdown menu/item/header/divider, footer heading/text/links/divider, nav links, sidebar group/header, table rows, and carousel slides/indicators                                                                                                                                                                                                      | 4.10.0      |
+| 22    | spectre-components 1.22.0 and full `spectre-ui@5.4.0` parity — `SpSkeleton`, `SpLogoCloud`/`SpLogoCloudItem`, Footer `appearance`/`surface`, Section `hero`/`attached`, Text `weight`, `xl`–`4xl` layout steps; peers raised to `spectre-ui@^5.4.0` and `spectre-tokens@^4.12.0`                                                                                                                                               | 4.11.0      |
 
 ---
 

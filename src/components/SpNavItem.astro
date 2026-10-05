@@ -13,6 +13,7 @@ interface SpNavItemProps {
   hovered?: boolean;
   focused?: boolean;
   placement?: DropdownPlacement;
+  fullWidth?: boolean;
   mega?: boolean;
   viewport?: boolean;
   accent?: DropdownAccentEdge;
@@ -35,6 +36,7 @@ const {
   hovered,
   focused,
   placement = "bottom-start",
+  fullWidth,
   mega,
   viewport,
   accent,
@@ -48,7 +50,7 @@ const {
 
 const navLinkClasses = getNavLinkClasses(omitUndefined({ active, disabled, hovered, focused }));
 const finalNavLinkClass = [navLinkClasses, className].filter(Boolean).join(" ");
-const wrapperClasses = getDropdownClasses(omitUndefined({ mega, viewport }));
+const wrapperClasses = getDropdownClasses(omitUndefined({ fullWidth, mega, viewport }));
 const menuClasses = getDropdownMenuClasses(omitUndefined({ open, placement, mega, viewport, accent, accentColor }));
 ---
 
