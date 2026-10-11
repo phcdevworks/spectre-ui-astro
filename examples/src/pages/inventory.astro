@@ -4,6 +4,7 @@ import {
   SpAccordionItem,
   SpAlert,
   SpBreadcrumb,
+  SpButton,
   SpCard,
   SpCarousel,
   SpCarouselIndicator,
@@ -16,10 +17,14 @@ import {
   SpLogoCloudItem,
   SpOffcanvas,
   SpPagination,
+  SpQuote,
   SpSection,
+  SpSectionHead,
   SpSkeleton,
   SpStack,
+  SpStat,
   SpStepper,
+  SpText,
   SpTabPanel,
   SpTable,
   SpTableRow,
@@ -118,6 +123,28 @@ const rows = [
       </SpStack>
     </SpSection>
 
+    <SpSection spacing="sm" gap="sm" aria-label="Section head">
+      <SpSectionHead layout="split">
+        <SpText slot="eyebrow" as="span" transform="uppercase" size="sm" variant="accent">Child theme</SpText>
+        <SpHeading slot="title" level="h2">Section head</SpHeading>
+        <SpLead>The title block sits left of the lead from the lg breakpoint.</SpLead>
+        <SpButton slot="actions" variant="accentOutline">Accent outline</SpButton>
+      </SpSectionHead>
+    </SpSection>
+
+    <SpSection spacing="sm" gap="sm" aria-label="Quote and stat">
+      <SpHeading level="h2">Quote and stat</SpHeading>
+      <SpQuote size="lg" accent="mark">
+        <p>Every visual decision resolves to an upstream recipe.</p>
+        <span slot="name">Spectre</span>
+        <span slot="role">Design system</span>
+      </SpQuote>
+      <SpStack direction="horizontal" gap="lg">
+        <SpStat size="lg">98<span slot="unit">%</span><span slot="label">Token coverage</span></SpStat>
+        <SpStat size="lg">3<span slot="unit">x</span><span slot="label">Faster theming</span></SpStat>
+      </SpStack>
+    </SpSection>
+
     <SpSection spacing="sm" gap="sm" aria-label="Carousel">
       <SpHeading level="h2">Carousel</SpHeading>
       <SpCarousel aria-label="Highlights">
@@ -171,6 +198,7 @@ const rows = [
     <SpSection spacing="sm" gap="sm" aria-label="Stepper">
       <SpHeading level="h2">Stepper</SpHeading>
       <SpStepper
+        tone="accent"
         current={1}
         aria-label="Checkout progress"
         steps={[{ label: "Cart" }, { label: "Shipping" }, { label: "Payment" }]}

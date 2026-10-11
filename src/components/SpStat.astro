@@ -1,0 +1,63 @@
+---
+import type { StatRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getStatClasses,
+  getStatFigureClasses,
+  getStatLabelClasses,
+  getStatUnitClasses,
+} from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpStatProps extends StatRecipeOptions {
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  align,
+  surface,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpStatProps;
+
+const classes = getStatClasses(omitUndefined({ size, align, surface }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const hasAccessibleName = Boolean(ariaLabel || ariaLabelledby);
+---
+
+<div
+  class={finalClass}
+  id={id}
+  role={hasAccessibleName ? "group" : undefined}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <p class={getStatFigureClasses()}>
+    <slot />{
+      Astro.slots.has("unit") && (
+        <span class={getStatUnitClasses()}>
+          <slot name="unit" />
+        </span>
+      )
+    }
+  </p>
+  {
+    Astro.slots.has("label") && (
+      <p class={getStatLabelClasses()}>
+        <slot name="label" />
+      </p>
+    )
+  }
+</div>

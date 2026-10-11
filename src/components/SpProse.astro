@@ -1,6 +1,7 @@
 ---
 import type { ProseRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getProseClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
 type SpProseElement = "div" | "article" | "section" | "main" | "aside";
 
@@ -14,6 +15,7 @@ interface SpProseProps extends ProseRecipeOptions {
 }
 
 const {
+  accentMarkers,
   as: Tag = "div",
   class: className,
   id,
@@ -21,7 +23,7 @@ const {
   ...rest
 } = Astro.props as SpProseProps;
 
-const finalClass = [getProseClasses(), className].filter(Boolean).join(" ");
+const finalClass = [getProseClasses(omitUndefined({ accentMarkers })), className].filter(Boolean).join(" ");
 ---
 
 <Tag class={finalClass} id={id} aria-label={ariaLabel} {...rest}>

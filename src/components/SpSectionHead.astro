@@ -1,0 +1,67 @@
+---
+import type { SectionHeadRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getSectionHeadClasses,
+  getSectionHeadLeadClasses,
+  getSectionHeadTitleClasses,
+} from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpSectionHeadElement = "div" | "header" | "hgroup";
+
+interface SpSectionHeadProps extends SectionHeadRecipeOptions {
+  as?: SpSectionHeadElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  layout,
+  align,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpSectionHeadProps;
+
+const classes = getSectionHeadClasses(omitUndefined({ layout, align }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+const hasAccessibleName = Boolean(ariaLabel || ariaLabelledby);
+const hasTitle = Astro.slots.has("eyebrow") || Astro.slots.has("title");
+const hasLead = Astro.slots.has("default") || Astro.slots.has("actions");
+---
+
+<Tag
+  class={finalClass}
+  id={id}
+  role={hasAccessibleName && Tag === "div" ? "group" : undefined}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  {
+    hasTitle && (
+      <div class={getSectionHeadTitleClasses()}>
+        <slot name="eyebrow" />
+        <slot name="title" />
+      </div>
+    )
+  }
+  {
+    hasLead && (
+      <div class={getSectionHeadLeadClasses()}>
+        <slot />
+        <slot name="actions" />
+      </div>
+    )
+  }
+</Tag>

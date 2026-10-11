@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.11.0                          |
+| Current version/status | 4.12.0                          |
 
 ## Standard Workflow
 
@@ -224,10 +224,12 @@ import {
   SpPricingCard,
   SpProgress,
   SpProse,
+  SpQuote,
   SpRadio,
   SpRange,
   SpRating,
   SpSection,
+  SpSectionHead,
   SpSelect,
   SpSidebar,
   SpSidebarGroup,
@@ -237,6 +239,7 @@ import {
   SpSkeleton,
   SpSpinner,
   SpStack,
+  SpStat,
   SpStepper,
   SpSwitch,
   SpTableRow,
@@ -298,7 +301,7 @@ closed by default with no layout shift on hydration.
 
 | Prop         | Type                                         | Default    | Description                                                                                                  |
 | ------------ | -------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"` `"inverse"`                                                |
+| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"` `"inverse"` `"accentOutline"` and the other upstream variants |
 | `size`       | `ButtonSize`                                 | —          | Size: `"sm"` `"md"` `"lg"`                                                                                   |
 | `as`         | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element                                                                                             |
 | `href`       | `string`                                     | —          | URL when `as="a"`                                                                                            |
@@ -365,7 +368,9 @@ closed by default with no layout shift on hydration.
 </SpCard>
 ```
 
-The default slot renders any child content.
+The default slot renders any child content. Every component with an accent
+rail (card, badge, testimonial, pricing card, nav, footer, modal, toast,
+tooltip, dropdown menu, list group) also accepts `accentColor="accent"`.
 
 `SpCard` does not have a dedicated bleed slot. For a child (media, a flush
 internal surface) that should run through the card's padding on one or more
@@ -485,6 +490,32 @@ the `SpStack` and `SpGrid` gaps and the `SpContainer` padding.
 
 ---
 
+### SpSectionHead
+
+The heading block at the top of a section. The `eyebrow` and `title` slots fill
+the title part; the default slot (the lead) and the `actions` slot fill the lead
+part. Each part renders only when one of its slots is populated. Typography
+comes from `SpText`, `SpHeading`, and `SpLead`.
+
+| Prop         | Type                             | Default     | Description                                                                 |
+| ------------ | -------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| `layout`     | `"stacked" \| "split"`           | `"stacked"` | `split` puts the title left and the lead right from the `lg` breakpoint     |
+| `align`      | `"start" \| "center"`            | `"start"`   | Stacked layout only; `center` centres the head at prose width               |
+| `as`         | `"div" \| "header" \| "hgroup"`  | `"div"`     | Rendered element                                                            |
+| `aria-label` | `string`                         | —           | Accessible label; on a `div` it also sets `role="group"`                    |
+| `class`      | `string`                         | —           | Additional CSS classes                                                      |
+
+```astro
+<SpSectionHead layout="split">
+  <SpText slot="eyebrow" as="span" transform="uppercase" size="sm">Services</SpText>
+  <SpHeading slot="title" level="h2">What we build</SpHeading>
+  <SpLead>Design systems, web platforms, and the tooling between them.</SpLead>
+  <SpButton slot="actions" variant="accentOutline">See the work</SpButton>
+</SpSectionHead>
+```
+
+---
+
 ### SpText
 
 | Prop        | Type                                                            | Default | Description                                                                          |
@@ -495,6 +526,7 @@ the `SpStack` and `SpGrid` gaps and the `SpContainer` padding.
 | `family`    | `TextFamily`                                                    | —       | Upstream font family                                                                 |
 | `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"`                         |
 | `weight`    | `TextWeight`                                                    | —       | `400`–`900`; overrides the weight the `size` preset carries                          |
+| `leading`   | `TextLeading`                                                   | —       | `"none"` `"tight"` `"snug"` `"normal"` `"relaxed"` `"loose"`; overrides line height  |
 | `id`        | `string`                                                        | —       | Element id                                                                           |
 | `class`     | `string`                                                        | —       | Additional CSS classes                                                               |
 
@@ -505,8 +537,10 @@ the `SpStack` and `SpGrid` gaps and the `SpContainer` padding.
 ```
 
 The default slot renders any child content. `SpText` maps directly to
-`getTextClasses` — there is no separate `SpHeading` component; use the `as` prop
-to render any heading level or `p`/`span`.
+`getTextClasses`; use its `as` prop to render any heading level or `p`/`span`
+when text-recipe styling is appropriate. Use `SpHeading` for the dedicated
+heading recipe. `variant` also takes the `"accent"`, `"onSurfaceAccent"`,
+`"onInverseBrand"`, and `"onInverseAccent"` roles.
 
 ---
 
@@ -1161,6 +1195,35 @@ render only when their slot is populated.
 
 ---
 
+### SpQuote
+
+A blockquote or pull quote on `getQuoteClasses`. It renders a `<figure>` with
+the default slot inside a `<blockquote>`, and a `<figcaption>` built from the
+`avatar`, `name`, `role`, and `organization` slots when any of them is
+populated. Role and organization share one line, comma-separated.
+
+| Prop          | Type                                 | Default    | Description                                                              |
+| ------------- | ------------------------------------ | ---------- | ------------------------------------------------------------------------ |
+| `size`        | `QuoteSize`                          | `"md"`     | `"sm"` to an `"xl"` statement quote                                      |
+| `surface`     | `"plain" \| "subtle" \| "inverse"`   | `"plain"`  | `subtle`/`inverse` add a padded panel; `inverse` switches to on-dark text |
+| `accent`      | `"edge" \| "mark" \| "none"`         | `"edge"`   | Leading rail, decorative quote mark, or the neutral border rule          |
+| `accentColor` | `QuoteAccentColor`                   | `"accent"` | Rail and mark tone                                                       |
+| `align`       | `"start" \| "center"`                | `"start"`  | Text alignment                                                           |
+| `cite`        | `string`                             | —          | Source URL, set on the `<blockquote>`                                    |
+| `class`       | `string`                             | —          | Additional CSS classes                                                   |
+
+```astro
+<SpQuote size="lg" accent="mark">
+  <p>Spectre let us ship the redesign without touching a single hex value.</p>
+  <SpAvatar slot="avatar">PL</SpAvatar>
+  <span slot="name">Product lead</span>
+  <span slot="role">Engineering</span>
+  <span slot="organization">A production consumer</span>
+</SpQuote>
+```
+
+---
+
 ### SpSpinner
 
 A non-interactive status indicator. Renders as `<div role="status">` with a
@@ -1202,6 +1265,29 @@ A loading placeholder. It renders with `aria-hidden="true"`, so put
   <SpSkeleton shape="circle" animated />
   <SpSkeleton />
 </div>
+```
+
+---
+
+### SpStat
+
+A single metric for stat rails, metric cards, and case-study figures. The
+default slot is the figure; the `unit` slot renders inside it in the surface's
+accent colour, and the `label` slot renders beneath it.
+
+| Prop         | Type                                | Default   | Description                                                   |
+| ------------ | ----------------------------------- | --------- | ------------------------------------------------------------- |
+| `size`       | `"sm" \| "md" \| "lg" \| "xl"`       | `"md"`    | Type scale of the figure                                      |
+| `align`      | `"start" \| "center" \| "end"`      | `"start"` | Alignment                                                     |
+| `surface`    | `"page" \| "surface" \| "inverse"`  | `"page"`  | What the stat sits on, which picks the text roles             |
+| `aria-label` | `string`                            | —         | Accessible label; also sets `role="group"`                    |
+| `class`      | `string`                            | —         | Additional CSS classes                                        |
+
+```astro
+<SpStat size="xl" surface="inverse">
+  98<span slot="unit">%</span>
+  <span slot="label">Lighthouse performance</span>
+</SpStat>
 ```
 
 ---
@@ -1622,7 +1708,8 @@ re-exported `getCarouselSlideClasses` and `getCarouselIndicatorClasses`.
 
 `SpTable` renders a responsive wrapper and semantic `<table>`, forwarding
 `size`, `striped`, `hoverable`, and `bordered`. Use `getTableRowClasses` for
-contextual or selected rows.
+contextual or selected rows. A slotted `<caption>` and `<tfoot>` take their
+styles from the upstream table recipe.
 
 ### SpPagination
 
@@ -1633,7 +1720,8 @@ contextual or selected rows.
 
 `SpStepper` renders an ordered list from `steps` and derives `done`, `active`,
 and `pending` states from the zero-based `current` index. A step-level `state`
-overrides the derived state.
+overrides the derived state. `tone` (`"brand"` | `"accent"`) colours the active
+and done steps; without it the step classes are unchanged.
 
 ### SpHeading
 
@@ -1658,7 +1746,11 @@ so the document outline and the visual scale can differ.
 ### SpProse
 
 `SpProse` wraps long-form or CMS-authored HTML in the upstream prose recipe. Use
-`as` for `div`, `article`, `section`, `main`, or `aside`.
+`as` for `div`, `article`, `section`, `main`, or `aside`. Set `accentMarkers` to
+colour list markers with the accent role instead of the muted one. Edit marks
+(`<del>`, `<ins>`, `<s>`), description lists, `<figcaption>`, `<caption>`,
+underlines, `<meter>`, and syntax highlighting inside `<pre>` come from the
+upstream base and prose styles with no extra props.
 
 ### SpSwitch
 
@@ -2053,12 +2145,14 @@ const links = [
 | `getPricingCardDescriptionClasses`    | Pricing card description                          |
 | `getProgress*Classes`                 | Progress track, bar, and label                    |
 | `getProseClasses`                     | Long-form prose content                           |
+| `getQuote*Classes`                    | Quote root, text, and attribution parts           |
 | `getRangeClasses`                     | Native range slider                               |
 | `getRatingClasses`                    | Rating root classes                               |
 | `getRatingStarsClasses`               | Rating star container                             |
 | `getRatingStarClasses`                | Individual star element                           |
 | `getRatingTextClasses`                | Rating text element                               |
 | `getSectionClasses`                   | Section class generation                          |
+| `getSectionHead*Classes`              | Section head root, title, and lead parts          |
 | `getSidebarClasses`                   | Sidebar root classes                              |
 | `getSidebarGroupClasses`              | Collapsible sidebar group                         |
 | `getSidebarGroupSummaryClasses`       | Sidebar group summary                             |
@@ -2068,6 +2162,7 @@ const links = [
 | `getSidebarToggleClasses`             | Sidebar toggle button classes                     |
 | `getSkeletonClasses`                  | Skeleton loading placeholder                      |
 | `getStackClasses`                     | Stack class generation                            |
+| `getStat*Classes`                     | Stat root, figure, unit, and label                |
 | `getStepper*Classes`                  | Stepper root, steps, indicators, and labels       |
 | `getSwitchClasses`                    | Toggle switch                                     |
 | `getTable*Classes`                    | Table wrapper, table, and row classes             |
@@ -2103,11 +2198,11 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 
 The corresponding accordion, breadcrumb, carousel, choice-card, datepicker, day,
 display, external-auth-button, file-input, heading, input-group, list-group,
-logo-cloud, offcanvas, pagination, popover, progress, prose, range, skeleton,
-stepper, switch, table, and tabs recipe option, variant, size, placement,
+logo-cloud, offcanvas, pagination, popover, progress, prose, quote, range,
+section-head, skeleton, stat, stepper, switch, table, and tabs recipe option, variant, size, placement,
 orientation, state, and accent types are also re-exported, as are the container
 padding, section spacing/gap, card padding, grid column-start, footer
-appearance/surface, and text weight types. Every public `get*Classes` helper
+appearance/surface, stepper step tone, and text weight and leading types. Every public `get*Classes` helper
 from `@phcdevworks/spectre-ui` is re-exported; the upstream parity test fails if
 one is missed.
 
@@ -2231,10 +2326,12 @@ import SpPopover from '@phcdevworks/spectre-ui-astro/components/SpPopover.astro'
 import SpPricingCard from '@phcdevworks/spectre-ui-astro/components/SpPricingCard.astro'
 import SpProgress from '@phcdevworks/spectre-ui-astro/components/SpProgress.astro'
 import SpProse from '@phcdevworks/spectre-ui-astro/components/SpProse.astro'
+import SpQuote from '@phcdevworks/spectre-ui-astro/components/SpQuote.astro'
 import SpRadio from '@phcdevworks/spectre-ui-astro/components/SpRadio.astro'
 import SpRange from '@phcdevworks/spectre-ui-astro/components/SpRange.astro'
 import SpRating from '@phcdevworks/spectre-ui-astro/components/SpRating.astro'
 import SpSection from '@phcdevworks/spectre-ui-astro/components/SpSection.astro'
+import SpSectionHead from '@phcdevworks/spectre-ui-astro/components/SpSectionHead.astro'
 import SpSelect from '@phcdevworks/spectre-ui-astro/components/SpSelect.astro'
 import SpSidebar from '@phcdevworks/spectre-ui-astro/components/SpSidebar.astro'
 import SpSidebarGroup from '@phcdevworks/spectre-ui-astro/components/SpSidebarGroup.astro'
@@ -2244,6 +2341,7 @@ import SpSidebarToggle from '@phcdevworks/spectre-ui-astro/components/SpSidebarT
 import SpSkeleton from '@phcdevworks/spectre-ui-astro/components/SpSkeleton.astro'
 import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
+import SpStat from '@phcdevworks/spectre-ui-astro/components/SpStat.astro'
 import SpStepper from '@phcdevworks/spectre-ui-astro/components/SpStepper.astro'
 import SpSwitch from '@phcdevworks/spectre-ui-astro/components/SpSwitch.astro'
 import SpTableRow from '@phcdevworks/spectre-ui-astro/components/SpTableRow.astro'
@@ -2302,17 +2400,20 @@ Each component family is classified by its support status in this adapter.
 | popover              | **stable** | Placement/open, header/body/arrow, ARIA, and SSR coverage          |
 | pricing-card         | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | progress             | **stable** | Determinate/indeterminate, label, ARIA, and SSR coverage           |
-| prose                | **stable** | Element override, slot, and SSR coverage                           |
+| prose                | **stable** | Element override, accent markers, slot, and SSR coverage           |
+| quote                | **stable** | Full prop, attribution slots, and SSR coverage                     |
 | radio                | **stable** | Full prop, ARIA, and SSR coverage                                  |
 | range                | **stable** | Bounds, WebKit fill mirroring, ARIA, and SSR coverage              |
 | rating               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | section              | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
+| section-head         | **stable** | Layout/align, title and lead slots, ARIA, and SSR coverage         |
 | select               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
 | sidebar              | **stable** | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction   |
 | skeleton             | **stable** | Shape/animation, `aria-hidden`, and SSR coverage                   |
 | spinner              | **stable** | Full prop, ARIA, and SSR coverage                                  |
 | stack                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| stepper              | **stable** | Derived/explicit state, ARIA, and SSR coverage                     |
+| stat                 | **stable** | Size/align/surface, unit and label slots, and SSR coverage         |
+| stepper              | **stable** | Derived/explicit state, tone, ARIA, and SSR coverage               |
 | switch               | **stable** | Size/state, switch role, ARIA, and SSR coverage                    |
 | table                | **stable** | Responsive wrapper, semantic table, and SSR coverage               |
 | tabs                 | **stable** | Controlled selection, panel association, ARIA, and SSR coverage    |

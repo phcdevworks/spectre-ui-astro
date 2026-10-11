@@ -6,6 +6,56 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.12.0] - 2026-10-11
+
+**Release Title:** Child Theme and Composition Parity
+
+Contract change type: additive
+
+### Added
+
+- Reached parity with `@phcdevworks/spectre-components` 1.23.0 and full
+  `@phcdevworks/spectre-ui` 5.5.0 recipe parity, for the child-theme options
+  requested by `spectre-base` (2026-10-11):
+  - `SpText` forwards `leading` (`none` | `tight` | `snug` | `normal` |
+    `relaxed` | `loose`), and its `variant` takes the new `accent`,
+    `onSurfaceAccent`, `onInverseBrand`, and `onInverseAccent` roles.
+  - `SpButton` takes `variant="accentOutline"`.
+  - `SpStepper` forwards `tone` (`brand` | `accent`) to every step. Without
+    `tone` the step classes are unchanged.
+  - Every component with an accent rail takes `accentColor="accent"` through
+    the upstream option types.
+  - `SpQuote` on `getQuoteClasses` and its text and attribution recipes, with
+    `size`, `surface`, `accent`, `accentColor`, `align`, and `cite`. The
+    default slot is the quote; the `avatar`, `name`, `role`, and
+    `organization` slots build the `<figcaption>`, which renders only when one
+    of them is populated.
+  - `SpStat` on `getStatClasses` and its figure, unit, and label recipes, with
+    `size`, `align`, and `surface`. The `unit` slot renders inside the figure
+    and the `label` slot beneath it.
+  - `SpSectionHead` on `getSectionHeadClasses`, with `layout` (`stacked` |
+    `split`), `align`, and `as` (`div` | `header` | `hgroup`). The `eyebrow`
+    and `title` slots fill the title part; the default and `actions` slots
+    fill the lead part.
+- Phase 17 HTML element coverage: `SpProse` forwards `accentMarkers` for
+  accent list markers. Edit marks, description lists, captions, table
+  footers, `<meter>`, underlines, proofing marks, syntax highlighting, and the
+  prose flow spacing reach `SpProse` and `SpTable` content from the upstream
+  base and prose styles with no adapter change.
+- Re-exported the quote, stat, and section-head helpers and the
+  `QuoteRecipeOptions`, `QuoteAttributionRecipeOptions`, `QuoteSize`,
+  `QuoteSurface`, `QuoteAccent`, `QuoteAccentColor`, `QuoteAlign`,
+  `StatRecipeOptions`, `StatSize`, `StatAlign`, `StatSurface`,
+  `SectionHeadRecipeOptions`, `SectionHeadLayout`, `SectionHeadAlign`,
+  `StepperStepTone`, and `TextLeading` types.
+
+### Changed
+
+- Raised the peer ranges to `@phcdevworks/spectre-ui` `^5.5.0` and
+  `@phcdevworks/spectre-tokens` `^4.13.0`, which the new recipes and options
+  require. `.sp-prose` block spacing now follows the upstream
+  `layout.prose.flow` steps.
+
 ## [4.11.0] - 2026-10-05
 
 **Release Title:** Skeleton and Logo Cloud Parity

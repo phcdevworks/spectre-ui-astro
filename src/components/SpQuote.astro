@@ -1,0 +1,78 @@
+---
+import type { QuoteRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getQuoteAttributionClasses,
+  getQuoteAttributionNameClasses,
+  getQuoteAttributionRoleClasses,
+  getQuoteClasses,
+  getQuoteTextClasses,
+} from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpQuoteProps extends QuoteRecipeOptions {
+  cite?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  size,
+  surface,
+  accent,
+  accentColor,
+  align,
+  cite,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpQuoteProps;
+
+const classes = getQuoteClasses(omitUndefined({ size, surface, accent, accentColor, align }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+
+const hasAvatar = Astro.slots.has("avatar");
+const hasName = Astro.slots.has("name");
+const hasRole = Astro.slots.has("role");
+const hasOrganization = Astro.slots.has("organization");
+const hasAttribution = hasAvatar || hasName || hasRole || hasOrganization;
+---
+
+<figure
+  class={finalClass}
+  id={id}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <blockquote class={getQuoteTextClasses()} cite={cite}>
+    <slot />
+  </blockquote>
+  {
+    hasAttribution && (
+      <figcaption class={getQuoteAttributionClasses({ avatar: hasAvatar })}>
+        {hasAvatar && <slot name="avatar" />}
+        {hasName && (
+          <div class={getQuoteAttributionNameClasses()}>
+            <slot name="name" />
+          </div>
+        )}
+        {(hasRole || hasOrganization) && (
+          <div class={getQuoteAttributionRoleClasses()}>
+            <slot name="role" />
+            {hasRole && hasOrganization && ", "}
+            <slot name="organization" />
+          </div>
+        )}
+      </figcaption>
+    )
+  }
+</figure>

@@ -15,9 +15,9 @@ file does not restate delivered work.
 
 | Package                         | Current state                                                                            |
 | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| `@phcdevworks/spectre-tokens`   | v4.12.0 — current adapter peer baseline                                                  |
-| `@phcdevworks/spectre-ui`       | v5.4.0 — current adapter recipe baseline                                                 |
-| `@phcdevworks/spectre-ui-astro` | v4.11.0 — full UI 5.4.0 and Components 1.22.0 parity                               |
+| `@phcdevworks/spectre-tokens`   | v4.13.0 — current adapter peer baseline                                                  |
+| `@phcdevworks/spectre-ui`       | v5.5.0 — current adapter recipe baseline                                                 |
+| `@phcdevworks/spectre-ui-astro` | v4.12.0 — full UI 5.5.0 and Components 1.23.0 parity                             |
 
 ---
 
@@ -47,6 +47,7 @@ file does not restate delivered work.
 | 20    | Full `spectre-ui@5.3.0` recipe parity — ChoiceCard, Datepicker/Day, Display, Heading, Lead, Prose, ExternalAuthButton, FileInput, InputGroup/InputGroupAddon, Popover, Progress, Range, and Switch; every upstream helper/type re-exported; Badge `dot`, Container `padding`, Section `spacing`/`gap`, Grid `colStart`, and NavItem link-state forwarding; parity test fails on any unexported upstream helper                 | 4.10.0      |
 | 21    | spectre-components composition parity — part components for card bleed, dropdown menu/item/header/divider, footer heading/text/links/divider, nav links, sidebar group/header, table rows, and carousel slides/indicators                                                                                                                                                                                                      | 4.10.0      |
 | 22    | spectre-components 1.22.0 and full `spectre-ui@5.4.0` parity — `SpSkeleton`, `SpLogoCloud`/`SpLogoCloudItem`, Footer `appearance`/`surface`, Section `hero`/`attached`, Text `weight`, `xl`–`4xl` layout steps; peers raised to `spectre-ui@^5.4.0` and `spectre-tokens@^4.12.0`                                                                                                                                               | 4.11.0      |
+| 23    | spectre-components 1.23.0 and full `spectre-ui@5.5.0` parity — child-theme options (`SpText` `leading`/accent variants, `SpButton` `accentOutline`, `SpStepper` `tone`, `accentColor="accent"` rails), `SpQuote`, `SpStat`, `SpSectionHead`, Phase 17 element coverage (`SpProse` `accentMarkers`); peers raised to `spectre-ui@^5.5.0` and `spectre-tokens@^4.13.0` | 4.12.0      |
 
 ---
 

@@ -6,7 +6,7 @@
     "name": "Spectre",
     "version": "1.0.0",
     "manifestVersion": "0.1",
-    "summary": "Ecosystem manifest for @phcdevworks/spectre-ui-astro — Astro adapter for the Spectre system.",
+    "summary": "Ecosystem manifest for @phcdevworks/spectre-ui-astro \u2014 Astro adapter for the Spectre system.",
     "packageManager": "npm",
     "repository": "https://github.com/phcdevworks/spectre-ui-astro"
   },
@@ -89,10 +89,12 @@
         "./components/SpPricingCard.astro",
         "./components/SpProgress.astro",
         "./components/SpProse.astro",
+        "./components/SpQuote.astro",
         "./components/SpRadio.astro",
         "./components/SpRange.astro",
         "./components/SpRating.astro",
         "./components/SpSection.astro",
+        "./components/SpSectionHead.astro",
         "./components/SpSelect.astro",
         "./components/SpSidebar.astro",
         "./components/SpSidebarGroup.astro",
@@ -102,6 +104,7 @@
         "./components/SpSkeleton.astro",
         "./components/SpSpinner.astro",
         "./components/SpStack.astro",
+        "./components/SpStat.astro",
         "./components/SpStepper.astro",
         "./components/SpSwitch.astro",
         "./components/SpTabPanel.astro",
@@ -125,7 +128,7 @@
       ],
       "notes": [
         "Build-layer package. Depends on foundation-layer packages spectre-tokens and spectre-ui.",
-        "Astro component files (.astro) in dist/ are copied from src/ at build time — never hand-edit dist/.",
+        "Astro component files (.astro) in dist/ are copied from src/ at build time \u2014 never hand-edit dist/.",
         "Spectre packages are declared as peerDependencies in package.json; consuming applications must install them."
       ]
     },
@@ -179,7 +182,7 @@
     "boundaryConstraints": [
       {
         "scope": "package:@phcdevworks/spectre-ui-astro",
-        "rule": "No direct token value imports from spectre-tokens internals — consume via spectre-ui styling contract.",
+        "rule": "No direct token value imports from spectre-tokens internals \u2014 consume via spectre-ui styling contract.",
         "reason": "spectre-ui-astro is a build-layer adapter and must consume the styled contract, not raw token primitives."
       }
     ]
@@ -203,9 +206,9 @@
       }
     ],
     "generationRules": [
-      "Astro components live in src/components/ — never edit dist/ directly.",
+      "Astro components live in src/components/ \u2014 never edit dist/ directly.",
       "Run npm run build after any component or type change to regenerate dist/.",
-      "Run npm run check before staging any commit — all checks must pass.",
+      "Run npm run check before staging any commit \u2014 all checks must pass.",
       "Component props must be typed; no untyped or any-typed component APIs."
     ],
     "usageGuidance": [
@@ -215,7 +218,7 @@
     ],
     "safeDefaults": [
       "Do not bypass the spectre-ui styling contract by importing raw token values directly.",
-      "Do not hand-edit any file in dist/ — they are always regenerated on build.",
+      "Do not hand-edit any file in dist/ \u2014 they are always regenerated on build.",
       "Do not add component props that expose internal styling overrides outside the token system."
     ]
   }

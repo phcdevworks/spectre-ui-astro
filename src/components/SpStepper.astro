@@ -1,5 +1,5 @@
 ---
-import type { StepperOrientation, StepperStepState } from "@phcdevworks/spectre-ui";
+import type { StepperOrientation, StepperStepState, StepperStepTone } from "@phcdevworks/spectre-ui";
 import {
   getStepperClasses,
   getStepperIndicatorClasses,
@@ -17,6 +17,7 @@ interface SpStepperProps {
   steps: SpStepperStep[];
   current?: number;
   orientation?: StepperOrientation;
+  tone?: StepperStepTone;
   class?: string;
   id?: string;
   "aria-label"?: string;
@@ -28,6 +29,7 @@ const {
   steps,
   current: currentInput = 0,
   orientation,
+  tone,
   class: className,
   id,
   "aria-label": ariaLabel,
@@ -46,7 +48,7 @@ const finalClass = [getStepperClasses(omitUndefined({ orientation })), className
       const state = stateFor(step, index);
       return (
         <li
-          class={getStepperStepClasses({ state })}
+          class={getStepperStepClasses(omitUndefined({ state, tone }))}
           aria-current={state === "active" ? "step" : undefined}
           data-state={state}
         >
