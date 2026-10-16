@@ -7,6 +7,11 @@ steps:
       - 'npm ci'
       - 'npm run ci:verify'
       - 'cd examples && npm install --no-package-lock && npm run build'
+    plugins:
+      # The agent's own Node may be below astro's floor (>=22.22.0), so run
+      # in a pinned Node image.
+      - docker#v5.12.0:
+          image: 'node:24'
     agents:
       queue: 'default'
     artifact_paths:
