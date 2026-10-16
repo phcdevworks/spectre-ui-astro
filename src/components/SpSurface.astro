@@ -1,0 +1,43 @@
+---
+import type { SurfaceRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getSurfaceClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+type SpSurfaceElement = "div" | "section" | "article" | "aside" | "header" | "footer" | "li";
+
+interface SpSurfaceProps extends SurfaceRecipeOptions {
+  as?: SpSurfaceElement;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  surface,
+  hover,
+  selected,
+  active,
+  as: Tag = "div",
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpSurfaceProps;
+
+const classes = getSurfaceClasses(omitUndefined({ surface, hover, selected, active }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<Tag
+  class={finalClass || undefined}
+  id={id}
+  aria-label={ariaLabel}
+  aria-describedby={ariaDescribedby}
+  {...rest}
+>
+  <slot />
+</Tag>

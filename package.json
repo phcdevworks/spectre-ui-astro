@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "4.12.0",
+  "version": "4.13.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro integration for the Spectre system. It brings Spectre's design contracts and interface components into Astro applications through a native, server-rendering-friendly API.",
   "keywords": [
     "phcdevworks",
@@ -64,6 +64,7 @@
     "./components/SpDatepicker.astro": "./dist/components/SpDatepicker.astro",
     "./components/SpDay.astro": "./dist/components/SpDay.astro",
     "./components/SpDisplay.astro": "./dist/components/SpDisplay.astro",
+    "./components/SpDivider.astro": "./dist/components/SpDivider.astro",
     "./components/SpDropdown.astro": "./dist/components/SpDropdown.astro",
     "./components/SpDropdownDivider.astro": "./dist/components/SpDropdownDivider.astro",
     "./components/SpDropdownHeader.astro": "./dist/components/SpDropdownHeader.astro",
@@ -87,6 +88,7 @@
     "./components/SpInputGroupAddon.astro": "./dist/components/SpInputGroupAddon.astro",
     "./components/SpLabel.astro": "./dist/components/SpLabel.astro",
     "./components/SpLead.astro": "./dist/components/SpLead.astro",
+    "./components/SpLink.astro": "./dist/components/SpLink.astro",
     "./components/SpListGroup.astro": "./dist/components/SpListGroup.astro",
     "./components/SpListGroupItem.astro": "./dist/components/SpListGroupItem.astro",
     "./components/SpLogoCloud.astro": "./dist/components/SpLogoCloud.astro",
@@ -118,6 +120,7 @@
     "./components/SpStack.astro": "./dist/components/SpStack.astro",
     "./components/SpStat.astro": "./dist/components/SpStat.astro",
     "./components/SpStepper.astro": "./dist/components/SpStepper.astro",
+    "./components/SpSurface.astro": "./dist/components/SpSurface.astro",
     "./components/SpSwitch.astro": "./dist/components/SpSwitch.astro",
     "./components/SpTabPanel.astro": "./dist/components/SpTabPanel.astro",
     "./components/SpTable.astro": "./dist/components/SpTable.astro",
@@ -160,8 +163,8 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^4.13.0",
-    "@phcdevworks/spectre-ui": "^5.5.0",
+    "@phcdevworks/spectre-tokens": "^4.14.0",
+    "@phcdevworks/spectre-ui": "^5.7.0",
     "astro": "^7.0.0",
     "typescript": "^5.0 || ^6.0 || ^7.0"
   },
@@ -173,22 +176,22 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@phcdevworks/spectre-manifest": "^1.2.0",
-    "@phcdevworks/spectre-tokens": "^4.13.0",
-    "@phcdevworks/spectre-ui": "^5.5.0",
+    "@phcdevworks/spectre-manifest": "^2.0.0",
+    "@phcdevworks/spectre-tokens": "^4.14.0",
+    "@phcdevworks/spectre-ui": "^5.7.0",
     "@types/node": "^26.6.5",
-    "@typescript-eslint/eslint-plugin": "^8.71.1",
-    "@typescript-eslint/parser": "^8.71.1",
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
+    "@typescript-eslint/parser": "^8.71.2",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "astro": "^7.3.8",
-    "eslint": "^10.12.0",
+    "astro": "^7.4.0",
+    "eslint": "^10.13.0",
     "jiti": "^2.7.0",
     "prettier": "^3.9.10",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "tsx": "^4.23.15",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-eslint": "^8.71.1",
-    "vitest": "^5.0.3"
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.5"
   },
   "allowScripts": {
     "esbuild@0.28.2": true,

@@ -15,9 +15,9 @@ file does not restate delivered work.
 
 | Package                         | Current state                                                                            |
 | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| `@phcdevworks/spectre-tokens`   | v4.13.0 — current adapter peer baseline                                                  |
-| `@phcdevworks/spectre-ui`       | v5.5.0 — current adapter recipe baseline                                                 |
-| `@phcdevworks/spectre-ui-astro` | v4.12.0 — full UI 5.5.0 and Components 1.23.0 parity                             |
+| `@phcdevworks/spectre-tokens`   | v4.14.0 — current adapter peer baseline                                                  |
+| `@phcdevworks/spectre-ui`       | v5.7.0 — current adapter recipe baseline                                                 |
+| `@phcdevworks/spectre-ui-astro` | v4.13.0 — full UI 5.7.0 recipe and utility parity                                     |
 
 ---
 
@@ -48,6 +48,7 @@ file does not restate delivered work.
 | 21    | spectre-components composition parity — part components for card bleed, dropdown menu/item/header/divider, footer heading/text/links/divider, nav links, sidebar group/header, table rows, and carousel slides/indicators                                                                                                                                                                                                      | 4.10.0      |
 | 22    | spectre-components 1.22.0 and full `spectre-ui@5.4.0` parity — `SpSkeleton`, `SpLogoCloud`/`SpLogoCloudItem`, Footer `appearance`/`surface`, Section `hero`/`attached`, Text `weight`, `xl`–`4xl` layout steps; peers raised to `spectre-ui@^5.4.0` and `spectre-tokens@^4.12.0`                                                                                                                                               | 4.11.0      |
 | 23    | spectre-components 1.23.0 and full `spectre-ui@5.5.0` parity — child-theme options (`SpText` `leading`/accent variants, `SpButton` `accentOutline`, `SpStepper` `tone`, `accentColor="accent"` rails), `SpQuote`, `SpStat`, `SpSectionHead`, Phase 17 element coverage (`SpProse` `accentMarkers`); peers raised to `spectre-ui@^5.5.0` and `spectre-tokens@^4.13.0` | 4.12.0      |
+| 24    | Full `spectre-ui@5.7.0` recipe and utility parity — `SpLink`, `SpDivider`, `SpSurface`; 13 helper-only utility families (spacing, layout, color, palette, border, shadow, opacity, z-index, icon-size, aspect-ratio, elevation, motion, chart-color) under the new `utilityFamilies` contract category; `SpText` `fontSize`/`tracking`/`decoration`/`underlineOffset`/`tabularNums`/`balance` and `7xl`–`9xl`; responsive `SpGrid` columns; `spectreThemeModes`/`spectreDensityModes`; peers raised to `spectre-ui@^5.7.0` and `spectre-tokens@^4.14.0` | 4.13.0      |
 
 ---
 
@@ -55,7 +56,9 @@ file does not restate delivered work.
 
 New adapter families are built proactively for every published
 `@phcdevworks/spectre-ui` recipe family that has no Astro component yet — no
-downstream request needed. See [TODO.md](TODO.md) for the active work queue.
+downstream request needed. Helper-only utility recipe families are declared in
+`componentFamilies.utilityFamilies` and re-exported instead of wrapped. See
+[TODO.md](TODO.md) for the active work queue.
 
 ---
 

@@ -63,6 +63,10 @@ for (const family of contractJson.componentFamilies.notYetSupported as string[])
   assertFamilyTableRow(family, 'not yet supported');
 }
 
+for (const family of contractJson.componentFamilies.utilityFamilies as string[]) {
+  assertFamilyTableRow(family, 'utility');
+}
+
 const versionMatch = readme.match(/\|\s*Current version\/status\s*\|\s*([^\s|]+)\s*\|/i);
 if (!versionMatch) {
   throw new Error(

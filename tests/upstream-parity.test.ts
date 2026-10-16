@@ -22,6 +22,7 @@ const declaredFamilies = new Set([
   ...(contractJson.componentFamilies.stable as string[]),
   ...(contractJson.componentFamilies.provisional as string[]),
   ...(contractJson.componentFamilies.notYetSupported as string[]),
+  ...(contractJson.componentFamilies.utilityFamilies as string[]),
 ]);
 
 // A helper whose name extends another helper's (e.g. dropdown-menu) is treated
@@ -65,22 +66,37 @@ describe("upstream UI family parity", () => {
     const undeclared = upstreamFamilies.filter((f) => !declaredFamilies.has(f));
     expect(
       undeclared,
-      `Upstream recipe families not declared in the contract. Add them to stable, provisional, or notYetSupported in astro-adapter.contract.json: ${undeclared.join(", ")}`,
+      `Upstream recipe families not declared in the contract. Add them to stable, provisional, notYetSupported, or utilityFamilies in astro-adapter.contract.json: ${undeclared.join(", ")}`,
     ).toHaveLength(0);
   });
 
   it("has no contract families absent from upstream", () => {
     const upstreamFamilies = new Set(deriveUpstreamFamilies());
-    const stableAndProvisional = [
+    const bound = [
       ...(contractJson.componentFamilies.stable as string[]),
       ...(contractJson.componentFamilies.provisional as string[]),
+      ...(contractJson.componentFamilies.utilityFamilies as string[]),
     ];
 
-    const orphaned = stableAndProvisional.filter((f) => !upstreamFamilies.has(f));
+    const orphaned = bound.filter((f) => !upstreamFamilies.has(f));
     expect(
       orphaned,
-      `Contract declares stable/provisional families with no upstream recipe: ${orphaned.join(", ")}`,
+      `Contract declares stable/provisional/utility families with no upstream recipe: ${orphaned.join(", ")}`,
     ).toHaveLength(0);
+  });
+
+  it("does not ship Astro components for helper-only utility families", () => {
+    const componentFiles = readdirSync(componentsDir)
+      .filter((f) => f.endsWith(".astro"))
+      .map((f) => f.replace(".astro", ""));
+
+    for (const family of contractJson.componentFamilies.utilityFamilies as string[]) {
+      const componentName = familyToComponentName(family);
+      expect(
+        componentFiles,
+        `"${family}" is a helper-only utility family but ${componentName}.astro exists. Move it to stable.`,
+      ).not.toContain(componentName);
+    }
   });
 
   it("provides an Astro component for every stable contract family", () => {

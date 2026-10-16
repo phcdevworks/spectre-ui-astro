@@ -1,0 +1,16 @@
+---
+import { getDividerClasses } from "@phcdevworks/spectre-ui";
+
+interface SpDividerProps {
+  class?: string;
+  id?: string;
+
+  [key: string]: unknown;
+}
+
+const { class: className, id, ...rest } = Astro.props as SpDividerProps;
+
+const finalClass = [getDividerClasses(), className].filter(Boolean).join(" ");
+---
+
+<hr class={finalClass} id={id} {...rest} />

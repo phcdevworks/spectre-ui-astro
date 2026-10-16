@@ -6,6 +6,51 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.13.0] - 2026-10-17
+
+**Release Title:** Recipe and Utility Parity
+
+Contract change type: semantic change
+
+### Added
+
+- Full `@phcdevworks/spectre-ui` 5.7.0 recipe and utility parity. Every
+  token-backed class family upstream now has an adapter path, so Astro
+  consumers no longer need hand-written utility class names:
+  - `SpLink` on `getLinkClasses`, with `tone` (`default` | `onInverse`),
+    `decoration`, `underlineOffset`, and `current` (`aria-current="page"`).
+  - `SpDivider` on `getDividerClasses`, rendering an `<hr>`.
+  - `SpSurface` on `getSurfaceClasses`, with every `--sp-surface-*` role
+    (`page`, `card`, `subtle`, `overlay`, `input`, `inverse`, `hero`), the
+    `hover`, `selected`, and `active` states, and `as`.
+  - The utility recipes are re-exported unchanged as helpers:
+    `getSpacingClasses`, `getLayoutClasses`, `getColorClasses`,
+    `getPaletteClasses`, `getBorderClasses`, `getShadowClasses`,
+    `getOpacityClasses`, `getZIndexClasses`, `getIconSizeClasses`,
+    `getAspectRatioClasses`, `getElevationClasses`, `getMotionClasses`, and
+    `getChartColorClasses`, with all of their option and scale types.
+  - `spectreThemeModes` and `spectreDensityModes`, typed `SpectreThemeMode`
+    and `SpectreDensityMode`.
+- `SpText` forwards `fontSize` (numeric `12`–`128` scale), `tracking`,
+  `decoration`, `underlineOffset`, `tabularNums`, and `balance`, and its
+  `size` takes `7xl`, `8xl`, and `9xl`.
+- `SpGrid` `columns` takes responsive `{ base, md, lg }` values through the
+  upstream option type. `GridColumnsOptions` and `GridResponsiveColumns` are
+  re-exported.
+- `astro-adapter.contract.json` gains a `componentFamilies.utilityFamilies`
+  category for helper-only families. The upstream parity test accepts it as a
+  declaration, fails if one of these families ships an Astro component, and
+  the README contract check requires a **utility** row for each.
+
+### Changed
+
+- Peer ranges raised to `@phcdevworks/spectre-ui@^5.7.0` and
+  `@phcdevworks/spectre-tokens@^4.14.0`.
+- Through `spectre-ui` 5.6.0, the `SpText` `lg`–`6xl` sizes follow the
+  Tailwind-aligned font scale, so each renders one step smaller than before
+  (`lg` is 18px instead of 20px). Use the next size up to keep a previous
+  size. Components that used those steps internally render unchanged.
+
 ## [4.12.0] - 2026-10-11
 
 **Release Title:** Child Theme and Composition Parity

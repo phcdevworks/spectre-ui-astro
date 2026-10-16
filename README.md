@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.12.0                          |
+| Current version/status | 4.13.0                          |
 
 ## Standard Workflow
 
@@ -187,6 +187,7 @@ import {
   SpDatepicker,
   SpDay,
   SpDisplay,
+  SpDivider,
   SpDropdown,
   SpDropdownDivider,
   SpDropdownHeader,
@@ -210,6 +211,7 @@ import {
   SpInputGroupAddon,
   SpLabel,
   SpLead,
+  SpLink,
   SpListGroup,
   SpListGroupItem,
   SpLogoCloud,
@@ -241,6 +243,7 @@ import {
   SpStack,
   SpStat,
   SpStepper,
+  SpSurface,
   SpSwitch,
   SpTableRow,
   SpTabPanel,
@@ -518,23 +521,34 @@ comes from `SpText`, `SpHeading`, and `SpLead`.
 
 ### SpText
 
-| Prop        | Type                                                            | Default | Description                                                                          |
-| ----------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------ |
-| `as`        | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"` | `"p"`   | Rendered element                                                                     |
-| `size`      | `TextSize`                                                      | —       | Upstream type scale                                                                  |
-| `variant`   | `TextVariant`                                                   | —       | Upstream color role, including `"onInverse"`/`"onInverseMuted"` for on-dark surfaces |
-| `family`    | `TextFamily`                                                    | —       | Upstream font family                                                                 |
-| `transform` | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"`                         |
-| `weight`    | `TextWeight`                                                    | —       | `400`–`900`; overrides the weight the `size` preset carries                          |
-| `leading`   | `TextLeading`                                                   | —       | `"none"` `"tight"` `"snug"` `"normal"` `"relaxed"` `"loose"`; overrides line height  |
-| `id`        | `string`                                                        | —       | Element id                                                                           |
-| `class`     | `string`                                                        | —       | Additional CSS classes                                                               |
+| Prop              | Type                                                            | Default | Description                                                                          |
+| ----------------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `as`              | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "span"` | `"p"`   | Rendered element                                                                     |
+| `size`            | `TextSize`                                                      | —       | Upstream type scale                                                                  |
+| `variant`         | `TextVariant`                                                   | —       | Upstream color role, including `"onInverse"`/`"onInverseMuted"` for on-dark surfaces |
+| `family`          | `TextFamily`                                                    | —       | Upstream font family                                                                 |
+| `transform`       | `TextTransform`                                                 | —       | `"none"` \| `"uppercase"` \| `"lowercase"` \| `"capitalize"`                         |
+| `weight`          | `TextWeight`                                                    | —       | `400`–`900`; overrides the weight the `size` preset carries                          |
+| `leading`         | `TextLeading`                                                   | —       | `"none"` `"tight"` `"snug"` `"normal"` `"relaxed"` `"loose"`; overrides line height  |
+| `fontSize`        | `TextFontSize`                                                  | —       | Numeric scale (`12`–`128`); sets only the font size, keeping the preset's leading    |
+| `tracking`        | `TextTracking`                                                  | —       | `"tightest"`–`"widest"` letter spacing                                               |
+| `decoration`      | `TextDecoration`                                                | —       | `"thin"` \| `"base"` \| `"thick"` underline thickness                                |
+| `underlineOffset` | `TextUnderlineOffset`                                           | —       | `"sm"` \| `"md"` \| `"lg"` underline offset                                          |
+| `tabularNums`     | `boolean`                                                       | —       | Tabular (fixed-width) numerals                                                       |
+| `balance`         | `boolean`                                                       | —       | Balanced line wrapping                                                               |
+| `id`              | `string`                                                        | —       | Element id                                                                           |
+| `class`           | `string`                                                        | —       | Additional CSS classes                                                               |
 
 ```astro
 <SpText as="h2" size="2xl" variant="brand">Section heading</SpText>
 <SpText variant="muted">Supporting copy.</SpText>
 <SpText as="span" transform="uppercase" size="sm">Eyebrow label</SpText>
+<SpText as="span" fontSize={48} tracking="tight" tabularNums>1,234</SpText>
 ```
+
+`size` takes `7xl`, `8xl`, and `9xl` as well. Since `spectre-ui` 5.6.0 the
+`lg`–`6xl` presets follow the Tailwind-aligned font scale (for example, `lg` is
+18px), so use the next size up to keep a previous rendered size.
 
 The default slot renders any child content. `SpText` maps directly to
 `getTextClasses`; use its `as` prop to render any heading level or `p`/`span`
@@ -1752,6 +1766,47 @@ colour list markers with the accent role instead of the muted one. Edit marks
 underlines, `<meter>`, and syntax highlighting inside `<pre>` come from the
 upstream base and prose styles with no extra props.
 
+### SpLink
+
+`SpLink` renders an `<a>` on `getLinkClasses`. `tone="onInverse"` switches to
+the on-inverse link role for dark surfaces; `decoration` (`thin` | `base` |
+`thick`) and `underlineOffset` (`sm` | `md` | `lg`) override the default
+underline. `current` sets `aria-current="page"`.
+
+```astro
+<SpLink href="/docs">Read the docs</SpLink>
+<SpLink href="/" tone="onInverse" decoration="thick" current>Home</SpLink>
+```
+
+### SpDivider
+
+`SpDivider` renders an `<hr>` on `getDividerClasses`, in the `surface.divider`
+role at the component border width. Use it between content sections; inside a
+dropdown menu or footer use `SpDropdownDivider` or `SpFooterDivider`.
+
+```astro
+<SpDivider />
+```
+
+### SpSurface
+
+`SpSurface` paints a `--sp-surface-*` background role from `getSurfaceClasses`:
+`page`, `card`, `subtle`, `overlay`, `input`, `inverse`, or `hero`. `hover`,
+`selected`, and `active` add the matching interaction states. Use `as` for
+`div` (default), `section`, `article`, `aside`, `header`, `footer`, or `li`.
+Spacing, borders, and elevation come from the utility helpers (see
+[Recipe Helpers](#recipe-helpers)).
+
+```astro
+---
+import { SpSurface, getSpacingClasses } from '@phcdevworks/spectre-ui-astro'
+---
+
+<SpSurface as="section" surface="subtle" class={getSpacingClasses({ p: 24 })}>
+  Panel content
+</SpSurface>
+```
+
 ### SpSwitch
 
 `SpSwitch` renders `<input type="checkbox" role="switch">` and forwards `size`,
@@ -2115,6 +2170,7 @@ const links = [
 | `getDatepicker*Classes`               | Datepicker panel, header, grid, and weekdays      |
 | `getDayClasses`                       | Calendar day cell                                 |
 | `getDisplayClasses`                   | Display (hero) typography                         |
+| `getDividerClasses`                   | Horizontal rule / section separator               |
 | `getDropdownClasses`                  | Dropdown root classes                             |
 | `getDropdownMenuClasses`              | Dropdown menu container                           |
 | `getDropdownItemClasses`              | Individual dropdown item                          |
@@ -2128,6 +2184,7 @@ const links = [
 | `getInputClasses`                     | Input class generation                            |
 | `getInputGroup*Classes`               | Input group wrapper and addon                     |
 | `getLeadClasses`                      | Lead paragraph typography                         |
+| `getLinkClasses`                      | Inline link tone and underline                    |
 | `getListGroup*Classes`                | List-group root and item structure                |
 | `getLogoCloud*Classes`                | Logo cloud root and tile                          |
 | `getModalClasses`                     | Modal root classes                                |
@@ -2164,6 +2221,7 @@ const links = [
 | `getStackClasses`                     | Stack class generation                            |
 | `getStat*Classes`                     | Stat root, figure, unit, and label                |
 | `getStepper*Classes`                  | Stepper root, steps, indicators, and labels       |
+| `getSurfaceClasses`                   | Surface background roles and interaction states   |
 | `getSwitchClasses`                    | Toggle switch                                     |
 | `getTable*Classes`                    | Table wrapper, table, and row classes             |
 | `getTabs*Classes`                     | Tabs root, list, items, and panels                |
@@ -2177,6 +2235,43 @@ const links = [
 | `getToastClasses`                     | Toast root classes                                |
 | `getToastIconClasses`                 | Toast icon wrapper                                |
 | `getTooltipClasses`                   | Tooltip class generation                          |
+
+### Utility helpers
+
+Every token-backed utility class in `@phcdevworks/spectre-ui` has a recipe, so
+layout, spacing, and effects never need hand-written class names or local CSS.
+These families are helper-only: there is no Astro component for them. Call the
+helper in a `class` attribute, on its own or next to a component's `class`.
+
+```astro
+---
+import { SpCard, getLayoutClasses, getSpacingClasses } from '@phcdevworks/spectre-ui-astro'
+---
+
+<div class={getLayoutClasses({ display: 'flex', md: { display: 'grid' } })}>
+  <SpCard class={getSpacingClasses({ mb: 16, lg: { mb: 32 } })}>…</SpCard>
+</div>
+```
+
+| Helper                  | For                                                                    |
+| ----------------------- | ---------------------------------------------------------------------- |
+| `getSpacingClasses`     | Padding, margin (including `auto`), gap, and basis, with `sm`–`2xl`    |
+| `getLayoutClasses`      | Display, flex, alignment, position, sizing, overflow, and more         |
+| `getColorClasses`       | Semantic text, background, and border colors                           |
+| `getPaletteClasses`     | Palette hue text, background, and border colors                        |
+| `getBorderClasses`      | Thick sides, border style, width, and radius                           |
+| `getShadowClasses`      | Shadow and inset shadow steps                                          |
+| `getOpacityClasses`     | Opacity roles                                                          |
+| `getZIndexClasses`      | Z-index roles                                                          |
+| `getIconSizeClasses`    | Icon size steps                                                        |
+| `getAspectRatioClasses` | Aspect ratios                                                          |
+| `getElevationClasses`   | `flat`, `raised`, `overlay`, and `modal` (surface + shadow + z-index)  |
+| `getMotionClasses`      | Animation, transition, duration, and easing                            |
+| `getChartColorClasses`  | Chart fill, stroke, background, text, and border roles                 |
+
+`spectreThemeModes` and `spectreDensityModes` (typed `SpectreThemeMode` and
+`SpectreDensityMode`) list every `data-spectre-theme` and
+`data-spectre-density` value, for typing a theme or density switch.
 
 Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`,
@@ -2202,7 +2297,10 @@ logo-cloud, offcanvas, pagination, popover, progress, prose, quote, range,
 section-head, skeleton, stat, stepper, switch, table, and tabs recipe option, variant, size, placement,
 orientation, state, and accent types are also re-exported, as are the container
 padding, section spacing/gap, card padding, grid column-start, footer
-appearance/surface, stepper step tone, and text weight and leading types. Every public `get*Classes` helper
+appearance/surface, stepper step tone, responsive grid columns, and text weight,
+leading, font-size, tracking, decoration, and underline-offset types. Link,
+surface, and every utility helper's option and scale types are re-exported too.
+Every public `get*Classes` helper
 from `@phcdevworks/spectre-ui` is re-exported; the upstream parity test fails if
 one is missed.
 
@@ -2289,6 +2387,7 @@ import SpContainer from '@phcdevworks/spectre-ui-astro/components/SpContainer.as
 import SpDatepicker from '@phcdevworks/spectre-ui-astro/components/SpDatepicker.astro'
 import SpDay from '@phcdevworks/spectre-ui-astro/components/SpDay.astro'
 import SpDisplay from '@phcdevworks/spectre-ui-astro/components/SpDisplay.astro'
+import SpDivider from '@phcdevworks/spectre-ui-astro/components/SpDivider.astro'
 import SpDropdown from '@phcdevworks/spectre-ui-astro/components/SpDropdown.astro'
 import SpDropdownDivider from '@phcdevworks/spectre-ui-astro/components/SpDropdownDivider.astro'
 import SpDropdownHeader from '@phcdevworks/spectre-ui-astro/components/SpDropdownHeader.astro'
@@ -2312,6 +2411,7 @@ import SpInputGroup from '@phcdevworks/spectre-ui-astro/components/SpInputGroup.
 import SpInputGroupAddon from '@phcdevworks/spectre-ui-astro/components/SpInputGroupAddon.astro'
 import SpLabel from '@phcdevworks/spectre-ui-astro/components/SpLabel.astro'
 import SpLead from '@phcdevworks/spectre-ui-astro/components/SpLead.astro'
+import SpLink from '@phcdevworks/spectre-ui-astro/components/SpLink.astro'
 import SpListGroup from '@phcdevworks/spectre-ui-astro/components/SpListGroup.astro'
 import SpListGroupItem from '@phcdevworks/spectre-ui-astro/components/SpListGroupItem.astro'
 import SpLogoCloud from '@phcdevworks/spectre-ui-astro/components/SpLogoCloud.astro'
@@ -2343,6 +2443,7 @@ import SpSpinner from '@phcdevworks/spectre-ui-astro/components/SpSpinner.astro'
 import SpStack from '@phcdevworks/spectre-ui-astro/components/SpStack.astro'
 import SpStat from '@phcdevworks/spectre-ui-astro/components/SpStat.astro'
 import SpStepper from '@phcdevworks/spectre-ui-astro/components/SpStepper.astro'
+import SpSurface from '@phcdevworks/spectre-ui-astro/components/SpSurface.astro'
 import SpSwitch from '@phcdevworks/spectre-ui-astro/components/SpSwitch.astro'
 import SpTableRow from '@phcdevworks/spectre-ui-astro/components/SpTableRow.astro'
 import SpTabPanel from '@phcdevworks/spectre-ui-astro/components/SpTabPanel.astro'
@@ -2363,66 +2464,82 @@ from `@phcdevworks/spectre-ui/index.css`.
 
 Each component family is classified by its support status in this adapter.
 
-| Family               | Status     | Notes                                                              |
-| -------------------- | ---------- | ------------------------------------------------------------------ |
-| accordion            | **stable** | Native details semantics, slot, state, and SSR coverage            |
-| alert                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| avatar               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| badge                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| breadcrumb           | **stable** | Item, current-page, separator, and SSR coverage                    |
-| button               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| card                 | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| carousel             | **stable** | Shell, controls, slot, ARIA, and SSR coverage                      |
-| checkbox             | **stable** | Full prop, ARIA, and SSR coverage                                  |
-| choice-card          | **stable** | Label-wrapped radio/checkbox, forced state, slot, and SSR coverage |
-| container            | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| datepicker           | **stable** | Deterministic month grid, locale, bounds, ARIA, and SSR coverage   |
-| day                  | **stable** | Selected/today/outside/disabled state, ARIA, and SSR coverage      |
-| display              | **stable** | Level, element override, slot, and SSR coverage                    |
-| dropdown             | **stable** | Full prop, slot, and SSR coverage                                  |
-| external-auth-button | **stable** | Icon slot, loading/disabled, link mode, ARIA, and SSR coverage     |
-| fieldset             | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| file-input           | **stable** | Size/state, native file attributes, ARIA, and SSR coverage         |
-| footer               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| grid                 | **stable** | Full prop, slot, and SSR coverage                                  |
-| heading              | **stable** | Level, element override, slot, and SSR coverage                    |
-| icon-box             | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| input                | **stable** | Full prop, ARIA, SSR, and explicit `id` invariant coverage         |
-| input-group          | **stable** | Group role, addon, disabled, and SSR coverage                      |
-| label                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| lead                 | **stable** | Element override, slot, and SSR coverage                           |
-| list-group           | **stable** | Root/item, interaction-state, slot, and SSR coverage               |
-| logo-cloud           | **stable** | Root/tile, size/fill/muted, and SSR coverage                       |
-| modal                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| nav                  | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| offcanvas            | **stable** | Controlled panel, backdrop, slot, ARIA, and SSR coverage           |
-| pagination           | **stable** | Range, link-template, ARIA, and SSR coverage                       |
-| popover              | **stable** | Placement/open, header/body/arrow, ARIA, and SSR coverage          |
-| pricing-card         | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| progress             | **stable** | Determinate/indeterminate, label, ARIA, and SSR coverage           |
-| prose                | **stable** | Element override, accent markers, slot, and SSR coverage           |
-| quote                | **stable** | Full prop, attribution slots, and SSR coverage                     |
-| radio                | **stable** | Full prop, ARIA, and SSR coverage                                  |
-| range                | **stable** | Bounds, WebKit fill mirroring, ARIA, and SSR coverage              |
-| rating               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| section              | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| section-head         | **stable** | Layout/align, title and lead slots, ARIA, and SSR coverage         |
-| select               | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| sidebar              | **stable** | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction   |
-| skeleton             | **stable** | Shape/animation, `aria-hidden`, and SSR coverage                   |
-| spinner              | **stable** | Full prop, ARIA, and SSR coverage                                  |
-| stack                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| stat                 | **stable** | Size/align/surface, unit and label slots, and SSR coverage         |
-| stepper              | **stable** | Derived/explicit state, tone, ARIA, and SSR coverage               |
-| switch               | **stable** | Size/state, switch role, ARIA, and SSR coverage                    |
-| table                | **stable** | Responsive wrapper, semantic table, and SSR coverage               |
-| tabs                 | **stable** | Controlled selection, panel association, ARIA, and SSR coverage    |
-| tag                  | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| testimonial          | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| text                 | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| textarea             | **stable** | Full prop, ARIA, and SSR coverage                                  |
-| toast                | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
-| tooltip              | **stable** | Full prop, slot, ARIA, and SSR coverage                            |
+| Family               | Status      | Notes                                                              |
+| -------------------- | ----------- | ------------------------------------------------------------------ |
+| accordion            | **stable**  | Native details semantics, slot, state, and SSR coverage            |
+| alert                | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| avatar               | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| badge                | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| breadcrumb           | **stable**  | Item, current-page, separator, and SSR coverage                    |
+| button               | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| card                 | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| carousel             | **stable**  | Shell, controls, slot, ARIA, and SSR coverage                      |
+| checkbox             | **stable**  | Full prop, ARIA, and SSR coverage                                  |
+| choice-card          | **stable**  | Label-wrapped radio/checkbox, forced state, slot, and SSR coverage |
+| container            | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| datepicker           | **stable**  | Deterministic month grid, locale, bounds, ARIA, and SSR coverage   |
+| day                  | **stable**  | Selected/today/outside/disabled state, ARIA, and SSR coverage      |
+| display              | **stable**  | Level, element override, slot, and SSR coverage                    |
+| divider              | **stable**  | `<hr>`, pass-through attributes, and SSR coverage                  |
+| dropdown             | **stable**  | Full prop, slot, and SSR coverage                                  |
+| external-auth-button | **stable**  | Icon slot, loading/disabled, link mode, ARIA, and SSR coverage     |
+| fieldset             | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| file-input           | **stable**  | Size/state, native file attributes, ARIA, and SSR coverage         |
+| footer               | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| grid                 | **stable**  | Full prop, slot, and SSR coverage                                  |
+| heading              | **stable**  | Level, element override, slot, and SSR coverage                    |
+| icon-box             | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| input                | **stable**  | Full prop, ARIA, SSR, and explicit `id` invariant coverage         |
+| input-group          | **stable**  | Group role, addon, disabled, and SSR coverage                      |
+| label                | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| lead                 | **stable**  | Element override, slot, and SSR coverage                           |
+| link                 | **stable**  | Tone, underline overrides, `aria-current`, and SSR coverage        |
+| list-group           | **stable**  | Root/item, interaction-state, slot, and SSR coverage               |
+| logo-cloud           | **stable**  | Root/tile, size/fill/muted, and SSR coverage                       |
+| modal                | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| nav                  | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| offcanvas            | **stable**  | Controlled panel, backdrop, slot, ARIA, and SSR coverage           |
+| pagination           | **stable**  | Range, link-template, ARIA, and SSR coverage                       |
+| popover              | **stable**  | Placement/open, header/body/arrow, ARIA, and SSR coverage          |
+| pricing-card         | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| progress             | **stable**  | Determinate/indeterminate, label, ARIA, and SSR coverage           |
+| prose                | **stable**  | Element override, accent markers, slot, and SSR coverage           |
+| quote                | **stable**  | Full prop, attribution slots, and SSR coverage                     |
+| radio                | **stable**  | Full prop, ARIA, and SSR coverage                                  |
+| range                | **stable**  | Bounds, WebKit fill mirroring, ARIA, and SSR coverage              |
+| rating               | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| section              | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| section-head         | **stable**  | Layout/align, title and lead slots, ARIA, and SSR coverage         |
+| select               | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| sidebar              | **stable**  | Full prop, slot, ARIA, and SSR coverage; owns toggle interaction   |
+| skeleton             | **stable**  | Shape/animation, `aria-hidden`, and SSR coverage                   |
+| spinner              | **stable**  | Full prop, ARIA, and SSR coverage                                  |
+| stack                | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| stat                 | **stable**  | Size/align/surface, unit and label slots, and SSR coverage         |
+| stepper              | **stable**  | Derived/explicit state, tone, ARIA, and SSR coverage               |
+| surface              | **stable**  | Every surface role, interaction states, `as`, and SSR coverage     |
+| switch               | **stable**  | Size/state, switch role, ARIA, and SSR coverage                    |
+| table                | **stable**  | Responsive wrapper, semantic table, and SSR coverage               |
+| tabs                 | **stable**  | Controlled selection, panel association, ARIA, and SSR coverage    |
+| tag                  | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| testimonial          | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| text                 | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| textarea             | **stable**  | Full prop, ARIA, and SSR coverage                                  |
+| toast                | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| tooltip              | **stable**  | Full prop, slot, ARIA, and SSR coverage                            |
+| aspect-ratio         | **utility** | `getAspectRatioClasses` helper; no component                       |
+| border               | **utility** | `getBorderClasses` helper; no component                            |
+| chart-color          | **utility** | `getChartColorClasses` helper; no component                        |
+| color                | **utility** | `getColorClasses` helper; no component                             |
+| elevation            | **utility** | `getElevationClasses` helper; no component                         |
+| icon-size            | **utility** | `getIconSizeClasses` helper; no component                          |
+| layout               | **utility** | `getLayoutClasses` helper; no component                            |
+| motion               | **utility** | `getMotionClasses` helper; no component                            |
+| opacity              | **utility** | `getOpacityClasses` helper; no component                           |
+| palette              | **utility** | `getPaletteClasses` helper; no component                           |
+| shadow               | **utility** | `getShadowClasses` helper; no component                            |
+| spacing              | **utility** | `getSpacingClasses` helper; no component                           |
+| z-index              | **utility** | `getZIndexClasses` helper; no component                            |
 
 **stable** — the component family is fully wired to upstream recipes, covered by
 SSR and unit tests, and declared in `astro-adapter.contract.json`. Breaking
@@ -2433,6 +2550,10 @@ coverage. Not yet safe to depend on across minor releases.
 
 **not yet supported** — families present in the upstream Spectre UI surface that
 this adapter has not yet bound.
+
+**utility** — helper-only utility recipe families. The helper is re-exported
+unchanged and covered by the parity tests; by design there is no Astro
+component, because the classes compose onto any element.
 
 The machine-readable classification lives in `astro-adapter.contract.json` under
 `componentFamilies`.

@@ -1,0 +1,44 @@
+---
+import type { LinkRecipeOptions } from "@phcdevworks/spectre-ui";
+import { getLinkClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
+
+interface SpLinkProps extends LinkRecipeOptions {
+  href?: string;
+  current?: boolean;
+  class?: string;
+  id?: string;
+  title?: string;
+  "aria-label"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  tone,
+  decoration,
+  underlineOffset,
+  href,
+  current,
+  class: className,
+  id,
+  title,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props as SpLinkProps;
+
+const classes = getLinkClasses(omitUndefined({ tone, decoration, underlineOffset }));
+const finalClass = [classes, className].filter(Boolean).join(" ");
+---
+
+<a
+  class={finalClass}
+  href={href}
+  id={id}
+  title={title}
+  aria-label={ariaLabel}
+  aria-current={current ? "page" : undefined}
+  {...rest}
+>
+  <slot />
+</a>

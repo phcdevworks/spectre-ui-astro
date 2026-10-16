@@ -299,7 +299,8 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 23 are released (current version `4.12.0`; see `package.json`
-and `CHANGELOG.md`). There is no open phase. New family or contract work opens
+Phases 1 through 24 are released (current version `4.13.0`; see `package.json`
+and `CHANGELOG.md`). Phase 24 delivered full `spectre-ui@5.7.0` recipe and
+utility parity. There is no open phase. New family or contract work opens
 only after its upstream recipe or typed contract is published. Check
 `ROADMAP.md` and `TODO.md` for exact scope before starting work.
