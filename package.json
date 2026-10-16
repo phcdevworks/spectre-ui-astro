@@ -173,7 +173,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@phcdevworks/spectre-manifest": "^1.2.0",
+    "@phcdevworks/spectre-manifest": "^2.0.0",
     "@phcdevworks/spectre-tokens": "^4.13.0",
     "@phcdevworks/spectre-ui": "^5.5.0",
     "@types/node": "^26.6.5",
