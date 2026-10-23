@@ -56,6 +56,7 @@ import SpDropdown from "../src/components/SpDropdown.astro";
 import SpFieldset from "../src/components/SpFieldset.astro";
 import SpFooter from "../src/components/SpFooter.astro";
 import SpGrid from "../src/components/SpGrid.astro";
+import SpIcon from "../src/components/SpIcon.astro";
 import SpIconBox from "../src/components/SpIconBox.astro";
 import SpInput from "../src/components/SpInput.astro";
 import SpLabel from "../src/components/SpLabel.astro";
@@ -186,6 +187,21 @@ describe("SSR rendering", () => {
     expect(html).toContain('aria-busy="true"');
     expect(html).toContain('tabindex="-1"');
     expect(html).not.toContain('href="/docs"');
+  });
+
+  it("renders SpIcon inside SpIconBox as a decorative SVG", async () => {
+    const icon = await container.renderToString(SpIcon, {
+      props: { icon: [["path", { d: "M3 12h18" }]] },
+    });
+    const html = await container.renderToString(SpIconBox, {
+      props: { variant: "primary", iconSize: "lg" },
+      slots: { default: icon },
+    });
+
+    expect(html).toContain(getIconBoxClasses({ variant: "primary", iconSize: "lg" }));
+    expect(html).toContain('<path d="M3 12h18"></path>');
+    expect(html).toContain('aria-hidden="true"');
+    expect(html).toContain('focusable="false"');
   });
 
   it("renders SpCard with upstream classes and semantic element behavior", async () => {

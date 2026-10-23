@@ -16,7 +16,7 @@ hand-rolling markup or styling against the recipes directly.
 | Project team           | `project-design`                |
 | Repository role        | Spectre L3b Astro adapter       |
 | Package/artifact       | `@phcdevworks/spectre-ui-astro` |
-| Current version/status | 4.13.0                          |
+| Current version/status | 4.14.0                          |
 
 ## Standard Workflow
 
@@ -205,6 +205,7 @@ import {
   SpFooterText,
   SpGrid,
   SpHeading,
+  SpIcon,
   SpIconBox,
   SpInput,
   SpInputGroup,
@@ -302,25 +303,25 @@ closed by default with no layout shift on hydration.
 
 ### SpButton
 
-| Prop         | Type                                         | Default    | Description                                                                                                  |
-| ------------ | -------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"` `"inverse"` `"accentOutline"` and the other upstream variants |
-| `size`       | `ButtonSize`                                 | —          | Size: `"sm"` `"md"` `"lg"`                                                                                   |
-| `as`         | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element                                                                                             |
-| `href`       | `string`                                     | —          | URL when `as="a"`                                                                                            |
-| `type`       | `"button" \| "submit" \| "reset"`            | `"button"` | Button type (button elements only)                                                                           |
-| `disabled`   | `boolean`                                    | —          | Disables the element; suppresses navigation on anchors                                                       |
-| `loading`    | `boolean`                                    | —          | Loading state; implies `disabled`                                                                            |
-| `fullWidth`  | `boolean`                                    | —          | Stretches to fill its container                                                                              |
-| `iconOnly`   | `boolean`                                    | —          | Removes text padding for icon-only buttons                                                                   |
-| `pill`       | `boolean`                                    | —          | Fully rounded corners                                                                                        |
-| `compact`    | `boolean`                                    | —          | Shrinks the visible box below the min touch target; an invisible `::after` preserves the accessible hit area |
-| `hovered`    | `boolean`                                    | —          | Force-applies hover styling                                                                                  |
-| `focused`    | `boolean`                                    | —          | Force-applies focus styling                                                                                  |
-| `active`     | `boolean`                                    | —          | Force-applies active styling                                                                                 |
-| `aria-label` | `string`                                     | —          | Accessible label                                                                                             |
-| `tabindex`   | `number`                                     | —          | Tab index override                                                                                           |
-| `class`      | `string`                                     | —          | Additional CSS classes                                                                                       |
+| Prop         | Type                                         | Default    | Description                                                                                                                |
+| ------------ | -------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `variant`    | `ButtonVariant`                              | —          | Visual style: `"primary"` `"secondary"` `"ghost"` `"inverse"` `"accentOutline"` `"action"` and the other upstream variants |
+| `size`       | `ButtonSize`                                 | —          | Size: `"sm"` `"md"` `"lg"`                                                                                                 |
+| `as`         | `"button" \| "a" \| "span" \| "div" \| "li"` | `"button"` | Rendered element                                                                                                           |
+| `href`       | `string`                                     | —          | URL when `as="a"`                                                                                                          |
+| `type`       | `"button" \| "submit" \| "reset"`            | `"button"` | Button type (button elements only)                                                                                         |
+| `disabled`   | `boolean`                                    | —          | Disables the element; suppresses navigation on anchors                                                                     |
+| `loading`    | `boolean`                                    | —          | Loading state; implies `disabled`                                                                                          |
+| `fullWidth`  | `boolean`                                    | —          | Stretches to fill its container                                                                                            |
+| `iconOnly`   | `boolean`                                    | —          | Removes text padding for icon-only buttons                                                                                 |
+| `pill`       | `boolean`                                    | —          | Fully rounded corners                                                                                                      |
+| `compact`    | `boolean`                                    | —          | Shrinks the visible box below the min touch target; an invisible `::after` preserves the accessible hit area               |
+| `hovered`    | `boolean`                                    | —          | Force-applies hover styling                                                                                                |
+| `focused`    | `boolean`                                    | —          | Force-applies focus styling                                                                                                |
+| `active`     | `boolean`                                    | —          | Force-applies active styling                                                                                               |
+| `aria-label` | `string`                                     | —          | Accessible label                                                                                                           |
+| `tabindex`   | `number`                                     | —          | Tab index override                                                                                                         |
+| `class`      | `string`                                     | —          | Additional CSS classes                                                                                                     |
 
 ```astro
 <SpButton variant="primary" size="lg">Get started</SpButton>
@@ -371,9 +372,9 @@ closed by default with no layout shift on hydration.
 </SpCard>
 ```
 
-The default slot renders any child content. Every component with an accent
-rail (card, badge, testimonial, pricing card, nav, footer, modal, toast,
-tooltip, dropdown menu, list group) also accepts `accentColor="accent"`.
+The default slot renders any child content. Every component with an accent rail
+(card, badge, testimonial, pricing card, nav, footer, modal, toast, tooltip,
+dropdown menu, list group) also accepts `accentColor="accent"`.
 
 `SpCard` does not have a dedicated bleed slot. For a child (media, a flush
 internal surface) that should run through the card's padding on one or more
@@ -500,13 +501,13 @@ the title part; the default slot (the lead) and the `actions` slot fill the lead
 part. Each part renders only when one of its slots is populated. Typography
 comes from `SpText`, `SpHeading`, and `SpLead`.
 
-| Prop         | Type                             | Default     | Description                                                                 |
-| ------------ | -------------------------------- | ----------- | --------------------------------------------------------------------------- |
-| `layout`     | `"stacked" \| "split"`           | `"stacked"` | `split` puts the title left and the lead right from the `lg` breakpoint     |
-| `align`      | `"start" \| "center"`            | `"start"`   | Stacked layout only; `center` centres the head at prose width               |
-| `as`         | `"div" \| "header" \| "hgroup"`  | `"div"`     | Rendered element                                                            |
-| `aria-label` | `string`                         | —           | Accessible label; on a `div` it also sets `role="group"`                    |
-| `class`      | `string`                         | —           | Additional CSS classes                                                      |
+| Prop         | Type                            | Default     | Description                                                             |
+| ------------ | ------------------------------- | ----------- | ----------------------------------------------------------------------- |
+| `layout`     | `"stacked" \| "split"`          | `"stacked"` | `split` puts the title left and the lead right from the `lg` breakpoint |
+| `align`      | `"start" \| "center"`           | `"start"`   | Stacked layout only; `center` centres the head at prose width           |
+| `as`         | `"div" \| "header" \| "hgroup"` | `"div"`     | Rendered element                                                        |
+| `aria-label` | `string`                        | —           | Accessible label; on a `div` it also sets `role="group"`                |
+| `class`      | `string`                        | —           | Additional CSS classes                                                  |
 
 ```astro
 <SpSectionHead layout="split">
@@ -641,11 +642,13 @@ const headerClass = getSidebarHeaderClasses()
 
 ### SpSidebarToggle
 
-| Prop    | Type     | Default            | Description                                  |
-| ------- | -------- | ------------------ | -------------------------------------------- |
-| `for`   | `string` | —                  | Required `id` of the `SpSidebar` to control  |
-| `label` | `string` | `"Toggle sidebar"` | Accessible label for the toggle button       |
-| `class` | `string` | —                  | Additional CSS classes for the toggle button |
+| Prop      | Type      | Default            | Description                                  |
+| --------- | --------- | ------------------ | -------------------------------------------- |
+| `for`     | `string`  | —                  | Required `id` of the `SpSidebar` to control  |
+| `label`   | `string`  | `"Toggle sidebar"` | Accessible label for the toggle button       |
+| `hovered` | `boolean` | —                  | Forces the hover look                        |
+| `focused` | `boolean` | —                  | Forces the focus look                        |
+| `class`   | `string`  | —                  | Additional CSS classes for the toggle button |
 
 `SpSidebarToggle` renders a button that can live outside `SpSidebar`, such as
 inside `SpNav`. Its `for` prop must match the target sidebar's `id`. The sidebar
@@ -1048,6 +1051,7 @@ is an unrelated, additive edge decoration.
 | ------------- | --------------------------------------------------- | -------- | --------------------------------------------------------------- |
 | `variant`     | `IconBoxVariant`                                    | —        | Color: `"primary"` `"success"` `"warning"` `"danger"` `"info"`  |
 | `size`        | `IconBoxSize`                                       | —        | Size: `"sm"` `"md"` `"lg"`                                      |
+| `iconSize`    | `IconBoxIconSize`                                   | —        | Glyph size `"xs"`–`"3xl"`; omitted follows the box's font size  |
 | `as`          | `"span" \| "div" \| "i" \| "a" \| "button" \| "li"` | `"span"` | Rendered element                                                |
 | `pill`        | `boolean`                                           | —        | Fully rounded corners                                           |
 | `interactive` | `boolean`                                           | —        | Adds hover/focus styles                                         |
@@ -1075,7 +1079,48 @@ is an unrelated, additive edge decoration.
 
 Use `aria-hidden="true"` on the icon when surrounding context already describes
 it. Use `aria-label` on the component when the icon box conveys standalone
-meaning.
+meaning. `SpIcon` is decorative by default, so it drops straight in:
+
+```astro
+<SpIconBox variant="primary" iconSize="lg">
+  <SpIcon icon={Rocket} />
+</SpIconBox>
+```
+
+---
+
+### SpIcon
+
+`SpIcon` renders an inline SVG from the icon sets `@phcdevworks/spectre-ui`
+ships: pass the imported icon export itself as `icon`. Only the icons a page
+imports are loaded, and the SVG renders on the server with no client script.
+
+| Prop    | Type         | Default | Description                                                                |
+| ------- | ------------ | ------- | -------------------------------------------------------------------------- |
+| `icon`  | `SpIconData` | —       | Required. Any export from `@phcdevworks/spectre-ui/icons` or `/icons/*`    |
+| `size`  | `IconSize`   | —       | `"xs"`–`"3xl"` through `getIconSizeClasses`; omitted follows the font size |
+| `label` | `string`     | —       | Accessible name; sets `role="img"`. Omitted renders the icon `aria-hidden` |
+| `title` | `string`     | —       | Renders an SVG `<title>` tooltip                                           |
+| `class` | `string`     | —       | Additional CSS classes                                                     |
+
+```astro
+---
+import { SpIcon } from '@phcdevworks/spectre-ui-astro'
+import { Search } from '@phcdevworks/spectre-ui/icons'
+import { faHouse } from '@phcdevworks/spectre-ui/icons/fa-solid'
+import { siGithub } from '@phcdevworks/spectre-ui/icons/brands'
+---
+
+<SpIcon icon={Search} />
+<SpIcon icon={faHouse} size="lg" />
+<SpIcon icon={siGithub} label="GitHub" />
+```
+
+Lucide icons draw as 2px outlines in `currentColor`; Material Design Icons
+(`/icons/mdi`), Font Awesome (`/icons/fa-solid`, `/icons/fa-regular`,
+`/icons/fa-brands`), and Simple Icons brand logos (`/icons/brands`) fill with
+`currentColor`. The output matches spectre-components `<sp-icon>` for the same
+icon.
 
 ---
 
@@ -1216,15 +1261,15 @@ the default slot inside a `<blockquote>`, and a `<figcaption>` built from the
 `avatar`, `name`, `role`, and `organization` slots when any of them is
 populated. Role and organization share one line, comma-separated.
 
-| Prop          | Type                                 | Default    | Description                                                              |
-| ------------- | ------------------------------------ | ---------- | ------------------------------------------------------------------------ |
-| `size`        | `QuoteSize`                          | `"md"`     | `"sm"` to an `"xl"` statement quote                                      |
-| `surface`     | `"plain" \| "subtle" \| "inverse"`   | `"plain"`  | `subtle`/`inverse` add a padded panel; `inverse` switches to on-dark text |
-| `accent`      | `"edge" \| "mark" \| "none"`         | `"edge"`   | Leading rail, decorative quote mark, or the neutral border rule          |
-| `accentColor` | `QuoteAccentColor`                   | `"accent"` | Rail and mark tone                                                       |
-| `align`       | `"start" \| "center"`                | `"start"`  | Text alignment                                                           |
-| `cite`        | `string`                             | —          | Source URL, set on the `<blockquote>`                                    |
-| `class`       | `string`                             | —          | Additional CSS classes                                                   |
+| Prop          | Type                               | Default    | Description                                                               |
+| ------------- | ---------------------------------- | ---------- | ------------------------------------------------------------------------- |
+| `size`        | `QuoteSize`                        | `"md"`     | `"sm"` to an `"xl"` statement quote                                       |
+| `surface`     | `"plain" \| "subtle" \| "inverse"` | `"plain"`  | `subtle`/`inverse` add a padded panel; `inverse` switches to on-dark text |
+| `accent`      | `"edge" \| "mark" \| "none"`       | `"edge"`   | Leading rail, decorative quote mark, or the neutral border rule           |
+| `accentColor` | `QuoteAccentColor`                 | `"accent"` | Rail and mark tone; `"action"` follows the theme's `data-spectre-action`  |
+| `align`       | `"start" \| "center"`              | `"start"`  | Text alignment                                                            |
+| `cite`        | `string`                           | —          | Source URL, set on the `<blockquote>`                                     |
+| `class`       | `string`                           | —          | Additional CSS classes                                                    |
 
 ```astro
 <SpQuote size="lg" accent="mark">
@@ -1289,13 +1334,14 @@ A single metric for stat rails, metric cards, and case-study figures. The
 default slot is the figure; the `unit` slot renders inside it in the surface's
 accent colour, and the `label` slot renders beneath it.
 
-| Prop         | Type                                | Default   | Description                                                   |
-| ------------ | ----------------------------------- | --------- | ------------------------------------------------------------- |
-| `size`       | `"sm" \| "md" \| "lg" \| "xl"`       | `"md"`    | Type scale of the figure                                      |
-| `align`      | `"start" \| "center" \| "end"`      | `"start"` | Alignment                                                     |
-| `surface`    | `"page" \| "surface" \| "inverse"`  | `"page"`  | What the stat sits on, which picks the text roles             |
-| `aria-label` | `string`                            | —         | Accessible label; also sets `role="group"`                    |
-| `class`      | `string`                            | —         | Additional CSS classes                                        |
+| Prop         | Type                               | Default    | Description                                               |
+| ------------ | ---------------------------------- | ---------- | --------------------------------------------------------- |
+| `size`       | `"sm" \| "md" \| "lg" \| "xl"`     | `"md"`     | Type scale of the figure                                  |
+| `align`      | `"start" \| "center" \| "end"`     | `"start"`  | Alignment                                                 |
+| `surface`    | `"page" \| "surface" \| "inverse"` | `"page"`   | What the stat sits on, which picks the text roles         |
+| `unitTone`   | `"accent" \| "action"`             | `"accent"` | Unit colour; `"action"` follows the theme's action colour |
+| `aria-label` | `string`                           | —          | Accessible label; also sets `role="group"`                |
+| `class`      | `string`                           | —          | Additional CSS classes                                    |
 
 ```astro
 <SpStat size="xl" surface="inverse">
@@ -1378,18 +1424,18 @@ const activeItemClass = getDropdownItemClasses({ active: true })
 
 ### SpFooter
 
-| Prop          | Type                             | Default    | Description                                                        |
-| ------------- | -------------------------------- | ---------- | ------------------------------------------------------------------ |
-| `bordered`    | `boolean`                        | —          | Applies a top border                                               |
-| `fullWidth`   | `boolean`                        | —          | Stretches to full width                                            |
-| `accent`      | `FooterAccentEdge`               | —          | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"`        |
-| `accentColor` | `FooterAccentColor`              | `"brand"`  | Rail color, used when `accent` is set                              |
-| `appearance`  | `FooterAppearance`               | `"dark"`   | Palette: `"dark"` `"light"` `"system"`                             |
-| `surface`     | `FooterSurface`                  | —          | Background role: `"page"` `"card"` `"subtle"` `"inverse"` `"hero"` |
-| `as`          | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element                                                   |
-| `id`          | `string`                         | —          | Element ID                                                         |
-| `aria-label`  | `string`                         | —          | Accessible label                                                   |
-| `class`       | `string`                         | —          | Additional CSS classes                                             |
+| Prop          | Type                             | Default    | Description                                                                   |
+| ------------- | -------------------------------- | ---------- | ----------------------------------------------------------------------------- |
+| `bordered`    | `boolean`                        | —          | Applies a top border                                                          |
+| `fullWidth`   | `boolean`                        | —          | Stretches to full width                                                       |
+| `accent`      | `FooterAccentEdge`               | —          | Decorative rail edge: `"top"` `"right"` `"bottom"` `"left"`                   |
+| `accentColor` | `FooterAccentColor`              | `"brand"`  | Rail color, used when `accent` is set                                         |
+| `appearance`  | `FooterAppearance`               | `"dark"`   | Palette: `"dark"` `"light"` `"system"`                                        |
+| `surface`     | `FooterSurface`                  | —          | Background role: `"page"` `"card"` `"subtle"` `"inverse"` `"hero"` `"action"` |
+| `as`          | `"footer" \| "div" \| "section"` | `"footer"` | Rendered element                                                              |
+| `id`          | `string`                         | —          | Element ID                                                                    |
+| `aria-label`  | `string`                         | —          | Accessible label                                                              |
+| `class`       | `string`                         | —          | Additional CSS classes                                                        |
 
 ```astro
 <SpFooter bordered>
@@ -1761,10 +1807,11 @@ so the document outline and the visual scale can differ.
 
 `SpProse` wraps long-form or CMS-authored HTML in the upstream prose recipe. Use
 `as` for `div`, `article`, `section`, `main`, or `aside`. Set `accentMarkers` to
-colour list markers with the accent role instead of the muted one. Edit marks
-(`<del>`, `<ins>`, `<s>`), description lists, `<figcaption>`, `<caption>`,
-underlines, `<meter>`, and syntax highlighting inside `<pre>` come from the
-upstream base and prose styles with no extra props.
+colour list markers with the accent role instead of the muted one. Set `size`
+(`md` | `lg` | `xl`) to set the body text size; omitted inherits the surrounding
+size. Edit marks (`<del>`, `<ins>`, `<s>`), description lists, `<figcaption>`,
+`<caption>`, underlines, `<meter>`, and syntax highlighting inside `<pre>` come
+from the upstream base and prose styles with no extra props.
 
 ### SpLink
 
@@ -1792,9 +1839,9 @@ dropdown menu or footer use `SpDropdownDivider` or `SpFooterDivider`.
 
 `SpSurface` paints a `--sp-surface-*` background role from `getSurfaceClasses`:
 `page`, `card`, `subtle`, `overlay`, `input`, `inverse`, or `hero`. `hover`,
-`selected`, and `active` add the matching interaction states. Use `as` for
-`div` (default), `section`, `article`, `aside`, `header`, `footer`, or `li`.
-Spacing, borders, and elevation come from the utility helpers (see
+`selected`, and `active` add the matching interaction states. Use `as` for `div`
+(default), `section`, `article`, `aside`, `header`, `footer`, or `li`. Spacing,
+borders, and elevation come from the utility helpers (see
 [Recipe Helpers](#recipe-helpers)).
 
 ```astro
@@ -2015,13 +2062,19 @@ recipe (for example, copyright lines).
 
 `SpSidebarGroup` renders a collapsible native `<details>` group with a styled
 `<summary>`. Pass `label` or use the `summary` slot, and `open` for the initial
-state.
+state. The summary ends in a chevron (`getSidebarGroupIconClasses`) that turns
+when the group opens; replace it through the `icon` slot. Children in the
+`content` slot are wrapped in `getSidebarGroupContentClasses` for the group's
+bottom spacing; the default slot renders unwrapped. `hovered` and `focused`
+force the summary's hover and focus look.
 
 ```astro
 <SpSidebar>
   <SpSidebarHeader>Docs</SpSidebarHeader>
   <SpSidebarGroup label="Guides" open>
-    <SpSidebarLink href="/guides/intro">Intro</SpSidebarLink>
+    <div slot="content">
+      <SpSidebarLink href="/guides/intro">Intro</SpSidebarLink>
+    </div>
   </SpSidebarGroup>
 </SpSidebar>
 ```
@@ -2213,6 +2266,8 @@ const links = [
 | `getSidebarClasses`                   | Sidebar root classes                              |
 | `getSidebarGroupClasses`              | Collapsible sidebar group                         |
 | `getSidebarGroupSummaryClasses`       | Sidebar group summary                             |
+| `getSidebarGroupIconClasses`          | Sidebar group disclosure chevron                  |
+| `getSidebarGroupContentClasses`       | Links under a sidebar group summary               |
 | `getSidebarLinkClasses`               | Individual sidebar link                           |
 | `getSidebarHeaderClasses`             | Sidebar section header                            |
 | `getSidebarBackdropClasses`           | Sidebar off-canvas backdrop                       |
@@ -2253,25 +2308,25 @@ import { SpCard, getLayoutClasses, getSpacingClasses } from '@phcdevworks/spectr
 </div>
 ```
 
-| Helper                  | For                                                                    |
-| ----------------------- | ---------------------------------------------------------------------- |
-| `getSpacingClasses`     | Padding, margin (including `auto`), gap, and basis, with `sm`–`2xl`    |
-| `getLayoutClasses`      | Display, flex, alignment, position, sizing, overflow, and more         |
-| `getColorClasses`       | Semantic text, background, and border colors                           |
-| `getPaletteClasses`     | Palette hue text, background, and border colors                        |
-| `getBorderClasses`      | Thick sides, border style, width, and radius                           |
-| `getShadowClasses`      | Shadow and inset shadow steps                                          |
-| `getOpacityClasses`     | Opacity roles                                                          |
-| `getZIndexClasses`      | Z-index roles                                                          |
-| `getIconSizeClasses`    | Icon size steps                                                        |
-| `getAspectRatioClasses` | Aspect ratios                                                          |
-| `getElevationClasses`   | `flat`, `raised`, `overlay`, and `modal` (surface + shadow + z-index)  |
-| `getMotionClasses`      | Animation, transition, duration, and easing                            |
-| `getChartColorClasses`  | Chart fill, stroke, background, text, and border roles                 |
+| Helper                  | For                                                                   |
+| ----------------------- | --------------------------------------------------------------------- |
+| `getSpacingClasses`     | Padding, margin (including `auto`), gap, and basis, with `sm`–`2xl`   |
+| `getLayoutClasses`      | Display, flex, alignment, position, sizing, overflow, and more        |
+| `getColorClasses`       | Semantic text, background, and border colors                          |
+| `getPaletteClasses`     | Palette hue text, background, and border colors                       |
+| `getBorderClasses`      | Thick sides, border style, width, and radius                          |
+| `getShadowClasses`      | Shadow and inset shadow steps                                         |
+| `getOpacityClasses`     | Opacity roles                                                         |
+| `getZIndexClasses`      | Z-index roles                                                         |
+| `getIconSizeClasses`    | Icon size steps                                                       |
+| `getAspectRatioClasses` | Aspect ratios                                                         |
+| `getElevationClasses`   | `flat`, `raised`, `overlay`, and `modal` (surface + shadow + z-index) |
+| `getMotionClasses`      | Animation, transition, duration, and easing                           |
+| `getChartColorClasses`  | Chart fill, stroke, background, text, and border roles                |
 
 `spectreThemeModes` and `spectreDensityModes` (typed `SpectreThemeMode` and
-`SpectreDensityMode`) list every `data-spectre-theme` and
-`data-spectre-density` value, for typing a theme or density switch.
+`SpectreDensityMode`) list every `data-spectre-theme` and `data-spectre-density`
+value, for typing a theme or density switch.
 
 Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 `AlertVariant`, `AlertSize`, `AvatarRecipeOptions`, `AvatarShape`, `AvatarSize`,
@@ -2294,13 +2349,14 @@ Recipe option and variant types are also re-exported: `AlertRecipeOptions`,
 The corresponding accordion, breadcrumb, carousel, choice-card, datepicker, day,
 display, external-auth-button, file-input, heading, input-group, list-group,
 logo-cloud, offcanvas, pagination, popover, progress, prose, quote, range,
-section-head, skeleton, stat, stepper, switch, table, and tabs recipe option, variant, size, placement,
-orientation, state, and accent types are also re-exported, as are the container
-padding, section spacing/gap, card padding, grid column-start, footer
-appearance/surface, stepper step tone, responsive grid columns, and text weight,
-leading, font-size, tracking, decoration, and underline-offset types. Link,
-surface, and every utility helper's option and scale types are re-exported too.
-Every public `get*Classes` helper
+section-head, skeleton, stat, stepper, switch, table, and tabs recipe option,
+variant, size, placement, orientation, state, and accent types are also
+re-exported, as are the container padding, section spacing/gap, card padding,
+grid column-start, footer appearance/surface, stepper step tone, responsive grid
+columns, and text weight, leading, font-size, tracking, decoration, and
+underline-offset types, plus `StatUnitTone`, `ProseSize`, `IconBoxIconSize`, and
+`SidebarInteractiveRecipeOptions`. Link, surface, and every utility helper's
+option and scale types are re-exported too. Every public `get*Classes` helper
 from `@phcdevworks/spectre-ui` is re-exported; the upstream parity test fails if
 one is missed.
 
@@ -2325,6 +2381,7 @@ import {
   SpFieldset,
   SpFooter,
   SpGrid,
+  SpIcon,
   SpIconBox,
   SpInput,
   SpLabel,
@@ -2405,6 +2462,7 @@ import SpFooterLinks from '@phcdevworks/spectre-ui-astro/components/SpFooterLink
 import SpFooterText from '@phcdevworks/spectre-ui-astro/components/SpFooterText.astro'
 import SpGrid from '@phcdevworks/spectre-ui-astro/components/SpGrid.astro'
 import SpHeading from '@phcdevworks/spectre-ui-astro/components/SpHeading.astro'
+import SpIcon from '@phcdevworks/spectre-ui-astro/components/SpIcon.astro'
 import SpIconBox from '@phcdevworks/spectre-ui-astro/components/SpIconBox.astro'
 import SpInput from '@phcdevworks/spectre-ui-astro/components/SpInput.astro'
 import SpInputGroup from '@phcdevworks/spectre-ui-astro/components/SpInputGroup.astro'

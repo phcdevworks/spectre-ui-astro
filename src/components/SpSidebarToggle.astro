@@ -1,7 +1,9 @@
 ---
+import type { SidebarInteractiveRecipeOptions } from "@phcdevworks/spectre-ui";
 import { getSidebarToggleClasses } from "@phcdevworks/spectre-ui";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
-interface SpSidebarToggleProps {
+interface SpSidebarToggleProps extends SidebarInteractiveRecipeOptions {
   /** id of the SpSidebar this toggle controls (pass the same `id` prop given to SpSidebar). */
   for: string;
   label?: string;
@@ -13,11 +15,13 @@ interface SpSidebarToggleProps {
 const {
   for: sidebarId,
   label = "Toggle sidebar",
+  hovered,
+  focused,
   class: className,
   ...rest
 } = Astro.props as SpSidebarToggleProps;
 
-const toggleClass = getSidebarToggleClasses();
+const toggleClass = getSidebarToggleClasses(omitUndefined({ hovered, focused }));
 const finalClass = [toggleClass, className].filter(Boolean).join(" ");
 const shellId = `${sidebarId}-shell`;
 ---

@@ -70,6 +70,7 @@
         "./components/SpFooterText.astro",
         "./components/SpGrid.astro",
         "./components/SpHeading.astro",
+        "./components/SpIcon.astro",
         "./components/SpIconBox.astro",
         "./components/SpInput.astro",
         "./components/SpInputGroup.astro",

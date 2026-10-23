@@ -27,6 +27,7 @@ interface SpIconBoxProps extends IconBoxRecipeOptions {
 const {
   variant,
   size,
+  iconSize,
   pill,
   fullWidth,
   interactive,
@@ -54,6 +55,7 @@ const isInteractive = interactive || Tag === "a" || Tag === "button";
 const classes = getIconBoxClasses(omitUndefined({
   variant,
   size,
+  iconSize,
   pill,
   fullWidth,
   interactive: isInteractive,

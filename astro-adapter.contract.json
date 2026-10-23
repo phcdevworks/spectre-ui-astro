@@ -1,5 +1,5 @@
 {
-  "version": "4.13.0",
+  "version": "4.14.0",
   "rootExports": {
     "components": [
       "SpAccordion",
@@ -38,6 +38,7 @@
       "SpFooterText",
       "SpGrid",
       "SpHeading",
+      "SpIcon",
       "SpIconBox",
       "SpInput",
       "SpInputGroup",
@@ -217,6 +218,8 @@
       "getSidebarBackdropClasses",
       "getSidebarClasses",
       "getSidebarGroupClasses",
+      "getSidebarGroupContentClasses",
+      "getSidebarGroupIconClasses",
       "getSidebarGroupSummaryClasses",
       "getSidebarHeaderClasses",
       "getSidebarLinkClasses",
@@ -360,6 +363,7 @@
       "GridTemplateOptions",
       "HeadingLevel",
       "HeadingRecipeOptions",
+      "IconBoxIconSize",
       "IconBoxRecipeOptions",
       "IconBoxSize",
       "IconBoxVariant",
@@ -421,6 +425,7 @@
       "ProgressRecipeOptions",
       "ProgressSize",
       "ProseRecipeOptions",
+      "ProseSize",
       "QuoteAccent",
       "QuoteAccentColor",
       "QuoteAlign",
@@ -444,6 +449,7 @@
       "ShadowInsetStep",
       "ShadowRecipeOptions",
       "ShadowStep",
+      "SidebarInteractiveRecipeOptions",
       "SidebarLinkLevel",
       "SidebarLinkRecipeOptions",
       "SidebarRecipeOptions",
@@ -467,6 +473,7 @@
       "StatRecipeOptions",
       "StatSize",
       "StatSurface",
+      "StatUnitTone",
       "StepperOrientation",
       "StepperRecipeOptions",
       "StepperStepRecipeOptions",
@@ -551,6 +558,7 @@
     "./components/SpFooterText.astro",
     "./components/SpGrid.astro",
     "./components/SpHeading.astro",
+    "./components/SpIcon.astro",
     "./components/SpIconBox.astro",
     "./components/SpInput.astro",
     "./components/SpInputGroup.astro",
@@ -603,14 +611,14 @@
     "./components/SpTooltip.astro"
   ],
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^4.14.0",
-    "@phcdevworks/spectre-ui": "^5.7.0",
+    "@phcdevworks/spectre-tokens": "^4.15.0",
+    "@phcdevworks/spectre-ui": "^5.8.0",
     "astro": "^7.0.0",
     "typescript": "^5.0 || ^6.0 || ^7.0"
   },
   "upstreamBinding": {
     "package": "@phcdevworks/spectre-ui",
-    "peerRange": "^5.7.0"
+    "peerRange": "^5.8.0"
   },
   "thinAdapterInvariants": {
     "noLocalCssOwnership": true,

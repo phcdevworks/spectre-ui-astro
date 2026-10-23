@@ -94,6 +94,7 @@ src/
     SpDatepicker.astro
     SpDay.astro
     SpDisplay.astro
+    SpDivider.astro
     SpDropdown.astro
     SpDropdownDivider.astro
     SpDropdownHeader.astro
@@ -111,14 +112,18 @@ src/
     SpFooterText.astro
     SpGrid.astro
     SpHeading.astro
+    SpIcon.astro
     SpIconBox.astro
     SpInput.astro
     SpInputGroup.astro
     SpInputGroupAddon.astro
     SpLabel.astro
     SpLead.astro
+    SpLink.astro
     SpListGroup.astro
     SpListGroupItem.astro
+    SpLogoCloud.astro
+    SpLogoCloudItem.astro
     SpModal.astro
     SpNav.astro
     SpNavItem.astro
@@ -141,10 +146,12 @@ src/
     SpSidebarHeader.astro
     SpSidebarLink.astro
     SpSidebarToggle.astro
+    SpSkeleton.astro
     SpSpinner.astro
     SpStack.astro
     SpStat.astro
     SpStepper.astro
+    SpSurface.astro
     SpSwitch.astro
     SpTabPanel.astro
     SpTable.astro
@@ -156,6 +163,7 @@ src/
     SpTextarea.astro
     SpToast.astro
     SpTooltip.astro
+    sp-icon.shared.ts
     sp-input.shared.ts
     sp-interactive.shared.ts
     sp-recipe-options.shared.ts
@@ -231,6 +239,11 @@ interactive components.
 `sp-input.shared.ts` exposes `resolveSpInputAccessibility`, which enforces the
 explicit `id` requirement and returns stable helper and error associations.
 
+`sp-icon.shared.ts` exposes `resolveSpIconGlyph`, which turns any
+`@phcdevworks/spectre-ui/icons` export (Lucide, MDI, Font Awesome, Simple
+Icons) into an escaped SVG viewBox and body for `SpIcon`. It mirrors the
+spectre-components `sp-icon` normalization; keep the two in step.
+
 ## Adding a New Component
 
 1. Add the `.astro` file under `src/components/`.
@@ -299,8 +312,8 @@ logic here.
 
 ## Roadmap Priorities
 
-Phases 1 through 24 are released (current version `4.13.0`; see `package.json`
-and `CHANGELOG.md`). Phase 24 delivered full `spectre-ui@5.7.0` recipe and
-utility parity. There is no open phase. New family or contract work opens
+Phases 1 through 25 are released (current version `4.14.0`; see `package.json`
+and `CHANGELOG.md`). Phase 25 delivered full `spectre-ui@5.8.0` recipe parity,
+including `SpIcon`. New family or contract work opens
 only after its upstream recipe or typed contract is published. Check
 `ROADMAP.md` and `TODO.md` for exact scope before starting work.

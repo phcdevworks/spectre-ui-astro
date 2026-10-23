@@ -22,6 +22,7 @@ const {
   size,
   align,
   surface,
+  unitTone,
   class: className,
   id,
   "aria-label": ariaLabel,
@@ -30,7 +31,7 @@ const {
   ...rest
 } = Astro.props as SpStatProps;
 
-const classes = getStatClasses(omitUndefined({ size, align, surface }));
+const classes = getStatClasses(omitUndefined({ size, align, surface, unitTone }));
 const finalClass = [classes, className].filter(Boolean).join(" ");
 const hasAccessibleName = Boolean(ariaLabel || ariaLabelledby);
 ---

@@ -6,13 +6,62 @@ reflects package releases published to npm.
 
 ## [Unreleased]
 
+## [4.14.0] - 2026-10-23
+
+**Release Title:** Action Color and Icon Parity
+
+Contract change type: semantic change
+
+### Added
+
+- Full `@phcdevworks/spectre-ui` 5.8.0 parity, matching spectre-components
+  1.25.0:
+  - `SpIcon` renders an inline SVG from the icon sets `spectre-ui` 5.8.0 ships
+    at `@phcdevworks/spectre-ui/icons` (Lucide) and `/icons/mdi`,
+    `/icons/brands`, `/icons/fa-solid`, `/icons/fa-regular`, and
+    `/icons/fa-brands`. Pass the imported icon export as `icon`, so only the
+    icons a page imports load and the SVG renders on the server. `size`
+    (`xs`–`3xl`) goes through `getIconSizeClasses`; omitted, the glyph follows
+    the font size. `label` sets `role="img"`; omitted, the icon is
+    `aria-hidden`. `title` renders an SVG `<title>`. Output matches `<sp-icon>`
+    for the same icon.
+  - The `action` colour, so a child theme recolours these with
+    `data-spectre-action` on `<html>`: `SpButton` `variant="action"`, `SpQuote`
+    `accentColor="action"`, and `SpFooter` `surface="action"` pass through the
+    upstream option types, and `SpStat` gains `unitTone` (`accent` | `action`).
+  - `SpProse` `size` (`md` | `lg` | `xl`) through `getProseClasses({ size })`.
+  - `SpIconBox` `iconSize` (`xs`–`3xl`) through
+    `getIconBoxClasses({ iconSize })`.
+  - `SpSidebarGroup` ends its summary in a chevron
+    (`getSidebarGroupIconClasses`) that turns when the group opens, replaceable
+    through the `icon` slot; a new `content` slot is wrapped in
+    `getSidebarGroupContentClasses`; `hovered` and `focused` reach
+    `getSidebarGroupSummaryClasses`.
+  - `SpSidebarToggle` `hovered` and `focused` through `getSidebarToggleClasses`.
+  - Re-exported `getSidebarGroupIconClasses`, `getSidebarGroupContentClasses`,
+    and the `StatUnitTone`, `ProseSize`, `IconBoxIconSize`, and
+    `SidebarInteractiveRecipeOptions` types.
+
+### Changed
+
+- Peer ranges raised to `@phcdevworks/spectre-ui@^5.8.0` and
+  `@phcdevworks/spectre-tokens@^4.15.0`.
+- `SpSidebarGroup` summaries now always render the disclosure chevron. A summary
+  slot that drew its own chevron shows two; drop the local one or pass it
+  through the `icon` slot.
+- Through `spectre-ui` 5.8.0, component text no longer drops below 16px:
+  `SpLabel`, `SpFieldset` legends, `SpInput` helper and error text, `SpTabs`,
+  `SpTable`, `SpBreadcrumb`, `SpAccordion` panels, footer text, and `SpProse`
+  captions render at 16px. Headings and display text shrink below 768px through
+  the new mobile-first token sizes.
+
 ### Fixed
 
 - CI failed at `npm ci` on the Node 22.19.0 matrix entry, because `astro`,
   `@astrojs/prism`, and `@astrojs/telemetry` need Node `>=22.22.0`. The GitHub
   Actions minimum moves to 22.22.0, and Buildkite runs in a pinned `node:24`
-  container instead of the agent's own Node. The published package's
-  `engines` range is unchanged.
+  container instead of the agent's own Node. The published package's `engines`
+  range is unchanged.
 
 ## [4.13.0] - 2026-10-17
 
@@ -23,8 +72,8 @@ Contract change type: semantic change
 ### Added
 
 - Full `@phcdevworks/spectre-ui` 5.7.0 recipe and utility parity. Every
-  token-backed class family upstream now has an adapter path, so Astro
-  consumers no longer need hand-written utility class names:
+  token-backed class family upstream now has an adapter path, so Astro consumers
+  no longer need hand-written utility class names:
   - `SpLink` on `getLinkClasses`, with `tone` (`default` | `onInverse`),
     `decoration`, `underlineOffset`, and `current` (`aria-current="page"`).
   - `SpDivider` on `getDividerClasses`, rendering an `<hr>`.
@@ -37,18 +86,18 @@ Contract change type: semantic change
     `getOpacityClasses`, `getZIndexClasses`, `getIconSizeClasses`,
     `getAspectRatioClasses`, `getElevationClasses`, `getMotionClasses`, and
     `getChartColorClasses`, with all of their option and scale types.
-  - `spectreThemeModes` and `spectreDensityModes`, typed `SpectreThemeMode`
-    and `SpectreDensityMode`.
+  - `spectreThemeModes` and `spectreDensityModes`, typed `SpectreThemeMode` and
+    `SpectreDensityMode`.
 - `SpText` forwards `fontSize` (numeric `12`–`128` scale), `tracking`,
-  `decoration`, `underlineOffset`, `tabularNums`, and `balance`, and its
-  `size` takes `7xl`, `8xl`, and `9xl`.
+  `decoration`, `underlineOffset`, `tabularNums`, and `balance`, and its `size`
+  takes `7xl`, `8xl`, and `9xl`.
 - `SpGrid` `columns` takes responsive `{ base, md, lg }` values through the
   upstream option type. `GridColumnsOptions` and `GridResponsiveColumns` are
   re-exported.
 - `astro-adapter.contract.json` gains a `componentFamilies.utilityFamilies`
   category for helper-only families. The upstream parity test accepts it as a
-  declaration, fails if one of these families ships an Astro component, and
-  the README contract check requires a **utility** row for each.
+  declaration, fails if one of these families ships an Astro component, and the
+  README contract check requires a **utility** row for each.
 
 ### Changed
 
@@ -56,8 +105,8 @@ Contract change type: semantic change
   `@phcdevworks/spectre-tokens@^4.14.0`.
 - Through `spectre-ui` 5.6.0, the `SpText` `lg`–`6xl` sizes follow the
   Tailwind-aligned font scale, so each renders one step smaller than before
-  (`lg` is 18px instead of 20px). Use the next size up to keep a previous
-  size. Components that used those steps internally render unchanged.
+  (`lg` is 18px instead of 20px). Use the next size up to keep a previous size.
+  Components that used those steps internally render unchanged.
 
 ## [4.12.0] - 2026-10-11
 
@@ -76,25 +125,24 @@ Contract change type: additive
   - `SpButton` takes `variant="accentOutline"`.
   - `SpStepper` forwards `tone` (`brand` | `accent`) to every step. Without
     `tone` the step classes are unchanged.
-  - Every component with an accent rail takes `accentColor="accent"` through
-    the upstream option types.
+  - Every component with an accent rail takes `accentColor="accent"` through the
+    upstream option types.
   - `SpQuote` on `getQuoteClasses` and its text and attribution recipes, with
-    `size`, `surface`, `accent`, `accentColor`, `align`, and `cite`. The
-    default slot is the quote; the `avatar`, `name`, `role`, and
-    `organization` slots build the `<figcaption>`, which renders only when one
-    of them is populated.
+    `size`, `surface`, `accent`, `accentColor`, `align`, and `cite`. The default
+    slot is the quote; the `avatar`, `name`, `role`, and `organization` slots
+    build the `<figcaption>`, which renders only when one of them is populated.
   - `SpStat` on `getStatClasses` and its figure, unit, and label recipes, with
     `size`, `align`, and `surface`. The `unit` slot renders inside the figure
     and the `label` slot beneath it.
   - `SpSectionHead` on `getSectionHeadClasses`, with `layout` (`stacked` |
-    `split`), `align`, and `as` (`div` | `header` | `hgroup`). The `eyebrow`
-    and `title` slots fill the title part; the default and `actions` slots
-    fill the lead part.
-- Phase 17 HTML element coverage: `SpProse` forwards `accentMarkers` for
-  accent list markers. Edit marks, description lists, captions, table
-  footers, `<meter>`, underlines, proofing marks, syntax highlighting, and the
-  prose flow spacing reach `SpProse` and `SpTable` content from the upstream
-  base and prose styles with no adapter change.
+    `split`), `align`, and `as` (`div` | `header` | `hgroup`). The `eyebrow` and
+    `title` slots fill the title part; the default and `actions` slots fill the
+    lead part.
+- Phase 17 HTML element coverage: `SpProse` forwards `accentMarkers` for accent
+  list markers. Edit marks, description lists, captions, table footers,
+  `<meter>`, underlines, proofing marks, syntax highlighting, and the prose flow
+  spacing reach `SpProse` and `SpTable` content from the upstream base and prose
+  styles with no adapter change.
 - Re-exported the quote, stat, and section-head helpers and the
   `QuoteRecipeOptions`, `QuoteAttributionRecipeOptions`, `QuoteSize`,
   `QuoteSurface`, `QuoteAccent`, `QuoteAccentColor`, `QuoteAlign`,
@@ -125,14 +173,14 @@ Contract change type: additive
     and the `SpLogoCloudItem` tile part on `getLogoCloudItemClasses`. Lit's
     `sp-logo-cloud` styles its direct children at runtime, so SSR markup uses
     the part component instead.
-  - `SpFooter` forwards `appearance` (`dark` | `light` | `system`) and
-    `surface` (`page` | `card` | `subtle` | `inverse` | `hero`).
+  - `SpFooter` forwards `appearance` (`dark` | `light` | `system`) and `surface`
+    (`page` | `card` | `subtle` | `inverse` | `hero`).
   - `SpSection` forwards `hero` (`sm` | `md` | `lg`) and `attached`.
   - `SpText` forwards `weight` (`400`–`900`).
   - `SpNavItem` forwards `fullWidth` to `getDropdownClasses`, matching
     `sp-nav-item`; it previously leaked to the DOM as an attribute.
-  - The `xl`, `2xl`, `3xl`, and `4xl` layout steps reach `SpSection`,
-    `SpStack`, `SpGrid`, and `SpContainer` through the upstream option types.
+  - The `xl`, `2xl`, `3xl`, and `4xl` layout steps reach `SpSection`, `SpStack`,
+    `SpGrid`, and `SpContainer` through the upstream option types.
 - Re-exported `getSkeletonClasses`, `getLogoCloudClasses`,
   `getLogoCloudItemClasses`, and the `SkeletonRecipeOptions`, `SkeletonShape`,
   `LogoCloudRecipeOptions`, `LogoCloudSize`, `LogoCloudFill`,

@@ -1,0 +1,70 @@
+---
+import type { IconSize } from "@phcdevworks/spectre-ui";
+import { getIconSizeClasses } from "@phcdevworks/spectre-ui";
+import { resolveSpIconGlyph, type SpIconData } from "./sp-icon.shared";
+
+interface SpIconProps {
+  /** An icon export from `@phcdevworks/spectre-ui/icons` or one of its `/icons/*` sets. */
+  icon: SpIconData;
+  size?: IconSize;
+  label?: string;
+  title?: string;
+  class?: string;
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+
+  [key: string]: unknown;
+}
+
+const {
+  icon,
+  size,
+  label,
+  title,
+  class: className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  "aria-describedby": ariaDescribedby,
+  ...rest
+} = Astro.props as SpIconProps;
+
+const glyph = resolveSpIconGlyph(icon);
+const accessibleLabel = label?.trim() || ariaLabel?.trim() || undefined;
+const labelled = Boolean(accessibleLabel || ariaLabelledby);
+const finalClass =
+  [size ? getIconSizeClasses({ size }) : undefined, className].filter(Boolean).join(" ") ||
+  undefined;
+// Unsized glyphs follow the surrounding font size, as in spectre-components `sp-icon`.
+const dimension = size ? undefined : "1em";
+---
+
+{
+  glyph && (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={glyph.viewBox}
+      width={dimension}
+      height={dimension}
+      fill={glyph.outline ? "none" : "currentColor"}
+      stroke={glyph.outline ? "currentColor" : undefined}
+      stroke-width={glyph.outline ? "2" : undefined}
+      stroke-linecap={glyph.outline ? "round" : undefined}
+      stroke-linejoin={glyph.outline ? "round" : undefined}
+      class={finalClass}
+      id={id}
+      role={labelled ? "img" : undefined}
+      aria-label={accessibleLabel}
+      aria-labelledby={ariaLabelledby}
+      aria-describedby={ariaDescribedby}
+      aria-hidden={labelled ? undefined : "true"}
+      focusable="false"
+      {...rest}
+    >
+      {title && <title>{title}</title>}
+      <Fragment set:html={glyph.body} />
+    </svg>
+  )
+}

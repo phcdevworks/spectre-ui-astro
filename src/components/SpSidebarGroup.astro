@@ -1,7 +1,16 @@
 ---
-import { getSidebarGroupClasses, getSidebarGroupSummaryClasses } from "@phcdevworks/spectre-ui";
+import type { SidebarInteractiveRecipeOptions } from "@phcdevworks/spectre-ui";
+import {
+  getSidebarGroupClasses,
+  getSidebarGroupContentClasses,
+  getSidebarGroupIconClasses,
+  getSidebarGroupSummaryClasses,
+} from "@phcdevworks/spectre-ui";
+import { ChevronRight } from "@phcdevworks/spectre-ui/icons";
+import SpIcon from "./SpIcon.astro";
+import { omitUndefined } from "./sp-recipe-options.shared";
 
-interface SpSidebarGroupProps {
+interface SpSidebarGroupProps extends SidebarInteractiveRecipeOptions {
   label?: string;
   open?: boolean;
   class?: string;
@@ -14,6 +23,8 @@ interface SpSidebarGroupProps {
 const {
   label,
   open = false,
+  hovered,
+  focused,
   class: className,
   summaryClass,
   id,
@@ -21,7 +32,10 @@ const {
 } = Astro.props as SpSidebarGroupProps;
 
 const finalClass = [getSidebarGroupClasses(), className].filter(Boolean).join(" ");
-const finalSummaryClass = [getSidebarGroupSummaryClasses(), summaryClass]
+const finalSummaryClass = [
+  getSidebarGroupSummaryClasses(omitUndefined({ hovered, focused })),
+  summaryClass,
+]
   .filter(Boolean)
   .join(" ");
 ---
@@ -29,6 +43,16 @@ const finalSummaryClass = [getSidebarGroupSummaryClasses(), summaryClass]
 <details class={finalClass} id={id} open={open} {...rest}>
   <summary class={finalSummaryClass}>
     <slot name="summary">{label}</slot>
+    <span class={getSidebarGroupIconClasses()} aria-hidden="true">
+      <slot name="icon"><SpIcon icon={ChevronRight} /></slot>
+    </span>
   </summary>
+  {
+    Astro.slots.has("content") && (
+      <div class={getSidebarGroupContentClasses()}>
+        <slot name="content" />
+      </div>
+    )
+  }
   <slot />
 </details>

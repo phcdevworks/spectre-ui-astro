@@ -35,6 +35,7 @@ export { default as SpFooterLinks } from "./components/SpFooterLinks.astro";
 export { default as SpFooterText } from "./components/SpFooterText.astro";
 export { default as SpGrid } from "./components/SpGrid.astro";
 export { default as SpHeading } from "./components/SpHeading.astro";
+export { default as SpIcon } from "./components/SpIcon.astro";
 export { default as SpIconBox } from "./components/SpIconBox.astro";
 export { default as SpInput } from "./components/SpInput.astro";
 export { default as SpInputGroup } from "./components/SpInputGroup.astro";

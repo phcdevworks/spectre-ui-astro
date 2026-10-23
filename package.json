@@ -1,6 +1,6 @@
 {
   "name": "@phcdevworks/spectre-ui-astro",
-  "version": "4.13.0",
+  "version": "4.14.0",
   "description": "@phcdevworks/spectre-ui-astro is the Astro integration for the Spectre system. It brings Spectre's design contracts and interface components into Astro applications through a native, server-rendering-friendly API.",
   "keywords": [
     "phcdevworks",
@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/phcdevworks/spectre-ui-astro#readme",
   "type": "module",
-  "packageManager": "npm@12.2.0",
+  "packageManager": "npm@12.2.1",
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -82,6 +82,7 @@
     "./components/SpFooterText.astro": "./dist/components/SpFooterText.astro",
     "./components/SpGrid.astro": "./dist/components/SpGrid.astro",
     "./components/SpHeading.astro": "./dist/components/SpHeading.astro",
+    "./components/SpIcon.astro": "./dist/components/SpIcon.astro",
     "./components/SpIconBox.astro": "./dist/components/SpIconBox.astro",
     "./components/SpInput.astro": "./dist/components/SpInput.astro",
     "./components/SpInputGroup.astro": "./dist/components/SpInputGroup.astro",
@@ -163,8 +164,8 @@
     "tag": "latest"
   },
   "peerDependencies": {
-    "@phcdevworks/spectre-tokens": "^4.14.0",
-    "@phcdevworks/spectre-ui": "^5.7.0",
+    "@phcdevworks/spectre-tokens": "^4.15.0",
+    "@phcdevworks/spectre-ui": "^5.8.0",
     "astro": "^7.0.0",
     "typescript": "^5.0 || ^6.0 || ^7.0"
   },
@@ -175,22 +176,22 @@
     "esbuild": "^0.28.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "@phcdevworks/spectre-manifest": "^2.0.0",
-    "@phcdevworks/spectre-tokens": "^4.14.0",
-    "@phcdevworks/spectre-ui": "^5.7.0",
+    "@phcdevworks/spectre-tokens": "^4.15.0",
+    "@phcdevworks/spectre-ui": "^5.8.0",
     "@types/node": "^26.6.5",
-    "@typescript-eslint/eslint-plugin": "^8.71.2",
-    "@typescript-eslint/parser": "^8.71.2",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "astro": "^7.4.0",
+    "astro": "^7.4.2",
     "eslint": "^10.13.0",
     "jiti": "^2.7.0",
     "prettier": "^3.9.10",
     "tsup": "^9.0.0",
     "tsx": "^4.23.15",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-eslint": "^8.71.2",
+    "typescript-eslint": "^8.72.0",
     "vitest": "^5.0.5"
   },
   "allowScripts": {
