@@ -57,11 +57,10 @@ Contract change type: semantic change
 
 ### Fixed
 
-- CI failed at `npm ci` on the Node 22.19.0 matrix entry, because `astro`,
-  `@astrojs/prism`, and `@astrojs/telemetry` need Node `>=22.22.0`. The GitHub
-  Actions minimum moves to 22.22.0, and Buildkite runs in a pinned `node:24`
-  container instead of the agent's own Node. The published package's `engines`
-  range is unchanged.
+- CI failed at `npm ci` on older Node 22 matrix entries because the Astro
+  toolchain needs Node `>=22.23.4`. The GitHub Actions minimum moves to 22.23.4,
+  and Buildkite runs in a pinned `node:24` container instead of the agent's own
+  Node. The published package's `engines` range is unchanged.
 
 ## [4.13.0] - 2026-10-17
 
